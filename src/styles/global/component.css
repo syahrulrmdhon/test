@@ -1,0 +1,57 @@
+/* dropdown */
+select {
+  width: 100%;
+  background: white;
+  margin: auto;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 5px;
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+  margin-right: 2rem;
+  padding: 1rem;
+  padding-right: 3rem;
+  cursor: pointer;
+}
+option {
+  margin: auto;
+}
+
+/* button */
+.btn-green {
+  border-radius: 20px;
+  width: 100%;
+  color: white;
+  background: #1a9d7f;
+  cursor: pointer;
+}
+.btn-green:hover {
+  filter: brightness(90%);
+}
+
+/* table */
+thead {
+  background: #b2d8d8;
+  color: #000000;
+}
+
+/* clear */
+.clear {
+  clear: both;
+}
+
+/* scroll bar always show */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  }

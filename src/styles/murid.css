@@ -1,0 +1,25 @@
+@import url("../styles/global/components/select.css");
+.murid {
+  background: #f7f7f7;
+}
+.content {
+  background: #f7f7f7;
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.left-content {
+  width: 90%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+}
+.right-content {
+  width: 90%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+  overflow-y: scroll;
+  height: 400px;
+}
