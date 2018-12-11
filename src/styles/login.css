@@ -1,0 +1,74 @@
+/* - LOGIN */
+.login .container-fluid{
+	margin-top: 140px;
+	margin-left: 100px;
+}
+.login h1{
+  font-size: 25px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #38c936;
+}
+.login .access-form{
+	margin-top: 45.5px;
+}
+.login input[type="submit"]{
+  width: 150px;
+  height: 40px;
+  background-color: #38c936;
+  border-radius: 50px;
+  color: #FFF;
+}
+
+.login input[type="submit"].alert{
+  background-color: #e63c2b;
+}
+
+.login .help-center{
+  position: absolute;
+  bottom: 5%;
+  left: 120px;
+}
+.login .bg-image{
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+}
+
+.gredu-title{
+  color: #FFF;
+}
+.login .description{
+  margin-right: 60px;
+}
+.gredu-title.header{
+  margin-top: 30px;
+  text-transform: uppercase; 
+  font-size: 14px;
+  letter-spacing: 5px;
+}
+.gredu-title.gredu-description{
+  margin-top: 90px;
+}
+.gredu-title.gredu-description h2{
+  font-size: 35px;
+  line-height: 1.33;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+}
+.gredu-title.gredu-content span{
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  display: block;
+  opacity: 0.5;
+}

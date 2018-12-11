@@ -1,0 +1,1 @@
+export { default as CustomPropsRoute } from './route_path/RenderPath';
