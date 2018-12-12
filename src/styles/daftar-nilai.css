@@ -1,0 +1,29 @@
+@import url("./global/component.css");
+.nilai {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+}
+.left-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-right: solid 0.5px #f2f2f2;
+  background: white;
+}
+.right-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: white;
+    height: 400px;
+}
+.tab-nilai {
+  border: solid 1px #cccccc;
+  background: #f2f2f2;
+  overflow-x: hidden;
+}
+.tab-nilai:active {
+  background: white;
+  color: #333333;
+}
+TabContent {
+    margin-left: 20px;
+}

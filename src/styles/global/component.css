@@ -1,3 +1,12 @@
+/* box content */
+.content {
+  /* background: #f7f7f7; */
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 /* dropdown */
 select {
   width: 100%;
@@ -46,12 +55,12 @@ thead {
 
 /* scroll bar always show */
 ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
-  }
+  -webkit-appearance: none;
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}

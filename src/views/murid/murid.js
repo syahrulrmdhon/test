@@ -29,7 +29,7 @@ class DaftarMurid extends Component {
                 <div className="content">
                     <div className="row">
                         <div className="left-content col-2">
-                            <h6><strong>Urutkan Berdasarkan</strong></h6>
+                            <h5><strong>Urutkan Berdasarkan</strong></h5>
                             <br />
                             <form onSubmit={this.handleSubmit}>
                                 <select value={this.state.value} onChange={this.handleChange}>
@@ -42,7 +42,7 @@ class DaftarMurid extends Component {
                             </form>
                         </div>
                         <div className="right-content col-10">
-                            <h6><strong>Kelas X IPA 2</strong></h6>
+                            <h5><strong>Kelas X IPA 2</strong></h5>
                             <br />
                             <Table bordered striped responsive hover sm>
                                 <thead>
@@ -100,7 +100,7 @@ class DaftarMurid extends Component {
                             </Table>
                         </div>
                     </div>
-                    <div className="clear"></div>
+                    <br/><br/><br/>
                 </div>
             </div>
         )

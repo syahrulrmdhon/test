@@ -1,12 +1,6 @@
-@import url("../styles/global/components/select.css");
+@import url("../styles/global/component.css");
 .murid {
   background: #f7f7f7;
-}
-.content {
-  background: #f7f7f7;
-  width: 90%;
-  margin: auto;
-  margin-top: 20px;
   margin-bottom: 20px;
 }
 .left-content {
