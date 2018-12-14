@@ -20,6 +20,7 @@ class DaftarMurid extends Component {
     handleSubmit(event) {
 
     }
+
     render() {
         return (
             <div className="murid">
@@ -100,7 +101,7 @@ class DaftarMurid extends Component {
                             </Table>
                         </div>
                     </div>
-                    <br/><br/><br/>
+                    <br /><br /><br />
                 </div>
             </div>
         )

@@ -16,7 +16,7 @@ export const MainRoutes = [
         component: Beranda
     },
     {
-        path: '/absensi',
+        path: '/absen',
         component: Absensi
     },
     {

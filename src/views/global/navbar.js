@@ -1,19 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router';
 import '../../styles/global/header.css'
-import '../../styles/global/background.css'
+import '../../styles/global/component.css'
 import {
     Collapse,
     Navbar,
     NavbarToggler,
-    NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
+    NavLink
 } from 'reactstrap';
 
 export default class MenuBar extends Component {
@@ -32,49 +27,51 @@ export default class MenuBar extends Component {
     }
     render() {
         return (
-            <div className="bg-white">
-                <Navbar expand="md" className="font-grey">
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav navbar>
-                            <NavItem>
-                                <NavLink className="font-grey" href="/home">
-                                    Beranda
+            <div className="menu-bar">
+                <div className="bg-white">
+                    <Navbar expand="md" className="font-grey">
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav navbar>
+                                <NavItem>
+                                    <NavLink className="font-grey" href="/home">
+                                        Beranda
                                 </NavLink>
-                            </NavItem>
-                            &emsp;&emsp;
+                                </NavItem>
+                                &emsp;&emsp;
                             <NavItem>
-                                <NavLink className="font-grey" href="/absen">
-                                    Absensi
+                                    <NavLink className="font-grey" href="/absen">
+                                        Absensi
                                 </NavLink>
-                            </NavItem>
-                            &emsp;&emsp;
+                                </NavItem>
+                                &emsp;&emsp;
                             <NavItem>
-                                <NavLink className="font-grey" href="/penilaian">
-                                    Penilaian
+                                    <NavLink className="font-grey" href="/penilaian">
+                                        Penilaian
                                 </NavLink>
-                            </NavItem>
-                            &emsp;&emsp;
+                                </NavItem>
+                                &emsp;&emsp;
                             <NavItem>
-                                <NavLink className="font-grey" href="/daftar-nilai">
-                                    Daftar Nilai
+                                    <NavLink className="font-grey" href="/daftar-nilai">
+                                        Daftar Nilai
                                 </NavLink>
-                            </NavItem>
-                            &emsp;&emsp;
+                                </NavItem>
+                                &emsp;&emsp;
                             <NavItem>
-                                <NavLink className="font-grey" href="/rapor">
-                                    Rapor Kelas
+                                    <NavLink className="font-grey" href="/rapor">
+                                        Rapor Kelas
                                 </NavLink>
-                            </NavItem>
-                            &emsp;&emsp;
+                                </NavItem>
+                                &emsp;&emsp;
                             <NavItem>
-                                <NavLink className="font-grey" href="/murid">
-                                    Daftar Murid
+                                    <NavLink className="font-grey" href="/murid">
+                                        Daftar Murid
                                 </NavLink>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
-                </Navbar>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                    </Navbar>
+                </div>
             </div>
         )
     }

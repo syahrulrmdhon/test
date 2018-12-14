@@ -2,15 +2,16 @@
 .murid {
   background: #f7f7f7;
   margin-bottom: 20px;
+  font-family: 'Nunito Sans', sans-serif;
 }
 .left-content {
-  width: 90%;
+  /* width: 90%; */
   padding-top: 20px;
   padding-bottom: 20px;
   background: white;
 }
 .right-content {
-  width: 90%;
+  /* width: 90%; */
   padding-top: 20px;
   padding-bottom: 20px;
   background: white;

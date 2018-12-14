@@ -1,0 +1,39 @@
+@import url("../styles/global/component.css");
+.absensi {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+  margin: auto;
+  font-family: "Nunito Sans", sans-serif;
+}
+.left-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+}
+.left-content form label {
+  color: #6d6d6d;
+}
+.center-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+  overflow-y: scroll;
+  /* height: 400px; */
+}
+.right-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: black;
+  text-align: center;
+}
+.card {
+  padding: 10px;
+  margin: auto;
+  box-shadow: 5px 10px #199d7f;
+}
+.card h3 {
+  color: #199d7f;
+}
+.car p {
+  color: #2d2d2d;
+}

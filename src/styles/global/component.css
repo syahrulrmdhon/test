@@ -1,6 +1,6 @@
 /* box content */
 .content {
-  /* background: #f7f7f7; */
+  background: #f7f7f7;
   width: 90%;
   margin: auto;
   margin-top: 20px;
@@ -63,4 +63,21 @@ thead {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Font NunitoSans */
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
+
+/* background and font color */
+.bg-green {
+  background: #199d7f;
+}
+.bg-white {
+    background: white;
+}
+.font-white { 
+    color: white !important;
+}
+.font-grey {
+    color: #9da2a6;
 }
