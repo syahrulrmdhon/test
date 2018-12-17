@@ -1,3 +1,4 @@
+
 /* box content */
 .content {
   background: #f7f7f7;
@@ -39,6 +40,17 @@ option {
   cursor: pointer;
 }
 .btn-green:hover {
+  filter: brightness(90%);
+}
+.btn-young-green {
+  background: #51d2b4;
+  width: 100%;
+  height: 50%;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.btn-young-green:hover {
   filter: brightness(90%);
 }
 

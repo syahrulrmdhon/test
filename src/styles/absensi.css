@@ -23,7 +23,6 @@
 .right-content {
   padding-top: 20px;
   padding-bottom: 20px;
-  background: black;
   text-align: center;
 }
 .card {
@@ -37,3 +36,13 @@
 .car p {
   color: #2d2d2d;
 }
+
+/* date range start */
+.Range .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+  background-color: #f0f8ff !important;
+  color: #4a90e2;
+}
+.Range .DayPicker-Day {
+  border-radius: 0 !important;
+}
+/* date range end */

@@ -1,6 +1,11 @@
 {
-  "name": "pbnu-fe",
-  "version": "0.1.0",
+  "name": "teacher-web",
+  "version": "2.0.0",
+  "author": {
+    "name": "Fandi A Riyanto",
+    "email": "fandi@gredu.asia",
+    "url": "https://toughcode.blogspot.com"
+  },
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.9",
@@ -10,6 +15,7 @@
     "popper.js": "^1.14.6",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
+    "react-day-picker": "^7.2.4",
     "react-dom": "^16.6.3",
     "react-image": "^1.5.1",
     "react-redux": "^6.0.0",

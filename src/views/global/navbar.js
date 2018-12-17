@@ -36,19 +36,19 @@ export default class MenuBar extends Component {
                                 <NavItem>
                                     <NavLink className="font-grey" href="/home">
                                         Beranda
-                                </NavLink>
+                                    </NavLink>
                                 </NavItem>
                                 &emsp;&emsp;
                             <NavItem>
                                     <NavLink className="font-grey" href="/absen">
                                         Absensi
-                                </NavLink>
+                                    </NavLink>
                                 </NavItem>
                                 &emsp;&emsp;
                             <NavItem>
                                     <NavLink className="font-grey" href="/penilaian">
                                         Penilaian
-                                </NavLink>
+                                    </NavLink>
                                 </NavItem>
                                 &emsp;&emsp;
                             <NavItem>
