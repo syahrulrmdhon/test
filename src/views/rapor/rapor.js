@@ -8,8 +8,8 @@ import classnames from 'classnames';
 import Header from '../global/header';
 import MenuBar from '../global/navbar';
 
-import ExportLogo from './../../assets/images/export3.png';
-import PrintLogo from './../../assets/images/print3.png';
+import ExportLogo from './../../assets/images/export.svg';
+import PrintLogo from './../../assets/images/print.svg';
 
 class Rapor extends Component {
     constructor(props) {
@@ -441,7 +441,7 @@ class Rapor extends Component {
                             <br />
                         </div>
                     </div>
-                    <br /><br /><br />
+                    <br /><br /><br /><br /><br /><br /><br />
                 </div>
             </div>
         )

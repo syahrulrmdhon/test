@@ -1,17 +1,32 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 import './../../styles/murid.css';
 import './../../styles/global/component.css'
 import { Table } from 'reactstrap';
 
 import Header from '../global/header';
 import MenuBar from '../global/navbar';
+import { stat } from 'fs';
 
 class DaftarMurid extends Component {
     constructor(props) {
         super(props);
-        this.state = { value: 'coconut' };
+        this.state = {
+            isLoading: true,
+            users: [],
+            error: null
+        };
 
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get(`https://jsonplaceholder.typicode.com/users`)
+            .then(res => {
+                const users = res.data;
+                this.setState({ users });
+                console.log('DATA', res);
+            })
     }
 
     handleChange(event) {
@@ -57,51 +72,24 @@ class DaftarMurid extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">13010036</th>
-                                        <td>36010033</td>
-                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                                        <td>87%</td>
-                                        <td>78</td>
-                                        <td>13</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">13010036</th>
-                                        <td>36010033</td>
-                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                                        <td>87%</td>
-                                        <td>78</td>
-                                        <td>13</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">13010036</th>
-                                        <td>36010033</td>
-                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                                        <td>87%</td>
-                                        <td>78</td>
-                                        <td>13</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">13010036</th>
-                                        <td>36010033</td>
-                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                                        <td>87%</td>
-                                        <td>78</td>
-                                        <td>13</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">13010036</th>
-                                        <td>36010033</td>
-                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                                        <td>87%</td>
-                                        <td>78</td>
-                                        <td>13</td>
-                                    </tr>
+                                    {
+                                        this.state.users.map(function (i, x) {
+                                            console.log('I', i);
+                                            return <tr>
+                                                <th scope="row">{i.name}</th>
+                                                <td>{i.username}</td>
+                                                <td>{i.email}</td>
+                                                <td>{i.address.city}</td>
+                                                <td>{i.address.street}</td>
+                                                <td>{i.address.zipcode}</td>
+                                            </tr>
+                                        })
+                                    }
                                 </tbody>
                             </Table>
                         </div>
                     </div>
-                    <br /><br /><br />
+                    <br /><br /><br /><br/><br/><br/><br/>
                 </div>
             </div>
         )

@@ -7,10 +7,11 @@ import Rapor from '../views/rapor/rapor';
 import DaftarMurid from '../views/murid/murid';
 
 export const MainRoutes = [
-    // {
-    //     path: '/',
-    //     component: Login
-    // },
+    {
+        path: '/',
+        exact: true,
+        component: Login
+    },
     {
         path: '/home',
         component: Beranda

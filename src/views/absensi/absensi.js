@@ -16,11 +16,6 @@ export default class Absensi extends Component {
     this.state = { value: '' };
 
     this.handleChange = this.handleChange.bind(this);
-
-    this.handleDayClick = this.handleDayClick.bind(this);
-    this.handleDayMouseEnter = this.handleDayMouseEnter.bind(this);
-    this.handleResetClick = this.handleResetClick.bind(this);
-    this.state = this.getInitialState();
   }
 
   handleChange(event) {
@@ -29,57 +24,7 @@ export default class Absensi extends Component {
   handleSubmit(event) {
 
   }
-  getInitialState() {
-    return {
-      from: null,
-      to: null,
-      enteredTo: null, // Keep track of the last day for mouseEnter.
-    };
-  }
-  isSelectingFirstDay(from, to, day) {
-    const isBeforeFirstDay = from && DateUtils.isDayBefore(day, from);
-    const isRangeSelected = from && to;
-    return !from || isBeforeFirstDay || isRangeSelected;
-  }
-  handleDayClick(day) {
-    const { from, to } = this.state;
-    if (from && to && day >= from && day <= to) {
-      this.handleResetClick();
-      return;
-    }
-    if (this.isSelectingFirstDay(from, to, day)) {
-      this.setState({
-        from: day,
-        to: null,
-        enteredTo: null,
-      });
-    } else {
-      this.setState({
-        to: day,
-        enteredTo: day,
-      });
-    }
-  }
-  handleDayMouseEnter(day) {
-    const { from, to } = this.state;
-    if (!this.isSelectingFirstDay(from, to, day)) {
-      this.setState({
-        enteredTo: day,
-      });
-    }
-  }
-  handleResetClick() {
-    this.setState(this.getInitialState());
-  }
-  handleShowCalendar() {
-    console.log(DayPicker);
-    this.setState({render: DayPicker});
-  }
   render() {
-    const { from, to, enteredTo } = this.state;
-    const modifiers = { start: from, end: enteredTo };
-    const disabledDays = { before: this.state.from };
-    const selectedDays = [from, { from, to: enteredTo }];
     return (
       <div className="absensi">
         <Header></Header>
@@ -92,42 +37,23 @@ export default class Absensi extends Component {
                 <h5><strong>Filter</strong></h5>
                 <br />
                 <form onSubmit={this.handleSubmit}>
-                  <label onClick={this.handleShowCalendar.bind(this.DayPicker)}>Pilih Range Tanggal</label>
-                  <DayPicker
-                    className="Range"
-                    numberOfMonths={1}
-                    fromMonth={from}
-                    selectedDays={selectedDays}
-                    disabledDays={disabledDays}
-                    modifiers={modifiers}
-                    onDayClick={this.handleDayClick}
-                    onDayMouseEnter={this.handleDayMouseEnter}
-                  />
-                  <label>
-                    {/* {!from && !to && 'Please select the first day.'}
-                    {from && !to && 'Please select the last day.'} */}
-                    {from &&
-                      to &&
-                      `${from.toLocaleDateString()} s/d ${to.toLocaleDateString()}`
-                    }
-                    {' '}
-                    {from &&
-                      to && (
-                        <button className="btn-green" onClick={this.handleResetClick}>
-                          Reset
-                      </button>
-                      )
-                    }
-                  </label>
+                  <label>Tipe Absensi</label>
+                  <select value={this.state.value} onChange={this.handleChange}>
+                    <option value="">Pilih Tipe Absensi</option>
+                    <option value="harian">Absensi Harian</option>
+                    <option value="mapel">Absensi Mata Pelajaran</option>
+                  </select>
                   <br /><br />
                   <label>Kelas</label>
                   <select value={this.state.value} onChange={this.handleChange}>
+                    <option value="">Pilih Kelas</option>
                     <option value="x2">X IPA 2</option>
                     <option value="x1">X IPA 1</option>
                   </select>
                   <br /><br />
                   <label>Mata Pelajaran</label>
                   <select value={this.state.value} onChange={this.handleChange}>
+                    <option value="">Pilih Mata Pelajaran</option>
                     <option value="bi">Bahasa Indonesia</option>
                     <option value="mtk">Matematika</option>
                     <option value="english">Bahasa Inggris</option>
@@ -138,7 +64,11 @@ export default class Absensi extends Component {
 
               </div>
               <div className="col-9 center-content">
-                <h5><strong>Absensi Harian</strong></h5>
+                <div className="row">
+                  <div className="col-12">
+                    <h5><strong>Tanggal 17 Desember 2018</strong></h5>
+                  </div>
+                </div>
                 <br />
                 <Table bordered striped responsive hover sm>
                   <thead>

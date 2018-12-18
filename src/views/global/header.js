@@ -9,7 +9,9 @@ import {
     NavItem,
     NavLink
 } from 'reactstrap';
-import logo from './../../assets/images/logo.svg'
+import Avatar from 'react-avatar';
+import Logo from './../../assets/images/logo.svg'
+import Shutdown from './../../assets/images/shutdown.png'
 
 export default class Header extends Component {
     constructor(props) {
@@ -31,7 +33,7 @@ export default class Header extends Component {
                 <div className="bg-green">
                     <Navbar expand="md" className="font-white">
                         <NavbarBrand>
-                            <img src={logo} alt="" />
+                            <img src={Logo} alt="" />
                             &emsp;
                         <span className="font-white">SMA Negeri Cahaya Madani Banten Boarding School</span>
                         </NavbarBrand>
@@ -39,10 +41,16 @@ export default class Header extends Component {
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink className="font-white" href="/components/">Components</NavLink>
+                                    <NavLink className="font-white" href="">
+                                        <Avatar facebookId="100008343750912" size="30" round={true} />
+                                        &ensp;Patience Anderson MD
+                                    </NavLink>
                                 </NavItem>
+                                &emsp;
                                 <NavItem>
-                                    <NavLink className="font-white" href="/murid">Nama Guru</NavLink>
+                                    <NavLink className="font-white" href="/">
+                                        <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
+                                    </NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>

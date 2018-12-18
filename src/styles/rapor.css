@@ -23,14 +23,17 @@
   position: absolute;
   bottom: 0;
   margin-bottom: 20px;
+  border: none;
 }
 .export {
   width: 50px;
   height: 10px;
   cursor: pointer;
+  border: none;
 }
 .print {
   width: 50px;
   height: 10px;
   cursor: pointer;
+  border: none;
 }
