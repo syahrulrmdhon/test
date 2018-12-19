@@ -5,10 +5,15 @@
   margin: auto;
   font-family: "Nunito Sans", sans-serif;
 }
+.content {
+  height: 700px;
+  background: #f7f7f7;
+}
 .left-content {
   padding-top: 20px;
   padding-bottom: 20px;
   background: white;
+  height: 400px;
 }
 .left-content form label {
   color: #6d6d6d;
@@ -18,14 +23,17 @@
   padding-bottom: 20px;
   background: white;
   overflow-y: scroll;
-  /* height: 400px; */
+  height: 400px;
 }
 .right-content {
+  background: #f7f7f7;
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
+  height: 400px;
 }
 .card {
+  background: white;
   padding: 10px;
   margin: auto;
   box-shadow: 5px 10px #199d7f;

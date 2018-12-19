@@ -4,18 +4,28 @@ import './../../styles/absensi.css'
 import Header from '../global/header'
 import MenuBar from '../global/navbar'
 
-// import Helmet from 'react-helmet';
-import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import { Table, TabContent, Card, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
-import classnames from 'classnames'
+import { Table } from 'reactstrap'
+import Axios from 'axios';
 
 export default class Absensi extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' };
+    this.state = {
+      isLoading: true,
+      users: [],
+      error: null
+    };
 
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    Axios.get('https://jsonplaceholder.typicode.com/users')
+      .then(res => {
+        const users = res.data;
+        this.setState({ users });
+      })
   }
 
   handleChange(event) {
@@ -65,67 +75,57 @@ export default class Absensi extends Component {
               </div>
               <div className="col-9 center-content">
                 <div className="row">
-                  <div className="col-12">
+                  <div className="col-9">
                     <h5><strong>Tanggal 17 Desember 2018</strong></h5>
+                  </div>
+                  <div className="col-3">
+                    Search bar...
                   </div>
                 </div>
                 <br />
-                <Table bordered striped responsive hover sm>
+                <Table bordered striped responsive hover className="table-sm absen">
                   <thead>
                     <tr>
-                      <th>NIS</th>
-                      <th>NISN</th>
+                      <th>No</th>
                       <th>Nama Murid</th>
-                      <th>Kehadiran Rata-Rata</th>
-                      <th>Nilai Rata-Rata</th>
-                      <th>Peringkat</th>
+                      <th>Hadir</th>
+                      <th>Sakit</th>
+                      <th>Ijin</th>
+                      <th>Alpha</th>
+                      <th>Keterangan</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">13010036</th>
-                      <td>36010033</td>
-                      <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                      <td>87%</td>
-                      <td>78</td>
-                      <td>13</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">13010036</th>
-                      <td>36010033</td>
-                      <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                      <td>87%</td>
-                      <td>78</td>
-                      <td>13</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">13010036</th>
-                      <td>36010033</td>
-                      <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                      <td>87%</td>
-                      <td>78</td>
-                      <td>13</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">13010036</th>
-                      <td>36010033</td>
-                      <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                      <td>87%</td>
-                      <td>78</td>
-                      <td>13</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">13010036</th>
-                      <td>36010033</td>
-                      <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                      <td>87%</td>
-                      <td>78</td>
-                      <td>13</td>
-                    </tr>
+                    {
+                      this.state.users.map(function (i, x) {
+                        return <tr key={x}>
+                          <th>{x + 1}</th>
+                          <th>{i.name}</th>
+                          <th className="align-center" title="Hadir">
+                            <input type="radio" className="rd-btn" name={"absen[" + x + "]"} value="hadir"></input>
+                          </th>
+                          <th className="align-center" title="Sakit">
+                            <input type="radio" name={"absen[" + x + "]"} value="sakit"></input>
+                          </th>
+                          <th className="align-center" title="Ijin">
+                            <input type="radio" name={"absen[" + x + "]"} value="ijin"></input>
+                          </th>
+                          <th className="align-center" title="Alpha">
+                            <input type="radio" name={"absen[" + x + "]"} value="alpha"></input>
+                          </th>
+                          <th className="align-center">
+                            <button className="btn-white">Lihat Keterangan</button>
+                          </th>
+                        </tr>
+                      })
+                    }
                   </tbody>
                 </Table>
-
+                <div className="float-right col-3">
+                  <button type="submit" className="btn-green">Simpan</button>
+                </div>
               </div>
+
             </div>
             <div className="col-lg-2 right-content">
               <div className="card">
@@ -148,7 +148,7 @@ export default class Absensi extends Component {
             </div>
           </div>
         </div>
-        <br /> <br /> <br />
+        {/* <br /> <br /> <br /><br /><br /><br /> */}
       </div >
     )
   }

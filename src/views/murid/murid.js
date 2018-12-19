@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import axios from 'axios';
+import Axios from 'axios';
 import './../../styles/murid.css';
 import './../../styles/global/component.css'
 import { Table } from 'reactstrap';
 
 import Header from '../global/header';
 import MenuBar from '../global/navbar';
-import { stat } from 'fs';
 
 class DaftarMurid extends Component {
     constructor(props) {
@@ -21,7 +20,7 @@ class DaftarMurid extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://jsonplaceholder.typicode.com/users`)
+        Axios.get(`https://jsonplaceholder.typicode.com/users`)
             .then(res => {
                 const users = res.data;
                 this.setState({ users });
@@ -60,7 +59,7 @@ class DaftarMurid extends Component {
                         <div className="right-content col-10">
                             <h5><strong>Kelas X IPA 2</strong></h5>
                             <br />
-                            <Table bordered striped responsive hover sm>
+                            <Table bordered striped responsive hover className="table-sm">
                                 <thead>
                                     <tr>
                                         <th>NIS</th>

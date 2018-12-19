@@ -24,9 +24,9 @@ class Login extends Component {
                             <br />
                             <input type="text" placeholder="Kata Sandi" className="col-12"></input>
                             <br /><br />
-                            <button className="btn btn-young-green col-12">Masuk</button>
+                            <Link to='/murid' className="btn btn-young-green col-12">Masuk</Link>
                             <br /><br />
-                            <p className="col-12">Lupa Kata Sandi? <Link to='/home' >Klik Di sini</Link></p>
+                            <p className="col-12">Lupa Kata Sandi? <Link to='' >Klik Di sini</Link></p>
                             <br />
                         </div>
                         <br /><br />

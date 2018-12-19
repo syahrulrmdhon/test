@@ -57,390 +57,396 @@ class DaftarNilai extends Component {
                                 <button type="submit" className="btn-green">Urutkan</button>
                             </form>
                         </div>
-                        <div className="right-content col-10 row">
-                            <h5 className="col-8"><strong>Daftar Nilai</strong></h5>
-                            <span className="float-right">
-                                <Nav tabs>
-                                    <NavItem className="tab-nilai">
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '1' })}
-                                            onClick={() => { this.toggle('1'); }}>
-                                            Pengetahuan
+                        <div className="right-content col-10">
+                            <div className="row">
+                                <div className="col-8">
+                                    <h5><strong>Daftar Nilai</strong></h5>
+                                </div>
+                                <div className="col-4">
+                                    <span className="float-right">
+                                        <Nav tabs>
+                                            <NavItem className="tab-nilai">
+                                                <NavLink
+                                                    className={classnames({ active: this.state.activeTab === '1' })}
+                                                    onClick={() => { this.toggle('1'); }}>
+                                                    Pengetahuan
                                         </NavLink>
-                                    </NavItem>
-                                    <NavItem className="tab-nilai">
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '2' })}
-                                            onClick={() => { this.toggle('2'); }}>
-                                            Keterampilan
+                                            </NavItem>
+                                            <NavItem className="tab-nilai">
+                                                <NavLink
+                                                    className={classnames({ active: this.state.activeTab === '2' })}
+                                                    onClick={() => { this.toggle('2'); }}>
+                                                    Keterampilan
                                         </NavLink>
-                                    </NavItem>
-                                    <NavItem className="tab-nilai">
-                                        <NavLink
-                                            className={classnames({ active: this.state.activeTab === '3' })}
-                                            onClick={() => { this.toggle('3'); }}>
-                                            Sikap
+                                            </NavItem>
+                                            <NavItem className="tab-nilai">
+                                                <NavLink
+                                                    className={classnames({ active: this.state.activeTab === '3' })}
+                                                    onClick={() => { this.toggle('3'); }}>
+                                                    Sikap
                                         </NavLink>
-                                    </NavItem>
-                                </Nav>
+                                            </NavItem>
+                                        </Nav>
+                                        <br />
+                                    </span>
+                                </div>
+                                <TabContent className="col-12" activeTab={this.state.activeTab}>
+                                    <TabPane tabId="1">
+                                        <Table bordered striped responsive hover className="table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Siswa</th>
+                                                    <th colSpan="2">Ulangan Harian</th>
+                                                    <th>Rata-Rata</th>
+                                                    <th colSpan="2">Tugas</th>
+                                                    <th>Rata-Rata</th>
+                                                    <th>UTS</th>
+                                                    <th>UAS/UKK</th>
+                                                    <th>Nilai Rapor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                            </tbody>
+                                        </Table>
+                                    </TabPane>
+                                    <TabPane tabId="2">
+                                        <Table bordered striped responsive hover className="table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Siswa</th>
+                                                    <th colSpan="2">Ulangan Harian</th>
+                                                    <th>Rata-Rata</th>
+                                                    <th colSpan="2">Tugas</th>
+                                                    <th>Rata-Rata</th>
+                                                    <th>UTS</th>
+                                                    <th>UAS/UKK</th>
+                                                    <th>Nilai Rapor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>95</td>
+                                                    <td>85</td>
+                                                    <td>90</td>
+                                                    <td>80</td>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                </tr>
+                                            </tbody>
+                                        </Table>
+                                    </TabPane>
+                                    <TabPane tabId="3">
+                                        <Table bordered striped responsive hover className="table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Murid</th>
+                                                    <th>Sangat Baik</th>
+                                                    <th>Butuh Perhatian</th>
+                                                    <th>Kehadiran</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                    <td>90</td>
+                                                    <td>90</td>
+                                                    <td>90%</td>
+                                                </tr>
+                                            </tbody>
+                                        </Table>
+                                    </TabPane>
+                                </TabContent>
                                 <br />
-                            </span>
-                            <TabContent className="col-12" activeTab={this.state.activeTab}>
-                                <TabPane tabId="1">
-                                    <Table bordered striped responsive hover sm>
-                                        <thead>
-                                            <tr>
-                                                <th>Nama Siswa</th>
-                                                <th colSpan="2">Ulangan Harian</th>
-                                                <th>Rata-Rata</th>
-                                                <th colSpan="2">Tugas</th>
-                                                <th>Rata-Rata</th>
-                                                <th>UTS</th>
-                                                <th>UAS/UKK</th>
-                                                <th>Nilai Rapor</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                        </tbody>
-                                    </Table>
-                                </TabPane>
-                                <TabPane tabId="2">
-                                    <Table bordered striped responsive hover sm>
-                                        <thead>
-                                            <tr>
-                                                <th>Nama Siswa</th>
-                                                <th colSpan="2">Ulangan Harian</th>
-                                                <th>Rata-Rata</th>
-                                                <th colSpan="2">Tugas</th>
-                                                <th>Rata-Rata</th>
-                                                <th>UTS</th>
-                                                <th>UAS/UKK</th>
-                                                <th>Nilai Rapor</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>95</td>
-                                                <td>85</td>
-                                                <td>90</td>
-                                                <td>80</td>
-                                                <td>90</td>
-                                                <td>90</td>
-                                            </tr>
-                                        </tbody>
-                                    </Table>
-                                </TabPane>
-                                <TabPane tabId="3">
-                                    <Table bordered striped responsive hover sm>
-                                        <thead>
-                                            <tr>
-                                                <th>Nama Murid</th>
-                                                <th>Sangat Baik</th>
-                                                <th>Butuh Perhatian</th>
-                                                <th>Kehadiran</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90%</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90%</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90%</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90%</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90%</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90%</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90%</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90%</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90%</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                                                <td>90</td>
-                                                <td>90</td>
-                                                <td>90%</td>
-                                            </tr>
-                                        </tbody>
-                                    </Table>
-                                </TabPane>
-                            </TabContent>
-                            <br />
+                            </div>
                         </div>
                     </div>
-                    <br /><br />
+                    <br /><br /><br /><br /><br /><br /><br />
                 </div>
             </div >
         )
