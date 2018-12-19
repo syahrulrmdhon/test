@@ -1,15 +1,31 @@
 {
-  "name": "pbnu-fe",
-  "version": "0.1.0",
+  "name": "teacher-web",
+  "version": "2.0.0",
+  "author": {
+    "name": "Fandi A Riyanto",
+    "email": "fandi@gredu.asia",
+    "url": "https://toughcode.blogspot.com"
+  },
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.9",
     "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "json-server": "^0.14.0",
+    "popper.js": "^1.14.6",
+    "prop-types": "^15.6.2",
     "react": "^16.6.3",
+    "react-avatar": "^3.4.6",
+    "react-bootstrap": "^0.32.4",
+    "react-day-picker": "^7.2.4",
     "react-dom": "^16.6.3",
     "react-image": "^1.5.1",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
+    "reactstrap": "^6.5.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.7",
     "typeface-nunito-sans": "0.0.54"

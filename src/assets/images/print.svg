@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="71" height="18" viewBox="0 0 71 18">
+    <g fill="#3D74B4" fill-rule="evenodd">
+        <text font-family="NunitoSans-SemiBold, Nunito Sans" font-size="16" font-weight="500" transform="translate(0 -2)">
+            <tspan x="29" y="16">Cetak</tspan>
+        </text>
+        <path fill-rule="nonzero" d="M16.15 4.775H2.85C1.235 4.775 0 6.017 0 7.64v5.73h3.8v3.82h11.4v-3.82H19V7.64c0-1.623-1.235-2.865-2.85-2.865zM13.3 15.28H5.7v-4.775h7.6v4.775zm2.85-6.685c-.57 0-.95-.382-.95-.955s.38-.955.95-.955.95.382.95.955-.38.955-.95.955zM15.2 0H3.8v3.82h11.4V0z"/>
+    </g>
+</svg>

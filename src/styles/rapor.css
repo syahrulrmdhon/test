@@ -1,0 +1,39 @@
+@import url("../styles/global/component.css");
+.rapor {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+  font-family: "Nunito Sans", sans-serif;
+}
+.left-content {
+  width: 90%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+}
+.right-content {
+  width: 90%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+  overflow-y: scroll;
+  height: 400px;
+}
+.export-print {
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+  border: none;
+}
+.export {
+  width: 50px;
+  height: 10px;
+  cursor: pointer;
+  border: none;
+}
+.print {
+  width: 50px;
+  height: 10px;
+  cursor: pointer;
+  border: none;
+}
