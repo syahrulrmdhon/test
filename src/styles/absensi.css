@@ -7,7 +7,7 @@
 }
 .content {
   height: 700px;
-  background: #f7f7f7;
+  /* background: #f7f7f7; */
 }
 .left-content {
   padding-top: 20px;
@@ -33,7 +33,7 @@
   height: 400px;
 }
 .card {
-  background: white;
+  /* background: white; */
   padding: 10px;
   margin: auto;
   box-shadow: 5px 10px #199d7f;
