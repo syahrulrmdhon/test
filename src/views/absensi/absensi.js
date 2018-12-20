@@ -21,6 +21,7 @@ export default class Absensi extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.showModal = this.showModal.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +37,11 @@ export default class Absensi extends Component {
   }
   handleSubmit(event) {
 
+  }
+  showModal() {
+    this.setState({
+      modal: !this.state.modal
+    })
   }
   render() {
     return (
@@ -119,10 +125,13 @@ export default class Absensi extends Component {
                               <input type="radio" name={"absen[" + x + "]"} value="alpha"></input>
                             </th>
                             <th className="align-center">
-                              <button className="btn-white">Lihat Keterangan</button>
+                              <button className="btn-white" onClick={this.showModal}>Lihat Keterangan</button>
                             </th>
                           </tr>
-                        })
+                        },
+                        this
+                        )
+                        
                       }
                     </tbody>
                   </Table>
@@ -154,6 +163,9 @@ export default class Absensi extends Component {
           </div>
         </div>
         {/* <br /> <br /> <br /><br /><br /><br /> */}
+        <ModalAbsensi modal={this.state.modal} toggle={this.showModal}>
+
+        </ModalAbsensi>
       </div >
     )
   }
