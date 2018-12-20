@@ -5,12 +5,17 @@ import Penilaian from '../views/penilaian/penilaian';
 import DaftarNilai from '../views/daftar-nilai/daftar-nilai';
 import Rapor from '../views/rapor/rapor';
 import DaftarMurid from '../views/murid/murid';
+import ModalAbsensi from '../views/absensi/modal'
 
 export const MainRoutes = [
     {
         path: '/',
         exact: true,
         component: Login
+    },
+    {
+        path: '/modal',
+        component: ModalAbsensi
     },
     {
         path: '/home',

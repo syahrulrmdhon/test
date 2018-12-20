@@ -30,7 +30,7 @@ export default class Header extends Component {
     render() {
         return (
             <div className="header-bar">
-                <div className="bg-green">
+                <div className="bg-green-header">
                     <Navbar expand="md" className="font-white">
                         <NavbarBrand>
                             <img src={Logo} alt="" />

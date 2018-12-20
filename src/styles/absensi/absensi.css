@@ -1,0 +1,92 @@
+@import url("../../styles/global/component.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+.absensi {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+  margin: auto;
+  font-family: "Nunito Sans", sans-serif;
+}
+.content {
+  height: 700px;
+  font-family: "Nunito Sans", sans-serif;
+}
+.left-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+  height: 400px;
+  font-family: "Nunito Sans", sans-serif;
+}
+.left-content form label {
+  color: #6d6d6d;
+  font-family: "Nunito Sans", sans-serif;
+}
+.center-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+  overflow-y: scroll;
+  height: 400px;
+  font-family: "Nunito Sans", sans-serif;
+}
+.right-content {
+  background: #f7f7f7;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  height: 400px;
+  font-family: "Nunito Sans", sans-serif;
+}
+.card {
+  /* background: white; */
+  padding: 10px;
+  margin: auto;
+  box-shadow: 5px 10px #199d7f;
+  font-family: "Nunito Sans", sans-serif;
+}
+.card h3 {
+  color: #199d7f;
+  font-family: "Nunito Sans", sans-serif;
+}
+.car p {
+  color: #2d2d2d;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+/* date range start */
+.Range .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+  background-color: #f0f8ff !important;
+  color: #4a90e2;
+  font-family: "Nunito Sans", sans-serif;
+}
+.Range .DayPicker-Day {
+  border-radius: 0 !important;
+  font-family: "Nunito Sans", sans-serif;
+}
+/* date range end */
+
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.icon {
+  padding: 10px;
+  color: #e0e4e8;
+  min-width: 20px;
+  border: solid 0.5px #e0e4e8;
+  border-left: none;
+  height: 30px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: solid 0.5px #e0e4e8;
+  border-right: none;
+  height: 30px;
+  font-family: "Nunito Sans", sans-serif;
+}

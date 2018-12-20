@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import './../../styles/absensi.css'
+import './../../styles/absensi/absensi.css'
 
 import Header from '../global/header'
 import MenuBar from '../global/navbar'
+import ModalAbsensi from './modal'
 
 import 'react-day-picker/lib/style.css';
 import { Table } from 'reactstrap'
 import Axios from 'axios';
+
 
 export default class Absensi extends Component {
   constructor(props) {
@@ -14,7 +16,8 @@ export default class Absensi extends Component {
     this.state = {
       isLoading: true,
       users: [],
-      error: null
+      error: null,
+      modal: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -76,12 +79,13 @@ export default class Absensi extends Component {
                 </div>
                 <div className="col-9 center-content">
                   <div className="row">
-                    <div className="col-9">
+                    <div className="col-8">
                       <h5><strong>Tanggal 17 Desember 2018</strong></h5>
                     </div>
-                    <div className="col-3">
-                      Search bar...
-                  </div>
+                    <div className="col-4 input-container">
+                      <input className="input-field" type="text" placeholder="Cari siswa disini..." name="search" />
+                      <i className="fa fa-search icon"></i>
+                    </div>
                   </div>
                   <br />
                   <Table bordered striped responsive hover className="table-sm absen">
