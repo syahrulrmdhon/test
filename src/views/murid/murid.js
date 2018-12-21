@@ -20,7 +20,8 @@ class DaftarMurid extends Component {
     }
 
     componentDidMount() {
-        Axios.get(`https://jsonplaceholder.typicode.com/users`)
+        const url = 'https://jsonplaceholder.typicode.com/users'
+        Axios.get(url)
             .then(res => {
                 const users = res.data;
                 this.setState({ users });

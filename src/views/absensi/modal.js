@@ -29,7 +29,7 @@ export default class ModalAbsensi extends Component {
                         <input className="col-12" type="text" placeholder="Status Absen" readOnly></input>
                         <br/><br/>
                         <label className="col-12">Keterangan</label>
-                        <textarea className="col-12" rows="10" cols="50" placeholder="Tulis keterangan..."></textarea>
+                        <textarea className="col-12" rows={4} cols={50} placeholder="Tulis keterangan..."></textarea>
                     </div>
                     <br/>
                     <div className="footer-modal">
