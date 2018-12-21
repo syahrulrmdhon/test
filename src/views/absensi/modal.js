@@ -4,7 +4,7 @@ import Modal from 'react-awesome-modal';
 
 export default class ModalAbsensi extends Component {
     render() {
-        console.log('MODAL', this.props.modal);
+        // console.log('MODAL', this.props.modal);
         return (
             <Modal
                 visible={this.props.modal}

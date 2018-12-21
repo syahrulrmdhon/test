@@ -18,8 +18,8 @@ class Login extends Component {
         user[e.target.name] = e.target.value
         this.setState(user)
     }
-    handleSubmit = event => {
-        event.preventDefault()
+    handleSubmit = e => {
+        e.preventDefault()
         const self = this
 
         const url = ('https://00983238.ngrok.io/authentication/login')
@@ -57,9 +57,9 @@ class Login extends Component {
                         <div className="main-right col-12">
                             <form onSubmit={this.handleSubmit}>
                                 <h5><strong>Masuk ke akun Gredu kamu</strong></h5>
-                                <br />
+                                <br /><br />
                                 <input type="text" name="email" onChange={this.handleChange.bind(this)} value={this.state.email} placeholder="Alamat Email" className="col-12"></input>
-                                <br />
+                                <br /><br />
                                 <input type="text" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
                                 <br /><br />
                                 <button type="submit" className="btn btn-young-green col-12">Masuk</button>
