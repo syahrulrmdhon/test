@@ -13,7 +13,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import ApiHost from './routes/api_host'
 import configureStore from './redux-modules/create'
-require('typeface-nunito-sans');
 
 var initialState = "Gredu Indonesia"
 initialState = window.DATA;

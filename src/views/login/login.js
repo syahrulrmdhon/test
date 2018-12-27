@@ -18,7 +18,7 @@ class Login extends Component {
         user[e.target.name] = e.target.value
         this.setState(user)
     }
-    handleSubmit = e => {
+    handleSubmit (e) {
         e.preventDefault()
         const self = this
 

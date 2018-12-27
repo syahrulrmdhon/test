@@ -25,7 +25,7 @@ export default class Absensi extends Component {
   }
 
   componentDidMount() {
-    Axios.get('https://jsonplaceholder.typicode.com/users')
+    Axios.get(process.env.API_URL+ '/users')
       .then(res => {
         const users = res.data;
         this.setState({ users });
@@ -131,7 +131,6 @@ export default class Absensi extends Component {
                         },
                         this
                         )
-                        
                       }
                     </tbody>
                   </Table>
