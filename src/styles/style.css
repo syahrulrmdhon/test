@@ -25,6 +25,7 @@ time, mark, audio, video {
   font: inherit;
   font-size: 100%;
   vertical-align: baseline;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 a {
@@ -41,7 +42,7 @@ body {
 
 body {
   /*font: 1.4rem "Nunito Sans", sans-serif;*/
-  font-family: 'Nunito Sans' !important;
+  font-family: "Nunito Sans", sans-serif;
   color: #51647a;
 }
 

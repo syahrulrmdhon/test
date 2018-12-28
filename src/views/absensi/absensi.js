@@ -17,10 +17,14 @@ export default class Absensi extends Component {
       isLoading: true,
       users: [],
       error: null,
-      modal: false
+      modal: false,
+      value: ''
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeAbsensi = this.handleChangeAbsensi.bind(this);
+    this.handleChangeKelas = this.handleChangeKelas.bind(this);
+    this.handleChangePelajaran = this.handleChangePelajaran.bind(this);
+
     this.showModal = this.showModal.bind(this);
   }
 
@@ -32,7 +36,13 @@ export default class Absensi extends Component {
       })
   }
 
-  handleChange(event) {
+  handleChangeAbsensi(event) {
+    this.setState({ value: event.target.value });
+  }
+  handleChangeKelas(event) {
+    this.setState({ value: event.target.value });
+  }
+  handleChangePelajaran(event) {
     this.setState({ value: event.target.value });
   }
   handleSubmit(event) {
@@ -58,22 +68,19 @@ export default class Absensi extends Component {
                   <br />
                   <form onSubmit={this.handleSubmit}>
                     <label>Tipe Absensi</label>
-                    <select value={this.state.value} onChange={this.handleChange}>
-                      <option value="">Pilih Tipe Absensi</option>
+                    <select value={this.state.value} onChange={this.handleChangeAbsensi}>
                       <option value="harian">Absensi Harian</option>
                       <option value="mapel">Absensi Mata Pelajaran</option>
                     </select>
                     <br /><br />
                     <label>Kelas</label>
-                    <select value={this.state.value} onChange={this.handleChange}>
-                      <option value="">Pilih Kelas</option>
+                    <select value={this.state.value} onChange={this.handleChangeKelas}>
                       <option value="x2">X IPA 2</option>
                       <option value="x1">X IPA 1</option>
                     </select>
                     <br /><br />
                     <label>Mata Pelajaran</label>
-                    <select value={this.state.value} onChange={this.handleChange}>
-                      <option value="">Pilih Mata Pelajaran</option>
+                    <select value={this.state.value} onChange={this.handleChangePelajaran}>
                       <option value="bi">Bahasa Indonesia</option>
                       <option value="mtk">Matematika</option>
                       <option value="english">Bahasa Inggris</option>
@@ -94,7 +101,7 @@ export default class Absensi extends Component {
                     </div>
                   </div>
                   <br />
-                  <Table bordered striped responsive hover className="table-sm absen">
+                  <Table bordered striped responsive hover className="table-sm">
                     <thead>
                       <tr>
                         <th>No</th>

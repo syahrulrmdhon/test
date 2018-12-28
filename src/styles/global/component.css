@@ -1,3 +1,5 @@
+/* Font NunitoSans */
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
 
 /* box content */
 .content {
@@ -26,9 +28,11 @@ select {
   padding: 1rem;
   padding-right: 3rem;
   cursor: pointer;
+  font-family: "Nunito Sans", sans-serif;
 }
 option {
   margin: auto;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 /* button */
@@ -37,7 +41,7 @@ option {
   width: 100%;
   color: white;
   background: #1a9d7f;
-  font-family: NunitoSans;
+  font-family: "Nunito Sans", sans-serif;
   cursor: pointer;
 }
 .btn-green:hover {
@@ -52,15 +56,19 @@ option {
   border: solid 0.5px #1a9d7f;
   color: #1a9d7f;
   background: white;
-  font-family: NunitoSans;
+  font-family: "Nunito Sans", sans-serif;
   cursor: pointer;
+}
+.btn-white:hover {
+  background: #1a9d7f;
+  color: white;
 }
 .btn-young-green {
   background: #51d2b4;
   width: 100%;
   height: 50%;
   color: white;
-  font-family: NunitoSans;
+  font-family: "Nunito Sans", sans-serif;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -91,19 +99,18 @@ thead {
   -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
-/* Font NunitoSans */
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
-
 /* background and font color */
 .bg-green {
   background: #199d7f;
 }
 .bg-white {
-    background: white;
+  background: white;
 }
-.font-white { 
-    color: white !important;
+.font-white {
+  font-family: "Nunito Sans", sans-serif;
+  color: white !important;
 }
 .font-grey {
-    color: #9da2a6;
+  font-family: "Nunito Sans", sans-serif;
+  color: #9da2a6;
 }

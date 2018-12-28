@@ -2,6 +2,7 @@
 .login {
   margin: auto;
   width: 80%;
+  font-family: "Nunito Sans", sans-serif;
 }
 .box {
   position: relative;
@@ -10,7 +11,6 @@
 .box .left-content {
   background-image: linear-gradient(to bottom, #51d2b4, #229c80);
   color: white;
-  font-family: NunitoSans;
   margin-top: 10%;
   border-radius: 5px;
 }
@@ -49,7 +49,6 @@
   filter: brightness(99%);
 }
 .copyright {
-  font-family: NunitoSans;
   font-size: 10px;
   text-align: center;
   bottom: 0;
