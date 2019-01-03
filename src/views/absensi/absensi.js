@@ -168,7 +168,6 @@ export default class Absensi extends Component {
             </div>
           </div>
         </div>
-        {/* <br /> <br /> <br /><br /><br /><br /> */}
         <ModalAbsensi modal={this.state.modal} toggle={this.showModal}>
 
         </ModalAbsensi>

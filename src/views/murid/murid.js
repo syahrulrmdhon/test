@@ -77,7 +77,6 @@ class DaftarMurid extends Component {
                             </Table>
                         </div>
                     </div>
-                    <br /><br /><br /><br/><br/><br/><br/>
                 </div>
             </div>
         )

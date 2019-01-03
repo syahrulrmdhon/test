@@ -3,6 +3,7 @@
   background: #f7f7f7;
   margin-bottom: 20px;
   font-family: 'Nunito Sans', sans-serif;
+  overflow-y: hidden;
 }
 .left-content {
   padding-top: 20px;
