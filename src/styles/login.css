@@ -3,6 +3,7 @@
   margin: auto;
   width: 80%;
   font-family: "Nunito Sans", sans-serif;
+  overflow-y: hidden;
 }
 .box {
   position: relative;
@@ -11,7 +12,7 @@
 .box .left-content {
   background-image: linear-gradient(to bottom, #51d2b4, #229c80);
   color: white;
-  margin-top: 10%;
+  margin-top: 7%;
   border-radius: 5px;
 }
 .box .left-content .main-left {
@@ -19,9 +20,10 @@
   margin-left: 10%;
 }
 .box .right-content {
-  margin-top: 10%;
-  box-shadow: 0 3px 8px 6px rgba(76, 76, 76, 0.1);
+  margin-top: 6.9%;
+  box-shadow: 0 3px 8px 3px rgba(76, 76, 76, 0.1);
   border-radius: 5px;
+  overflow-y: hidden;
 }
 .main-right {
   margin-top: 10%;
@@ -40,9 +42,6 @@
 }
 .main-right p{
   text-align: right;
-}
-.main-right a{
-  /* color: #51d2b4; */
 }
 .main-right a:hover {
   text-decoration: none;
