@@ -2,10 +2,11 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const API_URL = {
-    production: JSON.stringify('https:toughcode.blogspot.com'),
+    production: JSON.stringify('https://jsonplaceholder.typicode.com'),
     development: JSON.stringify('https://jsonplaceholder.typicode.com')
 }
-const  webpack = require('webpack')
+const webpack = require('webpack')
+const Jarvis = require("webpack-jarvis");
 
 module.exports = (env) => ({
     devServer: {
@@ -51,6 +52,9 @@ module.exports = (env) => ({
             'process.env': {
                 'API_URL': API_URL[env.TARGET_ENV]
             }
+        }),
+        new Jarvis({
+            port: 1988
         })
     ]
 });

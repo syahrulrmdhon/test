@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import './../../styles/beranda.css';
+import './../../styles/beranda.css'
 
-import Header from '../global/header';
-import MenuBar from '../global/navbar';
+import Header from '../global/header'
+import MenuBar from '../global/navbar'
 
 class Beranda extends Component {
     render() {

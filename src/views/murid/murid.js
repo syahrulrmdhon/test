@@ -44,21 +44,9 @@ class DaftarMurid extends Component {
                 <br /><br />
                 <div className="content">
                     <div className="row">
-                        <div className="left-content col-2">
-                            <h5><strong>Urutkan Berdasarkan</strong></h5>
-                            <br />
-                            <form onSubmit={this.handleSubmit}>
-                                <select value={this.state.value} onChange={this.handleChange}>
-                                    <option value="teratas">Peringkat Teratas</option>
-                                    <option value="ascending">Nama Murid (A ke Z)</option>
-                                    <option value="terbawah">Kehadiran Terendah</option>
-                                </select>
-                                <br /><br />
-                                <button type="submit" className="btn-green">Urutkan</button>
-                            </form>
-                        </div>
-                        <div className="right-content col-10">
-                            <h5><strong>Kelas X IPA 2</strong></h5>
+                        <div className="right-content col-12">
+                            <h5><strong>Daftar Murid Kelas X IPA 2</strong></h5>
+                            <h6>Tahun Ajaran 2018/2019</h6>
                             <br />
                             <Table bordered striped responsive hover className="table-sm">
                                 <thead>

@@ -1,4 +1,7 @@
 @import url("../styles/global/component.css");
+.row {
+  background: white;
+}
 .murid {
   background: #f7f7f7;
   margin-bottom: 20px;
@@ -19,5 +22,5 @@
   height: 400px;
 }
 .right-content h5{
-  float: left;
+  text-align: center;
 }
