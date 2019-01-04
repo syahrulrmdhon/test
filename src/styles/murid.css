@@ -7,18 +7,15 @@
   margin-bottom: 20px;
   font-family: 'Nunito Sans', sans-serif;
 }
-.left-content {
-  /* width: 90%; */
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background: white;
+.content {
+  margin-bottom: 10px;
 }
 .right-content {
   padding-top: 20px;
   padding-bottom: 20px;
   background: white;
   overflow-y: hidden;
-  height: 450px;
+  height: 530px;
 }
 .right-content h5{
   text-align: center;

@@ -56,7 +56,6 @@ class DaftarMurid extends Component {
             <div className="murid">
                 <Header></Header>
                 <MenuBar></MenuBar>
-                <br /><br />
                 <div className="content">
                     <div className="row">
                         <div className="right-content col-12">
