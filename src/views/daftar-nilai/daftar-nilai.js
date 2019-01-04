@@ -92,7 +92,7 @@ class DaftarNilai extends Component {
                                 </div>
                                 <TabContent className="col-12" activeTab={this.state.activeTab}>
                                     <TabPane tabId="1">
-                                        <Table bordered striped responsive hover className="table-sm">
+                                        <Table bordered striped responsive hover>
                                             <thead>
                                                 <tr>
                                                     <th>Nama Siswa</th>
@@ -230,7 +230,7 @@ class DaftarNilai extends Component {
                                         </Table>
                                     </TabPane>
                                     <TabPane tabId="2">
-                                        <Table bordered striped responsive hover className="table-sm">
+                                        <Table bordered striped responsive hover>
                                             <thead>
                                                 <tr>
                                                     <th>Nama Siswa</th>
@@ -368,7 +368,7 @@ class DaftarNilai extends Component {
                                         </Table>
                                     </TabPane>
                                     <TabPane tabId="3">
-                                        <Table bordered striped responsive hover className="table-sm">
+                                        <Table bordered striped responsive hover>
                                             <thead>
                                                 <tr>
                                                     <th>Nama Murid</th>

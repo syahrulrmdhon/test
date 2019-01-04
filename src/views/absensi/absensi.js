@@ -101,7 +101,7 @@ export default class Absensi extends Component {
                     </div>
                   </div>
                   <br />
-                  <Table bordered striped responsive hover className="table-sm">
+                  <Table bordered striped responsive hover>
                     <thead>
                       <tr>
                         <th>No</th>

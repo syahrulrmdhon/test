@@ -68,7 +68,7 @@ class Rapor extends Component {
                         <div className="right-content col-10">
                             <div className="row">
                                 <div className="col-8">
-                                    <h5><strong>Rapor Kelas X IPA 2</strong></h5>
+                                    <h5 className="float-left"><strong>Rapor Kelas X IPA 2</strong></h5>
                                 </div>
                                 <div className="col-4">
                                     <span className="float-right">
@@ -100,7 +100,7 @@ class Rapor extends Component {
                                 </div>
                                 <TabContent className="col-12" activeTab={this.state.activeTab}>
                                     <TabPane tabId="1">
-                                        <Table bordered striped responsive hover className="table-sm">
+                                        <Table bordered striped responsive hover>
                                             <thead>
                                                 <tr>
                                                     <th>Nama Siswa</th>
@@ -218,7 +218,7 @@ class Rapor extends Component {
                                         </Table>
                                     </TabPane>
                                     <TabPane tabId="2">
-                                        <Table bordered striped responsive hover className="table-sm">
+                                        <Table bordered striped responsive hover>
                                             <thead>
                                                 <tr>
                                                     <th>Nama Siswa</th>
@@ -336,7 +336,7 @@ class Rapor extends Component {
                                         </Table>
                                     </TabPane>
                                     <TabPane tabId="3">
-                                        <Table bordered striped responsive hover className="table-sm">
+                                        <Table bordered striped responsive hover>
                                             <thead>
                                                 <tr>
                                                     <th>Nama Siswa</th>

@@ -16,7 +16,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
   background: white;
-  height: 400px;
+  height: 450px;
   font-family: "Nunito Sans", sans-serif;
 }
 .left-content form label {
@@ -28,7 +28,7 @@
   padding-bottom: 20px;
   background: white;
   overflow-y: scroll;
-  height: 400px;
+  height: 450px;
   font-family: "Nunito Sans", sans-serif;
 }
 .right-content {
@@ -36,7 +36,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
-  height: 400px;
+  height: 450px;
   font-family: "Nunito Sans", sans-serif;
 }
 .card {
