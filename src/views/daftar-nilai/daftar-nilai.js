@@ -60,7 +60,7 @@ class DaftarNilai extends Component {
                         <div className="right-content col-10">
                             <div className="row">
                                 <div className="col-8">
-                                    <h5><strong>Daftar Nilai</strong></h5>
+                                    <h5 className="float-left"><strong>Daftar Nilai</strong></h5>
                                 </div>
                                 <div className="col-4">
                                     <span className="float-right">

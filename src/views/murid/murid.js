@@ -63,7 +63,7 @@ class DaftarMurid extends Component {
                             <h5><strong>Daftar Murid Kelas X IPA 2</strong></h5>
                             <h6>Tahun Ajaran 2018/2019</h6>
                             <br />
-                            <BootstrapTable data={this.state.users} options={options}>
+                            <BootstrapTable striped data={this.state.users} options={options}>
                                 <TableHeaderColumn dataField='id' isKey dataSort>NIS</TableHeaderColumn>
                                 <TableHeaderColumn dataField='email' dataSort>NISN</TableHeaderColumn>
                                 <TableHeaderColumn dataField='username' dataSort>Nama Murid</TableHeaderColumn>
