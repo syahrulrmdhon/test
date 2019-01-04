@@ -23,6 +23,7 @@
     "react-avatar": "^3.4.6",
     "react-awesome-modal": "^2.0.5",
     "react-bootstrap": "^0.32.4",
+    "react-bootstrap-table": "^4.3.1",
     "react-day-picker": "^7.2.4",
     "react-dom": "^16.6.3",
     "react-image": "^1.5.1",
