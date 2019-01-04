@@ -35,7 +35,7 @@ class DaftarMurid extends Component {
             .then(res => {
                 const users = res.data;
                 this.setState({ users });
-                
+
             })
     }
 
@@ -63,13 +63,31 @@ class DaftarMurid extends Component {
                             <h5><strong>Daftar Murid Kelas X IPA 2</strong></h5>
                             <h6>Tahun Ajaran 2018/2019</h6>
                             <br />
-                            <BootstrapTable striped data={this.state.users} options={options}>
-                                <TableHeaderColumn dataField='id' isKey dataSort>NIS</TableHeaderColumn>
-                                <TableHeaderColumn dataField='email' dataSort>NISN</TableHeaderColumn>
-                                <TableHeaderColumn dataField='username' dataSort>Nama Murid</TableHeaderColumn>
-                                <TableHeaderColumn dataField='username' dataSort>Kehadiran Rata-Rata</TableHeaderColumn>
-                                <TableHeaderColumn dataField='username' dataSort>Nilai Rata-Rata</TableHeaderColumn>
-                                <TableHeaderColumn dataField='username' dataSort>Peringkat</TableHeaderColumn>
+                            <BootstrapTable striped data={this.state.users} options={options} className="table-content">
+                                <TableHeaderColumn dataField='id' isKey dataSort={true}>
+                                    NIS
+                                <i className="fa fa-sort"></i>
+                                </TableHeaderColumn>
+                                <TableHeaderColumn dataField='email' dataSort={true}>
+                                    NISN
+                                <i className="fa fa-sort"></i>
+                                </TableHeaderColumn>
+                                <TableHeaderColumn dataField='username' dataSort={true}>
+                                    Nama Murid
+                                <i className="fa fa-sort"></i>
+                                </TableHeaderColumn>
+                                <TableHeaderColumn dataField='username' dataSort={true}>
+                                    Kehadiran Rata-Rata
+                                <i className="fa fa-sort"></i>
+                                </TableHeaderColumn>
+                                <TableHeaderColumn dataField='username' dataSort={true}>
+                                    Nilai Rata-Rata
+                                <i className="fa fa-sort"></i>
+                                </TableHeaderColumn>
+                                <TableHeaderColumn dataField='username' dataSort={true}>
+                                    Peringkat
+                                <i className="fa fa-sort"></i>
+                                </TableHeaderColumn>
                             </BootstrapTable>
                         </div>
                     </div>

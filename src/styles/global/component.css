@@ -113,3 +113,9 @@ thead {
   font-family: "Nunito Sans", sans-serif;
   color: #9da2a6;
 }
+
+/* table content */
+.table-content {
+  height: 400px;
+  overflow-y: scroll;
+}

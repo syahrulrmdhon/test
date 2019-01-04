@@ -29,7 +29,7 @@ export default class Absensi extends Component {
   }
 
   componentDidMount() {
-    Axios.get(process.env.API_URL+ '/users')
+    Axios.get(process.env.API_URL + '/users')
       .then(res => {
         const users = res.data;
         this.setState({ users });
@@ -58,7 +58,6 @@ export default class Absensi extends Component {
       <div className="absensi">
         <Header></Header>
         <MenuBar></MenuBar>
-        <br /><br />
         <div className="content">
           <div className="row">
             <div className="col-lg-10">
@@ -101,49 +100,49 @@ export default class Absensi extends Component {
                     </div>
                   </div>
                   <br />
-                  <Table bordered striped responsive hover>
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>Nama Murid</th>
-                        <th>Hadir</th>
-                        <th>Sakit</th>
-                        <th>Ijin</th>
-                        <th>Alpha</th>
-                        <th>Keterangan</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {
-                        this.state.users.map(function (i, x) {
-                          return <tr key={x}>
-                            <th>{x + 1}</th>
-                            <th>{i.name}</th>
-                            <th className="align-center" title="Hadir">
-                              <input type="radio" className="rd-btn" name={"absen[" + x + "]"} value="hadir"></input>
-                            </th>
-                            <th className="align-center" title="Sakit">
-                              <input type="radio" name={"absen[" + x + "]"} value="sakit"></input>
-                            </th>
-                            <th className="align-center" title="Ijin">
-                              <input type="radio" name={"absen[" + x + "]"} value="ijin"></input>
-                            </th>
-                            <th className="align-center" title="Alpha">
-                              <input type="radio" name={"absen[" + x + "]"} value="alpha"></input>
-                            </th>
-                            <th className="align-center">
-                              <button className="btn-white" onClick={this.showModal}>Lihat Keterangan</button>
-                            </th>
-                          </tr>
-                        },
-                        this
-                        )
-                      }
-                    </tbody>
-                  </Table>
-                  <div className="float-right col-3">
-                    <button type="submit" className="btn-green">Simpan</button>
+                  <div className="table-content">
+                    <Table bordered striped responsive hover>
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Nama Murid</th>
+                          <th>Hadir</th>
+                          <th>Sakit</th>
+                          <th>Ijin</th>
+                          <th>Alpha</th>
+                          <th>Keterangan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          this.state.users.map(function (i, x) {
+                            return <tr key={x}>
+                              <th>{x + 1}</th>
+                              <th>{i.name}</th>
+                              <th className="align-center" title="Hadir">
+                                <input type="radio" className="rd-btn" name={"absen[" + x + "]"} value="hadir"></input>
+                              </th>
+                              <th className="align-center" title="Sakit">
+                                <input type="radio" name={"absen[" + x + "]"} value="sakit"></input>
+                              </th>
+                              <th className="align-center" title="Ijin">
+                                <input type="radio" name={"absen[" + x + "]"} value="ijin"></input>
+                              </th>
+                              <th className="align-center" title="Alpha">
+                                <input type="radio" name={"absen[" + x + "]"} value="alpha"></input>
+                              </th>
+                              <th className="align-center">
+                                <button className="btn-white" onClick={this.showModal}>Lihat Keterangan</button>
+                              </th>
+                            </tr>
+                          },
+                            this
+                          )
+                        }
+                      </tbody>
+                    </Table>
                   </div>
+                  <button type="submit" className="btn-green float-right col-3">Simpan</button>
                 </div>
               </div>
             </div>

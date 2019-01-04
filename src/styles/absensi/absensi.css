@@ -10,60 +10,51 @@
 .content {
   background: #f7f7f7;
   height: 700px;
-  font-family: "Nunito Sans", sans-serif;
+  margin-bottom: 20px;
 }
 .left-content {
   padding-top: 20px;
   padding-bottom: 20px;
   background: white;
-  height: 450px;
-  font-family: "Nunito Sans", sans-serif;
+  height: 530px;
 }
 .left-content form label {
   color: #6d6d6d;
-  font-family: "Nunito Sans", sans-serif;
 }
 .center-content {
   padding-top: 20px;
   padding-bottom: 20px;
   background: white;
-  overflow-y: scroll;
-  height: 450px;
-  font-family: "Nunito Sans", sans-serif;
+  overflow-y: hidden;
+  height: 530px;
 }
 .right-content {
   background: #f7f7f7;
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
-  height: 450px;
-  font-family: "Nunito Sans", sans-serif;
+  height: 530px;
 }
 .card {
   background: white;
   padding: 10px;
   margin: auto;
   box-shadow: 5px 10px #199d7f;
-  font-family: "Nunito Sans", sans-serif;
 }
 .card h3 {
   color: #199d7f;
-  font-family: "Nunito Sans", sans-serif;
 }
 .car p {
   color: #2d2d2d;
-  font-family: "Nunito Sans", sans-serif;
 }
 
 /* date range start */
 .Range .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
   background-color: #f0f8ff !important;
   color: #4a90e2;
-  font-family: "Nunito Sans", sans-serif;
 }
 .Range .DayPicker-Day {
   border-radius: 0 !important;
-  font-family: "Nunito Sans", sans-serif;
 }
 /* date range end */
 

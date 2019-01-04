@@ -4,6 +4,9 @@
   margin-bottom: 20px;
   font-family: "Nunito Sans", sans-serif;
 }
+.content {
+  margin-bottom: 20px;
+}
 .left-content {
   width: 90%;
   padding-top: 20px;

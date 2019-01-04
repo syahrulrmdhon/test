@@ -14,13 +14,16 @@
   background: white;
 }
 .right-content {
-  /* width: 90%; */
   padding-top: 20px;
   padding-bottom: 20px;
   background: white;
-  overflow-y: scroll;
-  height: 470px;
+  overflow-y: hidden;
+  height: 450px;
 }
 .right-content h5{
   text-align: center;
+}
+.fa-sort {
+  float: right;
+  color: #1a9d7f;
 }
