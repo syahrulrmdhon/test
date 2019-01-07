@@ -2,7 +2,7 @@
 .nilai {
   background: #f7f7f7;
   margin-bottom: 20px;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   overflow-y: hidden;
 }
 .content {
@@ -15,20 +15,31 @@
   height: 530px;
 }
 .right-content {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background: white;
-    height: 530px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+  height: 530px;
 }
 .tab-nilai {
-  border: solid 1px #cccccc;
+  /* border: solid 1px #cccccc; */
   background: #f2f2f2;
   overflow-x: hidden;
+  color: #999999;
+}
+.tab-nilai:hover {
+  background: white;
+  border-color: #f2f2f2;
+  color: #333333;
 }
 .tab-nilai:active {
   background: white;
   color: #333333;
 }
+.tab-nilai:focus {
+  background: white;
+  color: #333333;
+  border-color: transparent;
+}
 TabContent {
-    margin-left: 20px;
+  margin-left: 20px;
 }

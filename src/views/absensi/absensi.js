@@ -6,20 +6,19 @@ import MenuBar from '../global/navbar'
 import ModalAbsensi from './modal'
 
 import { Table } from 'reactstrap'
-import Select from 'react-select';
 import Axios from 'axios';
 
-const selectClass = [
+const listClass = [
   { label: "X IPA 1", value: "x ipa 1" },
   { label: "X IPA 2", value: "x ipa 2" },
   { label: "X IPS 1", value: "x ips 1" },
   { label: "X IPS 2", value: "x ips 2" }
 ];
-const selectAbsensi = [
+const listAbsensi = [
   { label: "Absensi Harian", value: "harian" },
   { label: "Absensi Mata Pelajaran", value: "pelajaran" }
 ];
-const selectPelajaran = [
+const listPelajaran = [
   { label: "Fisika Dasar II", value: "fisika2" },
   { label: "Matematika Dasar II", value: "matematika2" },
   { label: "Sejarah Nasional II", value: "sejarah2" },
@@ -34,14 +33,13 @@ export default class Absensi extends Component {
       users: [],
       error: null,
       modal: false,
-      selectedOptionKelas: null,
-      selectedOptionAbsensi: null,
-      selectedOptionPelajaran: null
+      listAbsensi,
+      selectedAbsensi: "",
+      listClass,
+      selectedClass: "",
+      listPelajaran,
+      selectedPelajaran: ""
     };
-
-    this.handleChangeAbsensi = this.handleChangeAbsensi.bind(this);
-    this.handleChangeKelas = this.handleChangeKelas.bind(this);
-    this.handleChangePelajaran = this.handleChangePelajaran.bind(this);
 
     this.showModal = this.showModal.bind(this);
   }
@@ -52,19 +50,6 @@ export default class Absensi extends Component {
         const users = res.data;
         this.setState({ users });
       })
-  }
-
-  handleChangeAbsensi(selectedOptionAbsensi) {
-    this.setState({ selectedOptionAbsensi });
-    console.log('ABSENSI', selectedOptionAbsensi);
-  }
-  handleChangeKelas(selectedOptionKelas) {
-    this.setState({ selectedOptionKelas });
-    console.log('KELAS', selectedOptionKelas);
-  }
-  handleChangePelajaran(selectedOptionPelajaran) {
-    this.setState({ selectedOptionPelajaran });
-    console.log('KELAS', selectedOptionPelajaran);
   }
   handleSubmit(event) {
 
@@ -88,28 +73,40 @@ export default class Absensi extends Component {
                   <br />
                   <form onSubmit={this.handleSubmit}>
                     <label>Tipe Absensi</label>
-                    <Select
-                      options={selectAbsensi}
-                      placeholder="Pilih Tipe Absensi"
-                      value={this.state.selectedOptionAbsensi}
-                      onChange={this.handleChangeAbsensi}
-                    />
-                    <br />
+                    <select value={this.state.selectedClass}
+                      onChange={(e) => this.setState({ selectedAbsensi: e.target.value })}>
+                      {
+                        this.state.listAbsensi.map((absen) =>
+                          <option key={absen.value} value={absen.value}>
+                            {absen.label}
+                          </option>
+                        )
+                      }
+                    </select>
+                    <br /><br />
                     <label>Kelas</label>
-                    <Select
-                      options={selectClass}
-                      placeholder="Pilih Kelas"
-                      value={this.state.selectedOptionKelas}
-                      onChange={this.handleChangeKelas}
-                    />
-                    <br />
+                    <select value={this.state.selectedClass}
+                      onChange={(e) => this.setState({ selectedClass: e.target.value })}>
+                      {
+                        this.state.listClass.map((kelas) =>
+                          <option key={kelas.value} value={kelas.value}>
+                            {kelas.label}
+                          </option>
+                        )
+                      }
+                    </select>
+                    <br /><br />
                     <label>Mata Pelajaran</label>
-                    <Select
-                      options={selectPelajaran}
-                      placeholder="Pilih Mata Pelajaran"
-                      value={this.state.selectedOptionPelajaran}
-                      onChange={this.handleChangePelajaran}
-                    />
+                    <select value={this.state.selectedPelajaran}
+                      onChange={(e) => this.setState({ selectedPelajaran: e.target.value })}>
+                      {
+                        this.state.listPelajaran.map((pelajaran) =>
+                          <option key={pelajaran.value} value={pelajaran.value}>
+                            {pelajaran.label}
+                          </option>
+                        )
+                      }
+                    </select>
                     <br /><br />
                     <button type="submit" className="btn-green">Filter</button>
                   </form>

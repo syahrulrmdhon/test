@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import './../../styles/rapor.css';
+import './../../styles/rapor.css'
 import './../../styles/global/component.css'
 
-import { Table, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
-import classnames from 'classnames';
+import { Table, TabContent, TabPane } from 'reactstrap'
+import classnames from 'classnames'
+import { Button, ButtonGroup } from 'react-bootstrap'
 
-import Header from '../global/header';
-import MenuBar from '../global/navbar';
+import Header from '../global/header'
+import MenuBar from '../global/navbar'
 
-import ExportLogo from './../../assets/images/export.svg';
-import PrintLogo from './../../assets/images/print.svg';
+import ExportLogo from './../../assets/images/export.svg'
+import PrintLogo from './../../assets/images/print.svg'
 
 class Rapor extends Component {
     constructor(props) {
@@ -71,7 +72,16 @@ class Rapor extends Component {
                                 </div>
                                 <div className="col-4">
                                     <span className="float-right">
-                                        <Nav tabs>
+                                        <ButtonGroup justified>
+                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '1' })}
+                                                onClick={() => { this.toggle('1'); }}>Pengetahuan</Button>
+                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '2' })}
+                                                onClick={() => { this.toggle('2'); }}>Keterampilan</Button>
+                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '3' })}
+                                                onClick={() => { this.toggle('3'); }}>Sikap</Button>
+                                        </ButtonGroup>
+                                        <br /><br />
+                                        {/* <Nav tabs>
                                             <NavItem className="tab-nilai">
                                                 <NavLink
                                                     className={classnames({ active: this.state.activeTab === '1' })}
@@ -93,8 +103,7 @@ class Rapor extends Component {
                                                     Sikap
                                         </NavLink>
                                             </NavItem>
-                                        </Nav>
-                                        <br />
+                                        </Nav> */}
                                     </span>
                                 </div>
                                 <TabContent className="col-12" activeTab={this.state.activeTab}>
