@@ -69,7 +69,7 @@ class Login extends Component {
                             </form>
                         </div>
                         <br /><br />
-                        <p className="copyright col-12">Copyright © (2018) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
+                        <p className="copyright">Copyright © (2018) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                     </div>
                 </div>
             </div>
