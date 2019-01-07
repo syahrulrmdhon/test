@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
-import './../../styles/murid.css'
+import './../../styles/student/murid.css'
 import './../../styles/global/component.css'
 // import { Table } from 'reactstrap'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
