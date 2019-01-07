@@ -5,10 +5,26 @@ import Header from '../global/header'
 import MenuBar from '../global/navbar'
 import ModalAbsensi from './modal'
 
-import 'react-day-picker/lib/style.css';
 import { Table } from 'reactstrap'
+import Select from 'react-select';
 import Axios from 'axios';
 
+const selectClass = [
+  { label: "X IPA 1", value: "x ipa 1" },
+  { label: "X IPA 2", value: "x ipa 2" },
+  { label: "X IPS 1", value: "x ips 1" },
+  { label: "X IPS 2", value: "x ips 2" }
+];
+const selectAbsensi = [
+  { label: "Absensi Harian", value: "harian" },
+  { label: "Absensi Mata Pelajaran", value: "pelajaran" }
+];
+const selectPelajaran = [
+  { label: "Fisika Dasar II", value: "fisika2" },
+  { label: "Matematika Dasar II", value: "matematika2" },
+  { label: "Sejarah Nasional II", value: "sejarah2" },
+  { label: "Biologi II", value: "biologi2" }
+];
 
 export default class Absensi extends Component {
   constructor(props) {
@@ -18,7 +34,9 @@ export default class Absensi extends Component {
       users: [],
       error: null,
       modal: false,
-      value: ''
+      selectedOptionKelas: null,
+      selectedOptionAbsensi: null,
+      selectedOptionPelajaran: null
     };
 
     this.handleChangeAbsensi = this.handleChangeAbsensi.bind(this);
@@ -36,14 +54,17 @@ export default class Absensi extends Component {
       })
   }
 
-  handleChangeAbsensi(event) {
-    this.setState({ value: event.target.value });
+  handleChangeAbsensi(selectedOptionAbsensi) {
+    this.setState({ selectedOptionAbsensi });
+    console.log('ABSENSI', selectedOptionAbsensi);
   }
-  handleChangeKelas(event) {
-    this.setState({ value: event.target.value });
+  handleChangeKelas(selectedOptionKelas) {
+    this.setState({ selectedOptionKelas });
+    console.log('KELAS', selectedOptionKelas);
   }
-  handleChangePelajaran(event) {
-    this.setState({ value: event.target.value });
+  handleChangePelajaran(selectedOptionPelajaran) {
+    this.setState({ selectedOptionPelajaran });
+    console.log('KELAS', selectedOptionPelajaran);
   }
   handleSubmit(event) {
 
@@ -67,23 +88,28 @@ export default class Absensi extends Component {
                   <br />
                   <form onSubmit={this.handleSubmit}>
                     <label>Tipe Absensi</label>
-                    <select value={this.state.value} onChange={this.handleChangeAbsensi}>
-                      <option value="harian">Absensi Harian</option>
-                      <option value="mapel">Absensi Mata Pelajaran</option>
-                    </select>
-                    <br /><br />
+                    <Select
+                      options={selectAbsensi}
+                      placeholder="Pilih Tipe Absensi"
+                      value={this.state.selectedOptionAbsensi}
+                      onChange={this.handleChangeAbsensi}
+                    />
+                    <br />
                     <label>Kelas</label>
-                    <select value={this.state.value} onChange={this.handleChangeKelas}>
-                      <option value="x2">X IPA 2</option>
-                      <option value="x1">X IPA 1</option>
-                    </select>
-                    <br /><br />
+                    <Select
+                      options={selectClass}
+                      placeholder="Pilih Kelas"
+                      value={this.state.selectedOptionKelas}
+                      onChange={this.handleChangeKelas}
+                    />
+                    <br />
                     <label>Mata Pelajaran</label>
-                    <select value={this.state.value} onChange={this.handleChangePelajaran}>
-                      <option value="bi">Bahasa Indonesia</option>
-                      <option value="mtk">Matematika</option>
-                      <option value="english">Bahasa Inggris</option>
-                    </select>
+                    <Select
+                      options={selectPelajaran}
+                      placeholder="Pilih Mata Pelajaran"
+                      value={this.state.selectedOptionPelajaran}
+                      onChange={this.handleChangePelajaran}
+                    />
                     <br /><br />
                     <button type="submit" className="btn-green">Filter</button>
                   </form>
