@@ -48,6 +48,7 @@ class DaftarNilai extends Component {
             });
         }
     }
+
     render() {
         return (
             <div className="nilai">
@@ -95,7 +96,7 @@ class DaftarNilai extends Component {
                                     }
                                 </select>
                                 <br /><br />
-                                <button type="submit" className="btn-green">Urutkan</button>
+                                <button type="submit" className="btn-green">Filter</button>
                             </form>
                         </div>
                         <div className="right-content col-10">
@@ -157,7 +158,7 @@ class DaftarNilai extends Component {
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -169,7 +170,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -181,7 +182,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -193,7 +194,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -205,7 +206,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -217,7 +218,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -229,7 +230,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -241,7 +242,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -253,7 +254,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -265,7 +266,31 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
+                                                        <td>90</td>
+                                                        <td>90</td>
+                                                        <td>90</td>
+                                                        <td>95</td>
+                                                        <td>85</td>
+                                                        <td>90</td>
+                                                        <td>80</td>
+                                                        <td>90</td>
+                                                        <td>90</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
+                                                        <td>90</td>
+                                                        <td>90</td>
+                                                        <td>90</td>
+                                                        <td>95</td>
+                                                        <td>85</td>
+                                                        <td>90</td>
+                                                        <td>80</td>
+                                                        <td>90</td>
+                                                        <td>90</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -297,7 +322,7 @@ class DaftarNilai extends Component {
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -309,7 +334,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -321,7 +346,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -333,7 +358,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -345,7 +370,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -357,7 +382,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -369,7 +394,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -381,7 +406,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -393,7 +418,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -405,7 +430,7 @@ class DaftarNilai extends Component {
                                                         <td>90</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90</td>
@@ -433,61 +458,61 @@ class DaftarNilai extends Component {
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90%</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90%</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90%</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90%</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90%</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90%</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90%</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90%</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90%</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                                                        <td>Muhammad Jihaduddin Fikri Amrillah</td>
                                                         <td>90</td>
                                                         <td>90</td>
                                                         <td>90%</td>
