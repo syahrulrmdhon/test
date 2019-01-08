@@ -70,42 +70,6 @@
     background-color: transparent;
 }
 
-.avatar-wrapper {
-    width: 56px;
-    height: 56px;
-    border: 1px solid #1a9d7f;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    margin: 30px auto 0px;
-}
-
-.avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.ranking {
-    color: #1a9d7f;
-    padding-bottom: 30px;
-    border-bottom: 1px solid #b2d8d8;
-}
-
-.profile {
-    margin-top: 30px;
-}
-
-.field {
-    margin-bottom: 15px;
-    color: #333333;
-}
-
-.label {
-    color: #9da2a6;
-}
-
 .tab-score {
     width: 100px;
     border: solid 1px #cccccc;
@@ -144,76 +108,4 @@
 
 .tab-content {
     margin-top: 20px;
-}
-
-.detail thead {
-    background-color: #ecf2f8;
-    color: #000000;
-    font-weight: lighter;
-}
-
-.detail .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #F9F9F9;
-}
-.detail .table thead th {
-    padding: 8px 10px;
-    vertical-align: middle;
-    border-color: #b0d8d8;
-    border-bottom: none;
-}
-
-.detail .table td {
-    vertical-align: middle;
-    border-color: #b0d8d8;
-    border-top: none;
-    border-bottom: none;
-    padding: 12px 10px;
-    color: #333333;
-}
-
-.detail td:first-child, .detail td:nth-child(2) {
-    text-align: left;
-}
-
-.total-score, .average-score {
-    background-color: #f5faf2 !important;
-    border: 1px solid #b0d8d8;
-}
-
-.status {
-    display: flex;
-    text-align: left;
-    align-items: center;
-}
-
-.indicator {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-
-.red-indicator {
-    background-color: #ff6d4a;
-}
-
-.blue-indicator {
-    background-color: #4da1ff;
-}
-
-.attitude tr:last-child {
-    border-bottom: 1px solid #b0d8d8;
-}
-
-.total-status tr {
-    border: 1px solid #b0d8d8;
-}
-
-.total-status td:first-child {
-    width: 23.5%;
-}
-
-.detail .total-status td {
-    background-color: #f5faf2 !important;
-    color: #1a9d7f;
 }

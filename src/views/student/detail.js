@@ -2,15 +2,14 @@ import React, { Component } from 'react'
 import Header from '../global/header'
 import '../../styles/student/detail.css'
 
-import { Table, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
+import { Nav, NavItem, NavLink } from 'reactstrap'
+import Table from './table'
+import Side from './side'
 import classnames from 'classnames'
-import Avatar from './../../assets/images/img_avatar.png'
 import Print from './../../assets/images/print_new.svg'
 import Export from './../../assets/images/export_new.svg'
 
 export default class Detail extends Component {
-
-
   constructor(props) {
     super(props);
 
@@ -47,7 +46,7 @@ export default class Detail extends Component {
         </div>
         <div className="content">
           <div className="row detail-menu">
-            <div className="offset-3 col-9 padding-left-0">
+            <div className="offset-2 col-10 padding-left-0">
               <Nav tabs>
                 <NavItem className={classnames({ active: this.state.activeMenu === '1' })}>
                   <NavLink 
@@ -75,41 +74,7 @@ export default class Detail extends Component {
           </div>
           <div className="row rounded-10">
             <div className="left-content col-2 border-right text-center">
-              <div className="avatar-wrapper">
-                <img className="avatar" src={Avatar} />
-              </div>
-              <div className="font-weight-bold mt-3">
-                Fransiska Dominika
-              </div>
-              <div className="ranking">
-                Peringkat 13
-              </div>
-              <div className="profile text-left">
-                <div className="field">
-                  <div className="label">NIS:</div>
-                  13010036
-                </div>
-                <div className="field">
-                  <div className="label">NISN:</div>
-                  9965682223
-                </div>
-                <div className="field">
-                  <div className="label">No. Telp:</div>
-                  082200909087
-                </div>
-                <div className="field">
-                  <div className="label">Nama Ayah:</div>
-                  King Spinka Sr.
-                </div>
-                <div className="field">
-                  <div className="label">Nama Ibu:</div>
-                  Carole Barton Ph D
-                </div>
-                <div className="field">
-                  <div className="label">Alamat:</div>
-                  Jl. Taman Nasional 13
-                </div>                  
-              </div>
+              <Side />
             </div>
             <div className="right-content col-10 padding-left-6 padding-right-6 padding-top-6">
               <Nav tabs className="border-0 pull-left">
@@ -146,238 +111,7 @@ export default class Detail extends Component {
                 </span>
               </div>
               <div className="clearfix" />
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane className="knowledge" tabId="1">
-                  <div className="table-content">
-                    <Table bordered striped responsive>
-                      <thead>
-                        <tr>
-                          <th className="text-left">Mata Pelajaran</th>
-                          <th className="text-left">Deskripsi</th>
-                          <th>Nilai Rapor</th>
-                          <th>Predikat</th>
-                          <th>Deskripsi Lainnya</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Matematika</td>
-                          <td>Sangat baik dalam menjelaskan pecahan-pecahan senilai dengan gambar</td>
-                          <td>91</td>
-                          <td>A</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr>
-                          <td>Pendidikan Kewarganegaraan</td>
-                          <td>Baik dalam kompetensi menyebutkan sistem pemerintahan</td>
-                          <td>83</td>
-                          <td>B</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr>
-                          <td>Bahasa Indonesia</td>
-                          <td>Baik dalam membuat kalimat essay menggunakan KTSP</td>
-                          <td>88</td>
-                          <td>B</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr>
-                          <td>Bahasa Inggris</td>
-                          <td>Kurang baik memahami tenses</td>
-                          <td>68</td>
-                          <td>C</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr>
-                          <td>Pendidikan Agama</td>
-                          <td>Cukup memahami sikap teladan di lingkungan sekolah</td>
-                          <td>78</td>
-                          <td>C</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr>
-                          <td>Sejarah Umum</td>
-                          <td>Kurang memahami jenis-jenis peradaban sebelum perang dunia</td>
-                          <td>68</td>
-                          <td>D</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr className="total-score">
-                          <td colSpan="2" className="border-right-0">Jumlah Nilai Pengetahuan</td>
-                          <td className="border-left-0 border-right-0 text-center">350.0</td>
-                          <td className="border-left-0 border-right-0"></td>
-                          <td className="border-left-0"></td>
-                        </tr>
-                        <tr className="average-score">
-                          <td colSpan="2" className="border-right-0">Nilai Pengetahuan Rata-Rata</td>
-                          <td className="border-left-0 border-right-0 text-center">83.33</td>
-                          <td className="border-left-0 border-right-0"></td>
-                          <td className="border-left-0"></td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </div>
-                </TabPane>
-                <TabPane className="knowledge" tabId="2">
-                  <div className="table-content">
-                    <Table bordered striped responsive>
-                      <thead>
-                        <tr>
-                          <th className="text-left">Mata Pelajaran</th>
-                          <th className="text-left">Deskripsi</th>
-                          <th>Nilai Rapor</th>
-                          <th>Predikat</th>
-                          <th>Deskripsi Lainnya</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Matematika</td>
-                          <td>Sangat baik dalam menjelaskan pecahan-pecahan senilai dengan gambar</td>
-                          <td>91</td>
-                          <td>A</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr>
-                          <td>Pendidikan Kewarganegaraan</td>
-                          <td>Baik dalam kompetensi menyebutkan sistem pemerintahan</td>
-                          <td>83</td>
-                          <td>B</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr>
-                          <td>Bahasa Indonesia</td>
-                          <td>Baik dalam membuat kalimat essay menggunakan KTSP</td>
-                          <td>88</td>
-                          <td>B</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr>
-                          <td>Bahasa Inggris</td>
-                          <td>Kurang baik memahami tenses</td>
-                          <td>68</td>
-                          <td>C</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr>
-                          <td>Pendidikan Agama</td>
-                          <td>Cukup memahami sikap teladan di lingkungan sekolah</td>
-                          <td>78</td>
-                          <td>C</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr>
-                          <td>Sejarah Umum</td>
-                          <td>Kurang memahami jenis-jenis peradaban sebelum perang dunia</td>
-                          <td>68</td>
-                          <td>D</td>
-                          <td>Lihat Deskripsi</td>
-                        </tr>
-                        <tr className="total-score">
-                          <td colSpan="2" className="border-right-0">Jumlah Nilai Pengetahuan</td>
-                          <td className="border-left-0 border-right-0 text-center">350.0</td>
-                          <td className="border-left-0 border-right-0"></td>
-                          <td className="border-left-0"></td>
-                        </tr>
-                        <tr className="average-score">
-                          <td colSpan="2" className="border-right-0">Nilai Pengetahuan Rata-Rata</td>
-                          <td className="border-left-0 border-right-0 text-center">83.33</td>
-                          <td className="border-left-0 border-right-0"></td>
-                          <td className="border-left-0"></td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </div>
-                </TabPane>
-                <TabPane className="attitude" tabId="3">
-                  <div className="table-content">
-                    <Table bordered striped responsive>
-                      <thead>
-                        <tr>
-                          <th className="text-left">Mata Pelajaran</th>
-                          <th className="text-left">Keterangan</th>
-                          <th>Tanggal Penilaian</th>
-                          <th className="text-left">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Matematika</td>
-                          <td>Memukul Jeremy dan Doni dengan penggaris besi</td>
-                          <td>14/11/2018</td>
-                          <td>
-                            <div className="status">
-                              <div className="indicator red-indicator"></div>Butuh Perhatian
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Pendidikan Kewarganegaraan</td>
-                          <td>Meminjamkan payung ketika hujan ke saya</td>
-                          <td>3/10/2018</td>
-                          <td>
-                            <div className="status">
-                              <div className="indicator blue-indicator"></div>Sangat Baik
-                            </div>
-                          </td>                        
-                        </tr>
-                        <tr>
-                          <td>Bahasa Indonesia</td>
-                          <td>Baik dalam membuat kalimat essay menggunakan KTSP</td>
-                          <td>14/11/2018</td>
-                          <td>
-                            <div className="status">
-                              <div className="indicator red-indicator"></div>Butuh Perhatian
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Bahasa Inggris</td>
-                          <td>Kurang baik memahami tenses</td>
-                          <td>3/10/2018</td>
-                          <td>
-                            <div className="status">
-                              <div className="indicator blue-indicator"></div>Sangat Baik
-                            </div>
-                          </td>                        
-                        </tr>
-                        <tr>
-                          <td>Pendidikan Agama</td>
-                          <td>Cukup memahami sikap teladan di lingkungan sekolah</td>
-                          <td>14/11/2018</td>
-                          <td>
-                            <div className="status">
-                              <div className="indicator red-indicator"></div>Butuh Perhatian
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Sejarah Umum</td>
-                          <td>Kurang memahami jenis-jenis peradaban sebelum perang dunia</td>
-                          <td>3/10/2018</td>
-                          <td>
-                            <div className="status">
-                              <div className="indicator blue-indicator"></div>Sangat Baik
-                            </div>
-                          </td>                        
-                        </tr>
-                      </tbody>
-                    </Table>
-                    <Table responsive className="total-status">
-                      <tbody>
-                        <tr className="border-bottom-0">
-                          <td>Total Sikap Butuh Perhatian</td>
-                          <td>3 <span className="font-italic">(tiga)</span></td>
-                        </tr>
-                        <tr className="border-top-0">
-                          <td>Total Sikap Sangat Baik</td>
-                          <td>5 <span className="font-italic">(lima)</span></td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </div>
-                </TabPane>
-              </TabContent>              
+              <Table tab={this.state.activeTab}/>   
             </div>
           </div>
         </div>
