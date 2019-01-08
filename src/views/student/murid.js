@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
+import { Redirect } from 'react-router-dom'
 import './../../styles/student/murid.css'
 import './../../styles/global/component.css'
 // import { Table } from 'reactstrap'
@@ -52,8 +53,9 @@ class DaftarMurid extends Component {
             sortName: this.state.sortName,
             sortOrder: this.state.sortOrder,
             onSortChange: this.onSortChange,
-            onRowClick: function(row){
+            onRowClick: function (row) {
                 console.log('ROW CLICKED')
+                return <Redirect to='/dashboard' />
             }
         };
         return (
@@ -75,7 +77,7 @@ class DaftarMurid extends Component {
                                     NISN
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='username' tdStyle={ { color: 'blue', cursor: 'pointer' } } dataSort={true}>
+                                <TableHeaderColumn dataField='username' tdStyle={{ color: 'blue', cursor: 'pointer' }} dataSort={true}>
                                     Nama Murid
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
