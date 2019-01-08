@@ -4,6 +4,7 @@ import './../../styles/student/murid.css'
 import './../../styles/global/component.css'
 // import { Table } from 'reactstrap'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
+
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
 
 import Header from '../global/header'
@@ -50,7 +51,10 @@ class DaftarMurid extends Component {
         const options = {
             sortName: this.state.sortName,
             sortOrder: this.state.sortOrder,
-            onSortChange: this.onSortChange
+            onSortChange: this.onSortChange,
+            onRowClick: function(row){
+                console.log('ROW CLICKED')
+            }
         };
         return (
             <div className="murid">
@@ -62,7 +66,7 @@ class DaftarMurid extends Component {
                             <h5><strong>Daftar Murid Kelas X IPA 2</strong></h5>
                             <h6>Tahun Ajaran 2018/2019</h6>
                             <br />
-                            <BootstrapTable striped data={this.state.users} options={options} className="table-content">
+                            <BootstrapTable hover striped data={this.state.users} options={options} className="table-content">
                                 <TableHeaderColumn dataField='id' isKey dataSort={true}>
                                     NIS
                                 <i className="fa fa-sort"></i>
@@ -71,7 +75,7 @@ class DaftarMurid extends Component {
                                     NISN
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='username' dataSort={true}>
+                                <TableHeaderColumn dataField='username' tdStyle={ { color: 'blue', cursor: 'pointer' } } dataSort={true}>
                                     Nama Murid
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
