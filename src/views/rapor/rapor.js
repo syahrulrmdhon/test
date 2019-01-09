@@ -55,10 +55,8 @@ class Rapor extends Component {
                                 <button type="submit" className="btn-green">Filter</button>
                             </form>
                             <br />
-                            <div className="export-print">
-                                <img className="export" src={ExportLogo} alt="" />
-                                <img className="print" src={PrintLogo} alt="" />
-                            </div>
+                            <img className="export" src={ExportLogo} alt="" />
+                            <img className="print" src={PrintLogo} alt="" />
                         </div>
                         <div className="right-content col-10">
                             <div className="row">
@@ -447,7 +445,7 @@ class Rapor extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 }
