@@ -40,3 +40,17 @@
   cursor: pointer;
   border: none;
 }
+.tab-nilai {
+  border: solid 1px #cccccc;
+  background: #f2f2f2;
+  color: #999999;
+  font-weight: normal;
+  cursor: pointer;
+}
+.nav-tabs .tab-nilai .nav-link {
+  border: none;
+}
+.tab-nilai:active {
+  background: white;
+  color: #333333;
+}

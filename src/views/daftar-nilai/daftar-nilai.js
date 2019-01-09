@@ -4,8 +4,7 @@ import './../../styles/daftar-nilai.css';
 import Header from '../global/header'
 import MenuBar from '../global/navbar'
 
-import { Table, TabContent, TabPane } from 'reactstrap'
-import { Button, ButtonGroup } from 'react-bootstrap'
+import { Table, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames';
 
 const listClass = [
@@ -106,16 +105,7 @@ class DaftarNilai extends Component {
                                 </div>
                                 <div className="col-4">
                                     <span className="float-right">
-                                        <ButtonGroup justified>
-                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '1' })}
-                                                onClick={() => { this.toggle('1'); }}>Pengetahuan</Button>
-                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '2' })}
-                                                onClick={() => { this.toggle('2'); }}>Keterampilan</Button>
-                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '3' })}
-                                                onClick={() => { this.toggle('3'); }}>Sikap</Button>
-                                        </ButtonGroup>
-                                        <br /><br />
-                                        {/* <Nav tabs>
+                                        <Nav tabs className="border-0 pull-right">
                                             <NavItem className="tab-nilai">
                                                 <NavLink
                                                     className={classnames({ active: this.state.activeTab === '1' })}
@@ -137,7 +127,7 @@ class DaftarNilai extends Component {
                                                     Sikap
                                                 </NavLink>
                                             </NavItem>
-                                        </Nav> */}
+                                        </Nav>
                                     </span>
                                 </div>
                                 <TabContent className="col-12" activeTab={this.state.activeTab}>
