@@ -1,0 +1,35 @@
+.avatar-wrapper {
+    width: 56px;
+    height: 56px;
+    border: 1px solid #1a9d7f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 30px auto 0px;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.ranking {
+    color: #1a9d7f;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #b2d8d8;
+}
+
+.profile {
+    margin-top: 30px;
+}
+
+.field {
+    margin-bottom: 15px;
+    color: #333333;
+}
+
+.label {
+    color: #9da2a6;
+}

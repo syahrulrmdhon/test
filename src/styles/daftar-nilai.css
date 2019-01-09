@@ -2,29 +2,41 @@
 .nilai {
   background: #f7f7f7;
   margin-bottom: 20px;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
+  overflow-y: hidden;
+}
+.content {
+  margin-bottom: 20px;
 }
 .left-content {
   padding-top: 20px;
   padding-bottom: 20px;
-  /* border-right: solid 0.5px #f2f2f2; */
   background: white;
+  height: 530px;
 }
 .right-content {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background: white;
-    height: 400px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+  height: 530px;
 }
 .tab-nilai {
-  border: solid 1px #cccccc;
+  /* border: solid 1px #cccccc; */
   background: #f2f2f2;
   overflow-x: hidden;
+  color: #999999;
+}
+.tab-nilai:hover {
+  background: white;
+  border-color: #f2f2f2;
+  color: #333333;
 }
 .tab-nilai:active {
   background: white;
   color: #333333;
 }
-TabContent {
-    margin-left: 20px;
+.tab-nilai:focus {
+  background: white;
+  color: #333333;
+  border-color: transparent;
 }

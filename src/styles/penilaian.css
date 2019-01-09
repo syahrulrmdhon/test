@@ -1,0 +1,14 @@
+@import url("./global/component.css");
+.penilaian {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+  font-family: "Nunito Sans", sans-serif;
+  overflow-y: hidden;
+}
+.left-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+  height: 530px;
+  border-right: solid 0.5px #eeeeee;
+}
