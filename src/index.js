@@ -6,6 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import './styles/style.css';
+// import './styles/tes.scss';
+console.log(process.env.API_URL)
 
 // to use bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';

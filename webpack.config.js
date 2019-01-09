@@ -3,19 +3,26 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const API_URL = {
     production: JSON.stringify('https://jsonplaceholder.typicode.com'),
-    development: JSON.stringify('https://jsonplaceholder.typicode.com')
+    development: JSON.stringify('https://jsonplaceholder.typicode.com/development')
 }
-const webpack = require('webpack')
-const Jarvis = require("webpack-jarvis");
+const webpack = require('webpack');
+// var ROOT = path.resolve(__dirname, '..');
+// var root = path.join.bind(path, ROOT);
+
 
 module.exports = (env) => ({
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        contentBase: path.join(__dirname, 'build'),
+        compress: true,
+        port: 8080
     },
-    entry: "./src/index.js",
+    devtool: 'source-map',
     output: {
         path: path.resolve("build"),
-        filename: "bundled.js"
+        filename: '[name].[chunkhash].bundle.js',
+        sourceMapFilename: '[name].[chunkhash].bundle.map',
+        chunkFilename: '[id].[chunkhash].chunk.js'
     },
     module: {
         rules: [
@@ -35,6 +42,7 @@ module.exports = (env) => ({
                 test: /\.(ttf|woff|eot|png|svg|pdf|woff(2)?)(\?[a-z0-9=&.]+)?$/,
                 loader: "file-loader"
             }
+
         ]
     },
     plugins: [
@@ -50,9 +58,9 @@ module.exports = (env) => ({
             'process.env': {
                 'API_URL': API_URL[env.TARGET_ENV]
             }
-        }),
-        new Jarvis({
-            port: 1988
         })
+
     ]
+  
+
 });
