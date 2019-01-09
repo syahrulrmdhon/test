@@ -31,7 +31,7 @@ export default class Absensi extends Component {
                 </div>
                 <div className="col-9 center-content">
                   <TableAbsensi />
-                  <button type="submit" className="btn-green float-right col-3">Simpan</button>
+                  <button type="submit" onClick={this.handleSubmit} className="btn-green float-right col-3">Simpan</button>
                 </div>
               </div>
             </div>
