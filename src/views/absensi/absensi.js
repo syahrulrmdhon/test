@@ -169,7 +169,7 @@ export default class Absensi extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-lg-2 right-content">
+            <div className="col-lg-2 right">
               <div className="card">
                 <h6><strong>Total Kehadiran</strong></h6>
                 <h3><strong>19</strong></h3>
