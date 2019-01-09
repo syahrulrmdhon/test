@@ -21,22 +21,16 @@
   height: 530px;
 }
 .tab-nilai {
-  /* border: solid 1px #cccccc; */
+  border: solid 1px #cccccc;
   background: #f2f2f2;
-  overflow-x: hidden;
   color: #999999;
+  font-weight: normal;
+  cursor: pointer;
 }
-.tab-nilai:hover {
-  background: white;
-  border-color: #f2f2f2;
-  color: #333333;
+.nav-tabs .tab-nilai .nav-link {
+  border: none;
 }
 .tab-nilai:active {
   background: white;
   color: #333333;
-}
-.tab-nilai:focus {
-  background: white;
-  color: #333333;
-  border-color: transparent;
 }

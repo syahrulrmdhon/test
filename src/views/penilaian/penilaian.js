@@ -4,8 +4,7 @@ import './../../styles/penilaian.css'
 import Header from '../global/header'
 import MenuBar from '../global/navbar'
 
-import { Table, TabContent, TabPane } from 'reactstrap'
-import { Button, ButtonGroup } from 'react-bootstrap'
+import { Table, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames'
 
 const listPenilaian = [
@@ -105,15 +104,29 @@ class Penilaian extends Component {
                             <div className="row">
                                 <div className="col-4">
                                     <div className="float-left">
-                                        <ButtonGroup justified>
-                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '1' })}
-                                                onClick={() => { this.toggle('1'); }}>Pengetahuan</Button>
-                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '2' })}
-                                                onClick={() => { this.toggle('2'); }}>Keterampilan</Button>
-                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '3' })}
-                                                onClick={() => { this.toggle('3'); }}>Sikap</Button>
-                                        </ButtonGroup>
-                                        <br /><br />
+                                    <Nav tabs className="border-0 pull-left">
+                                            <NavItem className="tab-penilaian">
+                                                <NavLink
+                                                    className={classnames({ active: this.state.activeTab === '1' })}
+                                                    onClick={() => { this.toggle('1'); }}>
+                                                    Pengetahuan
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem className="tab-penilaian">
+                                                <NavLink
+                                                    className={classnames({ active: this.state.activeTab === '2' })}
+                                                    onClick={() => { this.toggle('2'); }}>
+                                                    Keterampilan
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem className="tab-penilaian">
+                                                <NavLink
+                                                    className={classnames({ active: this.state.activeTab === '3' })}
+                                                    onClick={() => { this.toggle('3'); }}>
+                                                    Sikap
+                                                </NavLink>
+                                            </NavItem>
+                                        </Nav>
                                     </div>
                                 </div>
                                 <div className="col-8">

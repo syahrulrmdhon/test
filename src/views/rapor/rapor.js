@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import './../../styles/rapor.css'
 import './../../styles/global/component.css'
 
-import { Table, TabContent, TabPane } from 'reactstrap'
+import { Table, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames'
-import { Button, ButtonGroup } from 'react-bootstrap'
 
 import Header from '../global/header'
 import MenuBar from '../global/navbar'
@@ -56,14 +55,8 @@ class Rapor extends Component {
                                 <button type="submit" className="btn-green">Filter</button>
                             </form>
                             <br />
-                            <div className="export-print">
-                                <button>
-                                    <img className="export" src={ExportLogo} alt="" />
-                                </button>
-                                <button>
-                                    <img className="print" src={PrintLogo} alt="" />
-                                </button>
-                            </div>
+                            <img className="export" src={ExportLogo} alt="" />
+                            <img className="print" src={PrintLogo} alt="" />
                         </div>
                         <div className="right-content col-10">
                             <div className="row">
@@ -72,22 +65,13 @@ class Rapor extends Component {
                                 </div>
                                 <div className="col-4">
                                     <span className="float-right">
-                                        <ButtonGroup justified>
-                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '1' })}
-                                                onClick={() => { this.toggle('1'); }}>Pengetahuan</Button>
-                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '2' })}
-                                                onClick={() => { this.toggle('2'); }}>Keterampilan</Button>
-                                            <Button bsClass="tab-nilai" className={classnames({ active: this.state.activeTab === '3' })}
-                                                onClick={() => { this.toggle('3'); }}>Sikap</Button>
-                                        </ButtonGroup>
-                                        <br /><br />
-                                        {/* <Nav tabs>
+                                        <Nav tabs className="border-0 pull-right">
                                             <NavItem className="tab-nilai">
                                                 <NavLink
                                                     className={classnames({ active: this.state.activeTab === '1' })}
                                                     onClick={() => { this.toggle('1'); }}>
                                                     Pengetahuan
-                                        </NavLink>
+                                            </NavLink>
                                             </NavItem>
                                             <NavItem className="tab-nilai">
                                                 <NavLink
@@ -101,9 +85,9 @@ class Rapor extends Component {
                                                     className={classnames({ active: this.state.activeTab === '3' })}
                                                     onClick={() => { this.toggle('3'); }}>
                                                     Sikap
-                                        </NavLink>
+                                            </NavLink>
                                             </NavItem>
-                                        </Nav> */}
+                                        </Nav>
                                     </span>
                                 </div>
                                 <TabContent className="col-12" activeTab={this.state.activeTab}>
@@ -461,7 +445,7 @@ class Rapor extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 }
