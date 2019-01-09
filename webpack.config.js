@@ -14,7 +14,7 @@ module.exports = (env) => ({
     },
     entry: "./src/index.js",
     output: {
-        path: path.resolve("dist"),
+        path: path.resolve("build"),
         filename: "bundled.js"
     },
     module: {
@@ -43,8 +43,6 @@ module.exports = (env) => ({
             filename: "./index.html"
         }),
         new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
             filename: "[name].css",
             chunkFilename: "[id].css"
         }),
