@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './../../styles/rapor.css'
 import './../../styles/global/component.css'
 
-import { Table, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames'
 
 import Header from '../global/header'
@@ -53,21 +53,21 @@ class Rapor extends Component {
                                                     className={classnames({ active: this.state.activeTab === '1' })}
                                                     onClick={() => { this.toggle('1'); }}>
                                                     Pengetahuan
-                                            </NavLink>
+                                                </NavLink>
                                             </NavItem>
                                             <NavItem className="tab-nilai">
                                                 <NavLink
                                                     className={classnames({ active: this.state.activeTab === '2' })}
                                                     onClick={() => { this.toggle('2'); }}>
                                                     Keterampilan
-                                        </NavLink>
+                                                </NavLink>
                                             </NavItem>
                                             <NavItem className="tab-nilai">
                                                 <NavLink
                                                     className={classnames({ active: this.state.activeTab === '3' })}
                                                     onClick={() => { this.toggle('3'); }}>
                                                     Sikap
-                                            </NavLink>
+                                                </NavLink>
                                             </NavItem>
                                         </Nav>
                                     </span>

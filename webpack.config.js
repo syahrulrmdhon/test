@@ -2,16 +2,14 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AsyncChunkNames = require('webpack-async-chunk-names-plugin');
-
+const webpack = require('webpack');
 
 const API_URL = {
     production: JSON.stringify('https://jsonplaceholder.typicode.com'),
     development: JSON.stringify('https://jsonplaceholder.typicode.com/development')
 }
 
-const webpack = require('webpack');
-var ROOT = path.resolve(__dirname, '..');
-var root = path.join.bind(path, ROOT);
+
 
 
 module.exports = (env) => ({

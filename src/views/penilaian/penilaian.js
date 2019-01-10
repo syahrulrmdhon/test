@@ -77,7 +77,7 @@ class Penilaian extends Component {
                                     <TabPane tabId="1">
                                         <div className="table-content">
                                             <Table bordered striped responsive hover>
-
+                                            
                                             </Table>
                                         </div>
                                     </TabPane>
