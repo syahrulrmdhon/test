@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import { Table, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
-import './../../styles/student/table.css'
+import { Link } from 'react-router-dom'
+
+import { Table, TabContent, TabPane } from 'reactstrap'
+import '../../styles/student/table.css'
 
 export default class TableContent extends Component {
   render() {
     return (
       <div>
         <TabContent activeTab={this.props.tab}>
-          <TabPane className="knowledge" tabId="1">
+          <TabPane className="knowledge" tabId={1}>
             <div className="table-content">
               <Table bordered striped responsive>
                 <thead>
@@ -25,42 +27,42 @@ export default class TableContent extends Component {
                     <td>Sangat baik dalam menjelaskan pecahan-pecahan senilai dengan gambar</td>
                     <td>91</td>
                     <td>A</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr>
                     <td>Pendidikan Kewarganegaraan</td>
                     <td>Baik dalam kompetensi menyebutkan sistem pemerintahan</td>
                     <td>83</td>
                     <td>B</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr>
                     <td>Bahasa Indonesia</td>
                     <td>Baik dalam membuat kalimat essay menggunakan KTSP</td>
                     <td>88</td>
                     <td>B</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr>
                     <td>Bahasa Inggris</td>
                     <td>Kurang baik memahami tenses</td>
                     <td>68</td>
                     <td>C</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr>
                     <td>Pendidikan Agama</td>
                     <td>Cukup memahami sikap teladan di lingkungan sekolah</td>
                     <td>78</td>
                     <td>C</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr>
                     <td>Sejarah Umum</td>
                     <td>Kurang memahami jenis-jenis peradaban sebelum perang dunia</td>
                     <td>68</td>
                     <td>D</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr className="total-score">
                     <td colSpan="2" className="border-right-0">Jumlah Nilai Pengetahuan</td>
@@ -78,7 +80,7 @@ export default class TableContent extends Component {
               </Table>
             </div>
           </TabPane>
-          <TabPane className="knowledge" tabId="2">
+          <TabPane className="knowledge" tabId={2}>
             <div className="table-content">
               <Table bordered striped responsive>
                 <thead>
@@ -96,42 +98,42 @@ export default class TableContent extends Component {
                     <td>Sangat baik dalam menjelaskan pecahan-pecahan senilai dengan gambar</td>
                     <td>91</td>
                     <td>A</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr>
                     <td>Pendidikan Kewarganegaraan</td>
                     <td>Baik dalam kompetensi menyebutkan sistem pemerintahan</td>
                     <td>83</td>
                     <td>B</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr>
                     <td>Bahasa Indonesia</td>
                     <td>Baik dalam membuat kalimat essay menggunakan KTSP</td>
                     <td>88</td>
                     <td>B</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr>
                     <td>Bahasa Inggris</td>
                     <td>Kurang baik memahami tenses</td>
                     <td>68</td>
                     <td>C</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr>
                     <td>Pendidikan Agama</td>
                     <td>Cukup memahami sikap teladan di lingkungan sekolah</td>
                     <td>78</td>
                     <td>C</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr>
                     <td>Sejarah Umum</td>
                     <td>Kurang memahami jenis-jenis peradaban sebelum perang dunia</td>
                     <td>68</td>
                     <td>D</td>
-                    <td>Lihat Deskripsi</td>
+                    <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr className="total-score">
                     <td colSpan="2" className="border-right-0">Jumlah Nilai Pengetahuan</td>
@@ -149,7 +151,7 @@ export default class TableContent extends Component {
               </Table>
             </div>
           </TabPane>
-          <TabPane className="attitude" tabId="3">
+          <TabPane className="attitude" tabId={3}>
             <div className="table-content">
               <Table bordered striped responsive>
                 <thead>
