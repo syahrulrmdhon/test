@@ -2,6 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const AsyncChunkNames = require('webpack-async-chunk-names-plugin');
 
 
 const API_URL = {
@@ -20,7 +21,7 @@ module.exports = (env) => ({
         contentBase: path.join(__dirname, 'build'),
         compress: true
     },
-    devtool: 'source-map',
+    devtool: ( 'production' === env.TARGET_ENV ? 'source-map' : 'cheap-module-eval-source-map' ),
     output: {
         path: path.resolve("build"),
         filename: '[name].[chunkhash].bundle.js',
@@ -69,7 +70,7 @@ module.exports = (env) => ({
             template: "./public/index.html",
             filename: "./index.html"
         }),
-     
+        new AsyncChunkNames(),
         new MiniCssExtractPlugin({
             filename: "[name].css",
             chunkFilename: "[id].css"
@@ -78,11 +79,32 @@ module.exports = (env) => ({
             'process.env': {
                 'API_U RL': API_URL[env.TARGET_ENV]
             }
-        }),
-        // new ExtractTextPlugin('./src/styles/tes.scss'),
-
-
-    ]
-
+        })
+    ],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                default: false,
+                vendors: false,
+    
+                vendor: {
+                    name: 'vendor',
+                    chunks: 'all',
+                    test: /node_modules/,
+                    priority: 20
+                },
+    
+                common: {
+                    name: 'common',
+                    minChunks: 2,
+                    chunks: 'all',
+                    priority: 10,
+                    reuseExistingChunk: true,
+                    enforce: true
+                }
+            }
+        }
+    }
+    
 
 });
