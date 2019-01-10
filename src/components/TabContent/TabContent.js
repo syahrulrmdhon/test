@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames'
 import Table from '../Table/Table'
+import '../../styles/tab-content.css'
 
 export default class ContentTab extends Component {
   constructor(props, context) {

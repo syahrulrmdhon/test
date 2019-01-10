@@ -1,0 +1,23 @@
+.tab-score {
+    width: 100px;
+    border: solid 1px #cccccc;
+    background-color: #f2f2f2;
+    color: #999999;
+    font-weight: normal;
+    cursor: pointer;
+    text-align: center;
+}
+
+.nav-tabs .tab-score .nav-link {
+    border: none;
+}
+
+.nav-tabs .tab-score:nth-child(2) {
+    border-left: none;
+    border-right: none;
+}
+
+.tab-score .active {
+    color: #333333;
+    font-weight: bold;
+}
