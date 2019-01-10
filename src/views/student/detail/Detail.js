@@ -5,7 +5,9 @@ import '../../../styles/student/detail.css'
 
 import LeftSide from '../../../components/LeftSide/LeftSide'
 import RightSide from '../../../components/RightSide/RightSide'
-import Tab from '../../../components/TabDetail/TabDetail'
+import Tab from '../../../components/TabDetail/TabDetail';
+import TabContent from '../../../components/TabContent/TabContent';
+
 
 export default class Detail extends Component {
   constructor(props, context) {
@@ -24,6 +26,7 @@ export default class Detail extends Component {
   }
   
   render() {
+    console.log(this.state.activeTab,"kimi")
     const tabs = ['Rincian Nilai', 'Rincian Absensi', 'Catatan Wali Kelas'];
     return (
       <div className="detail bg-grey">
@@ -36,12 +39,17 @@ export default class Detail extends Component {
         <div className="content">
           <div className="row detail-menu">
             <div className="offset-2 col-10 padding-left-0">
-              <Tab tab={tabs}/>
+              <Tab tabMenu={tabs} tabID={this.state.activeTab} toggle={(e) => {this.toggle}} />
             </div>
           </div>
           <div className="row rounded-10">
             <LeftSide />
-            <RightSide />
+            <RightSide >
+            {
+              console.log(tabs)
+            }
+                <TabContent tab={tabs} className="total-score" activeTab={this.state.activeTab}/>
+           </RightSide>
           </div>
         </div>
       </div>

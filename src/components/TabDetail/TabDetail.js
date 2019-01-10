@@ -6,19 +6,20 @@ export default class TabDetail extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      activeTab: 1,
+      activeTab: this.props.tabID
     };
 
     this.tabs = this.tabs.bind(this)
   }
 
-  toogle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
+  componentWillReceiveProps(nextProps) {
+    const diff = this.state.activeTab !== nextProps.activeTab
+    if (diff) {
+        this.setState({ tabID: nextProps.activeTab })
     }
   }
+
+  
 
   tabs(items) {
     const tabs = (
@@ -30,7 +31,7 @@ export default class TabDetail extends Component {
                 <NavLink
                   key={key}
                   href="#"
-                  onClick={() => { this.toogle(tab); }}>
+                  onClick={() => { this.props.toogle(tab); }}>
                   {item}
                 </NavLink>
               </NavItem>  
@@ -45,7 +46,7 @@ export default class TabDetail extends Component {
     return (
       <div>
         <Nav>
-          {this.tabs(this.props.tab)}
+          {this.tabs(this.props.tabMenu)}
         </Nav>
       </div>
     )

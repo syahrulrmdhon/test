@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import TabContent from '../TabContent/TabContent'
 
 export default class Content extends Component {
   constructor(props, context) {
@@ -18,12 +17,13 @@ export default class Content extends Component {
   }
 
   render() {
-    const tabs = ['Pengaturan', 'Keterampilan', 'Sikap'];
 
     return (
       <div className="right-content col-10 padding-left-6 padding-right-6 padding-top-6">
-        <TabContent tab={tabs} className="total-score" activeTab={this.state.activeTab}/>
+          {this.props.children}
       </div>
     )
   }
 }
+
+
