@@ -82,7 +82,10 @@ export default class Detail extends Component {
                 </div>
               </div>  
             </LeftSide>
-            <RightSide />
+            <RightSide >
+                <TabContent tab={tabs} className="total-score" activeTab={this.state.activeTab}/>
+            </RightSide>
+
           </div>
         </div>
       </div>
