@@ -1,4 +1,3 @@
-
 .detail thead {
     background-color: #ecf2f8;
     color: #000000;
@@ -8,11 +7,13 @@
 .detail .table-striped tbody tr:nth-of-type(odd) {
     background-color: #F9F9F9;
 }
+
 .detail .table thead th {
     padding: 8px 10px;
     vertical-align: middle;
     border-color: #b0d8d8;
     border-bottom: none;
+    text-align: center;
 }
 
 .detail .table td {
@@ -22,6 +23,7 @@
     border-bottom: none;
     padding: 12px 10px;
     color: #333333;
+    text-align: center;
 }
 
 .detail td:first-child, .detail td:nth-child(2) {
