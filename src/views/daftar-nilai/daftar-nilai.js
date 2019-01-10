@@ -4,14 +4,14 @@ import './../../styles/daftar-nilai.css'
 import Header from '../global/header'
 import MenuBar from '../global/navbar'
 
-import { Table, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames'
 import FilterNilai from './filter'
 import TablePengetahuan from './table-pengetahuan'
 import TableKeterampilan from './table-keterampilan'
 import TableSikap from './table-sikap';
 
-class DaftarNilai extends Component {
+export default class DaftarNilai extends Component {
     constructor(props) {
         super(props);
 
@@ -97,4 +97,3 @@ class DaftarNilai extends Component {
         )
     }
 }
-export default DaftarNilai;
