@@ -1,43 +1,35 @@
 import React, { Component } from 'react'
 import { Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames'
+import '../../styles/student/tab-menu.scss'
 
 export default class TabDetail extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      activeTab: this.props.tabID
-    };
+  constructor() {
+    super();
 
     this.tabs = this.tabs.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const diff = this.state.activeTab !== nextProps.activeTab
-    if (diff) {
-        this.setState({ tabID: nextProps.activeTab })
-    }
-  }
-
-  
 
   tabs(items) {
     const tabs = (
-      <div>
-        {items.map((item, key) => {
+      <Nav className="tab-menu">
+        {
+          items.map((item, key) => {
           let tab = key + 1
               return (
-              <NavItem key={key} className={classnames({ active: tab === this.state.activeTab })}>
+              <NavItem key={key} className={classnames({ active: this.props.activeMenu === tab })}>
                 <NavLink
                   key={key}
                   href="#"
-                  onClick={() => { this.props.toogle(tab); }}>
+                  onClick={() => this.props.toggle(tab)}>
                   {item}
                 </NavLink>
               </NavItem>  
               )
-        }, this)}
-      </div>
+          })
+        }
+      </Nav>
     )
     return tabs
   }
@@ -45,9 +37,7 @@ export default class TabDetail extends Component {
   render() {
     return (
       <div>
-        <Nav>
-          {this.tabs(this.props.tabMenu)}
-        </Nav>
+          {this.tabs(this.props.menu)}
       </div>
     )
   }

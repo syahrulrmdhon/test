@@ -1,46 +1,34 @@
 import React, { Component } from 'react'
 import { Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames'
-import Table from '../Table/Table'
-import '../../styles/tab-content.css'
+import '../../styles/global/tab-content.scss'
 
 export default class ContentTab extends Component {
   constructor(props, context) {
-    super(props, context);
-    this.state = {
-      activeTab: 1,
-    };
-
+    super();
     this.tabs = this.tabs.bind(this)
-  }
-
-  toogle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
-    }
   }
 
   tabs(items) {
     const tabs = (
-      <Nav>
-        {items.map((item, key) => {
+      <Nav tabs>
+        {
+          items.map((item, key) => {
           let tab = key + 1
           return (
-            <NavItem key={key} className="tab-score">
+            <NavItem key={key} className="nav__tab-content">
               <NavLink
-                className={classnames({ active: tab === this.state.activeTab })}
+                className={classnames({ active: this.props.activeTab === tab })}
                 key={key}
                 href="#"
-                onClick={() => { this.toogle(tab); }}>
+                onClick={() =>  this.props.toggle(tab)}>
                 {item}
               </NavLink>
             </NavItem>
           )
-        }, this)}
+          })
+        }
       </Nav>
-
     )
     return tabs
   }
@@ -48,8 +36,7 @@ export default class ContentTab extends Component {
   render() {
     return (
       <div>
-          {this.tabs(this.props.tab)}
-          <Table tab={this.state.activeTab} />
+        {this.tabs(this.props.tab)}
       </div>
     )
   }

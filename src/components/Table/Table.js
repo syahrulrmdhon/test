@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Table, TabContent, TabPane } from 'reactstrap'
-import '../../styles/student/table.css'
+import '../../styles/student/table.scss'
 
 export default class TableContent extends Component {
   render() {
     return (
       <div>
-        <TabContent activeTab={this.props.tab}>
+        <TabContent activeTab={this.props.activeTab}>
           <TabPane className="knowledge" tabId={1}>
             <div className="table-content">
               <Table bordered striped responsive>
@@ -65,13 +65,13 @@ export default class TableContent extends Component {
                     <td><Link to="">Lihat Deskripsi</Link></td>
                   </tr>
                   <tr className="total-score">
-                    <td colSpan="2" className="border-right-0">Jumlah Nilai Pengetahuan</td>
+                    <td colSpan="2" className="border-right-0 text-center">Jumlah Nilai Pengetahuan</td>
                     <td className="border-left-0 border-right-0 text-center">350.0</td>
                     <td className="border-left-0 border-right-0"></td>
                     <td className="border-left-0"></td>
                   </tr>
                   <tr className="average-score">
-                    <td colSpan="2" className="border-right-0">Nilai Pengetahuan Rata-Rata</td>
+                    <td colSpan="2" className="border-right-0 text-center">Nilai Pengetahuan Rata-Rata</td>
                     <td className="border-left-0 border-right-0 text-center">83.33</td>
                     <td className="border-left-0 border-right-0"></td>
                     <td className="border-left-0"></td>
