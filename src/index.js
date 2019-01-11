@@ -18,7 +18,6 @@ var initialState = "Gredu Indonesia"
 initialState = window.DATA;
 const client = new ApiHost();
 const store = configureStore(client, initialState);
-
 ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>

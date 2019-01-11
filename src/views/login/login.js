@@ -12,6 +12,8 @@ class Login extends Component {
             email: '',
             password: ''
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange(e) {
         let user = {}
@@ -22,7 +24,7 @@ class Login extends Component {
         e.preventDefault()
         const self = this
 
-        const url = ('https://00983238.ngrok.io/authentication/login')
+        const url = (process.env.API_URL + '/authentication/request_token')
         const user = {
             email: this.state.email,
             password: this.state.password

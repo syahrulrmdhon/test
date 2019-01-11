@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import '../../styles/global/header.css'
 import '../../styles/global/component.css'
 import {
@@ -38,31 +39,31 @@ export default class MenuBar extends Component {
                                     </NavLink>
                                 </NavItem>
                                 &emsp;&emsp;
-                            <NavItem>
+                                <NavItem>
                                     <NavLink className="font-grey" href="/absen">
                                         Absensi
                                     </NavLink>
                                 </NavItem>
                                 &emsp;&emsp;
-                            <NavItem>
+                                <NavItem>
                                     <NavLink className="font-grey" href="/penilaian">
                                         Penilaian
                                     </NavLink>
                                 </NavItem>
                                 &emsp;&emsp;
-                            <NavItem>
+                                <NavItem>
                                     <NavLink className="font-grey" href="/daftar-nilai">
                                         Daftar Nilai
                                 </NavLink>
                                 </NavItem>
                                 &emsp;&emsp;
-                            <NavItem>
+                                <NavItem>
                                     <NavLink className="font-grey" href="/rapor">
                                         Rapor Kelas
                                 </NavLink>
                                 </NavItem>
                                 &emsp;&emsp;
-                            <NavItem>
+                                <NavItem>
                                     <NavLink className="font-grey" href="/murid">
                                         Daftar Murid
                                 </NavLink>
