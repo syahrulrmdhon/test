@@ -1,10 +1,14 @@
+$nunito_light: 'NunitoLight';
+$nunito_regular: 'NunitoRegular';
+$nunito_semi_bold: 'NunitoSemiBold';
+$nunito_bold: 'NunitoBold';
+
 .detail {
     background-color: #f7f7f7;
-    font-weight: bold;
 }
 
 .detail a {
-    color: #00997D;    
+    color: #009D81;    
 }
 
 .detail a:hover {
@@ -27,6 +31,7 @@
 
 .detail-menu {
     background-color: #f7f7f7;
+    font-size: 14px;
 }
 
 .detail-menu ul {
@@ -39,7 +44,7 @@
 .detail-menu li {
     float: left;
     height: 45px;
-    width: 115px;
+    width: 135px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,6 +57,7 @@
 
 .detail-menu .nav-link {
     padding: 0px;
+    font-family: $nunito_bold;
 }
 
 .detail-menu .nav-tabs {
@@ -66,29 +72,6 @@
     background-color: transparent;
 }
 
-/* .tab-score {
-    width: 100px;
-    border: solid 1px #cccccc;
-    background-color: #f2f2f2;
-    color: #999999;
-    font-weight: normal;
-    cursor: pointer;
-}
-
-.nav-tabs .tab-score .nav-link {
-    border: none;
-}
-
-.nav-tabs .tab-score:nth-child(2) {
-    border-left: none;
-    border-right: none;
-}
-
-.tab-score .active {
-    color: #333333;
-    font-weight: bold;
-} */
-
 .export, .print {
     color: #3d74b4;
 }
@@ -100,8 +83,4 @@
 
 .print {
     margin-right: 30px;
-}
-
-.tab-content {
-    margin-top: 20px;
 }
