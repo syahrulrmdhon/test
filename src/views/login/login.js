@@ -13,7 +13,7 @@ class Login extends Component {
             password: '',
             user: {},
             schools: []
-            
+
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +24,7 @@ class Login extends Component {
         user[e.target.name] = e.target.value
         this.setState(user)
     }
-    handleSubmit(e) {
+    handleSubmit (e) {
         e.preventDefault()
         const self = this
 
@@ -66,10 +66,6 @@ class Login extends Component {
             localStorage.setItem("school_list", res.data.data.schools[0].id)
         })
     }
-    componentDidMount() {
-        
-    }
-
     render() {
         return (
             <div className="login">
