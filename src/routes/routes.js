@@ -1,10 +1,12 @@
-import { Login } from '../views';
-import Beranda from '../views/beranda/beranda';
-import Absensi from '../views/absensi/absensi';
-import Penilaian from '../views/penilaian/penilaian';
-import DaftarNilai from '../views/daftar-nilai/daftar-nilai';
-import Rapor from '../views/rapor/rapor';
-import DaftarMurid from '../views/murid/murid';
+import { Login } from '../views'
+import Beranda from '../views/beranda/beranda'
+import Absensi from '../views/absensi/absensi'
+import Penilaian from '../views/penilaian/penilaian'
+import DaftarNilai from '../views/daftar-nilai/daftar-nilai'
+import Rapor from '../views/rapor/rapor'
+import DaftarMurid from '../views/student/murid'
+import StudentDetail from '../views/student/detail/Detail'
+import NotFound from '../views/global/not-found'
 
 export const MainRoutes = [
     {
@@ -35,5 +37,13 @@ export const MainRoutes = [
     {
         path: '/murid',
         component: DaftarMurid
+    },
+    {
+        path: '/detail',
+        component: StudentDetail
+    },
+    {
+        path: '*',
+        component: NotFound
     }
 ];

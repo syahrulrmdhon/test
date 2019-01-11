@@ -1,0 +1,25 @@
+@import url("../../styles/global/component.css");
+.modal {
+  font-family: NunitoSans;
+}
+.header-modal {
+  background-color: rgba(235, 244, 254, 0.5);
+  text-align: center;
+  padding: 10px;
+}
+.header-modal h5 {
+  color: #4a4a4a;
+}
+.header-modal h6 {
+  color: #1a9d7f;
+}
+.content-header {
+    margin: auto;
+    padding: 10px;
+}
+.footer-modal {
+    margin: auto;
+    width: 50%;
+}.fa {
+    cursor: pointer;
+}
