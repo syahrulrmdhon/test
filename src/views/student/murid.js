@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import Axios from 'axios'
+import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import './../../styles/student/murid.css'
 import './../../styles/global/component.css'
-// import { Table } from 'reactstrap'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
@@ -13,32 +12,62 @@ import MenuBar from '../global/navbar'
 
 class DaftarMurid extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             isLoading: true,
             users: [],
-            error: null
+            error: null,
+            data: []
+
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.onSortChange = this.onSortChange.bind(this);
+        this.handleChange = this.handleChange.bind(this)
+        this.onSortChange = this.onSortChange.bind(this)
+        this.getStudentList = this.getStudentList.bind(this)
     }
 
     onSortChange(sortName, sortOrder) {
-        console.info('onSortChange', arguments);
+        console.info('onSortChange', arguments)
         this.setState({
             sortName,
             sortOrder
-        });
+        })
     }
 
-    componentDidMount() {
-        Axios.get(process.env.API_URL + '/users')
-            .then(res => {
-                const users = res.data;
-                this.setState({ users });
+    getStudentList() {
 
-            })
+        const url = (process.env.API_URL + `v1/scores/student_list?school_id=${localStorage.getItem("school_list")}`)
+        const self = this
+        
+        axios({
+            method: 'get',
+            url: url,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then(function(res) {
+                self.setState({data: res.data.data})
+                console.log('DATA', res.data.data.users)
+        })
+    }
+    getNis(cell) {
+        return cell.nis;
+    }
+    getNisn(cell) {
+        return cell.nisn;
+    }
+    getAttendancePrecentage(cell){
+        return cell.percentage
+    }
+    getScore(cell){
+        return cell.score
+    }
+    getRank(cell){
+        return cell.rank
+    }
+    componentDidMount() {
+        this.getStudentList()
     }
 
     handleChange(event) {
@@ -68,28 +97,28 @@ class DaftarMurid extends Component {
                             <h5><strong>Daftar Murid Kelas X IPA 2</strong></h5>
                             <h6>Tahun Ajaran 2018/2019</h6>
                             <br />
-                            <BootstrapTable hover striped data={this.state.users} options={options} className="table-content">
-                                <TableHeaderColumn dataField='id' isKey dataSort={true}>
+                            <BootstrapTable hover striped data={this.state.data.users} options={options} className="table-content">
+                                <TableHeaderColumn dataField="student" dataFormat={this.getNis} isKey={true} dataSort={true}>
                                     NIS
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='email' dataSort={true}>
+                                <TableHeaderColumn dataField='student' dataFormat={this.getNisn} dataSort={true}>
                                     NISN
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='username' tdStyle={{ color: 'blue', cursor: 'pointer' }} dataSort={true}>
+                                <TableHeaderColumn dataField='full_name' tdStyle={{ color: 'blue', cursor: 'pointer' }} dataSort={true}>
                                     Nama Murid
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='username' dataSort={true}>
+                                <TableHeaderColumn dataField='attendance_report' dataFormat={this.getAttendancePrecentage} dataSort={true}>
                                     Kehadiran Rata-Rata
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='username' dataSort={true}>
+                                <TableHeaderColumn dataField='class_rank' dataFormat={this.getScore} dataSort={true}>
                                     Nilai Rata-Rata
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='username' dataSort={true}>
+                                <TableHeaderColumn dataField='class_rank' dataFormat={this.getRank} dataSort={true}>
                                     Peringkat
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>

@@ -10,21 +10,25 @@ class Login extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            user: {},
+            schools: []
+            
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.getSchoolList = this.getSchoolList.bind(this);
     }
     handleChange(e) {
         let user = {}
         user[e.target.name] = e.target.value
         this.setState(user)
     }
-    handleSubmit (e) {
+    handleSubmit(e) {
         e.preventDefault()
         const self = this
 
-        const url = (process.env.API_URL + '/authentication/request_token')
+        const url = (process.env.API_URL + 'authentication/request_token')
         const user = {
             email: this.state.email,
             password: this.state.password
@@ -42,8 +46,30 @@ class Login extends Component {
             console.log('DATA LOGIN', res.data.data)
             self.props.history.push('/home')
             localStorage.setItem("token", res.data.data.auth_token)
+            self.getSchoolList()
         })
     }
+    getSchoolList() {
+
+        const url = (process.env.API_URL + 'v1/schools/list')
+        
+        axios({
+            method: 'get',
+            url: url,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then(function(res) {
+            console.log('SCHOOL LIST', res.data.data.schools[0].id)
+            localStorage.getItem("token")
+            localStorage.setItem("school_list", res.data.data.schools[0].id)
+        })
+    }
+    componentDidMount() {
+        
+    }
+
     render() {
         return (
             <div className="login">
