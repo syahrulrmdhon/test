@@ -1,0 +1,76 @@
+image: node:8.12.0-stretch
+
+stages:
+  - test
+  - build
+  - dev
+  - qa
+  - uat
+  - prod
+
+cache:
+  paths:
+  - node_modules/
+
+before_script:
+  - cd $CI_PROJECT_DIR
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SERVER_PRIVATE_KEY_001")
+  - ssh-add <(echo "$SERVER_PRIVATE_KEY_002")
+  - mkdir -p ~/.ssh
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+dev_deployment:
+  stage: dev
+  script:
+    - npm install
+    - npm run build_dev
+    - tar -cvf gredu_teacher_bundle.tar build/*
+    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@$DEV_HOST:~/_automaton/dev/landing
+    - ssh -t ubuntu@$DEV_HOST 'bash -i -c "~/_automaton/dev/dev_automaton.sh"'
+  tags:
+    - docker-ffa
+  only:
+    - master
+  except:
+    - tags
+
+qa_deployment:
+  stage: qa
+  script:
+    - npm install
+    - npm run build_qa
+    - tar -cvf gredu_teacher_bundle.tar build/*
+    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@$DEV_HOST:~/_automaton/qa/landing
+    - ssh -t ubuntu@$DEV_HOST 'bash -i -c "~/_automaton/qa/qa_automaton.sh"'
+  tags:
+    - docker-ffa
+  only:
+    - QA
+
+uat_deployment:
+  stage: uat
+  script:
+    - npm install
+    - npm run build_uat
+    - tar -cvf gredu_teacher_bundle.tar build/*
+    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@$DEV_HOST:~/_automaton/uat/landing
+    - ssh -t ubuntu@$DEV_HOST 'bash -i -c "~/_automaton/uat/uat_automaton.sh"'
+  tags:
+    - docker-ffa
+  only:
+    - UAT
+
+prod_deployment:
+  stage: prod
+  script:
+    - npm install
+    - npm run build_prod
+    - tar -cvf gredu_teacher_bundle.tar build/*
+    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@1.2.3.4:~/_automaton/landing
+    - ssh -t ubuntu@1.2.3.4 'bash -i -c "~/_automaton/_automaton.sh"'
+  tags:
+    - docker-ffa
+  only:
+    - /^V-.*$/
