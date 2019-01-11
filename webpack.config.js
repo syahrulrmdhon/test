@@ -6,7 +6,9 @@ const webpack = require('webpack');
 
 const API_URL = {
     production: JSON.stringify('https://jsonplaceholder.typicode.com'),
-    development: JSON.stringify('https://jsonplaceholder.typicode.com/development')
+    development: JSON.stringify('https://jsonplaceholder.typicode.com/development'),
+    uat:JSON.stringify('/uat'),
+    qa: JSON.stringify('/qa')
 }
 
 
@@ -74,7 +76,7 @@ module.exports = (env) => ({
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                'API_U RL': API_URL[env.TARGET_ENV]
+                'API_URL': API_URL[env.TARGET_ENV]
             }
         })
     ],

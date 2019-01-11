@@ -36,8 +36,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open --env.TARGET_ENV=development",
     "build_dev": "webpack --mode development --env.TARGET_ENV=development",
-    "build_qa": "webpack --mode development --env.TARGET_ENV=development",
-    "build_uat": "webpack --mode production  --env.TARGET_ENV=production",
+    "build_qa": "webpack --mode development --env.TARGET_ENV=qa",
+    "build_uat": "webpack --mode production  --env.TARGET_ENV=uat",
     "build_prod": "webpack --mode production --env.TARGET_ENV=production",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
