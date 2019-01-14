@@ -29,7 +29,7 @@ export default class AbsenceTable extends Component {
           </TabPane>
           <TabPane tabId={3}>
             <Input className="homeroom-teacher__input" type="text" placeholder="Tulis Judul Prestasi disini ..."></Input>
-            <Input className="homeroom-teacher__input mt-3" rows="5" type="textarea" placeholder="Tulis Deskripsi Prestasi disini ..."/> 
+            <Input className="homeroom-teacher__input mt-4" rows="5" type="textarea" placeholder="Tulis Deskripsi Prestasi disini ..."/> 
             <div className="homeroom-teacher__add-extracurricular">+ <span>Tambah Prestasi lainnya</span></div>
             <Button className="homeroom-teacher__save">Simpan</Button>
           </TabPane>
