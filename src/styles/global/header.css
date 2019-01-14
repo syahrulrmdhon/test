@@ -1,6 +1,12 @@
 .header-bar {
   font-family: "Nunito Sans", sans-serif;
 }
+
 .bg-green-header {
   background: #199d7f;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
 }
