@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import '../../styles/global/tab-content.scss'
 
 export default class ContentTab extends Component {
-  constructor(props, context) {
+  constructor() {
     super();
     this.tabs = this.tabs.bind(this)
   }

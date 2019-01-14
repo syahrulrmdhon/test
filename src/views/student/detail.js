@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../../global/header'
-import '../../../styles/student/detail.scss'
-import TabMenu from '../../../components/TabDetail/TabDetail'
+import Header from '../global/header'
+import TabMenu from '../../components/TabDetail/TabDetail'
+import Content from '../../components/Content/Content'
 
 import "react-datepicker/dist/react-datepicker.css";
-import Content from '../../../components/Content/Content'
+import '../../styles/student/detail.scss'
 
 export default class Detail extends Component {
   constructor(props, context) {

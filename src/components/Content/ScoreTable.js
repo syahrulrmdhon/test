@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
 import { Table, TabContent, TabPane } from 'reactstrap'
+
 import '../../styles/student/table.scss'
 
 export default class ScoreTable extends Component {
