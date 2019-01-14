@@ -2,24 +2,27 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../../global/header'
 import '../../../styles/student/detail.scss'
+import TabMenu from '../../../components/TabDetail/TabDetail'
 
-import LeftSide from '../../../components/LeftSide/LeftSide'
-import RightSide from '../../../components/RightSide/RightSide'
-import Tab from '../../../components/TabDetail/TabDetail';
-import TabContent from '../../../components/TabContent/TabContent';
-import Table from '../../../components/Table/Table'
-
-import Avatar from './../../../assets/images/img_avatar.png'
+import "react-datepicker/dist/react-datepicker.css";
+import Content from '../../../components/Content/Content'
 
 export default class Detail extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       activeTab: 1,
-      activeMenu: 1
+      activeMenu: 1,
+      homeroomTeacherActiveTab : 1,
+      startDate: null,
+      endDate: null
     };
     this.toggle = this.toggle.bind(this)
     this.toggleMenu = this.toggleMenu.bind(this)
+    this.homeroomTeacherTab =  this.homeroomTeacherTab.bind(this)
+    this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
+    this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
+
   }
 
   toggle(tab) {
@@ -38,9 +41,28 @@ export default class Detail extends Component {
     }
   }
 
+  homeroomTeacherTab(tab) {
+    if (this.state.homeroomTeacherActiveTab !== tab) {
+      this.setState({
+        homeroomTeacherActiveTab: tab
+      })
+    }
+  }
+
+  handleChangeStartDate(date) {
+    this.setState({
+      startDate: date
+    });
+  }
+
+  handleChangeEndDate(date) {
+    this.setState({
+      endDate: date
+    });
+  }
+
   render() {
     const tabMenu = ['Rincian Nilai', 'Rincian Absensi', 'Catatan Wali Kelas'];
-    const tabContent = ['Pengetahuan', 'Keterampilan', 'Sikap'];
     return (
       <div className="detail bg-grey">
         <Header />
@@ -52,52 +74,10 @@ export default class Detail extends Component {
         <div className="content">
           <div className="row detail-menu">
             <div className="offset-2 col-10 padding-left-0">
-              <Tab menu={tabMenu} activeMenu={this.state.activeMenu} toggle={this.toggleMenu} />
+              <TabMenu menu={tabMenu} activeMenu={this.state.activeMenu} toggle={this.toggleMenu} />
             </div>
           </div>
-          <div className="row rounded-10">
-            <LeftSide>
-              <div className="avatar-wrapper">
-                <img className="avatar" src={Avatar} alt=""/>
-              </div>
-              <div className="mt-3">Fransiska Dominika</div>
-              <div className="ranking">Peringkat 13</div>
-              <div className="profile text-left">
-                <div className="field">
-                  <div className="label">NIS:</div>
-                  13010036
-                </div>
-                <div className="field">
-                  <div className="label">NISN:</div>
-                  9965682223
-                </div>
-                <div className="field">
-                  <div className="label">No. Telp:</div>
-                  082200909087
-                </div>
-                <div className="field">
-                  <div className="label">Nama Ayah:</div>
-                  King Spinka Sr.
-                </div>
-                <div className="field">
-                  <div className="label">Nama Ibu:</div>
-                  Carole Barton Ph D
-                </div>
-                <div className="field">
-                  <div className="label">Alamat:</div>
-                  Jl. Taman Nasional 13
-                </div>
-              </div>
-            </LeftSide>
-            <RightSide>
-              <TabContent 
-                tab={tabContent} 
-                className="total-score" 
-                toggle={this.toggle} 
-                activeTab={this.state.activeTab} />
-              <Table activeTab={this.state.activeTab} />
-            </RightSide>
-          </div>
+          <Content activeTab={this.state.activeMenu}/>
         </div>
       </div>
     )
