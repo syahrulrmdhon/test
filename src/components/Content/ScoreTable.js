@@ -1,10 +1,29 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Table, TabContent, TabPane } from 'reactstrap'
+import Axios from 'axios'
 
 import '../../styles/student/table.scss'
 
 export default class ScoreTable extends Component {
+  constructor(props) {
+    super(props);
+   this.state = {
+    users: [],
+    modal: false
+  };
+}
+
+  componentDidMount() {
+    Axios.get(`https://jsonplaceholder.typicode.com/users`)
+    .then(res => {
+      const users = res.data;
+      this.setState({
+        users
+      });
+    })
+  }
+  
   render() {
     return (
       <div>
@@ -22,48 +41,17 @@ export default class ScoreTable extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Matematika</td>
-                    <td>Sangat baik dalam menjelaskan pecahan-pecahan senilai dengan gambar</td>
-                    <td>91</td>
-                    <td>A</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
-                  <tr>
-                    <td>Pendidikan Kewarganegaraan</td>
-                    <td>Baik dalam kompetensi menyebutkan sistem pemerintahan</td>
-                    <td>83</td>
-                    <td>B</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
-                  <tr>
-                    <td>Bahasa Indonesia</td>
-                    <td>Baik dalam membuat kalimat essay menggunakan KTSP</td>
-                    <td>88</td>
-                    <td>B</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
-                  <tr>
-                    <td>Bahasa Inggris</td>
-                    <td>Kurang baik memahami tenses</td>
-                    <td>68</td>
-                    <td>C</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
-                  <tr>
-                    <td>Pendidikan Agama</td>
-                    <td>Cukup memahami sikap teladan di lingkungan sekolah</td>
-                    <td>78</td>
-                    <td>C</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
-                  <tr>
-                    <td>Sejarah Umum</td>
-                    <td>Kurang memahami jenis-jenis peradaban sebelum perang dunia</td>
-                    <td>68</td>
-                    <td>D</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
+                  {
+                    this.state.users.map( (user, index) => {
+                      return <tr key={index}>
+                        <td>{user.name}</td>
+                        <td>{user.company.catchPhrase}</td>
+                        <td>{user.id}</td>
+                        <td>{user.id}</td>
+                        <td><Link to="">Lihat Deskripsi</Link></td>
+                      </tr>
+                    })
+                  }
                   <tr className="total-score">
                     <td colSpan="2" className="border-right-0 text-center">Jumlah Nilai Pengetahuan</td>
                     <td className="border-left-0 border-right-0 text-center">350.0</td>
@@ -93,48 +81,17 @@ export default class ScoreTable extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Matematika</td>
-                    <td>Sangat baik dalam menjelaskan pecahan-pecahan senilai dengan gambar</td>
-                    <td>91</td>
-                    <td>A</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
-                  <tr>
-                    <td>Pendidikan Kewarganegaraan</td>
-                    <td>Baik dalam kompetensi menyebutkan sistem pemerintahan</td>
-                    <td>83</td>
-                    <td>B</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
-                  <tr>
-                    <td>Bahasa Indonesia</td>
-                    <td>Baik dalam membuat kalimat essay menggunakan KTSP</td>
-                    <td>88</td>
-                    <td>B</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
-                  <tr>
-                    <td>Bahasa Inggris</td>
-                    <td>Kurang baik memahami tenses</td>
-                    <td>68</td>
-                    <td>C</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
-                  <tr>
-                    <td>Pendidikan Agama</td>
-                    <td>Cukup memahami sikap teladan di lingkungan sekolah</td>
-                    <td>78</td>
-                    <td>C</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
-                  <tr>
-                    <td>Sejarah Umum</td>
-                    <td>Kurang memahami jenis-jenis peradaban sebelum perang dunia</td>
-                    <td>68</td>
-                    <td>D</td>
-                    <td><Link to="">Lihat Deskripsi</Link></td>
-                  </tr>
+                {
+                  this.state.users.map( (user, index) => {
+                    return <tr key={index}>
+                        <td>{user.name}</td>
+                        <td>{user.company.catchPhrase}</td>
+                        <td>{user.id}</td>
+                        <td>{user.id}</td>
+                        <td><Link to="">Lihat Deskripsi</Link></td>
+                      </tr>
+                    })
+                  }
                   <tr className="total-score">
                     <td colSpan="2" className="border-right-0 text-center">Jumlah Nilai Pengetahuan</td>
                     <td className="border-left-0 border-right-0 text-center">350.0</td>
@@ -163,66 +120,20 @@ export default class ScoreTable extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Matematika</td>
-                    <td>Memukul Jeremy dan Doni dengan penggaris besi</td>
-                    <td>14/11/2018</td>
-                    <td>
-                      <div className="status">
-                        <div className="indicator red-indicator"></div>Butuh Perhatian
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Pendidikan Kewarganegaraan</td>
-                    <td>Meminjamkan payung ketika hujan ke saya</td>
-                    <td>3/10/2018</td>
-                    <td>
-                      <div className="status">
-                        <div className="indicator blue-indicator"></div>Sangat Baik
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Bahasa Indonesia</td>
-                    <td>Baik dalam membuat kalimat essay menggunakan KTSP</td>
-                    <td>14/11/2018</td>
-                    <td>
-                      <div className="status">
-                        <div className="indicator red-indicator"></div>Butuh Perhatian
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Bahasa Inggris</td>
-                    <td>Kurang baik memahami tenses</td>
-                    <td>3/10/2018</td>
-                    <td>
-                      <div className="status">
-                        <div className="indicator blue-indicator"></div>Sangat Baik
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Pendidikan Agama</td>
-                    <td>Cukup memahami sikap teladan di lingkungan sekolah</td>
-                    <td>14/11/2018</td>
-                    <td>
-                      <div className="status">
-                        <div className="indicator red-indicator"></div>Butuh Perhatian
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Sejarah Umum</td>
-                    <td>Kurang memahami jenis-jenis peradaban sebelum perang dunia</td>
-                    <td>3/10/2018</td>
-                    <td>
-                      <div className="status">
-                        <div className="indicator blue-indicator"></div>Sangat Baik
-                        </div>
-                    </td>
-                  </tr>
+                {
+                  this.state.users.map( (user, index) => {
+                    return <tr key={index}>
+                        <td>{user.name}</td>
+                        <td>{user.company.catchPhrase}</td>
+                        <td>{user.address.zipcode}</td>
+                        <td>
+                          <div className="status">
+                            <div className="indicator red-indicator"></div>Butuh Perhatian
+                          </div>
+                        </td> 
+                      </tr>
+                    })
+                  }
                 </tbody>
               </Table>
               <div className="total-status">

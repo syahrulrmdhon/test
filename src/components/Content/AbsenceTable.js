@@ -1,10 +1,29 @@
 import React, { Component } from 'react'
 import { Table } from 'reactstrap'
+import Axios from 'axios'
 
 export default class AbsenceTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      modal: false
+    };
+  }
+
+  componentDidMount() {
+    Axios.get(`https://jsonplaceholder.typicode.com/users`)
+    .then(res => {
+      const users = res.data;
+      this.setState({
+        users
+      });
+    })
+  }
+  
   render() {
     return (
-      <div>
+      <div className="table-content">
         <Table className="absences-detail__table" bordered striped responsive>
         <thead>
           <tr>
@@ -15,54 +34,16 @@ export default class AbsenceTable extends Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>10 September 2018</td>
-            <td>08:00 - 09:00</td>
-            <td>Matematika</td>
-            <td>Sakit</td>
-          </tr>
-          <tr>
-            <td>10 September 2018</td>
-            <td>08:00 - 09:00</td>
-            <td>Fisika Dasar</td>
-            <td>Sakit</td>
-          </tr>
-          <tr>
-            <td>10 September 2018</td>
-            <td>08:00 - 09:00</td>
-            <td>Matematika</td>
-            <td>Izin</td>
-          </tr>
-          <tr>
-            <td>10 September 2018</td>
-            <td>08:00 - 09:00</td>
-            <td>Matematika</td>
-            <td>Izin</td>
-          </tr>
-          <tr>
-            <td>10 September 2018</td>
-            <td>08:00 - 09:00</td>
-            <td>Matematika</td>
-            <td>Alpha</td>
-          </tr>
-          <tr>
-            <td>10 September 2018</td>
-            <td>08:00 - 09:00</td>
-            <td>Matematika</td>
-            <td>Alpha</td>
-          </tr>
-          <tr>
-            <td>10 September 2018</td>
-            <td>08:00 - 09:00</td>
-            <td>Matematika</td>
-            <td>Sakit</td>
-          </tr>
-          <tr>
-            <td>10 September 2018</td>
-            <td>08:00 - 09:00</td>
-            <td>Matematika</td>
-            <td>Sakit</td>
-          </tr>
+        {
+          this.state.users.map( (user, index) => {
+            return <tr key={index}>
+              <td>{user.name}</td>
+              <td>{user.company.catchPhrase}</td>
+              <td>{user.id}</td>
+              <td>{user.id}</td>
+            </tr>
+          })
+        }
         </tbody>
         </Table>
       </div>

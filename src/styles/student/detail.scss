@@ -38,6 +38,10 @@ $nunito_bold: 'NunitoBold';
   .offset-2 {
     margin-left: 20%;
   }
+
+  table {
+    margin-bottom: 0px;
+  }
 }
 
 .detail-menu {
@@ -196,7 +200,7 @@ $nunito_bold: 'NunitoBold';
   }
 
   &__table {
-    margin-top: 20px;
+    // margin-top: 20px;
 
     &.table tbody td {
       text-align: left;
@@ -223,6 +227,10 @@ $nunito_bold: 'NunitoBold';
   .form-inline label{
     display: block;
     margin-bottom: 5px;
+  }
+
+  &__form-date {
+    margin-bottom: 20px;
   }
 }
 
