@@ -35,7 +35,7 @@ export default class Header extends Component {
                         <NavbarBrand>
                             <img src={Logo} alt="" />
                             &emsp;
-                        <span className="font-white">SMA Negeri Cahaya Madani Banten Boarding School</span>
+                        <span className="font-white header-title">SMA Negeri Cahaya Madani Banten Boarding School</span>
                         </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
@@ -48,7 +48,7 @@ export default class Header extends Component {
                                 </NavItem>
                                 &emsp;
                                 <NavItem>
-                                    <NavLink className="font-white" href="/">
+                                    <NavLink className="font-white logout" href="/">
                                         <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
                                     </NavLink>
                                 </NavItem>

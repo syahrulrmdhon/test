@@ -1,0 +1,25 @@
+.header-bar {
+  font-family: "Nunito Sans", sans-serif;
+
+  .bg-green-header {
+    background: #199d7f;
+  }
+  
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    margin-left: -15px;
+  }
+  
+  .navbar {
+    padding: 12px 0px;
+    width: 90%;
+    margin: 0px auto;
+  }  
+
+  .navbar-nav .nav-link.logout {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: -17px;
+  }
+}

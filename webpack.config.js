@@ -5,14 +5,11 @@ const AsyncChunkNames = require('webpack-async-chunk-names-plugin');
 const webpack = require('webpack');
 
 const API_URL = {
-    production: JSON.stringify('https://jsonplaceholder.typicode.com'),
-    development: JSON.stringify('https://jsonplaceholder.typicode.com/development'),
-    uat:JSON.stringify('/uat'),
-    qa: JSON.stringify('/qa')
+    production: JSON.stringify('https://prod.api.core.gredu.co/'),
+    development: JSON.stringify('https://dev.api.core.gredu.co/'),
+    uat:JSON.stringify('https://aut.api.core.gredu.co/'),
+    qa: JSON.stringify('https://qa.api.core.gredu.co/')
 }
-
-
-
 
 module.exports = (env) => ({
     devServer: {

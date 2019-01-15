@@ -10,8 +10,14 @@ class Login extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            user: {},
+            schools: []
+
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.getSchoolList = this.getSchoolList.bind(this);
     }
     handleChange(e) {
         let user = {}
@@ -22,7 +28,7 @@ class Login extends Component {
         e.preventDefault()
         const self = this
 
-        const url = ('https://00983238.ngrok.io/authentication/login')
+        const url = (process.env.API_URL + 'authentication/request_token')
         const user = {
             email: this.state.email,
             password: this.state.password
@@ -40,6 +46,24 @@ class Login extends Component {
             console.log('DATA LOGIN', res.data.data)
             self.props.history.push('/home')
             localStorage.setItem("token", res.data.data.auth_token)
+            self.getSchoolList()
+        })
+    }
+    getSchoolList() {
+
+        const url = (process.env.API_URL + 'v1/schools/list')
+        
+        axios({
+            method: 'get',
+            url: url,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then(function(res) {
+            console.log('SCHOOL LIST', res.data.data.schools[0].id)
+            localStorage.getItem("token")
+            localStorage.setItem("school_list", res.data.data.schools[0].id)
         })
     }
     render() {
