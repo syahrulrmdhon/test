@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './../../styles/student/side.css'
+import './../../styles/student/side.scss'
 
 export default class LeftSide extends Component {
   render() {

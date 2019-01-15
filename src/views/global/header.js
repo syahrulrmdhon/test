@@ -48,7 +48,7 @@ export default class Header extends Component {
                                 </NavItem>
                                 &emsp;
                                 <NavItem>
-                                    <NavLink className="font-white" href="/">
+                                    <NavLink className="font-white logout" href="/">
                                         <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
                                     </NavLink>
                                 </NavItem>

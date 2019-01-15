@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-
-import '../../styles/global/header.css'
+import '../../styles/global/header.scss'
 import '../../styles/global/component.css'
 import {
     Collapse,
