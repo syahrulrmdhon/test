@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Select from 'react-select'
 
 export default class FilterNilai extends Component {
     constructor(props) {
@@ -20,7 +19,6 @@ export default class FilterNilai extends Component {
         this.getSemesterList()
         this.getClassList()
         this.getSubjectList()
-        this.getGrades()
     }
 
     getSemesterList() {
