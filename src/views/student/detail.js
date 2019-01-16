@@ -68,7 +68,7 @@ export default class Detail extends Component {
         <Header />
         <div className="bg-white">
           <div className="back">
-            <Link to="">&lt; Kembali</Link>
+            <Link to="/murid">&lt; Kembali</Link>
           </div>
         </div>
         <div className="content">
