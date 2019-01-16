@@ -1,34 +1,100 @@
 import React, { Component } from 'react'
-
-const listClass = [
-    { label: "X IPA 1", value: "x ipa 1" },
-    { label: "X IPA 2", value: "x ipa 2" },
-    { label: "X IPS 1", value: "x ips 1" },
-    { label: "X IPS 2", value: "x ips 2" }
-];
-const listSemester = [
-    { label: "1", value: 1 },
-    { label: "2", value: 2 }
-]
-const listPelajaran = [
-    { label: "Fisika Dasar II", value: "fisika2" },
-    { label: "Matematika Dasar II", value: "matematika2" },
-    { label: "Sejarah Nasional II", value: "sejarah2" },
-    { label: "Biologi II", value: "biologi2" }
-];
+import axios from 'axios'
+import Select from 'react-select'
 
 export default class FilterNilai extends Component {
     constructor(props) {
         super(props);
         this.state = {
             activeTab: '1',
-            listClass,
+            listClass: [],
             selectedClass: "",
-            listSemester,
+            listSemester: [],
             selectedSemester: "",
-            listPelajaran,
-            selectedPelajaran: ""
+            listSubject: [],
+            selectedSubject: "",
+            id: ""
         };
+    }
+    componentDidMount() {
+        this.getSemesterList()
+        this.getClassList()
+        this.getSubjectList()
+        this.getGrades()
+    }
+
+    getSemesterList() {
+        const url = `${process.env.API_URL}/v1/filters/semesters?school_id=${localStorage.getItem("school_list")}&school_year=2018/2019`
+        const self = this
+
+        axios({
+            method: 'get',
+            url: url,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then(function (res) {
+            let semester = []
+            for (var i in res.data.data) {
+                const datum = res.data.data[i]
+                datum.map(function (data, i) {
+                    semester.push({ value: data.id, label: data.period_name })
+                })
+            }
+            self.setState({
+                listSemester: semester
+            })
+        })
+    }
+    getClassList() {
+        const url = `${process.env.API_URL}/v1/filters/classes?school_id=${localStorage.getItem("school_list")}`
+        const self = this
+
+        axios({
+            method: 'get',
+            url: url,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then(function (res) {
+            let kelas = []
+            for (var i in res.data.data) {
+                const datum = res.data.data[i]
+                datum.map(function (data, i) {
+                    kelas.push({ value: data.id, label: data.name })
+                    self.setState({ id: data.id })
+                })
+            }
+            self.setState({
+                listClass: kelas
+            })
+        })
+    }
+    getSubjectList() {
+        const url = `${process.env.API_URL}v1/filters/subjects?school_id=${localStorage.getItem("school_list")}&class_id=${this.state.id}`
+        const self = this
+
+        axios({
+            method: 'get',
+            url: url,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then(function (res) {
+            let subject = []
+            for (var i in res.data.data) {
+                const datum = res.data.data[i]
+                datum.map(function (data, i) {
+                    subject.push({ value: data.id, label: data.subject_name })
+                })
+            }
+            self.setState({
+                listSubject: subject
+            })
+        })
     }
 
     render() {
@@ -62,10 +128,10 @@ export default class FilterNilai extends Component {
                     </select>
                     <br /><br />
                     <label>Mata Pelajaran</label>
-                    <select value={this.state.selectedPelajaran}
-                        onChange={(e) => this.setState({ selectedPelajaran: e.target.value })}>
+                    <select value={this.state.selectedSubject}
+                        onChange={(e) => this.setState({ selectedSubject: e.target.value })}>
                         {
-                            this.state.listPelajaran.map((pelajaran) =>
+                            this.state.listSubject.map((pelajaran) =>
                                 <option key={pelajaran.value} value={pelajaran.value}>
                                     {pelajaran.label}
                                 </option>
