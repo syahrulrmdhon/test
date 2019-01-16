@@ -3,6 +3,10 @@ $nunito_semi_bold: 'NunitoSemiBold';
 $nunito_bold: 'NunitoBold';
 
 .detail {
+    .table-content {
+        height: 350px;
+    }
+
     thead {
         background-color: #ecf2f8;
         font-family: $nunito_light;

@@ -3,6 +3,10 @@ $nunito_regular: 'NunitoRegular';
 $nunito_semi_bold: 'NunitoSemiBold';
 $nunito_bold: 'NunitoBold';
 
+body {
+  background-color: #f7f7f7;
+}
+
 .detail {
   background-color: #f7f7f7;
   
@@ -41,6 +45,10 @@ $nunito_bold: 'NunitoBold';
 
   table {
     margin-bottom: 0px;
+  }
+
+  .content {
+    height: 100%;
   }
 }
 
@@ -105,7 +113,7 @@ $nunito_bold: 'NunitoBold';
 
 .left-content, .right-content {
   background-color: transparent;
-  
+  height: 483px;
   .tab-content {
     margin-top: 20px;
   }
