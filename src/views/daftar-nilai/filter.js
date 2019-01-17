@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Select from 'react-select'
 
 export default class FilterNilai extends Component {
     constructor(props) {
@@ -12,8 +13,9 @@ export default class FilterNilai extends Component {
             selectedSemester: "",
             listSubject: [],
             selectedSubject: "",
-            id: ""
+            idClass: ""
         };
+        this.onChangeClass = this.onChangeClass.bind(this)
     }
     componentDidMount() {
         this.getSemesterList()
@@ -62,7 +64,7 @@ export default class FilterNilai extends Component {
                 const datum = res.data.data[i]
                 datum.map(function (data, i) {
                     kelas.push({ value: data.id, label: data.name })
-                    self.setState({ id: data.id })
+                    // self.setState({ idClass: data.id })
                 })
             }
             self.setState({
@@ -70,8 +72,18 @@ export default class FilterNilai extends Component {
             })
         })
     }
-    getSubjectList() {
-        const url = `${process.env.API_URL}v1/filters/subjects?school_id=${localStorage.getItem("school_list")}&class_id=${this.state.id}`
+    onChangeClass(selectedClass) {
+        this.setState({ selectedClass })
+        const idClass = selectedClass.value
+        this.getSubjectList(idClass)
+    }
+    getSubjectList(idClass) {
+        let url = ""
+        if (idClass===undefined){
+            url = `${process.env.API_URL}v1/filters/subjects?school_id=${localStorage.getItem("school_list")}`
+        }else{
+            url = `${process.env.API_URL}v1/filters/subjects?school_id=${localStorage.getItem("school_list")}&class_id=${idClass}`
+        }
         const self = this
 
         axios({
@@ -114,8 +126,14 @@ export default class FilterNilai extends Component {
                     </select>
                     <br /><br />
                     <label>Kelas</label>
-                    <select value={this.state.selectedClass}
-                        onChange={(e) => this.setState({ selectedClass: e.target.value })}>
+                    <Select
+                        value={this.state.selectedClass}
+                        onChange={(e) => {this.onChangeClass(e)}}
+                        options={this.state.listClass}
+                        placeholder= "Pilih Kelas..."
+                    />
+                    {/* <select value={this.state.selectedClass}
+                        onChange={(e) => {this.onChangeClass(e)}}>
                         {
                             this.state.listClass.map((kelas) =>
                                 <option key={kelas.value} value={kelas.value}>
@@ -123,7 +141,7 @@ export default class FilterNilai extends Component {
                                 </option>
                             )
                         }
-                    </select>
+                    </select> */}
                     <br /><br />
                     <label>Mata Pelajaran</label>
                     <select value={this.state.selectedSubject}
