@@ -1,0 +1,24 @@
+$nunito_semi_bold: 'NunitoSemiBold';
+
+.menu-bar {
+  font-size: 13px;
+
+  .font-grey {
+    font-family: $nunito_semi_bold;
+  }
+
+  .navbar {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 90%;
+    margin: 0px auto;
+  }
+
+  .navbar-nav {
+    margin-left: -15px;
+  }
+
+  .nav-item:first-child {
+    margin-left: -.5em;
+  }
+}
