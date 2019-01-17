@@ -9,9 +9,9 @@ export default class TablePengetahuan extends Component {
                     <thead>
                         <tr>
                             <th>Nama Siswa</th>
-                            <th colSpan="2">Ulangan Harian</th>
+                            <th colSpan={this.props.idxScores}>Ulangan Harian</th>
                             <th>Rata-Rata</th>
-                            <th colSpan="2">Tugas</th>
+                            <th colSpan={this.props.idxTugas}>Tugas</th>
                             <th>Rata-Rata</th>
                             <th>UTS</th>
                             <th>UAS/UKK</th>
@@ -19,150 +19,42 @@ export default class TablePengetahuan extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
+                        {
+                            this.props.listTable.map(function (data, i) {
+                                return <tr key={i}>
+                                    <td>{data.data.full_name}</td>
+                                    {data.data.subject_score_details.daily_exam.scores.map(function (x, i) {
+                                        return <td key={i}>
+                                            {x.score === null ? "-" : x.score}
+                                        </td>
+                                    })}
+                                    <td>
+                                        {data.data.subject_score_details.daily_exam.average.score === null ? "-" : data.data.subject_score_details.daily_exam.average.score}
+                                    </td>
+                                    {data.data.subject_score_details.task.scores.map(function (x, i) {
+                                        return <td key={i}>
+                                            {x.score === null ? "-" : x.score}
+                                        </td>
+                                    })}
+                                    <td>
+                                        {data.data.subject_score_details.task.average.score === null ? "-" : data.data.subject_score_details.task.average.score}
+                                    </td>
+                                    {data.data.subject_score_details.midterm_exam.scores.map(function (x, i) {
+                                        return <td key={i}>
+                                            {x.score === null ? "-" : x.score}
+                                        </td>
+                                    })}
+                                    {data.data.subject_score_details.final_exam.scores.map(function (x, i) {
+                                        return <td key={i}>
+                                            {x.score === null ? "-" : x.score}
+                                        </td>
+                                    })}
+                                    <td>
+                                        {data.data.subject_score_details.final_exam.average.score === null ? "-" : data.data.subject_score_details.final_exam.average.score}
+                                    </td>
+                                </tr>
+                            })
+                        }
                     </tbody>
                 </Table>
             </div>

@@ -15,66 +15,16 @@ export default class TableSikap extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90%</td>
-                        </tr>
+                        {
+                            this.props.listTable.map(function (data, i) {
+                                return <tr key={i}>
+                                    <td>{data.data.full_name}</td>
+                                    <td>{data.data.subject_score_details.sb}</td>
+                                    <td>{data.data.subject_score_details.bp}</td>
+                                    <td>{data.data.attendance_report.percentage}</td>
+                                </tr>
+                            })
+                        }
                     </tbody>
                 </Table>
             </div>

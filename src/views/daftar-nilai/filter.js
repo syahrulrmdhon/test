@@ -1,150 +1,37 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import Select from 'react-select'
 
 export default class FilterNilai extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeTab: '1',
-            listClass: [],
-            selectedClass: "",
-            listSemester: [],
-            selectedSemester: "",
-            listSubject: [],
-            selectedSubject: "",
-            idClass: ""
-        };
-        this.onChangeClass = this.onChangeClass.bind(this)
-    }
-    componentDidMount() {
-        this.getSemesterList()
-        this.getClassList()
-        this.getSubjectList()
-    }
-
-    getSemesterList() {
-        const url = `${process.env.API_URL}/v1/filters/semesters?school_id=${localStorage.getItem("school_list")}&school_year=2018/2019`
-        const self = this
-
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then(function (res) {
-            let semester = []
-            for (var i in res.data.data) {
-                const datum = res.data.data[i]
-                datum.map(function (data, i) {
-                    semester.push({ value: data.id, label: data.period_name })
-                })
-            }
-            self.setState({
-                listSemester: semester
-            })
-        })
-    }
-    getClassList() {
-        const url = `${process.env.API_URL}/v1/filters/classes?school_id=${localStorage.getItem("school_list")}`
-        const self = this
-
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then(function (res) {
-            let kelas = []
-            for (var i in res.data.data) {
-                const datum = res.data.data[i]
-                datum.map(function (data, i) {
-                    kelas.push({ value: data.id, label: data.name })
-                    // self.setState({ idClass: data.id })
-                })
-            }
-            self.setState({
-                listClass: kelas
-            })
-        })
-    }
-    onChangeClass(selectedClass) {
-        this.setState({ selectedClass })
-        const idClass = selectedClass.value
-        this.getSubjectList(idClass)
-    }
-    getSubjectList(idClass) {
-        let url = ""
-        if (idClass===undefined){
-            url = `${process.env.API_URL}v1/filters/subjects?school_id=${localStorage.getItem("school_list")}`
-        }else{
-            url = `${process.env.API_URL}v1/filters/subjects?school_id=${localStorage.getItem("school_list")}&class_id=${idClass}`
-        }
-        const self = this
-
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then(function (res) {
-            let subject = []
-            for (var i in res.data.data) {
-                const datum = res.data.data[i]
-                datum.map(function (data, i) {
-                    subject.push({ value: data.id, label: data.subject_name })
-                })
-            }
-            self.setState({
-                listSubject: subject
-            })
-        })
-    }
-
     render() {
         return (
             <div className="filter-nilai">
                 <h5><strong>Filter</strong></h5>
                 <br />
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <label>Semester</label>
-                    <select value={this.state.selectedSemester}
-                        onChange={(e) => this.setState({ selectedSemester: e.target.value })}>
-                        {
-                            this.state.listSemester.map((semester) =>
-                                <option key={semester.value} value={semester.value}>
-                                    {semester.label}
-                                </option>
-                            )
-                        }
-                    </select>
+                    <Select
+                        value={this.props.selectedSemester}
+                        onChange={(e) => { this.props.onChangeSemester(e) }}
+                        options={this.props.listSemester}
+                        placeholder="Pilih Semester..."
+                    />
                     <br /><br />
                     <label>Kelas</label>
                     <Select
-                        value={this.state.selectedClass}
-                        onChange={(e) => {this.onChangeClass(e)}}
-                        options={this.state.listClass}
-                        placeholder= "Pilih Kelas..."
+                        value={this.props.selectedClass}
+                        onChange={(e) => { this.props.onChangeClass(e) }}
+                        options={this.props.listClass}
+                        placeholder="Pilih Kelas..."
                     />
-                    {/* <select value={this.state.selectedClass}
-                        onChange={(e) => {this.onChangeClass(e)}}>
-                        {
-                            this.state.listClass.map((kelas) =>
-                                <option key={kelas.value} value={kelas.value}>
-                                    {kelas.label}
-                                </option>
-                            )
-                        }
-                    </select> */}
                     <br /><br />
                     <label>Mata Pelajaran</label>
-                    <select value={this.state.selectedSubject}
+                    <Select
+                        value={this.props.selectedSubject}
+                        onChange={(e) => { this.props.onChangeSubject(e) }}
+                        options={this.props.listSubject}
+                        placeholder="Pilih Pelajaran..."
+                    />
+                    {/* <select value={this.state.selectedSubject}
                         onChange={(e) => this.setState({ selectedSubject: e.target.value })}>
                         {
                             this.state.listSubject.map((pelajaran) =>
@@ -153,10 +40,10 @@ export default class FilterNilai extends Component {
                                 </option>
                             )
                         }
-                    </select>
+                    </select> */}
                     <br /><br />
-                    <button type="submit" className="btn-green">Filter</button>
                 </form>
+                <button type="submit" onClick={this.props.handleSubmit} className="btn-green">Filter</button>
             </div>
         )
     }
