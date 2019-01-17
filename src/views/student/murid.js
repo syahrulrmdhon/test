@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import './../../styles/student/murid.css'
 import './../../styles/global/component.css'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
@@ -20,9 +21,9 @@ class DaftarMurid extends Component {
             data: []
         };
 
-        this.handleChange = this.handleChange.bind(this)
         this.onSortChange = this.onSortChange.bind(this)
         this.getStudentList = this.getStudentList.bind(this)
+        this.onRowClick = this.onRowClick.bind(this)
     }
 
     onSortChange(sortName, sortOrder) {
@@ -34,7 +35,6 @@ class DaftarMurid extends Component {
     }
 
     getStudentList() {
-
         const url = (process.env.API_URL + `v1/scores/student_list?school_id=${localStorage.getItem("school_list")}`)
         const self = this
 
@@ -65,15 +65,11 @@ class DaftarMurid extends Component {
     getRank(cell) {
         return cell.rank
     }
+    onRowClick(row) {
+        this.props.history.push('detail/' + row.id);
+    }
     componentDidMount() {
         this.getStudentList()
-    }
-
-    handleChange(event) {
-        this.setState({ value: event.target.value });
-    }
-    handleSubmit(event) {
-
     }
 
     render() {
@@ -81,10 +77,7 @@ class DaftarMurid extends Component {
             sortName: this.state.sortName,
             sortOrder: this.state.sortOrder,
             onSortChange: this.onSortChange,
-            onRowClick: function (row) {
-                console.log('ROW CLICKED')
-                return <Redirect to='/dashboard' />
-            }
+            onRowClick: this.onRowClick
         };
         return (
             <div className="murid">
@@ -97,27 +90,28 @@ class DaftarMurid extends Component {
                             <h6>Tahun Ajaran 2018/2019</h6>
                             <br />
                             <BootstrapTable hover striped data={this.state.data.users} options={options} className="table-content">
-                                <TableHeaderColumn dataField="student" dataFormat={this.getNis} isKey={true} dataSort={true}>
+                                <TableHeaderColumn dataField="id" isKey hidden></TableHeaderColumn>
+                                <TableHeaderColumn dataField="student" dataFormat={this.getNis} dataSort={true}>
                                     NIS
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='student' dataFormat={this.getNisn} dataSort={true}>
+                                <TableHeaderColumn dataField="student" dataFormat={this.getNisn} dataSort={true}>
                                     NISN
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='full_name' tdStyle={{ color: 'blue', cursor: 'pointer' }} dataSort={true}>
+                                <TableHeaderColumn dataField="full_name" tdStyle={{ color: "blue", cursor: "pointer" }} dataSort={true}>
                                     Nama Murid
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='attendance_report' dataFormat={this.getAttendancePrecentage} dataSort={true}>
+                                <TableHeaderColumn dataField="attendance_report" dataFormat={this.getAttendancePrecentage} dataSort={true}>
                                     Kehadiran Rata-Rata
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='class_rank' dataFormat={this.getScore} dataSort={true}>
+                                <TableHeaderColumn dataField="class_rank" dataFormat={this.getScore} dataSort={true}>
                                     Nilai Rata-Rata
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
-                                <TableHeaderColumn dataField='class_rank' dataFormat={this.getRank} dataSort={true}>
+                                <TableHeaderColumn dataField="class_rank" dataFormat={this.getRank} dataSort={true}>
                                     Peringkat
                                 <i className="fa fa-sort"></i>
                                 </TableHeaderColumn>
