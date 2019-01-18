@@ -7,8 +7,8 @@ import { MainRoutes } from './../../routes/routes';
 class App extends Component {
   render() {
     return (
-      <div>
-        <main>
+      <div className="h-100">
+        <main className="h-100">
           <Switch>
             {MainRoutes.map((route, key) => {
               return (
