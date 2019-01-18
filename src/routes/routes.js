@@ -39,7 +39,7 @@ export const MainRoutes = [
         component: DaftarMurid
     },
     {
-        path: '/detail',
+        path: '/detail/:id',
         component: StudentDetail
     },
     {
