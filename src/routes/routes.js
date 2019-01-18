@@ -34,18 +34,6 @@ export const MainRoutes = [
         component: DaftarNilai
     },
     {
-        path: '/daftar-nilai/sikap',
-        component: TableSikap
-    },
-    {
-        path: '/daftar-nilai/pengetahuan',
-        component: TablePengetahuan
-    },
-    {
-        path: '/daftar-nilai/keterampilan',
-        component: TableKeterampilan
-    },
-    {
         path: '/rapor',
         component: Rapor
     },
