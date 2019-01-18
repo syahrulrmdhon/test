@@ -16,12 +16,12 @@ export default class TableSikap extends Component {
                     </thead>
                     <tbody>
                         {
-                            this.props.listTable.map(function (data, i) {
+                            this.props.tableAttitude.map(function (data, i) {
                                 return <tr key={i}>
-                                    <td>{data.data.full_name}</td>
-                                    <td>{data.data.subject_score_details.sb}</td>
-                                    <td>{data.data.subject_score_details.bp}</td>
-                                    <td>{data.data.attendance_report.percentage}</td>
+                                    <td>{data.full_name}</td>
+                                    <td>{data.subject_score_details.sb}</td>
+                                    <td>{data.subject_score_details.bp}</td>
+                                    <td>{data.attendance_report.percentage}</td>
                                 </tr>
                             })
                         }

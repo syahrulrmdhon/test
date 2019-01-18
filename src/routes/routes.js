@@ -6,6 +6,9 @@ import DaftarNilai from '../views/daftar-nilai/daftar-nilai'
 import Rapor from '../views/rapor/rapor'
 import DaftarMurid from '../views/student/murid'
 import StudentDetail from '../views/student/detail'
+import TablePengetahuan from '../views/daftar-nilai/table-pengetahuan'
+import TableKeterampilan from '../views/daftar-nilai/table-keterampilan'
+import TableSikap from '../views/daftar-nilai/table-sikap'
 import NotFound from '../views/global/not-found'
 
 export const MainRoutes = [
@@ -29,6 +32,18 @@ export const MainRoutes = [
     {
         path: '/daftar-nilai',
         component: DaftarNilai
+    },
+    {
+        path: '/daftar-nilai/sikap',
+        component: TableSikap
+    },
+    {
+        path: '/daftar-nilai/pengetahuan',
+        component: TablePengetahuan
+    },
+    {
+        path: '/daftar-nilai/keterampilan',
+        component: TableKeterampilan
     },
     {
         path: '/rapor',

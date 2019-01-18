@@ -15,17 +15,16 @@ export default class TableKeterampilan extends Component {
                     </thead>
                     <tbody>
                         {
-                            this.props.listTable.map(function (data, i) {
-                                console.log('SKILL', data.data.subject_score_details)
+                            this.props.tableSkill.map(function (data, i) {
                                 return <tr key={i}>
-                                    <td>{data.data.full_name}</td>
-                                    {data.data.subject_score_details.task.scores.map(function (x, i) {
+                                    <td>{data.full_name}</td>
+                                    {data.subject_score_details.task.scores.map(function (x, i) {
                                         return <td key={i}>
                                             {x.score === null ? "-" : x.score}
                                         </td>
                                     })}
                                     <td>
-                                    {data.data.subject_score_details.task.average.score === null ? "-" : data.data.subject_score_details.task.average.score}
+                                    {data.subject_score_details.task.average.score === null ? "-" : data.subject_score_details.task.average.score}
                                     </td>
                                 </tr>
                             })

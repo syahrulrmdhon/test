@@ -26,11 +26,9 @@ export default class DaftarNilai extends Component {
             selectedSemester: "",
             listSubject: [],
             selectedSubject: "",
-            listTable: [],
             tableKnowledge: [],
             tableSkill: [],
             tableAttitude: [],
-
 
             // knowledge
             idxScores: 0,
@@ -39,7 +37,6 @@ export default class DaftarNilai extends Component {
             // skill
             idxScoresSkill: 0
         };
-
         this.toggle = this.toggle.bind(this);
         this.getClassList = this.getClassList.bind(this)
         this.onChangeClass = this.onChangeClass.bind(this)
@@ -48,17 +45,12 @@ export default class DaftarNilai extends Component {
         this.getSubjectList = this.getSubjectList.bind(this)
         this.onChangeSubject = this.onChangeSubject.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.getKnowledge = this.getKnowledge.bind(this)
-        // this.getSkill = this.getSkill.bind(this)
-        this.getAttitude = this.getAttitude.bind(this)
     }
-
     componentDidMount() {
         this.getSemesterList()
         this.getClassList()
         this.getSubjectList()
     }
-
     toggle(tab) {
         if (this.state.activeTab !== tab) {
             this.setState({
@@ -66,7 +58,6 @@ export default class DaftarNilai extends Component {
             });
         }
     }
-
     getSemesterList() {
         const url = `${process.env.API_URL}v1/filters/semesters?school_id=${localStorage.getItem("school_list")}`
         const self = this
@@ -158,104 +149,63 @@ export default class DaftarNilai extends Component {
     }
     getKnowledge() {
         let url = `${process.env.API_URL}v1/scores/index?school_id=${localStorage.getItem("school_list")}&semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-        const self = this
-
-        axios({
+        
+        return axios({
             method: 'get',
             url: url,
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }
-        }).then(function (res) {
-            let tableKnowledge = []
-            for (var i in res.data.data) {
-                const datum = res.data.data[i]
-                console.log('DATUM', datum)
-                datum.map(function (data, i) {
-                    tableKnowledge.push({ data })
-                    console.log('DATUM DATA KNOWLEDGE', data)
-
-                    // get index ulangan harian pengetahuan
-                    data.subject_score_details.daily_exam.scores.map(function (x, i) {
-                        self.setState({
-                            idxScores: i + 1
-                        })
-                    })
-
-                    // get index tugas pengetahuan
-                    data.subject_score_details.task.scores.map(function (x, i) {
-                        self.setState({
-                            idxTugas: i + 1
-                        })
-                    })
-                })
-            }
-            self.setState({
-                tableKnowledge: tableKnowledge
-            })
         })
     }
-    // getSkill() {
-    //     let url = `${process.env.API_URL}v1/scores/index?school_id=${localStorage.getItem("school_list")}&semester=${this.state.selectedSemester.label}&category=skill&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-    //     const self = this
+    getSkill() {
+        let url = `${process.env.API_URL}v1/scores/index?school_id=${localStorage.getItem("school_list")}&semester=${this.state.selectedSemester.label}&category=skill&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
 
-    //     axios({
-    //         method: 'get',
-    //         url: url,
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Authorization": "Bearer " + localStorage.getItem("token")
-    //         }
-    //     }).then(function (res) {
-    //         let tableSkill = []
-    //         for (var i in res.data.data) {
-    //             const datum = res.data.data[i]
-    //             datum.map(function (data, i) {
-    //                 tableSkill.push({ data })
-    //                 // console.log('DATUM DATA SKILL', data)
-
-    //                 // get index ulangan harian keterampilan
-    //                 data.subject_score_details.task.scores.map(function (x, i) {
-    //                     self.setState({
-    //                         idxScoresSkill: i + 1
-    //                     })
-    //                 })
-    //             })
-    //         }
-    //         self.setState({
-    //             tableSkill: tableSkill
-    //         })
-    //     })
-    // }
+        return axios({
+            method: 'get',
+            url: url,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        })
+    }
     getAttitude() {
         let url = `${process.env.API_URL}v1/scores/index?school_id=${localStorage.getItem("school_list")}&semester=${this.state.selectedSemester.label}&category=attitude&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-        const self = this
-
-        axios({
+        
+        return axios({
             method: 'get',
             url: url,
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }
-        }).then(function (res) {
-            let tableAttitude = []
-            for (var i in res.data.data) {
-                const datum = res.data.data[i]
-                datum.map(function (data, i) {
-                    tableAttitude.push({ data })
-                })
-            }
-            self.setState({
-                tableAttitude: tableAttitude
-            })
         })
     }
+
     handleSubmit() {
-        this.getKnowledge()
-        // this.getSkill()
-        this.getAttitude()
+        let tableKnowledge = []
+        let tableAttitude = []
+        let tableSkill = []
+        this.getKnowledge().then(res => {
+            tableKnowledge = res.data.data.users;
+
+            this.getAttitude().then(attitudes => {
+                tableAttitude = attitudes.data.data.users
+                this.getSkill().then(skills => {
+                    tableSkill = skills.data.data.users
+                    this.setState({
+                        tableKnowledge: tableKnowledge,
+                        tableAttitude: tableAttitude,
+                        tableSkill: tableSkill,
+                        idxScores: tableKnowledge[0].subject_score_details.daily_exam.scores.length,
+                        idxTugas: tableKnowledge[0].subject_score_details.task.scores.length,
+                        idxScoresSkill: tableSkill[0].subject_score_details.task.scores.length,
+                    })
+                })
+            })
+        });
     }
 
     render() {
@@ -315,7 +265,7 @@ export default class DaftarNilai extends Component {
                                     <TabPane tabId="1">
                                         <div className="table-content">
                                             <TablePengetahuan
-                                                listTable={this.state.tableKnowledge}
+                                                tableKnowledge={this.state.tableKnowledge}
                                                 idxScores={this.state.idxScores}
                                                 idxTugas={this.state.idxTugas}
                                             />
@@ -324,7 +274,7 @@ export default class DaftarNilai extends Component {
                                     <TabPane tabId="2">
                                         <div className="table-content">
                                             <TableKeterampilan
-                                                listTable={this.state.tableSkill}
+                                                tableSkill={this.state.tableSkill}
                                                 idxScoresSkill={this.state.idxScoresSkill}
                                             />
                                         </div>
@@ -332,7 +282,7 @@ export default class DaftarNilai extends Component {
                                     <TabPane tabId="3">
                                         <div className="table-content">
                                             <TableSikap
-                                                listTable={this.state.tableAttitude}
+                                                tableAttitude={this.state.tableAttitude}
                                             />
                                         </div>
                                     </TabPane>
