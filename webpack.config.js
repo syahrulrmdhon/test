@@ -3,6 +3,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AsyncChunkNames = require('webpack-async-chunk-names-plugin');
 const webpack = require('webpack');
+const publicPath = '/';
 
 const API_URL = {
     production: JSON.stringify('https://prod.api.core.gredu.co/'),
@@ -22,7 +23,8 @@ module.exports = (env) => ({
         path: path.resolve("build"),
         filename: '[name].[chunkhash].bundle.js',
         sourceMapFilename: '[name].[chunkhash].bundle.map',
-        chunkFilename: '[id].[chunkhash].chunk.js'
+        chunkFilename: '[id].[chunkhash].chunk.js',
+        publicPath: publicPath
     },
     module: {
         rules: [

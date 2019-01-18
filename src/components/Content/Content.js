@@ -9,6 +9,7 @@ import Profile from './ProfileDetail'
 import RightSide from '../RightSide/RightSide'
 import ScoreTable from './ScoreTable'
 import Tab from '../TabContent/TabContent'
+import Axios from 'axios'
 
 export default class Content extends Component {
   constructor(props, context) {
@@ -17,12 +18,35 @@ export default class Content extends Component {
       activeTab: 1,
       homeroomTeacherActiveTab: 1,
       startDate: null,
-      endDate: null
-    };
+      endDate: null,
+      knowledgeScore: null,
+      skillScore: null,
+      attitudeScore: null,
+      subjects: null,
+      attendanceStatus: null
+    }
+
+    this.schoolId = localStorage.getItem("school_list")
+    this.token = localStorage.getItem("token")
+    this.authorization = `Bearer ${this.token}`
+    this.baseUrl = `${process.env.API_URL}v1/students/${this.props.studentId}`
     this.toggle = this.toggle.bind(this)
     this.homeroomTeacherTab = this.homeroomTeacherTab.bind(this)
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
+    this.getKnowledgeScore = this.getKnowledgeScore.bind(this)
+    this.getSkillScore = this.getSkillScore.bind(this)
+    this.getAttitudeScore = this.getAttitudeScore.bind(this)
+    this.getFilterSubject = this.getFilterSubject.bind(this)
+    this.getFilterAttendanceStatus = this.getFilterAttendanceStatus.bind(this)
+    this.getAttandanceDetail = this.getAttandanceDetail.bind(this)
+  }
+
+  componentDidMount() {
+    if (this.state.activeTab === 1) {
+      this.getKnowledgeScore()
+    }
+    this.getAttandanceDetail()
   }
 
   homeroomTeacherTab(tab) {
@@ -36,7 +60,7 @@ export default class Content extends Component {
   handleChangeStartDate(date) {
     this.setState({
       startDate: date
-    });
+    })
   }
 
   handleChangeEndDate(date) {
@@ -52,7 +76,109 @@ export default class Content extends Component {
       })
     }
   }
-  
+
+  componentDidUpdate(prevProps, nextState) {
+    if (nextState.activeTab !== this.state.activeTab) {
+      if (this.state.activeTab === 2 && !this.state.skillScore) {
+        this.getSkillScore()
+      }
+      else if (this.state.activeTab === 3 && !this.state.attitudeScore) {
+          this.getAttitudeScore()
+      }
+    }
+    if (prevProps.activeTab !== this.props.activeTab) {
+      if (this.props.activeTab === 2 && !this.state.subjects && !this.state.attendanceStatus) {
+        this.getFilterSubject()
+        this.getFilterAttendanceStatus()
+      }
+    }
+  }
+
+  getKnowledgeScore() {
+    const url = `${this.baseUrl}/score_recap?school_id=${localStorage.getItem("school_list")}&category=knowledge`
+    
+    Axios.get(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.authorization
+      }
+    })
+    .then(response => {
+      this.setState({ knowledgeScore: response.data.data })
+    })
+  }
+
+  getSkillScore() {
+    const url = `${this.baseUrl}/score_recap?school_id=${localStorage.getItem("school_list")}&category=skill`
+
+    Axios.get(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.authorization
+      }
+    })
+    .then(response => {
+      this.setState({ skillScore: response.data.data })
+    })
+  }
+
+  getAttitudeScore() {
+    const url = `${this.baseUrl}/score_recap?school_id=${localStorage.getItem("school_list")}&category=attitude`
+
+    Axios.get(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.authorization
+      }
+    })
+    .then(response => {
+      this.setState({attitudeScore: response.data.data})
+    })
+  }
+
+  getFilterSubject() {
+    const url = `${process.env.API_URL}v1/filters/subjects?school_id=${this.schoolId}`
+    
+    Axios.get(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.authorization
+      }
+    })
+    .then(response => {
+      this.setState({subjects: response.data.data.subjects})
+    })
+  }
+
+  getFilterAttendanceStatus() {
+    const url = `${process.env.API_URL}v1/filters/attendance_status?school_id=${this.schoolId}`
+    
+    Axios.get(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.authorization
+      }
+    })
+    .then(response => {
+      this.setState({attendanceStatus: response.data.data.attendance_status})
+    })
+  }
+
+  getAttandanceDetail() {
+    const url = `${process.env.API_URL}v1/attendances/${this.schoolId}/full_detail?school_id=${this.schoolId}&attendance_type=homeroom`
+    console.log(url)
+    Axios.get(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.authorization
+      }
+    })
+    .then(response => {
+      this.setState({attendanceStatus: response.data.data.attendance_status})
+      // console.log(response)
+    })
+  }
+
   render() {
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
     const tabHomeRoom = ['Catatan Wali Kelas', 'Estrakurikuler', 'Prestasi']
@@ -63,7 +189,7 @@ export default class Content extends Component {
           <TabPane tabId={1}>
             <div className="row rounded-10">
               <LeftSide>
-                <Profile />
+                <Profile dataProfile={this.props.dataProfile} />
               </LeftSide>
               <RightSide>
                 <Tab
@@ -71,7 +197,11 @@ export default class Content extends Component {
                   className="total-score"
                   toggle={this.toggle}
                   activeTab={this.state.activeTab} />
-                <ScoreTable activeTab={this.state.activeTab} />
+                <ScoreTable
+                  activeTab={this.state.activeTab}
+                  knowledgeScore={this.state.knowledgeScore}
+                  skillScore={this.state.skillScore}
+                  attitudeScore={this.state.attitudeScore} />
               </RightSide>
             </div>
           </TabPane>
@@ -122,9 +252,14 @@ export default class Content extends Component {
                     <Label className="absences-detail__filter-label" for="exampleSelect">Status</Label>
                     <Input className="absences-detail__select" type="select">
                       <option>Semua Status</option>
-                      <option>Alpha</option>
-                      <option>Izin</option>
-                      <option>Sakit</option>
+                      {
+                        this.state.attendanceStatus &&
+                        this.state.attendanceStatus.map((status, index) => {
+                          if (status.key !== 'present' && status.key !== 'late'){    
+                            return <option key={index}>{status.value}</option>
+                          }
+                        })
+                      }
                     </Input>
                     <i className="absences-detail__angle-down fa fa-angle-down"></i>
                   </FormGroup>
@@ -132,8 +267,12 @@ export default class Content extends Component {
                     <Label className="absences-detail__filter-label" for="exampleSelect">Mata Pelajaran</Label>
                     <Input className="absences-detail__select" type="select">
                       <option>Pilih Mata Pelajaran</option>
-                      <option>Fisika Dasar</option>
-                      <option>Matematika</option>
+                      {
+                        this.state.subjects &&
+                        this.state.subjects.map((subject, index) => {
+                          return <option key={index}>{subject.subject_name}</option>
+                        })
+                      }
                     </Input>
                     <i className="absences-detail__angle-down fa fa-angle-down"></i>
                   </FormGroup>
@@ -145,7 +284,7 @@ export default class Content extends Component {
           <TabPane tabId={3}>
             <div className="row rounded-10 homeroom-teacher">
               <LeftSide>
-                <Profile />
+                <Profile dataProfile={this.props.dataProfile} />
               </LeftSide>
               <RightSide>
                 <Tab
