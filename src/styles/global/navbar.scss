@@ -15,19 +15,18 @@ $nunito_semi_bold: 'NunitoSemiBold';
   .topnav a {
     float: left;
     display: block;
-    color: black;
+    color: #9da2a6;
     text-align: center;
     font-family: $nunito_semi_bold;
-    padding: 14px 16px;
+    padding: 17px;
+    margin-left: 5px;
+    margin-right: 5px;
     text-decoration: none;
     font-family: $nunito_semi_bold;
     font-size: 14px;
     border-bottom: 3px solid transparent;
   }
-  
-  .topnav a:hover {
-    border-bottom: 3px solid #1a9d7f;
-  }
+ 
   
   .topnav a.active-menu {
     border-bottom: 3px solid #1a9d7f;
@@ -42,7 +41,8 @@ $nunito_semi_bold: 'NunitoSemiBold';
   }
   
   .menu {
-    padding: 34px;
+    padding-top: 0px;
+    padding-left: 34px;
   }
   
   
