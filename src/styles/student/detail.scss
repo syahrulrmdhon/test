@@ -3,12 +3,9 @@ $nunito_regular: 'NunitoRegular';
 $nunito_semi_bold: 'NunitoSemiBold';
 $nunito_bold: 'NunitoBold';
 
-body {
-  background-color: #f7f7f7;
-}
-
 .detail {
   background-color: #f7f7f7;
+  min-height: 100%;
   
   a {
     color: #009D81;    
