@@ -9,137 +9,27 @@ export default class TableKeterampilan extends Component {
                     <thead>
                         <tr>
                             <th>Nama Siswa</th>
-                            <th colSpan="2">Ulangan Harian</th>
+                            <th colSpan={this.props.idxScoresSkill}>Tugas</th>
                             <th>Rata-Rata</th>
-                            <th colSpan="2">Tugas</th>
-                            <th>Rata-Rata</th>
-                            <th>UTS</th>
-                            <th>UAS/UKK</th>
-                            <th>Nilai Rapor</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                        <tr>
-                            <td>Muhammad Jihaduddin Fikri Amrillah</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>90</td>
-                            <td>90</td>
-                        </tr>
-                    </tbody>
+                        {
+                            this.props.tableSkill.map(function (data, i) {
+                                return <tr key={i}>
+                                    <td>{data.full_name}</td>
+                                    {data.subject_score_details.task.scores.map(function (x, i) {
+                                        return <td key={i}>
+                                            {x.score === null ? "-" : x.score}
+                                        </td>
+                                    })}
+                                    <td>
+                                    {data.subject_score_details.task.average.score === null ? "-" : data.subject_score_details.task.average.score}
+                                    </td>
+                                </tr>
+                            })
+                        }
+                    </tbody>    
                 </Table>
             </div>
         )
