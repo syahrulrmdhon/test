@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 // import { Redirect } from 'react-router-dom'
 import { Link } from "react-router-dom"
-import './../../styles/student/murid.css'
 import './../../styles/global/component.css'
+import './../../styles/student/murid.css'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
