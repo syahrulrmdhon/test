@@ -3,7 +3,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AsyncChunkNames = require('webpack-async-chunk-names-plugin');
 const webpack = require('webpack');
-const publicPath = '/';
+const publicPath = "/"
 
 const API_URL = {
     production: JSON.stringify('https://prod.api.core.gredu.co/'),

@@ -12,6 +12,7 @@ export default class TabDetail extends Component {
 
 
   tabs(items) {
+    console.log("tabs", items)
     const tabs = (
       <Nav className="tab-menu">
         {

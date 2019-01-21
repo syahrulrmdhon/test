@@ -7,18 +7,44 @@ $nunito_semi_bold: 'NunitoSemiBold';
     font-family: $nunito_semi_bold;
   }
 
-  .navbar {
-    padding-left: 0px;
-    padding-right: 0px;
-    width: 90%;
-    margin: 0px auto;
+  .topnav {
+    overflow: hidden;
+    background-color: #ffffff;
   }
-
-  .navbar-nav {
-    margin-left: -15px;
+  
+  .topnav a {
+    float: left;
+    display: block;
+    color: #9da2a6;
+    text-align: center;
+    font-family: $nunito_semi_bold;
+    padding: 17px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-decoration: none;
+    font-family: $nunito_semi_bold;
+    font-size: 14px;
+    border-bottom: 3px solid transparent;
   }
-
-  .nav-item:first-child {
-    margin-left: -.5em;
+ 
+  
+  .topnav a.active-menu {
+    border-bottom: 3px solid #1a9d7f;
+    font-family: $nunito_semi_bold;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #1a9d7f;
   }
+  
+  .menu {
+    padding-top: 0px;
+    padding-left: 34px;
+  }
+  
+  
+  
 }
