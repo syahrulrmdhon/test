@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
+
+import "react-datepicker/dist/react-datepicker.css";
+import '../../styles/student/detail.scss'
+
 import { Link } from 'react-router-dom'
 import Header from '../global/header'
 import TabMenu from '../../components/TabDetail/TabDetail'
 import Content from '../../components/Content/Content'
-import Axios from 'axios'
-
-import "react-datepicker/dist/react-datepicker.css";
-import '../../styles/student/detail.scss'
+import { apiClient } from '../../utils/apiClient'
 
 export default class Detail extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
       activeMenu: 1,
-      homeroomTeacherActiveTab : 1,
       startDate: null,
       endDate: null,
       studentId: this.props.match.params.id,
@@ -37,12 +37,7 @@ export default class Detail extends Component {
       }
     }
 
-    this.schoolId = localStorage.getItem("school_list")
-    this.token = localStorage.getItem("token")
-    this.authorization = `Bearer ${this.token}`
-    this.baseUrl = `${process.env.API_URL}v1/students/${this.state.studentId}`
     this.toggleMenu = this.toggleMenu.bind(this)
-    this.homeroomTeacherTab =  this.homeroomTeacherTab.bind(this)
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
     this.getStudentDetail = this.getStudentDetail.bind(this)
@@ -53,15 +48,9 @@ export default class Detail extends Component {
   }
   
   getStudentDetail() {
-    const url = `${this.baseUrl}?school_id=${this.schoolId}`
+    const url = `v1/students/${this.state.studentId}`
 
-    return Axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": this.authorization
-      }
-    })
-    .then(response => {
+    apiClient('get', url).then(response => {
       this.setState({profile: response.data.data})
     })
   }
@@ -70,14 +59,6 @@ export default class Detail extends Component {
     if (this.state.activeMenu !== menu) {
       this.setState({
         activeMenu: menu
-      })
-    }
-  }
-
-  homeroomTeacherTab(tab) {
-    if (this.state.homeroomTeacherActiveTab !== tab) {
-      this.setState({
-        homeroomTeacherActiveTab: tab
       })
     }
   }
@@ -96,7 +77,7 @@ export default class Detail extends Component {
 
   render() {
     const tabMenu = ['Rincian Nilai', 'Rincian Absensi', 'Catatan Wali Kelas'];
-
+  
     return (
       <div className="detail bg-grey">
         <Header />

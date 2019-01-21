@@ -3,35 +3,44 @@ import { TabContent, TabPane, Form, FormGroup, Label, Input } from 'reactstrap'
 import DatePicker from 'react-datepicker'
 
 import AbsenceTable from './AbsenceTable'
-import HomeroomTeacher from './HomeroomTeacher'
+import Homeroom from './Homeroom'
 import LeftSide from '../LeftSide/LeftSide'
 import Profile from './ProfileDetail'
 import RightSide from '../RightSide/RightSide'
 import ScoreTable from './ScoreTable'
 import Tab from '../TabContent/TabContent'
 import Axios from 'axios'
+import { apiClient } from '../../utils/apiClient'
 
 export default class Content extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       activeTab: 1,
-      homeroomTeacherActiveTab: 1,
+      homeroomActiveTab: 1,
       startDate: null,
       endDate: null,
       knowledgeScore: null,
       skillScore: null,
       attitudeScore: null,
       subjects: null,
-      attendanceStatus: null
+      attendanceStatus: null,
+      attendanceDetail: {
+        attendances: {
+          results: [],
+          present: null,
+          abstain: null,
+          sick: null,
+          permission: null
+        }
+      },
+      disable: true,
+      inputHomeroomNote: '',
     }
 
-    this.schoolId = localStorage.getItem("school_list")
-    this.token = localStorage.getItem("token")
-    this.authorization = `Bearer ${this.token}`
     this.baseUrl = `${process.env.API_URL}v1/students/${this.props.studentId}`
     this.toggle = this.toggle.bind(this)
-    this.homeroomTeacherTab = this.homeroomTeacherTab.bind(this)
+    this.homeroomTab = this.homeroomTab.bind(this)
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
     this.getKnowledgeScore = this.getKnowledgeScore.bind(this)
@@ -39,20 +48,21 @@ export default class Content extends Component {
     this.getAttitudeScore = this.getAttitudeScore.bind(this)
     this.getFilterSubject = this.getFilterSubject.bind(this)
     this.getFilterAttendanceStatus = this.getFilterAttendanceStatus.bind(this)
-    this.getAttandanceDetail = this.getAttandanceDetail.bind(this)
+    this.getAttendanceDetail = this.getAttendanceDetail.bind(this)
+    this.handleCreateHomeroomNote = this.handleCreateHomeroomNote.bind(this)
+    this.noteChangeHandler=this.noteChangeHandler.bind(this)
   }
 
   componentDidMount() {
     if (this.state.activeTab === 1) {
       this.getKnowledgeScore()
     }
-    this.getAttandanceDetail()
   }
 
-  homeroomTeacherTab(tab) {
-    if (this.state.homeroomTeacherActiveTab !== tab) {
+  homeroomTab(tab) {
+    if (this.state.homeroomActiveTab !== tab) {
       this.setState({
-        homeroomTeacherActiveTab: tab
+        homeroomActiveTab: tab
       })
     }
   }
@@ -86,103 +96,99 @@ export default class Content extends Component {
           this.getAttitudeScore()
       }
     }
+
     if (prevProps.activeTab !== this.props.activeTab) {
       if (this.props.activeTab === 2 && !this.state.subjects && !this.state.attendanceStatus) {
         this.getFilterSubject()
         this.getFilterAttendanceStatus()
+
+        if (nextState.attendanceDetail === this.state.attendanceDetail) {
+          this.getAttendanceDetail()      
+        }
       }
     }
   }
 
   getKnowledgeScore() {
-    const url = `${this.baseUrl}/score_recap?school_id=${localStorage.getItem("school_list")}&category=knowledge`
+    const url = `v1/students/${this.props.studentId}/score_recap?category=knowledge`
     
-    Axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": this.authorization
-      }
-    })
-    .then(response => {
-      this.setState({ knowledgeScore: response.data.data })
+    apiClient('get', url).then(response => {
+      this.setState({knowledgeScore: response.data.data})
     })
   }
 
   getSkillScore() {
-    const url = `${this.baseUrl}/score_recap?school_id=${localStorage.getItem("school_list")}&category=skill`
+    const url = `v1/students/${this.props.studentId}/score_recap?category=skill`
 
-    Axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": this.authorization
-      }
-    })
-    .then(response => {
+    apiClient('get', url).then(response => {
       this.setState({ skillScore: response.data.data })
     })
   }
 
   getAttitudeScore() {
-    const url = `${this.baseUrl}/score_recap?school_id=${localStorage.getItem("school_list")}&category=attitude`
+    const url = `v1/students/${this.props.studentId}/score_recap?category=attitude`
 
-    Axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": this.authorization
-      }
-    })
-    .then(response => {
+    apiClient('get', url).then(response => {
       this.setState({attitudeScore: response.data.data})
     })
   }
 
   getFilterSubject() {
-    const url = `${process.env.API_URL}v1/filters/subjects?school_id=${this.schoolId}`
-    
-    Axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": this.authorization
-      }
-    })
-    .then(response => {
+    const url = `v1/filters/subjects`
+
+    apiClient('get', url).then(response => {
       this.setState({subjects: response.data.data.subjects})
     })
   }
 
   getFilterAttendanceStatus() {
-    const url = `${process.env.API_URL}v1/filters/attendance_status?school_id=${this.schoolId}`
+    const url = `v1/filters/attendance_status`
     
-    Axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": this.authorization
-      }
-    })
-    .then(response => {
+    apiClient('get', url).then(response => {
       this.setState({attendanceStatus: response.data.data.attendance_status})
     })
   }
 
-  getAttandanceDetail() {
-    const url = `${process.env.API_URL}v1/attendances/${this.schoolId}/full_detail?school_id=${this.schoolId}&attendance_type=homeroom`
-    console.log(url)
-    Axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": this.authorization
+  getAttendanceDetail() {
+    const url = `v1/students/${this.props.studentId}/attendance_recap/`
+    
+    apiClient('get', url).then(response => {
+      this.setState({attendanceDetail: response.data.data})
+    })
+  }
+
+  handleCreateHomeroomNote() {
+    const url = `v1/students/${this.props.studentId}/create_notes`
+    const data = {
+      "achievement_type": "final_result",
+      "user_achievement": {
+        "user_id": this.props.studentId,
+        "description": this.state.inputHomeroomNote
       }
+    }
+
+    apiClient('post', url, data).then(response => {
+        this.setState({disable: true})
     })
-    .then(response => {
-      this.setState({attendanceStatus: response.data.data.attendance_status})
-      // console.log(response)
-    })
+  }
+
+  noteChangeHandler(event) {
+    const inputUser = event.target.value
+    if (inputUser.length) {
+      this.setState({disable: false})
+    }
+    else {
+      this.setState({disable: true})
+    }
+
+    this.setState({inputHomeroomNote: inputUser})
   }
 
   render() {
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
     const tabHomeRoom = ['Catatan Wali Kelas', 'Estrakurikuler', 'Prestasi']
-
+    
+    const attendances = this.state.attendanceDetail.attendances
     return (
       <div>
         <TabContent activeTab={this.props.activeTab}>
@@ -231,19 +237,19 @@ export default class Content extends Component {
                 </Form>
                 <div className="absences-detail__total-wrapper">
                   <div className="absences-detail__label">Hadir</div>
-                  <div className="absences-detail__amount">39</div>
+                  <div className="absences-detail__amount">{attendances.present !== null ? attendances.present : 0}</div>
                 </div>
                 <div className="absences-detail__total-wrapper">
                   <div className="absences-detail__label">Sakit</div>
-                  <div className="absences-detail__amount">2</div>
+                  <div className="absences-detail__amount">{attendances.sick !== null ? attendances.sick : 0}</div>
                 </div>
                 <div className="absences-detail__total-wrapper">
                   <div className="absences-detail__label">Izin</div>
-                  <div className="absences-detail__amount">1</div>
+                  <div className="absences-detail__amount">{attendances.permission ? attendances.permission : 0}</div>
                 </div>
                 <div className="absences-detail__total-wrapper">
                   <div className="absences-detail__label">Alpha</div>
-                  <div className="absences-detail__amount">7</div>
+                  <div className="absences-detail__amount">{attendances.abstain ? attendances.abstain : 0}</div>
                 </div>
               </LeftSide>
               <RightSide>
@@ -277,7 +283,7 @@ export default class Content extends Component {
                     <i className="absences-detail__angle-down fa fa-angle-down"></i>
                   </FormGroup>
                 </Form>
-                <AbsenceTable />
+                  <AbsenceTable attendances={this.state.attendanceDetail}/>
               </RightSide>
             </div>
           </TabPane>
@@ -290,9 +296,13 @@ export default class Content extends Component {
                 <Tab
                   tab={tabHomeRoom}
                   className="total-score"
-                  toggle={this.homeroomTeacherTab}
-                  activeTab={this.state.homeroomTeacherActiveTab} />
-                <HomeroomTeacher activeTab={this.state.homeroomTeacherActiveTab} />
+                  toggle={this.homeroomTab}
+                  activeTab={this.state.homeroomActiveTab} />
+                <Homeroom
+                  activeTab={this.state.homeroomActiveTab}
+                  clicked={this.handleCreateHomeroomNote} 
+                  disabled={this.state.disable}
+                  changed={(event) => this.noteChangeHandler(event)}/>
               </RightSide>
             </div>
           </TabPane>

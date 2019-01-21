@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-// import { Redirect } from 'react-router-dom'
-import { Link } from "react-router-dom"
 import './../../styles/student/murid.css'
 import './../../styles/global/component.css'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
@@ -10,6 +7,8 @@ import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-a
 
 import Header from '../global/header'
 import MenuBar from '../global/navbar'
+import { apiClient } from '../../utils/apiClient'
+
 
 class DaftarMurid extends Component {
     constructor(props) {
@@ -35,19 +34,10 @@ class DaftarMurid extends Component {
     }
 
     getStudentList() {
-        const url = (process.env.API_URL + `v1/scores/student_list?school_id=${localStorage.getItem("school_list")}`)
-        const self = this
-
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then(function (res) {
-            self.setState({ data: res.data.data })
-            console.log('DATA', res.data.data.users)
+        const url = 'v1/students/list'
+        
+        apiClient('get', url).then(response => {
+            this.setState({ data: response.data.data })
         })
     }
     getNis(cell) {
@@ -70,6 +60,7 @@ class DaftarMurid extends Component {
     }
     componentDidMount() {
         this.getStudentList()
+        
     }
 
     render() {
