@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import '../../styles/global/header.scss'
 import '../../styles/global/component.css'
 import '../../styles/global/navbar.scss'
+import { NavLink } from 'react-router-dom';
 
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    Nav,
-    NavItem,
-    NavLink
-} from 'reactstrap';
+
+const menus = [
+    { name: "Beranda", link: "/home" },
+    { name: "Absensi", link: "/absen" },
+    { name: "Penilaian", link: "/penilaian" },
+    { name: "Daftar Nilai", link: "/daftar-nilai" },
+    { name: "Rapor Kelas", link: "/rapor" },
+    { name: "Daftar Murid", link: "/murid" },
+]
 
 export default class MenuBar extends Component {
     constructor(props) {
@@ -30,49 +32,18 @@ export default class MenuBar extends Component {
         return (
             <div className="menu-bar">
                 <div className="bg-white">
-                    <Navbar expand="md" className="font-grey">
-                        <NavbarToggler onClick={this.toggle} />
-                        <Collapse isOpen={this.state.isOpen} navbar>
-                            <Nav navbar>
-                                <NavItem>
-                                    <NavLink className="font-grey" href="/home">
-                                        Beranda
-                                    </NavLink>
-                                </NavItem>
-                                &emsp;&emsp;
-                                <NavItem>
-                                    <NavLink className="font-grey" href="/absen">
-                                        Absensi
-                                    </NavLink>
-                                </NavItem>
-                                &emsp;&emsp;
-                                <NavItem>
-                                    <NavLink className="font-grey" href="/penilaian">
-                                        Penilaian
-                                    </NavLink>
-                                </NavItem>
-                                &emsp;&emsp;
-                                <NavItem>
-                                    <NavLink className="font-grey" href="/daftar-nilai">
-                                        Daftar Nilai
-                                </NavLink>
-                                </NavItem>
-                                &emsp;&emsp;
-                                <NavItem>
-                                    <NavLink className="font-grey" href="/rapor">
-                                        Rapor Kelas
-                                </NavLink>
-                                </NavItem>
-                                &emsp;&emsp;
-                                <NavItem>
-                                    <NavLink className="font-grey" href="/murid">
-                                        Daftar Murid
-                                </NavLink>
-                                </NavItem>
-                            </Nav>
-                        </Collapse>
-                    </Navbar>
-                </div>
+                            <div className="topnav">
+                                <div className="menu">
+                                        {
+                                            menus.map(function (data, index) {
+                                                return  <NavLink className="font-grey" key={index} to={data.link} activeClassName="active-menu">
+                                                        {data.name}
+                                                    </NavLink>
+                                            })
+                                        }
+                                </div>
+                            </div>
+                    </div>
             </div>
         )
     }
