@@ -28,5 +28,4 @@ yarn-error.log*
 !.elasticbeanstalk/*.global.yml
 
 
-# Indaam
-indaam.note.md
+.DS_Store

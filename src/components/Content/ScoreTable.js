@@ -52,7 +52,13 @@ export default class ScoreTable extends Component {
                       </tr>
                     })
                   }
-                  <tr className="total-score">
+                </tbody>
+              </Table>
+            </div>
+            <div className="border-hidden"></div>
+            <Table className="table-amount">
+              <tbody>
+              <tr className="total-score">
                     <td colSpan="2" className="border-right-0 text-center">Jumlah Nilai Pengetahuan</td>
                     <td className="border-left-0 border-right-0 text-center">350.0</td>
                     <td className="border-left-0 border-right-0"></td>
@@ -64,9 +70,8 @@ export default class ScoreTable extends Component {
                     <td className="border-left-0 border-right-0"></td>
                     <td className="border-left-0"></td>
                   </tr>
-                </tbody>
-              </Table>
-            </div>
+              </tbody>
+            </Table>
           </TabPane>
           <TabPane className="knowledge" tabId={2}>
             <div className="table-content">
@@ -92,7 +97,13 @@ export default class ScoreTable extends Component {
                       </tr>
                     })
                   }
-                  <tr className="total-score">
+                </tbody>
+              </Table>
+            </div>
+            <div className="border-hidden"></div>
+            <Table className="table-amount">
+              <tbody>
+              <tr className="total-score">
                     <td colSpan="2" className="border-right-0 text-center">Jumlah Nilai Pengetahuan</td>
                     <td className="border-left-0 border-right-0 text-center">350.0</td>
                     <td className="border-left-0 border-right-0"></td>
@@ -104,9 +115,8 @@ export default class ScoreTable extends Component {
                     <td className="border-left-0 border-right-0"></td>
                     <td className="border-left-0"></td>
                   </tr>
-                </tbody>
-              </Table>
-            </div>
+              </tbody>
+            </Table>
           </TabPane>
           <TabPane className="attitude" tabId={3}>
             <div className="table-content">
@@ -136,7 +146,9 @@ export default class ScoreTable extends Component {
                   }
                 </tbody>
               </Table>
-              <div className="total-status">
+            </div>
+            <div className="border-hidden"></div>
+            <div className="total-status">
                 <div className="pull-left">
                   Total Sikap Butuh Perhatian
                   <br />
@@ -148,7 +160,6 @@ export default class ScoreTable extends Component {
                   5 (<span>lima</span>)
                 </div>
               </div>
-            </div>
           </TabPane>
         </TabContent>
       </div>

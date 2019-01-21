@@ -3,6 +3,10 @@ $nunito_semi_bold: 'NunitoSemiBold';
 $nunito_bold: 'NunitoBold';
 
 .detail {
+    .table-content {
+        height: 300px;
+    }
+
     thead {
         background-color: #ecf2f8;
         font-family: $nunito_light;
@@ -44,11 +48,34 @@ $nunito_bold: 'NunitoBold';
     td:first-child, td:nth-child(2) {
         text-align: left;
     }
+
+    td:first-child {
+        width: 23.5%;
+    }
+
+    .border-hidden {
+        width: 4px;
+        height: 1px;
+        background-color: white;
+        position: relative;
+        float: right;
+        bottom: 1px;
+    }
+    
 }
 
 .total-score, .average-score {
     background-color: #f5faf2 !important;
     border: 1px solid #b0d8d8;
+
+    td:first-child {
+        width: 52%;
+        text-align: center;
+    }
+
+    td {
+        padding: 6px 10px !important;
+    }
 }
 
 .status {
@@ -73,7 +100,7 @@ $nunito_bold: 'NunitoBold';
 }
 
 .attitude tbody tr:last-child {
-    border-bottom: 1px solid #b0d8d8;
+    // border-bottom: 1px solid #b0d8d8;
 }
 
 .total-status {
@@ -83,6 +110,7 @@ $nunito_bold: 'NunitoBold';
     width: 100%;
     text-align: left;
     padding: 10px;
+    margin-top: 20px;
 
     .pull-left {
         width: 24%;
@@ -101,4 +129,21 @@ $nunito_bold: 'NunitoBold';
 
 .tab-content {
     margin-top: 20px;
+}
+
+.knowledge {
+    .table-content {
+        border-bottom: 1px solid #b0d8d8;
+    }
+
+    .table-amount {
+        margin-top: 20px;
+    }
+    
+}
+
+.attitude {
+    .table-content {
+        border-bottom: 1px solid #b0d8d8;
+    }
 }

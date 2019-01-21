@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import '../../styles/global/header.scss'
 import '../../styles/global/component.css'
+import '../../styles/global/navbar.scss'
+
 import {
     Collapse,
     Navbar,
