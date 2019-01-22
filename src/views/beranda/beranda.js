@@ -54,6 +54,7 @@ class Beranda extends Component {
                 {
                     dayname: 'Selasa',
                     datename: '6 Nov',
+                    edit: true,
                     items: [
                         {
                             time: '08:00 - 09:00',

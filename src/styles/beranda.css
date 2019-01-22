@@ -43,7 +43,7 @@
     overflow: auto;
     white-space: nowrap;
     overflow-y: scroll;
-    max-height: 700px;
+    max-height: 680px;
 }
 .schedule .content-block{
     border-radius: 5px;
