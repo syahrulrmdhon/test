@@ -190,7 +190,7 @@ export default class Content extends Component {
     
     const attendances = this.state.attendanceDetail.attendances
     return (
-      <div>
+      <div className="bg-white container-fluid">
         <TabContent activeTab={this.props.activeTab}>
           <TabPane tabId={1}>
             <div className="row rounded-10">
