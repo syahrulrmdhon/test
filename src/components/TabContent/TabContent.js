@@ -10,7 +10,6 @@ export default class ContentTab extends Component {
   }
 
   tabs(items) {
-    console.log(items, "my items")
     const tabs = (
       <Nav tabs>
         {
