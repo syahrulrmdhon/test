@@ -21,6 +21,7 @@ export default class TablePengetahuan extends Component {
                     <tbody>
                         {
                             this.props.tableKnowledge.map(function (data, i) {
+                                console.log('DATA', data.subject_score_details.task.average.score)
                                 return <tr key={i}>
                                     <td>{data.full_name}</td>
                                     {data.subject_score_details.daily_exam.scores.map(function (x, i) {
