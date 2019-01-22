@@ -2,16 +2,27 @@ import React, { Component } from 'react'
 
 import { TabContent, TabPane, Input, Button, Form } from 'reactstrap'
 
-export default class AbsenceTable extends Component {
+export default class Homeroom extends Component {
+  
   render() {
     return (
       <div>
         <TabContent activeTab={this.props.activeTab}>
           <TabPane tabId={1}>
             <Form>
-              <Input className="homeroom-teacher__input" rows="10" type="textarea" placeholder="Tulis Catatan Wali Kelas disini ..."/> 
-              <Button className="homeroom-teacher__save">Simpan</Button> 
+              <Input 
+                className="homeroom-teacher__input" 
+                rows="10"
+                type="textarea"
+                placeholder="Tulis Catatan Wali Kelas disini ..."
+                onChange={this.props.changed}/>           
             </Form>
+            <Button 
+              className="homeroom-teacher__save"
+              onClick={this.props.clicked}
+              disabled={this.props.disabled}>
+              Simpan
+            </Button> 
           </TabPane>
           <TabPane tabId={2}>
             <Form>
