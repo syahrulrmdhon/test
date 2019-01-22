@@ -32,9 +32,8 @@ class Rapor extends Component {
     }
     render() {
         return (
-            <div className="rapor">
+            <div className="padding-content">
                 <Header></Header>
-                <MenuBar></MenuBar>
                 <div className="content">
                     <div className="row">
                         <div className="left-content col-2">

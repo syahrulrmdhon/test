@@ -215,7 +215,7 @@ class Beranda extends Component {
         }
 
         return (
-            <div className="body-content">
+            <div className="body-content padding-content">
                 <Header />
                 <MenuBar />
                 <div className="row margin-right-0">

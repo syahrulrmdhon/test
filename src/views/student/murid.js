@@ -80,9 +80,8 @@ class DaftarMurid extends Component {
             onRowClick: this.onRowClick
         };
         return (
-            <div className="murid">
+            <div className="padding-content">
                 <Header></Header>
-                <MenuBar></MenuBar>
                 <div className="content">
                     <div className="row">
                         <div className="right-content col-12">

@@ -210,9 +210,8 @@ export default class DaftarNilai extends Component {
 
     render() {
         return (
-            <div className="nilai">
-                <Header></Header>
-                <MenuBar></MenuBar>
+            <div className="padding-content">
+                <Header />
                 <div className="content">
                     <div className="row">
                         <div className="left-content col-2">

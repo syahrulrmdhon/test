@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className="h-100">
-        <main className="h-100">
+        {/* <main className="h-100"> */}
           <Switch>
             {MainRoutes.map((route, key) => {
               return (
@@ -16,7 +16,7 @@ class App extends Component {
               )
             })}
           </Switch>
-        </main>
+        {/* </main> */}
 
       </div>
     )
