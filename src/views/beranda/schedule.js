@@ -10,6 +10,7 @@ export default class Schedule extends Component{
             dayname: this.props.dayname,
             datename: this.props.datename,
             current: this.props.current,
+            edit: this.props.edit,
             data: this.props.items,
         }
     }

@@ -1,9 +1,21 @@
 .sidebar{
     position: fixed;
-    width: 335px;
     height: calc(100% - 51px);
     z-index: 10000;
 }
+.sidebar.expand{
+    width: 335px;
+}
+.sidebar.minimize{
+    width: 60px;
+}
+.schedule-range.expand{
+    margin-left: 335px;
+}
+.schedule-range.minimize{
+    margin-left: 60px;
+}
+
 .mainbar{
     position: relative;
     background-color: #FFF;
@@ -43,12 +55,15 @@
     overflow: auto;
     white-space: nowrap;
     overflow-y: scroll;
-    max-height: 700px;
+    max-height: 680px;
 }
 .schedule .content-block{
     border-radius: 5px;
     width: 30%;
     vertical-align: top;
+}
+.minimize .schedule .content-block{
+    width: 23%;
 }
 .schedule .dayname {
     color: #000;
