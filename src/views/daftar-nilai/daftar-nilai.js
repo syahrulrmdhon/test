@@ -142,7 +142,22 @@ export default class DaftarNilai extends Component {
         let tableSkill = []
         this.getKnowledge().then(res => {
             tableKnowledge = res.data.data.users;
-
+            // const self = this
+            // tableKnowledge.map(function(data,i){    
+            //     const idxDailyExam = data.subject_score_details.daily_exam.scores.length;
+            //     self.setState({
+            //         idxScores: idxDailyExam
+            //     })
+            // })
+            // tableKnowledge = res.data.data.users;
+            
+            // tableKnowledge.map(function(data,i){    
+            //     const idxDailyExam = data.subject_score_details.daily_exam.scores
+            //     idxDailyExam.map(function(score, i){
+            //         idxDailyExam[i].score = idxDailyExam[i].score===null ? '0': idxDailyExam[i].score
+            //     })
+            //     console.log(idxDailyExam)
+            // })
             this.getAttitude().then(attitudes => {
                 tableAttitude = attitudes.data.data.users
                 this.getSkill().then(skills => {

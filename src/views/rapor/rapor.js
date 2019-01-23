@@ -26,6 +26,12 @@ class Rapor extends Component {
             tableKnowledge: [],
             tableSkill: [],
             tableAttitude: [],
+
+            idxScoreK: 0,
+            subjectName: "",
+            dTableKnowledge: [],
+            dTableSkill: [],
+            dTableAttitude: [],
         };
         this.toggle = this.toggle.bind(this);
         this.getSemesterList = this.getSemesterList.bind(this)
@@ -70,7 +76,7 @@ class Rapor extends Component {
             for (var i in res.data.data) {
                 const datum = res.data.data[i]
                 datum.map(function (data, i) {
-                    status.push({ key: data.key, value: data.value })
+                    status.push({ value: data.key, label: data.value })
                 })
             }
             this.setState({
@@ -82,15 +88,15 @@ class Rapor extends Component {
         this.setState({ selectedStatus })
     }
     getKnowledge() {
-        let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${localStorage.getItem("class_id")}&risk_status=${this.state.selectedStatus.key}`
+        let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${localStorage.getItem("class_id")}&risk_status=${this.state.selectedStatus.value}`
         return apiClient('get', url)
     }
     getSkill() {
-        let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=skill&class_id=${localStorage.getItem("class_id")}&risk_status=${this.state.selectedStatus.key}`
+        let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=skill&class_id=${localStorage.getItem("class_id")}&risk_status=${this.state.selectedStatus.value}`
         return apiClient('get', url)
     }
     getAttitude() {
-        let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=attitude&class_id=${localStorage.getItem("class_id")}&risk_status=${this.state.selectedStatus.key}`
+        let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=attitude&class_id=${localStorage.getItem("class_id")}&risk_status=${this.state.selectedStatus.value}`
         return apiClient('get', url)
     }
     handleSubmit() {
@@ -98,18 +104,21 @@ class Rapor extends Component {
         let tableAttitude = []
         let tableSkill = []
         this.getKnowledge().then(res => {
-            tableKnowledge = res.data.data.users;
-            console.log("KNOWLEDGE", tableKnowledge)
+            tableKnowledge = res.data.data.users
+            const iTableKnowledge = tableKnowledge[0]
             this.getAttitude().then(attitudes => {
-                tableAttitude = attitudes.data.data.users;
-                console.log("ATTITUDE", tableAttitude)
+                tableAttitude = attitudes.data.data.users
+                const iTableAttitude = tableAttitude[0]
                 this.getSkill().then(skills => {
-                    tableSkill = skills.data.data.users;
-                    console.log("skill", tableSkill)
+                    tableSkill = skills.data.data.users
+                    const iTableSkill = tableSkill[0]
                     this.setState({
                         tableKnowledge: tableKnowledge,
                         tableAttitude: tableAttitude,
-                        tableSkill: tableSkill
+                        tableSkill: tableSkill,
+                        dTableKnowledge:  iTableKnowledge,
+                        dTableAttitude: iTableAttitude,
+                        dTableSkill: iTableSkill
                     })
                 })
             })
@@ -169,21 +178,24 @@ class Rapor extends Component {
                                     <TabPane tabId="1">
                                         <div className="table-content">
                                             <TablePengetahuan
-                                                // tableKnowledge={this.state.tableKnowledge}
+                                                tableKnowledge={this.state.tableKnowledge}
+                                                dTableKnowledge={this.state.dTableKnowledge}
                                             />
                                         </div>
                                     </TabPane>
                                     <TabPane tabId="2">
                                         <div className="table-content">
                                             <TableKeterampilan
-                                                // tableSkill={this.state.tableSkill}
+                                                tableSkill={this.state.tableSkill}
+                                                dTableSkill={this.state.dTableSkill}
                                             />
                                         </div>
                                     </TabPane>
                                     <TabPane tabId="3">
                                         <div className="table-content">
                                             <TableSikap
-                                                // tableAttitude={this.state.tableAttitude}
+                                                tableAttitude={this.state.tableAttitude}
+                                                dTableAttitude={this.state.dTableAttitude}
                                             />
                                         </div>
                                     </TabPane>
