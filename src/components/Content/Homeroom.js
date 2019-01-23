@@ -3,9 +3,11 @@ import React, { Component } from 'react'
 import { TabContent, TabPane, Input, Button, Form } from 'reactstrap'
 
 export default class Homeroom extends Component {
-  
+
   render() {
-    console.log(this.props.extracurricularNotes)
+    let inputHomeroomNote = this.props.inputHomeroomNote
+    let inputExtracurricularNote = this.props.extracurricularNotes
+    
     return (
       <div>
         <TabContent activeTab={this.props.activeTab}>
@@ -17,7 +19,7 @@ export default class Homeroom extends Component {
                 type="textarea"
                 placeholder="Tulis Catatan Wali Kelas disini ..."
                 onChange={this.props.changed}
-                value={this.props.inputHomeroomNote} />           
+                value={inputHomeroomNote.length !== 0 ? inputHomeroomNote[0].description : ''} />           
             </Form>
             <Button 
               className="homeroom-teacher__save"
@@ -27,23 +29,38 @@ export default class Homeroom extends Component {
             </Button> 
           </TabPane>
           <TabPane tabId={2}>
-            <Form>
+            <Form className="homeroom-teacher__form">
               {
-                this.props.extracurricularNotes.map((note, index) => {
-                  return <div key={index}>
+                inputExtracurricularNote.length === 0 ?
+                  <div>
                     <Input className="homeroom-teacher__select" type="select" name="select">
-                      {
-                        this.props.extracurriculars.map((extracurricular, index) => {
-                          return <option key={index}>{extracurricular.name}</option>
-                        })
-                      }
+                    {
+                      this.props.extracurriculars.map((extracurricular, index) => {
+                        return <option key={index}>{extracurricular.name}</option>
+                      })
+                    }
                     </Input>
                     <i className="homeroom-teacher__angle-down fa fa-angle-down"></i>
-                    <Input value={note.description} onChange={(event) => this.props.changeExtracurricularNote(event, note.id)} className="homeroom-teacher__input mt-3" rows="5" type="textarea" placeholder="Tulis Deskripsi Estrakurikuler disini ..."/> 
+                    <Input value={inputExtracurricularNote} onChange={(event) => this.props.changeExtracurricularNote(event, note.id)} className="homeroom-teacher__input mt-3" rows="5" type="textarea" placeholder="Tulis Deskripsi Estrakurikuler disini ..."/> 
                   </div>
+                : 
+                this.props.extracurricularNotes.map((note, index) => {
+                  return (
+                    <div key={index} className="homeroom-teacher__form-group">
+                      <Input className="homeroom-teacher__select" type="select" name="select">
+                        {
+                          this.props.extracurriculars.map((extracurricular, index) => {
+                            return <option key={index}>{extracurricular.name}</option>
+                          })
+                        }
+                      </Input>
+                      <i className="homeroom-teacher__angle-down fa fa-angle-down"></i>
+                      <Input value={note.description} onChange={(event) => this.props.changeExtracurricularNote(event, note.id)} className="homeroom-teacher__input mt-3" rows="5" type="textarea" placeholder="Tulis Deskripsi Estrakurikuler disini ..."/> 
+                    </div>
+                  )
                 })
               }
-              <div className="homeroom-teacher__add-extracurricular">+ <span>Tambah Estrakurikuler lainnya</span></div>
+              <div onClick={this.props.addExtracurricularNote} className="homeroom-teacher__add-extracurricular">+ <span>Tambah Estrakurikuler lainnya</span></div>
             </Form>
             <Button className="homeroom-teacher__save">Simpan</Button>
 

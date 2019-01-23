@@ -13,7 +13,7 @@ export default class TabDetail extends Component {
 
   tabs(items) {
     const tabs = (
-      <Nav className="tab-menu">
+      <Nav>
         {
           items.map((item, key) => {
           let tab = key + 1

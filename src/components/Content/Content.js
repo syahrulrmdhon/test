@@ -35,10 +35,9 @@ export default class Content extends Component {
       },
       disable: true,
       inputHomeroomNote: '',
-      inputHomeroomNote: '',
       homeroomNote: '',
       extracurriculars: [],
-      extracurricularNotes: []
+      extracurricularNotes: [{description: ''}],
     }
 
     this.baseUrl = `${process.env.API_URL}v1/students/${this.props.studentId}`
@@ -185,7 +184,7 @@ export default class Content extends Component {
     const url = `v1/students/${this.props.studentId}/teacher_notes?achievement_type=final_result`
 
     apiClient('get', url).then(response => {
-      this.setState({inputHomeroomNote: response.data.data.notes[0].description})
+      this.setState({inputHomeroomNote: response.data.data.notes})
     })
   }
   
@@ -211,7 +210,7 @@ export default class Content extends Component {
         this.setState({disable: true})
     })
   }
-
+  
   noteChangeHandler(event) {
     const inputUser = event.target.value
     
@@ -261,6 +260,14 @@ export default class Content extends Component {
     })
   }
   
+  addExtracurricularNote() {
+    this.setState({extracurricularNotes: [...this.state.extracurricularNotes, '']})
+  }
+
+  handleChange(event, index) {
+    this.state.extracurricularNotes[index] = event.target.value
+    this.setState({extracurricularNotes:this.state.extracurricularNotes})
+  }
 
   render() {
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
@@ -385,7 +392,8 @@ export default class Content extends Component {
                   inputHomeroomNote={this.state.inputHomeroomNote}
                   extracurriculars={this.state.extracurriculars}
                   extracurricularNotes={this.state.extracurricularNotes}
-                  changeExtracurricularNote={this.changeExtracurricularNote}/>
+                  changeExtracurricularNote={this.handleChange}
+                  addExtracurricularNote={(event) => this.addExtracurricularNote(event)} />
               </RightSide>
             </div>
           </TabPane>
