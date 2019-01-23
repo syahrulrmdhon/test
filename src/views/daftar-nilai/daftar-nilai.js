@@ -11,6 +11,7 @@ import FilterNilai from './filter'
 import TablePengetahuan from './table-pengetahuan'
 import TableKeterampilan from './table-keterampilan'
 import TableSikap from './table-sikap';
+import { apiClient } from '../../utils/apiClient'
 
 export default class DaftarNilai extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ export default class DaftarNilai extends Component {
 
         this.state = {
             activeTab: '1',
+            idClass: undefined,
 
             // filter
             listClass: [],
@@ -59,17 +61,8 @@ export default class DaftarNilai extends Component {
         }
     }
     getSemesterList() {
-        const url = `${process.env.API_URL}v1/filters/semesters?school_id=${localStorage.getItem("school_list")}`
-        const self = this
-
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then(function (res) {
+        const url = `v1/filters/semesters?`
+        apiClient('get', url).then(res => {
             let semester = []
             for (var i in res.data.data) {
                 const datum = res.data.data[i]
@@ -77,23 +70,16 @@ export default class DaftarNilai extends Component {
                     semester.push({ value: data.id, label: data.period_name })
                 })
             }
-            self.setState({
+            this.setState({
                 listSemester: semester
             })
         })
     }
     getClassList() {
-        const url = `${process.env.API_URL}v1/filters/classes?school_id=${localStorage.getItem("school_list")}`
-        const self = this
+        const url = `v1/filters/classes?`
+        let self = this
 
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then(function (res) {
+        apiClient('get', url).then(res => {
             let kelas = []
             for (var i in res.data.data) {
                 const datum = res.data.data[i]
@@ -102,7 +88,7 @@ export default class DaftarNilai extends Component {
                     self.setState({ idClass: data.id })
                 })
             }
-            self.setState({
+            this.setState({
                 listClass: kelas
             })
         })
@@ -110,20 +96,11 @@ export default class DaftarNilai extends Component {
     getSubjectList(idClass) {
         let url = ""
         if (idClass === undefined) {
-            url = `${process.env.API_URL}v1/filters/subjects?school_id=${localStorage.getItem("school_list")}`
+            url = `v1/filters/subjects?`
         } else {
-            url = `${process.env.API_URL}v1/filters/subjects?school_id=${localStorage.getItem("school_list")}&class_id=${idClass}`
+            url = `v1/filters/subjects?class_id=${idClass}`
         }
-        const self = this
-
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then(function (res) {
+        apiClient('get', url).then(res => {
             let subject = []
             for (var i in res.data.data) {
                 const datum = res.data.data[i]
@@ -131,7 +108,7 @@ export default class DaftarNilai extends Component {
                     subject.push({ value: data.id, label: data.subject_name })
                 })
             }
-            self.setState({
+            this.setState({
                 listSubject: subject
             })
         })
@@ -148,42 +125,17 @@ export default class DaftarNilai extends Component {
         this.setState({ selectedSubject })
     }
     getKnowledge() {
-        let url = `${process.env.API_URL}v1/scores/index?school_id=${localStorage.getItem("school_list")}&semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-        
-        return axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        })
+        let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
+        return apiClient('get', url)
     }
     getSkill() {
-        let url = `${process.env.API_URL}v1/scores/index?school_id=${localStorage.getItem("school_list")}&semester=${this.state.selectedSemester.label}&category=skill&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-
-        return axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        })
+        let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=skill&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
+        return apiClient('get', url)
     }
     getAttitude() {
-        let url = `${process.env.API_URL}v1/scores/index?school_id=${localStorage.getItem("school_list")}&semester=${this.state.selectedSemester.label}&category=attitude&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-        
-        return axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        })
+        let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=attitude&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
+        return apiClient('get', url)
     }
-
     handleSubmit() {
         let tableKnowledge = []
         let tableAttitude = []
@@ -210,10 +162,16 @@ export default class DaftarNilai extends Component {
 
     render() {
         return (
+<<<<<<< HEAD
             <div className="padding-content">
                 <Header />
+=======
+            <div className="body-content">
+                <Header></Header>
+                <MenuBar></MenuBar>
+>>>>>>> c8ad8e6e2bf42fc3dc7ca98a2a8f3a6d69594cb8
                 <div className="content">
-                    <div className="row">
+                    <div className="row row-daftar-nilai">
                         <div className="left-content col-2">
                             <FilterNilai
                                 listClass={this.state.listClass}

@@ -31,16 +31,6 @@ export default class FilterNilai extends Component {
                         options={this.props.listSubject}
                         placeholder="Pilih Pelajaran..."
                     />
-                    {/* <select value={this.state.selectedSubject}
-                        onChange={(e) => this.setState({ selectedSubject: e.target.value })}>
-                        {
-                            this.state.listSubject.map((pelajaran) =>
-                                <option key={pelajaran.value} value={pelajaran.value}>
-                                    {pelajaran.label}
-                                </option>
-                            )
-                        }
-                    </select> */}
                     <br /><br />
                 </form>
                 <button type="submit" onClick={this.props.handleSubmit} className="btn-green">Filter</button>

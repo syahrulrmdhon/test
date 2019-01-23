@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './../../styles/login.css'
+import { apiClient } from '../../utils/apiClient'
 
 import Logo from './../../assets/images/gredu-complete.svg'
 
@@ -17,7 +17,7 @@ class Login extends Component {
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.getSchoolList = this.getSchoolList.bind(this);
+        // this.getSchoolList = this.getSchoolList.bind(this);
     }
     handleChange(e) {
         let user = {}
@@ -26,42 +26,22 @@ class Login extends Component {
     }
     handleSubmit (e) {
         e.preventDefault()
-        const self = this
 
-        const url = (process.env.API_URL + 'authentication/request_token')
+        const url = 'authentication/request_token'
         const user = {
             email: this.state.email,
             password: this.state.password
         }
 
-        axios({
-            method: 'post',
-            url: url,
-            data: user,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ user })
-        }).then(function (res) {
-            console.log('DATA LOGIN', res.data.data)
-            self.props.history.push('/home')
+        apiClient('post', url, user).then(res => {
+            this.props.history.push('/home')
             localStorage.setItem("token", res.data.data.auth_token)
-            self.getSchoolList()
+            this.getSchoolList()
         })
     }
     getSchoolList() {
-
-        const url = (process.env.API_URL + 'v1/schools/list')
-        
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then(function(res) {
-            console.log('SCHOOL LIST', res.data.data.schools[0].id)
+        const url = 'v1/schools/list'
+        apiClient('get', url).then(res => {
             localStorage.getItem("token")
             localStorage.setItem("school_list", res.data.data.schools[0].id)
         })
@@ -88,7 +68,7 @@ class Login extends Component {
                                 <br /><br />
                                 <button type="submit" className="btn btn-young-green col-12">Masuk</button>
                                 <br /><br />
-                                <p className="col-12">Lupa Kata Sandi? <Link to='' >Klik Di sini</Link></p>
+                                {/* <p className="col-12">Lupa Kata Sandi? <Link to='' >Klik Di sini</Link></p> */}
                                 <br />
                             </form>
                         </div>
