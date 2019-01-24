@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-export const apiClient = (method, url, request) => {
+export const apiClient = (method, url, request, params = {}) => {
     const baseUrl = `${process.env.API_URL}`
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_list")
@@ -10,10 +10,14 @@ export const apiClient = (method, url, request) => {
         'School-ID': schoolId
     }
 
-    if (method === 'get') {
-        return Axios.get(baseUrl + url, {headers: headers})
-    }
-    else if (method === 'post') {
-        return Axios.post(baseUrl + url, request, {headers: headers})
+    switch(method){
+        case 'get':
+            return Axios.get(baseUrl + url, {headers: headers, params: params})
+        case 'post':
+            return Axios.post(baseUrl + url, request, {headers: headers})
+        case 'put':
+            return Axios({ url: baseUrl + url, headers: headers, method: 'PUT', data: request })
+        case 'delete': 
+        return Axios({ url: baseUrl + url, headers: headers, method: 'DELETE' })
     }
 }
