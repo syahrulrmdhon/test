@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import './../../styles/absensi/absensi.css'
 
 import Header from '../global/header'
-import MenuBar from '../global/navbar'
-import ModalAbsensi from './modal'
 import CardAbsensi from './card'
 import TableAbsensi from './table'
 import FilterAbsensi from './filter'
@@ -21,7 +19,10 @@ export default class Absensi extends Component {
       attendanceTypes: [],
       classes: [],
       students: null,
-      attendanceData: []
+      attended: 0,
+      unattended: 0,
+      percentage: 0,
+      attendances: []
     };
 
     this.selectAttendanceType = this.selectAttendanceType.bind(this)
@@ -29,13 +30,14 @@ export default class Absensi extends Component {
     this.selectSubject = this.selectSubject.bind(this)
     this.handleFilterSubmit = this.handleFilterSubmit.bind(this)
     this.handleAttendanceStatusChange = this.handleAttendanceStatusChange.bind(this)
+    this.saveStudentAttendance = this.saveStudentAttendance.bind(this)
+
   };
   
 
   componentDidMount() {
     this.getAttendanceType()
     this.getClass()
-    console.log(localStorage.getItem('token'))
   }
 
   getAttendanceType() {
@@ -85,9 +87,22 @@ export default class Absensi extends Component {
 
   getStudents(type) {
     if (type === 'homeroom') {
-      const route = `v1/attendances/index?class_id=${this.state.selectedClass.value}`
+      const route = `v1/attendances/index?class_id=${this.state.selectedClass.value}&attendance_date=2019/01/25`
+
       apiClient('get', route).then(response => {
-        this.setState({students: response.data.data.user_attendances})
+        const data = response.data
+        let attendances = []
+
+        data.data.user_attendances.map(student => {
+          attendances.push({user_id: student.user.id, name: student.user.full_name, status: student.attendance.status})
+        })
+
+        this.setState({
+          attendances: attendances,
+          attended: data.data.attended,
+          unattended: data.data.unattended,
+          percentage: data.data.percentage
+        })
       })
     }
   }
@@ -98,7 +113,7 @@ export default class Absensi extends Component {
   }
 
   notStudent() {
-    if (!this.state.students) {
+    if (!this.state.attendances) {
       return 'Mohon pilih filter untuk menampilkan data.'
     }
     else {
@@ -108,41 +123,30 @@ export default class Absensi extends Component {
 
   saveStudentAttendance() {
     const route = 'v1/attendances/bulk_update'
-
+    const teacher = (localStorage.getItem('homeroom_class') !== null) ? 'homeroom' : null
+    
     const data = {
-      "attendance_date": "2019-01-24",
-      "attendance_type": "homeroom",
-      "class_id": "47d8db8a-0d63-452f-a9dc-6dc24ee65680",
-      "school_id": "af3dae6d-3f36-4a20-80d6-3ef6969d097e",
+      "attendance_date": "2019-01-25",
+      "attendance_type": teacher,
+      "class_id": localStorage.getItem('class_id'),
+      "school_id": localStorage.getItem('school_id'),
+      "attendances": this.state.attendances
     }
-    apiClient('post', route,)
-  }
 
-  handleSave() {
-    // const attendanceData = this.state.attendanceData
-
-    // this.
+    apiClient('post', route, data)
   }
 
   handleAttendanceStatusChange(event) {
     const userId = event.target.id
     const status = event.target.value
-    const attendanceData = this.state.attendanceData
-    
-    let student = attendanceData.find(attendance => attendance.user_id === userId)
 
-    if (!student) {
-      student = {
-        user_id: event.target.id,
-        status: event.target.value
-      }
-      attendanceData.push(student)
-    }
-    else {
-      student.status = status
-    }
+    const attendances = this.state.attendances
+    const attendance = attendances.find(attendance => attendance.user_id === userId)
+    
+    attendance.status = status
+    
     this.setState({
-      attendanceData: attendanceData
+      attendances: attendances
     })
   }
 
@@ -184,23 +188,26 @@ export default class Absensi extends Component {
                     </div>
                 </div>
                   {
-                    (!this.state.students || this.state.students.length === 0) ?
+                    (!this.state.attendances || this.state.attendances.length === 0) ?
                       <NotAvailable>{this.notStudent()}</NotAvailable>
                     :
                     <div>
                       <TableAbsensi 
-                        students={this.state.students}
+                        attendances={this.state.attendances}
                         attendanceStatus={this.state.attendanceStatus}
                         handleOptionChange={this.handleAttendanceStatusChange}
                       />
-                      <button type="submit" onClick={this.handleSubmit} className="btn-green float-right col-3">Simpan</button>
+                      <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-3">Simpan</button>
                     </div>
                   }
                 </div>
               </div>
             </div>
             <div className="col-lg-2 right">
-              <CardAbsensi />
+              <CardAbsensi 
+                attended={this.state.attended}
+                unattended={this.state.unattended}
+                percentage={this.state.percentage} />
             </div>
           </div>
         </div>

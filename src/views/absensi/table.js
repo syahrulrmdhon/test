@@ -37,21 +37,21 @@ export default class TableAbsensi extends Component {
                         </thead>
                         <tbody>
                             {
-                                this.props.students.map((student, index) => {
-                                    return <tr key={student.user.id}>
+                                this.props.attendances.map((attendance, index) => {
+                                    return <tr key={attendance.user_id}>
                                         <th>{index + 1}</th>
-                                        <th>{student.user.full_name}</th>
+                                        <th>{attendance.name}</th>
                                         <th className="align-center" title="Hadir">
-                                            <input type="radio" className="rd-btn" name={student.user.id} value="present" onChange={event => this.props.handleOptionChange(event)} id={student.user.id}></input>
+                                            <input type="radio" className="rd-btn" name={attendance.user_id} value="present" onChange={event => this.props.handleOptionChange(event)} id={attendance.user_id} checked={attendance.status === 'present'}/>
                                         </th>
                                         <th className="align-center" title="Sakit">
-                                            <input type="radio" name={student.user.id} value="sick" onChange={event => this.props.handleOptionChange(event)} id={student.user.id}></input>
+                                            <input type="radio" name={attendance.user_id} value="sick" onChange={event => this.props.handleOptionChange(event)} id={attendance.user_id} checked={attendance.status === 'sick'}/>
                                         </th>
                                         <th className="align-center" title="Ijin">
-                                            <input type="radio" name={student.user.id} value="permission" onChange={event => this.props.handleOptionChange(event)} id={student.user.id}></input>
+                                            <input type="radio" name={attendance.user_id} value="permission" onChange={event => this.props.handleOptionChange(event)} id={attendance.user_id} checked={attendance.status === 'permission'}/>
                                         </th>
                                         <th className="align-center" title="Alpha">
-                                            <input type="radio" name={student.user.id} value="abstain" onChange={event => this.props.handleOptionChange(event)} id={student.user.id}></input>
+                                            <input type="radio" name={attendance.user_id} value="abstain" onChange={event => this.props.handleOptionChange(event)} id={attendance.user_id} checked={attendance.status === 'abstain'}/>
                                         </th>
                                         <th className="align-center">
                                             <button className="btn-white" onClick={this.showModal}>Lihat Keterangan</button>
