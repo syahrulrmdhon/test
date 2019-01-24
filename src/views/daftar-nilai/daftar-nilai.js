@@ -124,6 +124,9 @@ export default class DaftarNilai extends Component {
     onChangeSubject(selectedSubject) {
         this.setState({ selectedSubject })
     }
+    disabledSelectSubject() {
+        document.getElementById("mySelect").disabled = true;
+    }
     getKnowledge() {
         let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
         return apiClient('get', url)
@@ -137,23 +140,26 @@ export default class DaftarNilai extends Component {
         return apiClient('get', url)
     }
     handleSubmit() {
+        let dataKnowledge = []
+        let dataSkill = []
         let tableKnowledge = []
         let tableAttitude = []
         let tableSkill = []
         this.getKnowledge().then(res => {
-            tableKnowledge = res.data.data.users;
-
+            dataKnowledge = res.data.data
+            tableKnowledge = res.data.data.users
             this.getAttitude().then(attitudes => {
                 tableAttitude = attitudes.data.data.users
                 this.getSkill().then(skills => {
+                    dataSkill = res.data.data
                     tableSkill = skills.data.data.users
                     this.setState({
                         tableKnowledge: tableKnowledge,
                         tableAttitude: tableAttitude,
                         tableSkill: tableSkill,
-                        idxScores: tableKnowledge[0].subject_score_details.daily_exam.scores.length,
-                        idxTugas: tableKnowledge[0].subject_score_details.task.scores.length,
-                        idxScoresSkill: tableSkill[0].subject_score_details.task.scores.length,
+                        idxScores: dataKnowledge.count.daily_exam,
+                        idxTugas: dataKnowledge.count.task,
+                        idxScoresSkill: dataSkill.count.task
                     })
                 })
             })
@@ -169,6 +175,7 @@ export default class DaftarNilai extends Component {
                     <div className="row row-daftar-nilai">
                         <div className="left-content col-2">
                             <FilterNilai
+                                id="mySelect"
                                 listClass={this.state.listClass}
                                 selectedClass={this.state.selectedClass}
                                 listSemester={this.state.listSemester}

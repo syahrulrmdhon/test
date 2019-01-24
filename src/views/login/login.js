@@ -16,8 +16,8 @@ class Login extends Component {
 
         }
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        // this.getSchoolList = this.getSchoolList.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.getUser = this.getUser.bind(this)
     }
     handleChange(e) {
         let user = {}
@@ -36,14 +36,16 @@ class Login extends Component {
         apiClient('post', url, user).then(res => {
             this.props.history.push('/home')
             localStorage.setItem("token", res.data.data.auth_token)
-            this.getSchoolList()
+            this.getUser()
         })
     }
-    getSchoolList() {
-        const url = 'v1/schools/list'
-        apiClient('get', url).then(res => {
-            localStorage.getItem("token")
-            localStorage.setItem("school_list", res.data.data.schools[0].id)
+    getUser() {
+        const url = 'v1/users'
+        apiClient('get', url).then(res=>{
+            localStorage.setItem("school_id", res.data.data.school.id)
+            localStorage.setItem("user_id", res.data.data.user.id)
+            localStorage.setItem("class_id", res.data.data.homeroom_class.id)
+            console.log('class id', localStorage.getItem("class_id"))
         })
     }
     render() {
