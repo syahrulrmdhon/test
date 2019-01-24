@@ -76,7 +76,7 @@ export default class Header extends Component {
                         </Navbar>
                     </div>
                 </div>
-                <Menu />
+                <Menu  />
             </div>
         )
     }

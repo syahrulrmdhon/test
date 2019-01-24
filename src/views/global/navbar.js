@@ -20,7 +20,8 @@ export default class MenuBar extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            navbar: props.navbar || true
         };
     }
     toggle() {
@@ -29,12 +30,14 @@ export default class MenuBar extends Component {
         });
     }
     render() {
+        const { navbar } = this.state
         return (
             <div className="menu-bar">
                 <div className="bg-white">
                             <div className="topnav">
                                 <div className="menu">
                                         {
+                                            navbar &&
                                             menus.map(function (data, index) {
                                                 return  <NavLink className="font-grey" key={index} to={data.link} activeClassName="active-menu">
                                                         {data.name}
