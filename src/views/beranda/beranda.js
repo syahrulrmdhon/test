@@ -3,7 +3,6 @@ import './../../styles/global/component.css'
 import './../../styles/beranda.css'
 
 import Header from '../global/header'
-import MenuBar from '../global/navbar'
 import SideBar from './side_bar'
 import Schedule from './schedule'
 
@@ -21,10 +20,16 @@ class Beranda extends Component {
             isSideBar: 'expand',
             data: [],
             classes: [],
+            setDate: null,
+            scheduleList: [],
+            checkedItems: {},
+            class_id: '',
         }
 
-        this.clickSideBar = this.clickSideBar.bind(this);
-        this.getData = this.getData.bind(this);
+        this.clickSideBar = this.clickSideBar.bind(this)
+        this.getData = this.getData.bind(this)
+        this.changeCalendar = this.changeCalendar.bind(this)
+        this.onChangeClass = this.onChangeClass.bind(this)
     }
 
     componentDidMount(){
@@ -32,8 +37,16 @@ class Beranda extends Component {
         this.getData()
     }
 
-    getData(){
-        apiClient('get', 'v1/home/index').then(response => {
+    getData(params = {}){
+        if(this.state.setDate){
+            params['date'] = this.state.setDate
+        }
+
+        if(this.state.class_id != ''){
+            params['class_id'] = this.state.class_id;
+        }
+        
+        apiClient('get', 'v1/home/index', false, params).then(response => {
             this.setState({
                 data: response.data.data.activity_schedules
             })
@@ -47,37 +60,61 @@ class Beranda extends Component {
         })
     }
 
+    changeCalendar(date){
+        let setDate = new Intl.DateTimeFormat('sq-AL', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(date)
+        this.state.setDate = setDate
+        this.getData()
+    }
+
+    onChangeClass(e) {
+        const item = e.target.name;
+        const isChecked = e.target.checked;
+
+        if(isChecked){
+            this.state.checkedItems[item] = item
+        } else {
+            delete this.state.checkedItems[item]
+        }
+
+        const result = Object.values(this.state.checkedItems);
+
+        let class_id = (result.length > 0) ? result.join(',') : ''
+        this.state.class_id = class_id
+        this.getData()
+    }
+
     render() {
-        let schedules = []
         if(this.state.data.length > 0){
-            {this.state.data.map((result, key) => (
-                schedules.push(<Schedule 
+            this.state.scheduleList = []
+            {this.state.data.map((result, key) => {
+                this.state.scheduleList.push(<Schedule 
                     dayname={result.dayname} 
                     datename={result.datename} 
                     current={result.current} 
+                    date={result.date}
                     items={result.items} 
-                    key={key}
+                    classes={this.state.classes}
+                    key={Math.random()}
                 />)
-            ))};
+            })};
         }
 
         let icon = (this.state.isSideBar == 'expand') ? 'arrow-left' : 'calendar'
 
         return (
-            <div className="body-content">
+            <div className="body-content padding-content">
                 <Header />
-                <MenuBar />
                 <div className={classnames("sidebar", this.state.isSideBar)}>
                     <div className="mainbar">
                         <FontAwesome name={icon} className="minimize-side-bar" onClick={this.clickSideBar} />
-                        <SideBar isSideBar={this.state.isSideBar} classes={this.state.classes} />
+                        <SideBar isSideBar={this.state.isSideBar} classes={this.state.classes} onChangeClass={this.onChangeClass} changeCalendar={this.changeCalendar} />
                     </div>
                 </div>
                 <div className={classnames("row margin-right-0 schedule-range", this.state.isSideBar)}>
                     <div className="col-sm-12">
                         <div className="margin-2">
-                            <div className="schedule padding-4">
-                              { schedules }
+                            <div className={classnames("schedule padding-4", this.state.isSideBar)}>
+                              {this.state.scheduleList}
                             </div>
                         </div>
                     </div>

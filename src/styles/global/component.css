@@ -905,3 +905,12 @@ strong, .bold {
 .show{
   display: block;
 }
+
+/* error message */
+.error-message{
+  color: #f65151;
+}
+
+.padding-content{
+  padding-top: 120px;
+}
