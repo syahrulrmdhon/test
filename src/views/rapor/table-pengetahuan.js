@@ -5,7 +5,7 @@ export default class TablePengetahuan extends Component {
     render() {
         return (
             <div className="table-pengetahuan">
-                <Table bordered striped responsive hover>
+                <Table bordered striped hover responsive>
                     <thead>
                         <tr>
                             <th>Nama Siswa</th>

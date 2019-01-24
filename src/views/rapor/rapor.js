@@ -39,6 +39,7 @@ class Rapor extends Component {
         this.getStatusList = this.getStatusList.bind(this)
         this.onChangeStatus = this.onChangeStatus.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handlePrint = this.handlePrint.bind(this)
     }
     componentDidMount() {
         this.getSemesterList()
@@ -116,7 +117,7 @@ class Rapor extends Component {
                         tableKnowledge: tableKnowledge,
                         tableAttitude: tableAttitude,
                         tableSkill: tableSkill,
-                        dTableKnowledge:  iTableKnowledge,
+                        dTableKnowledge: iTableKnowledge,
                         dTableAttitude: iTableAttitude,
                         dTableSkill: iTableSkill
                     })
@@ -124,13 +125,16 @@ class Rapor extends Component {
             })
         });
     }
+    handlePrint() {
+        
+    }
     render() {
         return (
             <div className="rapor">
                 <Header></Header>
                 <MenuBar></MenuBar>
                 <div className="content">
-                    <div className="row">
+                    <div className="row row-rapor">
                         <div className="left-content col-2">
                             <FilterRapor
                                 listSemester={this.state.listSemester}
@@ -140,6 +144,7 @@ class Rapor extends Component {
                                 selectedStatus={this.state.selectedStatus}
                                 onChangeStatus={this.onChangeStatus}
                                 handleSubmit={this.handleSubmit}
+                                handlePrint={this.handlePrint}
                             />
                         </div>
                         <div className="right-content col-10">

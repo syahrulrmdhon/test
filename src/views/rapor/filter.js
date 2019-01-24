@@ -31,7 +31,8 @@ export default class FilterRapor extends Component {
                 <button onClick={this.props.handleSubmit} type="submit" className="btn-green">Filter</button>
                 <br />
                 <img className="export" src={ExportLogo} alt="" />
-                <img className="print" src={PrintLogo} alt="" />
+                <img className="print" onClick={this.props.handlePrint} src={PrintLogo} alt="" />
+                <br/>
             </div>
         )
     }
