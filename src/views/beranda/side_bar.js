@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Calendar from 'react-calendar'; // https://www.npmjs.com/package/react-calendar
+import { getDate } from '../../utils/common'
 
 export default class SideBar extends Component{
     constructor(props) {
@@ -18,24 +19,27 @@ export default class SideBar extends Component{
             this.props.classes.map((classs, idx) => {
                 textClass.push(
                     <div className="col-sm-6" key={idx}>
-                        <input type="checkbox" value={classs.id} /><span className="title">{classs.name}</span>
+                        <input type="checkbox" name={classs.value} value={classs.value} id={idx} onChange={this.props.onChangeClass} /><label htmlFor={idx} className="title">{classs.label}</label>
                     </div>
                 )
             })
         }
 
+        let dateIndo = getDate();
+        let dayName = getDate('case-2');
+
         return(
             <div className={show}>
                 <div className="align-center margin-top-2 margin-bottom-6">
-                    <div className="header-title">Hari ini, Senin</div>
-                    <div className="title">25 November 2018</div>
+                    <div className="header-title">Hari ini, {dayName}</div>
+                    <div className="title">{dateIndo}</div>
                 </div>
                 <div className="border-top padding-top-2 margin-bottom-2">
                     <Calendar
-                        // onChange={this.onChange}
                         value={this.state.date}
                         prev2Label={ null }
                         next2Label={ null }
+                        onChange={this.props.changeCalendar}
                     />
                 </div>
                 <div className="border-top padding-top-2">
