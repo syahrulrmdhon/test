@@ -15,7 +15,7 @@ export default class ProfileDetail extends Component {
           {response.user.full_name}
         </div>
         <div className="ranking">
-          Peringkat {response.user.class_rank.rank ? response.user.class_rank.rank : '-' }
+          Peringkat {response.class_rank.rank ? response.class_rank.rank : '-' }
         </div>
         <div className="profile text-left">
           <div className="field">

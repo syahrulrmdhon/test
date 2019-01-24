@@ -81,3 +81,9 @@
   font-family: "Nunito Sans", sans-serif;
 }
 /* Search bar end */
+
+.date {
+  font-family: 'NunitoBold';
+  font-size: 14px;
+  color: #2d2d2d;
+}

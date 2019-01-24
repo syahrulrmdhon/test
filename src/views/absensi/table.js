@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from 'reactstrap'
 import Axios from 'axios'
-
 import ModalAbsensi from './modal'
 
 export default class TableAbsensi extends Component {
@@ -15,29 +14,22 @@ export default class TableAbsensi extends Component {
     }
 
     componentDidMount() {
-        Axios.get(process.env.API_URL + '/users')
+        Axios.get(process.env.API_URL + 'users')
             .then(res => {
                 const users = res.data;
                 this.setState({ users });
             })
     }
+    
     showModal() {
         this.setState({
             modal: !this.state.modal
         })
     }
+
     render() {
         return (
             <div className="table-absensi">
-                <div className="row">
-                    <div className="col-8">
-                        <h5><strong>Tanggal 17 Desember 2018</strong></h5>
-                    </div>
-                    <div className="col-4 input-container">
-                        <input className="input-field" type="text" placeholder="Cari siswa disini..." name="search" />
-                        <i className="fa fa-search icon"></i>
-                    </div>
-                </div>
                 <br />
                 <div className="table-content">
                     <Table bordered striped responsive hover>
@@ -54,29 +46,27 @@ export default class TableAbsensi extends Component {
                         </thead>
                         <tbody>
                             {
-                                this.state.users.map(function (i, x) {
-                                    return <tr key={x}>
-                                        <th>{x + 1}</th>
-                                        <th>{i.name}</th>
+                                this.props.students.map((student, index) => {
+                                    return <tr key={student.user.id}>
+                                        <th>{index + 1}</th>
+                                        <th>{student.user.full_name}</th>
                                         <th className="align-center" title="Hadir">
-                                            <input type="radio" className="rd-btn" name={"absen[" + x + "]"} value="hadir"></input>
+                                            <input type="radio" className="rd-btn" name={student.user.id} value="present"></input>
                                         </th>
                                         <th className="align-center" title="Sakit">
-                                            <input type="radio" name={"absen[" + x + "]"} value="sakit"></input>
+                                            <input type="radio" name={student.user.id} value="sick"></input>
                                         </th>
                                         <th className="align-center" title="Ijin">
-                                            <input type="radio" name={"absen[" + x + "]"} value="ijin"></input>
+                                            <input type="radio" name={student.user.id} value="permission"></input>
                                         </th>
                                         <th className="align-center" title="Alpha">
-                                            <input type="radio" name={"absen[" + x + "]"} value="alpha"></input>
+                                            <input type="radio" name={student.user.id} value="abstain"></input>
                                         </th>
                                         <th className="align-center">
                                             <button className="btn-white" onClick={this.showModal}>Lihat Keterangan</button>
                                         </th>
                                     </tr>
-                                },
-                                    this
-                                )
+                                }, this)
                             }
                         </tbody>
                     </Table>
