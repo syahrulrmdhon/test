@@ -36,8 +36,17 @@ export default class Header extends Component {
     }
 
     render() {
-        const school = JSON.parse(localStorage.getItem('school'));
-        const user = JSON.parse(localStorage.getItem('user'));
+        const l_school = !!(localStorage.getItem('school')) ? localStorage.getItem('school') : ''
+        let school = null
+        if(l_school){
+            school = JSON.parse(l_school);
+        }
+
+        const l_user = !!(localStorage.getItem('user')) ? localStorage.getItem('user') : ''
+        let user = null
+        if(l_user){
+            user = JSON.parse(l_user);
+        }
 
         // custom
         let school_name = !!(school) ? school.name : ''
