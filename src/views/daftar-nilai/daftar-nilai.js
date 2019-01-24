@@ -51,7 +51,6 @@ export default class DaftarNilai extends Component {
     componentDidMount() {
         this.getSemesterList()
         this.getClassList()
-        this.getSubjectList()
     }
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -62,34 +61,25 @@ export default class DaftarNilai extends Component {
     }
     getSemesterList() {
         const url = `v1/filters/semesters?`
+
         apiClient('get', url).then(res => {
-            let semester = []
-            for (var i in res.data.data) {
-                const datum = res.data.data[i]
-                datum.map(function (data, i) {
-                    semester.push({ value: data.id, label: data.period_name })
-                })
-            }
+            const data = res.data.data.semesters.map(
+                ({ period_name, id }) => ({ label: period_name, value: id })
+            )
             this.setState({
-                listSemester: semester
+                listSemester: data
             })
         })
     }
     getClassList() {
-        const url = `v1/filters/classes?`
-        let self = this
+        const url = `v1/filters/classes`
 
         apiClient('get', url).then(res => {
-            let kelas = []
-            for (var i in res.data.data) {
-                const datum = res.data.data[i]
-                datum.map(function (data, i) {
-                    kelas.push({ value: data.id, label: data.name })
-                    self.setState({ idClass: data.id })
-                })
-            }
+            const data = res.data.data.classes.map(
+                ({ id, name }) => ({ label: name, value: id })
+            )
             this.setState({
-                listClass: kelas
+                listClass: data
             })
         })
     }
@@ -124,6 +114,9 @@ export default class DaftarNilai extends Component {
     onChangeSubject(selectedSubject) {
         this.setState({ selectedSubject })
     }
+    disabledSelectSubject() {
+        document.getElementById("mySelect").disabled = true;
+    }
     getKnowledge() {
         let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
         return apiClient('get', url)
@@ -137,23 +130,26 @@ export default class DaftarNilai extends Component {
         return apiClient('get', url)
     }
     handleSubmit() {
+        let dataKnowledge = []
+        let dataSkill = []
         let tableKnowledge = []
         let tableAttitude = []
         let tableSkill = []
         this.getKnowledge().then(res => {
-            tableKnowledge = res.data.data.users;
-
+            dataKnowledge = res.data.data
+            tableKnowledge = res.data.data.users
             this.getAttitude().then(attitudes => {
                 tableAttitude = attitudes.data.data.users
                 this.getSkill().then(skills => {
+                    dataSkill = res.data.data
                     tableSkill = skills.data.data.users
                     this.setState({
                         tableKnowledge: tableKnowledge,
                         tableAttitude: tableAttitude,
                         tableSkill: tableSkill,
-                        idxScores: tableKnowledge[0].subject_score_details.daily_exam.scores.length,
-                        idxTugas: tableKnowledge[0].subject_score_details.task.scores.length,
-                        idxScoresSkill: tableSkill[0].subject_score_details.task.scores.length,
+                        idxScores: dataKnowledge.count.daily_exam,
+                        idxTugas: dataKnowledge.count.task,
+                        idxScoresSkill: dataSkill.count.task
                     })
                 })
             })
@@ -168,6 +164,7 @@ export default class DaftarNilai extends Component {
                     <div className="row row-daftar-nilai">
                         <div className="left-content col-2">
                             <FilterNilai
+                                id="mySelect"
                                 listClass={this.state.listClass}
                                 selectedClass={this.state.selectedClass}
                                 listSemester={this.state.listSemester}

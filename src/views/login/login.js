@@ -16,8 +16,9 @@ class Login extends Component {
 
         }
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        // this.getSchoolList = this.getSchoolList.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.getUser = this.getUser.bind(this)
+        this.setSchoolList = this.setSchoolList.bind(this)
     }
     handleChange(e) {
         let user = {}
@@ -34,16 +35,40 @@ class Login extends Component {
         }
 
         apiClient('post', url, user).then(res => {
-            this.props.history.push('/home')
             localStorage.setItem("token", res.data.data.auth_token)
-            this.getSchoolList()
+            this.setSchoolList()
+
         })
     }
-    getSchoolList() {
-        const url = 'v1/schools/list'
-        apiClient('get', url).then(res => {
-            localStorage.getItem("token")
-            localStorage.setItem("school_list", res.data.data.schools[0].id)
+    setSchoolList(){
+        apiClient('get', 'v1/schools/list').then(response => {
+            let schools = response.data.data.schools
+            let school_length = schools.length
+            
+            if(school_length > 1){
+                localStorage.setItem("school_list", schools)
+                this.props.history.push('/switch')
+            } else { // case school only 1
+                let school_id = schools[0].id || null 
+
+                localStorage.setItem("school_id", school_id)
+                this.getUser()
+                this.props.history.push('/home')
+            }
+
+        })
+    }
+    getUser() {
+        const url = 'v1/users'
+        apiClient('get', url).then(res=>{
+            localStorage.setItem("user_id", res.data.data.user.id)
+            localStorage.setItem("class_id", res.data.data.homeroom_class.id)
+
+            // attribute full
+            localStorage.setItem("user", JSON.stringify(res.data.data.user))
+            localStorage.setItem("school", JSON.stringify(res.data.data.school))
+            localStorage.setItem("current_period", JSON.stringify(res.data.data.current_period))
+            localStorage.setItem("homeroom_class", JSON.stringify(res.data.data.homeroom_class))
         })
     }
     render() {
@@ -64,7 +89,7 @@ class Login extends Component {
                                 <br /><br />
                                 <input type="text" name="email" onChange={this.handleChange.bind(this)} value={this.state.email} placeholder="Alamat Email" className="col-12"></input>
                                 <br /><br />
-                                <input type="text" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
+                                <input type="password" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
                                 <br /><br />
                                 <button type="submit" className="btn btn-young-green col-12">Masuk</button>
                                 <br /><br />

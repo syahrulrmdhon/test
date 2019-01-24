@@ -9,105 +9,30 @@ export default class TableSikap extends Component {
                     <thead>
                         <tr>
                             <th>Nama Siswa</th>
-                            <th>Matematika</th>
-                            <th>Bahasa Indonesia</th>
-                            <th>Kesenian</th>
-                            <th>IPA</th>
-                            <th>IPS</th>
-                            <th>Kehadiran</th>
+                            {
+                                this.props.dTableAttitude && this.props.dTableAttitude.final_scores && this.props.dTableAttitude.final_scores.subjects.map(function (x, i) {
+                                    return <th key={i}>
+                                        {x.name}
+                                    </th>
+                                })
+                            }
+                            <th>Kehadiran (%)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90%</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85</td>
-                            <td>90%</td>
-                        </tr>
+                    {
+                            this.props.tableAttitude.map(function (data, i) {
+                                return <tr key={i}>
+                                    <td>{data.full_name}</td>
+                                    {data.final_scores.subjects.map(function (x, i) {
+                                        return <td key={i}>
+                                            {x.status === null ? "N/A" : x.status}
+                                        </td>
+                                    })}
+                                    {/* <td>{data.final_scores.total.score === null ? "N/A" : data.final_scores.total.score}</td> */}
+                                </tr>
+                            })
+                        }
                     </tbody>
                 </Table>
             </div>
