@@ -3,7 +3,6 @@ import './../../styles/global/component.css'
 import './../../styles/beranda.css'
 
 import Header from '../global/header'
-import MenuBar from '../global/navbar'
 import SideBar from './side_bar'
 import Schedule from './schedule'
 
@@ -103,9 +102,8 @@ class Beranda extends Component {
         let icon = (this.state.isSideBar == 'expand') ? 'arrow-left' : 'calendar'
 
         return (
-            <div className="body-content">
+            <div className="body-content padding-content">
                 <Header />
-                <MenuBar />
                 <div className={classnames("sidebar", this.state.isSideBar)}>
                     <div className="mainbar">
                         <FontAwesome name={icon} className="minimize-side-bar" onClick={this.clickSideBar} />

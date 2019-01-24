@@ -910,3 +910,7 @@ strong, .bold {
 .error-message{
   color: #f65151;
 }
+
+.padding-content{
+  padding-top: 120px;
+}
