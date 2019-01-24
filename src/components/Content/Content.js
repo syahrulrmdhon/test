@@ -9,7 +9,6 @@ import Profile from './ProfileDetail'
 import RightSide from '../RightSide/RightSide'
 import ScoreTable from './ScoreTable'
 import Tab from '../TabContent/TabContent'
-import Axios from 'axios'
 import { apiClient } from '../../utils/apiClient'
 
 export default class Content extends Component {
@@ -36,6 +35,9 @@ export default class Content extends Component {
       },
       disable: true,
       inputHomeroomNote: '',
+      homeroomNote: '',
+      extracurriculars: [],
+      extracurricularNotes: [{description: ''}],
     }
 
     this.baseUrl = `${process.env.API_URL}v1/students/${this.props.studentId}`
@@ -50,7 +52,9 @@ export default class Content extends Component {
     this.getFilterAttendanceStatus = this.getFilterAttendanceStatus.bind(this)
     this.getAttendanceDetail = this.getAttendanceDetail.bind(this)
     this.handleCreateHomeroomNote = this.handleCreateHomeroomNote.bind(this)
-    this.noteChangeHandler=this.noteChangeHandler.bind(this)
+    this.noteChangeHandler = this.noteChangeHandler.bind(this)
+    this.getHomeroomNote = this.getHomeroomNote.bind(this)
+    this.changeExtracurricularNote = this.changeExtracurricularNote.bind(this)
   }
 
   componentDidMount() {
@@ -106,6 +110,17 @@ export default class Content extends Component {
           this.getAttendanceDetail()      
         }
       }
+      else if (this.props.activeTab === 3) {
+        if (!this.state.inputHomeroomNote.length) {
+          this.getHomeroomNote()
+        }
+      }
+    }
+    if (nextState.homeroomActiveTab !== this.state.homeroomActiveTab) {
+      if (this.state.homeroomActiveTab === 2 && !this.state.extracurriculars.length) {
+        this.getFilterExtracurricular()
+        this.getExtracurricularNote()
+      }
     }
   }
 
@@ -149,11 +164,35 @@ export default class Content extends Component {
     })
   }
 
+  getFilterExtracurricular() {
+    const url = `v1/filters/extracurriculars`
+
+    apiClient('get', url).then(response => {
+      this.setState({extracurriculars: response.data.data.extracurriculars})
+    })
+  }
+
   getAttendanceDetail() {
     const url = `v1/students/${this.props.studentId}/attendance_recap/`
     
     apiClient('get', url).then(response => {
       this.setState({attendanceDetail: response.data.data})
+    })
+  }
+
+  getHomeroomNote() {
+    const url = `v1/students/${this.props.studentId}/teacher_notes?achievement_type=final_result`
+
+    apiClient('get', url).then(response => {
+      this.setState({inputHomeroomNote: response.data.data.notes})
+    })
+  }
+  
+  getExtracurricularNote() {
+    const url = `v1/students/${this.props.studentId}/teacher_notes?achievement_type=extracurricular`
+
+    apiClient('get', url).then(response => {
+      this.setState({extracurricularNotes: response.data.data.notes})
     })
   }
 
@@ -171,9 +210,10 @@ export default class Content extends Component {
         this.setState({disable: true})
     })
   }
-
+  
   noteChangeHandler(event) {
     const inputUser = event.target.value
+    
     if (inputUser.length) {
       this.setState({disable: false})
     }
@@ -183,12 +223,58 @@ export default class Content extends Component {
 
     this.setState({inputHomeroomNote: inputUser})
   }
+  
+
+  changeExtracurricularNote(event, id) {
+    const noteIndex = this.state.extracurricularNotes.findIndex(note => {
+      return note.id === id;
+    });
+
+    const note = {
+      ...this.state.extracurricularNotes[noteIndex]
+    };
+
+    note.description = event.target.value;
+
+    const notes = [...this.state.extracurricularNotes];
+
+    notes[noteIndex] = note;
+
+    this.setState({
+      extracurricularNotes: notes
+    })
+  }
+
+  handleCreateExtracurricularNote(){
+    const url = `v1/students/${this.props.studentId}/create_notes`
+    const data = {
+      "achievement_type": "final_result",
+      "user_achievement": {
+        "user_id": this.props.studentId,
+        "description": this.state.inputHomeroomNote
+      }
+    }
+
+    apiClient('post', url, data).then(response => {
+        this.setState({disable: true})
+    })
+  }
+  
+  addExtracurricularNote() {
+    this.setState({extracurricularNotes: [...this.state.extracurricularNotes, '']})
+  }
+
+  handleChange(event, index) {
+    this.state.extracurricularNotes[index] = event.target.value
+    this.setState({extracurricularNotes:this.state.extracurricularNotes})
+  }
 
   render() {
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
     const tabHomeRoom = ['Catatan Wali Kelas', 'Estrakurikuler', 'Prestasi']
     
     const attendances = this.state.attendanceDetail.attendances
+
     return (
       <div className="bg-white container-fluid">
         <TabContent activeTab={this.props.activeTab}>
@@ -302,7 +388,12 @@ export default class Content extends Component {
                   activeTab={this.state.homeroomActiveTab}
                   clicked={this.handleCreateHomeroomNote} 
                   disabled={this.state.disable}
-                  changed={(event) => this.noteChangeHandler(event)}/>
+                  changed={(event) => this.noteChangeHandler(event)}
+                  inputHomeroomNote={this.state.inputHomeroomNote}
+                  extracurriculars={this.state.extracurriculars}
+                  extracurricularNotes={this.state.extracurricularNotes}
+                  changeExtracurricularNote={this.handleChange}
+                  addExtracurricularNote={(event) => this.addExtracurricularNote(event)} />
               </RightSide>
             </div>
           </TabPane>

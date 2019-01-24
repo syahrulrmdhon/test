@@ -3,7 +3,7 @@ import Axios from 'axios'
 export const apiClient = (method, url, request) => {
     const baseUrl = `${process.env.API_URL}`
     const token = localStorage.getItem('token')
-    const schoolId = localStorage.getItem("school_list")
+    const schoolId = localStorage.getItem("school_id")
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token,
