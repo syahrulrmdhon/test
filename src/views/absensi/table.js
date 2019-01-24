@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Table } from 'reactstrap'
-import Axios from 'axios'
 import ModalAbsensi from './modal'
 
 export default class TableAbsensi extends Component {
@@ -11,14 +10,6 @@ export default class TableAbsensi extends Component {
             modal: false
         };
         this.showModal = this.showModal.bind(this);
-    }
-
-    componentDidMount() {
-        Axios.get(process.env.API_URL + 'users')
-            .then(res => {
-                const users = res.data;
-                this.setState({ users });
-            })
     }
     
     showModal() {
@@ -51,16 +42,16 @@ export default class TableAbsensi extends Component {
                                         <th>{index + 1}</th>
                                         <th>{student.user.full_name}</th>
                                         <th className="align-center" title="Hadir">
-                                            <input type="radio" className="rd-btn" name={student.user.id} value="present"></input>
+                                            <input type="radio" className="rd-btn" name={student.user.id} value="present" onChange={event => this.props.handleOptionChange(event)} id={student.user.id}></input>
                                         </th>
                                         <th className="align-center" title="Sakit">
-                                            <input type="radio" name={student.user.id} value="sick"></input>
+                                            <input type="radio" name={student.user.id} value="sick" onChange={event => this.props.handleOptionChange(event)} id={student.user.id}></input>
                                         </th>
                                         <th className="align-center" title="Ijin">
-                                            <input type="radio" name={student.user.id} value="permission"></input>
+                                            <input type="radio" name={student.user.id} value="permission" onChange={event => this.props.handleOptionChange(event)} id={student.user.id}></input>
                                         </th>
                                         <th className="align-center" title="Alpha">
-                                            <input type="radio" name={student.user.id} value="abstain"></input>
+                                            <input type="radio" name={student.user.id} value="abstain" onChange={event => this.props.handleOptionChange(event)} id={student.user.id}></input>
                                         </th>
                                         <th className="align-center">
                                             <button className="btn-white" onClick={this.showModal}>Lihat Keterangan</button>

@@ -8,7 +8,6 @@ import CardAbsensi from './card'
 import TableAbsensi from './table'
 import FilterAbsensi from './filter'
 import { apiClient } from '../../utils/apiClient'
-import TableSikap from '../daftar-nilai/table-sikap';
 import { NotAvailable } from '../../views/global/notAvailable'
 
 export default class Absensi extends Component {
@@ -21,19 +20,22 @@ export default class Absensi extends Component {
       selectedSubject: "",
       attendanceTypes: [],
       classes: [],
-      students: null
+      students: null,
+      attendanceData: []
     };
 
     this.selectAttendanceType = this.selectAttendanceType.bind(this)
     this.selectClass = this.selectClass.bind(this)
     this.selectSubject = this.selectSubject.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFilterSubmit = this.handleFilterSubmit.bind(this)
+    this.handleAttendanceStatusChange = this.handleAttendanceStatusChange.bind(this)
   };
   
 
   componentDidMount() {
     this.getAttendanceType()
     this.getClass()
+    console.log(localStorage.getItem('token'))
   }
 
   getAttendanceType() {
@@ -85,13 +87,12 @@ export default class Absensi extends Component {
     if (type === 'homeroom') {
       const route = `v1/attendances/index?class_id=${this.state.selectedClass.value}`
       apiClient('get', route).then(response => {
-        console.log(response.data.data.user_attendances)
         this.setState({students: response.data.data.user_attendances})
       })
     }
   }
 
-  handleSubmit() {
+  handleFilterSubmit() {
     const type = this.state.selectedAttendanceType.value
     this.getStudents(type)
   }
@@ -105,6 +106,45 @@ export default class Absensi extends Component {
     }
   }
 
+  saveStudentAttendance() {
+    const route = 'v1/attendances/bulk_update'
+
+    const data = {
+      "attendance_date": "2019-01-24",
+      "attendance_type": "homeroom",
+      "class_id": "47d8db8a-0d63-452f-a9dc-6dc24ee65680",
+      "school_id": "af3dae6d-3f36-4a20-80d6-3ef6969d097e",
+    }
+    apiClient('post', route,)
+  }
+
+  handleSave() {
+    // const attendanceData = this.state.attendanceData
+
+    // this.
+  }
+
+  handleAttendanceStatusChange(event) {
+    const userId = event.target.id
+    const status = event.target.value
+    const attendanceData = this.state.attendanceData
+    
+    let student = attendanceData.find(attendance => attendance.user_id === userId)
+
+    if (!student) {
+      student = {
+        user_id: event.target.id,
+        status: event.target.value
+      }
+      attendanceData.push(student)
+    }
+    else {
+      student.status = status
+    }
+    this.setState({
+      attendanceData: attendanceData
+    })
+  }
 
   render() {
     const date = new Date()
@@ -130,7 +170,7 @@ export default class Absensi extends Component {
                     subjects={this.state.subjects}
                     selectedSubject={this.state.selectedSubject}
                     selectSubject={this.selectSubject}
-                    handleSubmit={this.handleSubmit}
+                    handleFilterSubmit={this.handleFilterSubmit}
                   />
                 </div>
                 <div className="col-9 center-content">
@@ -150,6 +190,8 @@ export default class Absensi extends Component {
                     <div>
                       <TableAbsensi 
                         students={this.state.students}
+                        attendanceStatus={this.state.attendanceStatus}
+                        handleOptionChange={this.handleAttendanceStatusChange}
                       />
                       <button type="submit" onClick={this.handleSubmit} className="btn-green float-right col-3">Simpan</button>
                     </div>

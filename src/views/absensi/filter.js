@@ -31,7 +31,7 @@ export default class FilterAbsensi extends Component {
                         placeholder='Pilih Mata Pelajaran' />
                     <br /><br />
                 </form>
-                <button type="submit" onClick={this.props.handleSubmit} className="btn-green">Filter</button>
+                <button type="submit" onClick={this.props.handleFilterSubmit} className="btn-green">Filter</button>
             </div>
         )
     }
