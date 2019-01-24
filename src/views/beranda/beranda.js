@@ -6,12 +6,12 @@ import Header from '../global/header'
 import MenuBar from '../global/navbar'
 import SideBar from './side_bar'
 import Schedule from './schedule'
-
+import classnames from 'classnames'
 import { apiClient } from '../../utils/apiClient'
 import { classes } from '../../utils/common'
 
 var FontAwesome = require('react-fontawesome');
-import classnames from 'classnames'
+
 
 class Beranda extends Component {
 
@@ -66,7 +66,6 @@ class Beranda extends Component {
         return (
             <div className="body-content padding-content">
                 <Header />
-                <MenuBar />
                 <div className={classnames("sidebar", this.state.isSideBar)}>
                     <div className="mainbar">
                         <FontAwesome name={icon} className="minimize-side-bar" onClick={this.clickSideBar} />

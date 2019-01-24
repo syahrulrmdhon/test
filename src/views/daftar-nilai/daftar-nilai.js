@@ -162,14 +162,8 @@ export default class DaftarNilai extends Component {
 
     render() {
         return (
-<<<<<<< HEAD
             <div className="padding-content">
                 <Header />
-=======
-            <div className="body-content">
-                <Header></Header>
-                <MenuBar></MenuBar>
->>>>>>> c8ad8e6e2bf42fc3dc7ca98a2a8f3a6d69594cb8
                 <div className="content">
                     <div className="row row-daftar-nilai">
                         <div className="left-content col-2">
