@@ -88,7 +88,7 @@ export default class Detail extends Component {
         </div>
         <div className="content">
           <div className="row detail-menu">
-            <div className="offset-2 col-10 padding-left-0">
+            <div className="offset-2 col-10 tab-menu">
               <TabMenu 
                 menu={tabMenu}
                 activeMenu={this.state.activeMenu}

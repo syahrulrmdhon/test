@@ -11,7 +11,7 @@ export default class TableSikap extends Component {
                             <th>Nama Murid</th>
                             <th>Sangat Baik</th>
                             <th>Butuh Perhatian</th>
-                            <th>Kehadiran %</th>
+                            <th>Kehadiran (%)</th>
                         </tr>
                     </thead>
                     <tbody>

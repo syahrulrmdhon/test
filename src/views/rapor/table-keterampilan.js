@@ -9,116 +9,32 @@ export default class TableKeterampilan extends Component {
                     <thead>
                         <tr>
                             <th>Nama Siswa</th>
-                            <th>Matematika</th>
-                            <th>Bahasa Indonesia</th>
-                            <th>Kesenian</th>
-                            <th>IPA</th>
-                            <th>IPS</th>
-                            <th>Kehadiran</th>
+                            {
+                                this.props.dTableSkill && this.props.dTableSkill.final_scores && this.props.dTableSkill.final_scores.subjects.map(function (x, i) {
+                                    return <th key={i}>
+                                        {x.name}
+                                    </th>
+                                })
+                            }
+                            <th>Kehadiran (%)</th>
                             <th>Total Nilai (GPA)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85%</td>
-                            <td>90</td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85%</td>
-                            <td>90</td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85%</td>
-                            <td>90</td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85%</td>
-                            <td>90</td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85%</td>
-                            <td>90</td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85%</td>
-                            <td>90</td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85%</td>
-                            <td>90</td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85%</td>
-                            <td>90</td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85%</td>
-                            <td>90</td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>90</td>
-                            <td>95</td>
-                            <td>85%</td>
-                            <td>90</td>
-                            <td>80</td>
-                        </tr>
+                        {
+                            this.props.tableSkill.map(function (data, i) {
+                                return <tr key={i}>
+                                    <td>{data.full_name}</td>
+                                    {data.final_scores.subjects.map(function (x, i) {
+                                        return <td key={i}>
+                                            {x.score.score === null ? "N/A" : x.score.score}
+                                        </td>
+                                    })}
+                                    <td>{data.final_scores.total.score === null ? "N/A" : data.final_scores.total.score}</td>
+                                    <td>{data.final_scores.total_average.score === null ? "N/A" : data.final_scores.total_average.score}</td>
+                                </tr>
+                            })
+                        }
                     </tbody>
                 </Table>
             </div>
