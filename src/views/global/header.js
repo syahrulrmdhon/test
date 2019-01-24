@@ -12,6 +12,7 @@ import {
 import Avatar from 'react-avatar';
 import Logo from './../../assets/images/logo.svg'
 import Shutdown from './../../assets/images/shutdown.png'
+import Menu from './navbar'
 
 export default class Header extends Component {
     constructor(props) {
@@ -29,31 +30,36 @@ export default class Header extends Component {
     }
     render() {
         return (
-            <div className="header-bar">
-                <Navbar expand="md" className="font-white">
-                    <NavbarBrand>
-                        <img className="logo" src={Logo} alt="" />
-                        &emsp;
+            <div className="fix-nav">
+                <div className="header-bar">
+                    <div className="fix-nav">
+                        <Navbar expand="md" className="font-white">
+                            <NavbarBrand>
+                                <img className="logo" src={Logo} alt="" />
+                                &emsp;
                     <span className="font-white header-title">SMA Negeri Cahaya Madani Banten Boarding School</span>
-                    </NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <NavLink className="font-white" href="">
-                                    <Avatar facebookId="100008343750912" size="30" round={true} />
-                                    &ensp;Patience Anderson MD
+                            </NavbarBrand>
+                            <NavbarToggler onClick={this.toggle} />
+                            <Collapse isOpen={this.state.isOpen} navbar>
+                                <Nav className="ml-auto" navbar>
+                                    <NavItem>
+                                        <NavLink className="font-white" href="">
+                                            <Avatar facebookId="100008343750912" size="30" round={true} />
+                                            &ensp;Patience Anderson MD
                                 </NavLink>
-                            </NavItem>
-                            &emsp;
+                                    </NavItem>
+                                    &emsp;
                             <NavItem>
-                                <NavLink className="font-white logout" href="/">
-                                    <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
-                                </NavLink>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
-                </Navbar>
+                                        <NavLink className="font-white logout" href="/">
+                                            <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
+                                        </NavLink>
+                                    </NavItem>
+                                </Nav>
+                            </Collapse>
+                        </Navbar>
+                    </div>
+                </div>
+                <Menu />
             </div>
         )
     }

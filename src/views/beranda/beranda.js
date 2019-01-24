@@ -64,7 +64,7 @@ class Beranda extends Component {
         let icon = (this.state.isSideBar == 'expand') ? 'arrow-left' : 'calendar'
 
         return (
-            <div className="body-content">
+            <div className="body-content padding-content">
                 <Header />
                 <MenuBar />
                 <div className={classnames("sidebar", this.state.isSideBar)}>
