@@ -51,7 +51,6 @@ export default class DaftarNilai extends Component {
     componentDidMount() {
         this.getSemesterList()
         this.getClassList()
-        this.getSubjectList()
     }
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -62,34 +61,25 @@ export default class DaftarNilai extends Component {
     }
     getSemesterList() {
         const url = `v1/filters/semesters?`
+
         apiClient('get', url).then(res => {
-            let semester = []
-            for (var i in res.data.data) {
-                const datum = res.data.data[i]
-                datum.map(function (data, i) {
-                    semester.push({ value: data.id, label: data.period_name })
-                })
-            }
+            const data = res.data.data.semesters.map(
+                ({ period_name, id }) => ({ label: period_name, value: id })
+            )
             this.setState({
-                listSemester: semester
+                listSemester: data
             })
         })
     }
     getClassList() {
-        const url = `v1/filters/classes?`
-        let self = this
+        const url = `v1/filters/classes`
 
         apiClient('get', url).then(res => {
-            let kelas = []
-            for (var i in res.data.data) {
-                const datum = res.data.data[i]
-                datum.map(function (data, i) {
-                    kelas.push({ value: data.id, label: data.name })
-                    self.setState({ idClass: data.id })
-                })
-            }
+            const data = res.data.data.classes.map(
+                ({ id, name }) => ({ label: name, value: id })
+            )
             this.setState({
-                listClass: kelas
+                listClass: data
             })
         })
     }
