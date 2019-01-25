@@ -25,6 +25,7 @@
     "react-datepicker": "^2.0.0",
     "react-day-picker": "^7.2.4",
     "react-dom": "^16.6.3",
+    "react-easy-print": "^0.6.0",
     "react-fontawesome": "^1.6.1",
     "react-image": "^1.5.1",
     "react-modal": "^3.8.1",

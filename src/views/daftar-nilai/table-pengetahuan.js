@@ -3,6 +3,7 @@ import { Table } from "reactstrap";
 
 export default class TablePengetahuan extends Component {
   render() {
+    console.log(this.props.tableKnowledge)
     return (
       <div className="table-pengetahuan">
         <Table bordered striped responsive hover>
@@ -19,14 +20,12 @@ export default class TablePengetahuan extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.tableKnowledge.map(function(data, i) {
+            {this.props.tableKnowledge.map(function (data, i) {
               return (
                 <tr key={i}>
-                  <td>{data.full_name}</td>
-                  {data.subject_score_details.daily_exam.scores.map(function(
-                    x,
-                    i
-                  ) {
+                  <td className="d-none">{data.id}</td>
+                  <td className="student-name" onClick={this.props.nameClicked}>{data.full_name}</td>
+                  {data.subject_score_details.daily_exam.scores.map(function (x, i) {
                     return (
                       <td key={i}>
                         {x.result.score === null ? "-" : x.result.score}
@@ -34,12 +33,9 @@ export default class TablePengetahuan extends Component {
                     );
                   })}
                   <td>
-                    {data.subject_score_details.daily_exam.average.score ===
-                    null
-                      ? "-"
-                      : data.subject_score_details.daily_exam.average.score}
+                    {data.subject_score_details.daily_exam.average.score === null ? "-" : data.subject_score_details.daily_exam.average.score}
                   </td>
-                  {data.subject_score_details.task.scores.map(function(x, i) {
+                  {data.subject_score_details.task.scores.map(function (x, i) {
                     return (
                       <td key={i}>
                         {x.result.score === null ? "-" : x.result.score}
@@ -47,26 +43,16 @@ export default class TablePengetahuan extends Component {
                     );
                   })}
                   <td>
-                    {data.subject_score_details.task.average.score === null
-                      ? "-"
-                      : data.subject_score_details.task.average.score}
+                    {data.subject_score_details.task.average.score === null ? "-" : data.subject_score_details.task.average.score}
                   </td>
                   <td>
-                    {data.subject_score_details.midterm_exam.average.score ===
-                    null
-                      ? "-"
-                      : data.subject_score_details.midterm_exam.average.score}
+                    {data.subject_score_details.midterm_exam.average.score === null ? "-" : data.subject_score_details.midterm_exam.average.score}
                   </td>
                   <td>
-                    {data.subject_score_details.final_exam.average.score ===
-                    null
-                      ? "-"
-                      : data.subject_score_details.final_exam.average.score}
+                    {data.subject_score_details.final_exam.average.score === null ? "-" : data.subject_score_details.final_exam.average.score}
                   </td>
                   <td>
-                    {data.subject_score_details.subject_average.score === null
-                      ? "-"
-                      : data.subject_score_details.subject_average.score}
+                    {data.subject_score_details.subject_average.score === null ? "-" : data.subject_score_details.subject_average.score}
                   </td>
                 </tr>
               );

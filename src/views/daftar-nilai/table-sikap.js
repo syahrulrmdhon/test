@@ -18,7 +18,7 @@ export default class TableSikap extends Component {
                         {
                             this.props.tableAttitude.map(function (data, i) {
                                 return <tr key={i}>
-                                    <td>{data.full_name}</td>
+                                    <td className="student-name">{data.full_name}</td>
                                     <td>
                                         {data.subject_score_details.sb === null ? "-" : data.subject_score_details.sb}
                                     </td>
