@@ -1,11 +1,8 @@
 .sidebar{
     position: fixed;
-<<<<<<< HEAD
-=======
     height: calc(100% - 51px);
 }
 .sidebar.expand{
->>>>>>> parent of 18ddf5a7... t
     width: 335px;
     height: calc(100% - 51px);
     z-index: 10000;
