@@ -40,7 +40,7 @@ export default class ProfileDetail extends Component {
         </div>
           <div className="field">
             <div className="label">Alamat:</div>
-            {response.user.addresses[0].full_address}
+            {response.user.addresses[0].full_address.street}
         </div>
         </div>
       </div>

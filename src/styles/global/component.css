@@ -914,3 +914,8 @@ strong, .bold {
 .padding-content{
   padding-top: 120px;
 }
+
+/* border radius */
+.rounded-corners {
+  border-radius: 7px;
+}

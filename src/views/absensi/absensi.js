@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './../../styles/absensi/absensi.css'
+import './../../styles/absensi/absensi.scss'
 
 import Header from '../global/header'
 import CardAbsensi from './card'
@@ -7,7 +7,7 @@ import TableAbsensi from './table'
 import FilterAbsensi from './filter'
 import { apiClient } from '../../utils/apiClient'
 import { NotAvailable } from '../../views/global/notAvailable'
-
+import { getDate } from '../../utils/common'
 export default class Absensi extends Component {
   constructor(props) {
     super(props); 
@@ -19,10 +19,11 @@ export default class Absensi extends Component {
       attendanceTypes: [],
       classes: [],
       students: null,
-      attended: 0,
-      unattended: 0,
-      percentage: 0,
-      attendances: []
+      attended: '-',
+      unattended: '-',
+      percentage: '-',
+      attendances: [],
+      selectedDate: new Date(),
     };
 
     this.selectAttendanceType = this.selectAttendanceType.bind(this)
@@ -31,10 +32,9 @@ export default class Absensi extends Component {
     this.handleFilterSubmit = this.handleFilterSubmit.bind(this)
     this.handleAttendanceStatusChange = this.handleAttendanceStatusChange.bind(this)
     this.saveStudentAttendance = this.saveStudentAttendance.bind(this)
-
+    this.handleDateChange = this.handleDateChange.bind(this)
   };
   
-
   componentDidMount() {
     this.getAttendanceType()
     this.getClass()
@@ -44,7 +44,10 @@ export default class Absensi extends Component {
     const route = 'v1/filters/attendance_types'
 
     apiClient('get', route).then(response => {
-      const data = response.data.data.attendance_types.map(({ key }) => ({ label: (key === 'homeroom' ? 'Absensi Harian' : 'Absensi Mata Pelajaran'), value: key }))
+      const data = response.data.data.attendance_types.map(({ key }) => ({
+        label: (key === 'homeroom' ? 'Absensi Harian' : 'Absensi Mata Pelajaran'), value: key })
+      )
+
       this.setState({ attendanceTypes: data })
     })
   }
@@ -87,7 +90,8 @@ export default class Absensi extends Component {
 
   getStudents(type) {
     if (type === 'homeroom') {
-      const route = `v1/attendances/index?class_id=${this.state.selectedClass.value}&attendance_date=2019/01/25`
+      const date = getDate('case-4', this.state.selectedDate)
+      const route = `v1/attendances/index?class_id=${this.state.selectedClass.value}&attendance_date=${date}`
 
       apiClient('get', route).then(response => {
         const data = response.data
@@ -124,9 +128,9 @@ export default class Absensi extends Component {
   saveStudentAttendance() {
     const route = 'v1/attendances/bulk_update'
     const teacher = (localStorage.getItem('homeroom_class') !== null) ? 'homeroom' : null
-    
+    const date = getDate('case-4', this.state.selectedDate)
     const data = {
-      "attendance_date": "2019-01-25",
+      "attendance_date": date,
       "attendance_type": teacher,
       "class_id": localStorage.getItem('class_id'),
       "school_id": localStorage.getItem('school_id'),
@@ -150,10 +154,12 @@ export default class Absensi extends Component {
     })
   }
 
+  handleDateChange(date) {
+    
+    this.setState({selectedDate: date})
+  }
+
   render() {
-    const date = new Date()
-    const options = { year: 'numeric', month: 'long', day: '2-digit' };
-    const dateNow = date.toLocaleDateString('id-ID', options)
 
     return (
 
@@ -175,12 +181,13 @@ export default class Absensi extends Component {
                     selectedSubject={this.state.selectedSubject}
                     selectSubject={this.selectSubject}
                     handleFilterSubmit={this.handleFilterSubmit}
-                  />
+                    selectedDate={this.state.selectedDate}
+                    handleDateChange={this.handleDateChange} />
                 </div>
                 <div className="col-9 center-content">
                 <div className="row">
                     <div className="col-8">
-                        <div className='date'>Tanggal {dateNow}</div>
+                        <div className='date'>Tanggal {getDate('case-1', this.state.selectedDate)}</div>
                     </div>
                     <div className="col-4 input-container">
                         <input className="input-field" type="text" placeholder="Cari siswa disini..." name="search" />

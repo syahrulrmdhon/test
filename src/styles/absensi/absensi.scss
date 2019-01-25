@@ -1,21 +1,38 @@
 @import url("../../styles/global/component.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+$nunito_light: 'NunitoLight';
+$nunito_regular: 'NunitoRegular';
+$nunito_semi_bold: 'NunitoSemiBold';
+$nunito_bold: 'NunitoBold';
+
 .absensi {
   background: #f7f7f7;
   margin: auto;
   font-family: "Nunito Sans", sans-serif;
   overflow-y: hidden;
+  
+  .left-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: white;
+    height: 530px;
+  }
+
+  .col-lg-2 {
+    flex: 0 0 19.666667%;
+    max-width: 19.666667%;
+  }
+
+  .col-lg-10 {
+    max-width: 80.333333%;
+    flex: 80.333333%;
+  }
 }
 .content {
   background: #f7f7f7;
   margin-bottom: 20px;
   position: relative;
-}
-.left-content {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background: white;
-  height: 530px;
 }
 .left-content form label {
   color: #6d6d6d;
@@ -37,7 +54,27 @@
   background: white;
   padding: 10px;
   margin: auto;
+  height: 32.6%;
+  border-radius: 7px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &__label {
+    font-size: 14px;
+    color: #2d2d2d;
+    font-family: $nunito_bold;
+  }
+
+  &__value {
+    color: #1a9d7f;
+    font-size: 36px;
+    margin: 20px;
+    font-family: $nunito_bold;
+  }
 }
+
 .card h3 {
   color: #199d7f;
 }
@@ -93,4 +130,50 @@
   font-family: 'NunitoBold';
   font-size: 14px;
   color: #2d2d2d;
+}
+
+.filter-absensi {
+  .react-datepicker-wrapper, .react-datepicker__input-container {
+    display: block;
+  }
+
+  input {
+    border-radius: 3px;
+    border-color: #cccccc;
+  }
+}
+
+.calendar-icon {
+  position: absolute;
+  bottom: 14px;
+  right: 10px;
+  color: #1a9d7f;
+}
+
+.select__indicator-separator {
+  display: none;
+}
+
+.select__control {
+  height: 35px;
+  border-radius: 3px !important;
+  border-color: #cccccc !important;
+}
+
+.select__dropdown-indicator svg{
+  color: #1a9d7f;
+  width: 12px;
+}
+
+.absensi label {
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+.select__placeholder {
+  color: #7f92a1 !important;
+}
+
+.card-absensi {
+  height: 100%;
 }

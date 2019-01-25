@@ -35,6 +35,8 @@ export function getDate(format = 'case-1', date = new Date){
                 
                 result = hour + ':' + minute
             break
+            case 'case-4': // 2019-01-20
+                result = new Intl.DateTimeFormat('sq-AL', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(date)
         }
     }
     return result
