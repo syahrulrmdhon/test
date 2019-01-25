@@ -240,6 +240,13 @@ $nunito_bold: 'NunitoBold';
 }
 
 .homeroom-teacher {
+  
+  &__form {
+    height: 300px;
+    overflow-y: auto;
+    margin-top: 30px;
+  }
+
   &__input {
     margin-top: 30px;
     color: #52595e;
@@ -291,12 +298,19 @@ $nunito_bold: 'NunitoBold';
     border-color: #dcdcdc;
     padding-left: 25px;
     padding-right: 25px;
-    margin-top: 30px;
+    // margin-top: 30px;
 
+  &__select:not(:first-child) {
+    // margin-top: 20px
+  }
 
     &.form-control:not([size]):not([multiple])  {
       height: 37px;;
     }
+  }
+
+  &__form-group:not(:first-child) &__select {
+    margin-top: 20px;
   }
 
   &__angle-down {

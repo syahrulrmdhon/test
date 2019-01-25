@@ -4,15 +4,22 @@
   margin-bottom: 20px;
   font-family: "Nunito Sans", sans-serif;
 }
+
 .content {
   margin-bottom: 20px;
 }
+
+.row-rapor {
+  background-color: white;
+}
+
 .left-content {
   width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
   background: white;
 }
+
 .right-content {
   width: 90%;
   padding-top: 20px;
@@ -21,6 +28,7 @@
   overflow-y: scroll;
   height: 400px;
 }
+
 /* .export-print {
   margin-left: auto;
   margin-right: auto;
@@ -29,6 +37,7 @@
   margin-bottom: 20px;
   border: none;
 } */
+
 .export {
   display: block;
   margin: auto;
@@ -38,6 +47,7 @@
   left: 0;
   right: 0;
 }
+
 .print {
   display: block;
   margin: auto;
@@ -47,6 +57,7 @@
   left: 30%;
   /* right: 0; */
 }
+
 .tab-nilai {
   border: solid 1px #cccccc;
   background: #f2f2f2;
@@ -54,10 +65,18 @@
   font-weight: normal;
   cursor: pointer;
 }
+
 .nav-tabs .tab-nilai .nav-link {
   border: none;
 }
+
 .tab-nilai:active {
   background: white;
   color: #333333;
+}
+
+.ifmcontentstoprint {
+  height: 0px;
+  width: 0px;
+  position: absolute
 }

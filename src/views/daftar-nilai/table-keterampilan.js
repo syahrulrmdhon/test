@@ -20,16 +20,16 @@ export default class TableKeterampilan extends Component {
                                     <td>{data.full_name}</td>
                                     {data.subject_score_details.task.scores.map(function (x, i) {
                                         return <td key={i}>
-                                            {x.score === null ? "-" : x.score}
+                                            {x.result.score === null ? "-" : x.result.score}
                                         </td>
                                     })}
                                     <td>
-                                    {data.subject_score_details.task.average.score === null ? "-" : data.subject_score_details.task.average.score}
+                                        {data.subject_score_details.task.average.score === null ? "-" : data.subject_score_details.task.average.score}
                                     </td>
                                 </tr>
                             })
                         }
-                    </tbody>    
+                    </tbody>
                 </Table>
             </div>
         )
