@@ -4,7 +4,7 @@
     height: calc(100% - 51px);
     z-index: 10000;
 }
-.mainbar{
+.mainbar{ 
     position: relative;
     background-color: #FFF;
     border-top: 1px solid #f7f7f7;
