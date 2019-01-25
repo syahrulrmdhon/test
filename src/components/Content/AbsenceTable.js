@@ -1,7 +1,26 @@
 import React, { Component } from 'react'
 import { Table } from 'reactstrap'
+import Axios from 'axios'
 
 export default class AbsenceTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      modal: false
+    };
+  }
+
+  componentDidMount() {
+    Axios.get(`https://jsonplaceholder.typicode.com/users`)
+    .then(res => {
+      const users = res.data;
+      this.setState({
+        users
+      });
+    })
+  }
+  
   render() {
     return (
       <div className="table-content">
@@ -11,17 +30,17 @@ export default class AbsenceTable extends Component {
             <th>Tanggal</th>
             <th>Jam Pelajaran</th>
             <th>Mata Pelajaran</th>
-            <th>Status</th>
+            <th>Keterangan</th>
           </tr>
         </thead>
         <tbody>
         {
-          this.props.attendances.attendances.results.map( (attendance, index) => {
+          this.state.users.map( (user, index) => {
             return <tr key={index}>
-              <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>{attendance.status}</td>
+              <td>{user.name}</td>
+              <td>{user.company.catchPhrase}</td>
+              <td>{user.id}</td>
+              <td>{user.id}</td>
             </tr>
           })
         }
