@@ -3,7 +3,6 @@ import { Table } from 'reactstrap'
 
 export default class TableSikap extends Component {
     render() {
-        console.log(this.props.tableAttitude)
         return (
             <div className="table-sikap">
                 <Table bordered striped responsive hover>

@@ -3,7 +3,6 @@ import { Table } from "reactstrap";
 
 export default class TablePengetahuan extends Component {
   render() {
-    console.log(this.props.tableKnowledge)
     return (
       <div className="table-pengetahuan">
         <Table bordered striped responsive hover>
