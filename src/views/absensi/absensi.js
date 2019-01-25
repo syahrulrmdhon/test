@@ -19,9 +19,9 @@ export default class Absensi extends Component {
   }
   render() {
     return (
-      <div className="absensi">
-        <Header></Header>
-        <MenuBar></MenuBar>
+
+      <div className="absensi padding-content">
+        <Header />
         <div className="content">
           <div className="row">
             <div className="col-lg-10">
@@ -40,7 +40,7 @@ export default class Absensi extends Component {
             </div>
           </div>
         </div>
-      </div >
+      </div>
     )
   }
 }

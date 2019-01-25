@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './../../styles/login.css'
+import { apiClient } from '../../utils/apiClient'
 
 import Logo from './../../assets/images/gredu-complete.svg'
 
@@ -16,8 +16,9 @@ class Login extends Component {
 
         }
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.getSchoolList = this.getSchoolList.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.getUser = this.getUser.bind(this)
+        this.setSchoolList = this.setSchoolList.bind(this)
     }
     handleChange(e) {
         let user = {}
@@ -26,44 +27,34 @@ class Login extends Component {
     }
     handleSubmit (e) {
         e.preventDefault()
-        const self = this
 
-        const url = (process.env.API_URL + 'authentication/request_token')
+        const url = 'authentication/request_token'
         const user = {
             email: this.state.email,
             password: this.state.password
         }
 
-        axios({
-            method: 'post',
-            url: url,
-            data: user,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ user })
-        }).then(function (res) {
-            console.log('DATA LOGIN', res.data.data)
-            self.props.history.push('/home')
+        apiClient('post', url, user).then(res => {
             localStorage.setItem("token", res.data.data.auth_token)
-            self.getSchoolList()
+            this.setSchoolList()
+
         })
     }
-    getSchoolList() {
+    setSchoolList(){
+        apiClient('get', 'v1/schools/list').then(response => {
+            let schools = response.data.data.schools
+            let school_length = schools.length
+            
+            if(school_length > 1){
+                localStorage.setItem("school_list", schools)
+                this.props.history.push('/switch')
+            } else { // case school only 1
+                let school_id = schools[0].id || null 
 
-        const url = (process.env.API_URL + 'v1/schools/list')
-        
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
+                localStorage.setItem("school_id", school_id)
+                this.getUser()
+                this.props.history.push('/home')
             }
-        }).then(function(res) {
-            console.log('SCHOOL LIST', res.data.data.schools[0].id)
-            localStorage.getItem("token")
-            localStorage.setItem("school_list", res.data.data.schools[0].id)
 
         })
     }
@@ -101,11 +92,11 @@ class Login extends Component {
                                 <br /><br />
                                 <input type="text" name="email" onChange={this.handleChange.bind(this)} value={this.state.email} placeholder="Alamat Email" className="col-12"></input>
                                 <br /><br />
-                                <input type="text" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
+                                <input type="password" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
                                 <br /><br />
                                 <button type="submit" className="btn btn-young-green col-12">Masuk</button>
                                 <br /><br />
-                                <p className="col-12">Lupa Kata Sandi? <Link to='' >Klik Di sini</Link></p>
+                                {/* <p className="col-12">Lupa Kata Sandi? <Link to='' >Klik Di sini</Link></p> */}
                                 <br />
                             </form>
                         </div>
