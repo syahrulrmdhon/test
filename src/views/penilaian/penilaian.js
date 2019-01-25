@@ -33,9 +33,8 @@ class Penilaian extends Component {
 
     render() {
         return (
-            <div className="penilaian">
-                <Header></Header>
-                <MenuBar></MenuBar>
+            <div className="padding-content">
+                <Header />
                 <div className="content">
                     <div className="row">
                         <div className="left-content col-2">
