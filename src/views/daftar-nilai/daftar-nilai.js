@@ -239,7 +239,7 @@ export default class DaftarNilai extends Component {
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
         )
     }
 }

@@ -25,7 +25,7 @@ class Login extends Component {
         user[e.target.name] = e.target.value
         this.setState(user)
     }
-    handleSubmit (e) {
+    handleSubmit(e) {
         e.preventDefault()
 
         const url = 'authentication/request_token'
@@ -40,16 +40,16 @@ class Login extends Component {
 
         })
     }
-    setSchoolList(){
+    setSchoolList() {
         apiClient('get', 'v1/schools/list').then(response => {
             let schools = response.data.data.schools
             let school_length = schools.length
-            
-            if(school_length > 1){
+
+            if (school_length > 1) {
                 localStorage.setItem("school_list", schools)
                 this.props.history.push('/switch')
             } else { // case school only 1
-                let school_id = schools[0].id || null 
+                let school_id = schools[0].id || null
 
                 localStorage.setItem("school_id", school_id)
                 this.getUser()
@@ -60,7 +60,7 @@ class Login extends Component {
     }
     getUser() {
         const url = 'v1/users'
-        apiClient('get', url).then(res=>{
+        apiClient('get', url).then(res => {
             localStorage.setItem("user_id", res.data.data.user.id)
             localStorage.setItem("class_id", res.data.data.homeroom_class.id)
 
@@ -73,32 +73,34 @@ class Login extends Component {
     }
     render() {
         return (
-            <div className="login">
-                <div className="row box col-12">
-                    <div className="left-content col-lg-6">
-                        <div className="main-left">
-                            <img src={Logo} alt=""></img>
+            <div className="background">
+                <div className="login">
+                    <div className="row box col-12">
+                        <div className="left-content col-lg-6">
+                            <div className="main-left">
+                                <img src={Logo} alt=""></img>
+                                <br /><br />
+                                <h3>Web Teacher</h3>
+                            </div>
+                        </div>
+                        <div className="right-content col-lg-6">
+                            <div className="main-right col-12">
+                                <form onSubmit={this.handleSubmit}>
+                                    <h5><strong>Masuk ke akun Gredu kamu</strong></h5>
+                                    <br /><br />
+                                    <input type="text" name="email" onChange={this.handleChange.bind(this)} value={this.state.email} placeholder="Alamat Email" className="col-12"></input>
+                                    <br /><br />
+                                    <input type="password" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
+                                    <br /><br />
+                                    <button type="submit" className="btn btn-young-green col-12">Masuk</button>
+                                    <br /><br />
+                                    {/* <p className="col-12">Lupa Kata Sandi? <Link to='' >Klik Di sini</Link></p> */}
+                                    <br />
+                                </form>
+                            </div>
                             <br /><br />
-                            <h3>Web Teacher</h3>
+                            <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                         </div>
-                    </div>
-                    <div className="right-content col-lg-6">
-                        <div className="main-right col-12">
-                            <form onSubmit={this.handleSubmit}>
-                                <h5><strong>Masuk ke akun Gredu kamu</strong></h5>
-                                <br /><br />
-                                <input type="text" name="email" onChange={this.handleChange.bind(this)} value={this.state.email} placeholder="Alamat Email" className="col-12"></input>
-                                <br /><br />
-                                <input type="password" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
-                                <br /><br />
-                                <button type="submit" className="btn btn-young-green col-12">Masuk</button>
-                                <br /><br />
-                                {/* <p className="col-12">Lupa Kata Sandi? <Link to='' >Klik Di sini</Link></p> */}
-                                <br />
-                            </form>
-                        </div>
-                        <br /><br />
-                        <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                     </div>
                 </div>
             </div>
