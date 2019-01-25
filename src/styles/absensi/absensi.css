@@ -8,7 +8,6 @@
 }
 .content {
   background: #f7f7f7;
-  height: 700px;
   margin-bottom: 20px;
   position: relative;
 }
@@ -82,7 +81,6 @@
 }
 /* Search bar end */
 
-
 .sticky {
   z-index: 1;
   overflow: hidden;
@@ -91,3 +89,8 @@
   display: block;
 }
 
+.date {
+  font-family: 'NunitoBold';
+  font-size: 14px;
+  color: #2d2d2d;
+}
