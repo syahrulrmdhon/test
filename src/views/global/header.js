@@ -20,7 +20,8 @@ export default class Header extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            navbar:props.navbar || true
         };
         this.logout = this.logout.bind(this)
     }
@@ -85,7 +86,7 @@ export default class Header extends Component {
                         </Navbar>
                     </div>
                 </div>
-                <Menu  />
+                <Menu  navbar={false} />
             </div>
         )
     }

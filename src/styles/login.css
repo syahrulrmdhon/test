@@ -88,3 +88,17 @@
   right: 0;
   color: #4a4a4a;
 }
+
+.input-feedback {
+  color: red;
+  margin-top: .25rem;
+}
+
+.alert{
+   font-size: 13px;
+   text-align: center;
+   font-family: "Nunito Sans", sans-serif;
+   font-weight: 300;
+   color: #000;
+
+}

@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './../../styles/login.css'
 import { apiClient } from '../../utils/apiClient'
-import Logo from './../../assets/images/gredu-complete.svg'
+import Logo from './../../assets/images/gredu-complete.svg';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { Alert } from 'reactstrap';
+
+
 
 class Login extends Component {
     constructor(props) {
@@ -10,27 +15,28 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            visible:false,
             user: {},
-            schools: []
-
+            schools: [],
+            message:''
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.getUser = this.getUser.bind(this)
         this.setSchoolList = this.setSchoolList.bind(this)
+        this.onShowAlert = this.onShowAlert.bind(this)
     }
     handleChange(e) {
         let user = {}
         user[e.target.name] = e.target.value
         this.setState(user)
     }
-    handleSubmit(e) {
-        e.preventDefault()
+    handleSubmit(email, password) {
 
         const url = 'authentication/request_token'
         const user = {
-            email: this.state.email,
-            password: this.state.password
+            email: email,
+            password: password
         }
 
         apiClient('post', url, user).then(res => {
@@ -38,7 +44,19 @@ class Login extends Component {
             this.setSchoolList()
 
         })
+            .catch(err => {
+                this.onShowAlert(err.response.data)
+            })
     }
+
+    onShowAlert(data){
+        this.setState({visible:true,message:data.error.user_authentication[0]},()=>{
+          window.setTimeout(()=>{
+            this.setState({visible:false})
+          },2000)
+        });
+    }
+
     setSchoolList() {
         apiClient('get', 'v1/schools/list').then(response => {
             let schools = response.data.data.schools
@@ -62,7 +80,7 @@ class Login extends Component {
         apiClient('get', url).then(res => {
             localStorage.setItem("user_id", res.data.data.user.id)
 
-            if(res.data.data.homeroom_class != null){
+            if (res.data.data.homeroom_class != null) {
                 localStorage.setItem("class_id", res.data.data.homeroom_class.id)
             }
 
@@ -74,6 +92,7 @@ class Login extends Component {
         })
     }
     render() {
+        const { visible, message } = this.state;
         return (
             <div className="background">
                 <div className="login">
@@ -87,18 +106,72 @@ class Login extends Component {
                         </div>
                         <div className="right-content-login col-lg-6">
                             <div className="main-right col-12">
-                                <form onSubmit={this.handleSubmit}>
-                                    <h5><strong>Masuk ke akun Gredu kamu</strong></h5>
-                                    <br /><br />
-                                    <input type="text" name="email" onChange={this.handleChange.bind(this)} value={this.state.email} placeholder="Alamat Email" className="col-12"></input>
-                                    <br /><br />
-                                    <input type="password" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
-                                    <br /><br />
-                                    <button type="submit" className="btn btn-young-green col-12">Masuk</button>
-                                    <br /><br />
-                                    {/* <p className="col-12">Lupa Kata Sandi? <Link to='' >Klik Di sini</Link></p> */}
-                                    <br />
-                                </form>
+
+                                <Alert color="danger" className="alert" isOpen={visible}>
+                                        {message}
+                                </Alert>
+
+                                <h5><strong>Masuk ke akun Gredu kamu</strong></h5>
+                                <Formik
+                                    initialValues={{ email: '', password: '' }}
+                                    onSubmit={(values, { setSubmitting }) => {
+                                        setTimeout(() => {
+                                            console.log(values.email, values.password)
+                                            this.handleSubmit(values.email, values.password)
+                                            setSubmitting(false);
+                                        }, 500);
+                                    }}
+                                    validationSchema={Yup.object().shape({
+                                        email: Yup.string()
+                                            .email()
+                                            .required("Email can't be empty"),
+                                        password: Yup.string()
+                                            .required("Password can't be empty")
+                                    })}
+                                >
+                                    {props => {
+                                        const {
+                                            values,
+                                            touched,
+                                            errors,
+                                            handleChange,
+                                            handleBlur,
+                                            handleSubmit
+                                        } = props;
+                                        return (
+                                            <form onSubmit={handleSubmit}>
+                                                <br /><br />
+                                                <input
+                                                    id="email"
+                                                    placeholder="Enter your email"
+                                                    type="text"
+                                                    value={values.email}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    className="col-12"
+                                                />
+                                                {errors.email &&
+                                                    touched.email && <div className="input-feedback">{errors.email}</div>}
+                                                <br /><br />
+                                                <input
+                                                    id="password"
+                                                    placeholder="Enter your password"
+                                                    type="password"
+                                                    value={values.password}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    className="col-12"
+                                                    autoComplete="off"
+                                                />
+                                                {errors.password &&
+                                                    touched.password && <div className="input-feedback">{errors.password}</div>}
+                                                <br /><br />
+                                                <button type="submit" className="btn btn-young-green col-12">Masuk</button>
+
+                                            </form>
+                                        );
+                                    }}
+                                </Formik>
                             </div>
                             <div className="verification">
                                 <p>Belum punya akun?<Link to="/"> Verifikasi Akun</Link></p>
@@ -113,3 +186,15 @@ class Login extends Component {
     }
 }
 export default Login;
+
+{/* <form onSubmit={this.handleSubmit}>
+<h5><strong>Masuk ke akun Gredu kamu</strong></h5>
+<br /><br />
+<input type="text" name="email" onChange={this.handleChange.bind(this)} value={this.state.email} placeholder="Alamat Email" className="col-12"></input>
+<br /><br />
+<input type="password" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
+<br /><br />
+<button type="submit" className="btn btn-young-green col-12">Masuk</button>
+<br /><br />
+<br />
+</form> */}
