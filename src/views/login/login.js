@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './../../styles/login.css'
 import { apiClient } from '../../utils/apiClient'
-
 import Logo from './../../assets/images/gredu-complete.svg'
 
 class Login extends Component {
@@ -86,7 +85,7 @@ class Login extends Component {
                                 <h3>Web Teacher</h3>
                             </div>
                         </div>
-                        <div className="right-content col-lg-6">
+                        <div className="right-content-login col-lg-6">
                             <div className="main-right col-12">
                                 <form onSubmit={this.handleSubmit}>
                                     <h5><strong>Masuk ke akun Gredu kamu</strong></h5>
@@ -100,6 +99,9 @@ class Login extends Component {
                                     {/* <p className="col-12">Lupa Kata Sandi? <Link to='' >Klik Di sini</Link></p> */}
                                     <br />
                                 </form>
+                            </div>
+                            <div className="verification">
+                                <p>Belum punya akun?<Link to="/"> Verifikasi Akun</Link></p>
                             </div>
                             <br /><br />
                             <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>

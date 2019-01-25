@@ -8,7 +8,6 @@
   font-family: "Nunito Sans", sans-serif;
   overflow-y: hidden;
   height: 100vh;
-  /* background-color: #fff; */
 }
 .box {
   position: relative;
@@ -29,7 +28,14 @@
   margin-left: 3.125em;
   
 }
-.box .right-content {
+.box .left-content .main-left h3 {
+  font-size: 20px;
+
+}
+.box .left-content .main-left img{
+  margin-top: 97.5px;
+}
+.box .right-content-login {
   margin-top: 3.125em;
   box-shadow: 0 3px 8px 3px rgba(76, 76, 76, 0.1);
   border-top-right-radius: 10px 10px;
@@ -39,7 +45,7 @@
   background-color: white;
 }
 .main-right {
-  margin-top: 10%;
+  margin-top: 90px;
   text-align: left;
   padding-left: 10%;
 }
@@ -56,6 +62,19 @@
 .main-right p{
   text-align: right;
 }
+.right-content-login  .verification p{
+  text-align: center;
+  bottom: 50px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 13px;
+}
+
+
+
+
 .main-right a:hover {
   text-decoration: none;
   filter: brightness(99%);
