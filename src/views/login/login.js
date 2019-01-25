@@ -62,10 +62,15 @@ class Login extends Component {
         const url = 'v1/users'
         apiClient('get', url).then(res=>{
             localStorage.setItem("user_id", res.data.data.user.id)
+<<<<<<< HEAD
 
             if(res.data.data.homeroom_class != null){
                 localStorage.setItem("class_id", res.data.data.homeroom_class.id)
             }
+=======
+            localStorage.setItem("class_id", res.data.data.homeroom_class.id)
+            localStorage.setItem("class_name", res.data.data.homeroom_class.name)
+>>>>>>> 89b94f4025be5515a8610945baacd9a662716487
 
             // attribute full
             localStorage.setItem("user", JSON.stringify(res.data.data.user))
