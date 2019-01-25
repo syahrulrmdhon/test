@@ -2,45 +2,38 @@ import React, { Component } from 'react'
 import Avatar from './../../assets/images/img_avatar.png'
 
 export default class ProfileDetail extends Component {
-  
   render() {
-    const response = this.props.dataProfile
-
     return (
       <div>
         <div className="avatar-wrapper">
           <img className="avatar" src={Avatar} alt="" />
         </div>
-        <div className="mt-3 name">
-          {response.user.full_name}
-        </div>
-        <div className="ranking">
-          Peringkat {response.user.class_rank.rank ? response.user.class_rank.rank : '-' }
-        </div>
+        <div className="mt-3 name">Fransiska Dominika</div>
+        <div className="ranking">Peringkat 13</div>
         <div className="profile text-left">
           <div className="field">
             <div className="label">NIS:</div>
-            {response.user.nis}
+            13010036
         </div>
           <div className="field">
             <div className="label">NISN:</div>
-            {response.user.nisn}
+            9965682223
         </div>
           <div className="field">
             <div className="label">No. Telp:</div>
-            {response.user.phone_number}
+            082200909087
         </div>
           <div className="field">
             <div className="label">Nama Ayah:</div>
-            {response.parents.father.full_name}
+            King Spinka Sr.
         </div>
           <div className="field">
             <div className="label">Nama Ibu:</div>
-            {response.parents.mother.full_name}
+            Carole Barton Ph D
         </div>
           <div className="field">
             <div className="label">Alamat:</div>
-            {response.user.addresses[0].full_address}
+            Jl. Taman Nasional 13
         </div>
         </div>
       </div>

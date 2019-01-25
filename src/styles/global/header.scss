@@ -38,19 +38,4 @@ $nunito_regular: 'NunitoRegular';
   .logo {
     width: 27px;
   }
-
-
-}
-
-.fix-nav {
-  position: fixed;
-  width: 100%;
-  z-index: 1;
-  top:0;
-}
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
 }

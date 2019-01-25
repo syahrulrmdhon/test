@@ -25,7 +25,7 @@ export default class TablePengetahuan extends Component {
                                     <td>{data.full_name}</td>
                                     {data.subject_score_details.daily_exam.scores.map(function (x, i) {
                                         return <td key={i}>
-                                            {x.result.score === null ? "-" : x.result.score}
+                                            {x.score === null ? "-" : x.score}
                                         </td>
                                     })}
                                     <td>
@@ -33,7 +33,7 @@ export default class TablePengetahuan extends Component {
                                     </td>
                                     {data.subject_score_details.task.scores.map(function (x, i) {
                                         return <td key={i}>
-                                            {x.result.score === null ? "-" : x.result.score}
+                                            {x.score === null ? "-" : x.score}
                                         </td>
                                     })}
                                     <td>
@@ -41,16 +41,16 @@ export default class TablePengetahuan extends Component {
                                     </td>
                                     {data.subject_score_details.midterm_exam.scores.map(function (x, i) {
                                         return <td key={i}>
-                                            {x.result.score === null ? "-" : x.result.score}
+                                            {x.score === null ? "-" : x.score}
                                         </td>
                                     })}
                                     {data.subject_score_details.final_exam.scores.map(function (x, i) {
                                         return <td key={i}>
-                                            {x.result.score === null ? "-" : x.result.score}
+                                            {x.score === null ? "-" : x.score}
                                         </td>
                                     })}
                                     <td>
-                                        {data.subject_score_details.subject_average.score === null ? "-" : data.subject_score_details.subject_average.score}
+                                        {data.subject_score_details.final_exam.average.score === null ? "-" : data.subject_score_details.final_exam.average.score}
                                     </td>
                                 </tr>
                             })
