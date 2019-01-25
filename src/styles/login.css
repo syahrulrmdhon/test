@@ -24,6 +24,7 @@
   box-shadow: 0 3px 8px 3px rgba(76, 76, 76, 0.1);
   border-radius: 5px;
   overflow-y: hidden;
+  background-color: white; 
 }
 .main-right {
   margin-top: 10%;

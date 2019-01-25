@@ -21,6 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
+=======
+yarn.lock
+>>>>>>> 18ddf5a777ad803130a3e62d370f41be2a76655b
 package-lock.json*
 
 # Elastic Beanstalk Files
