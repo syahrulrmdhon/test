@@ -1,8 +1,5 @@
 .sidebar{
     position: fixed;
-    height: calc(100% - 51px); 
-}
-.sidebar.expand{
     width: 335px;
     height: calc(100% - 51px);
     z-index: 10000;
