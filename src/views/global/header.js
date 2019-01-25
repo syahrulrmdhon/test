@@ -28,6 +28,25 @@ export default class Header extends Component {
         });
     }
     render() {
+        const l_school = !!(localStorage.getItem('school')) ? localStorage.getItem('school') : ''
+        let school = null
+        if(l_school){
+            school = JSON.parse(l_school);
+        }
+
+        const l_user = !!(localStorage.getItem('user')) ? localStorage.getItem('user') : ''
+        let user = null
+        if(l_user){
+            user = JSON.parse(l_user);
+        }
+
+        // custom
+        let school_name = !!(school) ? school.name : ''
+        let school_logo = !!(school) ? school.asset.doc_aws_url : Logo
+
+        let user_name = !!(user) ? user.full_name : ''
+        // let user_logo = !!(user) ? user.asset.doc_aws_url : ' '
+
         return (
             <div className="header-bar">
                 <Navbar expand="md" className="font-white">
