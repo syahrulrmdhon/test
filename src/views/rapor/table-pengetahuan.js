@@ -5,36 +5,120 @@ export default class TablePengetahuan extends Component {
     render() {
         return (
             <div className="table-pengetahuan">
-                <Table bordered striped hover responsive>
+                <Table bordered striped responsive hover>
                     <thead>
                         <tr>
                             <th>Nama Siswa</th>
-                            {
-                                this.props.dTableKnowledge && this.props.dTableKnowledge.final_scores && this.props.dTableKnowledge.final_scores.subjects.map(function (x, i) {
-                                    return <th key={i}>
-                                        {x.name}
-                                    </th>
-                                })
-                            }
-                            <th>Kehadiran (%)</th>
+                            <th>Matematika</th>
+                            <th>Bahasa Indonesia</th>
+                            <th>Kesenian</th>
+                            <th>IPA</th>
+                            <th>IPS</th>
+                            <th>Kehadiran</th>
                             <th>Total Nilai (GPA)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            this.props.tableKnowledge.map(function (data, i) {
-                                return <tr key={i}>
-                                    <td>{data.full_name}</td>
-                                    {data.final_scores.subjects.map(function (x, i) {
-                                        return <td key={i}>
-                                            {x.score.score === null ? "N/A" : x.score.score}
-                                        </td>
-                                    })}
-                                    <td>{data.final_scores.total.score === null ? "N/A" : data.final_scores.total.score}</td>
-                                    <td>{data.final_scores.total_average.score === null ? "N/A" : data.final_scores.total_average.score}</td>
-                                </tr>
-                            })
-                        }
+                        <tr>
+                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>85%</td>
+                            <td>90</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>85%</td>
+                            <td>90</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>85%</td>
+                            <td>90</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>85%</td>
+                            <td>90</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>85%</td>
+                            <td>90</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>85%</td>
+                            <td>90</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>85%</td>
+                            <td>90</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>85%</td>
+                            <td>90</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>85%</td>
+                            <td>90</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <th>Muhammad Jihaduddin Fikri Amrillah</th>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>85%</td>
+                            <td>90</td>
+                            <td>80</td>
+                        </tr>
                     </tbody>
                 </Table>
             </div>
