@@ -60,10 +60,20 @@ class Login extends Component {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }
-        }).then(function(res) {
-            console.log('SCHOOL LIST', res.data.data.schools[0].id)
-            localStorage.getItem("token")
-            localStorage.setItem("school_list", res.data.data.schools[0].id)
+
+        })
+    }
+    getUser() {
+        const url = 'v1/users'
+        apiClient('get', url).then(res=>{
+            localStorage.setItem("user_id", res.data.data.user.id)
+            localStorage.setItem("class_id", res.data.data.homeroom_class.id)
+
+            // attribute full
+            localStorage.setItem("user", JSON.stringify(res.data.data.user))
+            localStorage.setItem("school", JSON.stringify(res.data.data.school))
+            localStorage.setItem("current_period", JSON.stringify(res.data.data.current_period))
+            localStorage.setItem("homeroom_class", JSON.stringify(res.data.data.homeroom_class))
         })
     }
     render() {
