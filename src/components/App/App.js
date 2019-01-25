@@ -5,22 +5,10 @@ import { CustomPropsRoute } from './../../components';
 import { MainRoutes } from './../../routes/routes';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-  }
-
-  componentDidMount(){
-    const token = localStorage.getItem('token')
-
-    if(token == null){
-      this.props.history.push('/')
-    }
-  }
-
   render() {
     return (
       <div className="h-100">
-        {/* <main className="h-100"> */}
+        <main className="h-100">
           <Switch>
             {MainRoutes.map((route, key) => {
               return (
@@ -28,7 +16,7 @@ class App extends Component {
               )
             })}
           </Switch>
-        {/* </main> */}
+        </main>
 
       </div>
     )

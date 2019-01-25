@@ -897,20 +897,3 @@ strong, .bold {
   -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
   box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
 }
-
-/* show hide */
-.hide{
-  display: none;
-}
-.show{
-  display: block;
-}
-
-/* error message */
-.error-message{
-  color: #f65151;
-}
-
-.padding-content{
-  padding-top: 120px;
-}
