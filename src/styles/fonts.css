@@ -25,3 +25,10 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'NunitoExtraBold';
+  src: url('../assets/fonts/Nunito-ExtraBold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}

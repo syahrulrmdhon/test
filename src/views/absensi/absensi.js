@@ -24,6 +24,8 @@ export default class Absensi extends Component {
       percentage: '-',
       attendances: [],
       selectedDate: new Date(),
+      searchName: '',
+      searchAttendances: []
     };
 
     this.selectAttendanceType = this.selectAttendanceType.bind(this)
@@ -33,6 +35,7 @@ export default class Absensi extends Component {
     this.handleAttendanceStatusChange = this.handleAttendanceStatusChange.bind(this)
     this.saveStudentAttendance = this.saveStudentAttendance.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
   };
   
   componentDidMount() {
@@ -88,10 +91,10 @@ export default class Absensi extends Component {
     this.setState({selectedSubject: subject})
   }
 
-  getStudents(type) {
+  getAttendances(type, name) {
     if (type === 'homeroom') {
       const date = getDate('case-4', this.state.selectedDate)
-      const route = `v1/attendances/index?class_id=${this.state.selectedClass.value}&attendance_date=${date}`
+      const route = `v1/attendances/index?class_id=${this.state.selectedClass.value}&attendance_date=${date}${name !== undefined ? '&full_name=' + name : ''}`
 
       apiClient('get', route).then(response => {
         const data = response.data
@@ -111,9 +114,15 @@ export default class Absensi extends Component {
     }
   }
 
+  reset() {
+    this.setState({searchName: ''})
+    this.setState({searchAttendances: []})
+  }
+
   handleFilterSubmit() {
     const type = this.state.selectedAttendanceType.value
-    this.getStudents(type)
+    this.reset()
+    this.getAttendances(type)
   }
 
   notStudent() {
@@ -137,16 +146,25 @@ export default class Absensi extends Component {
       "attendances": this.state.attendances
     }
 
-    apiClient('post', route, data)
+    apiClient('post', route, data).then(() => {
+      apiClient('get', `v1/attendances/index?class_id=${this.state.selectedClass.value}&attendance_date=${date}`)
+      .then(response => {
+        const data = response.data
+        this.setState({
+          attended: data.data.attended,
+          unattended: data.data.unattended,
+          percentage: data.data.percentage
+        })
+      })
+    })
   }
 
   handleAttendanceStatusChange(event) {
-    const userId = event.target.id
+    const userId = event.target.name
     const status = event.target.value
 
     const attendances = this.state.attendances
     const attendance = attendances.find(attendance => attendance.user_id === userId)
-    
     attendance.status = status
     
     this.setState({
@@ -155,19 +173,48 @@ export default class Absensi extends Component {
   }
 
   handleDateChange(date) {
-    
     this.setState({selectedDate: date})
   }
 
+  filterAttendances(filter){
+    const data = this.state.attendances
+    data = data.filter((item) =>  {
+      return item.name.includes(filter);
+    });
+  }
+
+  handleKeyPress(event) {
+    const type = this.state.selectedAttendanceType.value
+    let search = event.target.value
+    const attendances = this.state.attendances
+    this.setState({searchName: search})
+
+    if (search) {
+      search = search.toLowerCase()
+      const attendances = this.state.attendances
+      let data = attendances.filter((attendance) =>  {
+        return attendance.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+
+      if (data.length === 0) {
+        this.setState({searchAttendances: null})
+      }
+      else {
+        this.setState({searchAttendances: data})
+      }
+    }
+    else {
+      this.setState({searchAttendances: attendances})
+    }
+  }
+
   render() {
-
     return (
-
       <div className="absensi padding-content">
         <Header />
         <div className="content">
           <div className="row">
-            <div className="col-lg-10 bg-white">
+            <div className="col-lg-10 bg-white rounded-10">
               <div className="row">
                 <div className="col-3 left-content">
                   <FilterAbsensi 
@@ -185,15 +232,13 @@ export default class Absensi extends Component {
                     handleDateChange={this.handleDateChange} />
                 </div>
                 <div className="col-9 center-content">
-                <div className="row">
-                    <div className="col-8">
-                        <div className='date'>Tanggal {getDate('case-1', this.state.selectedDate)}</div>
+                  <div className="search-container">
+                    <div className='date'>Tanggal {getDate('case-1', this.state.selectedDate)}</div>
+                    <div className="search">
+                      <input onChange={this.handleKeyPress} className="input-field" type="text" placeholder="Cari siswa disini..." name="search" value={this.state.searchName}/>
+                      <i className="fa fa-search icon"></i>
                     </div>
-                    <div className="col-4 input-container">
-                        <input className="input-field" type="text" placeholder="Cari siswa disini..." name="search" />
-                        <i className="fa fa-search icon"></i>
-                    </div>
-                </div>
+                  </div>
                   {
                     (!this.state.attendances || this.state.attendances.length === 0) ?
                       <NotAvailable>{this.notStudent()}</NotAvailable>
@@ -201,10 +246,10 @@ export default class Absensi extends Component {
                     <div>
                       <TableAbsensi 
                         attendances={this.state.attendances}
+                        searchAttendances={this.state.searchAttendances}
                         attendanceStatus={this.state.attendanceStatus}
-                        handleOptionChange={this.handleAttendanceStatusChange}
-                      />
-                      <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-3">Simpan</button>
+                        handleOptionChange={this.handleAttendanceStatusChange} />
+                      <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-3 save">Simpan</button>
                     </div>
                   }
                 </div>

@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
 import { getDate } from '../../utils/common'
-// import Select from '../global/selectOption'
 import DatePicker from 'react-datepicker'
 export default class FilterAbsensi extends Component {
     
     render() {
         return (
-            <div className="filter-absensi">
+            <div className="filter">
                 <h5><strong>Filter</strong></h5>
                 <br />
                 <form onSubmit={this.handleSubmit}>
@@ -27,7 +26,7 @@ export default class FilterAbsensi extends Component {
                         onChange={event => this.props.selectAttendanceType(event)}
                         options={this.props.attendanceTypes} 
                         classNamePrefix='select'
-                        placeholder='Pilih Tipe Absensi' />               
+                        placeholder='Pilih Tipe Absensi' />
                     <br /><br />
                     <label>Kelas</label>
                     <Select 
