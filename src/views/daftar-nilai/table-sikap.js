@@ -18,7 +18,7 @@ export default class TableSikap extends Component {
                         {
                             this.props.tableAttitude.map(function (data, i) {
                                 return <tr key={i}>
-                                    <td className="student-name">{data.full_name}</td>
+                                    <td className="student-name" onClick={(e)=> (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
                                     <td>
                                         {data.subject_score_details.sb === null ? "-" : data.subject_score_details.sb}
                                     </td>
@@ -29,7 +29,7 @@ export default class TableSikap extends Component {
                                         {data.attendance_report.percentage === null ? "-" : data.attendance_report.percentage}
                                     </td>
                                 </tr>
-                            })
+                            },this)
                         }
                     </tbody>
                 </Table>

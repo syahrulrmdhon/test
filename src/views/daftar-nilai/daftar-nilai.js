@@ -179,8 +179,10 @@ export default class DaftarNilai extends Component {
             })
         });
     }
-    nameClicked(row) {
-        this.props.history.push('detail/' + row.id);
+    nameClicked(e, id) {
+        console.log(id)
+        e.preventDefault()
+        this.props.history.push('detail/' + id);
     }
     render() {
         return (
@@ -246,7 +248,7 @@ export default class DaftarNilai extends Component {
                                                         tableKnowledge={this.state.tableKnowledge}
                                                         idxScores={this.state.idxScores}
                                                         idxTugas={this.state.idxTugas}
-                                                        nameClicked={this.nameClicked()}
+                                                        nameClicked={this.nameClicked}
                                                     />
                                             }
                                         </div>
@@ -260,6 +262,7 @@ export default class DaftarNilai extends Component {
                                                     <TableKeterampilan
                                                         tableSkill={this.state.tableSkill}
                                                         idxScoresSkill={this.state.idxScoresSkill}
+                                                        nameClicked={this.nameClicked}
                                                     />
                                             }
                                         </div>
@@ -272,6 +275,7 @@ export default class DaftarNilai extends Component {
                                                     :
                                                     <TableSikap
                                                         tableAttitude={this.state.tableAttitude}
+                                                        nameClicked={this.nameClicked}
                                                     />
                                             }
                                         </div>

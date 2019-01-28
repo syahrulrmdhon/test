@@ -39,7 +39,7 @@ class Rapor extends Component {
     this.getStatusList = this.getStatusList.bind(this);
     this.onChangeStatus = this.onChangeStatus.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.onRowClick = this.onRowClick.bind(this)
+    this.nameClicked = this.nameClicked.bind(this)
   }
   componentDidMount() {
     this.getSemesterList();
@@ -170,6 +170,11 @@ class Rapor extends Component {
       });
     });
   }
+  nameClicked(e, id) {
+    console.log(id)
+    e.preventDefault()
+    this.props.history.push('detail/' + id);
+  }
   render() {
     return (
       <div className="padding-content">
@@ -249,6 +254,7 @@ class Rapor extends Component {
                           <TablePengetahuan
                             tableKnowledge={this.state.tableKnowledge}
                             dTableKnowledge={this.state.dTableKnowledge}
+                            nameClicked={this.nameClicked}
                           />
 
                       }
@@ -265,6 +271,7 @@ class Rapor extends Component {
                           <TableKeterampilan
                             tableSkill={this.state.tableSkill}
                             dTableSkill={this.state.dTableSkill}
+                            nameClicked={this.nameClicked}
                           />
                       }
                     </div>
@@ -280,6 +287,7 @@ class Rapor extends Component {
                           <TableSikap
                             tableAttitude={this.state.tableAttitude}
                             dTableAttitude={this.state.dTableAttitude}
+                            nameClicked={this.nameClicked}
                           />
                       }
                     </div>

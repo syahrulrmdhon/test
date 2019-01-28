@@ -24,7 +24,7 @@ export default class TableKeterampilan extends Component {
                         {
                             this.props.tableSkill.map(function (data, i) {
                                 return <tr key={i}>
-                                    <td className="student-name">{data.full_name}</td>
+                                    <td className="student-name" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
                                     {data.final_scores.subjects.map(function (x, i) {
                                         return <td key={i}>
                                             {x.score.score === null ? "-" : x.score.score}
@@ -33,7 +33,7 @@ export default class TableKeterampilan extends Component {
                                     <td>{data.final_scores.total.score === null ? "-" : data.final_scores.total.score}</td>
                                     <td>{data.final_scores.total_average.score === null ? "-" : data.final_scores.total_average.score}</td>
                                 </tr>
-                            })
+                            },this)
                         }
                     </tbody>
                 </Table>

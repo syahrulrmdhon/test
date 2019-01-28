@@ -89,6 +89,7 @@ thead {
 .student-name {
   font-weight: bold;
   color: #3d74b4;
+  cursor: pointer;
 }
 
 /* clear */
