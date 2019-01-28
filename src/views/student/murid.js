@@ -26,7 +26,6 @@ class DaftarMurid extends Component {
     }
 
     onSortChange(sortName, sortOrder) {
-        console.info('onSortChange', arguments)
         this.setState({
             sortName,
             sortOrder

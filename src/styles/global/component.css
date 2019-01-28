@@ -83,8 +83,13 @@ body {
 
 /* table */
 thead {
-  background: #b2d8d8;
+  background: #E8F7F7;
   color: #000000;
+}
+.student-name {
+  font-weight: bold;
+  color: #3d74b4;
+  cursor: pointer;
 }
 
 /* clear */
@@ -96,11 +101,13 @@ thead {
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 3px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background-color: #1a9d7f;
 }
 
 /* background and font color */
