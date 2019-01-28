@@ -19,58 +19,42 @@ export default class TablePengetahuan extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.tableKnowledge.map(function(data, i) {
-              return (
-                <tr key={i}>
-                  <td>{data.full_name}</td>
-                  {data.subject_score_details.daily_exam.scores.map(function(
-                    x,
-                    i
-                  ) {
-                    return (
-                      <td key={i}>
-                        {x.result.score === null ? "-" : x.result.score}
-                      </td>
-                    );
-                  })}
-                  <td>
-                    {data.subject_score_details.daily_exam.average.score ===
-                    null
-                      ? "-"
-                      : data.subject_score_details.daily_exam.average.score}
-                  </td>
-                  {data.subject_score_details.task.scores.map(function(x, i) {
-                    return (
-                      <td key={i}>
-                        {x.result.score === null ? "-" : x.result.score}
-                      </td>
-                    );
-                  })}
-                  <td>
-                    {data.subject_score_details.task.average.score === null
-                      ? "-"
-                      : data.subject_score_details.task.average.score}
-                  </td>
-                  <td>
-                    {data.subject_score_details.midterm_exam.average.score ===
-                    null
-                      ? "-"
-                      : data.subject_score_details.midterm_exam.average.score}
-                  </td>
-                  <td>
-                    {data.subject_score_details.final_exam.average.score ===
-                    null
-                      ? "-"
-                      : data.subject_score_details.final_exam.average.score}
-                  </td>
-                  <td>
-                    {data.subject_score_details.subject_average.score === null
-                      ? "-"
-                      : data.subject_score_details.subject_average.score}
-                  </td>
-                </tr>
-              );
-            })}
+            {this.props.tableKnowledge.map(function (data, i) {
+              return <tr key={i}>
+                <td className="student-name" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
+                {data.subject_score_details.daily_exam.scores.map(function (x, i) {
+                  return (
+                    <td key={i}>
+                      {x.result.score === null ? "-" : x.result.score}
+                    </td>
+                  );
+                })}
+                <td>
+                  {data.subject_score_details.daily_exam.average.score === null ? "-" : data.subject_score_details.daily_exam.average.score}
+                </td>
+                {data.subject_score_details.task.scores.map(function (x, i) {
+                  return (
+                    <td key={i}>
+                      {x.result.score === null ? "-" : x.result.score}
+                    </td>
+                  );
+                })
+                }
+                <td>
+                  {data.subject_score_details.task.average.score === null ? "-" : data.subject_score_details.task.average.score}
+                </td>
+                <td>
+                  {data.subject_score_details.midterm_exam.average.score === null ? "-" : data.subject_score_details.midterm_exam.average.score}
+                </td>
+                <td>
+                  {data.subject_score_details.final_exam.average.score === null ? "-" : data.subject_score_details.final_exam.average.score}
+                </td>
+                <td>
+                  {data.subject_score_details.subject_average.score === null ? "-" : data.subject_score_details.subject_average.score}
+                </td>
+              </tr>
+            }, this)
+            }
           </tbody>
         </Table>
       </div>

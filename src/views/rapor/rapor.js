@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import "./../../styles/rapor.css";
-import "./../../styles/global/component.css";
+import React, { Component } from "react"
+import "./../../styles/rapor.css"
+import "./../../styles/global/component.css"
 
-import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
-import classnames from "classnames";
+import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap"
+import classnames from "classnames"
 
-import Header from "../global/header";
-import MenuBar from "../global/navbar";
-import FilterRapor from "./filter";
-import TablePengetahuan from "./table-pengetahuan";
-import TableKeterampilan from "./table-keterampilan";
-import TableSikap from "./table-sikap";
-import { apiClient } from "../../utils/apiClient";
+import Header from "../global/header"
+import FilterRapor from "./filter"
+import TablePengetahuan from "./table-pengetahuan"
+import TableKeterampilan from "./table-keterampilan"
+import TableSikap from "./table-sikap"
+import { apiClient } from "../../utils/apiClient"
+import { NotAvailable } from '../../views/global/notAvailable'
 
 class Rapor extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class Rapor extends Component {
     this.getStatusList = this.getStatusList.bind(this);
     this.onChangeStatus = this.onChangeStatus.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePrint = this.handlePrint.bind(this);
+    this.nameClicked = this.nameClicked.bind(this)
   }
   componentDidMount() {
     this.getSemesterList();
@@ -58,7 +58,7 @@ class Rapor extends Component {
     const classes = JSON.parse(classList)
     const nameClass = classes.name
     this.setState({
-        nameClass: nameClass
+      nameClass: nameClass
     })
   }
   getSemesterList() {
@@ -67,7 +67,7 @@ class Rapor extends Component {
       let semester = [];
       for (var i in res.data.data) {
         const datum = res.data.data[i];
-        datum.map(function(data, i) {
+        datum.map(function (data, i) {
           semester.push({ value: data.id, label: data.period_name });
         });
       }
@@ -85,7 +85,7 @@ class Rapor extends Component {
       let status = [];
       for (var i in res.data.data) {
         const datum = res.data.data[i];
-        datum.map(function(data, i) {
+        datum.map(function (data, i) {
           status.push({ value: data.key, label: data.value });
         });
       }
@@ -100,26 +100,50 @@ class Rapor extends Component {
   getKnowledge() {
     let url = `v1/scores/report?semester=${
       this.state.selectedSemester.label
-    }&category=knowledge&class_id=${localStorage.getItem(
-      "class_id"
-    )}&risk_status=${this.state.selectedStatus.value}`;
+      }&category=knowledge&class_id=${localStorage.getItem(
+        "class_id"
+      )}&risk_status=${this.state.selectedStatus.value}`;
     return apiClient("get", url);
+  }
+  notKnowledge() {
+    if (!this.state.tableKnowledge) {
+      return 'Mohon pilih filter untuk menampilkan data.'
+    }
+    else {
+      return 'Data belum tersedia.'
+    }
   }
   getSkill() {
     let url = `v1/scores/report?semester=${
       this.state.selectedSemester.label
-    }&category=skill&class_id=${localStorage.getItem("class_id")}&risk_status=${
+      }&category=skill&class_id=${localStorage.getItem("class_id")}&risk_status=${
       this.state.selectedStatus.value
-    }`;
+      }`;
     return apiClient("get", url);
+  }
+  notSkill() {
+    if (!this.state.tableSkill) {
+      return 'Mohon pilih filter untuk menampilkan data.'
+    }
+    else {
+      return 'Data belum tersedia.'
+    }
   }
   getAttitude() {
     let url = `v1/scores/report?semester=${
       this.state.selectedSemester.label
-    }&category=attitude&class_id=${localStorage.getItem(
-      "class_id"
-    )}&risk_status=${this.state.selectedStatus.value}`;
+      }&category=attitude&class_id=${localStorage.getItem(
+        "class_id"
+      )}&risk_status=${this.state.selectedStatus.value}`;
     return apiClient("get", url);
+  }
+  notAttitude() {
+    if (!this.state.tableAttitude) {
+      return 'Mohon pilih filter untuk menampilkan data.'
+    }
+    else {
+      return 'Data belum tersedia.'
+    }
   }
   handleSubmit() {
     let tableKnowledge = [];
@@ -146,7 +170,11 @@ class Rapor extends Component {
       });
     });
   }
-  handlePrint() {}
+  nameClicked(e, id) {
+    console.log(id)
+    e.preventDefault()
+    this.props.history.push('detail/' + id);
+  }
   render() {
     return (
       <div className="padding-content">
@@ -217,26 +245,51 @@ class Rapor extends Component {
                 <TabContent className="col-12" activeTab={this.state.activeTab}>
                   <TabPane tabId="1">
                     <div className="table-content">
-                      <TablePengetahuan
-                        tableKnowledge={this.state.tableKnowledge}
-                        dTableKnowledge={this.state.dTableKnowledge}
-                      />
+                      {
+
+                        (!this.state.tableKnowledge || this.state.tableKnowledge.length === 0) ?
+                          <NotAvailable>{this.notKnowledge()}</NotAvailable>
+
+                          :
+                          <TablePengetahuan
+                            tableKnowledge={this.state.tableKnowledge}
+                            dTableKnowledge={this.state.dTableKnowledge}
+                            nameClicked={this.nameClicked}
+                          />
+
+                      }
                     </div>
                   </TabPane>
                   <TabPane tabId="2">
                     <div className="table-content">
-                      <TableKeterampilan
-                        tableSkill={this.state.tableSkill}
-                        dTableSkill={this.state.dTableSkill}
-                      />
+                      {
+
+                        (!this.state.tableSkill || this.state.tableSkill.length === 0) ?
+                          <NotAvailable>{this.notSkill()}</NotAvailable>
+
+                          :
+                          <TableKeterampilan
+                            tableSkill={this.state.tableSkill}
+                            dTableSkill={this.state.dTableSkill}
+                            nameClicked={this.nameClicked}
+                          />
+                      }
                     </div>
                   </TabPane>
                   <TabPane tabId="3">
                     <div className="table-content">
-                      <TableSikap
-                        tableAttitude={this.state.tableAttitude}
-                        dTableAttitude={this.state.dTableAttitude}
-                      />
+                      {
+
+                        (!this.state.tableAttitude || this.state.tableAttitude.length === 0) ?
+                          <NotAvailable>{this.notAttitude()}</NotAvailable>
+
+                          :
+                          <TableSikap
+                            tableAttitude={this.state.tableAttitude}
+                            dTableAttitude={this.state.dTableAttitude}
+                            nameClicked={this.nameClicked}
+                          />
+                      }
                     </div>
                   </TabPane>
                 </TabContent>

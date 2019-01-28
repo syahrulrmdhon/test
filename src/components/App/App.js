@@ -11,9 +11,18 @@ class App extends Component {
 
   componentDidMount(){
     const token = localStorage.getItem('token')
+    const user_id = localStorage.getItem('user_id')
 
     if(token == null){
       this.props.history.push('/')
+    } else if(user_id == null){
+      const school_list = localStorage.getItem('school_list')
+      if(school_list != null){
+        this.props.history.push('/switch')
+      } else {
+        localStorage.clear()
+        this.props.history.push('/')
+      }
     }
   }
 

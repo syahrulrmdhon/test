@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
 
-import ExportLogo from './../../assets/images/export.svg'
-import PrintLogo from './../../assets/images/print.svg'
+// import ExportLogo from './../../assets/images/export.svg'
 
 export default class FilterRapor extends Component {
     render() {
@@ -30,8 +29,7 @@ export default class FilterRapor extends Component {
                 </form>
                 <button onClick={this.props.handleSubmit} type="submit" className="btn-green">Filter</button>
                 <br />
-                <img className="export" src={ExportLogo} alt="" />
-                <img className="print" onClick={this.props.handlePrint} src={PrintLogo} alt="" />
+                {/* <img className="export" src={ExportLogo} alt="" /> */}
                 <br/>
             </div>
         )
