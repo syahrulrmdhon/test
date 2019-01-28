@@ -23,15 +23,15 @@ export default class TableSikap extends Component {
                     {
                             this.props.tableAttitude.map(function (data, i) {
                                 return <tr key={i}>
-                                    <td>{data.full_name}</td>
+                                    <td className="student-name" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
                                     {data.final_scores.subjects.map(function (x, i) {
                                         return <td key={i}>
-                                            {x.status === null ? "N/A" : x.status}
+                                            {x.status === null ? "-" : x.status}
                                         </td>
                                     })}
-                                    {/* <td>{data.final_scores.total.score === null ? "N/A" : data.final_scores.total.score}</td> */}
+                                    <td>{data.final_scores.attendance_report.percentage === null ? "-" : data.final_scores.attendance_report.percentage}</td>
                                 </tr>
-                            })
+                            },this)
                         }
                     </tbody>
                 </Table>
