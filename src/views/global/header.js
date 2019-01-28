@@ -13,6 +13,8 @@ import Avatar from 'react-avatar';
 import Logo from './../../assets/images/logo.svg'
 import Shutdown from './../../assets/images/shutdown.png'
 import Menu from './navbar'
+var FontAwesome = require('react-fontawesome');
+import { DropdownButton, ButtonToolbar, MenuItem } from 'react-bootstrap';
 
 export default class Header extends Component {
     constructor(props) {
@@ -69,10 +71,15 @@ export default class Header extends Component {
                                     <Collapse isOpen={this.state.isOpen} navbar>
                                         <Nav className="ml-auto" navbar>
                                             <NavItem>
-                                                <NavLink className="font-white" href="">
-                                                    <Avatar facebookId="100008343750912" size="30" round={true} />
-                                                    &ensp;{user_name}
-                                        </NavLink>
+                                                <ButtonToolbar>
+                                                    <DropdownButton
+                                                        bsStyle='info'
+                                                        title={user_name}
+                                                        id='dropdown-profile'
+                                                    >
+                                                        <MenuItem eventKey="1"><FontAwesome name="user" /> <span className="profile">Profil</span></MenuItem>
+                                                    </DropdownButton>
+                                                </ButtonToolbar>
                                             </NavItem>
                                             &emsp;
                                     <NavItem>

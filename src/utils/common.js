@@ -12,6 +12,23 @@ export function setError(data = []){
     return result
 }
 
+export function getUser(){
+    const url = 'v1/users'
+    apiClient('get', url).then(res=>{
+        localStorage.setItem("user_id", res.data.data.user.id)
+
+        if(res.data.data.homeroom_class != null){
+            localStorage.setItem("class_id", res.data.data.homeroom_class.id)
+        }
+
+        // attribute full
+        localStorage.setItem("user", JSON.stringify(res.data.data.user))
+        localStorage.setItem("school", JSON.stringify(res.data.data.school))
+        localStorage.setItem("current_period", JSON.stringify(res.data.data.current_period))
+        localStorage.setItem("homeroom_class", JSON.stringify(res.data.data.homeroom_class))
+    })
+}
+
 export function getDate(format = 'case-1', date = new Date){
     let result = ''
 

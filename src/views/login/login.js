@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './../../styles/login.css'
 import { apiClient } from '../../utils/apiClient'
+import { getUser } from '../../utils/common'
 
 import Logo from './../../assets/images/gredu-complete.svg'
 
@@ -17,7 +18,7 @@ class Login extends Component {
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.getUser = this.getUser.bind(this)
+        // this.getUser = this.getUser.bind(this)
         this.setSchoolList = this.setSchoolList.bind(this)
     }
     handleChange(e) {
@@ -46,32 +47,16 @@ class Login extends Component {
             let school_length = schools.length
             
             if(school_length > 1){
-                localStorage.setItem("school_list", schools)
+                localStorage.setItem("school_list", JSON.stringify(schools))
                 this.props.history.push('/switch')
             } else { // case school only 1
                 let school_id = schools[0].id || null 
 
                 localStorage.setItem("school_id", school_id)
-                this.getUser()
+                getUser()
                 this.props.history.push('/home')
             }
 
-        })
-    }
-    getUser() {
-        const url = 'v1/users'
-        apiClient('get', url).then(res=>{
-            localStorage.setItem("user_id", res.data.data.user.id)
-
-            if(res.data.data.homeroom_class != null){
-                localStorage.setItem("class_id", res.data.data.homeroom_class.id)
-            }
-
-            // attribute full
-            localStorage.setItem("user", JSON.stringify(res.data.data.user))
-            localStorage.setItem("school", JSON.stringify(res.data.data.school))
-            localStorage.setItem("current_period", JSON.stringify(res.data.data.current_period))
-            localStorage.setItem("homeroom_class", JSON.stringify(res.data.data.homeroom_class))
         })
     }
     render() {
