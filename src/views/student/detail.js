@@ -23,12 +23,12 @@ export default class Detail extends Component {
           phone_number: '',
           nis: '',
           nisn: '',
-          class_rank: {
-            rank: null
-          },
           addresses: [{
             full_address: ''
           }],
+        },
+        class_rank: {
+          rank: null
         },
         parents: {
           father: {},

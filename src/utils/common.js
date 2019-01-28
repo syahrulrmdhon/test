@@ -1,4 +1,16 @@
 import { apiClient } from './apiClient'
+import React, { Component } from 'react'
+
+export function seeMore(value, s_count = 50){
+    const count = value.length
+    
+    if(s_count < count){
+        value = value.substring(0, s_count);
+        value += '...'
+    }
+    value = <span className="profile" title={value}>{value}</span>
+    return value
+}
 
 export function setError(data = []){
     let result = {}
@@ -12,7 +24,7 @@ export function setError(data = []){
     return result
 }
 
-export function getUser(){
+export function getUser(redirect = false){
     const url = 'v1/users'
     apiClient('get', url).then(res=>{
         localStorage.setItem("user_id", res.data.data.user.id)
@@ -26,6 +38,10 @@ export function getUser(){
         localStorage.setItem("school", JSON.stringify(res.data.data.school))
         localStorage.setItem("current_period", JSON.stringify(res.data.data.current_period))
         localStorage.setItem("homeroom_class", JSON.stringify(res.data.data.homeroom_class))
+
+        if(redirect){
+            window.location.href = "/home";
+        }
     })
 }
 

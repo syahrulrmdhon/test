@@ -906,6 +906,21 @@ strong, .bold {
   margin-bottom: 10px;
   font-size: 11px;
   object-fit: contain;
+  letter-spacing: 0.3px;
+}
+.header-bar .dropdown-menu{
+  border: none;
+}
+.header-bar .dropdown-menu > li > a{
+  text-decoration: none;
+}
+.header-bar .dropdown-menu > li > a:hover, 
+.header-bar .dropdown-menu > li > a > span:hover{
+  color:#1aa78a;
+}
+.header-bar ul.dropdown-menu li.active a,
+.header-bar ul.dropdown-menu li.active span{
+  color: #1aa78a;
 }
 
 /* List Style */
@@ -927,6 +942,10 @@ strong, .bold {
   -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
   -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
   box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+}
+
+.padding-content{
+  padding-top: 120px;
 }
 
 /* show hide */

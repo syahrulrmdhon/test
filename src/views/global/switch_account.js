@@ -38,8 +38,8 @@ export default class SwitchAccount extends Component {
     // }
     onConfirm(school_id){
         localStorage.setItem("school_id", school_id)
-        getUser()
-        this.props.history.push('/home')
+        getUser(true)
+        // this.props.history.push('/home')
     }
 
     logout(){
