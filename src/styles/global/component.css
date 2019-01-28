@@ -76,6 +76,25 @@ option {
   filter: brightness(90%);
 }
 
+.btn{
+  padding: 10px 30px;
+  margin-right: 10px;
+  border: 1px solid #cccccc;
+  letter-spacing: 0.3px;
+  font-size: 14px;
+}
+.btn.default{
+  color: #1a9d7f;
+}
+.btn.default:hover{
+  border: 1px solid #1a9d7f;
+}
+.btn.green{
+  color: #FFF;
+  background-color: #1a9d7f;
+  padding: 10px 40px;
+}
+
 /* container */
 body {
   background: #f7f7f7;
@@ -83,8 +102,13 @@ body {
 
 /* table */
 thead {
-  background: #b2d8d8;
+  background: #E8F7F7;
   color: #000000;
+}
+.student-name {
+  font-weight: bold;
+  color: #3d74b4;
+  cursor: pointer;
 }
 
 /* clear */
@@ -96,11 +120,13 @@ thead {
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 3px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background-color: #1a9d7f;
 }
 
 /* background and font color */
@@ -877,6 +903,33 @@ strong, .bold {
   border: 1px solid #f7f7f7 !important;
 }
 
+/* header */
+.header-bar #dropdown-profile{
+  background-color: #1aa78a;
+  border: none;
+}
+.header-bar .profile{
+  color: #474f58;
+  margin-bottom: 10px;
+  font-size: 11px;
+  object-fit: contain;
+  letter-spacing: 0.3px;
+}
+.header-bar .dropdown-menu{
+  border: none;
+}
+.header-bar .dropdown-menu > li > a{
+  text-decoration: none;
+}
+.header-bar .dropdown-menu > li > a:hover, 
+.header-bar .dropdown-menu > li > a > span:hover{
+  color:#1aa78a;
+}
+.header-bar ul.dropdown-menu li.active a,
+.header-bar ul.dropdown-menu li.active span{
+  color: #1aa78a;
+}
+
 /* List Style */
 .no-list-style {
   list-style: none !important;
@@ -898,6 +951,10 @@ strong, .bold {
   box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
 }
 
+.padding-content{
+  padding-top: 120px;
+}
+
 /* show hide */
 .hide{
   display: none;
@@ -913,4 +970,146 @@ strong, .bold {
 
 .padding-content{
   padding-top: 120px;
+}
+
+
+/* switch account */
+.switch{
+  background-color: #FFF;
+  height: 100%;
+}
+.switch .header{
+  opacity: 1;
+  background-image: linear-gradient(to bottom, #51d2b4, #229c80);
+  height: 50px;
+}
+.switch .logo{
+  width: 20px;
+}
+.switch .body-gredu{
+  margin-top: 100px;
+}
+.switch .title{
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.53;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+  font-size: 16px;
+  font-weight: 600;
+}
+.switch .trigger-account{
+  position: absolute;
+  left: 340px;
+  top: 10px;
+}
+.switch .account-list{
+  border: 1px solid #dcdcdc;
+  width: 30%;
+  border-radius: 5px;
+}
+.switch .item{
+  border-bottom: 1px solid #dcdcdc;
+  padding-bottom: 20px;
+}
+.switch .item.last{
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.switch .name-school{
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+  font-size: 14px;
+}
+.switch a{
+  position: relative;
+}
+.switch a:hover,
+.switch .name-school:hover{
+  color: #45c4a6;
+  text-decoration: none;
+}
+
+.switch .address{
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #a7a7a7;
+}
+.switch .f-icon{
+  font-size: 15px;
+  color: #45c4a6;
+}
+.switch img.logo-account{
+  width: 80%;
+  text-align: center;
+  display: block;
+}
+
+/* alert */
+.react-confirm-alert-overlay{
+  background: rgba(70, 66, 66, 0.9);
+}
+.react-confirm-alert-body{
+  padding: 0;
+}
+.modal-alert .header{
+  padding:20px;
+  opacity: 0.6;
+  background-color: rgba(235, 244, 254, 0.5);
+}
+.modal-alert .header > h1{
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.3px;
+  text-align: center;
+  color: #4a4a4a;
+  font-size: 14px;
+}
+.modal-alert .toggle{
+  padding: 0px 20px 20px 20px;
+  text-align: center;
+}
+/* bootstrap */
+.open > .dropdown-menu {
+  display: block;
+}
+.dropdown-menu {
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background-clip: padding-box;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  display: none;
+  float: left;
+  font-size: 14px;
+  left: 0;
+  list-style: none;
+  margin: 2px 0 0;
+  min-width: 160px;
+  padding: 5px 0;
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  z-index: 1000;
+}
+.dropdown-menu>li>a {
+  clear: both;
+  color: #333;
+  display: block;
+  font-weight: 400;
+  line-height: 1.42857143;
+  padding: 3px 20px;
+  white-space: nowrap;
 }

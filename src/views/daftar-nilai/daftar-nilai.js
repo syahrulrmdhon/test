@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import './../../styles/daftar-nilai.css'
 
 import Header from '../global/header'
-import MenuBar from '../global/navbar'
 
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames'
@@ -12,6 +10,7 @@ import TablePengetahuan from './table-pengetahuan'
 import TableKeterampilan from './table-keterampilan'
 import TableSikap from './table-sikap';
 import { apiClient } from '../../utils/apiClient'
+import { NotAvailable } from '../../views/global/notAvailable'
 
 export default class DaftarNilai extends Component {
     constructor(props) {
@@ -47,6 +46,7 @@ export default class DaftarNilai extends Component {
         this.getSubjectList = this.getSubjectList.bind(this)
         this.onChangeSubject = this.onChangeSubject.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.nameClicked = this.nameClicked.bind(this)
     }
     componentDidMount() {
         this.getSemesterList()
@@ -121,13 +121,37 @@ export default class DaftarNilai extends Component {
         let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
         return apiClient('get', url)
     }
+    notKnowledge() {
+        if (!this.state.tableKnowledge) {
+            return 'Mohon pilih filter untuk menampilkan data.'
+        }
+        else {
+            return 'Data belum tersedia.'
+        }
+    }
     getSkill() {
         let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=skill&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
         return apiClient('get', url)
     }
+    notSkill() {
+        if (!this.state.tableSkill) {
+            return 'Mohon pilih filter untuk menampilkan data.'
+        }
+        else {
+            return 'Data belum tersedia.'
+        }
+    }
     getAttitude() {
         let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=attitude&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
         return apiClient('get', url)
+    }
+    notAttitude() {
+        if (!this.state.tableAttitude) {
+            return 'Mohon pilih filter untuk menampilkan data.'
+        }
+        else {
+            return 'Data belum tersedia.'
+        }
     }
     handleSubmit() {
         let dataKnowledge = []
@@ -155,11 +179,15 @@ export default class DaftarNilai extends Component {
             })
         });
     }
-
+    nameClicked(e, id) {
+        console.log(id)
+        e.preventDefault()
+        this.props.history.push('detail/' + id);
+    }
     render() {
         return (
             <div className="padding-content">
-                <Header />
+                <Header navbar={false} />
                 <div className="content">
                     <div className="row row-daftar-nilai">
                         <div className="left-content col-2">
@@ -212,26 +240,44 @@ export default class DaftarNilai extends Component {
                                 <TabContent className="col-12" activeTab={this.state.activeTab}>
                                     <TabPane tabId="1">
                                         <div className="table-content">
-                                            <TablePengetahuan
-                                                tableKnowledge={this.state.tableKnowledge}
-                                                idxScores={this.state.idxScores}
-                                                idxTugas={this.state.idxTugas}
-                                            />
+                                            {
+                                                (!this.state.tableKnowledge || this.state.tableKnowledge.length === 0) ?
+                                                    <NotAvailable>{this.notKnowledge()}</NotAvailable>
+                                                    :
+                                                    <TablePengetahuan
+                                                        tableKnowledge={this.state.tableKnowledge}
+                                                        idxScores={this.state.idxScores}
+                                                        idxTugas={this.state.idxTugas}
+                                                        nameClicked={this.nameClicked}
+                                                    />
+                                            }
                                         </div>
                                     </TabPane>
                                     <TabPane tabId="2">
                                         <div className="table-content">
-                                            <TableKeterampilan
-                                                tableSkill={this.state.tableSkill}
-                                                idxScoresSkill={this.state.idxScoresSkill}
-                                            />
+                                            {
+                                                (!this.state.tableSkill || this.state.tableSkill.length === 0) ?
+                                                    <NotAvailable>{this.notSkill()}</NotAvailable>
+                                                    :
+                                                    <TableKeterampilan
+                                                        tableSkill={this.state.tableSkill}
+                                                        idxScoresSkill={this.state.idxScoresSkill}
+                                                        nameClicked={this.nameClicked}
+                                                    />
+                                            }
                                         </div>
                                     </TabPane>
                                     <TabPane tabId="3">
                                         <div className="table-content">
-                                            <TableSikap
-                                                tableAttitude={this.state.tableAttitude}
-                                            />
+                                            {
+                                                (!this.state.tableAttitude || this.state.tableAttitude.length === 0) ?
+                                                    <NotAvailable>{this.notAttitude()}</NotAvailable>
+                                                    :
+                                                    <TableSikap
+                                                        tableAttitude={this.state.tableAttitude}
+                                                        nameClicked={this.nameClicked}
+                                                    />
+                                            }
                                         </div>
                                     </TabPane>
                                 </TabContent>
@@ -239,7 +285,7 @@ export default class DaftarNilai extends Component {
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
         )
     }
 }
