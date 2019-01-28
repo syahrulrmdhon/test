@@ -13,7 +13,7 @@ export default class Header extends Component {
         if(!!(data[fieldname])){
             result = <div className="error-message">{data[fieldname]}</div>
         }
-
+        console.log(data,"myr esult")
         return(
             <div>{result}</div>
         )

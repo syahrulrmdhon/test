@@ -6,6 +6,9 @@ import Logo from './../../assets/images/gredu-complete.svg';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Alert } from 'reactstrap';
+import { getDate, setError } from '../../utils/common'
+import Error from '../global/error'
+
 
 
 
@@ -17,6 +20,7 @@ class Login extends Component {
             password: '',
             visible:false,
             user: {},
+            errors: {},
             schools: [],
             message:''
         }
@@ -31,12 +35,12 @@ class Login extends Component {
         user[e.target.name] = e.target.value
         this.setState(user)
     }
-    handleSubmit(email, password) {
-
+    handleSubmit(e) {
+        e.preventDefault()
         const url = 'authentication/request_token'
         const user = {
-            email: email,
-            password: password
+            email: this.state.email,
+            password: this.state.password
         }
 
         apiClient('post', url, user).then(res => {
@@ -45,7 +49,19 @@ class Login extends Component {
 
         })
             .catch(err => {
-                this.onShowAlert(err.response.data)
+                let response = err.response
+                let data = response.data
+                console.log(this.state.email, this.state.password, "here")
+                if(this.state.email || this.state.password === ''){
+                    this.setState({
+                        errors: setError(data),
+                    })
+                }else{
+                    this.onShowAlert(data)
+                    console.log("or here")
+                }
+                
+
             })
     }
 
@@ -92,7 +108,8 @@ class Login extends Component {
         })
     }
     render() {
-        const { visible, message } = this.state;
+        const { visible, message,errors } = this.state;
+        console.log(errors,"my err")
         return (
             <div className="background">
                 <div className="login">
@@ -111,70 +128,22 @@ class Login extends Component {
                                         {message}
                                 </Alert>
 
+                                <form onSubmit={this.handleSubmit}>
                                 <h5><strong>Masuk ke akun Gredu kamu</strong></h5>
-                                <Formik
-                                    initialValues={{ email: '', password: '' }}
-                                    onSubmit={(values, { setSubmitting }) => {
-                                        setTimeout(() => {
-                                            console.log(values.email, values.password)
-                                            this.handleSubmit(values.email, values.password)
-                                            setSubmitting(false);
-                                        }, 500);
-                                    }}
-                                    validationSchema={Yup.object().shape({
-                                        email: Yup.string()
-                                            .email()
-                                            .required("Email can't be empty"),
-                                        password: Yup.string()
-                                            .required("Password can't be empty")
-                                    })}
-                                >
-                                    {props => {
-                                        const {
-                                            values,
-                                            touched,
-                                            errors,
-                                            handleChange,
-                                            handleBlur,
-                                            handleSubmit
-                                        } = props;
-                                        return (
-                                            <form onSubmit={handleSubmit}>
-                                                <br /><br />
-                                                <input
-                                                    id="email"
-                                                    placeholder="Enter your email"
-                                                    type="text"
-                                                    value={values.email}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    className="col-12"
-                                                />
-                                                {errors.email &&
-                                                    touched.email && <div className="input-feedback">{errors.email}</div>}
-                                                <br /><br />
-                                                <input
-                                                    id="password"
-                                                    placeholder="Enter your password"
-                                                    type="password"
-                                                    value={values.password}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    className="col-12"
-                                                    autoComplete="off"
-                                                />
-                                                {errors.password &&
-                                                    touched.password && <div className="input-feedback">{errors.password}</div>}
-                                                <br /><br />
-                                                <button type="submit" className="btn btn-young-green col-12">Masuk</button>
-
-                                            </form>
-                                        );
-                                    }}
-                                </Formik>
+                                <br /><br />
+                                <input type="text" name="email" onChange={this.handleChange.bind(this)} value={this.state.email} placeholder="Alamat Email" className="col-12"></input>
+                                <Error data={this.state.errors} fieldname= 'email' />
+                                <br /><br />
+                                <input type="password" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
+                                <Error data={this.state.errors} fieldname= 'password' />
+                                <br /><br />
+                                <button type="submit" className="btn btn-young-green col-12">Masuk</button>
+                                <br /><br />
+                                <br />
+                                </form>
                             </div>
                             <div className="verification">
-                                <p>Belum punya akun?<Link to="/"> Verifikasi Akun</Link></p>
+                                <p>Belum punya akun?<Link to="/verification"> Verifikasi Akun</Link></p>
                             </div>
                             <br /><br />
                             <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
