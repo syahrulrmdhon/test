@@ -187,7 +187,7 @@ export default class DaftarNilai extends Component {
     render() {
         return (
             <div className="padding-content">
-                <Header />
+                <Header navbar={false} />
                 <div className="content">
                     <div className="row row-daftar-nilai">
                         <div className="left-content col-2">
@@ -285,7 +285,7 @@ export default class DaftarNilai extends Component {
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
         )
     }
 }
