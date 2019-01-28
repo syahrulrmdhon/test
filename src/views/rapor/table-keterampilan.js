@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from 'reactstrap'
+import ArrowKeterampilan from './arrow-keterampilan';
 
 export default class TableKeterampilan extends Component {
     render() {
@@ -31,9 +32,17 @@ export default class TableKeterampilan extends Component {
                                         </td>
                                     })}
                                     <td>{data.final_scores.total.score === null ? "-" : data.final_scores.total.score}</td>
-                                    <td>{data.final_scores.total_average.score === null ? "-" : data.final_scores.total_average.score}</td>
+                                    <td>
+                                        <ArrowKeterampilan
+                                            arrow={data.final_scores.total_average.improvement_status}
+                                        />
+                                        &nbsp;
+                                        <span>
+                                            {data.final_scores.total_average.score === null ? "-" : data.final_scores.total_average.score}
+                                        </span>
+                                    </td>
                                 </tr>
-                            },this)
+                            }, this)
                         }
                     </tbody>
                 </Table>

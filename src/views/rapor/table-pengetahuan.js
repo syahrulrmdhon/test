@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from 'reactstrap'
+import ArrowPengetahuan from './arrow-pengetahuan';
 
 export default class TablePengetahuan extends Component {
     render() {
@@ -23,6 +24,7 @@ export default class TablePengetahuan extends Component {
                     <tbody>
                         {
                             this.props.tableKnowledge.map(function (data, i) {
+                                console.log('pengetahuan', data)
                                 return <tr key={i}>
                                     <td className="student-name" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
                                     {data.final_scores.subjects.map(function (x, i) {
@@ -31,9 +33,17 @@ export default class TablePengetahuan extends Component {
                                         </td>
                                     })}
                                     <td>{data.final_scores.total.score === null ? "-" : data.final_scores.total.score}</td>
-                                    <td>{data.final_scores.total_average.score === null ? "-" : data.final_scores.total_average.score}</td>
+                                    <td>
+                                        <ArrowPengetahuan
+                                            arrow={data.final_scores.total_average.improvement_status}
+                                        />
+                                        &nbsp;
+                                        <span className="arrow">
+                                            {data.final_scores.total_average.score === null ? "-" : data.final_scores.total_average.score}
+                                        </span>
+                                    </td>
                                 </tr>
-                            },this)
+                            }, this)
                         }
                     </tbody>
                 </Table>
