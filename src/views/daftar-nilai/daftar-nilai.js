@@ -237,6 +237,8 @@ export default class DaftarNilai extends Component {
                                         </Nav>
                                     </span>
                                 </div>
+                            </div>
+
                                 <TabContent className="col-12" activeTab={this.state.activeTab}>
                                     <TabPane tabId="1">
                                         <div className="table-content">
@@ -281,7 +283,6 @@ export default class DaftarNilai extends Component {
                                         </div>
                                     </TabPane>
                                 </TabContent>
-                            </div>
                         </div>
                     </div>
                 </div>
