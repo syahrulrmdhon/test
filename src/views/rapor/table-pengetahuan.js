@@ -31,7 +31,9 @@ export default class TablePengetahuan extends Component {
                                         </td>
                                     })}
                                     <td>{data.final_scores.total.score === null ? "N/A" : data.final_scores.total.score}</td>
-                                    <td>{data.final_scores.total_average.score === null ? "N/A" : data.final_scores.total_average.score}</td>
+                                    <td>
+                                    {data.final_scores.total_average.score === null ? "N/A" : data.final_scores.total_average.score}
+                                    </td>
                                 </tr>
                             })
                         }
