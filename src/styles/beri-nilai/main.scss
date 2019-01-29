@@ -92,20 +92,15 @@ $nunito_bold: 'NunitoBold';
 }
 
 .back {
+  font-size: 14px;
   width: 90%;
-  // margin: 0px auto;
+  margin: 0px auto;
   padding: 12px 0px;
-  display: flex;
-  margin-left: 120px;
-
 }
 
 .back a {
-  font-size: 14px;
-  margin-left: 100px;
-  margin-top: 3px;
+  margin-left: -15px;
   font-family: $nunito_bold;
-  position: relative;
 }
 
 .content .tab-content {
@@ -352,14 +347,3 @@ $nunito_bold: 'NunitoBold';
   }
 }
 
-.size-nav {
-  height: 56px;
-}
-.content-wrap-custom-size {
-  width: 90%;
-  top:147px !important;
-}
-
-.container-fluid-custom {
-  margin-left: -15px;
-}

@@ -80,13 +80,9 @@ export default class Detail extends Component {
   
     return (
       <div className="detail bg-grey">
-        <Header />
-        <div className="bg-white">
-          <div className="back">
-            <Link to="/murid">&lt; Kembali</Link>
-          </div>
-        </div>
-        <div className="content-wrapper">
+        <Header navbar={false} />
+       
+        <div className="content-wrapper content-wrap-custom-size ">
           <div className="row detail-menu">
             <div className="offset-2 col-10 tab-menu">
               <TabMenu 
