@@ -9,6 +9,7 @@ import StudentDetail from '../views/student/detail'
 import TablePengetahuan from '../views/daftar-nilai/table-pengetahuan'
 import TableKeterampilan from '../views/daftar-nilai/table-keterampilan'
 import TableSikap from '../views/daftar-nilai/table-sikap'
+import SwitchAccount from '../views/global/switch_account'
 import NotFound from '../views/global/not-found'
 
 export const MainRoutes = [
@@ -16,6 +17,10 @@ export const MainRoutes = [
         path: '/',
         exact: true,
         component: Login
+    },
+    {
+        path: '/switch',
+        component: SwitchAccount
     },
     {
         path: '/home',

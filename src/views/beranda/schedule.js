@@ -38,7 +38,7 @@ export default class Schedule extends Component{
             {this.state.data.map((result, key) => (
                 items.push(
                     <ScheduleItem data={result} key={key} modal={this.childModal} />,
-                    <ScheduleModal key={result.id} id={result.id} id={result.id} listClass={this.state.classes} setDate={this.state.date} callBack={this.callBack} ref={this.modal} />
+                    <ScheduleModal key={Math.random()} id={result.id} id={result.id} listClass={this.state.classes} setDate={this.state.date} callBack={this.callBack} ref={this.modal} />
                 )
             ))};
         } else {
@@ -54,7 +54,7 @@ export default class Schedule extends Component{
                 <div className="list">
                     {items}
                 </div>
-                <ScheduleModal listClass={this.state.classes} setDate={this.state.date} callBack={this.callBack} ref={this.modal} />
+                <ScheduleModal key={Math.random()} listClass={this.state.classes} setDate={this.state.date} callBack={this.callBack} ref={this.modal} />
                 <div className="add-activity margin-top-4">
                     <a href="javascript:void(0);" onClick={this.childModal} className="fullwidth disblock align-center"><FontAwesome name='plus-circle' /> Tambah Kegiatan</a>
                 </div>
