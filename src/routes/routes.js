@@ -10,6 +10,7 @@ import TablePengetahuan from '../views/daftar-nilai/table-pengetahuan'
 import TableKeterampilan from '../views/daftar-nilai/table-keterampilan'
 import TableSikap from '../views/daftar-nilai/table-sikap'
 import SwitchAccount from '../views/global/switch_account'
+import DetailNilai from './../views/beri-nilai/beri-nilai'
 import NotFound from '../views/global/not-found'
 
 export const MainRoutes = [
@@ -49,6 +50,10 @@ export const MainRoutes = [
     {
         path: '/detail/:id',
         component: StudentDetail
+    },
+    {
+        path: '/nilai/' ,
+        component:DetailNilai   
     },
     {
         path: '*',

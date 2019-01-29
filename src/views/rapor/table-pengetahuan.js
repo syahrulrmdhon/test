@@ -32,11 +32,6 @@ export default class TablePengetahuan extends Component {
                                             {x.score.score === null ? "-" : x.score.score}
                                         </td>
                                     })}
-<<<<<<< HEAD
-                                    <td>{data.final_scores.total.score === null ? "N/A" : data.final_scores.total.score}</td>
-                                    <td>
-                                    {data.final_scores.total_average.score === null ? "N/A" : data.final_scores.total_average.score}
-=======
                                     <td>{data.final_scores.total.score === null ? "-" : data.final_scores.total.score}</td>
                                     <td>
                                         <ArrowPengetahuan
@@ -46,7 +41,6 @@ export default class TablePengetahuan extends Component {
                                         <span className="arrow">
                                             {data.final_scores.total_average.score === null ? "-" : data.final_scores.total_average.score}
                                         </span>
->>>>>>> 5e81ca671d758161e443482ffbbf47b0d607f993
                                     </td>
                                 </tr>
                             }, this)
