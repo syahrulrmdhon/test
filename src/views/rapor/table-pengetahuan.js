@@ -24,7 +24,6 @@ export default class TablePengetahuan extends Component {
                     <tbody>
                         {
                             this.props.tableKnowledge.map(function (data, i) {
-                                console.log('pengetahuan', data)
                                 return <tr key={i}>
                                     <td className="student-name" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
                                     {data.final_scores.subjects.map(function (x, i) {

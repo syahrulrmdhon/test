@@ -123,10 +123,10 @@ export default class DaftarNilai extends Component {
     }
     notKnowledge() {
         if (!this.state.tableKnowledge) {
-            return 'Mohon pilih filter untuk menampilkan data.'
+            return ''
         }
         else {
-            return 'Data belum tersedia.'
+            return 'Mohon pilih filter untuk menampilkan data.'
         }
     }
     getSkill() {
@@ -135,10 +135,10 @@ export default class DaftarNilai extends Component {
     }
     notSkill() {
         if (!this.state.tableSkill) {
-            return 'Mohon pilih filter untuk menampilkan data.'
+            return ''
         }
         else {
-            return 'Data belum tersedia.'
+            return 'Mohon pilih filter untuk menampilkan data.'
         }
     }
     getAttitude() {
@@ -147,10 +147,10 @@ export default class DaftarNilai extends Component {
     }
     notAttitude() {
         if (!this.state.tableAttitude) {
-            return 'Mohon pilih filter untuk menampilkan data.'
+            return ''
         }
         else {
-            return 'Data belum tersedia.'
+            return 'Mohon pilih filter untuk menampilkan data.'
         }
     }
     handleSubmit() {

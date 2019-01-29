@@ -3,6 +3,7 @@ import "./../../styles/rapor.css"
 import "./../../styles/global/component.css"
 
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap"
+import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap'
 import classnames from "classnames"
 
 import Header from "../global/header"
@@ -13,7 +14,7 @@ import TableSikap from "./table-sikap"
 import { apiClient } from "../../utils/apiClient"
 import { NotAvailable } from '../../views/global/notAvailable'
 
-class Rapor extends Component {
+export default class Rapor extends Component {
   constructor(props) {
     super(props);
 
@@ -31,7 +32,8 @@ class Rapor extends Component {
       nameClass: "",
       dTableKnowledge: [],
       dTableSkill: [],
-      dTableAttitude: []
+      dTableAttitude: [],
+      semesterActive: ''
     };
     this.toggle = this.toggle.bind(this);
     this.getSemesterList = this.getSemesterList.bind(this);
@@ -40,11 +42,13 @@ class Rapor extends Component {
     this.onChangeStatus = this.onChangeStatus.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameClicked = this.nameClicked.bind(this)
+    this.getActiveSemester = this.getActiveSemester.bind(this)
   }
   componentDidMount() {
     this.getSemesterList();
     this.getStatusList();
     this.getClassName()
+    this.getActiveSemester()
   }
   toggle(tab) {
     if (this.state.activeTab !== tab) {
@@ -52,6 +56,16 @@ class Rapor extends Component {
         activeTab: tab
       });
     }
+  }
+  getActiveSemester() {
+    const periodObject = localStorage.getItem("current_period")
+    const periodParse = JSON.parse(periodObject)
+    const activeSemester = periodParse.period_name
+    // this.setState({
+    //   semesterActive: activeSemester
+    // })
+    this.state.semesterActive = activeSemester
+    this.getMountData()
   }
   getClassName() {
     const classList = localStorage.getItem("homeroom_class")
@@ -80,14 +94,14 @@ class Rapor extends Component {
     this.setState({ selectedSemester });
   }
   getStatusList() {
-    const url = `v1/filters/risk_status`;
+    const url = `v1/filters/risk_status`
     apiClient("get", url).then(res => {
       let status = [];
       for (var i in res.data.data) {
         const datum = res.data.data[i];
         datum.map(function (data, i) {
           status.push({ value: data.key, label: data.value });
-        });
+        })
       }
       this.setState({
         listStatus: status
@@ -98,52 +112,54 @@ class Rapor extends Component {
     this.setState({ selectedStatus });
   }
   getKnowledge() {
-    let url = `v1/scores/report?semester=${
-      this.state.selectedSemester.label
-      }&category=knowledge&class_id=${localStorage.getItem(
-        "class_id"
-      )}&risk_status=${this.state.selectedStatus.value}`;
+    let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${localStorage.getItem("class_id")}&risk_status=${this.state.selectedStatus.value}`;
     return apiClient("get", url);
   }
-  notKnowledge() {
-    if (!this.state.tableKnowledge) {
-      return 'Mohon pilih filter untuk menampilkan data.'
-    }
-    else {
-      return 'Data belum tersedia.'
-    }
+  getMountKnowledge() {
+    let url = `v1/scores/report?semester=${this.state.semesterActive}&category=knowledge&class_id=${localStorage.getItem("class_id")}&risk_status=all`;
+    console.log('url know', url)
+    return apiClient('get', url)
   }
   getSkill() {
-    let url = `v1/scores/report?semester=${
-      this.state.selectedSemester.label
-      }&category=skill&class_id=${localStorage.getItem("class_id")}&risk_status=${
-      this.state.selectedStatus.value
-      }`;
+    let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=skill&class_id=${localStorage.getItem("class_id")}&risk_status=${this.state.selectedStatus.value}`;
     return apiClient("get", url);
   }
-  notSkill() {
-    if (!this.state.tableSkill) {
-      return 'Mohon pilih filter untuk menampilkan data.'
-    }
-    else {
-      return 'Data belum tersedia.'
-    }
+  getMountSkill() {
+    let url = `v1/scores/report?semester=${this.state.semesterActive}&category=skill&class_id=${localStorage.getItem("class_id")}&risk_status=all`;
+    return apiClient('get', url)
   }
   getAttitude() {
-    let url = `v1/scores/report?semester=${
-      this.state.selectedSemester.label
-      }&category=attitude&class_id=${localStorage.getItem(
-        "class_id"
-      )}&risk_status=${this.state.selectedStatus.value}`;
+    let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=attitude&class_id=${localStorage.getItem("class_id")}&risk_status=${this.state.selectedStatus.value}`;
     return apiClient("get", url);
   }
-  notAttitude() {
-    if (!this.state.tableAttitude) {
-      return 'Mohon pilih filter untuk menampilkan data.'
-    }
-    else {
-      return 'Data belum tersedia.'
-    }
+  getMountAttitude() {
+    let url = `v1/scores/report?semester=${this.state.semesterActive}&category=attitude&class_id=${localStorage.getItem("class_id")}&risk_status=all`;
+    return apiClient('get', url)
+  }
+  getMountData() {
+    let tableKnowledge = [];
+    let tableAttitude = [];
+    let tableSkill = [];
+    this.getMountKnowledge().then(res => {
+      tableKnowledge = res.data.data.users;
+      const iTableKnowledge = tableKnowledge[0];
+      this.getMountAttitude().then(attitudes => {
+        tableAttitude = attitudes.data.data.users;
+        const iTableAttitude = tableAttitude[0];
+        this.getMountSkill().then(skills => {
+          tableSkill = skills.data.data.users;
+          const iTableSkill = tableSkill[0];
+          this.setState({
+            tableKnowledge: tableKnowledge,
+            tableAttitude: tableAttitude,
+            tableSkill: tableSkill,
+            dTableKnowledge: iTableKnowledge,
+            dTableAttitude: iTableAttitude,
+            dTableSkill: iTableSkill
+          })
+        })
+      })
+    })
   }
   handleSubmit() {
     let tableKnowledge = [];
@@ -165,13 +181,12 @@ class Rapor extends Component {
             dTableKnowledge: iTableKnowledge,
             dTableAttitude: iTableAttitude,
             dTableSkill: iTableSkill
-          });
-        });
-      });
-    });
+          })
+        })
+      })
+    })
   }
   nameClicked(e, id) {
-    console.log(id)
     e.preventDefault()
     this.props.history.push('detail/' + id);
   }
@@ -194,106 +209,63 @@ class Rapor extends Component {
               />
             </div>
             <div className="right-content col-10">
-              <div className="row">
+              <div className="row margin-bottom-4">
                 <div className="col-8">
-                  <h5 className="float-left">
-                    <strong>Rapor Kelas {this.state.nameClass}</strong>
+                  <h5 className="float-left margin-left-3 padding-top-1">
+                    <strong className="large-text">Rapor Kelas {this.state.nameClass} {this.state.semesterActive}</strong>
                   </h5>
                 </div>
                 <div className="col-4">
-                  <span className="float-right">
+                  <span className="float-right margin-right-4">
                     <Nav tabs className="border-0 pull-right">
                       <NavItem className="tab-nilai">
-                        <NavLink
-                          className={classnames({
-                            active: this.state.activeTab === "1"
-                          })}
-                          onClick={() => {
-                            this.toggle("1");
-                          }}
-                        >
+                        <NavLink className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.toggle("1"); }}>
                           Pengetahuan
                         </NavLink>
                       </NavItem>
                       <NavItem className="tab-nilai">
-                        <NavLink
-                          className={classnames({
-                            active: this.state.activeTab === "2"
-                          })}
-                          onClick={() => {
-                            this.toggle("2");
-                          }}
-                        >
+                        <NavLink className={classnames({ active: this.state.activeTab === "2" })} onClick={() => { this.toggle("2"); }}>
                           Keterampilan
                         </NavLink>
                       </NavItem>
                       <NavItem className="tab-nilai">
-                        <NavLink
-                          className={classnames({
-                            active: this.state.activeTab === "3"
-                          })}
-                          onClick={() => {
-                            this.toggle("3");
-                          }}
-                        >
+                        <NavLink className={classnames({ active: this.state.activeTab === "3" })} onClick={() => { this.toggle("3"); }}>
                           Sikap
                         </NavLink>
                       </NavItem>
                     </Nav>
                   </span>
                 </div>
-                <TabContent className="col-12" activeTab={this.state.activeTab}>
-                  <TabPane tabId="1">
-                    <div className="table-content">
-                      {
-
-                        (!this.state.tableKnowledge || this.state.tableKnowledge.length === 0) ?
-                          <NotAvailable>{this.notKnowledge()}</NotAvailable>
-
-                          :
-                          <TablePengetahuan
-                            tableKnowledge={this.state.tableKnowledge}
-                            dTableKnowledge={this.state.dTableKnowledge}
-                            nameClicked={this.nameClicked}
-                          />
-
-                      }
-                    </div>
-                  </TabPane>
-                  <TabPane tabId="2">
-                    <div className="table-content">
-                      {
-
-                        (!this.state.tableSkill || this.state.tableSkill.length === 0) ?
-                          <NotAvailable>{this.notSkill()}</NotAvailable>
-
-                          :
-                          <TableKeterampilan
-                            tableSkill={this.state.tableSkill}
-                            dTableSkill={this.state.dTableSkill}
-                            nameClicked={this.nameClicked}
-                          />
-                      }
-                    </div>
-                  </TabPane>
-                  <TabPane tabId="3">
-                    <div className="table-content">
-                      {
-
-                        (!this.state.tableAttitude || this.state.tableAttitude.length === 0) ?
-                          <NotAvailable>{this.notAttitude()}</NotAvailable>
-
-                          :
-                          <TableSikap
-                            tableAttitude={this.state.tableAttitude}
-                            dTableAttitude={this.state.dTableAttitude}
-                            nameClicked={this.nameClicked}
-                          />
-                      }
-                    </div>
-                  </TabPane>
-                </TabContent>
               </div>
+              <TabContent className="col-12" activeTab={this.state.activeTab}>
+                <TabPane tabId="1">
+                  <div className="table-content">
+                    <TablePengetahuan
+                      tableKnowledge={this.state.tableKnowledge}
+                      dTableKnowledge={this.state.dTableKnowledge}
+                      nameClicked={this.nameClicked}
+                    />
+                  </div>
+                </TabPane>
+                <TabPane tabId="2">
+                  <div className="table-content">
+                    <TableKeterampilan
+                      tableSkill={this.state.tableSkill}
+                      dTableSkill={this.state.dTableSkill}
+                      nameClicked={this.nameClicked}
+                    />
+                  </div>
+                </TabPane>
+                <TabPane tabId="3">
+                  <div className="table-content">
+                    <TableSikap
+                      tableAttitude={this.state.tableAttitude}
+                      dTableAttitude={this.state.dTableAttitude}
+                      nameClicked={this.nameClicked}
+                    />
+                  </div>
+                </TabPane>
+              </TabContent>
             </div>
           </div>
         </div>
@@ -301,4 +273,3 @@ class Rapor extends Component {
     );
   }
 }
-export default Rapor;

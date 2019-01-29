@@ -13,6 +13,7 @@ export default class FilterNilai extends Component {
                         value={this.props.selectedSemester}
                         onChange={(e) => { this.props.onChangeSemester(e) }}
                         options={this.props.listSemester}
+                        classNamePrefix='select'
                         placeholder="Pilih Semester..."
                     />
                     <br /><br />
@@ -21,6 +22,7 @@ export default class FilterNilai extends Component {
                         value={this.props.selectedClass}
                         onChange={(e) => { this.props.onChangeClass(e) }}
                         options={this.props.listClass}
+                        classNamePrefix='select'
                         placeholder="Pilih Kelas..."
                     />
                     <br /><br />
@@ -30,6 +32,7 @@ export default class FilterNilai extends Component {
                         value={this.props.selectedSubject}
                         onChange={(e) => { this.props.onChangeSubject(e) }}
                         options={this.props.listSubject}
+                        classNamePrefix='select'
                         placeholder="Pilih Pelajaran..."
                     />
                     <br /><br />
