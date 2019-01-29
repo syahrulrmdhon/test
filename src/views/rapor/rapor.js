@@ -12,7 +12,6 @@ import TablePengetahuan from "./table-pengetahuan"
 import TableKeterampilan from "./table-keterampilan"
 import TableSikap from "./table-sikap"
 import { apiClient } from "../../utils/apiClient"
-import { NotAvailable } from '../../views/global/notAvailable'
 
 export default class Rapor extends Component {
   constructor(props) {
@@ -61,9 +60,6 @@ export default class Rapor extends Component {
     const periodObject = localStorage.getItem("current_period")
     const periodParse = JSON.parse(periodObject)
     const activeSemester = periodParse.period_name
-    // this.setState({
-    //   semesterActive: activeSemester
-    // })
     this.state.semesterActive = activeSemester
     this.getMountData()
   }
@@ -117,7 +113,6 @@ export default class Rapor extends Component {
   }
   getMountKnowledge() {
     let url = `v1/scores/report?semester=${this.state.semesterActive}&category=knowledge&class_id=${localStorage.getItem("class_id")}&risk_status=all`;
-    console.log('url know', url)
     return apiClient('get', url)
   }
   getSkill() {
@@ -210,13 +205,13 @@ export default class Rapor extends Component {
             </div>
             <div className="right-content col-10">
               <div className="row margin-bottom-4">
-                <div className="col-8">
-                  <h5 className="float-left margin-left-3 padding-top-1">
-                    <strong className="large-text">Rapor Kelas {this.state.nameClass} {this.state.semesterActive}</strong>
+                <div className="col-4">
+                  <h5 className="float-left margin-left-1 padding-top-1">
+                    <strong className="large-text">Rapor Kelas {this.state.nameClass}</strong>
                   </h5>
                 </div>
-                <div className="col-4">
-                  <span className="float-right margin-right-4">
+                <div className="col-8">
+                  <span className="float-right margin-right-1">
                     <Nav tabs className="border-0 pull-right">
                       <NavItem className="tab-nilai">
                         <NavLink className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.toggle("1"); }}>
@@ -237,33 +232,27 @@ export default class Rapor extends Component {
                   </span>
                 </div>
               </div>
-              <TabContent className="col-12" activeTab={this.state.activeTab}>
+              <TabContent activeTab={this.state.activeTab} className="margin-left-1 margin-right-1">
                 <TabPane tabId="1">
-                  <div className="table-content">
-                    <TablePengetahuan
-                      tableKnowledge={this.state.tableKnowledge}
-                      dTableKnowledge={this.state.dTableKnowledge}
-                      nameClicked={this.nameClicked}
-                    />
-                  </div>
+                  <TablePengetahuan
+                    tableKnowledge={this.state.tableKnowledge}
+                    dTableKnowledge={this.state.dTableKnowledge}
+                    nameClicked={this.nameClicked}
+                  />
                 </TabPane>
                 <TabPane tabId="2">
-                  <div className="table-content">
-                    <TableKeterampilan
-                      tableSkill={this.state.tableSkill}
-                      dTableSkill={this.state.dTableSkill}
-                      nameClicked={this.nameClicked}
-                    />
-                  </div>
+                  <TableKeterampilan
+                    tableSkill={this.state.tableSkill}
+                    dTableSkill={this.state.dTableSkill}
+                    nameClicked={this.nameClicked}
+                  />
                 </TabPane>
                 <TabPane tabId="3">
-                  <div className="table-content">
-                    <TableSikap
-                      tableAttitude={this.state.tableAttitude}
-                      dTableAttitude={this.state.dTableAttitude}
-                      nameClicked={this.nameClicked}
-                    />
-                  </div>
+                  <TableSikap
+                    tableAttitude={this.state.tableAttitude}
+                    dTableAttitude={this.state.dTableAttitude}
+                    nameClicked={this.nameClicked}
+                  />
                 </TabPane>
               </TabContent>
             </div>

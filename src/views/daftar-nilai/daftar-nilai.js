@@ -206,12 +206,14 @@ export default class DaftarNilai extends Component {
                             />
                         </div>
                         <div className="right-content col-10">
-                            <div className="row">
-                                <div className="col-8">
-                                    <h5 className="float-left"><strong>Daftar Nilai</strong></h5>
-                                </div>
+                            <div className="row margin-bottom-4">
                                 <div className="col-4">
-                                    <span className="float-right">
+                                    <h5 className="float-left margin-left-1 padding-top-1">
+                                        <strong className="large-text">Daftar Nilai</strong>
+                                    </h5>
+                                </div>
+                                <div className="col-8">
+                                    <span className="float-right margin-right-1">
                                         <Nav tabs className="border-0 pull-right">
                                             <NavItem className="tab-nilai">
                                                 <NavLink
@@ -239,50 +241,44 @@ export default class DaftarNilai extends Component {
                                 </div>
                             </div>
 
-                                <TabContent className="col-12" activeTab={this.state.activeTab}>
-                                    <TabPane tabId="1">
-                                        <div className="table-content">
-                                            {
-                                                (!this.state.tableKnowledge || this.state.tableKnowledge.length === 0) ?
-                                                    <NotAvailable>{this.notKnowledge()}</NotAvailable>
-                                                    :
-                                                    <TablePengetahuan
-                                                        tableKnowledge={this.state.tableKnowledge}
-                                                        idxScores={this.state.idxScores}
-                                                        idxTugas={this.state.idxTugas}
-                                                        nameClicked={this.nameClicked}
-                                                    />
-                                            }
-                                        </div>
-                                    </TabPane>
-                                    <TabPane tabId="2">
-                                        <div className="table-content">
-                                            {
-                                                (!this.state.tableSkill || this.state.tableSkill.length === 0) ?
-                                                    <NotAvailable>{this.notSkill()}</NotAvailable>
-                                                    :
-                                                    <TableKeterampilan
-                                                        tableSkill={this.state.tableSkill}
-                                                        idxScoresSkill={this.state.idxScoresSkill}
-                                                        nameClicked={this.nameClicked}
-                                                    />
-                                            }
-                                        </div>
-                                    </TabPane>
-                                    <TabPane tabId="3">
-                                        <div className="table-content">
-                                            {
-                                                (!this.state.tableAttitude || this.state.tableAttitude.length === 0) ?
-                                                    <NotAvailable>{this.notAttitude()}</NotAvailable>
-                                                    :
-                                                    <TableSikap
-                                                        tableAttitude={this.state.tableAttitude}
-                                                        nameClicked={this.nameClicked}
-                                                    />
-                                            }
-                                        </div>
-                                    </TabPane>
-                                </TabContent>
+                            <TabContent className="margin-left-1 margin-right-1" activeTab={this.state.activeTab}>
+                                <TabPane tabId="1">
+                                    {
+                                        (!this.state.tableKnowledge || this.state.tableKnowledge.length === 0) ?
+                                            <NotAvailable>{this.notKnowledge()}</NotAvailable>
+                                            :
+                                            <TablePengetahuan
+                                                tableKnowledge={this.state.tableKnowledge}
+                                                idxScores={this.state.idxScores}
+                                                idxTugas={this.state.idxTugas}
+                                                nameClicked={this.nameClicked}
+                                            />
+                                    }
+                                </TabPane>
+                                <TabPane tabId="2">
+                                    {
+                                        (!this.state.tableSkill || this.state.tableSkill.length === 0) ?
+                                            <NotAvailable>{this.notSkill()}</NotAvailable>
+                                            :
+                                            <TableKeterampilan
+                                                tableSkill={this.state.tableSkill}
+                                                idxScoresSkill={this.state.idxScoresSkill}
+                                                nameClicked={this.nameClicked}
+                                            />
+                                    }
+                                </TabPane>
+                                <TabPane tabId="3">
+                                    {
+                                        (!this.state.tableAttitude || this.state.tableAttitude.length === 0) ?
+                                            <NotAvailable>{this.notAttitude()}</NotAvailable>
+                                            :
+                                            <TableSikap
+                                                tableAttitude={this.state.tableAttitude}
+                                                nameClicked={this.nameClicked}
+                                            />
+                                    }
+                                </TabPane>
+                            </TabContent>
                         </div>
                     </div>
                 </div>

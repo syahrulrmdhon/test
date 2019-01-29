@@ -4,8 +4,7 @@ import { Table } from "reactstrap";
 export default class TablePengetahuan extends Component {
   render() {
     return (
-      <div className="table-pengetahuan">
-        <Table bordered striped responsive hover>
+        <Table bordered striped responsive hover className="table-nilai">
           <thead>
             <tr>
               <th>Nama Siswa</th>
@@ -57,7 +56,6 @@ export default class TablePengetahuan extends Component {
             }
           </tbody>
         </Table>
-      </div>
     );
   }
 }

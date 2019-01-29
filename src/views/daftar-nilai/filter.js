@@ -5,10 +5,12 @@ export default class FilterNilai extends Component {
     render() {
         return (
             <div className="filter-nilai">
-                <h5><strong>Filter</strong></h5>
+                <h5 className="padding-top-1">
+                    <strong className="large-text">Filter</strong>
+                </h5>
                 <br />
-                <form>
-                    <label>Semester</label>
+                <form className="margin-top-4">
+                    <label className="padding-bottom-2 small-text-filter">Semester</label>
                     <Select
                         value={this.props.selectedSemester}
                         onChange={(e) => { this.props.onChangeSemester(e) }}
@@ -17,7 +19,7 @@ export default class FilterNilai extends Component {
                         placeholder="Pilih Semester..."
                     />
                     <br /><br />
-                    <label>Kelas</label>
+                    <label className="padding-bottom-2 small-text-filter">Kelas</label>
                     <Select
                         value={this.props.selectedClass}
                         onChange={(e) => { this.props.onChangeClass(e) }}
@@ -26,7 +28,7 @@ export default class FilterNilai extends Component {
                         placeholder="Pilih Kelas..."
                     />
                     <br /><br />
-                    <label>Mata Pelajaran</label>
+                    <label className="padding-bottom-2 small-text-filter">Mata Pelajaran</label>
                     <Select
                         isDisabled={this.props.disabledSelectSubject}
                         value={this.props.selectedSubject}

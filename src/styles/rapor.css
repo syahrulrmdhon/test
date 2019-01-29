@@ -9,43 +9,18 @@
 }
 
 .left-content {
-  height: calc(100%-100px);
   width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
 .right-content {
-  height: calc(100%-100px);
   width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
-  overflow-y: scroll;
-}
-
-.tab-nilai {
-  border: solid 1px #cccccc;
-  background: #f2f2f2;
-  color: #999999;
-  font-weight: normal;
-  cursor: pointer;
-}
-
-.nav-tabs .tab-nilai .nav-link {
-  border: none;
-}
-
-.tab-nilai:active {
-  background: white;
-  color: #333333;
 }
 
 .arrow img {
   width: 10px;
   height: 20px;
-}
-
-.small-text-filter {
-  font-size: 10px;
-  color: #6d6d6d;
 }

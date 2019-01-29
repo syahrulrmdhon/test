@@ -1,6 +1,13 @@
 /* Font NunitoSans */
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
 
+/* table nilai */
+.table-nilai {
+  height: 400px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
 /* box content */
 .content {
   background: #f7f7f7;
@@ -142,12 +149,6 @@ thead {
 .font-grey {
   font-family: "Nunito Sans", sans-serif;
   color: #9da2a6;
-}
-
-/* table content */
-.table-content {
-  height: 400px;
-  overflow-y: scroll;
 }
 
 /* Important Reset */
@@ -901,6 +902,11 @@ strong, .bold {
 /* Small Font */
 .small-text {
   font-size: 12px !important;
+}
+
+.small-text-filter {
+  font-size: 10px;
+  color: #6d6d6d;
 }
 
 .normal-text {
