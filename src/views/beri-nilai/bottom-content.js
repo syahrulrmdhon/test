@@ -24,11 +24,7 @@ export default class componentName extends Component {
 
                 </div>
                 <div className="row">
-                    <div className="table-position">
-                        <table>
-                            
-                        </table>
-                    </div>
+                    
                 </div>
             </div>
         )
