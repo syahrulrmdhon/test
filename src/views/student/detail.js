@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/student/detail.scss'
 
-import { Link } from 'react-router-dom'
 import Header from '../global/header'
 import TabMenu from '../../components/TabDetail/TabDetail'
 import Content from '../../components/Content/Content'

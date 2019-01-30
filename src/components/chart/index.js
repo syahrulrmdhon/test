@@ -1,29 +1,38 @@
 import React, { Component } from 'react';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} from 'Recharts';
-import { data } from './data';
+import { Chart } from "react-google-charts";
+
 
 export default class SingleBarChat extends Component {
   render() {
     return (
-      <div>
-        <BarChart width={735} height={263} data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="1 1"/>
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" fill="#2fa8e7" />
-        </BarChart>
-      </div>
+      <div style={{ display: 'flex' }}>
+      <Chart
+        width={'770px'}
+        height={'220px'}
+        chartType="Bar"
+        loader={<div>Loading Chart</div>}
+        data={[
+          ['', 'Siswa'],
+          ['0-10', 1],
+          ['11-20', 7],
+          ['21-30', 1],
+          ['31-40', 8],
+          ['41-50', 9],
+          ['51-60', 6],
+          ['61-70', 8]
+        ]}
+        options={{
+          legend: {position: 'none'},
+          hAxis: {
+          viewWindow: {
+            min: [7, 100, 0],
+            max: [17, 30, 0]
+          }
+        }
+        }}
+
+      />
+     </div>
     )
   }
 }

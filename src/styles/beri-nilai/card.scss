@@ -1,0 +1,52 @@
+@import url("../../styles/global/component.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+$nunito_light: 'NunitoLight';
+$nunito_regular: 'NunitoRegular';
+$nunito_semi_bold: 'NunitoSemiBold';
+$nunito_bold: 'NunitoBold';
+$nunito_extra_bold: 'NunitoExtraBold';
+
+
+.card-nilai {
+    height: 50%;
+  }
+
+  .card {
+    background: white;
+    padding: 10px;
+    margin: auto;
+    height: 25.6%;
+    border-radius: 10px;
+    border: 0.5px solid #cccccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &__label {
+      font-size: 14px;
+      color: #2d2d2d;
+      font-family: $nunito_bold;
+    }
+  
+    &__value {
+      color: #1a9d7f;
+      font-size: 26px;
+      margin: 20px;
+      font-family: $nunito_bold;
+    }
+    &__error {
+      color: #eb373e;
+      font-size: 26px;
+      margin: 20px;
+      font-family: $nunito_bold;
+    }
+  }
+  
+  .card h3 {
+    color: #199d7f;
+  }
+  .card p {
+    color: #2d2d2d;
+  }
+  

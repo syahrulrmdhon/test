@@ -345,5 +345,51 @@ $nunito_bold: 'NunitoBold';
         font-family: $nunito_semi_bold;
     }
   }
+  
 }
 
+.tab-position {
+  margin-left: 4% !important;
+}
+
+.top-content{
+  height: 41.34vh;
+}
+
+.title-content {
+  padding-top:29px;
+  padding-left: 29px;
+  padding-bottom: 29px;
+  
+  span {
+    font-family: $nunito_bold;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2d2d2d;
+  }
+}
+
+.content-chart {
+  // display: flex
+}
+
+.box-postition {
+  padding-left: 5em;
+  padding-top:1.8em;
+  padding-bottom: 15px;
+}
+
+.card-detail {
+  width: 169px;
+  height: 110px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 0.5px solid #cccccc; 
+}
+
+.bottom-content{
+  margin-top:2%;
+}
