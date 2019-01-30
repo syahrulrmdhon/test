@@ -5,7 +5,7 @@ import ArrowPengetahuan from './arrow-pengetahuan';
 export default class TablePengetahuan extends Component {
     render() {
         return (
-            <Table bordered striped hover responsive className="table-nilai">
+            <Table bordered striped hover responsive>
                 <thead>
                     <tr>
                         <th>Nama Siswa</th>
@@ -20,7 +20,7 @@ export default class TablePengetahuan extends Component {
                         <th>Total Nilai (GPA)</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-nilai">
                     {
                         this.props.tableKnowledge.map(function (data, i) {
                             return <tr key={i}>

@@ -18,7 +18,7 @@ export default class TableSikap extends Component {
                         <th>Kehadiran (%)</th>
                     </tr>
                 </thead>
-                <tbody className="body-table">
+                <tbody className="table-nilai">
                     {
                         this.props.tableAttitude.map(function (data, i) {
                             return <tr key={i}>

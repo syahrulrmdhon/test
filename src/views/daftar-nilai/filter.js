@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
+import classnames from 'classnames'
 
 export default class FilterNilai extends Component {
     render() {
+        let isDisabled = false
+        if (this.props.selectedClass === '' || this.props.selectedSemester === '' || this.props.selectedSubject === '') {
+            isDisabled = "cursor"
+        }
         return (
             <div className="filter-nilai">
                 <h5 className="padding-top-1">
@@ -39,7 +44,10 @@ export default class FilterNilai extends Component {
                     />
                     <br /><br />
                 </form>
-                <button type="submit" onClick={this.props.handleSubmit} className="btn-green">Filter</button>
+                <button type="submit" className={classnames("btn-green", isDisabled)}
+                    disabled={isDisabled} onClick={this.props.handleSubmit} className="btn-green">
+                    Filter
+                </button>
             </div>
         )
     }

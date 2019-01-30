@@ -3,7 +3,6 @@
 
 /* table nilai */
 .table-nilai {
-  height: 400px;
   overflow-x: scroll;
   overflow-y: scroll;
 }
@@ -1091,9 +1090,9 @@ ul > li.nav-item a.active{
 
 /* table responsive */
 .table-responsive {
-  min-height: 450px;
+  /* min-height: 450px;
   overflow-x: auto;
-  margin-top: 20px;
+  margin-top: 20px; */
 }
 .table {
   width: 100%;

@@ -1,32 +1,32 @@
-@import url("./global/component.css");
-.nilai {
-  background: #f7f7f7;
-  margin-bottom: 20px;
-  font-family: "Nunito Sans", sans-serif;
+.padding-content {
+  height: 95%;
   overflow-y: hidden;
 }
 
 .content {
   margin-bottom: 20px;
+  height: 97%;
 }
 
 .row-daftar-nilai {
+  height: 97%;
   background-color: white;
 }
 
 .left-content {
+  height: 100%;
+  width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
-  background: white;
-  height: 530px;
 }
 
 .right-content {
+  height: 100%;
+  width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
-  background: white;
-  height: 530px;
 }
+
 .tab-content {
   height: 100%;
 }
@@ -35,4 +35,14 @@
 }
 .not-available {
   height: 90%;
+}
+
+.cursor {
+  cursor: crosshair;
+  background-color: #4b635d;
+}
+
+.cursor:hover {
+  cursor: default;
+  background-color: #4b635d;
 }

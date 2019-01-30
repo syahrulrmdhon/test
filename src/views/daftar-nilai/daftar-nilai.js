@@ -30,6 +30,7 @@ export default class DaftarNilai extends Component {
             tableKnowledge: [],
             tableSkill: [],
             tableAttitude: [],
+            disabled: false,
 
             // knowledge
             idxScores: 0,
@@ -126,7 +127,7 @@ export default class DaftarNilai extends Component {
             return ''
         }
         else {
-            return 'Mohon pilih filter untuk menampilkan data.'
+            return 'Mohon pilih semua filter untuk menampilkan data.'
         }
     }
     getSkill() {
@@ -138,7 +139,7 @@ export default class DaftarNilai extends Component {
             return ''
         }
         else {
-            return 'Mohon pilih filter untuk menampilkan data.'
+            return 'Mohon pilih semua filter untuk menampilkan data.'
         }
     }
     getAttitude() {
@@ -150,7 +151,7 @@ export default class DaftarNilai extends Component {
             return ''
         }
         else {
-            return 'Mohon pilih filter untuk menampilkan data.'
+            return 'Mohon pilih semua filter untuk menampilkan data.'
         }
     }
     handleSubmit() {
@@ -180,7 +181,6 @@ export default class DaftarNilai extends Component {
         });
     }
     nameClicked(e, id) {
-        console.log(id)
         e.preventDefault()
         this.props.history.push('detail/' + id);
     }
@@ -207,12 +207,12 @@ export default class DaftarNilai extends Component {
                         </div>
                         <div className="right-content col-10">
                             <div className="row margin-bottom-4">
-                                <div className="col-4">
+                                <div className="col-lg-2">
                                     <h5 className="float-left margin-left-1 padding-top-1">
                                         <strong className="large-text">Daftar Nilai</strong>
                                     </h5>
                                 </div>
-                                <div className="col-8">
+                                <div className="col-lg-10">
                                     <span className="float-right margin-right-1">
                                         <Nav tabs className="border-0 pull-right">
                                             <NavItem className="tab-nilai">

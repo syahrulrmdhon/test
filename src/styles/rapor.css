@@ -1,20 +1,27 @@
+.padding-content {
+  height: 95%;
+  overflow-y: hidden;
+}
 
 .content {
   margin-bottom: 20px;
+  height: 97%;
 }
 
 .row-rapor {
-  height: 100%;
+  height: 97%;
   background-color: white;
 }
 
 .left-content {
+  height: 100%;
   width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
 .right-content {
+  height: 100%;
   width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -23,4 +30,14 @@
 .arrow img {
   width: 10px;
   height: 20px;
+}
+
+.cursor {
+  cursor: crosshair;
+  background-color: #4b635d;
+}
+
+.cursor:hover {
+  cursor: default;
+  background-color: #4b635d;
 }

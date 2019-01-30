@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
+import classnames from 'classnames'
 
 // import ExportLogo from './../../assets/images/export.svg'
 
 export default class FilterRapor extends Component {
     render() {
+        let isDisabled = false
+        if (this.props.selectedClass === '' || this.props.selectedSemester === '' || this.props.selectedSubject === '') {
+            isDisabled = "cursor"
+        }
         return (
             <div className="filter-rapor">
                 <h5 className="padding-top-1">
@@ -30,7 +35,10 @@ export default class FilterRapor extends Component {
                     />
                     <br /><br />
                 </form>
-                <button onClick={this.props.handleSubmit} type="submit" className="btn-green">Filter</button>
+                <button type="submit" className={classnames("btn-green", isDisabled)}
+                    disabled={isDisabled} onClick={this.props.handleSubmit} className="btn-green">
+                    Filter
+                </button>
                 <br />
                 {/* <img className="export" src={ExportLogo} alt="" /> */}
                 <br />

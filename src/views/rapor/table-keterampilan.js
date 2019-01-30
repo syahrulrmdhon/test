@@ -5,7 +5,7 @@ import ArrowKeterampilan from './arrow-keterampilan';
 export default class TableKeterampilan extends Component {
     render() {
         return (
-            <Table bordered striped responsive hover className="table-nilai">
+            <Table bordered striped responsive hover>
                 <thead>
                     <tr>
                         <th>Nama Siswa</th>
@@ -20,7 +20,7 @@ export default class TableKeterampilan extends Component {
                         <th>Total Nilai (GPA)</th>
                     </tr>
                 </thead>
-                <tbody className="body-table">
+                <tbody className="table-nilai">
                     {
                         this.props.tableSkill.map(function (data, i) {
                             return <tr key={i}>

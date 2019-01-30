@@ -4,7 +4,7 @@ import { Table } from 'reactstrap'
 export default class TableSikap extends Component {
     render() {
         return (
-            <Table bordered striped responsive hover className="table-nilai">
+            <Table bordered striped responsive hover>
                 <thead>
                     <tr>
                         <th>Nama Murid</th>
@@ -13,7 +13,7 @@ export default class TableSikap extends Component {
                         <th>Kehadiran (%)</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-nilai">
                     {
                         this.props.tableAttitude.map(function (data, i) {
                             return <tr key={i}>
