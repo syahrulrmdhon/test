@@ -47,9 +47,14 @@ export default class Nilai extends Component {
               <div className="bg-white container-fluid container-fluid-custom rounded-corners">
                 <TopContent />
               </div>
-              <div className="bg-white container-fluid container-fluid-custom rounded-corners bottom-content">
+              <div className="col-sm-9 bg-white container-fluid container-fluid-custom rounded-corners bottom-content">
+                  
                 <BottomContent />
               </div>
+              <div className="col-sm-2 bg-white container-fluid container-fluid-custom rounded-corners bottom-content">
+                  
+                  {/* <BottomContent /> */}
+                </div>
             </TabPane>
           </TabContent>
         </div>

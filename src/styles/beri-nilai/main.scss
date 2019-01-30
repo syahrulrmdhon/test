@@ -362,6 +362,7 @@ $nunito_bold: 'NunitoBold';
   padding-bottom: 29px;
   
   span {
+    margin-top:5%;
     font-family: $nunito_bold;
     font-size: 11px;
     font-style: normal;
@@ -392,4 +393,21 @@ $nunito_bold: 'NunitoBold';
 
 .bottom-content{
   margin-top:2%;
+  margin-right: 1%;
+  width: 100%;
+  
+
+}
+
+.search-in-table {
+  display: flex;
+  width: 180px;
+
+  .input-field, .icon {
+    height: 35px;
+  }
+}
+
+.table-position {
+  margin-top:10%;
 }
