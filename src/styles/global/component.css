@@ -1094,6 +1094,10 @@ ul > li.nav-item a.active{
   overflow-x: auto;
   margin-top: 20px; */
 }
+.table-content {
+  height: 400px;
+  overflow-y: scroll;
+}
 .table {
   width: 100%;
   max-width: 100%;
