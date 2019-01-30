@@ -4,7 +4,7 @@ import Select from 'react-select'
 export default class componentName extends Component {
     render() {
         return (
-            <div>
+            <div className="bottom-contents">
                 <div className="row  title-content">
                     <div className="col-sm-6 ">
                         <span>Hasil Perolehan Nilai</span>
@@ -24,7 +24,13 @@ export default class componentName extends Component {
 
                 </div>
                 <div className="row">
-                    
+                <div className="table-responsive">
+                        <table className="table-nilai ">
+                            <tr>
+                                 <th>Nama Murid</th>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         )
