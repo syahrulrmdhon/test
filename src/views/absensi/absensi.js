@@ -8,6 +8,7 @@ import FilterAbsensi from './filter'
 import { apiClient } from '../../utils/apiClient'
 import { NotAvailable } from '../../views/global/notAvailable'
 import { getDate } from '../../utils/common'
+import { LabelInfo } from '../../views/global/labelInfo'
 export default class Absensi extends Component {
   constructor(props) {
     super(props)
@@ -50,7 +51,9 @@ export default class Absensi extends Component {
   componentDidMount() {
     this.getAttendanceType()
     this.getClass(this.state.selectedAttendanceType.value)
-    this.getAttendances(this.state.selectedAttendanceType.value, '', this.state.selectedClass.value)
+    if (this.state.selectedAttendanceType.value === 'homeroom') {
+      this.getAttendances(this.state.selectedAttendanceType.value, '', this.state.selectedClass.value)
+    }
   }
 
   getAttendanceType() {
@@ -116,7 +119,6 @@ export default class Absensi extends Component {
 
   getAttendances(type, name=undefined, classId, subjectId) {
       const date = getDate('case-4', this.state.selectedDate)
-      let selectedClass = classId ? classId.value : this.state.selectedClass.value
       let route = `v1/attendances/index?class_id=${classId}&attendance_date=${date}${name !== undefined ? '&full_name=' + name : ''}`
 
       if (type === 'subject') {
@@ -128,7 +130,7 @@ export default class Absensi extends Component {
         let attendances = []
 
         data.data.user_attendances.map(student => {
-          attendances.push({user_id: student.user.id, name: student.user.full_name, status: student.attendance.status})
+          attendances.push({user_id: student.user.id, name: student.user.full_name, status: student.attendance.status !== null ? student.attendance.status : 'present'})
         })
 
         this.setState({
@@ -152,9 +154,11 @@ export default class Absensi extends Component {
   }
 
   notStudent() {
-
-    if (!this.state.attendances || this.state.searchAttendances === null) {
-      return 'Murid tidak ditemukan.'
+    if (this.state.searchAttendances === null) {
+      return 'Siswa tidak ditemukan.'
+    }
+    else if (!this.state.attendances.length) {
+      return 'Mohon pilih filter untuk menampilkan data.'
     }
   }
 
@@ -278,7 +282,10 @@ export default class Absensi extends Component {
                         searchAttendances={this.state.searchAttendances}
                         attendanceStatus={this.state.attendanceStatus}
                         handleOptionChange={this.handleAttendanceStatusChange} />
+                    <div className="wrapper-save">
+                     <LabelInfo className="info">Tekan tombol <span>Simpan</span> untuk merubah data</LabelInfo>
                       <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-3 save">Simpan</button>
+                    </div>
                     </div>
                   }
                 </div>

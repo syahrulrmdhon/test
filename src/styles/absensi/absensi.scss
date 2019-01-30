@@ -61,6 +61,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
   .table {
     background-color: #f9f9f9;
     border: 1px solid #cccccc;
+    margin-bottom: 0px;
 
     .name {
       color: #2099e8;
@@ -181,8 +182,20 @@ $nunito_extra_bold: 'NunitoExtraBold';
     margin-bottom: 20px;
   }
 
-  .description {
-    
+  .wrapper-save {
+    position: relative;
+  }
+
+  .info {
+    border: 1px solid #cccccc;
+    float: left;
+    background-color: #f3fcff;
+    margin-bottom: 0px;
+    font-style: italic;
+    width: 450px;
+    span {
+      font-family: $nunito_bold;
+    }
   }
 }
 .content {
