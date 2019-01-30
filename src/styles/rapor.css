@@ -11,6 +11,10 @@
 .row-rapor {
   height: 97%;
   background-color: white;
+  border-radius: 2px;
+  -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
 }
 
 .left-content {
