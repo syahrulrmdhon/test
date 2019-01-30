@@ -1,0 +1,331 @@
+@import url("../../styles/global/component.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+$nunito_light: 'NunitoLight';
+$nunito_regular: 'NunitoRegular';
+$nunito_semi_bold: 'NunitoSemiBold';
+$nunito_bold: 'NunitoBold';
+$nunito_extra_bold: 'NunitoExtraBold';
+
+.absensi {
+  background: #f7f7f7;
+  margin: auto;
+  font-family: "Nunito Sans", sans-serif;
+  overflow-y: hidden;
+  
+  .left-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: transparent;
+    height: 530px;
+  }
+
+  .center-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: transparent;
+    overflow-y: hidden;
+    height: 530px;
+  }
+
+  .col-lg-2 {
+    flex: 0 0 19.666667%;
+    max-width: 19.666667%;
+  }
+
+  .col-lg-10 {
+    max-width: 80.333333%;
+    flex: 80.333333%;
+  }
+
+  .fa-search {
+    color: #4a4a4a;
+  }
+
+  .search {
+    display: flex;
+    width: 50%;
+
+    .input-field, .icon {
+      height: 35px;
+    }
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .table {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    margin-bottom: 0px;
+
+    .name {
+      color: #2099e8;
+      font-family: $nunito_bold;
+      cursor: pointer;
+    }
+  }
+
+  thead {
+    background-color: #f3fcff;
+    text-align: center;
+
+    th {
+      font-family: $nunito_bold;
+      color: #52595e;
+      border-bottom: 1px solid #ececec;
+      height: 50px;
+      vertical-align: middle;
+    }
+  }
+
+  tbody td{
+    font-size: 12px;
+
+    &.number {
+      font-family: $nunito_extra_bold;
+      font-size: 11px;
+      color: #52595e;
+    }
+  }
+
+  tbody tr:nth-of-type(odd) {
+    background-color: #ffffff;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  input[type=radio] {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .show {
+    text-align: center;
+    padding: 5px;
+    border-radius: 20px;
+    height: 30px;
+    font-size: 11px;
+    border: solid 0.5px #1a9d7f;
+    color: #1a9d7f;
+    font-family: $nunito_bold;
+    cursor: pointer;
+    margin: 0px auto;
+    width: 120px;
+  }
+
+  .check {
+    display: block;
+    position: absolute;
+    border: 1px solid #1a9d7f;
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    z-index: 5;
+    transition: border .25s linear;
+    -webkit-transition: border .25s linear;
+  }
+
+  .check::before {
+    display: block;
+    position: absolute;
+    content: '';
+    border-radius: 100%;
+    height: 10px;
+    width: 10px;
+    top: 2px;
+    left: 2px;
+    margin: auto;
+    transition: background 0.25s linear;
+    -webkit-transition: background 0.25s linear;
+  }
+
+  .status {
+    position: relative;
+    justify-content: center;
+  }
+
+  input[type=radio]:checked ~ .check::before{
+    background: #1a9d7f;
+  }
+  
+  .alpha input[type=radio]:checked ~ .check::before{
+    background: #9d1a1a;
+  }
+
+  .alpha input[type=radio]:checked ~ .check {
+    border: 1px solid #9d1a1a;
+  }
+
+  .filter label {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+
+  .attendance-table {
+    label {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      position: absolute;
+      z-index: 900;
+    }
+  }
+
+  .table-content {
+    height: 360px;
+    margin-bottom: 20px;
+  }
+
+  .wrapper-save {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .info {
+    border: 1px solid #cccccc;
+    float: left;
+    background-color: #f3fcff;
+    margin-bottom: 0px;
+    font-style: italic;
+    width: 65%;
+    text-align: left;
+
+    span {
+      font-family: $nunito_bold;
+    }
+  }
+
+  .title {
+    margin: 10px 0px 30px;
+    font-family: $nunito_bold;
+    font-size: 14px;
+    color: #505050;
+  }
+}
+.content {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+  position: relative;
+}
+.left-content form label {
+  color: #6d6d6d;
+}
+
+.right {
+  background: #f7f7f7;
+  padding-bottom: 20px;
+  text-align: center;
+  height: 530px;
+}
+.card {
+  background: white;
+  padding: 10px;
+  margin: auto;
+  height: 32.6%;
+  border-radius: 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &__label {
+    font-size: 14px;
+    color: #2d2d2d;
+    font-family: $nunito_bold;
+  }
+
+  &__value {
+    color: #1a9d7f;
+    font-size: 36px;
+    margin: 20px;
+    font-family: $nunito_bold;
+  }
+}
+
+.card h3 {
+  color: #199d7f;
+}
+.card p {
+  color: #2d2d2d;
+}
+
+/* date range start */
+.Range .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+  background-color: #f0f8ff !important;
+  color: #4a90e2;
+}
+.Range .DayPicker-Day {
+  border-radius: 0 !important;
+}
+/* date range end */
+
+/* Search bar start */
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.icon {
+  padding: 10px;
+  color: #e0e4e8;
+  min-width: 20px;
+  border: solid 0.5px #e0e4e8;
+  border-left: none;
+  height: 30px;
+}
+.input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: solid 1px #e0e4e8;
+  border-right: none;
+  height: 30px;
+  font-family: "Nunito Sans", sans-serif;
+}
+/* Search bar end */
+
+.sticky {
+  z-index: 1;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+  display: block;
+}
+
+.date {
+  font-family: 'NunitoBold';
+  font-size: 14px;
+  color: #2d2d2d;
+}
+
+.filter {
+  .react-datepicker-wrapper, .react-datepicker__input-container {
+    display: block;
+  }
+
+  input {
+    border-radius: 3px;
+    border-color: #cccccc;
+  }
+}
+
+.calendar-icon {
+  position: absolute;
+  bottom: 14px;
+  right: 10px;
+  color: #1a9d7f;
+}
+
+.card-absensi {
+  height: 100%;
+}

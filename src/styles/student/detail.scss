@@ -47,6 +47,13 @@ $nunito_bold: 'NunitoBold';
   .content {
     height: 100%;
   }
+
+  .content-wrapper {
+    position: relative;
+    top: 97px;
+    width: 90%;
+    margin: 0px auto;
+  }
 }
 
 .detail-menu {
@@ -112,7 +119,7 @@ $nunito_bold: 'NunitoBold';
   background-color: transparent;
   height: 483px;
   .tab-content {
-    margin-top: 20px;
+    margin-top: 0px;
   }
 }
 
@@ -339,3 +346,4 @@ $nunito_bold: 'NunitoBold';
     }
   }
 }
+
