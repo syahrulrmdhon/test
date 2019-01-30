@@ -14,7 +14,7 @@ export default class FilterNilai extends Component {
                     <strong className="large-text">Filter</strong>
                 </h5>
                 <br />
-                <form className="margin-top-4">
+                <form className="margin-top-1">
                     <label className="padding-bottom-2 small-text-filter">Semester</label>
                     <Select
                         value={this.props.selectedSemester}
