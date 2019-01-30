@@ -9,7 +9,8 @@ import { apiClient } from '../../utils/apiClient'
 import { NotAvailable } from '../../views/global/notAvailable'
 import { getDate } from '../../utils/common'
 import { LabelInfo } from '../../views/global/labelInfo'
-export default class Absensi extends Component {
+
+export default class Attendance extends Component {
   constructor(props) {
     super(props)
     this.homeroomClass = localStorage.getItem('homeroom_class')
@@ -46,11 +47,13 @@ export default class Absensi extends Component {
     this.saveStudentAttendance = this.saveStudentAttendance.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
     this.handleSearchAttendance = this.handleSearchAttendance.bind(this)
+    this.nameClicked = this.nameClicked.bind(this)
   };
   
   componentDidMount() {
     this.getAttendanceType()
     this.getClass(this.state.selectedAttendanceType.value)
+    
     if (this.state.selectedAttendanceType.value === 'homeroom') {
       this.getAttendances(this.state.selectedAttendanceType.value, '', this.state.selectedClass.value)
     }
@@ -241,6 +244,11 @@ export default class Absensi extends Component {
     }
   }
 
+  nameClicked(event, id) {
+    event.preventDefault()
+    this.props.history.push('detail/' + id);
+  }
+
   render() {
     return (
       <div className="absensi padding-content">
@@ -281,7 +289,8 @@ export default class Absensi extends Component {
                         attendances={this.state.attendances}
                         searchAttendances={this.state.searchAttendances}
                         attendanceStatus={this.state.attendanceStatus}
-                        handleOptionChange={this.handleAttendanceStatusChange} />
+                        handleOptionChange={this.handleAttendanceStatusChange} 
+                        nameClicked={this.nameClicked} />
                     <div className="wrapper-save">
                      <LabelInfo className="info">Tekan tombol <span>Simpan</span> untuk merubah data</LabelInfo>
                       <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-3 save">Simpan</button>

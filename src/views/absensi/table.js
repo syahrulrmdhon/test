@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Table } from 'reactstrap'
 import ModalAbsensi from './modal'
 
-export default class TableAbsensi extends Component {
+export default class TableAttendance extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -49,7 +49,7 @@ export default class TableAbsensi extends Component {
                                 data.map((attendance, index) => {
                                     return <tr key={attendance.user_id}>
                                         <td className="text-center number">{index + 1}</td>
-                                        <td className="name">{attendance.name}</td>
+                                        <td className="name" onClick={(event) => (this.props.nameClicked(event, attendance.user_id))}>{attendance.name}</td>
                                         <td className="align-center" title="Hadir">
                                         <div className="status">
                                             <label htmlFor={'present-' + attendance.user_id}></label>
