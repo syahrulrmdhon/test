@@ -44,7 +44,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
 
   .search {
     display: flex;
-    width: 280px;
+    width: 50%;
 
     .input-field, .icon {
       height: 35px;
@@ -205,9 +205,10 @@ $nunito_extra_bold: 'NunitoExtraBold';
   }
 
   .title {
-    margin-top: 10px;
+    margin: 10px 0px 30px;
     font-family: $nunito_bold;
-    font-size: 13px;
+    font-size: 14px;
+    color: #505050;
   }
 }
 .content {
