@@ -7,7 +7,7 @@ export default class FilterAbsensi extends Component {
     render() {
         return (
             <div className="filter">
-                <h5><strong>Filter</strong></h5>
+                <div className="title">Filter</div>
                 <br />
                 <form onSubmit={this.handleSubmit}>
                     <label>Pilih Tanggal</label>

@@ -52,7 +52,6 @@ export default class TableAbsensi extends Component {
                                         <td className="name">{attendance.name}</td>
                                         <td className="align-center" title="Hadir">
                                         <div className="status">
-
                                             <label htmlFor={'present-' + attendance.user_id}></label>
                                             <input type="radio" className="rd-btn" name={attendance.user_id} value="present" onChange={event => this.props.handleOptionChange(event)} id={'present-' + attendance.user_id} checked={attendance.status === 'present'}/>
                                             <div className="check"></div>
@@ -60,7 +59,6 @@ export default class TableAbsensi extends Component {
                                         </td>
                                         <td className="align-center" title="Sakit">
                                         <div className="status">
-
                                             <label htmlFor={'sick-' + attendance.user_id}></label>
                                             <input type="radio" name={attendance.user_id} value="sick" onChange={event => this.props.handleOptionChange(event)} id={'sick-' + attendance.user_id} checked={attendance.status === 'sick'}/>
                                             <div className="check"></div>
@@ -68,7 +66,6 @@ export default class TableAbsensi extends Component {
                                         </td>
                                         <td className="align-center" title="Ijin">
                                         <div className="status">
-
                                             <label htmlFor={'permission-' + attendance.user_id}></label>
                                             <input type="radio" name={attendance.user_id} value="permission" onChange={event => this.props.handleOptionChange(event)} id={'permission-' + attendance.user_id} checked={attendance.status === 'permission'}/>
                                             <div className="check"></div>
@@ -76,14 +73,13 @@ export default class TableAbsensi extends Component {
                                         </td>
                                         <td className="align-center" title="Alpha">
                                         <div className="status alpha">
-
                                             <label htmlFor={'abstain-' + attendance.user_id}></label>
                                             <input type="radio" name={attendance.user_id} value="abstain" onChange={event => this.props.handleOptionChange(event)} id={'abstain-' + attendance.user_id} checked={attendance.status === 'abstain'}/>
                                             <div className="check"></div>
                                             </div>
                                         </td>
                                         <td className="align-center">
-                                            <button className="show" onClick={this.showModal}>Lihat Keterangan</button>
+                                            <button className="show bg-white" onClick={this.showModal}>Lihat Keterangan</button>
                                         </td>
                                     </tr>
                                 }, this)

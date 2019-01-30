@@ -116,7 +116,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
     font-family: $nunito_bold;
     cursor: pointer;
     margin: 0px auto;
-    width: 80%;
+    width: 120px;
   }
 
   .check {
@@ -184,6 +184,9 @@ $nunito_extra_bold: 'NunitoExtraBold';
 
   .wrapper-save {
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .info {
@@ -192,10 +195,18 @@ $nunito_extra_bold: 'NunitoExtraBold';
     background-color: #f3fcff;
     margin-bottom: 0px;
     font-style: italic;
-    width: 450px;
+    width: 65%;
+    text-align: left;
+
     span {
       font-family: $nunito_bold;
     }
+  }
+
+  .title {
+    margin-top: 10px;
+    font-family: $nunito_bold;
+    font-size: 13px;
   }
 }
 .content {
