@@ -2,19 +2,20 @@ import React, { Component } from 'react'
 import Header from '../global/header';
 import Filter from './filter'
 import Content from './content'
+import '../../styles/exam.scss'
 
 export default class Exam extends Component {
   render() {
     return (
-      <div className="padding-content">
+      <div className="padding-content exam">
         <Header />
         <div className="margin-8">
           <div className="content-block main-block">
             <div className="row">
-              <div className="col-sm-2 left-block">
+              <div className="col-sm-2 col-sm-2-custom left-block">
                 <Filter />
               </div>
-              <div className="col-sm-10 right-block">
+              <div className="col-sm-10 col-sm-10-custom right-block">
                 <Content />
               </div>
             </div>

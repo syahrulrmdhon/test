@@ -1379,13 +1379,13 @@ tbody tr:nth-child(even) {
   white-space: nowrap;
 }
 
-.col-sm-2 {
-  flex: 0 0 20.8%;
-  max-width: 20.8%;
+.col-sm-2-custom {
+  flex: 0 0 20.8% !important;
+  max-width: 20.8% !important;
 }
 
-.col-sm-10 {
-  flex: 0 0 79.2%;
-  max-width: 79.2%;
+.col-sm-10-custom {
+  flex: 0 0 79.2% !important;
+  max-width: 79.2% !important;
 }
 
