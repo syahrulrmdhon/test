@@ -1262,3 +1262,7 @@ table.table.assessment > th{
   padding: 3px 20px;
   white-space: nowrap;
 }
+
+.normal-box-shadow {
+  box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+}

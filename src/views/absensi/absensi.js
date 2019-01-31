@@ -49,11 +49,11 @@ export default class Attendance extends Component {
     this.handleSearchAttendance = this.handleSearchAttendance.bind(this)
     this.nameClicked = this.nameClicked.bind(this)
   };
-  
+
   componentDidMount() {
     this.getAttendanceType()
     this.getClass(this.state.selectedAttendanceType.value)
-    
+
     if (this.state.selectedAttendanceType.value === 'homeroom') {
       this.getAttendances(this.state.selectedAttendanceType.value, '', this.state.selectedClass.value)
     }
@@ -66,7 +66,7 @@ export default class Attendance extends Component {
       const data = response.data.data.attendance_types.map(({ key }) => ({
         label: (key === 'homeroom' ? 'Absensi Harian' : 'Absensi Mata Pelajaran'), value: key })
       )
-      
+
       this.setState({ attendanceTypes: data })
     })
   }
@@ -105,7 +105,7 @@ export default class Attendance extends Component {
       this.setState({selectedClass: this.selectedClass, selectedSubject: '', subjects: []})
     }
     this.getClass(type.value)
-    
+
   }
 
   selectClass(item) {
@@ -121,28 +121,28 @@ export default class Attendance extends Component {
   }
 
   getAttendances(type, name=undefined, classId, subjectId) {
-      const date = getDate('case-4', this.state.selectedDate)
-      let route = `v1/attendances/index?class_id=${classId}&attendance_date=${date}${name !== undefined ? '&full_name=' + name : ''}`
+    const date = getDate('case-4', this.state.selectedDate)
+    let route = `v1/attendances/index?class_id=${classId}&attendance_date=${date}${name !== undefined ? '&full_name=' + name : ''}`
 
-      if (type === 'subject') {
-        route = `v1/attendances/index?class_id=${classId}&school_subject_id=${subjectId}&attendance_date=${date}${name !== undefined ? '&full_name=' + name : ''}`
-      }
+    if (type === 'subject') {
+      route = `v1/attendances/index?class_id=${classId}&school_subject_id=${subjectId}&attendance_date=${date}${name !== undefined ? '&full_name=' + name : ''}`
+    }
 
-      apiClient('get', route).then(response => {
-        const data = response.data
-        let attendances = []
+    apiClient('get', route).then(response => {
+      const data = response.data
+      let attendances = []
 
-        data.data.user_attendances.map(student => {
-          attendances.push({user_id: student.user.id, name: student.user.full_name, status: student.attendance.status !== null ? student.attendance.status : 'present'})
-        })
-
-        this.setState({
-          attendances: attendances,
-          attended: data.data.attended,
-          unattended: data.data.unattended,
-          percentage: data.data.percentage
-        })
+      data.data.user_attendances.map(student => {
+        attendances.push({user_id: student.user.id, name: student.user.full_name, status: student.attendance.status !== null ? student.attendance.status : 'present'})
       })
+
+      this.setState({
+        attendances: attendances,
+        attended: data.data.attended,
+        unattended: data.data.unattended,
+        percentage: data.data.percentage
+      })
+    })
   }
 
   reset() {
@@ -185,14 +185,14 @@ export default class Attendance extends Component {
     }
     apiClient('post', postUrl, data).then(() => {
       apiClient('get', getUrl)
-      .then(response => {
-        const data = response.data
-        this.setState({
-          attended: data.data.attended,
-          unattended: data.data.unattended,
-          percentage: data.data.percentage
+        .then(response => {
+          const data = response.data
+          this.setState({
+            attended: data.data.attended,
+            unattended: data.data.unattended,
+            percentage: data.data.percentage
+          })
         })
-      })
     })
   }
 
@@ -203,7 +203,7 @@ export default class Attendance extends Component {
     const attendances = this.state.attendances
     const attendance = attendances.find(attendance => attendance.user_id === userId)
     attendance.status = status
-    
+
     this.setState({
       attendances: attendances
     })
@@ -253,12 +253,12 @@ export default class Attendance extends Component {
     return (
       <div className="absensi padding-content">
         <Header />
-        <div className="content">
-          <div className="row">
-            <div className="col-lg-10 bg-white rounded-10">
+        <div className="content margin-8">
+          <div className="row margin-0">
+            <div className="col-sm-10 bg-white rounded-10 normal-box-shadow">
               <div className="row">
-                <div className="col-3 left-content">
-                  <FilterAbsensi 
+                <div className="col-sm-3 left-content">
+                  <FilterAbsensi
                     attendanceTypes={this.state.attendanceTypes}
                     selectAttendanceType={this.selectAttendanceType}
                     selectedAttendanceType={this.state.selectedAttendanceType}
@@ -272,7 +272,7 @@ export default class Attendance extends Component {
                     selectedDate={this.state.selectedDate}
                     handleDateChange={this.handleDateChange} />
                 </div>
-                <div className="col-9 center-content">
+                <div className="col-sm-9 center-content">
                   <div className="search-container">
                     <div className='date'>Tanggal {getDate('case-1', this.state.selectedDate)}</div>
                     <div className="search">
@@ -283,25 +283,25 @@ export default class Attendance extends Component {
                   {
                     (!this.state.attendances || this.state.attendances.length === 0 || this.state.searchAttendances === null) ?
                       <NotAvailable>{this.notStudent()}</NotAvailable>
-                    :
-                    <div>
-                      <TableAbsensi 
-                        attendances={this.state.attendances}
-                        searchAttendances={this.state.searchAttendances}
-                        attendanceStatus={this.state.attendanceStatus}
-                        handleOptionChange={this.handleAttendanceStatusChange} 
-                        nameClicked={this.nameClicked} />
-                    <div className="wrapper-save">
-                     <LabelInfo className="info">Tekan tombol <span>Simpan</span> untuk merubah data</LabelInfo>
-                      <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-3 save">Simpan</button>
-                    </div>
-                    </div>
+                      :
+                      <div>
+                        <TableAbsensi
+                          attendances={this.state.attendances}
+                          searchAttendances={this.state.searchAttendances}
+                          attendanceStatus={this.state.attendanceStatus}
+                          handleOptionChange={this.handleAttendanceStatusChange}
+                          nameClicked={this.nameClicked} />
+                        <div className="wrapper-save">
+                          <LabelInfo className="info">Tekan tombol <span>Simpan</span> untuk merubah data</LabelInfo>
+                          <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-sm-3 save">Simpan</button>
+                        </div>
+                      </div>
                   }
                 </div>
               </div>
             </div>
-            <div className="col-lg-2 right">
-              <CardAbsensi 
+            <div className="col-sm-2 right">
+              <CardAbsensi
                 attended={this.state.attended}
                 unattended={this.state.unattended}
                 percentage={this.state.percentage} />
