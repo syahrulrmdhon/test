@@ -3,7 +3,6 @@ import "./../../styles/rapor.css";
 import "./../../styles/global/component.css";
 
 import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
-import { Button, ButtonGroup, ButtonToolbar } from "react-bootstrap";
 import classnames from "classnames";
 
 import Header from "../global/header";
@@ -298,9 +297,9 @@ export default class Rapor extends Component {
                     <NotAvailable>{this.notKnowledge()}</NotAvailable>
                   ) : (
                     <TablePengetahuan
-                    tableKnowledge={this.state.tableKnowledge}
-                    dTableKnowledge={this.state.dTableKnowledge}
-                    nameClicked={this.nameClicked}
+                      tableKnowledge={this.state.tableKnowledge}
+                      dTableKnowledge={this.state.dTableKnowledge}
+                      nameClicked={this.nameClicked}
                     />
                   )}
                 </TabPane>
