@@ -23,7 +23,7 @@ export default class Tab extends Component {
     render(){
         return(
             <div className="margin-top-4">
-                <Nav tabs>
+                <Nav tabs className="toggle">
                     <NavItem>
                         <NavLink
                         className={classnames({ active: this.state.activeTab === '1' })}
