@@ -5,9 +5,12 @@ import './../../styles/beri-nilai/main.scss'
 import Header from '../global/header'
 import TabMenu from '../../components/TabDetail/TabDetail'
 import TopContent from './top-content'
+import TopContentEvaluasi from './evaluasi/top-content-evaluasi'
 import BottomContent from './bottom-content'
+import BottomContentEvaluasi from './evaluasi/bottom-content-evaluasi'
 import { apiClient } from '../../utils/apiClient'
 import { TabContent, TabPane, Form, FormGroup, Label, Input } from 'reactstrap'
+
 export default class Nilai extends Component {
   constructor(props) {
     super(props)
@@ -48,6 +51,18 @@ export default class Nilai extends Component {
               </div>
               <div className="col-sm-9 bg-white container-fluid container-fluid-custom rounded-corners bottom-content">
                 <BottomContent />
+              </div>
+              <div className="col-sm-2 bg-white  container-fluid-custom rounded-corners bottom-content">
+                  
+              </div>
+            </TabPane>
+
+            <TabPane tabId={2} >
+              <div className="bg-white container-fluid container-fluid-custom rounded-corners">
+                <TopContentEvaluasi />
+              </div>
+              <div className="col-sm-9 bg-white container-fluid container-fluid-custom rounded-corners bottom-content">
+                <BottomContentEvaluasi />
               </div>
               <div className="col-sm-2 bg-white  container-fluid-custom rounded-corners bottom-content">
                   
