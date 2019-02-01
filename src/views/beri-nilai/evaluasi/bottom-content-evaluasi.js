@@ -6,12 +6,15 @@ export default class BottomContentEvaluasi extends Component {
   render() {
     return (
       <div className="bottom-contents">
-        <div className="title-content">
-          <span>Hasil Evaluasi Soal</span>
+        <div className="row title-content-evaluasi margin-bottom-2 margin-top-4">
+          <div className="col-12">
+            <span>Hasil Perolehan Nilai</span>
+          </div>
         </div>
-        <br />
-        <div className="table-responsive">
-          <TableEvaluasi />
+        <div className="row">
+          <div className="col-12">
+            <TableEvaluasi />
+          </div>
         </div>
       </div>
     );

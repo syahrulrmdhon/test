@@ -12,15 +12,15 @@ export default class TopContentEvaluasi extends Component {
   render() {
     return (
       <div className='row'>
-        <div className='col-9'>
-          <div className='title-content'>
+        <div className='col-10'>
+          <div className='title-content-evaluasi margin-top-4 margin-bottom-2'>
             <span>Evaluasi soal</span>
           </div>
-          <div className='content-chart margin-bottom-4 margin-left-6'>
+          <div className='content-chart margin-bottom-4'>
             <ChartEvaluasi />
           </div>
         </div>
-        <div className='col-3'>
+        <div className='col-2'>
           <div className='box-card-evaluasi margin-top-6'>
             <CardEvaluasi />
           </div>

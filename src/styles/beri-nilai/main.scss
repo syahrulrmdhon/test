@@ -376,6 +376,16 @@ $nunito_bold: 'NunitoBold';
     color: #2d2d2d;
   }
 }
+.title-content-evaluasi {
+  span{
+      font-family: $nunito_bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #2d2d2d;
+  }
+}
 
 .content-chart {
   // display: flex
@@ -438,7 +448,9 @@ $nunito_bold: 'NunitoBold';
 }
 .tbody-table-nilai .left-col {
   border-left: 10px solid #eb373e !important;
-  width: 200px;
+}
+.tbody-table-nilai .left-col-evaluasi {
+  border-left: 3px solid #eb373e !important;
 }
 
 .avatar {
@@ -472,4 +484,43 @@ $nunito_bold: 'NunitoBold';
   line-height: 0.65;
   letter-spacing: normal;
   color: #eb373e !important;
+}
+
+// large text bold
+.large-text-green-bold {
+  font-family: $nunito_bold;
+  font-size: 16px;
+  color: #259c7f !important;
+}
+.large-text-red-bold {
+  font-family: $nunito_bold;
+  font-size: 16px;
+  color: #eb373e !important;
+}
+.large-text-yellow-bold {
+  font-family: $nunito_bold;
+  font-size: 16px;
+  color: #f2bc2d !important;
+}
+
+// normal text bold
+.normal-text-green-bold {
+  font-family: $nunito_bold;
+  font-size: 12px;
+  color: #259c7f !important;
+}
+
+.shadow-box {
+  border-radius: 5px;
+  -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+}
+
+.container-subject {
+  height: auto !important;
+  .content-subject {
+    height: auto;
+    overflow-y: scroll;
+  }
 }

@@ -10,9 +10,9 @@ export default class CardEvaluasi extends Component {
   render() {
     return (
       <div className="card-evaluasi">
-        <div className="card__label-evaluasi">Nomor Soal Belum Dikuasai</div>
+        <div className="card-evaluasi__label-evaluasi">Nomor Soal Belum Dikuasai</div>
         <br />
-        <div className="card__number-evaluasi">7, 12, 17, & 21</div>
+        <div className="card-evaluasi__number-evaluasi">7, 12, 17, & 21</div>
       </div>
     );
   }

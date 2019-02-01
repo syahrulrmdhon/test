@@ -1,40 +1,40 @@
-import React, { Component } from "react";
-import { Table } from "reactstrap";
-import "./../../../styles/beri-nilai/main.scss";
+import React, { Component } from 'react'
+import { Table } from 'reactstrap'
+import './../../../styles/beri-nilai/main.scss'
+import './../../../styles/global/component.css'
 
 export default class TableEvaluasi extends Component {
   render() {
     return (
-      <Table className="table-evaluasi">
-        <thead>
-          <tr>
-            <th>No.</th>
-            <th>Soal & Jawaban</th>
-            <th>Presentase Menjawab Dengan Benar</th>
-            <th>Pemahaman Materi</th>
+      <Table className='d-sm-table'>
+        <thead className='thead-light'>
+          <tr className="col-12">
+            <th className="text-left">No.</th>
+            <th className="text-left">Soal & Jawaban</th>
+            <th className="text-center">Presentase Menjawab Dengan Benar</th>
+            <th className="text-left">Pemahaman Materi</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>
-              Berapa jumlah 2 ayam di tambah 2 ayam? a) 10 ayam (2 Murid) b) 8
-              ayam (0 Murid) c) 4 ayam (20 Murid) d) 6 ayam (8 Murid)
+          <tr><th></th></tr>
+          <tr className="tbody-table-nilai margin-bottom-1">
+            <td className="text-left left-col-evaluasi">1</td>
+            <td className="text-left">
+              <div>Berapa jumlah 2 ayam di tambah 2 ayam?</div>
+              <div>a) 10 ayam (10 Murid)</div>
+              <div className="normal-text-green-bold">
+                b) 8 ayam (3 Murid)
+              </div>
+              <div>c) 4 ayam (12 Murid)</div>
+              <div>d) 6 ayam (5 Murid)</div>
             </td>
-            <td>80%</td>
-            <td>Murid sangat paham</td>
+            <td className="large-text-red-bold">3%</td>
+            <td>Murid kurang paham</td>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>
-              Berapa jumlah 2 ayam di tambah 2 ayam? a) 10 ayam (2 Murid) b) 8
-              ayam (0 Murid) c) 4 ayam (20 Murid) d) 6 ayam (8 Murid)
-            </td>
-            <td>80%</td>
-            <td>Murid sangat paham</td>
-          </tr>
+          <br/>
+
         </tbody>
       </Table>
-    );
+    )
   }
 }
