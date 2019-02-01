@@ -349,7 +349,7 @@ $nunito_bold: 'NunitoBold';
 }
 
 .bottom-contents {
-  height: 525.5px;
+  height: 625.5px;
 }
 
 .tab-position {
@@ -422,5 +422,54 @@ $nunito_bold: 'NunitoBold';
 }
 
 .margin-table-nilai {
-  margin: 20px;
+  margin: 2%;
+}
+.custom-table {
+  border: 0.5 solid #e3e8f9;
+  border-top: 0.5px solid #e3e8f9
+}
+
+.tbody-table-nilai {
+  border: 0.5px solid #e3e8f9;
+  margin-top:2%;
+  border-collapse:separate; 
+  border-spacing:1em;
+  height: 0px;
+}
+.tbody-table-nilai .left-col {
+  border-left: 10px solid #eb373e !important;
+  width: 200px;
+}
+
+.avatar {
+  // margin-top:22px;
+  display: block
+}
+.name {
+  text-align: center;
+  align-items: center;
+  margin-left: 20px; 
+  font-family: $nunito_semi_bold;
+  position: relative;
+  font-size: 11px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.91;
+  letter-spacing: normal;
+  color: #333333;
+  display: block;
+  width: 90px;
+  margin-top: 21px;
+}
+
+.label-nilai {
+  width: 28.5px;
+  height: 10px;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
+  color: #eb373e !important;
 }

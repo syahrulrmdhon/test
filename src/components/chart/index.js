@@ -10,6 +10,7 @@ export default class SingleBarChat extends Component {
         width={'770px'}
         height={'220px'}
         chartType="Bar"
+        color="red"
         loader={<div>Loading Chart</div>}
         data={[
           ['', 'Siswa'],

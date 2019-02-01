@@ -8,7 +8,6 @@ import TopContent from './top-content'
 import BottomContent from './bottom-content'
 import { apiClient } from '../../utils/apiClient'
 import { TabContent, TabPane, Form, FormGroup, Label, Input } from 'reactstrap'
-
 export default class Nilai extends Component {
   constructor(props) {
     super(props)
@@ -48,13 +47,11 @@ export default class Nilai extends Component {
                 <TopContent />
               </div>
               <div className="col-sm-9 bg-white container-fluid container-fluid-custom rounded-corners bottom-content">
-                  
                 <BottomContent />
               </div>
-              <div className="col-sm-2 bg-white container-fluid container-fluid-custom rounded-corners bottom-content">
+              <div className="col-sm-2 bg-white  container-fluid-custom rounded-corners bottom-content">
                   
-                  {/* <BottomContent /> */}
-                </div>
+              </div>
             </TabPane>
           </TabContent>
         </div>
