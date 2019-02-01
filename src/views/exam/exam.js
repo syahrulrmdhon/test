@@ -50,7 +50,6 @@ const exam = (props) => {
             props.classes.length ?
               <div className="exam__class-wrapper">
                 {props.classes.map((item, index) => {
-                  console.log(item)
                   return <div key={item.id} className="exam__class">{item.name}</div>
                 })}
               </div>

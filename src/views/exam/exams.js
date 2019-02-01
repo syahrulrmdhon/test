@@ -3,7 +3,6 @@ import Exam from './exam'
 
 const exams = (props) => {
   return (props.exams.map((exam, index) => {
-    console.log(exam.id, exam.name, exam.classses, exam.is_score_populated)
     return (
       <Exam
         key={exam.id}
