@@ -17,8 +17,8 @@ const leason = (props) => {
 
   return (
     <div className="exam__panel">
-      <div className="row">
-        <div className="col-sm-5">
+      <div className="row h-100">
+        <div className="col-sm-5 position-relative">
           <div className="exam__task-of">{props.task}</div>
           <div className="exam__title">{props.title}</div>
           <div className="exam__action-wrapper">
@@ -31,7 +31,7 @@ const leason = (props) => {
             <div className="exam__action">Hapus</div>
           </div>
         </div>
-        <div className="col-sm-2">
+        <div className="col-sm-2 d-flex">
           <div className="exam__score-wrapper">
             <div className="exam__circular-wrapper">
               <CircularProgressbar
@@ -44,7 +44,7 @@ const leason = (props) => {
             </div>
           </div>
         </div>
-        <div className="col-sm-5">
+        <div className="col-sm-5 exam__assigned-class-wrapper">
           <div className="exam__assigned-class align-items-start">KELAS YANG DITUGASKAN</div>
           <div className="exam__class-wrapper">
             {
