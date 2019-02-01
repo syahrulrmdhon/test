@@ -21,6 +21,22 @@ class Content extends Component {
           scoreFilled: 100,
           haveQuestion: true,
           classAssigned: ['X IPS 2', 'X IPS 3', 'X IPS 4']
+        },
+        {
+          id: 3,
+          task: 'Tugas 3',
+          title: 'Mengidentifikasi Denotasi dalam Teks Laporan',
+          scoreFilled: 90,
+          haveQuestion: true,
+          classAssigned: ['X IPS 2', 'X IPS 3', 'X IPS 4', 'X IPS 5', 'X IPS 6', 'X IPS 7', 'X IPA 2', 'X IPA 3']
+        },
+        {
+          id: 3,
+          task: 'Tugas 4',
+          title: 'Remedial Denotasi dalam Teks Laporan',
+          scoreFilled: 64,
+          haveQuestion: true,
+          classAssigned: ['X IPS 2', 'X IPS 3', 'X IPS 4', 'X IPS 5', 'X IPS 6', 'X IPS 7', 'X IPA 2', 'X IPA 3']
         }
       ]
     }
