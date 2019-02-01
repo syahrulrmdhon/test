@@ -121,6 +121,14 @@ $nunito_bold: 'NunitoBold';
     cursor: pointer;
   }
 
+  &__not-class {
+    color: #333333;
+    font-family: $nunito_regular;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
   label.header-title {
     color: #2d2d2d;
   }

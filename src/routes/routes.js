@@ -8,7 +8,7 @@ import Rapor from '../views/rapor/rapor'
 import DaftarMurid from '../views/student/murid'
 import StudentDetail from '../views/student/detail'
 import SwitchAccount from '../views/global/switch_account'
-import Exam from '../views/exam/exam'
+import Exam from '../views/exam/index'
 import NotFound from '../views/global/not-found'
 
 export const MainRoutes = [
@@ -54,7 +54,7 @@ export const MainRoutes = [
         component: StudentDetail
     },
     {
-        path: '/exam',
+        path: '/exam/:id',
         component: Exam
     },
     {

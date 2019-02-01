@@ -1,37 +1,65 @@
-import React, { Component } from 'react'
-import Header from '../global/header';
-import Filter from './filter'
-import Content from './content'
-import '../../styles/exam.scss'
+import React, {Component} from 'react';
+import CircularProgressbar from 'react-circular-progressbar';
 
-export default class Exam extends Component {
-  render() {
-    return (
-      <div className="padding-content exam">
-        <Header />
-        <div className="margin-8">
-          <div className="content-block main-block">
-            <div className="row">
-              <div className="col-sm-2 col-sm-2-custom left-block">
-                <Filter />
-              </div>
-              <div className="col-sm-10 col-sm-10-custom right-block">
-                <Content />
-              </div>
+import 'react-circular-progressbar/dist/styles.css';
+
+const exam = (props) => {
+  const styles = {
+    path: {
+      stroke: '1a9d7f',
+      strokeLinecap: 'square'
+    },
+    text: { fill: '#f88', fontSize: '16px' },
+    trail: {
+      stroke: 'ededed',
+    }
+  }
+
+  return (
+    <div className="exam__panel">
+      <div className="row h-100">
+        <div className="col-sm-5 position-relative">
+          <div className="exam__task-of">Tugas {props.order}</div>
+          <div className="exam__title">{props.title}</div>
+          <div className="exam__action-wrapper">
+            <div className="exam__action">Pilih Kelas</div>
+            {
+              props.question &&
+              <div className="exam__action">Pilih Soal</div>
+            }
+            <div className="exam__action">Ubah</div>
+            <div className="exam__action">Hapus</div>
+          </div>
+        </div>
+        <div className="col-sm-2 d-flex">
+          <div className="exam__score-wrapper">
+            <div className="exam__circular-wrapper">
+              <CircularProgressbar
+              percentage={!props.percentage ? 0 : props.percentage}
+              styles={styles} />
+            </div>
+            <div className="exam__percentage-wrapper">
+              <div className="exam__percentage">{!props.percentage ? 0 : props.percentage}%</div>
+              <div className="exam__percentage-label">Nilai Terisi</div>
             </div>
           </div>
         </div>
+        <div className="col-sm-5 exam__assigned-class-wrapper">
+          <div className="exam__assigned-class align-items-start">KELAS YANG DITUGASKAN</div>
+          {
+            props.classes.length ?
+              <div className="exam__class-wrapper">
+                {props.classes.map((item, index) => {
+                  console.log(item)
+                  return <div key={item.id} className="exam__class">{item.name}</div>
+                })}
+              </div>
+              :
+              <div className="exam__not-class">Belum ada kelas yang ditugaskan</div>
+            }
+        </div>
       </div>
-    )
-  }
-}
-
-// margin: 10px 0px 30px;
-// font-family: $nunito_bold;
-// font-size: 14px;
-// color: #505050;
-//
-// letter-spacing: 0.3px;
-// color: #505050;
-// font-weight: bold;
-// font-size: 16px;
+    </div>
+  )
+};
+export default exam
