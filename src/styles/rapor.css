@@ -1,0 +1,80 @@
+.rapor {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.content {
+  margin-bottom: 20px;
+}
+
+.row-rapor {
+  background-color: white;
+}
+
+.left-content {
+  width: 90%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+}
+
+.right-content {
+  width: 90%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+  overflow-y: scroll;
+  height: 400px;
+}
+
+/* .export-print {
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+  border: none;
+} */
+
+.export {
+  display: block;
+  margin: auto;
+  text-align: center;
+  bottom: 50px;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.print {
+  display: block;
+  margin: auto;
+  /* text-align: center; */
+  bottom: 20px;
+  position: absolute;
+  left: 30%;
+  /* right: 0; */
+}
+
+.tab-nilai {
+  border: solid 1px #cccccc;
+  background: #f2f2f2;
+  color: #999999;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.nav-tabs .tab-nilai .nav-link {
+  border: none;
+}
+
+.tab-nilai:active {
+  background: white;
+  color: #333333;
+}
+
+.arrow img {
+  width: 10px;
+  height: 20px;
+}

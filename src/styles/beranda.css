@@ -1,0 +1,220 @@
+.sidebar{
+    position: fixed;
+    height: calc(100% - 51px); 
+}
+.sidebar.expand{
+    width: 335px;
+}
+.sidebar.minimize{
+    width: 60px;
+}
+.schedule-range.expand{
+    margin-left: 335px;
+}
+.schedule-range.minimize{
+    margin-left: 60px;
+}
+
+.mainbar{
+    position: relative;
+    background-color: #FFF;
+    border-top: 1px solid #f7f7f7;
+    padding: 25px;
+    box-shadow: 0 0 2.5px 0px #e5e9f2;
+    margin-top: 1px;
+    height: 100%;
+}
+.mainbar .header-title{
+    color: #323c47;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
+.mainbar .title{
+    font-size: 12px;
+    color: #989898;
+}
+.mainbar .minimize-side-bar{
+    position: absolute;
+    right: -12px;
+    padding: 12px 20px;
+    font-size: 25px;
+    background-image: linear-gradient(to bottom, #49bba1, #079e7f);
+    color: #FFF;
+    box-shadow: 0 2.5px 7.5px 0 #acb2c1;
+}
+.sidebar > .mainbar input[type="checkbox"]{
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    height: 30px;
+}
+
+/* schedule */
+.schedule{
+    overflow: auto;
+    white-space: nowrap;
+    overflow-y: scroll;
+    max-height: 680px;
+}
+.schedule .content-block{
+    border-radius: 5px;
+    width: 30%;
+    vertical-align: top;
+}
+.minimize .schedule .content-block{
+    width: 23%;
+}
+.schedule .dayname {
+    color: #000;
+    font-size: 14px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #f7f7f7;
+}
+.schedule .dayname.current{
+    border-bottom: 3px solid #1a9d7f;
+}
+.schedule .list{
+    margin-top: 40px;
+}
+.schedule .border-full{
+    border-radius: 5px;
+    border: 2px solid #e9e9ef !important;
+}
+.schedule .border-full.subject{
+    border: 2px solid #1a9d7f !important;
+    background-color: #1a9d7f;
+}
+.schedule .time{
+    font-size: 11px;
+}
+.schedule .description{
+    margin-top:5px;
+    margin-bottom:5px; 
+    font-weight: 700;  
+}
+.schedule .classes{
+    padding: 5px;
+    background-color: rgba(178, 216, 216, 0.32);
+    color: #1a9d7f;
+    border-radius: 5px;
+}
+
+.schedule .subject .time,
+.schedule .subject .description,
+.schedule .subject .classes{
+    color: #FFF;
+}
+
+.empty-schedule {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    border: 1px solid #fafafa;
+    border-radius: 5px;
+}
+
+.add-activity{
+    border-radius: 5px;
+    border: 1px solid #e9e9ef !important;
+    padding: 10px;
+    background-color: rgba(220, 251, 242, 0.09);
+}
+.add-activity a{
+    color: #1a9d7f;
+}
+
+/* custom calendar */
+.react-calendar{
+    border: none;
+}
+.react-calendar__tile--active,
+.react-calendar__tile--active:enabled:hover, 
+.react-calendar__tile--active:enabled:focus{
+    background-color: #199d7f;
+}
+.react-calendar__navigation__label{
+    color: #6d6d6d;
+}
+.react-calendar__navigation button:enabled:hover, .react-calendar__navigation button:enabled:focus{
+    background-color: #FFF;
+}
+.react-calendar__navigation__arrow.react-calendar__navigation__prev-button,
+.react-calendar__navigation__arrow.react-calendar__navigation__next-button{
+    font-size: 30px;
+    color: #1a9d7f;
+}
+
+
+
+/* MODAL */
+.styles_modal__gNwvD{
+    width: 35%;
+    padding: 0;
+    border-radius: 5px;
+}
+.styles_closeButton__20ID4{
+    top: 5px;
+}
+.popup-header{
+    padding: 1.2rem;
+    background-color: #fafcfe;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.popup-header .header-title{
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.3px;
+    text-align: center;
+    color: #4a4a4a;
+}
+.popup-header .date-title{
+    font-weight: 600;
+    color: #1a9d7f;
+    margin-top: 5px;
+}
+.popup-body{
+    padding: 60px 40px;
+}
+.popup-body label{
+    color: #51647a;
+    font-size: 10px;
+    font-weight: 600;
+    display: block;
+}
+.popup-body input[type='text'],
+.popup-body input[type='select'],
+.popup-body textarea{
+    border-radius: 5px;
+}
+.popup-body textarea{
+    height: 100px;
+}
+.popup-body .submit-btn{
+    width: 180px;
+    border-radius: 25px;
+    background-color: #1a9d7f;
+    color: #FFF;
+}
+.popup-body .select-list{
+    height: 40px;
+}
+.popup-body .select-list .select__control{
+    min-height: auto;
+    height: 40px;
+    border: 1px solid #f0f0f0;
+}
+.popup-body .select-list .select__indicator-separator{
+    background-color: #FFF;
+}
+
+/* TIME PICKER */
+.react-time-picker__wrapper{
+    width: 100%;
+    border: 1px solid #f0f0f0;
+    height: 40px;
+    border-radius: 5px;
+}

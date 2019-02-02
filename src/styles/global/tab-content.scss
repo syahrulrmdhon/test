@@ -1,0 +1,29 @@
+$nunito_regular: 'NunitoRegular';
+$nunito_bold: 'NunitoBold';
+
+.nav {
+  &__tab-content {
+    width: 140px;
+    border: solid 1px #cccccc;
+    background-color: #f2f2f2;
+    font-family: $nunito_regular;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  
+  &__tab-content:nth-child(2) {
+    border-left: none;
+    border-right: none;
+  }
+
+  .nav-link {
+    border: none;
+    color: #999999;
+    text-align: center;
+    
+    &.active {
+      color: #333333;
+      font-family: $nunito_bold;
+    }
+  }
+}

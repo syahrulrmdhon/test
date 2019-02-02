@@ -1,0 +1,28 @@
+@import url("./global/component.css");
+.penilaian {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+  font-family: "Nunito Sans", sans-serif;
+  overflow-y: hidden;
+}
+.left-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+  height: 530px;
+  border-right: solid 0.5px #eeeeee;
+}
+.tab-penilaian {
+  border: solid 1px #cccccc;
+  background: #f2f2f2;
+  color: #999999;
+  font-weight: normal;
+  cursor: pointer;
+}
+.nav-tabs .tab-penilaian .nav-link {
+  border: none;
+}
+.tab-penilaian:active {
+  background: white;
+  color: #333333;
+}

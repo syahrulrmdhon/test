@@ -1,0 +1,104 @@
+.background {
+  background-color: #fff;
+  height: 100vh;
+}
+.login {
+  margin: auto;
+  width: 80%;
+  font-family: "Nunito Sans", sans-serif;
+  overflow-y: hidden;
+  height: 100vh;
+}
+.box {
+  position: relative;
+  margin-top: 5%;
+}
+.box .left-content {
+  background-image: linear-gradient(to bottom, #51d2b4, #229c80);
+  color: white;
+  margin-top: 3.125em;
+  /* border-radius: 5px; */
+  border-top-right-radius: 1px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 75vh;
+}
+.box .left-content .main-left {
+  margin-top: 3.125em;
+  margin-left: 3.125em;
+  
+}
+.box .left-content .main-left h3 {
+  font-size: 20px;
+
+}
+.box .left-content .main-left img{
+  margin-top: 97.5px;
+}
+.box .right-content-login {
+  margin-top: 3.125em;
+  box-shadow: 0 3px 8px 3px rgba(76, 76, 76, 0.1);
+  border-top-right-radius: 10px 10px;
+  border-bottom-right-radius: 10px 10px;
+  overflow-y: hidden;
+  height: 75vh;
+  background-color: white;
+}
+.main-right {
+  margin-top: 90px;
+  text-align: left;
+  padding-left: 10%;
+}
+.main-right h5 {
+  color: #4a4a4a;
+}
+.main-right input {
+  border: none;
+  border-bottom: solid 1px #c4c4c4;
+}
+.main-right input[type=text]:focus {
+  border-bottom: solid 1px #c4c4c4;
+}
+.main-right p{
+  text-align: right;
+}
+.right-content-login  .verification p{
+  text-align: center;
+  bottom: 50px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 13px;
+}
+
+
+
+
+.main-right a:hover {
+  text-decoration: none;
+  filter: brightness(99%);
+}
+.copyright {
+  font-size: 10px;
+  text-align: center;
+  bottom: 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  color: #4a4a4a;
+}
+
+.input-feedback {
+  color: red;
+  margin-top: .25rem;
+}
+
+.alert{
+   font-size: 13px;
+   text-align: center;
+   font-family: "Nunito Sans", sans-serif;
+   font-weight: 300;
+   color: #000;
+
+}

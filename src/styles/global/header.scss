@@ -1,0 +1,56 @@
+$nunito_regular: 'NunitoRegular';
+
+.header-bar {
+  font-family: $nunito_regular;
+  height: 65px;
+  background-color: #199d7f;
+  display: flex;
+  
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    margin-left: -15px;
+  }
+  
+  .navbar {
+    padding: 12px 0px;
+    width: 90%;
+    margin: 0px auto;
+  }  
+
+  .navbar-nav {
+    align-items: center;
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+
+    .nav-link.logout {
+      padding-left: 0px;
+      padding-right: 0px;
+      margin-right: -17px;
+    }
+  }
+
+  .logo {
+    width: 27px;
+  }
+
+
+}
+
+.fix-nav {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top:0;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

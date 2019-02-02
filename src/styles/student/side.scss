@@ -1,0 +1,50 @@
+$nunito_light: 'NunitoLight';
+$nunito_semi_bold: 'NunitoSemiBold';
+$nunito_bold: 'NunitoBold';
+
+.avatar-wrapper {
+    width: 56px;
+    height: 56px;
+    border: 1px solid #1a9d7f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 30px auto 0px;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.name {
+    font-family: $nunito_bold;
+    color: #2d2d2d;
+    font-size: 14px;
+}
+
+.ranking {
+    color: #1a9d7f;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #b2d8d8;
+    font-family: $nunito_semi_bold;
+    font-size: 13px;
+}
+
+.profile {
+    margin-top: 30px;
+}
+
+.field {
+    margin-bottom: 15px;
+    color: #333333;
+    font-family: $nunito_bold;
+    font-size: 10px;
+}
+
+.label {
+    color: #9da2a6;
+    font-family: $nunito_light;
+}
