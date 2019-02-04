@@ -1,30 +1,25 @@
 import React, {Component} from 'react'
 import ReactPaginate from 'react-paginate'
-var FontAwesome = require('react-fontawesome')
+import previous from '../../assets/images/previous.svg'
+import next from '../../assets/images/next.svg'
 
 import '../../styles/pagination.scss'
 
-class Pagination extends Component {
-  render() {
-
-    return (
-      <div>
-        <ReactPaginate
-          previousLabel={<FontAwesome className="arrow-left" name={"arrow-left"}/>}
-          nextLabel={<FontAwesome className="arrow-right" name={"arrow-right"}/>}
-          breakLabel={'...'}
-          breakClassName={'break-me'}
-          pageCount={10}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          // onPageChange={this.handlePageClick}
-          containerClassName={'pagination'}
-          subContainerClassName={'pages pagination'}
-          activeClassName={'active'}
-        />
-      </div>
-    );
-  }
+const pagination = (props) => {
+  return (
+      <ReactPaginate
+        previousLabel={<img src={previous} alt="" className="arrow-left"/>}      
+        nextLabel={<img src={next} alt="" className="arrow-right" />}          
+        breakLabel={'...'}
+        breakClassName={'break-me'}
+        pageCount={props.pageCount}
+        marginPagesDisplayed={props.marginPagesDisplayed}
+        pageRangeDisplayed={props.pageRangeDisplayed}
+        // onPageChange={this.handlePageClick}
+        containerClassName={'pagination'}
+        activeClassName={'active'}
+      />
+  );
 }
 
-export default Pagination;
+export default pagination;
