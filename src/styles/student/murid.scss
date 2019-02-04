@@ -53,10 +53,10 @@ $nunito_light: 'NunitoLight';
       border-right: 1px solid #b2d8d8;
       font-family: $nunito_light;
       color: #000000;
-    }
 
-    &:last-child {
-      border-right: none;
+      &:last-child {
+        border-right: none;
+      }
     }
 
     tbody tr {
@@ -88,7 +88,7 @@ $nunito_light: 'NunitoLight';
         }
       }
 
-      &:last-child td {
+      &:last-child td{
         border-bottom: none;
       }
     }
