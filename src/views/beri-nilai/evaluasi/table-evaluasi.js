@@ -5,6 +5,7 @@ import './../../../styles/global/component.css'
 
 export default class TableEvaluasi extends Component {
   render() {
+    console.log('table', this.props.questionResults)
     return (
       <Table className='d-sm-table'>
         <thead className='thead-light'>
@@ -17,21 +18,28 @@ export default class TableEvaluasi extends Component {
         </thead>
         <tbody>
           <tr><th></th></tr>
-          <tr className="tbody-table-nilai margin-bottom-1">
-            <td className="text-left left-col-evaluasi">1</td>
-            <td className="text-left">
-              <div>Berapa jumlah 2 ayam di tambah 2 ayam?</div>
-              <div>a) 10 ayam (10 Murid)</div>
-              <div className="normal-text-green-bold">
-                b) 8 ayam (3 Murid)
-              </div>
-              <div>c) 4 ayam (12 Murid)</div>
-              <div>d) 6 ayam (5 Murid)</div>
-            </td>
-            <td className="large-text-red-bold">3%</td>
-            <td>Murid kurang paham</td>
-          </tr>
-          <br/>
+          {this.props.questionResults.map(function (data, i) {
+            return (
+              <tr key={i} className="tbody-table-nilai margin-bottom-1">
+                <td className="text-left left-col-evaluasi">{data.qn_number===null?'-':data.qn_number}</td>
+                {data.exam_question_choices.map(function (x, i) {
+                  return (
+                    <td className="text-left" key={i}>
+                      <div>{data.question === null ? "-" : data.question}</div>
+                      <div>{x.symbol===null?'-':x.symbol}) {x.content===null?'-':x.content} (10 Murid)</div>
+                      {/* <div className="normal-text-green-bold">b) 8 ayam (3 Murid)</div>
+                      <div>c) 4 ayam (12 Murid)</div>
+                      <div>d) 6 ayam (5 Murid)</div> */}
+                    </td>
+                  );
+                })
+                }
+
+                <td className="large-text-red-bold">{data.average_score === null ? '-' : data.average_score}</td>
+                <td className="text-left">{data.predicate===null ? '-' : data.predicate}</td>
+              </tr>
+            )
+          })}
 
         </tbody>
       </Table>
