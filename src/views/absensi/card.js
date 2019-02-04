@@ -5,21 +5,21 @@ export default class CardAbsensi extends Component {
         return (
             <div className="card-absensi">
                 <div className="card">
-                    <div className="card__label">Total Kehadiran</div>
-                    <div className="card__value">{this.props.attended}</div>
-                    <div>Murid</div>
+                    <h6><strong>Total Kehadiran</strong></h6>
+                    <h3><strong>{this.props.attended}</strong></h3>
+                    <p>Murid</p>
                 </div>
                 <br />
                 <div className="card">
-                    <div className="card__label">Total Ketidakhadiran</div>
-                    <div className="card__value">{this.props.unattended}</div>
-                    <div>Murid</div>
+                    <h6><strong>Total Ketidakhadiran</strong></h6>
+                    <h3><strong>{this.props.unattended}</strong></h3>
+                    <p>Murid</p>
                 </div>
                 <br />
                 <div className="card">
-                    <div className="card__label">Persentase Kehadiran</div>
-                    <div className="card__value">{this.props.percentage}{this.props.percentage !== '-' ? '%' : false}</div>
-                    <div>Murid</div>
+                    <h6><strong>Persentase Kehadiran</strong></h6>
+                    <h3><strong>{this.props.percentage}%</strong></h3>
+                    <p>Murid</p>
                 </div>
             </div>
         )

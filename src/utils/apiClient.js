@@ -14,7 +14,7 @@ export const apiClient = (method, url, request, params = {}) => {
         case 'get':
             return Axios.get(baseUrl + url, {headers: headers, params: params})
         case 'post':
-            return Axios.post(baseUrl + url, request, {headers: headers})
+            return Axios.post(baseUrl + url, request, {headers: headers, params: params})
         case 'put':
             return Axios({ url: baseUrl + url, headers: headers, method: 'PUT', data: request })
         case 'delete': 

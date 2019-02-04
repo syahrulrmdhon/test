@@ -47,13 +47,6 @@ $nunito_bold: 'NunitoBold';
   .content {
     height: 100%;
   }
-
-  .content-wrapper {
-    position: relative;
-    top: 97px;
-    width: 90%;
-    margin: 0px auto;
-  }
 }
 
 .detail-menu {
@@ -92,20 +85,15 @@ $nunito_bold: 'NunitoBold';
 }
 
 .back {
+  font-size: 14px;
   width: 90%;
-  // margin: 0px auto;
+  margin: 0px auto;
   padding: 12px 0px;
-  display: flex;
-  margin-left: 120px;
-
 }
 
 .back a {
-  font-size: 14px;
-  margin-left: 100px;
-  margin-top: 3px;
+  margin-left: -15px;
   font-family: $nunito_bold;
-  position: relative;
 }
 
 .content .tab-content {
@@ -124,7 +112,7 @@ $nunito_bold: 'NunitoBold';
   background-color: transparent;
   height: 483px;
   .tab-content {
-    margin-top: 0px;
+    margin-top: 20px;
   }
 }
 
@@ -351,12 +339,3 @@ $nunito_bold: 'NunitoBold';
     }
   }
 }
-
-.size-nav {
-  height: 56px;
-}
-.content-wrap-custom-size {
-  width: 90%;
-  top:147px !important;
-}
-
