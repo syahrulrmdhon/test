@@ -48,10 +48,9 @@ export default function reducer(state = initialState, action) {
     }
 }
 
-export function getParticipant(token) {
-    const tokens = localStorage.getItem('token')
+export function getParticipant() {
+    const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
-    console.log(tokens)
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
         promise: client => client.get(process.env.API_URL + `/v1/assessments/6ae41268-d737-4a87-bb54-1a9cfd1d69f8/exams/b4aa7bda-f96d-4665-8dc3-fe263ed670ed/exam_classes/1a5e496b-ffc4-445f-93b4-ef324e80e31c/participants`, {

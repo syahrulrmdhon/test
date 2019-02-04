@@ -23,7 +23,7 @@ class BottomContent extends Component {
     }
   }
   componentDidMount(){
-    this.props.getParticipant(this.state.token)
+    this.props.getParticipant()
   }
   render() {
     let content = []
@@ -66,50 +66,6 @@ class BottomContent extends Component {
                   <FontAwesome name="ellipsis-h" size="lg" className="icon-table-pencil cgreen" />
                 </td>
               </tr>
-
-              <tr>
-                <td className="align-center border-left-col">
-                  <Avatar src={Ava} size="30" round={true} />
-                </td>
-                <td>T Ritika Singh</td>
-                <td>TRitikaSingh@gmail.com</td>
-                <td className="label-nilai">N/A</td>
-                <td>
-                  <FontAwesome name="pencil" size="lg" className="icon-table-pencil" />
-                </td>
-                <td>
-                  <FontAwesome name="ellipsis-h" size="lg" className="icon-table-pencil cgreen" />
-                </td>
-              </tr>
-              <tr>
-                <td className="align-center border-left-col">
-                  <Avatar src={Ava} size="30" round={true} />
-                </td>
-                <td>T Ritika Singh</td>
-                <td>TRitikaSingh@gmail.com</td>
-                <td className="label-nilai">N/A</td>
-                <td>
-                  <FontAwesome name="pencil" size="lg" className="icon-table-pencil" />
-                </td>
-                <td>
-                  <FontAwesome name="ellipsis-h" size="lg" className="icon-table-pencil cgreen" />
-                </td>
-              </tr>
-              <tr>
-                <td className="align-center border-left-col">
-                  <Avatar src={Ava} size="30" round={true} />
-                </td>
-                <td>T Ritika Singh</td>
-                <td>TRitikaSingh@gmail.com</td>
-                <td className="label-nilai">N/A</td>
-                <td>
-                  <FontAwesome name="pencil" size="lg" className="icon-table-pencil" />
-                </td>
-                <td>
-                  <FontAwesome name="ellipsis-h" size="lg" className="icon-table-pencil cgreen" />
-                </td>
-              </tr>
-
             </tbody>
           </table>
         </div>
