@@ -1,0 +1,101 @@
+$nunito_bold: 'NunitoBold';
+$nunito_semi_bold: 'NunitoSemiBold';
+$nunito_regular: 'NunitoRegular';
+$nunito_light: 'NunitoLight';
+
+.student-list {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+  font-family: "Nunito Sans", sans-serif;
+
+  .content-block {
+    height: 510px;
+  }
+
+  .react-bs-table-bordered {
+    border: 1px solid #dbdbdb
+  }
+  
+  .table-title {
+    font-size: 14px;
+    font-family: $nunito_bold;
+    color: #2d2d2d;
+    line-height: 24px;
+  }
+
+  .school-year {
+    font-family: $nunito_regular;
+    color: #2d2d2d;
+    font-size: 14px;
+  }
+
+  .table-content {
+    margin-top: 16px;
+  }
+
+  .react-bs-table {
+    border: 1px solid #dbdbdb;
+  }
+
+  .table {
+    border-collapse: unset;
+    border-spacing: unset;
+
+    &-content {
+      max-height: 400px;
+      overflow-y: auto;
+      height: auto;
+    }
+
+    thead th {
+      border-top: none;
+      border-bottom: 1px solid #b2d8d8;
+      border-right: 1px solid #b2d8d8;
+      font-family: $nunito_light;
+      color: #000000;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+
+    tbody tr {
+      td {
+        border-top: none;
+        border-right: 1px solid #b2d8d8;
+        border-bottom: 1px solid #b2d8d8;
+    
+        &:last-child {
+          border-right: none;
+        }
+        
+        &.name {
+          color: #3d74b4;
+          font-family: $nunito_bold;
+          font-size: 12px;
+          cursor: pointer;
+        }
+
+        &.nis div {
+          font-family: $nunito_semi_bold;
+          color: #333333;
+        }
+
+        &.score div {
+          font-family: $nunito_bold;
+          color: #333333;
+          text-align: center;
+        }
+      }
+
+      &:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .fa-sort {
+    float: right;
+    color: #1a9d7f;
+  }
+}
