@@ -1,0 +1,14 @@
+$nunito_semi_bold: 'NunitoSemiBold';
+$nunito_bold: 'NunitoBold';
+
+.pagination {
+  a {
+    color: #7f92a1;
+    font-size: 12px;
+    font-family: $nunito_semi_bold;
+  }
+  active a {
+    color: #4a4a4a;
+    font-family: $nunito_bold;
+  }
+}
