@@ -50,7 +50,7 @@ export default class Nilai extends Component {
               <div className="col-sm-9 bg-white container-fluid-custom rounded-corners bottom-content">
                 <BottomContent />
               </div>
-              <div className="col-sm-2 bg-white  rounded-corners bottom-content">
+              <div className="col-sm-3 bg-white  rounded-corners bottom-content">
                   <RightContent />
               </div>
             </TabPane>

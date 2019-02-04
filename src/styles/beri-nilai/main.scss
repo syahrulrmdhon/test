@@ -472,8 +472,6 @@ $nunito_bold: 'NunitoBold';
 }
 
 .label-nilai {
-  width: 28.5px;
-  height: 10px;
   font-family: $nunito_bold;
   font-size: 15.5px;
   font-style: normal;
@@ -481,4 +479,118 @@ $nunito_bold: 'NunitoBold';
   line-height: 0.65;
   letter-spacing: normal;
   color: #eb373e !important;
+}
+.col-sm-3 {
+  width: 23%;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 1em;
+}
+
+
+table.table.beri-nilai tr.head{
+  background-color: #d8d8d8 !important;
+  text-transform: uppercase;
+  opacity: 0.9;
+  color: #7f92a1;
+}
+
+table .beri-nilai td{
+  vertical-align: middle;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.11;
+  letter-spacing: normal;
+  color: #333333;
+}
+table.table.beri-nilai .btn{
+  padding: 3px 25px;
+}
+tbody tr:nth-child(odd) {
+  background-color: #FFFFFF;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #FFFFFF;
+}
+.border-left-col {
+  border-left:4px solid #1a9d7f !important;
+}
+
+.icon-table-pencil {
+  margin-left: 20px;
+}
+
+.right-content-kkm {
+  max-height: 100%
+}
+
+.kkm {
+  min-height: 100%;
+
+  &__title {
+    height: 15px;
+    font-family: $nunito_bold;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2d2d2d;
+  }
+
+  &_showall {
+    font-family: $nunito_regular;
+    font-size: 7.5px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.1px;
+    text-align: right;
+    color: #7f92a1;
+    cursor: pointer;
+  }
+
+  &__name {
+    width: 97px;
+    height: 9.5px;
+    font-family: $nunito_regular;
+    font-size: 10px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #31394d;
+  }
+
+  &__email {
+    width: 65.6px;
+    height: 7px;
+    font-family: $nunito_regular;
+    font-size: 8px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #748aa1;
+  }
+
+  &__nilai {
+    width: 20px;
+    height: 10px;
+    font-family: $nunito_bold;
+    font-size: 18px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: right;
+    color: #eb373e;
+    margin:34px
+  }
 }

@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import logo from './logo.svg';
 import './App.css';
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
+// import { library } from '@fortawesome/fontawesome-svg-core'
+// import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
+import { NavLink } from 'react-router-dom'
 
-library.add(faStroopwafel)
+// library.add(faStroopwafel)
 
 class App extends Component {
   render() {
@@ -22,7 +23,13 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            <NavLink to="/">
+              asdas
+            </NavLink>
+            <NavLink to="/">
+              asdas
+            </NavLink>
+
           </a>
         </header>
       </div>
