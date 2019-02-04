@@ -21,12 +21,27 @@ export default class Nilai extends Component {
     }
     this.toggleMenu = this.toggleMenu.bind(this)
   }
+  componentDidMount() {
+    this.getQuestionResults()
+  }
   toggleMenu(menu) {
     if (this.state.activeMenu !== menu) {
       this.setState({
         activeMenu: menu
       })
     }
+  }
+  getQuestionResults() {
+    let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
+    let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
+    let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
+    const url = `v1/assessments/${assessment_id}/exams/${exam_id}/exam_classes/${exam_classes_id}/question_results`
+    let questionResults = []
+
+    apiClient('get', url).then(res=>{
+      questionResults = res.data.data.exam_questions
+
+    })
   }
 
   render() {
@@ -66,7 +81,7 @@ export default class Nilai extends Component {
                 <div className="col-9 bg-white margin-right-4 margin-top-6 container-subject shadow-box">
                   <BottomContentEvaluasi />
                 </div>
-                <div className="col-2 margin-left-2 bg-white margin-top-6 container-subject shadow-box">
+                <div className="col-2 margin-left-2 bg-white margin-top-6 shadow-box h-100">
                   <div className="content-subject">
                     <SubjectEvaluasi />
                   </div>

@@ -52,7 +52,7 @@ export const MainRoutes = [
         component: StudentDetail
     },
     {
-        path: '/nilai/' ,
+        path: '/nilai' ,
         component:DetailNilai   
     },
     {
