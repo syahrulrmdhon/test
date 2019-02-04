@@ -18,8 +18,8 @@ export default class Nilai extends Component {
 
     this.state = {
       activeMenu: 1,
-      dataQuestions: {},
-      questionResults: []
+      questionResults: [],
+      competencyScores: []
     }
     this.toggleMenu = this.toggleMenu.bind(this)
   }
@@ -41,7 +41,7 @@ export default class Nilai extends Component {
 
     apiClient('get', url).then(res => {
       this.setState({
-        dataQuestions: res.data.data,
+        competencyScores: res.data.data.competency_scores,
         questionResults: res.data.data.exam_questions
       })
     })
