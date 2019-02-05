@@ -1,6 +1,25 @@
 import { apiClient } from './apiClient'
 import React, { Component } from 'react'
 
+export function setLabelSelect(lists, values = {}){
+    let label = ''
+    lists.map((list, idx) => {
+        let key = list.value
+        let set_value = !!(values) ? values.value : ''
+
+        if(key == set_value){
+            label = list.label;
+        }
+    })
+
+    if(label != ''){
+        values.label = label
+        return values
+    } else {
+        return false
+    }
+}
+
 export function seeMore(value, s_count = 50){
     const count = value.length
     
@@ -10,6 +29,20 @@ export function seeMore(value, s_count = 50){
     }
     value = <span className="profile" title={value}>{value}</span>
     return value
+}
+
+export function setErrorRuby(data = {}){
+    let result = {}
+    let errors = data.errors || []
+
+    if(typeof errors == 'object'){
+        for (var error in errors) {
+            if (errors.hasOwnProperty(error)) {
+                result[error] = errors[error]
+            }
+        }
+    }
+    return result
 }
 
 export function setError(data = []){
@@ -146,8 +179,36 @@ export function getMonthIndo(month = false){
     return result
 }
 
-export function classes(){
-    apiClient('get', 'v1/filters/classes').then(response => response.data).then(data => {
+export function changeFormatOptions(values = []){
+    let result = []
+    if(values.length > 0){
+        values.map((value, idx) => {
+            result[idx] = {
+                value: value.key,
+                label: value.value,
+            }
+        })
+    }
+    return result;
+}
+
+export function assessmentType(params = {}, event = {}, fieldName = 'assessment_type'){
+    if(params){
+        apiClient('get', 'v1/filters/assessment_types', false, params).then(response => {
+            var obj = {}
+            let result = response.data.data.assessment_types  
+            let assessment_types = changeFormatOptions(result)
+            event = setLabelSelect(assessment_types, event)
+
+            obj['assessment_types'] = assessment_types
+            obj[fieldName] = event
+            this.setState(obj)
+        })
+    }
+}
+
+export function classes(params = {}){
+    apiClient('get', 'v1/filters/classes', false, params).then(response => response.data).then(data => {
         let result = []
 
         if(data.data.classes.length > 0){

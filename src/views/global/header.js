@@ -85,7 +85,6 @@ export default class Header extends Component {
         if(l_user){
             user = JSON.parse(l_user);
         }
-        console.log(user);
 
         // custom
         let school_name = !!(school) ? school.name : ''
