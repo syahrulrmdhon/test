@@ -8,8 +8,8 @@ import Rapor from '../views/rapor/rapor'
 import DaftarMurid from '../views/student/murid'
 import StudentDetail from '../views/student/detail'
 import SwitchAccount from '../views/global/switch_account'
-import NotFound from '../views/global/not-found'
 import DetailNilai from './../views/beri-nilai/beri-nilai'
+import NotFound from '../views/global/not-found'
 
 export const MainRoutes = [
     {
