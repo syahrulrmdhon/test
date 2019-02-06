@@ -24,7 +24,7 @@ export default class Detail extends Component {
           nis: '',
           nisn: '',
           addresses: [{
-            full_address: ''
+            full_address: {}
           }],
         },
         class_rank: {
@@ -86,7 +86,7 @@ export default class Detail extends Component {
             <Link to="/murid">&lt; Kembali</Link>
           </div>
         </div>
-        <div className="content">
+        <div className="content-wrapper">
           <div className="row detail-menu">
             <div className="offset-2 col-10 tab-menu">
               <TabMenu 
