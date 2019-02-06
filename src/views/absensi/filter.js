@@ -12,11 +12,13 @@ export default class FilterAbsensi extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>Pilih Tanggal</label>
                     <div className="position-relative">
-                        <DatePicker className="w-100"
+                        <DatePicker
+                             className="w-100"
                             selected={this.props.selectedDate}
                             onChange={this.props.handleDateChange}
                             placeholderText="Weeks start on Monday"
-                            value={getDate('case-1', this.props.selectedDate)} />
+                            value={getDate('case-1', this.props.selectedDate)} 
+                            />
                         <i className="fa fa-calendar calendar-icon" aria-hidden="true" />
                     </div>
                     <br /><br />
