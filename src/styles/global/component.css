@@ -1095,7 +1095,8 @@ strong, .bold {
 .content-block.main-block .left-block{
   border-right: 1px solid #f7f7f7;
 }
-.content-block.main-block .empty-data{
+.content-block.main-block .empty-data,
+.content .empty-data{
   height: 440px;  
   border: 1px solid #cccccc;
   border-radius: 2px;
@@ -1205,7 +1206,7 @@ ul.toggle > li.nav-item a.active{
   height: 400px;
   overflow-y: scroll;
 }
-.table {
+.table.assessment {
   width: 100%;
   max-width: 100%;
   border-collapse: separate;
