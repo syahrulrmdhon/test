@@ -108,7 +108,7 @@ export default class Nilai extends Component {
                   </div>
                 </div>
               </div>
-              <div className="row margin-top-4">
+              <div className="row margin-top-2">
                 <div className="col-sm-9">
                   <div className="content-block main-block">
                     <BottomContentEvaluasi

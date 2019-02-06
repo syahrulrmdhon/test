@@ -2,26 +2,30 @@ import React, { Component } from 'react'
 import { Table } from 'reactstrap'
 import './../../../styles/beri-nilai/main.scss'
 import './../../../styles/global/component.css'
-import {Percentage} from './table-conditions'
-import {Predicate} from './table-conditions'
-import {evaluatQuestion} from './../../../utils/exam'
+import { Percentage } from './table-conditions'
+import { Predicate } from './table-conditions'
+import { evaluatQuestion } from './../../../utils/exam'
 
 export default class TableEvaluasi extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
   }
 
   render() {
     let content = []
-    if(this.props.questionEvaluations.length > 0){
+    if (this.props.questionEvaluations.length > 0) {
       this.props.questionEvaluations.map((value, key) => {
         let question = evaluatQuestion(value)
         content.push(
-          <tr key={key} >
+          <tr key={key} className="box-shadow">
             <td>{value.qn_number}</td>
             <td>{question}</td>
-            <td></td>
-            <td></td>
+            <Percentage
+              evaluations={value}
+            />
+            <Predicate
+              evaluations={value}
+            />
           </tr>
         )
       })

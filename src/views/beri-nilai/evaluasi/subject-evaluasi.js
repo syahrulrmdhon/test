@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class SubjectEvaluasi extends Component {
     render() {
         return (
-            <div className="title-content-evaluasi margin-top-4 margin-bottom-2">
+            <div className="title-content-evaluasi margin-top-4 padding-4 margin-bottom-2">
 
                 {
                     this.props.competencySubjects.map(function (data, i) {

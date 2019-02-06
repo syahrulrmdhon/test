@@ -16,14 +16,14 @@ export default class TopContentEvaluasi extends Component {
           <div className='title-content-evaluasi margin-top-4 margin-bottom-2'>
             <span>Evaluasi soal</span>
           </div>
-          <div className='content-chart margin-top-10'>
+          <div className='content-chart margin-top-8'>
             <ChartEvaluasi 
               examChart={this.props.examChart}
             />
           </div>
         </div>
         <div className='col-sm-2'>
-          <div className='box-card-evaluasi margin-top-6'>
+          <div className='box-card-evaluasi margin-top-12'>
             <CardEvaluasi
               questionResults={this.props.questionResults}
             />
