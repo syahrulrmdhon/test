@@ -4,9 +4,30 @@ import './../../../styles/beri-nilai/main.scss'
 import './../../../styles/global/component.css'
 import {Percentage} from './table-conditions'
 import {Predicate} from './table-conditions'
+import {evaluatQuestion} from './../../../utils/exam'
 
 export default class TableEvaluasi extends Component {
+  constructor(props){
+    super(props)
+  }
+
   render() {
+    let content = []
+    if(this.props.questionEvaluations.length > 0){
+      this.props.questionEvaluations.map((value, key) => {
+        let question = evaluatQuestion(value)
+        content.push(
+          <tr key={key} >
+            <td>{value.qn_number}</td>
+            <td>{question}</td>
+            <td></td>
+            <td></td>
+          </tr>
+        )
+      })
+    }
+
+
     return (
       <Table responsive className='d-sm-table'>
         <thead className='thead-light'>
@@ -18,7 +39,8 @@ export default class TableEvaluasi extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.questionEvaluations.map(function (data, i) {
+          {content}
+          {/* {this.props.questionEvaluations.map(function (data, i) {
             return (
               <tr key={i} className="tbody-table-nilai margin-bottom-1">
                 <td className="text-left left-col-evaluasi">{data.qn_number === null ? '-' : data.qn_number}</td>
@@ -38,7 +60,7 @@ export default class TableEvaluasi extends Component {
                 />
               </tr>
             )
-          })}
+          })} */}
 
         </tbody>
       </Table>

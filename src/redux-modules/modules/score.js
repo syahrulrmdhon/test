@@ -17,8 +17,6 @@ export default function reducer(state = initialState, action) {
             }
         case LOAD_SUCCESS:
             delete state.error;
-            console.log('action.result ', action.result);
-            console.log('state', state);
             if (state.result !== action.result) {
                 return {
                     ...state,

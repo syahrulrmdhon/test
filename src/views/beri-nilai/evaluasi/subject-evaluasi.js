@@ -7,13 +7,13 @@ export default class SubjectEvaluasi extends Component {
 
                 {
                     this.props.competencySubjects.map(function (data, i) {
-                        return <div>
+                        return <div key={i}>
                             <span>{data.subject_name}</span>
                             <br /><br />
                             <div>
                                 {
                                     data.competency_scores.map(function (x, idx) {
-                                        return <p className="text-justify content-competency">
+                                        return <p className="text-justify content-competency" key={idx}>
                                             {x.basic_comp.competency_number} {x.basic_comp.content}
                                         </p>
                                     })
