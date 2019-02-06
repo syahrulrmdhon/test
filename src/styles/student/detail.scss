@@ -47,6 +47,13 @@ $nunito_bold: 'NunitoBold';
   .content {
     height: 100%;
   }
+
+  .content-wrapper {
+    position: relative;
+    top: 97px;
+    width: 90%;
+    margin: 0px auto;
+  }
 }
 
 .detail-menu {
@@ -110,10 +117,10 @@ $nunito_bold: 'NunitoBold';
 
 .left-content, .right-content {
   background-color: transparent;
-  height: 483px;
-  .tab-content {
-    margin-top: 20px;
-  }
+  // height: 483px;
+  // .tab-content {
+  //   margin-top: 0px;
+  // }
 }
 
 .absences-detail {
@@ -339,3 +346,4 @@ $nunito_bold: 'NunitoBold';
     }
   }
 }
+
