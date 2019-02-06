@@ -12,7 +12,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
   margin: auto;
   font-family: "Nunito Sans", sans-serif;
   overflow-y: hidden;
-  
+
   .left-content {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -28,12 +28,12 @@ $nunito_extra_bold: 'NunitoExtraBold';
     height: 530px;
   }
 
-  .col-lg-2 {
+  .col-sm-2 {
     flex: 0 0 19.666667%;
     max-width: 19.666667%;
   }
 
-  .col-lg-10 {
+  .col-sm-10 {
     max-width: 80.333333%;
     flex: 80.333333%;
   }
@@ -44,7 +44,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
 
   .search {
     display: flex;
-    width: 280px;
+    width: 50%;
 
     .input-field, .icon {
       height: 35px;
@@ -61,10 +61,12 @@ $nunito_extra_bold: 'NunitoExtraBold';
   .table {
     background-color: #f9f9f9;
     border: 1px solid #cccccc;
+    margin-bottom: 0px;
 
     .name {
       color: #2099e8;
       font-family: $nunito_bold;
+      cursor: pointer;
     }
   }
 
@@ -115,7 +117,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
     font-family: $nunito_bold;
     cursor: pointer;
     margin: 0px auto;
-    width: 80%;
+    width: 120px;
   }
 
   .check {
@@ -152,7 +154,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
   input[type=radio]:checked ~ .check::before{
     background: #1a9d7f;
   }
-  
+
   .alpha input[type=radio]:checked ~ .check::before{
     background: #9d1a1a;
   }
@@ -181,15 +183,48 @@ $nunito_extra_bold: 'NunitoExtraBold';
     margin-bottom: 20px;
   }
 
-  .description {
-    
+  .wrapper-save {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .info {
+    border: none;
+    float: left;
+    background-color:  rgba(178, 216, 216, 0.32);
+    margin-bottom: 0px;
+    font-style: italic;
+    width: 65%;
+    text-align: left;
+    color: #6d6d6d;
+
+    span {
+      font-family: $nunito_bold;
+    }
+  }
+
+  .title {
+    margin: 10px 0px 30px;
+    font-family: $nunito_bold;
+    font-size: 14px;
+    color: #505050;
+  }
+
+  .content {
+    background: #f7f7f7;
+    margin-bottom: 20px;
+    position: relative;
+    width: auto;
+  }
+
+  .table-responsive {
+    margin-top: 0px;
+    min-height: auto;
   }
 }
-.content {
-  background: #f7f7f7;
-  margin-bottom: 20px;
-  position: relative;
-}
+
 .left-content form label {
   color: #6d6d6d;
 }
@@ -199,6 +234,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
   padding-bottom: 20px;
   text-align: center;
   height: 530px;
+  padding-right: 0px;
 }
 .card {
   background: white;
@@ -210,7 +246,8 @@ $nunito_extra_bold: 'NunitoExtraBold';
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+
   &__label {
     font-size: 14px;
     color: #2d2d2d;
