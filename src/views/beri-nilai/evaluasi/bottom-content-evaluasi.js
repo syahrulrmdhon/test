@@ -6,7 +6,7 @@ export default class BottomContentEvaluasi extends Component {
   render() {
     return (
       <div className="bottom-contents">
-        <div className="row title-content-evaluasi margin-bottom-2 margin-top-4">
+        <div className="d-flex title-content-evaluasi margin-bottom-2 margin-top-4">
           <div className="col-12">
             <span>Hasil Perolehan Nilai</span>
           </div>

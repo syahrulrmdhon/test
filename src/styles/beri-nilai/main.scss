@@ -532,6 +532,9 @@ $nunito_bold: 'NunitoBold';
   // height: auto !important;
 }
 .content-subject {
-  max-height: 500px;
   overflow-y: scroll;
+}
+
+.content-competency {
+  padding-bottom: 20px;
 }

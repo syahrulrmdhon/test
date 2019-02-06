@@ -19,7 +19,7 @@ export default class Nilai extends Component {
     this.state = {
       activeMenu: 1,
       questionEvaluations: [],
-      competencyScores: [],
+      competencySubjects: [],
       questionResults: [],
       examChart: []
     }
@@ -57,9 +57,10 @@ export default class Nilai extends Component {
 
     apiClient('get', url).then(res => {
       this.setState({
-        competencyScores: res.data.data.competency_scores,
+        competencySubjects: res.data.data.subject_competencies,
         questionEvaluations: res.data.data.exam_questions
       })
+
     })
   }
 
@@ -102,16 +103,16 @@ export default class Nilai extends Component {
                   examChart={this.state.examChart}
                 />
               </div>
-              <div className="row">
-                <div className="col-9 bg-white margin-right-4 margin-top-6 container-subject shadow-box">
+              <div className="d-flex">
+                <div className="col-9 bg-white margin-right-1 margin-top-6 container-subject shadow-box">
                   <BottomContentEvaluasi
-                    questionEvaluations={this.state.questionEvaluations}
+                  questionEvaluations={this.state.questionEvaluations}
                   />
                 </div>
-                <div className="col-2 margin-left-2 bg-white margin-top-6 shadow-box h-100">
+                <div className="col-3 bg-white margin-top-6 shadow-box h-100">
                   <div className="content-subject">
                     <SubjectEvaluasi
-                      competencyScores={this.state.competencyScores}
+                      competencySubjects={this.state.competencySubjects}
                     />
                   </div>
                 </div>

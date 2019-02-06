@@ -2,38 +2,27 @@ import React, { Component } from 'react'
 
 export default class SubjectEvaluasi extends Component {
     render() {
-        console.log('scores', this.props.competencyScores)
         return (
             <div className="title-content-evaluasi margin-top-4 margin-bottom-2">
-                <span>Matematika</span>
-                <br /><br />
+
                 {
-                    this.props.competencyScores.map(function (x, i) {
+                    this.props.competencySubjects.map(function (data, i) {
+                        console.log('xxx', data)
                         return <div>
-                            <p className="text-justify">
-                                {x.basic_comp.competency_number} {x.basic_comp.content}
-                            </p>
-                            <br/>
+                            <span>{data.subject_name}</span>
+                            <br /><br />
+                            <div>
+                                {
+                                    data.competency_scores.map(function (x, idx) {
+                                        return <p className="text-justify content-competency">
+                                            {x.basic_comp.competency_number} {x.basic_comp.content}
+                                        </p>
+                                    })
+                                }
+                            </div>
                         </div>
                     })
                 }
-                {/* <div>
-                    <p className="text-justify">
-                        3.1 Memahami makna dalam percakapan transaksional dan interpersonal dalam konteks kehidupan sehari-hari
-                    </p>
-                    <br />
-                    <p className="text-justify">
-                        3.1 Memahami makna dalam percakapan transaksional dan interpersonal dalam konteks kehidupan sehari-hari
-                    </p>
-                    <br />
-                    <p className="text-justify">
-                        3.1 Memahami makna dalam percakapan transaksional dan interpersonal dalam konteks kehidupan sehari-hari
-                    </p>
-                    <br />
-                    <p className="text-justify">
-                        3.1 Memahami makna dalam percakapan transaksional dan interpersonal dalam konteks kehidupan sehari-hari
-                    </p>
-                </div> */}
             </div>
         )
     }
