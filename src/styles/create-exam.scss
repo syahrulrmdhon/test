@@ -5,6 +5,7 @@ $nunito_bold: 'NunitoBold';
 
 .create-exam {
   .content-wrapper {
+    position: relative;
     box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
     border-radius: 5px;
     background-color: #ffffff;
@@ -23,7 +24,7 @@ $nunito_bold: 'NunitoBold';
     color: #1a9d7f;
     font-size: 14px;
     font-family: $nunito_semi_bold;
-    margin: 0px auto;
+    text-align: center;
   }
 
   &__line {
@@ -63,6 +64,8 @@ $nunito_bold: 'NunitoBold';
     padding: 10px;
     margin-top: 36px;
     width: 200px;
+    position: absolute;
+    bottom: 40px;
   }
 
   ::placeholder {

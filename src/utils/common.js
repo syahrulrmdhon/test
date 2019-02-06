@@ -243,7 +243,6 @@ export function schoolYears(){
 }
 
 export function examTypes(params={}){
-    console.log(params)
     const path = 'v1/filters/exam_types'
     apiClient('get', path, false, params).then(response => response.data).then(data => {
         let result = []
@@ -258,4 +257,13 @@ export function examTypes(params={}){
         }
         this.setState({examTypes: result})
     })
+}
+
+export function checkProperties(obj) {
+    console.log('ddd')
+    for (let key in obj) {
+        if (obj[key] !== null && obj[key] != "")
+            return false;
+    }
+    return true;
 }
