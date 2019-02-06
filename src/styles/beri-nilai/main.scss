@@ -518,8 +518,14 @@ tbody tr:nth-child(odd) {
 tbody tr:nth-child(even) {
   background-color: #FFFFFF;
 }
-.border-left-col {
+.border-left-col-green {
   border-left:4px solid #1a9d7f !important;
+}
+.border-left-col-red {
+  border-left:4px solid #eb373e !important;
+}
+.border-left-col-yellow {
+  border-left:4px solid #f2bc2d !important;
 }
 
 .icon-table-pencil {
@@ -593,4 +599,33 @@ tbody tr:nth-child(even) {
     color: #eb373e;
     margin:34px
   }
+}
+.color-green-score {
+  color: #05a558 !important;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
+}
+
+.color-red-score {
+  color: #eb373e !important;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
+}
+
+.color-yellow-score {
+  color: #f2bc2d !important;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
 }
