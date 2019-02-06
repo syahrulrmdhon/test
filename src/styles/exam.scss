@@ -1,0 +1,151 @@
+$nunito_regular: 'NunitoRegular';
+$nunito_semi_bold: 'NunitoSemiBold';
+$nunito_bold: 'NunitoBold';
+
+.exam {
+  &__wrapper-title {
+    color: #2d2d2d;
+    line-height: 20px;
+  }
+  
+  &__topic-description {
+    font-family: $nunito_regular;
+  }
+
+  &__wrapper-panel {
+    margin-top: 24px;
+  }
+
+  &__panel {
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px 0 rgba(30, 30, 30, 0.05);
+    margin-bottom: 20px;
+    padding: 18px 13.5px;
+    border: 1px solid rgba(204, 204, 204, 0.5);
+    height: 120px;
+  }
+
+  &__task-of {
+    color: #121212;
+    font-family: $nunito_semi_bold;
+    font-size: 11px;
+    opacity: .5;
+  }
+
+  &__title {
+    font-size: 14px;
+    color: #333333;
+    font-family: $nunito_semi_bold;
+    margin-top: 4px;
+  }
+
+  &__action-wrapper {
+    position: absolute;
+    bottom: 0px;
+    font-size: 11px;
+    color: #1a9d7f;
+  }
+
+  &__action {
+    display: inline;
+    font-family: $nunito_bold;
+  }
+
+  &__action {
+    padding: 1px 6.5px;
+    border-right: 1px solid #ededed;
+    cursor: pointer;
+
+    &:first-child {
+      padding-left: 0px;
+      padding-right: 6.5px;
+    }
+
+    &:last-child {
+      padding-left: 6.5px;
+      padding-right: 0px;
+      border-right: none;
+    }
+  }
+
+  &__score-wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-right: 20px;
+  }
+
+  &__percentage-wrapper {
+    padding-left: 10px;
+    width: 55%;
+  }
+
+  &__percentage {
+    color: #121212;
+    font-size: 24px;
+    font-family: $nunito_regular;
+  }
+
+  &__percentage-label {
+    color: #121212;
+    opacity: 0.5;
+    font-family: $nunito_bold;
+    font-size: 11px;
+  }
+
+  &__circular-wrapper {
+    width: 40%;
+  }
+
+  &__assigned-class-wrapper {
+    border-left: 1px solid #ededed;
+    padding-left: 30px;
+  }
+
+  &__assigned-class {
+    font-size: 11px;
+    font-family: $nunito_semi_bold;
+    color: #121212;
+    opacity: .5;
+  }
+
+  &__class {
+    float: left;
+    margin-top: 7.5px;
+    font-family: $nunito_semi_bold;
+    font-size: 10px;
+    color: #1a9d7f;
+    background-color: rgba(178, 216, 216, 0.32);;
+    padding: 2px 4.5px;
+    margin-right: 12px;
+    cursor: pointer;
+  }
+
+  &__not-class {
+    color: #333333;
+    font-family: $nunito_regular;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+  
+  label.header-title {
+    color: #2d2d2d;
+  }
+
+  .col-sm-2 {
+    width: 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  .col-sm-5 {
+    width: 40%;
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+}

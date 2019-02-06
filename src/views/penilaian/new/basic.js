@@ -42,20 +42,21 @@ export default class Basic extends Component {
             const category = assessment.category  
             const assessment_classes_attributes = []  
 
-            if(assessment.assessment_classes_attributes.length > 0){
-                assessment.assessment_classes_attributes.map((assessment_classes_attribute, idx) => {
-                    assessment_classes_attributes.push({
-                        value: assessment_classes_attribute.class_id,
+            if(Object.entries(assessment).length > 0){
+                if(assessment.assessment_classes_attributes.length > 0){
+                    assessment.assessment_classes_attributes.map((assessment_classes_attribute, idx) => {
+                        assessment_classes_attributes.push({
+                            value: assessment_classes_attribute.class_id,
+                        })
                     })
+                }
+                this.categoryType({ value: category }, assessment)
+                this.setState({
+                    class_list: assessment.assessment_classes_attributes,
+                    name: assessment.name,
+                    assessment_classes_attributes: assessment_classes_attributes,
                 })
             }
-            
-            this.categoryType({ value: category }, assessment)
-            this.setState({
-                class_list: assessment.assessment_classes_attributes,
-                name: assessment.name,
-                assessment_classes_attributes: assessment_classes_attributes,
-            })
         })
     }
 
@@ -77,20 +78,26 @@ export default class Basic extends Component {
 
         let data = {
             assessment: {
-                category: this.state.category.value,
-                assessment_type: this.state.assessment_type.value,
-                name: this.state.name,
+                category: this.state.category.value || '',
+                assessment_type: this.state.assessment_type.value  || '',
+                name: this.state.name  || '',
                 school_id: this.state.school_id,
                 assessment_classes_attributes: class_attributes
             }
         }
 
         let url = 'v1/assessments/validate'
+
         apiClient('post', url, data).then(response => {
             this.props.callBack('basic')
         }).catch(error => {
             this.setState({
-                errors: setErrorRuby(error.response.data)
+                errors: setErrorRuby(error.response.data, [
+                    'category',
+                    'assessment_type',
+                    'name',
+                    'assessment_class',
+                ])
             })
         })
     }
