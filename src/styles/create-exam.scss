@@ -66,6 +66,13 @@ $nunito_bold: 'NunitoBold';
     width: 200px;
     position: absolute;
     bottom: 40px;
+
+    &:disabled {
+      background-color: #6c757d;
+      border: none;
+      color: #ffffff;
+      opacity: .65;
+    }
   }
 
   ::placeholder {
@@ -81,11 +88,6 @@ $nunito_bold: 'NunitoBold';
     &__control {
       height: 38px;
       width: 300px;
-    }
-    
-    &__dropdown-indicator {
-      background-color: rgba(234, 249, 242, 0.4);
-      border-left: 1px solid #cccccc;
     }
 
     &__indicator-separator {

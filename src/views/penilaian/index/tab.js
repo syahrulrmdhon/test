@@ -5,19 +5,6 @@ import classnames from 'classnames'
 export default class Tab extends Component {
     constructor(props){
         super(props)
-        this.state = {
-            activeTab: '1'
-        };
-
-        this.toggle = this.toggle.bind(this)
-    }
-    
-    toggle(tab) {
-        if (this.state.activeTab !== tab) {
-            this.setState({
-                activeTab: tab
-            });
-        }
     }
 
     render(){
@@ -26,24 +13,24 @@ export default class Tab extends Component {
                 <Nav tabs className="toggle">
                     <NavItem>
                         <NavLink
-                        className={classnames({ active: this.state.activeTab === '1' })}
-                        onClick={() => { this.toggle('1'); }}
+                        className={classnames({ active: this.props.activeTab === 'knowledge' })}
+                        onClick={() => { this.props.tabToggle('knowledge'); }}
                         >
                         Pengetahuan
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink
-                        className={classnames({ active: this.state.activeTab === '2' })}
-                        onClick={() => { this.toggle('2'); }}
+                        className={classnames({ active: this.props.activeTab === 'skill' })}
+                        onClick={() => { this.props.tabToggle('skill'); }}
                         >
                         Keterampilan
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink
-                        className={classnames({ active: this.state.activeTab === '3' })}
-                        onClick={() => { this.toggle('3'); }}
+                        className={classnames({ active: this.props.activeTab === 'attitude' })}
+                        onClick={() => { this.props.tabToggle('attitude'); }}
                         >
                         Sikap
                         </NavLink>

@@ -16,7 +16,7 @@ export default class AbsenceTable extends Component {
         </thead>
         <tbody>
         {
-          this.props.attendances.attendances.results.map( (attendance, index) => {
+          this.props.attendances.attendances.results.entries.map( (attendance, index) => {
             return <tr key={index}>
               <td>-</td>
               <td>-</td>

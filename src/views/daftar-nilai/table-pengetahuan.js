@@ -3,8 +3,8 @@ import { Table } from "reactstrap";
 
 export default class TablePengetahuan extends Component {
   render() {
+    console.log('pengetahuan', this.props.tableKnowledge)
     return (
-      <div className="table-pengetahuan">
         <Table bordered striped responsive hover>
           <thead>
             <tr>
@@ -18,7 +18,7 @@ export default class TablePengetahuan extends Component {
               <th>Nilai Rapor</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="table-nilai">
             {this.props.tableKnowledge.map(function (data, i) {
               return <tr key={i}>
                 <td className="student-name" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
@@ -57,7 +57,6 @@ export default class TablePengetahuan extends Component {
             }
           </tbody>
         </Table>
-      </div>
     );
   }
 }

@@ -1,6 +1,16 @@
 /* Font NunitoSans */
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
 
+button{
+  cursor: pointer;
+}
+
+/* table nilai */
+.table-nilai {
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
 /* box content */
 .content {
   background: #f7f7f7;
@@ -11,25 +21,40 @@
 }
 
 /* dropdown */
-select {
-  width: 100%;
-  background: white;
-  margin: auto;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: transparent;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
-  background-repeat: no-repeat;
-  background-position-x: 100%;
-  background-position-y: 5px;
-  border: 1px solid #dfdfdf;
-  border-radius: 2px;
-  margin-right: 2rem;
-  padding: 1rem;
-  padding-right: 3rem;
-  cursor: pointer;
-  font-family: "Nunito Sans", sans-serif;
+.select__indicator-separator {
+  display: none;
 }
+
+.select__control {
+  height: 35px;
+  border-radius: 3px !important;
+  border-color: #cccccc !important;
+}
+
+.select__dropdown-indicator svg{
+  color: #1a9d7f;
+  width: 12px;
+}
+
+.select__placeholder {
+  color: #7f92a1 !important;
+}
+
+.select__control {
+  height: 35px;
+  border-radius: 3px !important;
+  border-color: #cccccc !important;
+}
+
+.select__dropdown-indicator svg{
+  color: #1a9d7f;
+  width: 12px;
+}
+
+.select__placeholder {
+  color: #7f92a1 !important;
+}
+
 option {
   margin: auto;
   font-family: "Nunito Sans", sans-serif;
@@ -143,12 +168,6 @@ thead {
 .font-grey {
   font-family: "Nunito Sans", sans-serif;
   color: #9da2a6;
-}
-
-/* table content */
-.table-content {
-  height: 400px;
-  overflow-y: scroll;
 }
 
 /* Important Reset */
@@ -956,6 +975,11 @@ strong, .bold {
   font-size: 12px !important;
 }
 
+.small-text-filter {
+  font-size: 10px;
+  color: #6d6d6d;
+}
+
 .normal-text {
   font-size: 14px;
 }
@@ -1071,7 +1095,8 @@ strong, .bold {
 .content-block.main-block .left-block{
   border-right: 1px solid #f7f7f7;
 }
-.content-block.main-block .empty-data{
+.content-block.main-block .empty-data,
+.content .empty-data{
   height: 440px;  
   border: 1px solid #cccccc;
   border-radius: 2px;
@@ -1085,8 +1110,8 @@ strong, .bold {
 label.header-title{
   letter-spacing: 0.3px;
   color: #505050;
-  font-weight: bold;
-  font-size: 16px;
+  font-family: "NunitoBold";
+  font-size: 14px;
 }
 label.header-title.form{
   color: #1a9d7f;
@@ -1103,6 +1128,7 @@ label.header-title.form{
   display: block;
   margin-bottom: 5px;
   color: #6d6d6d;
+  font-size: 10px;
 }
 .content-input .counter:after {
   content: counter(number);
@@ -1114,6 +1140,7 @@ label.header-title.form{
   background-color: #1a9d7f;
   color: #FFF;
 }
+
 .submit-btn.default{
   background-color: #FFFF;
   border: 1px solid #1a9d7f;
@@ -1121,6 +1148,12 @@ label.header-title.form{
   padding: 10px 30px;
 }
 
+.filter-btn{
+  width: 100%;
+  border-radius: 25px;
+  background-color: #1a9d7f;
+  color: #FFF;
+}
 /* select react */
 .select-list{
   height: 40px;
@@ -1156,6 +1189,7 @@ ul.toggle > li.nav-item a{
   padding: 8px;
   color: #999999 !important;
   letter-spacing: 0.5px;
+  cursor: pointer;
 }
 ul.toggle > li.nav-item a.active{
   color: #000000 !important;
@@ -1164,11 +1198,15 @@ ul.toggle > li.nav-item a.active{
 
 /* table responsive */
 .table-responsive {
-  min-height: 450px;
+  /* min-height: 450px;
   overflow-x: auto;
-  margin-top: 20px;
+  margin-top: 20px; */
 }
-.table {
+.table-content {
+  height: 400px;
+  overflow-y: scroll;
+}
+.table.assessment {
   width: 100%;
   max-width: 100%;
   border-collapse: separate;
@@ -1228,7 +1266,6 @@ tbody tr:nth-child(even) {
 .padding-content{
   padding-top: 120px;
 }
-
 
 /* switch account */
 .switch{
@@ -1313,6 +1350,7 @@ tbody tr:nth-child(even) {
 /* alert */
 .react-confirm-alert-overlay{
   background: rgba(70, 66, 66, 0.9);
+  z-index: 99999;
 }
 .react-confirm-alert-body{
   padding: 0;
@@ -1370,3 +1408,14 @@ tbody tr:nth-child(even) {
   padding: 3px 20px;
   white-space: nowrap;
 }
+
+.col-sm-2-custom {
+  flex: 0 0 20.8% !important;
+  max-width: 20.8% !important;
+}
+
+.col-sm-10-custom {
+  flex: 0 0 79.2% !important;
+  max-width: 79.2% !important;
+}
+

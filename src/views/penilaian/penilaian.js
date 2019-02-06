@@ -1,19 +1,52 @@
 import React, { Component } from 'react'
 import './../../styles/penilaian.css'
 import Header from '../global/header'
-// import { Table, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
-// import classnames from 'classnames'
 import Filter from './filter'
 import Index from './index_assessment'
+import { assessmentGetData } from '../../utils/exam'
+import { assessmentType } from '../../utils/common'
+
+import Tab from './index/tab'
+import { NavLink } from 'react-router-dom'
 
 class Penilaian extends Component {
     constructor(props) {
         super(props)
 
-        // this.toggle = this.toggle.bind(this)
         this.state = {
-            activeTab: '1'
+            activeTab: 'knowledge',
+            assessment_type: null,
+            class_id: null,
+            school_subject_id: null,
+            data: [],
+            assessment_types: [],
         }
+        this.tabToggle = this.tabToggle.bind(this)
+        this.onChangeAttr = this.onChangeAttr.bind(this)
+        this.onFilter = this.onFilter.bind(this)
+    }
+
+    componentDidMount(){
+        assessmentGetData.call(this)
+        assessmentType.call(this, {category: this.state.activeTab})
+    }
+
+    onChangeAttr(event, props){
+        let obj = {}
+        obj[props.name] = event
+        this.setState(obj)
+    }
+
+    tabToggle(category = false){
+        this.state.activeTab = category
+
+        assessmentGetData.call(this)
+        assessmentType.call(this, {category: category})
+    }
+
+    onFilter(event){
+        event.preventDefault(); 
+        assessmentGetData.call(this)
     }
 
     render() {
@@ -24,10 +57,33 @@ class Penilaian extends Component {
                     <div className="content-block main-block">
                         <div className="row">
                             <div className="col-sm-2 left-block">
-                                <Filter />
+                                <Filter
+                                    assessment_types={this.state.assessment_types}
+                                    onChangeAttr={this.onChangeAttr}
+                                    onFilter={this.onFilter}
+                                    assessment_type={this.state.assessment_type}
+                                    class_id={this.state.class_id}
+                                    school_subject_id={this.state.school_subject_id}
+                                />
                             </div>
                             <div className="col-sm-10 right-block">
-                                <Index />
+                                <div className="margin-top-6 margin-left-3 margin-right-6">
+                                    <div className="row">
+                                        <div className="col-sm-6">
+                                            <label className="header-title">Daftar Topik Penilaian</label>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <div className="float-right">
+                                                <NavLink to="/penilaian/tambah" className="submit-btn default">Tambah Topik</NavLink>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <Tab 
+                                        activeTab={this.state.activeTab}
+                                        tabToggle={this.tabToggle} 
+                                    />
+                                    <Index  data={this.state.data} category={this.state.activeTab} />
+                                </div>
                             </div>
                         </div>
                     </div>

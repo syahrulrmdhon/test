@@ -5,6 +5,7 @@ $nunito_bold: 'NunitoBold';
 .detail {
     .table-content {
         height: 300px;
+        margin-top: 20px;
     }
 
     thead {
@@ -99,10 +100,6 @@ $nunito_bold: 'NunitoBold';
     background-color: #4da1ff;
 }
 
-.attitude tbody tr:last-child {
-    // border-bottom: 1px solid #b0d8d8;
-}
-
 .total-status {
     border: 1px solid #b0d8d8;
     color: #1a9d7f;
@@ -125,10 +122,6 @@ $nunito_bold: 'NunitoBold';
     div {
         font-family: $nunito_bold;
     }
-}
-
-.tab-content {
-    margin-top: 20px;
 }
 
 .knowledge {

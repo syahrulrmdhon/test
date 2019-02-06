@@ -1,80 +1,47 @@
-.rapor {
-  background: #f7f7f7;
-  margin-bottom: 20px;
-  font-family: "Nunito Sans", sans-serif;
-}
+/* .padding-content {
+  height: 95%;
+  overflow-y: hidden;
+} */
 
 .content {
-  margin-bottom: 20px;
+  height: 97%;
 }
 
 .row-rapor {
+  margin-top: 40px;
+  height: 97%;
   background-color: white;
+  border-radius: 2px;
+  -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
 }
 
 .left-content {
+  height: 100%;
   width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
-  background: white;
 }
 
 .right-content {
+  height: 100%;
   width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
-  background: white;
-  overflow-y: scroll;
-  height: 400px;
-}
-
-/* .export-print {
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 20px;
-  border: none;
-} */
-
-.export {
-  display: block;
-  margin: auto;
-  text-align: center;
-  bottom: 50px;
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-.print {
-  display: block;
-  margin: auto;
-  /* text-align: center; */
-  bottom: 20px;
-  position: absolute;
-  left: 30%;
-  /* right: 0; */
-}
-
-.tab-nilai {
-  border: solid 1px #cccccc;
-  background: #f2f2f2;
-  color: #999999;
-  font-weight: normal;
-  cursor: pointer;
-}
-
-.nav-tabs .tab-nilai .nav-link {
-  border: none;
-}
-
-.tab-nilai:active {
-  background: white;
-  color: #333333;
 }
 
 .arrow img {
   width: 10px;
   height: 20px;
+}
+
+.cursor {
+  cursor: crosshair;
+  background-color: #4b635d;
+}
+
+.cursor:hover {
+  cursor: default;
+  background-color: #4b635d;
 }

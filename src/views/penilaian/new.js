@@ -22,9 +22,9 @@ class New extends Component {
         super(props)
 
         this.state = {
-            tabMenu: '1'
+            tabMenu: '1',
+            assessment: {}
         }
-
         this.callBack = this.callBack.bind(this)
     }
 
@@ -33,7 +33,8 @@ class New extends Component {
             const assessment = response.data.data.assessment
 
             this.setState({
-                tabMenu: (typeof assessment == 'object') ? '2' : '1',
+                tabMenu: (Object.entries(assessment).length > 0) ? '2' : '1',
+                assessment: assessment,
             })
         })
     }
@@ -82,7 +83,12 @@ class New extends Component {
             tab_content.push(<Basic key={Math.random()} callBack={this.callBack} />)
             break
             case '2':
-            tab_content.push(<Componentt key={Math.random()} callBack={this.callBack} />)
+            tab_content.push(<Componentt 
+                key={Math.random()} 
+                callBack={this.callBack} 
+                tabMenu={this.state.tabMenu} 
+                assessment={this.state.assessment} 
+            />)
         }
 
         return(
@@ -112,4 +118,5 @@ class New extends Component {
         )
     }
 }
+
 export default New;
