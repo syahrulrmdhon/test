@@ -129,6 +129,10 @@ $nunito_bold: 'NunitoBold';
     transform: translateY(-50%);
   }
 
+  a:hover {
+    text-decoration: none;
+  }
+  
   label.header-title {
     color: #2d2d2d;
   }
