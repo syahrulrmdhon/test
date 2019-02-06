@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { Table } from 'reactstrap'
 import './../../../styles/beri-nilai/main.scss'
 import './../../../styles/global/component.css'
+import {Percentage} from './table-conditions'
+import {Predicate} from './table-conditions'
 
 export default class TableEvaluasi extends Component {
   render() {
     return (
-      <Table className='d-sm-table'>
+      <Table responsive className='d-sm-table'>
         <thead className='thead-light'>
           <tr className="col-12">
             <th className="text-left">No.</th>
@@ -28,8 +30,12 @@ export default class TableEvaluasi extends Component {
                     </td>
                   );
                 })}
-                <td className="large-text-red-bold">{data.correct_percentage === null ? '-' : data.correct_percentage}</td>
-                <td className="text-left">{data.predicate === null ? '-' : data.predicate}</td>
+                <Percentage
+                  evaluations={data}
+                />
+                <Predicate
+                  evaluations={data}
+                />
               </tr>
             )
           })}

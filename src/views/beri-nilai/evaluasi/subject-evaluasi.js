@@ -7,7 +7,6 @@ export default class SubjectEvaluasi extends Component {
 
                 {
                     this.props.competencySubjects.map(function (data, i) {
-                        console.log('xxx', data)
                         return <div>
                             <span>{data.subject_name}</span>
                             <br /><br />
