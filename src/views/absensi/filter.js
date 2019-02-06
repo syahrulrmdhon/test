@@ -7,8 +7,7 @@ export default class FilterAbsensi extends Component {
     render() {
         return (
             <div className="filter">
-                <h5><strong>Filter</strong></h5>
-                <br />
+                <div className="title">Filter</div>
                 <form onSubmit={this.handleSubmit}>
                     <label>Pilih Tanggal</label>
                     <div className="position-relative">

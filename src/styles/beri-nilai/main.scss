@@ -3,7 +3,7 @@ $nunito_regular: 'NunitoRegular';
 $nunito_semi_bold: 'NunitoSemiBold';
 $nunito_bold: 'NunitoBold';
 
-.detail {
+.details-nilai{
   background-color: #f7f7f7;
   min-height: 100%;
   
@@ -50,7 +50,7 @@ $nunito_bold: 'NunitoBold';
 
   .content-wrapper {
     position: relative;
-    top: 97px;
+    top: 127px;
     width: 90%;
     margin: 0px auto;
   }
@@ -92,20 +92,15 @@ $nunito_bold: 'NunitoBold';
 }
 
 .back {
+  font-size: 14px;
   width: 90%;
-  // margin: 0px auto;
+  margin: 0px auto;
   padding: 12px 0px;
-  display: flex;
-  margin-left: 120px;
-
 }
 
 .back a {
-  font-size: 14px;
-  margin-left: 100px;
-  margin-top: 3px;
+  margin-left: -15px;
   font-family: $nunito_bold;
-  position: relative;
 }
 
 .content .tab-content {
@@ -120,7 +115,7 @@ $nunito_bold: 'NunitoBold';
   background-color: #ffffff;
 }
 
-.left-content, .right-content {
+.left-content{
   background-color: transparent;
   height: 483px;
   .tab-content {
@@ -350,4 +345,287 @@ $nunito_bold: 'NunitoBold';
         font-family: $nunito_semi_bold;
     }
   }
+  
+}
+
+.bottom-contents {
+  height: 625.5px;
+}
+
+.tab-position {
+  margin-left: 4% !important;
+}
+
+.top-content{
+  height: 41.34vh;
+}
+
+.title-content {
+  padding-top:29px;
+  padding-left: 29px;
+  padding-bottom: 29px;
+  
+  span {
+    margin-top:5%;
+    font-family: $nunito_bold;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2d2d2d;
+  }
+}
+
+.content-chart {
+  // display: flex
+}
+
+.box-postition {
+  padding-left: 5em;
+  padding-top:1.8em;
+  padding-bottom: 15px;
+}
+
+.card-detail {
+  width: 169px;
+  height: 110px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 0.5px solid #cccccc; 
+}
+
+.bottom-content{
+  margin-top:2%;
+  margin-right: 1%;
+  width: 100%;
+  
+
+}
+
+.search-in-table {
+  display: flex;
+  width: 180px;
+
+  .input-field, .icon {
+    height: 35px;
+  }
+}
+
+.table-position {
+  margin-top:10%;
+}
+
+.table-nilai {
+  background: #e3e8f9;
+  border: 0.5 solid #e3e8f9;
+}
+
+.margin-table-nilai {
+  margin: 2%;
+}
+.custom-table {
+  border: 0.5 solid #e3e8f9;
+  border-top: 0.5px solid #e3e8f9
+}
+
+.tbody-table-nilai {
+  border: 0.5px solid #e3e8f9;
+  margin-top:2%;
+  border-collapse:separate; 
+  border-spacing:1em;
+  height: 0px;
+
+  &__label {
+      width: 105%;
+      text-align: center;
+      margin-top: 20px;
+  }
+
+  &__left-col{
+    border-left: 10px solid #eb373e !important;
+    width: 100px;
+
+  }
+}
+
+
+.avatar {
+  // margin-top:22px;
+  display: block
+}
+.name {
+  text-align: center;
+  align-items: center;
+  margin-left: 20px; 
+  font-family: $nunito_semi_bold;
+  position: relative;
+  font-size: 11px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.91;
+  letter-spacing: normal;
+  color: #333333;
+  display: block;
+  width: 90px;
+  margin-top: 21px;
+}
+
+.label-nilai {
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
+  color: #eb373e !important;
+}
+.col-sm-3 {
+  width: 23%;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 1em;
+}
+
+
+table.table.beri-nilai tr.head{
+  background-color: #d8d8d8 !important;
+  text-transform: uppercase;
+  opacity: 0.9;
+  color: #7f92a1;
+}
+
+table .beri-nilai td{
+  vertical-align: middle;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.11;
+  letter-spacing: normal;
+  color: #333333;
+}
+table.table.beri-nilai .btn{
+  padding: 3px 25px;
+}
+tbody tr:nth-child(odd) {
+  background-color: #FFFFFF;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #FFFFFF;
+}
+.border-left-col-green {
+  border-left:4px solid #1a9d7f !important;
+}
+.border-left-col-red {
+  border-left:4px solid #eb373e !important;
+}
+.border-left-col-yellow {
+  border-left:4px solid #f2bc2d !important;
+}
+
+.icon-table-pencil {
+  margin-left: 20px;
+}
+
+.right-content-kkm {
+  max-height: 100%
+}
+
+.kkm {
+  min-height: 100%;
+
+  &__title {
+    height: 15px;
+    font-family: $nunito_bold;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2d2d2d;
+  }
+
+  &_showall {
+    font-family: $nunito_regular;
+    font-size: 7.5px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.1px;
+    text-align: right;
+    color: #7f92a1;
+    cursor: pointer;
+  }
+
+  &__name {
+    width: 97px;
+    height: 9.5px;
+    font-family: $nunito_regular;
+    font-size: 10px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #31394d;
+  }
+
+  &__email {
+    width: 65.6px;
+    height: 7px;
+    font-family: $nunito_regular;
+    font-size: 8px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #748aa1;
+  }
+
+  &__nilai {
+    width: 20px;
+    height: 10px;
+    font-family: $nunito_bold;
+    font-size: 18px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: right;
+    color: #eb373e;
+    margin:34px
+  }
+}
+.color-green-score {
+  color: #05a558 !important;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
+}
+
+.color-red-score {
+  color: #eb373e !important;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
+}
+
+.color-yellow-score {
+  color: #f2bc2d !important;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
 }
