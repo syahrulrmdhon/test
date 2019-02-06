@@ -18,13 +18,16 @@ export default class Nilai extends Component {
 
     this.state = {
       activeMenu: 1,
+      questionEvaluations: [],
+      competencyScores: [],
       questionResults: [],
-      competencyScores: []
+      examChart: []
     }
     this.toggleMenu = this.toggleMenu.bind(this)
   }
   componentDidMount() {
-    this.getQuestionResults()
+    this.getQuestionsResults()
+    this.getQuestions()
   }
   toggleMenu(menu) {
     if (this.state.activeMenu !== menu) {
@@ -33,7 +36,20 @@ export default class Nilai extends Component {
       })
     }
   }
-  getQuestionResults() {
+  getQuestionsResults() {
+    let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
+    let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
+    let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
+    const url = `v1/assessments/${assessment_id}/exams/${exam_id}/exam_classes/${exam_classes_id}/question_results`
+
+    apiClient('get', url).then(res => {
+      this.setState({
+        questionResults: res.data.data.unmanaged,
+        examChart: res.data.data.exam_charts
+      })
+    })
+  }
+  getQuestions() {
     let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
     let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
     let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
@@ -42,7 +58,7 @@ export default class Nilai extends Component {
     apiClient('get', url).then(res => {
       this.setState({
         competencyScores: res.data.data.competency_scores,
-        questionResults: res.data.data.exam_questions
+        questionEvaluations: res.data.data.exam_questions
       })
     })
   }
@@ -78,17 +94,22 @@ export default class Nilai extends Component {
 
             <TabPane tabId={2}>
               <div className="bg-white container-fluid container-fluid-custom rounded-corners col-12 shadow-box">
-                <TopContentEvaluasi />
+                <TopContentEvaluasi
+                  questionResults={this.state.questionResults}
+                  examChart={this.state.examChart}
+                />
               </div>
               <div className="row">
                 <div className="col-9 bg-white margin-right-4 margin-top-6 container-subject shadow-box">
-                  <BottomContentEvaluasi 
-                    questionResults={this.state.questionResults}
+                  <BottomContentEvaluasi
+                    questionEvaluations={this.state.questionEvaluations}
                   />
                 </div>
                 <div className="col-2 margin-left-2 bg-white margin-top-6 shadow-box h-100">
                   <div className="content-subject">
-                    <SubjectEvaluasi />
+                    <SubjectEvaluasi 
+                      competencyScores={this.state.competencyScores}
+                    />
                   </div>
                 </div>
               </div>

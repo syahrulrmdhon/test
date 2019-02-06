@@ -14,7 +14,7 @@ export default class BottomContentEvaluasi extends Component {
         <div className="row">
           <div className="col-12">
             <TableEvaluasi 
-              questionResults={this.props.questionResults}
+              questionEvaluations={this.props.questionEvaluations}
             />
           </div>
         </div>

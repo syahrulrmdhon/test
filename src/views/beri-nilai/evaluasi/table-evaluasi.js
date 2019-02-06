@@ -5,7 +5,7 @@ import './../../../styles/global/component.css'
 
 export default class TableEvaluasi extends Component {
   render() {
-    console.log('table', this.props.questionResults)
+    console.log('table', this.props.questionEvaluations)
     return (
       <Table className='d-sm-table'>
         <thead className='thead-light'>
@@ -18,7 +18,7 @@ export default class TableEvaluasi extends Component {
         </thead>
         <tbody>
           <tr><th></th></tr>
-          {this.props.questionResults.map(function (data, i) {
+          {this.props.questionEvaluations.map(function (data, i) {
             return (
               <tr key={i} className="tbody-table-nilai margin-bottom-1">
                 <td className="text-left left-col-evaluasi">{data.qn_number === null ? '-' : data.qn_number}</td>
@@ -26,16 +26,13 @@ export default class TableEvaluasi extends Component {
                   return (
                     <td className="text-left" key={i}>
                       <div>{data.question === null ? "-" : data.question}</div>
-                      <div>{x.symbol === null ? '-' : x.symbol}) {x.content === null ? '-' : x.content} (10 Murid)</div>
-                      {/* <div className="normal-text-green-bold">b) 8 ayam (3 Murid)</div>
-                      <div>c) 4 ayam (12 Murid)</div>
-                      <div>d) 6 ayam (5 Murid)</div> */}
+                      <div>{x.symbol === null ? '-' : x.symbol}) {x.content === null ? '-' : x.content} ({x.ans_count} Murid)</div>
                     </td>
                   );
                 })
                 }
 
-                <td className="large-text-red-bold">{data.average_score === null ? '-' : data.average_score}</td>
+                <td className="large-text-red-bold">{data.correct_percentage === null ? '-' : data.correct_percentage}</td>
                 <td className="text-left">{data.predicate === null ? '-' : data.predicate}</td>
               </tr>
             )
