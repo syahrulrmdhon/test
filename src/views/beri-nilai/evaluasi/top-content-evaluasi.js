@@ -24,7 +24,7 @@ export default class TopContentEvaluasi extends Component {
         </div>
         <div className='col-2'>
           <div className='box-card-evaluasi margin-top-6'>
-            <CardEvaluasi 
+            <CardEvaluasi
               questionResults={this.props.questionResults}
             />
           </div>

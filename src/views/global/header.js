@@ -18,7 +18,6 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 var FontAwesome = require('react-fontawesome');
 
-
 export default class Header extends Component {
     constructor(props) {
         super(props);

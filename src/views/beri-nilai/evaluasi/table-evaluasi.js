@@ -17,7 +17,6 @@ export default class TableEvaluasi extends Component {
           </tr>
         </thead>
         <tbody>
-          <tr><th></th></tr>
           {this.props.questionEvaluations.map(function (data, i) {
             return (
               <tr key={i} className="tbody-table-nilai margin-bottom-1">

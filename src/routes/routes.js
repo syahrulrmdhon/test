@@ -1,14 +1,12 @@
 import { Login } from '../views'
-import Beranda from '../views/beranda/beranda'
+import Home from '../views/beranda/beranda'
 import Absensi from '../views/absensi/absensi'
-import Penilaian from '../views/penilaian/penilaian'
+import Assessment from '../views/penilaian/penilaian'
+import AssessmentNew from '../views/penilaian/new'
 import DaftarNilai from '../views/daftar-nilai/daftar-nilai'
 import Rapor from '../views/rapor/rapor'
 import DaftarMurid from '../views/student/murid'
 import StudentDetail from '../views/student/detail'
-import TablePengetahuan from '../views/daftar-nilai/table-pengetahuan'
-import TableKeterampilan from '../views/daftar-nilai/table-keterampilan'
-import TableSikap from '../views/daftar-nilai/table-sikap'
 import SwitchAccount from '../views/global/switch_account'
 import DetailNilai from './../views/beri-nilai/beri-nilai'
 import NotFound from '../views/global/not-found'
@@ -25,15 +23,19 @@ export const MainRoutes = [
     },
     {
         path: '/home',
-        component: Beranda
+        component: Home
     },
     {
         path: '/absen',
         component: Absensi
     },
     {
+        path: '/penilaian/tambah',
+        component: AssessmentNew
+    },
+    {
         path: '/penilaian',
-        component: Penilaian
+        component: Assessment
     },
     {
         path: '/daftar-nilai',

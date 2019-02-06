@@ -6,80 +6,83 @@ import {
 } from 'reactstrap';
 import Avatar from 'react-avatar';
 import Ava from './../../assets/images/img_avatar.png'
+import './../../styles/beri-nilai/main.scss'
+import { getParticipant } from './../../redux-modules/modules/score'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 var FontAwesome = require('react-fontawesome');
 
-export default class componentName extends Component {
+class BottomContent extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      data: [{}],
+      token: localStorage.getItem('token')
+    }
+  }
+  componentDidMount(){
+    this.props.getParticipant()
+  }
   render() {
-    return (
-      <div className="bottom-contents">
-        <div className="row  title-content">
-          <div className="col-sm-6 ">
-            <span>Hasil Perolehan Nilai</span>
-          </div>
-          <div className="col-sm-3">
-            <Select
-              classNamePrefix='select'
-              placeholder='Urutkan Berdasarkan' />
-          </div>
-          <div className="col-sm-3">
-            <div className="search-in-table">
-              <input className="input-field" type="text" placeholder="Cari murid disini..." name="search" />
-              <i className="fa fa-search icon"></i>
+    let content = []
+    if (this.state.data.length === 0) {
+      content.push(<Table key={1} />)
+    } else {
+      content.push(
+        <div className="margin-top-4 empty-data" key={1} >
+          Data belum tersedia.
             </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-sm-12">
-            <Table responsive className="table-outline mb-0 d-none d-sm-table custom-table">
-              <thead className="thead-light">
-                <tr>
-                  <th col="2">Nama Murid</th>
-                  <th className="text-left">Email</th>
-                  <th>Nilai</th>
-                  <th className="text-center">Beri Nilai</th>
-                  <th>Rincian</th>
-                </tr>
-              </thead>
-              <tbody className="">
-                <tr><th></th></tr>
-                <tr className="tbody-table-nilai spacer highlighted">
-                  <td className="text-left left-col">
-                    <div className="col-sm-7 avatar">
-                      <Avatar src={Ava} size="40" round={true} />
-                    </div>
-                    <div className="col-sm-2">
-                      <span className="name">Yiorgos Avraamu</span>
-                    </div>
-                  </td>
-                  <td >tritika@ensyspace.com</td>
-                  <td className="label-nilai">N/A</td>
-                  <td ><FontAwesome name="pencil" width="30" /></td>
-                  <td ><FontAwesome name="ellipsis-h" size="50" /></td>
-                </tr>
-                <tr><th></th></tr>
-                <tr className="tbody-table-nilai spacer highlighted">
-                  <td className="text-left left-col">
-                    <div className="col-sm-7 avatar">
-                      <Avatar src={Ava} size="40" round={true} />
-                    </div>
-                    <div className="col-sm-2">
-                      <span className="name">Yiorgos Avraamu</span>
-                    </div>
-                  </td>
-                  <td >tritika@ensyspace.com</td>
-                  <td className="label-nilai">N/A</td>
-                  <td ><FontAwesome name="pencil" width="30" /></td>
-                  <td ><FontAwesome name="ellipsis-h" size="50" /></td>
-                </tr>
-                
-              </tbody>
-            </Table>
-          </div>
+      )
+    }
+    console.log(this.props,"my user")
+    return (
+      <div className=" margin-top-6 margin-left-3 margin-right-6 margin-bottom-2">
+        <div className="table-responsive">
+          <table className="table assessment">
+            <thead>
+              <tr className="main-head">
+                <th></th>
+                <th>Nama Murid</th>
+                <th>Email</th>
+                <th>Nilai</th>
+                <th>Beri Nilai</th>
+                <th>Rincian</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="align-center border-left-col">
+                  <Avatar src={Ava} size="30" round={true} />
+                </td>
+                <td>T Ritika Singh</td>
+                <td>TRitikaSingh@gmail.com</td>
+                <td className="label-nilai">N/A</td>
+                <td>
+                  <FontAwesome name="pencil" size="lg" className="icon-table-pencil" />
+                </td>
+                <td>
+                  <FontAwesome name="ellipsis-h" size="lg" className="icon-table-pencil cgreen" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     )
   }
 }
+
+
+
+const mapStateToProps = state => ({
+  user: state
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ getParticipant }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(BottomContent);
+
+
 
 

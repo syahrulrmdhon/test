@@ -10,8 +10,8 @@ import BottomContent from './bottom-content'
 import BottomContentEvaluasi from './evaluasi/bottom-content-evaluasi'
 import { apiClient } from '../../utils/apiClient'
 import { TabContent, TabPane, Form, FormGroup, Label, Input } from 'reactstrap'
+import RightContent from './right-content'
 import SubjectEvaluasi from './evaluasi/subject-evaluasi';
-
 export default class Nilai extends Component {
   constructor(props) {
     super(props)
@@ -67,7 +67,7 @@ export default class Nilai extends Component {
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
     console.log(this.state.activeMenu, "here stat")
     return (
-      <div className="detail bg-grey">
+      <div className="details-nilai bg-grey">
         <Header navbar={false} />
         <div className="content-wrapper content-wrap-custom-size ">
           <div className="row detail-menu">
@@ -84,8 +84,11 @@ export default class Nilai extends Component {
               <div className="bg-white container-fluid container-fluid-custom rounded-corners">
                 <TopContent />
               </div>
-              <div className="col-sm-9 bg-white container-fluid container-fluid-custom rounded-corners bottom-content">
+              <div className="col-sm-9 bg-white container-fluid-custom rounded-corners bottom-content">
                 <BottomContent />
+              </div>
+              <div className="col-sm-3 bg-white  rounded-corners bottom-content">
+                <RightContent />
               </div>
               <div className="col-sm-2 bg-white  container-fluid-custom rounded-corners bottom-content">
 
@@ -107,7 +110,7 @@ export default class Nilai extends Component {
                 </div>
                 <div className="col-2 margin-left-2 bg-white margin-top-6 shadow-box h-100">
                   <div className="content-subject">
-                    <SubjectEvaluasi 
+                    <SubjectEvaluasi
                       competencyScores={this.state.competencyScores}
                     />
                   </div>
@@ -120,3 +123,5 @@ export default class Nilai extends Component {
     )
   }
 }
+
+

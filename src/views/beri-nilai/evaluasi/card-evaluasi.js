@@ -9,7 +9,7 @@ const data = [
 export default class CardEvaluasi extends Component {
   render() {
     return (
-      <div className="card-evaluasi">
+      <div className="card-evaluasi responsive">
         <div className="card-evaluasi__label-evaluasi">Nomor Soal Belum Dikuasai</div>
         <br />
         <div className="card-evaluasi__number-evaluasi">{this.props.questionResults}</div>

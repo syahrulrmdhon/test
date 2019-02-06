@@ -15,7 +15,6 @@ export default class CardAbsensi extends Component {
                     <div className="card__error">N/A</div>
                     <div>Murid</div>
                 </div>
-                
             </div>
         )
     }

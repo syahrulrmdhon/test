@@ -3,7 +3,7 @@ $nunito_regular: 'NunitoRegular';
 $nunito_semi_bold: 'NunitoSemiBold';
 $nunito_bold: 'NunitoBold';
 
-.detail {
+.details-nilai{
   background-color: #f7f7f7;
   min-height: 100%;
   
@@ -50,7 +50,7 @@ $nunito_bold: 'NunitoBold';
 
   .content-wrapper {
     position: relative;
-    top: 97px;
+    top: 127px;
     width: 90%;
     margin: 0px auto;
   }
@@ -115,7 +115,7 @@ $nunito_bold: 'NunitoBold';
   background-color: #ffffff;
 }
 
-.left-content, .right-content {
+.left-content{
   background-color: transparent;
   height: 483px;
   .tab-content {
@@ -445,6 +445,18 @@ $nunito_bold: 'NunitoBold';
   border-collapse:separate; 
   border-spacing:1em;
   height: 0px;
+
+  &__label {
+      width: 105%;
+      text-align: center;
+      margin-top: 20px;
+  }
+
+  &__left-col{
+    border-left: 10px solid #eb373e !important;
+    width: 100px;
+
+  }
 }
 .tbody-table-nilai .left-col {
   border-left: 10px solid #eb373e !important;
@@ -452,6 +464,7 @@ $nunito_bold: 'NunitoBold';
 .tbody-table-nilai .left-col-evaluasi {
   border-left: 3px solid #eb373e !important;
 }
+
 
 .avatar {
   // margin-top:22px;
@@ -475,8 +488,6 @@ $nunito_bold: 'NunitoBold';
 }
 
 .label-nilai {
-  width: 28.5px;
-  height: 10px;
   font-family: $nunito_bold;
   font-size: 15.5px;
   font-style: normal;
