@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
 var FontAwesome = require('react-fontawesome')
+import { setLabelSelect } from './../../../../utils/common'
 
 export default class KdItem extends Component {
     render(){
@@ -15,14 +16,17 @@ export default class KdItem extends Component {
 
         return(
             <div className="row">
-                <div className="col-sm-6">
+                <div className="col-sm-10">
                     <div className="content-input margin-top-4">
                         <label className="content-label">Kompetensi Dasar</label>
                         <Select
                             className= "select-list"
                             classNamePrefix= "select"
                             placeholder= "Pilih Kompetensi Dasar"
-                            name= "kd[]"
+                            name= {this.props.index}
+                            options= {this.props.basic_comps}
+                            onChange= {this.props.handleKD}
+                            value= {setLabelSelect(this.props.basic_comps, this.props.value)}
                         />
                     </div>
                 </div>

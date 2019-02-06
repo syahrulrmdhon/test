@@ -1,35 +1,31 @@
 import React, { Component } from 'react'
 import Select from 'react-select';
-
-const listPenilaian = [
-    { label: "Pilih Tipe Penilaian", value: "" }
-];
-const listClass = [
-    { label: "X IPA 1", value: "x ipa 1" },
-    { label: "X IPA 2", value: "x ipa 2" },
-    { label: "X IPS 1", value: "x ips 1" },
-    { label: "X IPS 2", value: "x ips 2" }
-];
-const listPelajaran = [
-    { label: "Fisika Dasar II", value: "fisika2" },
-    { label: "Matematika Dasar II", value: "matematika2" },
-    { label: "Sejarah Nasional II", value: "sejarah2" },
-    { label: "Biologi II", value: "biologi2" }
-];
+import {classes, subjects} from './../../utils/common'
 
 export default class Filter extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            listPenilaian,
-            selectedPenilaian: "",
-            listClass,
-            selectedClass: "",
-            listPelajaran,
-            selectedPelajaran: ""
+            classes: [],
+            subjects: [],
         }
+        this.triggerSubject = this.triggerSubject.bind(this)
     }
+
+    componentDidMount(){
+        classes.call(this, {attendance_type: 'subject'})
+    }
+
+    triggerSubject(event, props){
+        subjects.call(this, {
+            class_id: event.value
+        }, {
+            listOptions: true
+        })
+        this.props.onChangeAttr(event, props)
+    }
+
     render() {
         return (
             <div className="margin-top-6 margin-left-3">
@@ -42,10 +38,10 @@ export default class Filter extends Component {
                                 className= "select-list"
                                 classNamePrefix= "select"
                                 placeholder= "Pilih Tipe Penilaian"
-                                name= "type_assessment"
-                                // onChange={this.handleAttribute}
-                                // options={this.state.listClass}
-                                // value={this.state.classs_id}
+                                name= "assessment_type"
+                                options= {this.props.assessment_types} 
+                                value={this.props.assessment_type}
+                                onChange={this.props.onChangeAttr}
                             />
                         </div>
                         <div className="content-input">
@@ -55,9 +51,9 @@ export default class Filter extends Component {
                                 classNamePrefix= "select"
                                 placeholder= "Pilih Kelas"
                                 name= "class_id"
-                                // onChange={this.handleAttribute}
-                                // options={this.state.listClass}
-                                // value={this.state.classs_id}
+                                options= {this.state.classes}
+                                onChange={this.triggerSubject}
+                                value={this.props.class_id}
                             />
                         </div>
                         <div className="content-input">
@@ -66,14 +62,16 @@ export default class Filter extends Component {
                                 className= "select-list"
                                 classNamePrefix= "select"
                                 placeholder= "Pilih Mata Pelajaran"
-                                name= "subject_id"
-                                // onChange={this.handleAttribute}
-                                // options={this.state.listClass}
-                                // value={this.state.classs_id}
+                                name= "school_subject_id"
+                                options={this.state.subjects}
+                                onChange={this.props.onChangeAttr}
                             />
                         </div>
                         <div className="content-input margin-top-6">
-                            <button className="submit-btn">Filter</button>
+                            <button 
+                                className="submit-btn"
+                                onClick={this.props.onFilter}
+                            >Filter</button>
                         </div>
                     </form>
                 </div>

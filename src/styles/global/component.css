@@ -1,6 +1,10 @@
 /* Font NunitoSans */
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
 
+button{
+  cursor: pointer;
+}
+
 /* table nilai */
 .table-nilai {
   overflow-x: scroll;
@@ -1184,6 +1188,7 @@ ul.toggle > li.nav-item a{
   padding: 8px;
   color: #999999 !important;
   letter-spacing: 0.5px;
+  cursor: pointer;
 }
 ul.toggle > li.nav-item a.active{
   color: #000000 !important;
