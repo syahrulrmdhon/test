@@ -42,7 +42,7 @@ class BottomContent extends Component {
 
     const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     return (
-      <div className=" margin-top-6 margin-left-3 margin-right-6 margin-bottom-2">
+      <div className="margin-left-3 margin-right-6 margin-bottom-2">
         <div className="table-responsive">
           <table className="table assessment">
             <thead>
@@ -90,3 +90,100 @@ export default connect(mapStateToProps, mapDispatchToProps)(BottomContent);
 
 
 
+// <table class="table table-condensed" style={{borderCollapse:'collapse'}}>
+
+// <thead>
+//     <tr>
+//         <th>&nbsp;</th>
+//         <th>Job Name</th>
+//         <th>Description</th>
+//         <th>Provider Name</th>
+//         <th>Region</th>
+//         <th>Status</th>
+//     </tr>
+// </thead>
+
+// <tbody>
+//     <tr data-toggle="collapse" data-target="#demo1" className="accordion-toggle">
+//         <td>
+//             <button class="btn btn-default btn-xs"><span className="glyphicon glyphicon-eye-open"></span></button>
+//         </td>
+//         <td>OBS Name</td>
+//         <td>OBS Description</td>
+//         <td>hpcloud</td>
+//         <td>nova</td>
+//         <td> created</td>
+
+//     </tr>
+//     <tr>
+//         <td colSpan="12" class="hiddenRow">
+//             <div className="accordian-body collapse" id="demo1">
+//                 <table className="table table-striped">
+//                     <thead>
+//                         <tr>
+//                             <td><a href="WorkloadURL">Workload link</a></td>
+//                             <td>Bandwidth: Dandwidth Details</td>
+//                             <td>OBS Endpoint: end point</td>
+//                         </tr>
+//                         <tr>
+//                             <th>Access Key</th>
+//                             <th>Secret Key</th>
+//                             <th>Status </th>
+//                             <th> Created</th>
+//                             <th> Expires</th>
+//                             <th>Actions</th>
+//                         </tr>
+//                     </thead>
+//                     <tbody>
+//                         <tr>
+//                             <td>access-key-1</td>
+//                             <td>secretKey-1</td>
+//                             <td>Status</td>
+//                             <td>some date</td>
+//                             <td>some date</td>
+//                             <td>
+//                                 <a href="" className="btn btn-default btn-sm">
+//                                     <i className="glyphicon glyphicon-cog"></i></a>
+//                             </td>
+//                         </tr>
+
+
+
+//                     </tbody>
+//                 </table>
+
+//             </div>
+//         </td>
+//     </tr>
+//     <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
+//         <td>
+//             <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
+//         </td>
+//         <td>OBS Name</td>
+//         <td>OBS Description</td>
+//         <td>hpcloud</td>
+//         <td>nova</td>
+//         <td> created</td>
+//     </tr>
+//     <tr>
+//         <td colspan="6" class="hiddenRow">
+//             <div id="demo2" class="accordian-body collapse">Demo2</div>
+//         </td>
+//     </tr>
+//     <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
+//         <td>
+//             <button class="btn btn-default btn-xs"><span className="glyphicon glyphicon-eye-open"></span></button>
+//         </td>
+//         <td>OBS Name</td>
+//         <td>OBS Description</td>
+//         <td>hpcloud</td>
+//         <td>nova</td>
+//         <td> created</td>
+//     </tr>
+//     <tr>
+//         <td colspan="6" class="hiddenRow">
+//             <div id="demo3" className="accordian-body collapse">Demo3</div>
+//         </td>
+//     </tr>
+// </tbody>
+// </table>

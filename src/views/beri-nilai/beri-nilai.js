@@ -57,18 +57,21 @@ export default class Nilai extends Component {
               </div> */}
               <div className="row">
                 <div className="col-sm-12">
-                  <div className="content-block main-block">
+                  <div className="content-block main-block main-height">
                   <TopContent />
                   </div>
                 </div>
               </div>
-              <div className="row margin-top-4">
+              <div className="row margin-top-4 padding-bottom-6 ">
                 <div className="col-sm-9">
-                  <div className="content-block main-block">
+                  <div className="content-block   main-block">
+                  <BottomContent />
                   </div>
                 </div>
                 <div className="col-sm-3">
-                  <div className="content-block main-block">
+                  <div className="content-block main-block padding-5">
+                  <RightContent />
+
                   </div>
                 </div>
               </div>

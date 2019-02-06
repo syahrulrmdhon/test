@@ -21,7 +21,6 @@ class Content extends Component {
     }
 
     render() {
-        console.log("here top", this.props.result)
         return (
             <div className="col-sm-12">
                 <div className="col-sm-9">
@@ -31,7 +30,7 @@ class Content extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="content-chart">
+                        <div className="content-chart  margin-left-5">
                             <SingleBarChat />
                         </div>
 
