@@ -1,26 +1,14 @@
 import React, { Component } from 'react'
-import { TabContent, TabPane, Form, FormGroup, Label, Input } from 'reactstrap'
-// import DatePicker from 'react-datepicker'
-
-// import AbsenceTable from './AbsenceTable'
-// import Homeroom from './Homeroom'
-// import LeftSide from '../LeftSide/LeftSide'
-// import Profile from './ProfileDetail'
-// import RightSide from '../RightSide/RightSide'
-// import ScoreTable from './ScoreTable'
-// import Tab from '../TabContent/TabContent'
-// import { apiClient } from '../../utils/apiClient'
-// import './../../styles/beri-nilai/main.scss';
-// import Highcharts from 'highcharts'
-// import HighchartsReact from 'highcharts-react-official'
 import SingleBarChat from './../../components/chart/index';
 import './../../styles/beri-nilai/card.scss';
-import Card from './card'
+import Card from './card';
+import { getParticipantsResult } from './../../redux-modules/modules/score'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 
 
-
-export default class Content extends Component {
+class Content extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -28,8 +16,12 @@ export default class Content extends Component {
         }
     }
 
-    render() {
+    componentDidMount(){
+        // this.props.getParticipantsResult()
+    }
 
+    render() {
+        console.log("here top", this.props.result)
         return (
             <div className="col-sm-12">
                 <div className="col-sm-9">
@@ -56,3 +48,16 @@ export default class Content extends Component {
         )
     }
 }
+
+
+const mapStateToProps = state => ({
+    result: state
+  })
+  
+  const mapDispatchToProps = dispatch => bindActionCreators({ getParticipantsResult }, dispatch);
+  export default connect(mapStateToProps, mapDispatchToProps)(Content);
+  
+  
+  
+  
+  

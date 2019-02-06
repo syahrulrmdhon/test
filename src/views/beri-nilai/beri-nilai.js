@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import SingleBarChart from './../../components/chart/index'
-import { Link } from 'react-router-dom'
 import './../../styles/beri-nilai/main.scss'
 import Header from '../global/header'
 import TabMenu from '../../components/TabDetail/TabDetail'
 import TopContent from './top-content'
 import BottomContent from './bottom-content'
-import { apiClient } from '../../utils/apiClient'
-import { TabContent, TabPane, Form, FormGroup, Label, Input } from 'reactstrap'
+import { TabContent, TabPane } from 'reactstrap'
 import RightContent from './right-content'
 export default class Nilai extends Component {
   constructor(props) {
@@ -28,7 +25,6 @@ export default class Nilai extends Component {
 
   render() {
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
-    console.log(this.state.activeMenu, "here stat")
     return (
       <div className="details-nilai bg-grey">
         <Header navbar={false} />
@@ -44,15 +40,39 @@ export default class Nilai extends Component {
           </div>
           <TabContent activeTab={this.state.activeMenu}>
             <TabPane tabId={1} >
-              <div className="bg-white container-fluid container-fluid-custom rounded-corners">
+              {/* <div className="bg-white container-fluid container-fluid-custom rounded-corners">
                 <TopContent />
               </div>
-              <div className="col-sm-9 bg-white container-fluid-custom rounded-corners bottom-content">
-                <BottomContent />
+              <div className="row">
+                <div className="col-sm-9 ">
+                 <div className="bg-white container-fluid-custom rounded-corners bottom-content"> 
+                  <BottomContent />
+                </div>
               </div>
-              <div className="col-sm-3 bg-white  rounded-corners bottom-content">
-                  <RightContent />
+              <div className="col-sm-3 ">
+                <div className="bg-white  rounded-corners bottom-content padding-2">
+                     <RightContent />
+                </div>
               </div>
+              </div> */}
+              <div className="row">
+                <div className="col-sm-12">
+                  <div className="content-block main-block">
+                  <TopContent />
+                  </div>
+                </div>
+              </div>
+              <div className="row margin-top-4">
+                <div className="col-sm-9">
+                  <div className="content-block main-block">
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <div className="content-block main-block">
+                  </div>
+                </div>
+              </div>
+              
             </TabPane>
           </TabContent>
         </div>

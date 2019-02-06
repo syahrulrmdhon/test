@@ -27,8 +27,6 @@ class BottomContent extends Component {
   }
 
 
-
-
   render() {
     let content = []
     if (this.state.data.length === 0) {
