@@ -6,6 +6,7 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 import { assessmentGetData } from './../../../utils/exam' // getdata
+import { NavLink } from 'react-router-dom'
 
 export default class Table extends Component {
     constructor(props){
@@ -62,6 +63,7 @@ export default class Table extends Component {
             this.state.data.map((value, idx) => {
                 let totalExam = ''
                 let subjectName = combineNameSubject(value.school_subjects)
+                let url = 'exam/'+value.id
 
                 if(value.category == 'attitude'){
                     totalExam = combineNameSubject(value.school_attitudes)
@@ -72,12 +74,12 @@ export default class Table extends Component {
                 content.push(
                     <tr key={idx} >
                         <td className="align-center"><span className="bullet bcgreen"></span></td>
-                        <td>{value.name}</td>
+                        <td><NavLink to={url}>{value.name}</NavLink></td>
                         <td>{subjectName}</td>
                         <td>{totalExam}</td>
                         <td>20/01/2019</td>
                         <td className="align-right padding-right-6">
-                            <a href="javacript:void(0);" className="btn default margin-right-4">Lihat</a>
+                            <NavLink to={url} className="btn default margin-right-4">Lihat</NavLink>
                             <FontAwesome name="trash" className="margin-left-2 margin-right-2 cgreen" onClick={this.delete.bind(this, value)} />
                             <FontAwesome name="edit" className="margin-left-2 cgreen" />
                         </td>
