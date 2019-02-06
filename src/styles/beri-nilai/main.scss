@@ -514,11 +514,25 @@ $nunito_bold: 'NunitoBold';
   color: #f2bc2d !important;
 }
 
+<<<<<<< HEAD
 // normal text bold
 .normal-text-green-bold {
   font-family: $nunito_bold;
   font-size: 12px;
   color: #259c7f !important;
+=======
+tbody tr:nth-child(even) {
+  background-color: #FFFFFF;
+}
+.border-left-col-green {
+  border-left:4px solid #1a9d7f !important;
+>>>>>>> 11cf3a3b11690ee2be555c6c5784d6cba9e8e981
+}
+.border-left-col-red {
+  border-left:4px solid #eb373e !important;
+}
+.border-left-col-yellow {
+  border-left:4px solid #f2bc2d !important;
 }
 
 .shadow-box {
@@ -534,7 +548,38 @@ $nunito_bold: 'NunitoBold';
 .content-subject {
   overflow-y: scroll;
 }
+<<<<<<< HEAD
 
 .content-competency {
   padding-bottom: 20px;
+=======
+.color-green-score {
+  color: #05a558 !important;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
+}
+
+.color-red-score {
+  color: #eb373e !important;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
+}
+
+.color-yellow-score {
+  color: #f2bc2d !important;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
+>>>>>>> 11cf3a3b11690ee2be555c6c5784d6cba9e8e981
 }

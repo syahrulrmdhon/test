@@ -4,12 +4,12 @@ import Select from 'react-select'
 import {
   Table,
 } from 'reactstrap';
-import Avatar from 'react-avatar';
-import Ava from './../../assets/images/img_avatar.png'
 import './../../styles/beri-nilai/main.scss'
 import { getParticipant } from './../../redux-modules/modules/score'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Score, AvatarComponent, Collapse  }  from './tableCondition';
+
 
 var FontAwesome = require('react-fontawesome');
 
@@ -22,9 +22,13 @@ class BottomContent extends Component {
       token: localStorage.getItem('token')
     }
   }
-  componentDidMount(){
+  componentDidMount() {
     this.props.getParticipant()
   }
+
+
+
+
   render() {
     let content = []
     if (this.state.data.length === 0) {
@@ -33,10 +37,12 @@ class BottomContent extends Component {
       content.push(
         <div className="margin-top-4 empty-data" key={1} >
           Data belum tersedia.
-            </div>
+        </div>
       )
     }
-    console.log(this.props,"my user")
+
+
+    const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     return (
       <div className=" margin-top-6 margin-left-3 margin-right-6 margin-bottom-2">
         <div className="table-responsive">
@@ -52,20 +58,20 @@ class BottomContent extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="align-center border-left-col">
-                  <Avatar src={Ava} size="30" round={true} />
-                </td>
-                <td>T Ritika Singh</td>
-                <td>TRitikaSingh@gmail.com</td>
-                <td className="label-nilai">N/A</td>
-                <td>
-                  <FontAwesome name="pencil" size="lg" className="icon-table-pencil" />
-                </td>
-                <td>
-                  <FontAwesome name="ellipsis-h" size="lg" className="icon-table-pencil cgreen" />
-                </td>
-              </tr>
+              { dataArray &&
+                dataArray.map(function (data) {
+                  return <tr key={Math.random()}>
+                    <AvatarComponent  data={data} />
+                    <td>{data.user.full_name}</td>
+                    <td>{data.user.email}</td>
+                    <Score data={data}/>
+                    <td>
+                      <FontAwesome name="pencil" size="lg" className="icon-table-pencil" />
+                    </td>
+                    <Collapse data={data} />
+                  </tr>
+                })
+              }
             </tbody>
           </table>
         </div>
@@ -77,7 +83,7 @@ class BottomContent extends Component {
 
 
 const mapStateToProps = state => ({
-  user: state
+  user: state.score
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ getParticipant }, dispatch);
