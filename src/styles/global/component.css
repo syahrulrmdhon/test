@@ -35,6 +35,22 @@
 .select__placeholder {
   color: #7f92a1 !important;
 }
+
+.select__control {
+  height: 35px;
+  border-radius: 3px !important;
+  border-color: #cccccc !important;
+}
+
+.select__dropdown-indicator svg{
+  color: #1a9d7f;
+  width: 12px;
+}
+
+.select__placeholder {
+  color: #7f92a1 !important;
+}
+
 option {
   margin: auto;
   font-family: "Nunito Sans", sans-serif;
@@ -1089,8 +1105,8 @@ strong, .bold {
 label.header-title{
   letter-spacing: 0.3px;
   color: #505050;
-  font-weight: bold;
-  font-size: 16px;
+  font-family: "NunitoBold";
+  font-size: 14px;
 }
 label.header-title.form{
   color: #1a9d7f;
@@ -1107,6 +1123,7 @@ label.header-title.form{
   display: block;
   margin-bottom: 5px;
   color: #6d6d6d;
+  font-size: 10px;
 }
 .content-input .counter:after {
   content: counter(number);
@@ -1118,6 +1135,7 @@ label.header-title.form{
   background-color: #1a9d7f;
   color: #FFF;
 }
+
 .submit-btn.default{
   background-color: #FFFF;
   border: 1px solid #1a9d7f;
@@ -1125,6 +1143,12 @@ label.header-title.form{
   padding: 10px 30px;
 }
 
+.filter-btn{
+  width: 100%;
+  border-radius: 25px;
+  background-color: #1a9d7f;
+  color: #FFF;
+}
 /* select react */
 .select-list{
   height: 40px;
@@ -1378,6 +1402,13 @@ tbody tr:nth-child(even) {
   white-space: nowrap;
 }
 
-.normal-box-shadow {
-  box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+.col-sm-2-custom {
+  flex: 0 0 20.8% !important;
+  max-width: 20.8% !important;
 }
+
+.col-sm-10-custom {
+  flex: 0 0 79.2% !important;
+  max-width: 79.2% !important;
+}
+
