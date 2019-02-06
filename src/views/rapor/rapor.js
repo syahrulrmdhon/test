@@ -246,7 +246,7 @@ export default class Rapor extends Component {
                 </div>
                 <div className="col-8">
                   <span className="float-right margin-right-1">
-                    <Nav tabs className="border-0 pull-right">
+                    <Nav tabs className="toggle border-0 pull-right">
                       <NavItem className="tab-nilai">
                         <NavLink
                           className={classnames({
