@@ -1,6 +1,12 @@
 /* Font NunitoSans */
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
 
+/* table nilai */
+.table-nilai {
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
 /* box content */
 .content {
   background: #f7f7f7;
@@ -13,6 +19,21 @@
 /* dropdown */
 .select__indicator-separator {
   display: none;
+}
+
+.select__control {
+  height: 35px;
+  border-radius: 3px !important;
+  border-color: #cccccc !important;
+}
+
+.select__dropdown-indicator svg{
+  color: #1a9d7f;
+  width: 12px;
+}
+
+.select__placeholder {
+  color: #7f92a1 !important;
 }
 
 .select__control {
@@ -143,12 +164,6 @@ thead {
 .font-grey {
   font-family: "Nunito Sans", sans-serif;
   color: #9da2a6;
-}
-
-/* table content */
-.table-content {
-  height: 400px;
-  overflow-y: scroll;
 }
 
 /* Important Reset */
@@ -956,6 +971,11 @@ strong, .bold {
   font-size: 12px !important;
 }
 
+.small-text-filter {
+  font-size: 10px;
+  color: #6d6d6d;
+}
+
 .normal-text {
   font-size: 14px;
 }
@@ -1172,9 +1192,13 @@ ul.toggle > li.nav-item a.active{
 
 /* table responsive */
 .table-responsive {
-  min-height: 450px;
+  /* min-height: 450px;
   overflow-x: auto;
-  margin-top: 20px;
+  margin-top: 20px; */
+}
+.table-content {
+  height: 400px;
+  overflow-y: scroll;
 }
 .table {
   width: 100%;
@@ -1236,7 +1260,6 @@ tbody tr:nth-child(even) {
 .padding-content{
   padding-top: 120px;
 }
-
 
 /* switch account */
 .switch{
