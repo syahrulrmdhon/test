@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Select from 'react-select';
 
 const listPenilaian = [
     { label: "Pilih Tipe Penilaian", value: "" }
@@ -16,7 +17,7 @@ const listPelajaran = [
     { label: "Biologi II", value: "biologi2" }
 ];
 
-export default class FilterPenilaian extends Component {
+export default class Filter extends Component {
     constructor(props) {
         super(props)
 
@@ -31,48 +32,51 @@ export default class FilterPenilaian extends Component {
     }
     render() {
         return (
-            <div className="filter-penilaian">
-                <h5><strong>Filter</strong></h5>
-                <br />
-                <form onSubmit={this.handleSubmit}>
-                    <label>Tipe Penilaian</label>
-                    <select value={this.state.selectedPenilaian}
-                        onChange={(e) => this.setState({ selectedPenilaian: e.target.value })}>
-                        {
-                            this.state.listPenilaian.map((penilaian) =>
-                                <option key={penilaian.value} value={penilaian.value}>
-                                    {penilaian.label}
-                                </option>
-                            )
-                        }
-                    </select>
-                    <br /><br />
-                    <label>Kelas</label>
-                    <select value={this.state.selectedClass}
-                        onChange={(e) => this.setState({ selectedClass: e.target.value })}>
-                        {
-                            this.state.listClass.map((kelas) =>
-                                <option key={kelas.value} value={kelas.value}>
-                                    {kelas.label}
-                                </option>
-                            )
-                        }
-                    </select>
-                    <br /><br />
-                    <label>Mata Pelajaran</label>
-                    <select value={this.state.selectedPelajaran}
-                        onChange={(e) => this.setState({ selectedPelajaran: e.target.value })}>
-                        {
-                            this.state.listPelajaran.map((pelajaran) =>
-                                <option key={pelajaran.value} value={pelajaran.value}>
-                                    {pelajaran.label}
-                                </option>
-                            )
-                        }
-                    </select>
-                    <br /><br />
-                    <button type="submit" className="btn-green">Filter</button>
-                </form>
+            <div className="margin-top-6 margin-left-3">
+                <label className="header-title">Filter</label>
+                <div className="margin-top-4">
+                    <form>
+                        <div className="content-input">
+                            <label className="content-label">Tipe Penilaian</label>
+                            <Select
+                                className= "select-list"
+                                classNamePrefix= "select"
+                                placeholder= "Pilih Tipe Penilaian"
+                                name= "type_assessment"
+                                // onChange={this.handleAttribute}
+                                // options={this.state.listClass}
+                                // value={this.state.classs_id}
+                            />
+                        </div>
+                        <div className="content-input">
+                            <label className="content-label">Kelas</label>
+                            <Select
+                                className= "select-list"
+                                classNamePrefix= "select"
+                                placeholder= "Pilih Kelas"
+                                name= "class_id"
+                                // onChange={this.handleAttribute}
+                                // options={this.state.listClass}
+                                // value={this.state.classs_id}
+                            />
+                        </div>
+                        <div className="content-input">
+                            <label className="content-label">Mata Pelajaran</label>
+                            <Select
+                                className= "select-list"
+                                classNamePrefix= "select"
+                                placeholder= "Pilih Mata Pelajaran"
+                                name= "subject_id"
+                                // onChange={this.handleAttribute}
+                                // options={this.state.listClass}
+                                // value={this.state.classs_id}
+                            />
+                        </div>
+                        <div className="content-input margin-top-6">
+                            <button className="submit-btn">Filter</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         )
     }
