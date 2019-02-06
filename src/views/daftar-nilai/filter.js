@@ -1,40 +1,53 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
+import classnames from 'classnames'
 
 export default class FilterNilai extends Component {
     render() {
+        let isDisabled = false
+        if (this.props.selectedClass === '' || this.props.selectedSemester === '' || this.props.selectedSubject === '') {
+            isDisabled = "cursor"
+        }
         return (
             <div className="filter-nilai">
-                <h5><strong>Filter</strong></h5>
+                <h5 className="padding-top-1">
+                    <strong className="large-text">Filter</strong>
+                </h5>
                 <br />
-                <form>
-                    <label>Semester</label>
+                <form className="margin-top-1">
+                    <label className="padding-bottom-2 small-text-filter">Semester</label>
                     <Select
                         value={this.props.selectedSemester}
                         onChange={(e) => { this.props.onChangeSemester(e) }}
                         options={this.props.listSemester}
+                        classNamePrefix='select'
                         placeholder="Pilih Semester..."
                     />
                     <br /><br />
-                    <label>Kelas</label>
+                    <label className="padding-bottom-2 small-text-filter">Kelas</label>
                     <Select
                         value={this.props.selectedClass}
                         onChange={(e) => { this.props.onChangeClass(e) }}
                         options={this.props.listClass}
+                        classNamePrefix='select'
                         placeholder="Pilih Kelas..."
                     />
                     <br /><br />
-                    <label>Mata Pelajaran</label>
+                    <label className="padding-bottom-2 small-text-filter">Mata Pelajaran</label>
                     <Select
                         isDisabled={this.props.disabledSelectSubject}
                         value={this.props.selectedSubject}
                         onChange={(e) => { this.props.onChangeSubject(e) }}
                         options={this.props.listSubject}
+                        classNamePrefix='select'
                         placeholder="Pilih Pelajaran..."
                     />
                     <br /><br />
                 </form>
-                <button type="submit" onClick={this.props.handleSubmit} className="btn-green">Filter</button>
+                <button type="submit" className={classnames("btn-green", isDisabled)}
+                    disabled={isDisabled} onClick={this.props.handleSubmit} className="btn-green">
+                    Filter
+                </button>
             </div>
         )
     }

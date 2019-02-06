@@ -1,6 +1,25 @@
 import { apiClient } from './apiClient'
 import React, { Component } from 'react'
 
+export function setLabelSelect(lists, values = {}){
+    let label = ''
+    lists.map((list, idx) => {
+        let key = list.value
+        let set_value = !!(values) ? values.value : ''
+
+        if(key == set_value){
+            label = list.label;
+        }
+    })
+
+    if(label != ''){
+        values.label = label
+        return values
+    } else {
+        return false
+    }
+}
+
 export function seeMore(value, s_count = 50){
     const count = value.length
     
@@ -10,6 +29,35 @@ export function seeMore(value, s_count = 50){
     }
     value = <span className="profile" title={value}>{value}</span>
     return value
+}
+
+export function setErrorRuby(data = {}, fields = []){
+    let result = {}
+    let errors = data.errors || []
+
+    // var array1 = [5, 12, 8, 130, 44];
+    // var found = array1.find(function (element) {
+    //   return element ==  10;
+    // });
+
+    // console.log(found);
+    // return false;
+
+    if(typeof errors == 'object'){
+        for (var error in errors) {
+            
+            let found = fields.find(function (element) {
+                return element ==  error;
+            });
+
+            if(typeof found != 'undefined'){
+                if (errors.hasOwnProperty(error)) {
+                    result[error] = errors[error]
+                }
+            }
+        }
+    }
+    return result
 }
 
 export function setError(data = []){
@@ -146,8 +194,83 @@ export function getMonthIndo(month = false){
     return result
 }
 
-export function classes(){
-    apiClient('get', 'v1/filters/classes').then(response => response.data).then(data => {
+export function changeFormatOptions(values = []){
+    let result = []
+    if(values.length > 0){
+        values.map((value, idx) => {
+            result[idx] = {
+                value: value.key,
+                label: value.value,
+            }
+        })
+    }
+    return result;
+}
+
+export function basicComps(params = {}, options = {}){
+    let listOptions = options.listOptions || false
+    let fieldName = options.fieldName || 'basic_comps'
+
+    apiClient('get', 'v1/filters/basic_comps', false, params).then(response => response.data).then(data => {
+        let basic_comps = data.data.basic_comps || []
+        let obj = {}
+        
+        if((basic_comps.length > 0) && listOptions){
+            const temps = basic_comps
+            basic_comps = []
+            
+            temps.map((temp, idx) => {
+                basic_comps.push({
+                    value: temp.id,
+                    label: temp.competency_number + ' ' + temp.content,
+                })
+            })
+        }
+        obj[fieldName] = basic_comps
+        this.setState(obj)
+    })
+}
+
+export function subjects(params = {}, options = {}){
+    let listOptions = options.listOptions || false
+
+    apiClient('get', 'v1/filters/subjects', false, params).then(response => response.data).then(data => {
+        let subjects = data.data.subjects || []
+        
+        if((subjects.length > 0) && listOptions){
+            const temps = subjects
+            subjects = []
+            
+            temps.map((temp, idx) => {
+                subjects.push({
+                    value: temp.id,
+                    label: temp.subject_name,
+                })
+            })
+        }    
+        this.setState({
+            subjects: subjects,
+        })
+    })
+}
+
+export function assessmentType(params = {}, event = {}, fieldName = 'assessment_type'){
+    if(params){
+        apiClient('get', 'v1/filters/assessment_types', false, params).then(response => {
+            var obj = {}
+            let result = response.data.data.assessment_types  
+            let assessment_types = changeFormatOptions(result)
+            event = setLabelSelect(assessment_types, event)
+
+            obj['assessment_types'] = assessment_types
+            obj[fieldName] = event
+            this.setState(obj)
+        })
+    }
+}
+
+export function classes(params = {}){
+    apiClient('get', 'v1/filters/classes', false, params).then(response => response.data).then(data => {
         let result = []
 
         if(data.data.classes.length > 0){

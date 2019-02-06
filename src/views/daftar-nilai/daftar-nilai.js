@@ -1,291 +1,317 @@
-import React, { Component } from 'react'
-import './../../styles/daftar-nilai.css'
+import React, { Component } from "react";
+import "./../../styles/daftar-nilai.css";
 
-import Header from '../global/header'
+import Header from "../global/header";
 
-import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
-import classnames from 'classnames'
-import FilterNilai from './filter'
-import TablePengetahuan from './table-pengetahuan'
-import TableKeterampilan from './table-keterampilan'
-import TableSikap from './table-sikap';
-import { apiClient } from '../../utils/apiClient'
-import { NotAvailable } from '../../views/global/notAvailable'
+import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
+import classnames from "classnames";
+import FilterNilai from "./filter";
+import TablePengetahuan from "./table-pengetahuan";
+import TableKeterampilan from "./table-keterampilan";
+import TableSikap from "./table-sikap";
+import { apiClient } from "../../utils/apiClient";
+import { NotAvailable } from "../../views/global/notAvailable";
 
 export default class DaftarNilai extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            activeTab: '1',
-            idClass: undefined,
+    this.state = {
+      activeTab: "1",
+      idClass: undefined,
 
-            // filter
-            listClass: [],
-            selectedClass: "",
-            listSemester: [],
-            selectedSemester: "",
-            listSubject: [],
-            selectedSubject: "",
-            tableKnowledge: [],
-            tableSkill: [],
-            tableAttitude: [],
+      // filter
+      listClass: [],
+      selectedClass: "",
+      listSemester: [],
+      selectedSemester: "",
+      listSubject: [],
+      selectedSubject: "",
+      tableKnowledge: [],
+      tableSkill: [],
+      tableAttitude: [],
+      disabled: false,
 
-            // knowledge
-            idxScores: 0,
-            idxTugas: 0,
+      // knowledge
+      idxScores: 0,
+      idxTugas: 0,
 
-            // skill
-            idxScoresSkill: 0
-        };
-        this.toggle = this.toggle.bind(this);
-        this.getClassList = this.getClassList.bind(this)
-        this.onChangeClass = this.onChangeClass.bind(this)
-        this.getSemesterList = this.getSemesterList.bind(this)
-        this.onChangeSemester = this.onChangeSemester.bind(this)
-        this.getSubjectList = this.getSubjectList.bind(this)
-        this.onChangeSubject = this.onChangeSubject.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.nameClicked = this.nameClicked.bind(this)
+      // skill
+      idxScoresSkill: 0
+    };
+    this.toggle = this.toggle.bind(this);
+    this.getClassList = this.getClassList.bind(this);
+    this.onChangeClass = this.onChangeClass.bind(this);
+    this.getSemesterList = this.getSemesterList.bind(this);
+    this.onChangeSemester = this.onChangeSemester.bind(this);
+    this.getSubjectList = this.getSubjectList.bind(this);
+    this.onChangeSubject = this.onChangeSubject.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.nameClicked = this.nameClicked.bind(this);
+  }
+  componentDidMount() {
+    this.getSemesterList();
+    this.getClassList();
+  }
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
     }
-    componentDidMount() {
-        this.getSemesterList()
-        this.getClassList()
-    }
-    toggle(tab) {
-        if (this.state.activeTab !== tab) {
-            this.setState({
-                activeTab: tab
-            });
-        }
-    }
-    getSemesterList() {
-        const url = `v1/filters/semesters?`
+  }
+  getSemesterList() {
+    const url = `v1/filters/semesters?`;
 
-        apiClient('get', url).then(res => {
-            const data = res.data.data.semesters.map(
-                ({ period_name, id }) => ({ label: period_name, value: id })
-            )
-            this.setState({
-                listSemester: data
-            })
-        })
-    }
-    getClassList() {
-        const url = `v1/filters/classes`
+    apiClient("get", url).then(res => {
+      const data = res.data.data.semesters.map(({ period_name, id }) => ({
+        label: period_name,
+        value: id
+      }));
+      this.setState({
+        listSemester: data
+      });
+    });
+  }
+  getClassList() {
+    const url = `v1/filters/classes`;
 
-        apiClient('get', url).then(res => {
-            const data = res.data.data.classes.map(
-                ({ id, name }) => ({ label: name, value: id })
-            )
-            this.setState({
-                listClass: data
-            })
-        })
+    apiClient("get", url).then(res => {
+      const data = res.data.data.classes.map(({ id, name }) => ({
+        label: name,
+        value: id
+      }));
+      this.setState({
+        listClass: data
+      });
+    });
+  }
+  getSubjectList(idClass) {
+    let url = "";
+    if (idClass === undefined) {
+      url = `v1/filters/subjects?`;
+    } else {
+      url = `v1/filters/subjects?class_id=${idClass}`;
     }
-    getSubjectList(idClass) {
-        let url = ""
-        if (idClass === undefined) {
-            url = `v1/filters/subjects?`
-        } else {
-            url = `v1/filters/subjects?class_id=${idClass}`
-        }
-        apiClient('get', url).then(res => {
-            let subject = []
-            for (var i in res.data.data) {
-                const datum = res.data.data[i]
-                datum.map(function (data, i) {
-                    subject.push({ value: data.id, label: data.subject_name })
-                })
-            }
-            this.setState({
-                listSubject: subject
-            })
-        })
-    }
-    onChangeSemester(selectedSemester) {
-        this.setState({ selectedSemester })
-    }
-    onChangeClass(selectedClass) {
-        this.setState({ selectedClass })
-        const idClass = selectedClass.value
-        this.getSubjectList(idClass)
-    }
-    onChangeSubject(selectedSubject) {
-        this.setState({ selectedSubject })
-    }
-    disabledSelectSubject() {
-        document.getElementById("mySelect").disabled = true;
-    }
-    getKnowledge() {
-        let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-        return apiClient('get', url)
-    }
-    notKnowledge() {
-        if (!this.state.tableKnowledge) {
-            return 'Mohon pilih filter untuk menampilkan data.'
-        }
-        else {
-            return 'Data belum tersedia.'
-        }
-    }
-    getSkill() {
-        let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=skill&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-        return apiClient('get', url)
-    }
-    notSkill() {
-        if (!this.state.tableSkill) {
-            return 'Mohon pilih filter untuk menampilkan data.'
-        }
-        else {
-            return 'Data belum tersedia.'
-        }
-    }
-    getAttitude() {
-        let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=attitude&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-        return apiClient('get', url)
-    }
-    notAttitude() {
-        if (!this.state.tableAttitude) {
-            return 'Mohon pilih filter untuk menampilkan data.'
-        }
-        else {
-            return 'Data belum tersedia.'
-        }
-    }
-    handleSubmit() {
-        let dataKnowledge = []
-        let dataSkill = []
-        let tableKnowledge = []
-        let tableAttitude = []
-        let tableSkill = []
-        this.getKnowledge().then(res => {
-            dataKnowledge = res.data.data
-            tableKnowledge = res.data.data.users
-            this.getAttitude().then(attitudes => {
-                tableAttitude = attitudes.data.data.users
-                this.getSkill().then(skills => {
-                    dataSkill = res.data.data
-                    tableSkill = skills.data.data.users
-                    this.setState({
-                        tableKnowledge: tableKnowledge,
-                        tableAttitude: tableAttitude,
-                        tableSkill: tableSkill,
-                        idxScores: dataKnowledge.count.daily_exam,
-                        idxTugas: dataKnowledge.count.task,
-                        idxScoresSkill: dataSkill.count.task
-                    })
-                })
-            })
+    apiClient("get", url).then(res => {
+      let subject = [];
+      for (var i in res.data.data) {
+        const datum = res.data.data[i];
+        datum.map(function(data, i) {
+          subject.push({ value: data.id, label: data.subject_name });
         });
+      }
+      this.setState({
+        listSubject: subject
+      });
+    });
+  }
+  onChangeSemester(selectedSemester) {
+    this.setState({ selectedSemester });
+  }
+  onChangeClass(selectedClass) {
+    this.setState({ selectedClass });
+    const idClass = selectedClass.value;
+    this.getSubjectList(idClass);
+  }
+  onChangeSubject(selectedSubject) {
+    this.setState({ selectedSubject });
+  }
+  disabledSelectSubject() {
+    document.getElementById("mySelect").disabled = true;
+  }
+  getKnowledge() {
+    let url = `v1/scores/index?semester=${
+      this.state.selectedSemester.label
+    }&category=knowledge&class_id=${
+      this.state.selectedClass.value
+    }&school_subject_id=${this.state.selectedSubject.value}`;
+    return apiClient("get", url);
+  }
+  notKnowledge() {
+    if (!this.state.tableKnowledge) {
+      return "";
+    } else {
+      return "Mohon pilih semua filter untuk menampilkan data.";
     }
-    nameClicked(e, id) {
-        console.log(id)
-        e.preventDefault()
-        this.props.history.push('detail/' + id);
+  }
+  getSkill() {
+    let url = `v1/scores/index?semester=${
+      this.state.selectedSemester.label
+    }&category=skill&class_id=${
+      this.state.selectedClass.value
+    }&school_subject_id=${this.state.selectedSubject.value}`;
+    return apiClient("get", url);
+  }
+  notSkill() {
+    if (!this.state.tableSkill) {
+      return "";
+    } else {
+      return "Mohon pilih semua filter untuk menampilkan data.";
     }
-    render() {
-        return (
-            <div className="padding-content">
-                <Header navbar={false} />
-                <div className="content">
-                    <div className="row row-daftar-nilai">
-                        <div className="left-content col-2">
-                            <FilterNilai
-                                id="mySelect"
-                                listClass={this.state.listClass}
-                                selectedClass={this.state.selectedClass}
-                                listSemester={this.state.listSemester}
-                                selectedSemester={this.state.selectedSemester}
-                                listSubject={this.state.listSubject}
-                                selectedSubject={this.state.selectedSubject}
-                                onChangeClass={this.onChangeClass}
-                                onChangeSemester={this.onChangeSemester}
-                                onChangeSubject={this.onChangeSubject}
-                                handleSubmit={this.handleSubmit}
-                            />
-                        </div>
-                        <div className="right-content col-10">
-                            <div className="row">
-                                <div className="col-8">
-                                    <h5 className="float-left"><strong>Daftar Nilai</strong></h5>
-                                </div>
-                                <div className="col-4">
-                                    <span className="float-right">
-                                        <Nav tabs className="border-0 pull-right">
-                                            <NavItem className="tab-nilai">
-                                                <NavLink
-                                                    className={classnames({ active: this.state.activeTab === '1' })}
-                                                    onClick={() => { this.toggle('1'); }}>
-                                                    Pengetahuan
-                                                </NavLink>
-                                            </NavItem>
-                                            <NavItem className="tab-nilai">
-                                                <NavLink
-                                                    className={classnames({ active: this.state.activeTab === '2' })}
-                                                    onClick={() => { this.toggle('2'); }}>
-                                                    Keterampilan
-                                                </NavLink>
-                                            </NavItem>
-                                            <NavItem className="tab-nilai">
-                                                <NavLink
-                                                    className={classnames({ active: this.state.activeTab === '3' })}
-                                                    onClick={() => { this.toggle('3'); }}>
-                                                    Sikap
-                                                </NavLink>
-                                            </NavItem>
-                                        </Nav>
-                                    </span>
-                                </div>
-                                <TabContent className="col-12" activeTab={this.state.activeTab}>
-                                    <TabPane tabId="1">
-                                        <div className="table-content">
-                                            {
-                                                (!this.state.tableKnowledge || this.state.tableKnowledge.length === 0) ?
-                                                    <NotAvailable>{this.notKnowledge()}</NotAvailable>
-                                                    :
-                                                    <TablePengetahuan
-                                                        tableKnowledge={this.state.tableKnowledge}
-                                                        idxScores={this.state.idxScores}
-                                                        idxTugas={this.state.idxTugas}
-                                                        nameClicked={this.nameClicked}
-                                                    />
-                                            }
-                                        </div>
-                                    </TabPane>
-                                    <TabPane tabId="2">
-                                        <div className="table-content">
-                                            {
-                                                (!this.state.tableSkill || this.state.tableSkill.length === 0) ?
-                                                    <NotAvailable>{this.notSkill()}</NotAvailable>
-                                                    :
-                                                    <TableKeterampilan
-                                                        tableSkill={this.state.tableSkill}
-                                                        idxScoresSkill={this.state.idxScoresSkill}
-                                                        nameClicked={this.nameClicked}
-                                                    />
-                                            }
-                                        </div>
-                                    </TabPane>
-                                    <TabPane tabId="3">
-                                        <div className="table-content">
-                                            {
-                                                (!this.state.tableAttitude || this.state.tableAttitude.length === 0) ?
-                                                    <NotAvailable>{this.notAttitude()}</NotAvailable>
-                                                    :
-                                                    <TableSikap
-                                                        tableAttitude={this.state.tableAttitude}
-                                                        nameClicked={this.nameClicked}
-                                                    />
-                                            }
-                                        </div>
-                                    </TabPane>
-                                </TabContent>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  }
+  getAttitude() {
+    let url = `v1/scores/index?semester=${
+      this.state.selectedSemester.label
+    }&category=attitude&class_id=${
+      this.state.selectedClass.value
+    }&school_subject_id=${this.state.selectedSubject.value}`;
+    return apiClient("get", url);
+  }
+  notAttitude() {
+    if (!this.state.tableAttitude) {
+      return "";
+    } else {
+      return "Mohon pilih semua filter untuk menampilkan data.";
+    }
+  }
+  handleSubmit() {
+    let dataKnowledge = [];
+    let dataSkill = [];
+    let tableKnowledge = [];
+    let tableAttitude = [];
+    let tableSkill = [];
+    this.getKnowledge().then(res => {
+      dataKnowledge = res.data.data;
+      tableKnowledge = res.data.data.users;
+      this.getAttitude().then(attitudes => {
+        tableAttitude = attitudes.data.data.users;
+        this.getSkill().then(skills => {
+          dataSkill = res.data.data;
+          tableSkill = skills.data.data.users;
+          this.setState({
+            tableKnowledge: tableKnowledge,
+            tableAttitude: tableAttitude,
+            tableSkill: tableSkill,
+            idxScores: dataKnowledge.count.daily_exam,
+            idxTugas: dataKnowledge.count.task,
+            idxScoresSkill: dataSkill.count.task
+          });
+        });
+      });
+    });
+  }
+  nameClicked(e, id) {
+    e.preventDefault();
+    this.props.history.push("detail/" + id);
+  }
+  render() {
+    return (
+      <div className="padding-content">
+        <Header />
+        <div className="content">
+          <div className="row row-daftar-nilai">
+            <div className="left-content col-2">
+              <FilterNilai
+                id="mySelect"
+                listClass={this.state.listClass}
+                selectedClass={this.state.selectedClass}
+                listSemester={this.state.listSemester}
+                selectedSemester={this.state.selectedSemester}
+                listSubject={this.state.listSubject}
+                selectedSubject={this.state.selectedSubject}
+                onChangeClass={this.onChangeClass}
+                onChangeSemester={this.onChangeSemester}
+                onChangeSubject={this.onChangeSubject}
+                handleSubmit={this.handleSubmit}
+              />
             </div>
-        )
-    }
+            <div className="right-content col-10">
+              <div className="row margin-bottom-4">
+                <div className="col-lg-2">
+                  <h5 className="float-left margin-left-1 padding-top-1">
+                    <strong className="large-text">Daftar Nilai</strong>
+                  </h5>
+                </div>
+                <div className="col-lg-10">
+                  <span className="float-right margin-right-1">
+                    <Nav tabs className="toggle border-0 pull-right">
+                      <NavItem className="tab-nilai">
+                        <NavLink
+                          className={classnames({
+                            active: this.state.activeTab === "1"
+                          })}
+                          onClick={() => {
+                            this.toggle("1");
+                          }}
+                        >
+                          Pengetahuan
+                        </NavLink>
+                      </NavItem>
+                      <NavItem className="tab-nilai">
+                        <NavLink
+                          className={classnames({
+                            active: this.state.activeTab === "2"
+                          })}
+                          onClick={() => {
+                            this.toggle("2");
+                          }}
+                        >
+                          Keterampilan
+                        </NavLink>
+                      </NavItem>
+                      <NavItem className="tab-nilai">
+                        <NavLink
+                          className={classnames({
+                            active: this.state.activeTab === "3"
+                          })}
+                          onClick={() => {
+                            this.toggle("3");
+                          }}
+                        >
+                          Sikap
+                        </NavLink>
+                      </NavItem>
+                    </Nav>
+                  </span>
+                </div>
+              </div>
+
+              <TabContent
+                className="margin-left-1 margin-right-1"
+                activeTab={this.state.activeTab}
+              >
+                <TabPane tabId="1">
+                  {!this.state.tableKnowledge ||
+                  this.state.tableKnowledge.length === 0 ? (
+                    <NotAvailable>{this.notKnowledge()}</NotAvailable>
+                  ) : (
+                    <TablePengetahuan
+                      tableKnowledge={this.state.tableKnowledge}
+                      idxScores={this.state.idxScores}
+                      idxTugas={this.state.idxTugas}
+                      nameClicked={this.nameClicked}
+                    />
+                  )}
+                </TabPane>
+                <TabPane tabId="2">
+                  {!this.state.tableSkill ||
+                  this.state.tableSkill.length === 0 ? (
+                    <NotAvailable>{this.notSkill()}</NotAvailable>
+                  ) : (
+                    <TableKeterampilan
+                      tableSkill={this.state.tableSkill}
+                      idxScoresSkill={this.state.idxScoresSkill}
+                      nameClicked={this.nameClicked}
+                    />
+                  )}
+                </TabPane>
+                <TabPane tabId="3">
+                  {!this.state.tableAttitude ||
+                  this.state.tableAttitude.length === 0 ? (
+                    <NotAvailable>{this.notAttitude()}</NotAvailable>
+                  ) : (
+                    <TableSikap
+                      tableAttitude={this.state.tableAttitude}
+                      nameClicked={this.nameClicked}
+                    />
+                  )}
+                </TabPane>
+              </TabContent>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
