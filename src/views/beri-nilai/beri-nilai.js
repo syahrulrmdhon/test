@@ -46,7 +46,6 @@ fetchData(){
         .catch(err => {
             let response = err.response
             let data = response.data
-            console.log(data, "here")
      
         })
 

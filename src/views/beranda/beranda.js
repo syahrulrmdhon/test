@@ -58,6 +58,7 @@ class Beranda extends Component {
         this.setState({
             isSideBar: show
         })
+
     }
 
     changeCalendar(date){
