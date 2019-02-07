@@ -9,6 +9,7 @@ import DaftarMurid from '../views/student/murid'
 import StudentDetail from '../views/student/detail'
 import SwitchAccount from '../views/global/switch_account'
 import Exam from '../views/exam/index'
+import DetailNilai from './../views/beri-nilai/beri-nilai'
 import NotFound from '../views/global/not-found'
 
 export const MainRoutes = [
@@ -56,6 +57,10 @@ export const MainRoutes = [
     {
         path: '/exam/:id',
         component: Exam
+    },
+    {
+        path: '/nilai' ,
+        component:DetailNilai
     },
     {
         path: '*',

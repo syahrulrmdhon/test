@@ -13,11 +13,10 @@ import Logo from './../../assets/images/logo.svg'
 import Shutdown from './../../assets/images/shutdown.png'
 import Menu from './navbar'
 import { seeMore, getUser } from '../../utils/common'
-var FontAwesome = require('react-fontawesome');
 import { DropdownButton, ButtonToolbar, MenuItem } from 'react-bootstrap'
-
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+var FontAwesome = require('react-fontawesome');
 
 export default class Header extends Component {
     constructor(props) {
@@ -105,6 +104,9 @@ export default class Header extends Component {
                 school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()} className={actived} onClick={() => {this.onChangeSchool(school)}} value={school.id} ><FontAwesome className="check-school" name= {icon} /> {seeMore(school.name, 20)} </MenuItem>)
             })
         }
+        const { navbar } = this.props
+        let navbarOpt = navbar === undefined?true:false
+
 
         return (
             <div className="fix-nav">
@@ -142,7 +144,7 @@ export default class Header extends Component {
                         </Navbar>
                     </div>
                 </div>
-                <Menu  navbar={this} />
+                <Menu  navbar={navbarOpt} />
             </div>
         )
     }
