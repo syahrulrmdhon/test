@@ -22,9 +22,17 @@ export function assessmentGetData(){
 
     let url = 'v1/assessments?category=' + category
     apiClient('get', url, false, params).then(response => {
-        let data = response.data.data[models]       
+        let assessments = response.data.data.assessments
+        let data = assessments.entries
+
+        let paginate = {
+            size: assessments.size,
+            total_entries: assessments.total_entries,
+            total_pages: assessments.total_pages,
+        }      
         this.setState({
-            data: data                
+            data: data,
+            paginate: paginate,         
         })
     })
 }
@@ -97,4 +105,19 @@ export function assessmentShow(id) {
             data: data                
         })
     })
+}
+
+export function assessmentLabel(value){
+    switch(value){
+        case 'task':
+            return 'Tugas'
+        case 'daily_exam':
+            return 'UH'
+        case 'midterm_exam':
+            return 'UTS'
+        case 'final_exam':
+            return 'UAS'
+        default:
+            return 'N/A'
+    }
 }
