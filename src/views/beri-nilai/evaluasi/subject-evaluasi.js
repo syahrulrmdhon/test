@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 export default class SubjectEvaluasi extends Component {
     render() {
         return (
-            <div className="title-content-evaluasi margin-top-4 padding-4 margin-bottom-2">
+            <div className="margin-top-4 padding-2 margin-bottom-2 right-block-evaluasi">
 
                 {
                     this.props.competencySubjects.map(function (data, i) {
                         return <div key={i}>
-                            <span>{data.subject_name}</span>
+                            <span className="normal-text-bold">{data.subject_name}</span>
                             <br /><br />
                             <div>
                                 {

@@ -98,7 +98,7 @@ export default class Nilai extends Component {
             <TabPane tabId={2}>
               <div className="row">
                 <div className="col-sm-12">
-                  <div className="content-block main-block">
+                  <div className="content-block-evaluasi main-block-evaluasi">
                     <div className="padding-4">
                       <TopContentEvaluasi
                         questionResults={this.state.questionResults}
@@ -110,46 +110,20 @@ export default class Nilai extends Component {
               </div>
               <div className="row margin-top-2">
                 <div className="col-sm-9">
-                  <div className="content-block main-block">
+                  <div className="content-block-evaluasi main-block-evaluasi">
                     <BottomContentEvaluasi
                       questionEvaluations={this.state.questionEvaluations}
                     />
                   </div>
                 </div>
                 <div className="col-sm-3">
-                  <div className="content-block main-block">
+                  <div className="content-block-evaluasi main-block-evaluasi">
                     <SubjectEvaluasi
                       competencySubjects={this.state.competencySubjects}
                     />
                   </div>
                 </div>
               </div>
-              {/* <div className="row">
-                <div className="bg-white container-fluid container-fluid-custom rounded-corners col-12 shadow-box">
-                  <TopContentEvaluasi
-                    questionResults={this.state.questionResults}
-                    examChart={this.state.examChart}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-9">
-                  <div className=" bg-white margin-top-6 container-subject shadow-box">
-                    <BottomContentEvaluasi
-                      questionEvaluations={this.state.questionEvaluations}
-                    />
-                  </div>
-                </div>
-                <div className="col-3">
-                  <div className="bg-white margin-top-6 shadow-box h-100">
-                    <div className="content-subject">
-                      <SubjectEvaluasi
-                        competencySubjects={this.state.competencySubjects}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div> */}
             </TabPane>
           </TabContent>
         </div>

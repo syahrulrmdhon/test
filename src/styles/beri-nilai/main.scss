@@ -387,10 +387,6 @@ $nunito_bold: 'NunitoBold';
   }
 }
 
-.content-chart {
-  // display: flex
-}
-
 .box-postition {
   padding-left: 5em;
   padding-top:1.8em;
@@ -465,7 +461,6 @@ $nunito_bold: 'NunitoBold';
   border-left: 3px solid #eb373e !important;
 }
 
-
 .avatar {
   // margin-top:22px;
   display: block
@@ -520,6 +515,11 @@ $nunito_bold: 'NunitoBold';
   font-size: 12px;
   color: #259c7f !important;
 }
+.normal-text-bold {
+  font-family: $nunito_bold;
+  font-size: 12px;
+  color: #2d2d2d !important;
+}
 .border-left-col-red {
   border-left:4px solid #eb373e !important;
 }
@@ -534,9 +534,6 @@ $nunito_bold: 'NunitoBold';
   box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
 }
 
-.container-subject {
-  // height: auto !important;
-}
 .content-subject {
   overflow-y: scroll;
 }
@@ -547,4 +544,52 @@ $nunito_bold: 'NunitoBold';
 
 .details-nilai .main-block {
   min-height: 350px;
+}
+
+.right-content-evaluasi {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+/* content-block */
+.content-block-evaluasi{
+  position: relative;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e9e9ef;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+}
+.content-block-evaluasi.main-block-evaluasi{
+  border: none;
+  box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+  border-radius: 5px;
+  padding: 0;
+}
+.right-block-evaluasi{
+  overflow-y: scroll;
+}
+.content-block-evaluasi.main-block-evaluasi,
+.content-block-evaluasi.main-block-evaluasi .left-block-evaluasi,
+.content-block-evaluasi.main-block-evaluasi .right-block-evaluasi{
+  max-height: 600px;
+}
+.content-block-evaluasi.main-block-evaluasi .left-block-evaluasi{
+  border-right: 1px solid #f7f7f7;
+}
+.content-block-evaluasi.main-block-evaluasi .empty-data-evaluasi{
+  height: 440px;  
+  border: 1px solid #cccccc;
+  border-radius: 2px;
+  line-height: 440px;
+  text-align: center;
+  font-weight: bold;
+  color: #6d6d6d;
+  font-size: 12px;
 }

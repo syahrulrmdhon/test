@@ -23,7 +23,7 @@ export default class TopContentEvaluasi extends Component {
           </div>
         </div>
         <div className='col-sm-2'>
-          <div className='box-card-evaluasi margin-top-12'>
+          <div className='box-card-evaluasi margin-top-2'>
             <CardEvaluasi
               questionResults={this.props.questionResults}
             />
