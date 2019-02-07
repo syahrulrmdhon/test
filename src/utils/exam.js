@@ -85,4 +85,16 @@ export function combineNameSubject(values = []){
         })
         result = result.join(', ')
     }
+    return result
+}
+
+export function assessmentShow(id) {
+    let url = `v1/assessments/${id}`
+
+    apiClient('get', url).then(response => {
+        let data = response.data.data.assessment
+        this.setState({
+            data: data                
+        })
+    })
 }
