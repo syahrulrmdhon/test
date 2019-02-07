@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 var FontAwesome = require('react-fontawesome');
-import {combineNameSubject} from './../../../utils/exam'
+import {combineNameSubject, assessmentLabel} from './../../../utils/exam'
 import {apiClient} from './../../../utils/apiClient'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
@@ -61,6 +61,7 @@ export default class Table extends Component {
         let content = []
         if(this.state.data.length > 0){
             this.state.data.map((value, idx) => {
+                console.log(value)
                 let totalExam = ''
                 let subjectName = combineNameSubject(value.school_subjects)
                 let url = 'exam/'+value.id
@@ -68,7 +69,8 @@ export default class Table extends Component {
                 if(value.category == 'attitude'){
                     totalExam = combineNameSubject(value.school_attitudes)
                 } else {
-                    totalExam = (value.exams.length || '0') + ' Exam'
+                    let label = assessmentLabel(value.assessment_type)
+                    totalExam = value.exam_count + ' (' + label + ')'
                 }
                 
                 content.push(

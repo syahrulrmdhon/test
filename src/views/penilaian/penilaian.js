@@ -19,6 +19,7 @@ class Penilaian extends Component {
             class_id: null,
             school_subject_id: null,
             data: [],
+            paginate: {},
             assessment_types: [],
         }
         this.tabToggle = this.tabToggle.bind(this)
