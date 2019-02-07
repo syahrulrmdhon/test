@@ -8,20 +8,16 @@ import { bindActionCreators } from 'redux';
 
 
 
+
 class Content extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {
-
-        }
+      
     }
 
-    componentDidMount(){
-        // this.props.getParticipantsResult()
-    }
 
     render() {
-        console.log("here top", this.props.result)
+
         return (
             <div className="col-sm-12">
                 <div className="col-sm-9">
@@ -31,7 +27,7 @@ class Content extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="content-chart">
+                        <div className="content-chart  margin-left-5">
                             <SingleBarChat />
                         </div>
 
@@ -39,9 +35,11 @@ class Content extends Component {
                 </div>
                 <div className="col-sm-3" >
                     <div className="box-postition">
-                        <Card>
+                        <Card
+                            participant_passed={this.props.participant_passed}
+                            participant_not_passed={this.props.participant_not_passed}
+                        />
 
-                        </Card>
                     </div>
                 </div>
             </div>
@@ -50,12 +48,7 @@ class Content extends Component {
 }
 
 
-const mapStateToProps = state => ({
-    result: state
-  })
-  
-  const mapDispatchToProps = dispatch => bindActionCreators({ getParticipantsResult }, dispatch);
-  export default connect(mapStateToProps, mapDispatchToProps)(Content);
+  export default Content;
   
   
   

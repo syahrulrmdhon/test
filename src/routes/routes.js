@@ -11,6 +11,7 @@ import SwitchAccount from '../views/global/switch_account'
 import DetailNilai from './../views/beri-nilai/beri-nilai'
 import Exam from '../views/exam/index'
 import NotFound from '../views/global/not-found'
+import NewScore from './../views/beri-nilai/new'
 
 export const MainRoutes = [
     {
@@ -61,6 +62,10 @@ export const MainRoutes = [
     {
         path: '/exam/:id',
         component: Exam
+    },
+    {
+        path:'/score/new-score',
+        component:NewScore
     },
     {
         path: '*',

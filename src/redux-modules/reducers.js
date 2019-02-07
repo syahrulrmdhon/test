@@ -6,6 +6,7 @@ import assessment from './modules/assessment'
 export default combineReducers({
     assessment,
     user,
-    score
+    score,
+    assessment,
 })
 

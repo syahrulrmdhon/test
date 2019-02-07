@@ -5,15 +5,21 @@ import TabMenu from '../../components/TabDetail/TabDetail'
 import TopContent from './top-content'
 import BottomContent from './bottom-content'
 import { TabContent, TabPane } from 'reactstrap'
+import { apiClient } from '../../utils/apiClient'
 import RightContent from './right-content'
 export default class Nilai extends Component {
   constructor(props) {
     super(props)
 
+
     this.state = {
       activeMenu: 1,
-    }
-    this.toggleMenu = this.toggleMenu.bind(this)
+      exam:{},
+      participant_passed:{},
+      participant_not_passed:[]
+  }
+  this.toggleMenu = this.toggleMenu.bind(this)
+  this.fetchData = this.fetchData.bind(this)
   }
   toggleMenu(menu) {
     if (this.state.activeMenu !== menu) {
@@ -22,9 +28,34 @@ export default class Nilai extends Component {
       })
     }
   }
+  componentDidMount(){
+    // this.props.getParticipantsResult()
+    this.fetchData()
+}
+
+fetchData(){
+    let url = 'v1/assessments/6ae41268-d737-4a87-bb54-1a9cfd1d69f8/exams/b4aa7bda-f96d-4665-8dc3-fe263ed670ed/exam_classes/1a5e496b-ffc4-445f-93b4-ef324e80e31c/participant_results'
+    apiClient('get', url).then(res => {
+        console.log(res.data.data.participants)
+        this.setState({
+            exam:res.data.data.exam,
+            participant_passed:res.data.data.participants.passed,
+            participant_not_passed: res.data.data.participants.not_passed
+        })
+    })
+        .catch(err => {
+            let response = err.response
+            let data = response.data
+            console.log(data, "here")
+     
+        })
+
+}
+
 
   render() {
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
+
     return (
       <div className="details-nilai bg-grey">
         <Header navbar={false} />
@@ -40,35 +71,29 @@ export default class Nilai extends Component {
           </div>
           <TabContent activeTab={this.state.activeMenu}>
             <TabPane tabId={1} >
-              {/* <div className="bg-white container-fluid container-fluid-custom rounded-corners">
-                <TopContent />
-              </div>
-              <div className="row">
-                <div className="col-sm-9 ">
-                 <div className="bg-white container-fluid-custom rounded-corners bottom-content"> 
-                  <BottomContent />
-                </div>
-              </div>
-              <div className="col-sm-3 ">
-                <div className="bg-white  rounded-corners bottom-content padding-2">
-                     <RightContent />
-                </div>
-              </div>
-              </div> */}
               <div className="row">
                 <div className="col-sm-12">
-                  <div className="content-block main-block">
-                  <TopContent />
+                  <div className="content-block main-block main-height">
+                  <TopContent
+                    exam={this.state.exam}
+                    participant_passed={this.state.participant_passed}
+                    participant_not_passed={this.state.participant_not_passed}
+                  />
                   </div>
                 </div>
               </div>
-              <div className="row margin-top-4">
+              <div className="row margin-top-4 padding-bottom-6 ">
                 <div className="col-sm-9">
-                  <div className="content-block main-block">
+                  <div className="content-block   main-block">
+                  <BottomContent />
                   </div>
                 </div>
                 <div className="col-sm-3">
-                  <div className="content-block main-block">
+                  <div className="content-block main-block padding-5">
+                  <RightContent
+                      participant_not_passed={this.state.participant_not_passed}
+                  />
+
                   </div>
                 </div>
               </div>

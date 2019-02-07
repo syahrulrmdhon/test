@@ -13,7 +13,7 @@ export default class SingleBarChat extends Component {
         color="red"
         loader={<div>Loading Chart</div>}
         data={[
-          ['', 'Siswa'],
+          ['', 'Siswa'],  
           ['0-10', 1],
           ['11-20', 7],
           ['21-30', 1],
