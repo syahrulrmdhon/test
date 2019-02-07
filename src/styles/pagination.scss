@@ -1,0 +1,55 @@
+$nunito_semi_bold: 'NunitoSemiBold';
+$nunito_bold: 'NunitoBold';
+
+.pagination {
+  align-items: center;
+  
+  a {
+    color: #7f92a1d5;
+    font-size: 12px;
+    font-family: $nunito_semi_bold;
+    vertical-align: middle;
+    width: 24px;
+    padding: 4px 0px;
+    display: block;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  a:focus {
+    outline: none;
+  }
+
+  .arrow-left, .arrow-right {
+    border: 1px solid #dbdbdb;
+    padding: 7px 6.5px;
+    vertical-align: middle;
+    border-radius: 5px;
+  }
+
+  li {
+    border: 1px solid transparent;
+    text-align: center;
+    border-radius: 5px;
+
+    &:first-child {
+      margin-right: 25%;
+    }
+
+    &:last-child {
+      margin-left: 25%;
+    }
+  }
+
+  li.active {
+    border: 1px solid #dbdbdb;
+    background-color: rgba(219, 219, 219, .12);
+
+    a {
+      color: #4a4a4a;
+      font-family: $nunito_bold;
+    }
+  }
+}
