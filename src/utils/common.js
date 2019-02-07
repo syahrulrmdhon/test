@@ -263,7 +263,7 @@ export function assessmentType(params = {}, event = {}, fieldName = 'assessment_
             event = setLabelSelect(assessment_types, event)
 
             obj['assessment_types'] = assessment_types
-            obj[fieldName] = event
+            obj[fieldName] = eventgetUser
             this.setState(obj)
         })
     }
