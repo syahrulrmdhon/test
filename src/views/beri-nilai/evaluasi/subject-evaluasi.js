@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class SubjectEvaluasi extends Component {
     render() {
         return (
-            <div className="margin-top-4 padding-2 margin-bottom-2 right-block-evaluasi">
+            <div className="margin-top-4 padding-4 margin-bottom-2 right-block-evaluasi">
 
                 {
                     this.props.competencySubjects.map(function (data, i) {

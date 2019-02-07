@@ -546,11 +546,6 @@ $nunito_bold: 'NunitoBold';
   min-height: 350px;
 }
 
-.right-content-evaluasi {
-  max-height: 400px;
-  overflow-y: scroll;
-}
-
 /* content-block */
 .content-block-evaluasi{
   position: relative;
@@ -575,21 +570,7 @@ $nunito_bold: 'NunitoBold';
 .right-block-evaluasi{
   overflow-y: scroll;
 }
-.content-block-evaluasi.main-block-evaluasi,
-.content-block-evaluasi.main-block-evaluasi .left-block-evaluasi,
+.content-block-evaluasi,
 .content-block-evaluasi.main-block-evaluasi .right-block-evaluasi{
   max-height: 600px;
-}
-.content-block-evaluasi.main-block-evaluasi .left-block-evaluasi{
-  border-right: 1px solid #f7f7f7;
-}
-.content-block-evaluasi.main-block-evaluasi .empty-data-evaluasi{
-  height: 440px;  
-  border: 1px solid #cccccc;
-  border-radius: 2px;
-  line-height: 440px;
-  text-align: center;
-  font-weight: bold;
-  color: #6d6d6d;
-  font-size: 12px;
 }
