@@ -10,6 +10,7 @@ import StudentDetail from '../views/student/detail'
 import SwitchAccount from '../views/global/switch_account'
 import Exam from '../views/exam/index'
 import CreateExam from '../views/create-exam/Index'
+import DetailNilai from './../views/beri-nilai/beri-nilai'
 import NotFound from '../views/global/not-found'
 
 export const MainRoutes = [
@@ -61,6 +62,10 @@ export const MainRoutes = [
     {
         path: '/create-exam/:id',
         component: CreateExam
+    },
+    {
+        path: '/nilai' ,
+        component:DetailNilai
     },
     {
         path: '*',

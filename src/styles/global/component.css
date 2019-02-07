@@ -4,6 +4,9 @@
 button{
   cursor: pointer;
 }
+button:focus{
+  outline: 1px dotted !important;
+}
 
 /* table nilai */
 .table-nilai {
