@@ -61,7 +61,6 @@ export default class Table extends Component {
         let content = []
         if(this.state.data.length > 0){
             this.state.data.map((value, idx) => {
-                console.log(value)
                 let totalExam = ''
                 let subjectName = combineNameSubject(value.school_subjects)
                 let url = 'exam/'+value.id
