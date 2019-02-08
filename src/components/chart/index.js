@@ -4,6 +4,7 @@ import { Chart } from "react-google-charts";
 
 export default class SingleBarChat extends Component {
   render() {
+    console.log(this.props.chart, "data chart")
     return (
       <div style={{ display: 'flex' }}>
       <Chart
@@ -12,16 +13,7 @@ export default class SingleBarChat extends Component {
         chartType="Bar"
         color="red"
         loader={<div>Loading Chart</div>}
-        data={[
-          ['', 'Siswa'],  
-          ['0-10', 1],
-          ['11-20', 7],
-          ['21-30', 1],
-          ['31-40', 8],
-          ['41-50', 9],
-          ['51-60', 6],
-          ['61-70', 8]
-        ]}
+        data={this.props.chart}
         options={{
           legend: {position: 'none'},
           hAxis: {

@@ -68,7 +68,7 @@ class BottomContent extends Component {
             <tbody>
               { dataArray &&
                 dataArray.map(function (data) {
-                  return <tr key={Math.random()}  data-toggle="collapse" data-target="#accordion" class="clickable">
+                  return <tr key={Math.random()}  data-toggle="collapse" data-target="#accordion" className="clickable">
                     <AvatarComponent  data={data} height={this.state.height} />
                     <td className="">{data.user.full_name}</td>
                     <td>{data.user.email}</td>

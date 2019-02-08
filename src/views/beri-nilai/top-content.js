@@ -28,7 +28,9 @@ class Content extends Component {
                     </div>
                     <div className="row">
                         <div className="content-chart  margin-left-5">
-                            <SingleBarChat />
+                            <SingleBarChat 
+                                chart={this.props.chart}
+                            />
                         </div>
 
                     </div>

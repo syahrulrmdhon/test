@@ -13,6 +13,7 @@ export default class Nilai extends Component {
 
 
     this.state = {
+      score:[],
       activeMenu: 1,
       exam:{},
       participant_passed:{},
@@ -36,8 +37,9 @@ export default class Nilai extends Component {
 fetchData(){
     let url = 'v1/assessments/6ae41268-d737-4a87-bb54-1a9cfd1d69f8/exams/b4aa7bda-f96d-4665-8dc3-fe263ed670ed/exam_classes/1a5e496b-ffc4-445f-93b4-ef324e80e31c/participant_results'
     apiClient('get', url).then(res => {
-        console.log(res.data.data.participants)
+        console.log(res.data.data.participants.score_ranges, 'here at')
         this.setState({
+            score:res.data.data.participants,
             exam:res.data.data.exam,
             participant_passed:res.data.data.participants.passed,
             participant_not_passed: res.data.data.participants.not_passed
@@ -54,7 +56,7 @@ fetchData(){
 
   render() {
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
-
+    console.log(this.state.score.score_ranges,"my score")
     return (
       <div className="details-nilai bg-grey">
         <Header navbar={false} />
@@ -74,6 +76,7 @@ fetchData(){
                 <div className="col-sm-12">
                   <div className="content-block main-block main-height">
                   <TopContent
+                    chart={this.state.score.score_ranges}
                     exam={this.state.exam}
                     participant_passed={this.state.participant_passed}
                     participant_not_passed={this.state.participant_not_passed}

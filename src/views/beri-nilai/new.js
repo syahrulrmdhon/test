@@ -52,10 +52,10 @@ export default class New extends Component {
     const url = `v1/assessments/6ae41268-d737-4a87-bb54-1a9cfd1d69f8/exams/b4aa7bda-f96d-4665-8dc3-fe263ed670ed/exam_scores/0eea9548-6397-4303-b980-e4b2bf34cc4a`
 
     apiClient('get', url).then(response => {
-        console.log(response)
+      console.log(response.data.data,"response get form")
       this.setState({
           data: response.data.data,
-          question:response.data.data.exam_questions
+          question:response.data.data.collections
         })
     })
   }
