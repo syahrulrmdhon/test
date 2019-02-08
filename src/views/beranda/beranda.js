@@ -120,7 +120,6 @@ class Beranda extends Component {
                         </div>
                     </div>
                 </div>
-            
             </div>
         )
     }

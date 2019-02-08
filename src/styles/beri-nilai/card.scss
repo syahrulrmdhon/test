@@ -7,6 +7,27 @@ $nunito_semi_bold: 'NunitoSemiBold';
 $nunito_bold: 'NunitoBold';
 $nunito_extra_bold: 'NunitoExtraBold';
 
+.box-card-evaluasi {
+  height: 220px;
+  .card-evaluasi {
+    height: 125%;
+    border: solid 0.5px #cccccc;
+    border-radius: 5px;
+    padding: 10px;
+    &__label-evaluasi {
+      font-size: 12px;
+      color: #2d2d2d;
+      font-family: $nunito_bold;
+      text-align: center;
+    }
+    &__number-evaluasi {
+      font-size: 24px;
+      color: #2d2d2d;
+      font-family: $nunito_bold;
+      text-align: center;
+    }
+  }
+}
 
 .card-nilai {
     height: 50%;

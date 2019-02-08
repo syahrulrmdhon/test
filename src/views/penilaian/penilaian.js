@@ -9,6 +9,8 @@ import { assessmentType } from '../../utils/common'
 import Tab from './index/tab'
 import { NavLink } from 'react-router-dom'
 
+import Pagination from './../global/pagination'
+
 class Penilaian extends Component {
     constructor(props) {
         super(props)
@@ -19,6 +21,7 @@ class Penilaian extends Component {
             class_id: null,
             school_subject_id: null,
             data: [],
+            paginate: {},
             assessment_types: [],
         }
         this.tabToggle = this.tabToggle.bind(this)
@@ -84,6 +87,7 @@ class Penilaian extends Component {
                                     />
                                     <Index  data={this.state.data} category={this.state.activeTab} />
                                 </div>
+                                <Pagination />
                             </div>
                         </div>
                     </div>

@@ -305,3 +305,33 @@ export function schoolYears(){
         })
     })
 }
+
+export function examTypes(params={}){
+    const path = 'v1/filters/exam_types'
+    apiClient('get', path, false, params).then(response => response.data).then(data => {
+        let result = []
+
+        if(data.data.exam_types.length > 0){
+            data.data.exam_types.map((type, key) => (
+                result.push({
+                    label: type.value,
+                    value: type.key,
+                })
+            ))
+        }
+        this.setState({examTypes: result})
+    })
+}
+
+export function checkProperties(obj) {
+    console.log(obj,"here ch atas")
+    for (let key in obj) {
+        console.log(obj[key],"here ch uti")
+        if (obj[key] === null || obj[key] === "" || obj[key] === undefined) {
+            return true;
+            // break;
+        }
+    }
+    
+    return false;
+}

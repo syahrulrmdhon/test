@@ -10,6 +10,8 @@ import StudentDetail from '../views/student/detail'
 import SwitchAccount from '../views/global/switch_account'
 import DetailNilai from './../views/beri-nilai/beri-nilai'
 import Exam from '../views/exam/index'
+import CreateExam from '../views/create-exam/Index'
+import ParticipantClass from '../views/exam/participant_class/new'
 import NotFound from '../views/global/not-found'
 import NewScore from './../views/beri-nilai/new'
 
@@ -66,6 +68,18 @@ export const MainRoutes = [
     {
         path:'/score/new-score',
         component:NewScore
+    },
+    {
+        path: '/create-exam/:id',
+        component: CreateExam
+    },
+    {
+        path: '/nilai' ,
+        component:DetailNilai
+    },
+    {
+        path: '/pariticipant-class' ,
+        component:ParticipantClass
     },
     {
         path: '*',

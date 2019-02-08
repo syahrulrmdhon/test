@@ -6,15 +6,15 @@ import Profile from './../../components/Content/ProfileDetail'
 import { apiClient } from '../../utils/apiClient'
 import RightContent from './../../components/RightSide/RightSide'
 import Select from 'react-select'
-import { setLabelSelect } from './../../utils/common'
+import { setLabelSelect, checkProperties } from './../../utils/common'
 
 
 let choice = [
-    {value:'a',label:'A'},
-    {value:'b',label:'B'},
-    {value:'c',label:'C'},
-    {value:'d',label:'D'},
-    {value:'e',label:'E'},
+    { value: 'a', label: 'A' },
+    { value: 'b', label: 'B' },
+    { value: 'c', label: 'C' },
+    { value: 'd', label: 'D' },
+    { value: 'e', label: 'E' },
 ]
 
 export default class Content extends Component {
@@ -22,11 +22,12 @@ export default class Content extends Component {
         super(props, context);
         this.state = {
             activeTab: 1,
-            essay:{
-                answer:'',
-                score:''
+            essay: {
+                answer: '',
+                score: ''
             },
-            valueData:{}
+            score_choice: 0,
+            valueData: {}
         }
 
         this.generateSelect = this.generateSelect.bind(this)
@@ -41,67 +42,75 @@ export default class Content extends Component {
         // }
     }
 
-    onChangeEssay(e, prop){
+    onChangeEssay(e, prop) {
         e.preventDefault()
-        console.log(e.target.value,"e.target.value")
+        console.log(e.target.value, "e.target.value")
         var dv = this.state.essay
         dv[prop] = e.target.value
         this.setState({ essay: dv })
- 
+
     }
 
-    // onChangeSelect(valueData){
-    //     console.log(valueData,"my val")
-    //     this.setState({
-    //         valueData:valueData
-    //     })
-
-    // }
-    onChangeSelect(event, props){
-        console.log(event,"my event");
+    onChangeSelect(event, props) {
+        console.log(event, props, "my event");
+        let is_answer = ''
+        props.map((array) => {
+            is_answer = array.is_correct_ans
+        })
+        if (is_answer === null) {
             this.setState({
+                valueData: event,
+                score_choice:0
+            })
+        }else{
+            this.setState({
+                score_choice:0,
                 valueData: event
             })
-      
+        }
+
     }
 
-    generateSelect(x,index){
+    generateSelect(x, index) {
         let valueData = {}
         x.map((array) => {
-           valueData =  {value:array.symbol.toLowerCase(),label:array.symbol}
+            valueData = { value: array.symbol.toLowerCase(), label: array.symbol }
         })
-        console.log(this.state.valueData,"up here")
-        console.log(this.state.valueData && valueData  ,"valudata")
+        console.log(this.state.valueData.hasOwnProperty('value') === false ? valueData : this.state.valueData, "valuedata")
+        // let obj=''
+        // for(let i in this.state.valueData){
+        //     console.log(this.state.valueData[i],'valuedata')
+        // }
 
         const select = (
             <Select
-            onChange={(e) => {this.onChangeSelect(e)}}
-            value= {setLabelSelect(choice, valueData )}
-            classNamePrefix='select'
-            name={index}
-            placeholder='- Pilih jawaban -' 
-            options={choice}
+                onChange={(e) => { this.onChangeSelect(e, x) }}
+                value={setLabelSelect(choice, this.state.valueData.hasOwnProperty('value') === false ? valueData : this.state.valueData)}
+                classNamePrefix='select'
+                name={index}
+                placeholder='- Pilih jawaban -'
+                options={choice}
             />
         )
         return select;
     }
 
-    generateEssay(x){
+    generateEssay(x) {
         const essay = (
-            <input 
+            <input
                 type="text"
                 className="right-content-score__uraian"
                 value={this.state.essay.answer}
-                onChange={(e) => {this.onChangeEssay(e,'answer')}}
+                onChange={(e) => { this.onChangeEssay(e, 'answer') }}
             />
         )
-        
+
         return essay;
     }
 
     render() {
         const { form } = this.props
-        console.log(this.props.form, "my stdent")
+        console.log(this.state.valueData, "here ch")
         return (
             <div className="bg-white margin-top-8 container-fluid container-fluid-custom rounded-corners">
                 <div className="row rounded-10">
@@ -128,101 +137,34 @@ export default class Content extends Component {
                                                 form.map(function (x, i) {
                                                     return <tr key={Math.random()}>
                                                         <td className="align-left text-center ">{x.qn_number}</td>
-                                                         <td className="align-left text-left">{x.problem_type === 'essay'?'Essay':'Multiple Choice'}</td>
+                                                        <td className="align-left text-left">{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
                                                         <td className="align-center">
-                                                            {x.problem_type === 'essay'?this.generateEssay(x.exam_question_choices):this.generateSelect(x.exam_question_choices,i)}
+                                                            {x.problem_type === 'essay' ? this.generateEssay(x.exam_question_choices) : this.generateSelect(x.exam_question_choices, i)}
                                                         </td>
                                                         <td className="align-center">
-                                                            {x.problem_type === 'essay'?<input 
+                                                            {x.problem_type === 'essay' ? <input
                                                                 type="text"
                                                                 className="right-content-score__skor"
                                                                 value={this.state.essay.score}
-                                                                onChange={(e) => {this.onChangeEssay(e,'score')}}
-                                                            />:<input type="text" className="right-content-score__skor" value={x.max_score} />}
+                                                                onChange={(e) => { this.onChangeEssay(e, 'score') }}
+                                                            /> : 
+                                                            x.exam_question_choices.map((array) => {
+                                                                console.log(this.state.score_choice,"xxxx")
+                                                                return    <input type="text" className="right-content-score__skor" value={array.is_correct_ans ===null?this.state.score_choice:x.max_score} />
+                                                            })
+                                                         }
                                                         </td>
                                                         <td>{x.weight}</td>
                                                     </tr>
                                                 }, this)
                                             }
 
-                                            {/* <tr>
-                                            <td className="align-left text-center ">2</td>
-                                            <td className="align-left text-left">Pilihan ganda</td>
-                                            <td className="align-center">
-                                            <Select 
-                                                classNamePrefix='select'
-                                                placeholder='- Pilih jawaban -' />
-                                            </td>
-                                            <td className="align-center">
-                                                <input type="text" className="right-content-score__skor"/>
-                                            </td>
-                                            <td>10</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td className="align-left text-center ">3</td>
-                                            <td className="align-left text-left">Uraian</td>
-                                            <td className="align-center">
-                                            <input type="text" className="right-content-score__uraian"/>
-                                            </td>
-                                            <td className="align-center">
-                                                <input type="text" className="right-content-score__skor"/>
-                                            </td>
-                                            <td>10</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td className="align-left text-center ">4</td>
-                                            <td className="align-left text-left">Uraian</td>
-                                            <td className="align-center">
-                                            <input type="text" className="right-content-score__uraian"/>
-                                            </td>
-                                            <td className="align-center">
-                                                <input type="text" className="right-content-score__skor"/>
-                                            </td>
-                                            <td>10</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td className="align-left text-center ">4</td>
-                                            <td className="align-left text-left">Uraian</td>
-                                            <td className="align-center">
-                                            <input type="text" className="right-content-score__uraian"/>
-                                            </td>
-                                            <td className="align-center">
-                                                <input type="text" className="right-content-score__skor"/>
-                                            </td>
-                                            <td>10</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td className="align-left text-center ">4</td>
-                                            <td className="align-left text-left">Uraian</td>
-                                            <td className="align-center">
-                                            <input type="text" className="right-content-score__uraian"/>
-                                            </td>
-                                            <td className="align-center">
-                                                <input type="text" className="right-content-score__skor"/>
-                                            </td>
-                                            <td>10</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td className="align-left text-center ">4</td>
-                                            <td className="align-left text-left">Uraian</td>
-                                            <td className="align-center">
-                                            <input type="text" className="right-content-score__uraian"/>
-                                            </td>
-                                            <td className="align-center">
-                                                <input type="text" className="right-content-score__skor"/>
-                                            </td>
-                                            <td>10</td>
-
-                                        </tr> */}
-
                                         </tbody>
 
                                     </table>
+                                    <div className="margin-top-3 align-right">
+                                    <button className="submit-btn">Submit </button>
+                                </div>
                                 </div>
                             </div>
                         </div>

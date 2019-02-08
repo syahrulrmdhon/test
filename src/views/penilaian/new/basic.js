@@ -39,23 +39,27 @@ export default class Basic extends Component {
     componentDidMount(){
         apiClient('get', "v1/assessments/new").then(response => {
             const assessment = response.data.data.assessment
-            const category = assessment.category  
+            const category = (assessment) ? assessment.category : null 
             const assessment_classes_attributes = []  
 
-            if(Object.entries(assessment).length > 0){
-                if(assessment.assessment_classes_attributes.length > 0){
-                    assessment.assessment_classes_attributes.map((assessment_classes_attribute, idx) => {
-                        assessment_classes_attributes.push({
-                            value: assessment_classes_attribute.class_id,
+            if(assessment !== undefined){
+                if(Object.entries(assessment).length > 0){
+                    if(assessment.assessment_classes_attributes.length > 0){
+                        assessment.assessment_classes_attributes.map((assessment_classes_attribute, idx) => {
+                            assessment_classes_attributes.push({
+                                value: assessment_classes_attribute.class_id,
+                            })
                         })
-                    })
+                    }
+                    
+                    if(category != null){
+                        this.categoryType({ value: category }, assessment)                
+                    }
+    
+                    this.state.class_list = assessment.assessment_classes_attributes
+                    this.state.name = assessment.name
+                    this.state.assessment_classes_attributes = assessment_classes_attributes
                 }
-                this.categoryType({ value: category }, assessment)
-                this.setState({
-                    class_list: assessment.assessment_classes_attributes,
-                    name: assessment.name,
-                    assessment_classes_attributes: assessment_classes_attributes,
-                })
             }
         })
     }

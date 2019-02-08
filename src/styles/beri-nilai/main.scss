@@ -376,9 +376,15 @@ $nunito_bold: 'NunitoBold';
     color: #2d2d2d;
   }
 }
-
-.content-chart {
-  // display: flex
+.title-content-evaluasi {
+  span{
+      font-family: $nunito_bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #2d2d2d;
+  }
 }
 
 .box-postition {
@@ -448,6 +454,33 @@ $nunito_bold: 'NunitoBold';
 
   }
 }
+.tbody-table-nilai .left-col {
+  border-left: 10px solid #eb373e !important;
+}
+.tbody-table-nilai .left-col-evaluasi-red {
+  border-left: 3px solid #eb373e !important;
+}
+
+.avatar {
+  // margin-top:22px;
+  display: block
+}
+.name {
+  text-align: center;
+  align-items: center;
+  margin-left: 20px; 
+  font-family: $nunito_semi_bold;
+  position: relative;
+  font-size: 11px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.91;
+  letter-spacing: normal;
+  color: #333333;
+  display: block;
+  width: 90px;
+  margin-top: 21px;
+}
 
 .label-nilai {
   font-family: $nunito_bold;
@@ -469,27 +502,33 @@ table.table.beri-nilai tr.head{
   color: #7f92a1;
 }
 
-table .beri-nilai td{
-  vertical-align: middle;
-  font-weight: 600;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.11;
-  letter-spacing: normal;
-  color: #333333;
+// large text bold
+.large-text-green-bold {
+  font-family: $nunito_bold;
+  font-size: 16px;
+  color: #259c7f !important;
 }
-table.table.beri-nilai .btn{
-  padding: 3px 25px;
+.large-text-red-bold {
+  font-family: $nunito_bold;
+  font-size: 16px;
+  color: #eb373e !important;
 }
-tbody tr:nth-child(odd) {
-  background-color: #FFFFFF;
+.large-text-yellow-bold {
+  font-family: $nunito_bold;
+  font-size: 16px;
+  color: #f2bc2d !important;
 }
 
-tbody tr:nth-child(even) {
-  background-color: #FFFFFF;
+// normal text bold
+.normal-text-green-bold {
+  font-family: $nunito_bold;
+  font-size: 12px;
+  color: #259c7f !important;
 }
-.border-left-col-green {
-  border-left:4px solid #1a9d7f !important;
+.normal-text-bold {
+  font-family: $nunito_bold;
+  font-size: 12px;
+  color: #2d2d2d !important;
 }
 .border-left-col-red {
   border-left:4px solid #eb373e !important;
@@ -498,96 +537,23 @@ tbody tr:nth-child(even) {
   border-left:4px solid #f2bc2d !important;
 }
 
-.icon-table-pencil {
-  margin-left: 20px;
+.shadow-box {
+  border-radius: 5px;
+  -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
 }
 
-.right-content-kkm {
-  max-height: 100%
+.content-subject {
+  overflow-y: scroll;
 }
 
-.kkm {
-  min-height: 100%;
-
-  &__title {
-    height: 15px;
-    font-family: $nunito_bold;
-    font-size: 11px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #2d2d2d;
-  }
-
-  &_showall {
-    font-family: $nunito_regular;
-    font-size: 7.5px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: -0.1px;
-    text-align: right;
-    color: #7f92a1;
-    cursor: pointer;
-  }
-
-  &__name {
-    width: 97px;
-    height: 9.5px;
-    font-family: $nunito_regular;
-    font-size: 10px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #31394d;
-  }
-
-  &__email {
-    width: 65.6px;
-    height: 7px;
-    font-family: $nunito_regular;
-    font-size: 8px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #748aa1;
-  }
-
-  &__nilai {
-    width: 20px;
-    height: 10px;
-    font-family: $nunito_bold;
-    font-size: 18px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1;
-    letter-spacing: normal;
-    text-align: right;
-    color: #eb373e;
-    margin:34px
-  }
-}
-.color-green-score {
-  color: #05a558 !important;
-  font-family: $nunito_bold;
-  font-size: 15.5px;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 0.65;
-  letter-spacing: normal;
+.content-competency {
+  padding-bottom: 20px;
 }
 
-.color-red-score {
-  color: #eb373e !important;
-  font-family: $nunito_bold;
-  font-size: 15.5px;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 0.65;
-  letter-spacing: normal;
+.details-nilai .main-block {
+  min-height: 350px;
 }
 
 .color-yellow-score {
@@ -714,4 +680,32 @@ tbody tr:nth-child(even) {
     width: 3px;
   }
 
+/* content-block */
+.content-block-evaluasi{
+  position: relative;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e9e9ef;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+}
+.content-block-evaluasi.main-block-evaluasi{
+  border: none;
+  box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+  border-radius: 5px;
+  padding: 0;
+}
+.right-block-evaluasi{
+  overflow-y: scroll;
+}
+.content-block-evaluasi,
+.content-block-evaluasi.main-block-evaluasi .right-block-evaluasi{
+  max-height: 600px;
+}
 }
