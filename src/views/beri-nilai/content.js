@@ -6,6 +6,8 @@ import Profile from './../../components/Content/ProfileDetail'
 import { apiClient } from '../../utils/apiClient'
 import RightContent from './../../components/RightSide/RightSide'
 import Select from 'react-select'
+import { setLabelSelect } from './../../utils/common'
+
 
 let choice = [
     {value:'a',label:'A'},
@@ -20,10 +22,17 @@ export default class Content extends Component {
         super(props, context);
         this.state = {
             activeTab: 1,
-            valueData:[]
+            essay:{
+                answer:'',
+                score:''
+            },
+            valueData:{}
         }
 
         this.generateSelect = this.generateSelect.bind(this)
+        this.generateEssay = this.generateEssay.bind(this)
+        this.onChangeEssay = this.onChangeEssay.bind(this)
+        this.onChangeSelect = this.onChangeSelect.bind(this)
     }
 
     componentDidMount() {
@@ -32,19 +41,44 @@ export default class Content extends Component {
         // }
     }
 
-    generateSelect(x){
-        
-        console.log(x,"x data")
-        let valuedata=[];
-        x.map(function(array, index){
-            valuedata = [{value:array.symbol.toLowerCase(),label:array.symbol}]
+    onChangeEssay(e, prop){
+        e.preventDefault()
+        console.log(e.target.value,"e.target.value")
+        var dv = this.state.essay
+        dv[prop] = e.target.value
+        this.setState({ essay: dv })
+ 
+    }
+
+    // onChangeSelect(valueData){
+    //     console.log(valueData,"my val")
+    //     this.setState({
+    //         valueData:valueData
+    //     })
+
+    // }
+    onChangeSelect(event, props){
+        console.log(event,"my event");
+            this.setState({
+                valueData: event
+            })
+      
+    }
+
+    generateSelect(x,index){
+        let valueData = {}
+        x.map((array) => {
+           valueData =  {value:array.symbol.toLowerCase(),label:array.symbol}
         })
-    
-        console.log(valuedata , "value")
+        console.log(this.state.valueData,"up here")
+        console.log(this.state.valueData && valueData  ,"valudata")
+
         const select = (
             <Select
-            value={valuedata}
+            onChange={(e) => {this.onChangeSelect(e)}}
+            value= {setLabelSelect(choice, valueData )}
             classNamePrefix='select'
+            name={index}
             placeholder='- Pilih jawaban -' 
             options={choice}
             />
@@ -52,6 +86,18 @@ export default class Content extends Component {
         return select;
     }
 
+    generateEssay(x){
+        const essay = (
+            <input 
+                type="text"
+                className="right-content-score__uraian"
+                value={this.state.essay.answer}
+                onChange={(e) => {this.onChangeEssay(e,'answer')}}
+            />
+        )
+        
+        return essay;
+    }
 
     render() {
         const { form } = this.props
@@ -82,16 +128,17 @@ export default class Content extends Component {
                                                 form.map(function (x, i) {
                                                     return <tr key={Math.random()}>
                                                         <td className="align-left text-center ">{x.qn_number}</td>
-                                                      {
-                                                           x.exam_question_choices.length === 0?<td>N/A tipe soal</td>:x.exam_question_choices.map(function(data, index){
-                                                                return   <td className="align-left text-left">{data.choice_type}</td>
-                                                            })
-                                                        }
+                                                         <td className="align-left text-left">{x.problem_type === 'essay'?'Essay':'Multiple Choice'}</td>
                                                         <td className="align-center">
-                                                            {this.generateSelect(x.exam_question_choices)}
+                                                            {x.problem_type === 'essay'?this.generateEssay(x.exam_question_choices):this.generateSelect(x.exam_question_choices,i)}
                                                         </td>
                                                         <td className="align-center">
-                                                            <input type="text" className="right-content-score__skor" value={x.max_score} />
+                                                            {x.problem_type === 'essay'?<input 
+                                                                type="text"
+                                                                className="right-content-score__skor"
+                                                                value={this.state.essay.score}
+                                                                onChange={(e) => {this.onChangeEssay(e,'score')}}
+                                                            />:<input type="text" className="right-content-score__skor" value={x.max_score} />}
                                                         </td>
                                                         <td>{x.weight}</td>
                                                     </tr>
