@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/student/detail.scss'
 
+import { Link } from 'react-router-dom'
 import Header from '../global/header'
 import TabMenu from '../../components/TabDetail/TabDetail'
 import Content from '../../components/Content/Content'
@@ -79,9 +80,13 @@ export default class Detail extends Component {
   
     return (
       <div className="detail bg-grey">
-        <Header navbar={false} />
-       
-        <div className="content-wrapper content-wrap-custom-size margin-top-6">
+        <Header />
+        <div className="bg-white">
+          <div className="back">
+            <Link to="/murid">&lt; Kembali</Link>
+          </div>
+        </div>
+        <div className="content-wrapper">
           <div className="row detail-menu">
             <div className="offset-2 col-10 tab-menu">
               <TabMenu 

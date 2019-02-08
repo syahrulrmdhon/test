@@ -1,14 +1,18 @@
-import superagent from 'superagent';
-
+import axios from 'axios';
+// import apiHost from './constant';
 const methods = ['get', 'post', 'put', 'patch', 'del'];
+const apiHost = 'localhost:2222'
 
-export default class ApiClient {
+export default class ApiHost {
   constructor(req) {
     methods.forEach(method => {
-      this[method] = (path, { params, data, headers, files, fields } = {}, isExternal = false) => new Promise((resolve, reject) => {
+      this[method] = (path, { params, data, headers, files, fields, fallback } = {}, isExternal = true, typeForm = false) => new Promise((resolve, reject) => {
         let request;
-        request = superagent[method](path);
-
+        if (isExternal) {
+          request = axios[method](`${apiHost}${path}`);
+        } else {
+          request = axios[method](path);
+        }
         if (params) {
           request.query(params);
         }
@@ -28,7 +32,20 @@ export default class ApiClient {
         if (data) {
           request.send(data);
         }
-        request.end((err, { body } = {}) => (err ? reject(body || err) : resolve(body)));
+
+        if (typeForm) {
+          request.type('form');
+        }
+        request.end((err, { body } = {}) => {
+          if (err) {
+            if (fallback) {
+              fallback(err);
+              reject(body || err);
+            } else {
+              reject(body || err);
+            }
+          } else { resolve(body); }
+        });
       });
     });
   }

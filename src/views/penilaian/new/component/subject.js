@@ -16,6 +16,7 @@ class Subject extends Component {
 
         this.removeKD = this.removeKD.bind(this)
         this.addKD = this.addKD.bind(this)
+        // this.getKD = this.getKD.bind(this)
         this.handleKD = this.handleKD.bind(this)
     }
 
@@ -30,18 +31,33 @@ class Subject extends Component {
 
     addKD(){
         const kd_list = this.state.kd_list[0]
-        
         this.setState({
             kd_list: this.state.kd_list.concat(kd_list)
-        })
+        }) 
     }
+
+    // getKD(event){
+    //     const category = this.props.assessment.category || null
+
+    //     this.setState({
+    //         subject_id: event,
+    //     })
+
+    //     if(category && event.value){
+    //         basicComps.call(this, {
+    //             category: category,
+    //             school_subject_id: event.value,
+    //         }, {
+    //             listOptions: true,
+    //         })
+    //     }
+    // }
 
     handleKD(event, props){
         let basic_comps_attribute = this.state.assessment_basic_comps_attributes.slice()
 
         if(event.value){
             basic_comps_attribute[props.name] = event
-
             this.setState({
                 assessment_basic_comps_attributes: basic_comps_attribute
             })
@@ -62,21 +78,16 @@ class Subject extends Component {
         if(this.state.kd_list.length > 0){
             this.state.kd_list.map((x, idx) => {
                 const basic_comps = this.props.basic_comps || []
-                const kd_value = (this.props.assessment_subject) ? this.props.assessment_subject['assessment_basic_comps_attributes'][idx] : null
                 kd_list.push(<KdItem 
                     key={Math.random()} 
-                    index={this.props.index} 
-                    kd_index={idx} 
+                    index={idx} 
                     removeKD= {this.removeKD}
                     handleKD= {this.handleKD}
                     basic_comps= {basic_comps}
-                    setKD={this.props.setKD}
-                    value={kd_value} 
+                    value={this.state.assessment_basic_comps_attributes[idx]} 
                 />)
             })
         }
-
-        let subject =  (this.props.assessment_subject) ? this.props.assessment_subject.school_subject_id : null
 
         return(
             <div>
@@ -90,8 +101,8 @@ class Subject extends Component {
                                 placeholder= "Pilih Mata Pelajaran"
                                 name= {this.props.index}
                                 options= {this.props.subjects}
-                                onChange= {this.props.setSubject}
-                                value= {setLabelSelect(this.props.subjects, subject)}
+                                onChange= {this.props.getKD}
+                                value= {setLabelSelect(this.props.subjects, this.props.value)}
                             />
                         </div>
                     </div>
@@ -116,5 +127,13 @@ class Subject extends Component {
         )
     }
 }
+
+// function mapStateToProps(state){
+//     return {}
+// }
+
+// function matchDispatchToProps(dispatch){
+//     return bindActionCreators({setSubject: setSubject}, dispatch)
+// }
 
 export default Subject

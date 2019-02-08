@@ -18,7 +18,6 @@ const menu_arr = [
 ]
 
 class New extends Component {
-
     constructor(props){
         super(props)
 
@@ -32,18 +31,11 @@ class New extends Component {
     componentDidMount(){
         apiClient('get', "v1/assessments/new").then(response => {
             const assessment = response.data.data.assessment
-            let tabMenu = '1'
-
-            if(assessment !== undefined){
-                if(Object.entries(assessment).length > 0){
-                    tabMenu = '2'
-                }
-            }
 
             this.setState({
-                tabMenu: tabMenu,
+                tabMenu: (Object.entries(assessment).length > 0) ? '2' : '1',
                 assessment: assessment,
-            })   
+            })
         })
     }
 

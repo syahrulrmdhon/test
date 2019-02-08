@@ -26,7 +26,6 @@ export default class Index extends Component {
         }
       ],
     }
-    this.addExam = this.addExam.bind(this)
   }
 
   componentDidMount() {
@@ -41,10 +40,6 @@ export default class Index extends Component {
     })
   }
 
-  addExam(id) {
-    this.props.history.push({pathname: `/create-exam/${this.state.assessmentId}`})
-  }
-  
   render() {
     return (
       <div className="padding-content exam">
@@ -56,9 +51,7 @@ export default class Index extends Component {
                 <Filter classes={this.state.classes}/>
               </div>
               <div className="col-sm-10 col-sm-10-custom right-block">
-                <Content
-                  exams={this.state.exams}
-                  addExam={this.addExam}/>
+                <Content exams={this.state.exams}/>
               </div>
             </div>
           </div>

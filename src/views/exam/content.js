@@ -11,7 +11,7 @@ const content = (props) => {
         </div>
         <div className="col-sm-6">
           <div className="float-right">
-            <button onClick={() => props.addExam()} className="submit-btn default">Tambah Tugas</button>
+            <a href="javascript:void(0);" className="submit-btn default">Tambah Tugas</a>
           </div>
         </div>
       </div>
