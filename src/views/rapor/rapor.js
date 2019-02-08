@@ -219,7 +219,7 @@ export default class Rapor extends Component {
   }
   render() {
     return (
-      <div className="padding-content">
+      <div className="padding-content h-100">
         <Header />
         <div className="content">
           <div className="row row-rapor">

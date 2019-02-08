@@ -25,7 +25,8 @@ export default class KdItem extends Component {
                             placeholder= "Pilih Kompetensi Dasar"
                             name= {this.props.index}
                             options= {this.props.basic_comps}
-                            onChange= {this.props.handleKD}
+                            onChange= {(e) => {this.props.setKD(e, this.props.index, this.props.kd_index)}}
+                            index={this.props.index}
                             value= {setLabelSelect(this.props.basic_comps, this.props.value)}
                         />
                     </div>
