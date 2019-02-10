@@ -13,12 +13,19 @@ import CreateExam from '../views/create-exam/Index'
 import DetailNilai from './../views/beri-nilai/beri-nilai'
 import ParticipantClass from '../views/exam/participant_class/new'
 import NotFound from '../views/global/not-found'
+import Dashboard from './../views/Dashboard'
 
 export const MainRoutes = [
     {
         path: '/',
         exact: true,
         component: Login
+  
+    },
+    
+    {
+        path: '/dashboard',
+        component: Dashboard
     },
     {
         path: '/switch',
