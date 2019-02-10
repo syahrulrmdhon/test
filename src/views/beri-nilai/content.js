@@ -43,7 +43,7 @@ export default class Content extends Component {
     }
 
     onChangeEssay(e, prop) {
-        e.preventDefault()
+        // e.preventDefault()
         console.log(e.target.value, "e.target.value")
         var dv = this.state.essay
         dv[prop] = e.target.value
