@@ -83,7 +83,7 @@ export class Collapse extends Component {
         }
         return (
             <td>
-                <FontAwesome name="ellipsis-h" size="lg" className={classNames("icon-table-pencil", classname)} />
+                <FontAwesome name="ellipsis-h" size="lg" className={classNames("icon-table-pencil", classname)} onClick={this.props.onClickToogles} />
             </td>
         )
     }

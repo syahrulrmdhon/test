@@ -324,12 +324,14 @@ export function examTypes(params={}){
 }
 
 export function checkProperties(obj) {
-    console.log(obj)
+    console.log(obj,"here ch atas")
     for (let key in obj) {
+        console.log(obj[key],"here ch uti")
         if (obj[key] === null || obj[key] === "" || obj[key] === undefined) {
             return true;
             // break;
         }
     }
+    
     return false;
 }
