@@ -7,6 +7,7 @@ import Header from '../global/header'
 import TabMenu from '../../components/TabDetail/TabDetail'
 import Content from './content'
 import { apiClient } from '../../utils/apiClient'
+import { setError } from './../../utils/common'
 
 let choice = [
   { value: 'a', label: 'A' },
@@ -45,11 +46,18 @@ export default class New extends Component {
     this.handleSave = this.handleSave.bind(this)
     this.onChangeEssay = this.onChangeEssay.bind(this)
     this.onChangeSelect = this.onChangeSelect.bind(this)
+    this.redirect = this.redirect.bind(this)
   }
 
   componentDidMount() {
     this.getStudent()
     this.getGenerateForm()
+  }
+
+  redirect(){
+    this.props.history.push({
+      pathname:'/assessment/'+this.state.assessment_id +'/exam/'+ this.state.exam + '/class/'+ this.state.class_id,
+    })
   }
 
   getGenerateForm() {
@@ -77,7 +85,7 @@ export default class New extends Component {
 
   handleSave(e, table) {
     console.log(this.state.valueData, " hit here")
-    var rowData = [];
+    var user_problem_answers = [];
     var rows = table.getElementsByTagName('tr');
     let quest_id = {}
     this.state.question.map((array) => {
@@ -85,30 +93,51 @@ export default class New extends Component {
     })
     for (let i = 0; i < rows.length; i++) {
       if (rows[i].cells[1].innerHTML === 'Essay') {
-        rowData.push({
+        user_problem_answers.push({
           user_id: this.props.match.params.student_id,
           exam_id: this.props.match.params.exam_id,
           class_id: this.props.match.params.class_id,
           exam_question_id: quest_id,
           ans: this.state.essay.answer,
-          score: this.state.essay.score
+          score: this.state.score_choice
         })
 
-
       } else {
-        rowData.push({
+        user_problem_answers.push({
           user_id: this.props.match.params.student_id,
           exam_id: this.props.match.params.exam_id,
           class_id: this.props.match.params.class_id,
           ans: this.state.valueData.label,
-          score:this.state.score_choice,
+          score: rows[i].cells[3].firstChild.innerHTML,
           exam_question_id: quest_id,
 
         })
 
       }
     }
-    console.log("here hit now", rowData)
+    let data = {}
+    data['user_problem_answers'] = user_problem_answers 
+    console.log("here hit now", data)
+    let url = `v1/assessments/${this.props.match.params.assessment_id}/exams/${this.props.match.params.exam_id}/exam_scores/${this.props.match.params.student_id}/bulk_fill_answers`
+    
+    apiClient('post', url, data).then(res => {
+      this.redirect()
+  })
+      .catch(err => {
+          let response = err.response
+          let data = response.data
+          console.log(this.state.email, this.state.password, "here")
+          if(this.state.email || this.state.password === ''){
+              this.setState({
+                  errors: setError(data),
+              })
+          }else{
+              this.onShowAlert(data)
+              console.log("or here")
+          }
+          
+        console.log(err)
+      })
 
   }
 
@@ -122,7 +151,6 @@ export default class New extends Component {
   }
 
   onChangeSelect(event, props) {
-    console.log(event, props, "my event");
     let is_answer = ''
     props.map((array) => {
       is_answer = array.is_correct_ans

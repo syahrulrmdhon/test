@@ -53,6 +53,7 @@ export default class Content extends Component {
     }
 
     generateSelect(x, index) {
+        console.log(x, "my xxxxx")
         let valueData = {}
         x.map((array) => {
             valueData = { value: array.symbol.toLowerCase(), label: array.symbol }
@@ -114,7 +115,7 @@ export default class Content extends Component {
                                         <tbody>
                                             {
                                                 form.map(function (x, i) {
-                                                    console.log("data xxxxx", x.problem_type)
+                                                    console.log("data xxxxx", x)
                                                     return <tr key={Math.random()}>
                                                         <td className="align-left text-center">{x.qn_number}</td>
                                                         <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
@@ -129,7 +130,7 @@ export default class Content extends Component {
                                                                 onChange={(e) => { this.props.onChangeEssay(e, 'score') }}
                                                             /> :
                                                                 x.exam_question_choices.map((array) => {
-                                                                    return <input type="text" className="right-content-score__skor" value={array.is_correct_ans === null ? this.props.score_choice : x.max_score} />
+                                                                    return  <td className="align-center">{array.is_correct_ans === null ? this.props.score_choice : x.max_score}</td>
                                                                 })
                                                             }
                                                         </td>
