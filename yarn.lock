@@ -5671,6 +5671,11 @@ fs.realpath@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
 
+fs@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
+  integrity sha1-invTcYa23d84E/I4WLV+yq9eQdQ=
+
 fsevents@1.2.4, fsevents@^1.2.2, fsevents@^1.2.3:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.2.4.tgz#f41dcb1af2582af3692da36fc55cbd8e1041c426"
@@ -10439,6 +10444,13 @@ react-overlays@^0.8.0:
     react-transition-group "^2.2.0"
     warning "^3.0.0"
 
+react-paginate@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-6.2.1.tgz#90735c95c9836edb73597b605c6ffd8d3f2eaa32"
+  integrity sha512-7MaWiVi4SAFYq5tAGcMCaZE6AK4XxCDM0zEo6+ZthVkhYNnKy1LLkO6syYQu+dBvNfukJ7CurOIpGWnkydJiDQ==
+  dependencies:
+    prop-types "^15.6.1"
+
 react-popper@^0.10.4:
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.10.4.tgz#af2a415ea22291edd504678d7afda8a6ee3295aa"
@@ -10610,6 +10622,13 @@ react-smooth@~1.0.0:
     prop-types "^15.6.0"
     raf "^3.4.0"
     react-transition-group "^2.5.0"
+
+react-switch@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-switch/-/react-switch-4.0.1.tgz#6adace6126f15ff5efbbf104936a7f5846619097"
+  integrity sha512-RKo0VDbETmVPHfyP9m89YHhl9i0dtI1+3OuQsFhZi16ynEnRseRLR81wttrimfpa9nkqgICWoG6KnR7fFKJvrA==
+  dependencies:
+    prop-types "^15.6.2"
 
 react-transition-group@^2.0.0, react-transition-group@^2.2.0, react-transition-group@^2.3.1:
   version "2.5.2"

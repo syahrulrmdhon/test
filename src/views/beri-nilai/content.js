@@ -108,6 +108,33 @@ export default class Content extends Component {
         return essay;
     }
 
+    handlSave(e){
+        console.log(e.target,"index")
+        var table = document.getElementById('table-score');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+            for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+                alert(table.rows[r].cells[c].innerHTML);
+            }
+        }
+        // var rowIdx;
+        // var rowData= [];
+        // var table= document.getElementById('table-score');
+        // var rows= table.getElementsByTagName('tr');
+        // var selectedRow;
+        // var rowCellValue;
+        // for(let i= 0;i<rows.length;i++){
+        //     console.log(rows[i].textContent ||
+        //         rows[i].innerText,".index")
+        //     // rowCellValue= 
+        //     //         rowData.push('cell '+i+': '+rowCellValue);
+        //     // // rows[i].onclick= function(){
+        //     // //     rowIdx= this.rowIndex;
+        //     // //     selectedRow= this.cells;
+                 
+        //     //     alert("Row #"+ rowData);
+        //     // // }
+        // }
+    }
     render() {
         const { form } = this.props
         console.log(this.state.valueData, "here ch")
@@ -124,7 +151,7 @@ export default class Content extends Component {
                     </div>
                             <div>
                                 <div className="table-responsive">
-                                    <table className="right-content-score____table">
+                                    <table id="table-score" className="right-content-score____table">
                                         <thead className="right-content-score__table-head">
                                             <th className="right-content-score__no align-left text-center">No</th>
                                             <th>Tipe Soal</th>
@@ -163,7 +190,7 @@ export default class Content extends Component {
 
                                     </table>
                                     <div className="margin-top-3 align-right">
-                                    <button className="submit-btn">Submit </button>
+                                    <button className="submit-btn" onClick={this.handlSave}>Submit </button>
                                 </div>
                                 </div>
                             </div>

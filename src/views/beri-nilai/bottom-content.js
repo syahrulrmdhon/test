@@ -22,9 +22,11 @@ class BottomContent extends Component {
     this.state = {
       data: [{}],
       height:'',
+      class:'td-hidden',
       token: localStorage.getItem('token')
     }
     this.onClickToogle = this.onClickToogle.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount() {
     this.props.getParticipant()
@@ -33,6 +35,17 @@ class BottomContent extends Component {
         this.setState({
             height:'col-height'
         })
+    }
+
+    handleClick(idx){
+        console.log("here class", this.state.class+idx);
+        let classes = ''
+        if(this.state.class === 'td-hidden'){
+          classes=""
+        }else{
+          classes="td-hidden"
+        }
+        this.setState({class:classes})
     }
 
 
@@ -67,8 +80,9 @@ class BottomContent extends Component {
             </thead>
             <tbody>
               { dataArray &&
-                dataArray.map(function (data) {
-                  return <tr key={Math.random()}  data-toggle="collapse" data-target="#accordion" className="clickable">
+                dataArray.map(function (data, index) {
+                  return <div className="tr-row">
+                     <tr key={Math.random()}  data-toggle="collapse" data-target={"#accordion1"+index} onClick={this.handleClick} className="clickable">
                     <AvatarComponent  data={data} height={this.state.height} />
                     <td className="">{data.user.full_name}</td>
                     <td>{data.user.email}</td>
@@ -80,11 +94,9 @@ class BottomContent extends Component {
                       {/*<button className="btn btn-default btn-xs"><span className="glyphicon glyphicon-eye-open"></span>*/}
                       {/*</button>*/}
                   </tr>
-                },this)
-              }
-              <tr className="bcgreen" >
-                  <td colSpan="6">
-                      <div id="accordion" className=" bcgreen collapse">
+                  <tr className="bcgreen" >
+                  <td colSpan="6" className={this.state.class+index}>
+                      <div id={"accordion1"+index} className=" bcgreen collapse">
                           asdasdasdsadasaasdaaaaaaaaaaaaasdddddddddddddddddddddddddddddddddddddddddddddd
                           {/*<Collapse data={data} onClickToogles={this.onClickToogle}/>*/}
                           {/*<button className="btn btn-default btn-xs"><span className="glyphicon glyphicon-eye-open"></span>*/}
@@ -94,6 +106,10 @@ class BottomContent extends Component {
 
 
               </tr>
+                  </div>
+               },this)
+              }
+           
             </tbody>
           </table>
         </div>
