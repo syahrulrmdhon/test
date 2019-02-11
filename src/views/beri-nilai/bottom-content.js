@@ -22,14 +22,16 @@ class BottomContent extends Component {
     this.state = {
       data: [{}],
       height:'',
+      collapce:'',
       class:'td-hidden',
       token: localStorage.getItem('token')
     }
     this.onClickToogle = this.onClickToogle.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.handleNewScore = this.handleNewScore.bind(this)
   }
   componentDidMount() {
-    this.props.getParticipant()
+    this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment)
   }
     onClickToogle(){
         this.setState({
@@ -48,7 +50,11 @@ class BottomContent extends Component {
         this.setState({class:classes})
     }
 
-
+    handleNewScore(e, student){
+        e.preventDefault()
+        console.log("here go")
+        this.props.handleNewScoreParent(e,student)
+    }
 
     render() {
         let content = []
@@ -81,25 +87,21 @@ class BottomContent extends Component {
               { dataArray &&
                 dataArray.map(function (data, index) {
                   return <div className="tr-row">
-                     <tr key={Math.random()}  data-toggle="collapse" data-target={"#accordion1"+index} onClick={this.handleClick} className="clickable">
+                     <tr key={Math.random()}  data-toggle={this.state.collapce} data-target={"#accordion1"+index} onClick={this.handleClick} className="clickable">
                     <AvatarComponent  data={data} height={this.state.height} />
                     <td className="">{data.user.full_name}</td>
                     <td>{data.user.email}</td>
                     <Score data={data}/>
                     <td>
-                      <FontAwesome name="pencil" size="lg" className="icon-table-pencil" />
+                      <FontAwesome name="pencil" size="lg" className="icon-table-pencil" onClick={(e)=> {this.props.handleNewScoreParent(e, data.user.id)}} />
                     </td>
                     <Collapse data={data} onClickToogles={this.onClickToogle}/>
-                      {/*<button className="btn btn-default btn-xs"><span className="glyphicon glyphicon-eye-open"></span>*/}
-                      {/*</button>*/}
+                     
                   </tr>
                   <tr className="bcgreen" >
                   <td colSpan="6" className={this.state.class+index}>
                       <div id={"accordion1"+index} className=" bcgreen collapse">
-                          asdasdasdsadasaasdaaaaaaaaaaaaasdddddddddddddddddddddddddddddddddddddddddddddd
-                          {/*<Collapse data={data} onClickToogles={this.onClickToogle}/>*/}
-                          {/*<button className="btn btn-default btn-xs"><span className="glyphicon glyphicon-eye-open"></span>*/}
-                          {/*</button>*/}
+                         hit me
                       </div>
                   </td>
 
@@ -128,101 +130,3 @@ export default connect(mapStateToProps, mapDispatchToProps)(BottomContent);
 
 
 
-
-<table class="table table-condensed" style={{ borderCollapse: 'collapse' }}>
-
-    <thead>
-        <tr>
-            <th>&nbsp;</th>
-            <th>Job Name</th>
-            <th>Description</th>
-            <th>Provider Name</th>
-            <th>Region</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr data-toggle="collapse" data-target="#demo1" className="accordion-toggle">
-            <td>
-                <button class="btn btn-default btn-xs"><span className="glyphicon glyphicon-eye-open"></span></button>
-            </td>
-            <td>OBS Name</td>
-            <td>OBS Description</td>
-            <td>hpcloud</td>
-            <td>nova</td>
-            <td> created</td>
-
-        </tr>
-        <tr>
-            <td colSpan="12" class="hiddenRow">
-                <div className="accordian-body collapse" id="demo1">
-                    <table className="table table-striped">
-                        <thead>
-                            <tr>
-                                <td><a href="WorkloadURL">Workload link</a></td>
-                                <td>Bandwidth: Dandwidth Details</td>
-                                <td>OBS Endpoint: end point</td>
-                            </tr>
-                            <tr>
-                                <th>Access Key</th>
-                                <th>Secret Key</th>
-                                <th>Status </th>
-                                <th> Created</th>
-                                <th> Expires</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>access-key-1</td>
-                                <td>secretKey-1</td>
-                                <td>Status</td>
-                                <td>some date</td>
-                                <td>some date</td>
-                                <td>
-                                    <a href="" className="btn btn-default btn-sm">
-                                        <i className="glyphicon glyphicon-cog"></i></a>
-                                </td>
-                            </tr>
-
-
-
-                        </tbody>
-                    </table>
-
-                </div>
-            </td>
-        </tr>
-        <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
-            <td>
-                <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
-            </td>
-            <td>OBS Name</td>
-            <td>OBS Description</td>
-            <td>hpcloud</td>
-            <td>nova</td>
-            <td> created</td>
-        </tr>
-        <tr>
-            <td colspan="6" class="hiddenRow">
-                <div id="demo2" class="accordian-body collapse">Demo2</div>
-            </td>
-        </tr>
-        <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
-            <td>
-                <button class="btn btn-default btn-xs"><span className="glyphicon glyphicon-eye-open"></span></button>
-            </td>
-            <td>OBS Name</td>
-            <td>OBS Description</td>
-            <td>hpcloud</td>
-            <td>nova</td>
-            <td> created</td>
-        </tr>
-        <tr>
-            <td colspan="6" class="hiddenRow">
-                <div id="demo3" className="accordian-body collapse">Demo3</div>
-            </td>
-        </tr>
-    </tbody>
-</table>

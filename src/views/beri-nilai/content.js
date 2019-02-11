@@ -18,37 +18,18 @@ let choice = [
 ]
 
 export default class Content extends Component {
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
         this.state = {
             activeTab: 1,
-            essay: {
-                answer: '',
-                score: ''
-            },
             score_choice: 0,
             valueData: {}
         }
 
         this.generateSelect = this.generateSelect.bind(this)
         this.generateEssay = this.generateEssay.bind(this)
-        this.onChangeEssay = this.onChangeEssay.bind(this)
         this.onChangeSelect = this.onChangeSelect.bind(this)
-    }
-
-    componentDidMount() {
-        // if (this.state.activeTab === 1) {
-        //     this.getKnowledgeScore()
-        // }
-    }
-
-    onChangeEssay(e, prop) {
-        // e.preventDefault()
-        console.log(e.target.value, "e.target.value")
-        var dv = this.state.essay
-        dv[prop] = e.target.value
-        this.setState({ essay: dv })
-
+        this.handlSave = this.handlSave.bind(this)
     }
 
     onChangeSelect(event, props) {
@@ -76,16 +57,10 @@ export default class Content extends Component {
         x.map((array) => {
             valueData = { value: array.symbol.toLowerCase(), label: array.symbol }
         })
-        console.log(this.state.valueData.hasOwnProperty('value') === false ? valueData : this.state.valueData, "valuedata")
-        // let obj=''
-        // for(let i in this.state.valueData){
-        //     console.log(this.state.valueData[i],'valuedata')
-        // }
-
         const select = (
             <Select
-                onChange={(e) => { this.onChangeSelect(e, x) }}
-                value={setLabelSelect(choice, this.state.valueData.hasOwnProperty('value') === false ? valueData : this.state.valueData)}
+                onChange={(e) => { this.props.onChangeSelect(e, x) }}
+                value={setLabelSelect(choice, this.props.valueData.hasOwnProperty('value') === false ? valueData : this.props.valueData)}
                 classNamePrefix='select'
                 name={index}
                 placeholder='- Pilih jawaban -'
@@ -100,8 +75,8 @@ export default class Content extends Component {
             <input
                 type="text"
                 className="right-content-score__uraian"
-                value={this.state.essay.answer}
-                onChange={(e) => { this.onChangeEssay(e, 'answer') }}
+                value={this.props.essay.answer}
+                onChange={(e) => { this.props.onChangeEssay(e, 'answer') }}
             />
         )
 
@@ -109,27 +84,12 @@ export default class Content extends Component {
     }
 
     handlSave(e) {
-        console.log(e.target, "index")
         var table = document.getElementById('table-score');
-        // var cell = table.rows[0].cells; 
-        // console.log(cell[0].innerHTML,"row")     
-        // document.write(cell[0].innerHTML);
-
-        var rowIdx;
-        var rowData= [];
-        var table= document.getElementById('table-score');
-        var rows= table.getElementsByTagName('tr');
-        var selectedRow;
-        var rowCellValue;
-        for(let i= 0;i<rows.length;i++){
-            console.log(rows[i].cells, 'index')
-
-          
-        }
+        this.props.handleSave(e,table)
+   
     }
     render() {
         const { form } = this.props
-        console.log(this.state.valueData, "here ch")
         return (
             <div className="bg-white margin-top-8 container-fluid container-fluid-custom rounded-corners">
                 <div className="row rounded-10">
@@ -154,9 +114,10 @@ export default class Content extends Component {
                                         <tbody>
                                             {
                                                 form.map(function (x, i) {
+                                                    console.log("data xxxxx", x.problem_type)
                                                     return <tr key={Math.random()}>
-                                                        <td className="align-left text-center ">{x.qn_number}</td>
-                                                        <td className="align-left text-left">{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
+                                                        <td className="align-left text-center">{x.qn_number}</td>
+                                                        <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
                                                         <td className="align-center">
                                                             {x.problem_type === 'essay' ? this.generateEssay(x.exam_question_choices) : this.generateSelect(x.exam_question_choices, i)}
                                                         </td>
@@ -164,12 +125,11 @@ export default class Content extends Component {
                                                             {x.problem_type === 'essay' ? <input
                                                                 type="text"
                                                                 className="right-content-score__skor"
-                                                                value={this.state.essay.score}
-                                                                onChange={(e) => { this.onChangeEssay(e, 'score') }}
+                                                                value={this.props.essay.score}
+                                                                onChange={(e) => { this.props.onChangeEssay(e, 'score') }}
                                                             /> :
                                                                 x.exam_question_choices.map((array) => {
-                                                                    console.log(this.state.score_choice, "xxxx")
-                                                                    return <input type="text" className="right-content-score__skor" value={array.is_correct_ans === null ? this.state.score_choice : x.max_score} />
+                                                                    return <input type="text" className="right-content-score__skor" value={array.is_correct_ans === null ? this.props.score_choice : x.max_score} />
                                                                 })
                                                             }
                                                         </td>

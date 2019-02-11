@@ -67,7 +67,7 @@ export const MainRoutes = [
         component: Exam
     },
     {
-        path:'/score/new-score',
+        path:'/assessment/:assessment_id/exam/:exam_id/class/:class_id/student/:student_id',
         component:NewScore
     },
     {
@@ -75,7 +75,7 @@ export const MainRoutes = [
         component: CreateExam
     },
     {
-        path: '/nilai' ,
+        path: '/assessment/:assessment_id/exam/:exam_id/class/:class_id' ,
         component:DetailNilai
     },
     {

@@ -19,20 +19,29 @@ export default class Nilai extends Component {
       score: [],
       activeMenu: 1,
       exam: {},
+      exam_id:props.match.params.exam_id,
+      class_id: props.match.params.class_id,
+      assessment_id: props.match.params.assessment_id,
       participant_passed: {},
       participant_not_passed: [],
       questionEvaluations: [],
       competencySubjects: [],
       questionResults: [],
-      examChart: []
+      examChart: [],
+      collapce:''
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.fetchData = this.fetchData.bind(this)
     this.toggleMenu = this.toggleMenu.bind(this)
+    this.handleNewScore = this.handleNewScore.bind(this)
   }
   componentDidMount() {
+    console.log("here exam id", this.state.exam_id + '+' + this.state.class_id + '+' + this.state.assessment_id)
+
     this.getQuestionsResults()
     this.getQuestions()
+    this.fetchData()
+
   }
   toggleMenu(menu) {
     if (this.state.activeMenu !== menu) {
@@ -41,13 +50,9 @@ export default class Nilai extends Component {
       })
     }
   }
-  componentDidMount() {
-    // this.props.getParticipantsResult()
-    this.fetchData()
-  }
 
   fetchData() {
-    let url = 'v1/assessments/6ae41268-d737-4a87-bb54-1a9cfd1d69f8/exams/b4aa7bda-f96d-4665-8dc3-fe263ed670ed/exam_classes/1a5e496b-ffc4-445f-93b4-ef324e80e31c/participant_results'
+    let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/participant_results`
     apiClient('get', url).then(res => {
       console.log(res.data.data.participants.score_ranges, 'here at')
       this.setState({
@@ -93,6 +98,28 @@ export default class Nilai extends Component {
   }
 
 
+  handleNewScore(e, student){
+    e.preventDefault()
+    let collapce = this.state.collapce
+    if(collapce === ''){
+        this.setState({
+            collapce:'collapce'
+        })
+    }else{
+        this.setState({
+            collapce:''
+        })
+    }
+
+    this.props.history.push({
+        pathname:'/assessment/'+this.state.assessment_id+'/exam/'+this.state.exam_id+'/class/'+this.state.class_id+'/student/'+student
+    })
+
+
+}
+
+
+
   render() {
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
     console.log(this.state.score.score_ranges, "my score")
@@ -127,7 +154,12 @@ export default class Nilai extends Component {
               <div className="row margin-top-4 padding-bottom-6 ">
                 <div className="col-sm-9">
                   <div className="content-block   main-block">
-                    <BottomContent />
+                    <BottomContent 
+                      exam = {this.state.exam_id}
+                      class = {this.state.class_id}
+                      asssessment = {this.state.assessment_id}
+                      handleNewScoreParent = {this.handleNewScore}
+                    />
                   </div>
                 </div>
                 <div className="col-sm-3">
