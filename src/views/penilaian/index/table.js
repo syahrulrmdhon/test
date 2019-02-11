@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 var FontAwesome = require('react-fontawesome');
-import {combineNameSubject} from './../../../utils/exam'
+import {combineNameSubject, assessmentLabel} from './../../../utils/exam'
 import {apiClient} from './../../../utils/apiClient'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
@@ -68,7 +68,8 @@ export default class Table extends Component {
                 if(value.category == 'attitude'){
                     totalExam = combineNameSubject(value.school_attitudes)
                 } else {
-                    totalExam = (value.exams.length || '0') + ' Exam'
+                    let label = assessmentLabel(value.assessment_type)
+                    totalExam = value.exam_count + ' (' + label + ')'
                 }
                 
                 content.push(
@@ -77,7 +78,7 @@ export default class Table extends Component {
                         <td><NavLink to={url}>{value.name}</NavLink></td>
                         <td>{subjectName}</td>
                         <td>{totalExam}</td>
-                        <td>20/01/2019</td>
+                        <td>{value.created_date}</td>
                         <td className="align-right padding-right-6">
                             <NavLink to={url} className="btn default margin-right-4">Lihat</NavLink>
                             <FontAwesome name="trash" className="margin-left-2 margin-right-2 cgreen" onClick={this.delete.bind(this, value)} />
