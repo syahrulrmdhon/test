@@ -20,6 +20,7 @@ export const MainRoutes = [
         path: '/',
         exact: true,
         component: Login
+  
     },
     {
         path: '/switch',

@@ -530,6 +530,9 @@ table.table.beri-nilai tr.head{
   font-size: 12px;
   color: #2d2d2d !important;
 }
+.border-left-col-green {
+  border-left:4px solid #1a9d7f !important;
+}
 .border-left-col-red {
   border-left:4px solid #eb373e !important;
 }
@@ -710,7 +713,12 @@ table.table.beri-nilai tr.head{
 }
 }
 
-.content-table {
+.tr-row {
   width: 100%;
-  display: content;
+  display: contents !important;
+
+}
+
+.td-hidden {
+  display: none
 }

@@ -43,7 +43,7 @@ export default class Content extends Component {
     }
 
     onChangeEssay(e, prop) {
-        e.preventDefault()
+        // e.preventDefault()
         console.log(e.target.value, "e.target.value")
         var dv = this.state.essay
         dv[prop] = e.target.value
@@ -60,11 +60,11 @@ export default class Content extends Component {
         if (is_answer === null) {
             this.setState({
                 valueData: event,
-                score_choice:0
+                score_choice: 0
             })
-        }else{
+        } else {
             this.setState({
-                score_choice:0,
+                score_choice: 0,
                 valueData: event
             })
         }
@@ -108,6 +108,25 @@ export default class Content extends Component {
         return essay;
     }
 
+    handlSave(e) {
+        console.log(e.target, "index")
+        var table = document.getElementById('table-score');
+        // var cell = table.rows[0].cells; 
+        // console.log(cell[0].innerHTML,"row")     
+        // document.write(cell[0].innerHTML);
+
+        var rowIdx;
+        var rowData= [];
+        var table= document.getElementById('table-score');
+        var rows= table.getElementsByTagName('tr');
+        var selectedRow;
+        var rowCellValue;
+        for(let i= 0;i<rows.length;i++){
+            console.log(rows[i].cells, 'index')
+
+          
+        }
+    }
     render() {
         const { form } = this.props
         console.log(this.state.valueData, "here ch")
@@ -124,7 +143,7 @@ export default class Content extends Component {
                     </div>
                             <div>
                                 <div className="table-responsive">
-                                    <table className="right-content-score____table">
+                                    <table id="table-score" className="right-content-score____table">
                                         <thead className="right-content-score__table-head">
                                             <th className="right-content-score__no align-left text-center">No</th>
                                             <th>Tipe Soal</th>
@@ -147,12 +166,12 @@ export default class Content extends Component {
                                                                 className="right-content-score__skor"
                                                                 value={this.state.essay.score}
                                                                 onChange={(e) => { this.onChangeEssay(e, 'score') }}
-                                                            /> : 
-                                                            x.exam_question_choices.map((array) => {
-                                                                console.log(this.state.score_choice,"xxxx")
-                                                                return    <input type="text" className="right-content-score__skor" value={array.is_correct_ans ===null?this.state.score_choice:x.max_score} />
-                                                            })
-                                                         }
+                                                            /> :
+                                                                x.exam_question_choices.map((array) => {
+                                                                    console.log(this.state.score_choice, "xxxx")
+                                                                    return <input type="text" className="right-content-score__skor" value={array.is_correct_ans === null ? this.state.score_choice : x.max_score} />
+                                                                })
+                                                            }
                                                         </td>
                                                         <td>{x.weight}</td>
                                                     </tr>
@@ -163,8 +182,8 @@ export default class Content extends Component {
 
                                     </table>
                                     <div className="margin-top-3 align-right">
-                                    <button className="submit-btn">Submit </button>
-                                </div>
+                                        <button className="submit-btn" onClick={this.handlSave}>Submit </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
