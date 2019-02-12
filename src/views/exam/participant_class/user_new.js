@@ -9,9 +9,10 @@ export default class ParticipantUser extends Component {
 
         this.state = {
             step: 'ParticipantForm',
-            assessment_id: 'f80f7981-f1e0-4391-b6fc-1de57721c518',
-            exam_id: '90744b5a-85ad-46e9-ac9b-422c96de0016',
-            classes: []
+            assessment_id: this.props.match.params.assessment_id || null,
+            exam_id: this.props.match.params.exam_id || null,
+            classes: [],
+            activeTab: null,
         }
     }
 
@@ -20,6 +21,27 @@ export default class ParticipantUser extends Component {
     }
 
     render(){
+        let tab = []
+        if(this.state.classes.length > 0){
+            this.state.classes.map((classs, idx) => {
+                let active = null
+
+                if(this.state.activeTab == null && idx == 0){
+                    active = 'active'
+                }
+
+                tab.push(
+                    <NavItem key={idx}>
+                        <NavLink
+                        className={active}
+                        >
+                        {classs.name}
+                        </NavLink>
+                    </NavItem>
+                )
+            })
+        }
+
         return (
             <div className="padding-content">
                <Header />
@@ -32,29 +54,7 @@ export default class ParticipantUser extends Component {
                                     <div className="margin-top-10">
                                         <div className="margin-top-4">
                                             <Nav tabs className="toggle tab-class">
-                                                <NavItem>
-                                                    <NavLink
-                                                    className="active"
-                                                    // className={classnames({ active: this.props.activeTab === 'knowledge' })}
-                                                    // onClick={() => { this.props.tabToggle('knowledge'); }}
-                                                    >
-                                                    X IPA 2
-                                                    </NavLink>
-                                                </NavItem>
-                                                <NavItem>
-                                                    <NavLink
-                                                    // className={classnames({ active: this.props.activeTab === 'skill' })}
-                                                    // onClick={() => { this.props.tabToggle('skill'); }}
-                                                    >
-                                                    X IPA 1
-                                                    </NavLink>
-                                                </NavItem>
-                                                <NavItem>
-                                                    <NavLink
-                                                    >
-                                                    X IPA 1
-                                                    </NavLink>
-                                                </NavItem>
+                                                {tab}
                                             </Nav>
                                         </div>
                                     </div>

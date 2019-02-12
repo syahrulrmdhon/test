@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Select from 'react-select';
 import DatePicker from 'react-datepicker'
 var FontAwesome = require('react-fontawesome')
+import { setLabelSelect } from './../../../utils/common'
 
 export default class Classes extends Component {
     constructor(props){
@@ -74,7 +75,7 @@ export default class Classes extends Component {
                                     name= "category"
                                     options={this.props.class_filters}
                                     onChange={(event) => {this.props.handleClassAttr(event, this.props.index)}}
-                                    value={this.props.data.class_id}
+                                    value={setLabelSelect(this.props.class_filters, this.props.data.class_id)}
                                 />
                                 {/* <Error data={this.state.errors} fieldname= 'category' /> */}
                             </div>

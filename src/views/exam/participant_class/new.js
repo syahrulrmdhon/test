@@ -57,6 +57,7 @@ export default class ParticipantClass extends Component {
                         comp_kkms.push(com_kkm)
                     })
                 }
+
                 data.push({
                     class_id: exam_classes_attribute.class_id ? exam_classes_attribute.class_id.value : null,
                     start_date: getDate('case-5', exam_classes_attribute.start_date),
@@ -73,7 +74,7 @@ export default class ParticipantClass extends Component {
             let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/validate?step=ClassForm`
 
             apiClient('post', url, {exam: result}).then(response => {
-                this.props.history.push('/pariticipant-user')
+                this.props.history.push(`/pariticipant-user/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`)
             }).catch(error => {
                 console.log(error.response)
             })   
