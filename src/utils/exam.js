@@ -107,19 +107,25 @@ export function assessmentShow(id) {
     })
 }
 
-export function assessmentLabel(value){
+export function assessmentLabel(value, color = false){
+    let result = ''
     switch(value){
         case 'task':
-            return 'Tugas'
+            result = (color) ? 'bcgreen' : 'Tugas'
+        break
         case 'daily_exam':
-            return 'UH'
+            result = (color) ? 'bcblue' : 'UH'
+        break
         case 'midterm_exam':
-            return 'UTS'
+            result = (color) ? 'bcblack2' : 'UTS'
+        break
         case 'final_exam':
-            return 'UAS'
+            result = (color) ? 'bcred' : 'UAS'
+        break
         default:
             return 'N/A'
     }
+    return result
 }
 
 export function getQuestion(id, number) {

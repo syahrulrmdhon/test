@@ -12,8 +12,8 @@ export default class ParticipantClass extends Component {
 
         this.state = {
             step: 'ClassForm',
-            assessment_id: '9bbb04e2-5195-4d83-a7d7-9d842c44a808',
-            exam_id: '90744b5a-85ad-46e9-ac9b-422c96de0016',
+            assessment_id: this.props.match.params.assessment_id || null,
+            exam_id: this.props.match.params.exam_id || null,
             basic_comps: [],
             class_filters: [],
             exam: {
@@ -109,8 +109,6 @@ export default class ParticipantClass extends Component {
         }
 
         class_attributes[c_index]['comp_kkms'] = basic_comps
-        console.log(class_attributes)
-
         this.setState({
             exam: {
                 exam_classes_attributes: class_attributes
