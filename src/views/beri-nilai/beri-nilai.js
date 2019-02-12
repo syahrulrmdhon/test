@@ -100,19 +100,21 @@ export default class Nilai extends Component {
 
   handleNewScore(e, student){
     e.preventDefault()
-    let collapce = this.state.collapce
-    if(collapce === ''){
-        this.setState({
-            collapce:'collapce'
-        })
-    }else{
-        this.setState({
-            collapce:''
-        })
-    }
+    // let collapce = this.state.collapce
+    // if(collapce === ''){
+    //     this.setState({
+    //         collapce:'collapce'
+    //     })
+    // }else{
+    //     this.setState({
+    //         collapce:''
+    //     })
+    // }
+    let data = 'ac67857a-ad71-4a97-9718-c71c47e2e4bc'
 
     this.props.history.push({
-        pathname:'/assessment/'+this.state.assessment_id+'/exam/'+this.state.exam_id+'/class/'+this.state.class_id+'/student/'+student
+        pathname:'/assessment/'+this.state.assessment_id+'/exam/'+this.state.exam_id+'/class/'+this.state.class_id+'/student/'+student,
+        state: {data:data}
     })
 
 
@@ -153,7 +155,7 @@ export default class Nilai extends Component {
               </div>
               <div className="row margin-top-4 padding-bottom-6 ">
                 <div className="col-sm-9">
-                  <div className="content-block   main-block">
+                  <div className="content-block main-block">
                     <BottomContent 
                       exam = {this.state.exam_id}
                       class = {this.state.class_id}
@@ -163,7 +165,7 @@ export default class Nilai extends Component {
                   </div>
                 </div>
                 <div className="col-sm-3">
-                  <div className="content-block main-block padding-5">
+                  <div className="content-block main-block padding-5  ">
                     <RightContent
                       participant_not_passed={this.state.participant_not_passed}
                     />

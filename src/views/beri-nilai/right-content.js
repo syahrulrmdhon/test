@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Avatar from 'react-avatar';
 import Ava from './../../assets/images/img_avatar.png'
 
-export class componentName extends Component {
+export class RightComponent extends Component {
 
   render() {
     console.log(this.props.participant_not_passed,"here")
@@ -22,7 +22,7 @@ export class componentName extends Component {
         </div>
         { 
           this.props.participant_not_passed.map(function(data){
-            return   <div className="margin-top-5">
+            return   <div className="margin-top-5" key={Math.random()}>
             <div className="row  margin-top-1 padding-bottom-4">
               <div className="col-sm-1">
                 <Avatar src={Ava} size="30" round={true} />
@@ -58,4 +58,4 @@ const mapDispatchToProps = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(componentName)
+export default connect(mapStateToProps, mapDispatchToProps)(RightComponent)

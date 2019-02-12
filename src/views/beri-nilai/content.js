@@ -92,7 +92,7 @@ export default class Content extends Component {
     render() {
         const { form } = this.props
         return (
-            <div className="bg-white margin-top-8 container-fluid container-fluid-custom rounded-corners">
+            <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">
                 <div className="row rounded-10">
                     <LeftSide>
                         <Profile dataProfile={this.props.student} />
@@ -136,7 +136,7 @@ export default class Content extends Component {
                                                         </td>
                                                         <td>{x.weight}</td>
                                                     </tr>
-                                                }, this)
+                                                },this)    
                                             }
 
                                         </tbody>

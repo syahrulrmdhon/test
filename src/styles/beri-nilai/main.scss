@@ -535,6 +535,7 @@ table.table.beri-nilai tr.head{
 }
 .border-left-col-red {
   border-left:4px solid #eb373e !important;
+  z-index: 2000;
 }
 .border-left-col-yellow {
   border-left:4px solid #f2bc2d !important;
@@ -721,4 +722,66 @@ table.table.beri-nilai tr.head{
 
 .td-hidden {
   display: none
+}
+
+.content-bottom{
+  .header {
+    max-width: 100%;
+    height: 29.5px;
+    background-color: rgba(216, 216, 216, 0.14);
+  }
+
+  span{
+    vertical-align: middle;
+    font-family: $nunito_bold;
+    font-size: 12px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #333333;
+  }
+  
+  .content-student{
+
+    .box-student{
+      max-width: 100%;
+      // height: 29.5px;
+      background-color: #ffffff; 
+      // height: 43px;   
+    }
+
+    .label-content {
+      font-family: $nunito_semi_bold;
+      font-size: 11px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 0.91;
+      letter-spacing: normal;
+      color: #333333;
+    }
+    .icon-pencil {
+      cursor: pointer;
+    }
+
+    .dispay-second-row {
+      display: none;
+    }
+    .line-separator{
+      position: absolute;
+      right: 80px;
+      top: 67px;
+      border-top: 1px solid #eaeaea;
+      width: 143px;
+    }
+
+    .second-head {
+      max-width: 100%;
+      height: 23.5px;
+      background-color: rgba(178, 216, 216, 0.32);
+    }
+  }
+
+  
 }

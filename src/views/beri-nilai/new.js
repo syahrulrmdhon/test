@@ -52,6 +52,7 @@ export default class New extends Component {
   componentDidMount() {
     this.getStudent()
     this.getGenerateForm()
+    console.log(this.props.location.state.data,"location")
   }
 
   redirect(){
