@@ -9,6 +9,8 @@ import { assessmentType } from '../../utils/common'
 import Tab from './index/tab'
 import { NavLink } from 'react-router-dom'
 
+import Pagination from './../global/pagination'
+
 class Penilaian extends Component {
     constructor(props) {
         super(props)
@@ -85,6 +87,7 @@ class Penilaian extends Component {
                                     />
                                     <Index  data={this.state.data} category={this.state.activeTab} />
                                 </div>
+                                <Pagination />
                             </div>
                         </div>
                     </div>
