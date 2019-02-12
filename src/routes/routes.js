@@ -70,7 +70,7 @@ export const MainRoutes = [
         component:DetailNilai
     },
     {
-        path: '/pariticipant-class' ,
+        path: '/pariticipant-class/:assessment_id/assessment/:exam_id/exam' ,
         component:ParticipantClass
     },
     {
