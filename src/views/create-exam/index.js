@@ -63,19 +63,22 @@ export default class Index extends Component {
     
     apiClient('get', path).then(res => {
       const data = res.data.data
-      const examType = data.exam.exam_type
-      const form = this.state.form
-      const selectedType = this.state.examTypes.find( type => type.value === examType );
-      form.title = data.exam.name
-      form.totalQuestion = data.exam.question_count
-      form.selectedType = selectedType
-      this.setState({form: form})
+
+      if (data.hasOwnProperty('exam')) {
+        const form = this.state.form
+        const examType = data.exam.exam_type
+        const selectedType = this.state.examTypes.find( type => type.value === examType )
+        form.title = data.exam.name
+        form.totalQuestion = data.exam.question_count
+        form.selectedType = selectedType
+        this.setState({form: form})
+      }
     })
   }
 
   btnClick() {
     const assessmentId = this.state.assessmentId
-    let path = `v1/assessments/${assessmentId}8/exams/validate?step=BasicForm`
+    let path = `v1/assessments/${assessmentId}/exams/validate?step=BasicForm`
     let data = {
       assessment_id: assessmentId,
       name: this.state.form.title,
@@ -94,7 +97,13 @@ export default class Index extends Component {
       this.props.history.push({pathname: `/exam/${assessmentId}`})
     }
     else {
-      console.log('ke halaman buat soal')
+      path = `v1/assessments/${assessmentId}/exams/validate?step=BasicForm`
+      data.is_remedial = false
+      apiClient('post', path, data).then(response => {
+        if (response.status === 200){
+          this.props.history.push({pathname: `/question/${assessmentId}`, data: this.state.form})
+        }
+      })
     }
   }
 
@@ -111,7 +120,7 @@ export default class Index extends Component {
         disable = true
       }
     }
-    
+
     return (
       <div className="padding-content create-exam">
         <Header />

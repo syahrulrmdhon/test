@@ -11,6 +11,7 @@ import SwitchAccount from '../views/global/switch_account'
 import Exam from '../views/exam/index'
 import CreateExam from '../views/create-exam/Index'
 import DetailNilai from './../views/beri-nilai/beri-nilai'
+import Question from '../views/create-exam/create-question'
 import ParticipantClass from '../views/exam/participant_class/new'
 import NotFound from '../views/global/not-found'
 
@@ -71,6 +72,10 @@ export const MainRoutes = [
     {
         path: '/pariticipant-class' ,
         component:ParticipantClass
+    },
+    {
+        path: '/question/:id',
+        component: Question
     },
     {
         path: '*',
