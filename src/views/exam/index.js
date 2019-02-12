@@ -11,21 +11,14 @@ export default class Index extends Component {
     super(props)
     this.state = {
       assessmentId: this.props.match.params.id,
-      exams: [
-        {
-          id: '',
-          name: '',
-          include_question: false,
-          classses: [
-            {
-              id: null,
-              name: ''
-            }
-          ],
-          percentage: 0
-        }
-      ],
+      exams: {  
+        size: 0,
+        total_entries: 0,
+        total_pages: 0,
+        entries: []
+      }
     }
+
     this.addExam = this.addExam.bind(this)
   }
 
@@ -37,11 +30,11 @@ export default class Index extends Component {
     const path = `v1/assessments/${this.state.assessmentId}`
 
     apiClient('get', path).then(response => {
-      this.setState({exams: response.data.data.assessment.exams})
+      this.setState({exams: response.data.data.exams})
     })
   }
 
-  addExam(id) {
+  addExam() {
     this.props.history.push({pathname: `/create-exam/${this.state.assessmentId}`})
   }
   

@@ -324,12 +324,27 @@ export function examTypes(params={}){
 }
 
 export function checkProperties(obj) {
-    console.log(obj)
     for (let key in obj) {
         if (obj[key] === null || obj[key] === "" || obj[key] === undefined) {
             return true;
-            // break;
         }
     }
     return false;
+}
+
+export function questionTypes(params={}){
+    const path = 'v1/filters/problem_types'
+    apiClient('get', path, false, params).then(response => response.data).then(data => {
+        let result = []
+
+        if(data.data.problem_types.length > 0){
+            data.data.problem_types.map((type, key) => (
+                result.push({
+                    label: type.value,
+                    value: type.key,
+                })
+            ))
+        }
+        this.setState({questionTypes: result})
+    })
 }

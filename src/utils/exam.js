@@ -121,3 +121,26 @@ export function assessmentLabel(value){
             return 'N/A'
     }
 }
+
+export function getQuestion(id, number) {
+    let params = {}
+
+    if(this.state.step !== null){
+        params['step'] = this.state.step
+    }
+
+    if(this.state.activeNumber !== null) {
+        params['number'] = this.state.activeNumber
+    }
+    let url = `v1/assessments/${id}/exams/new?`
+
+    apiClient('get', url, false, params).then(response => {
+        // console.log(url)
+        let data = response.data.data
+        // data.exam
+        this.setState({
+            data: data,
+        })
+    })
+
+}
