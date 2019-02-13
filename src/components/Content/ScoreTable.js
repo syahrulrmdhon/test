@@ -32,11 +32,12 @@ export default class ScoreTable extends Component {
                   <tbody>
                     {
                       knowledgeScore.subject_scores.map((subject, index) => {
+                        const description = subject.score.description
                         return <tr key={index}>
-                          <td>{subject.name}</td>
-                          <td>{subject.score.description}</td>
-                          <td>{subject.score.score}</td>
-                          <td>{subject.score.predicate}</td>
+                          <td>{subject.name ? subject.name : '-'}</td>
+                          <td className={!description ? 'text-center' : ''}>{description ? description : '-'}</td>
+                          <td>{subject.score.score ? subject.score.score : '-'}</td>
+                          <td>{subject.score.predicate ? subject.score.predicate : '-'}</td>
                           <td><Link to="">Lihat Deskripsi</Link></td>
                         </tr>
                       })
@@ -49,13 +50,13 @@ export default class ScoreTable extends Component {
                   <tbody>
                   <tr className="total-score">
                         <td colSpan="2" className="border-right-0 text-center">Jumlah Nilai Pengetahuan</td>
-                        <td className="border-left-0 border-right-0 text-center">{knowledgeScore.total.score}</td>
+                        <td className="border-left-0 border-right-0 text-center">{knowledgeScore.total.score ? knowledgeScore.total.score : '-'}</td>
                         <td className="border-left-0 border-right-0"></td>
                         <td className="border-left-0"></td>
                       </tr>
                       <tr className="average-score">
                         <td colSpan="2" className="border-right-0 text-center">Nilai Pengetahuan Rata-Rata</td>
-                        <td className="border-left-0 border-right-0 text-center">{knowledgeScore.total_average.score}</td>
+                        <td className="border-left-0 border-right-0 text-center">{knowledgeScore.total_average.score ? knowledgeScore.total_average.score : '-'}</td>
                         <td className="border-left-0 border-right-0"></td>
                         <td className="border-left-0"></td>
                       </tr>
@@ -82,11 +83,12 @@ export default class ScoreTable extends Component {
                   <tbody>
                   {
                     skillScore.subject_scores.map((subject, index) => {
+                      const description = subject.score.description
                       return <tr key={index}>
-                          <td>{subject.name}</td>
-                          <td>{subject.score.description}</td>
-                          <td>{subject.score.score}</td>
-                          <td>{subject.score.predicate}</td>
+                          <td>{subject.name ? subject.name : '-'}</td>
+                          <td className={!description ? 'text-center' : ''}>{description ? description : '-'}</td>
+                          <td>{subject.score.score ? subject.score.score : '-'}</td>
+                          <td>{subject.score.predicate ? subject.score.predicate : '-'}</td>
                           <td><Link to="">Lihat Deskripsi</Link></td>
                         </tr>
                       })
@@ -99,13 +101,13 @@ export default class ScoreTable extends Component {
                 <tbody>
                 <tr className="total-score">
                       <td colSpan="2" className="border-right-0 text-center">Jumlah Nilai Pengetahuan</td>
-                      <td className="border-left-0 border-right-0 text-center">{skillScore.total.score}</td>
+                      <td className="border-left-0 border-right-0 text-center">{skillScore.total.score ? skillScore.total.score : '-'}</td>
                       <td className="border-left-0 border-right-0"></td>
                       <td className="border-left-0"></td>
                     </tr>
                     <tr className="average-score">
                       <td colSpan="2" className="border-right-0 text-center">Nilai Pengetahuan Rata-Rata</td>
-                      <td className="border-left-0 border-right-0 text-center">{skillScore.total_average.score}</td>
+                      <td className="border-left-0 border-right-0 text-center">{skillScore.total_average.score ? skillScore.total_average.score : '-'}</td>
                       <td className="border-left-0 border-right-0"></td>
                       <td className="border-left-0"></td>
                     </tr>
@@ -132,7 +134,7 @@ export default class ScoreTable extends Component {
                     attitudeScore.subject_scores.map((subject, index) => {
                       return <tr key={index}>
                           <td>{subject.name}</td>
-                          <td>{subject.note}</td>
+                          <td className={!subject.note ? 'text-center' : ''}>{subject.note ? subject.note : '-'}</td>
                           <td>
                           {
                             subject.status === "sb" ? 

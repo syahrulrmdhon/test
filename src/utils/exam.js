@@ -107,17 +107,45 @@ export function assessmentShow(id) {
     })
 }
 
-export function assessmentLabel(value){
+export function assessmentLabel(value, color = false){
+    let result = ''
     switch(value){
         case 'task':
-            return 'Tugas'
+            result = (color) ? 'bcgreen' : 'Tugas'
+        break
         case 'daily_exam':
-            return 'UH'
+            result = (color) ? 'bcblue' : 'UH'
+        break
         case 'midterm_exam':
-            return 'UTS'
+            result = (color) ? 'bcblack2' : 'UTS'
+        break
         case 'final_exam':
-            return 'UAS'
+            result = (color) ? 'bcred' : 'UAS'
+        break
         default:
             return 'N/A'
     }
+    return result
+}
+
+export function getQuestion(id, number) {
+    let params = {}
+
+    if(this.state.step !== null){
+        params['step'] = this.state.step
+    }
+
+    if(this.state.activeNumber !== null) {
+        params['number'] = this.state.activeNumber
+    }
+    let url = `v1/assessments/${id}/exams/new?`
+
+    return apiClient('get', url, false, params).then(response => {
+        let data = response.data.data
+        this.setState({
+            data: data,
+        })
+        return response.data.data
+    })
+
 }

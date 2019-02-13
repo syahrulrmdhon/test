@@ -8,16 +8,16 @@ export default class TablePengetahuan extends Component {
             <Table bordered striped hover responsive>
                 <thead>
                     <tr>
-                        <th>Nama Siswa</th>
+                        <th className='align-top'>Nama Siswa</th>
                         {
                             this.props.dTableKnowledge && this.props.dTableKnowledge.final_scores && this.props.dTableKnowledge.final_scores.subjects.map(function (x, i) {
-                                return <th key={i}>
+                                return <th key={i} className='align-top'>
                                     {x.name}
                                 </th>
                             })
                         }
-                        <th>Kehadiran (%)</th>
-                        <th>Total Nilai (GPA)</th>
+                        <th className='align-top'>Kehadiran (%)</th>
+                        <th className='align-top'>Total Nilai (GPA)</th>
                     </tr>
                 </thead>
                 <tbody className="table-nilai">

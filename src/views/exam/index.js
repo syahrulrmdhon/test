@@ -11,7 +11,7 @@ export default class Index extends Component {
     super(props)
     this.state = {
       assessmentId: this.props.match.params.id,
-      exams: {
+      exams: {  
         size: 0,
         total_entries: 0,
         total_pages: 0,
@@ -21,6 +21,7 @@ export default class Index extends Component {
 
     this.addExam = this.addExam.bind(this)
     this.onChangePage = this.onChangePage.bind(this)
+    this.deleteExam = this.deleteExam.bind(this)
   }
 
   componentDidMount() {
@@ -54,10 +55,20 @@ export default class Index extends Component {
 
 
 
+
+
   addExam() {
-    this.props.history.push({ pathname: `/create-exam/${this.state.assessmentId}` })
+    this.props.history.push({pathname: `/create-exam/${this.state.assessmentId}`})
   }
 
+  deleteExam(id) {
+    const path = `v1/assessments/${this.state.assessmentId}/exams/${id}`
+
+    apiClient('delete', path).then(() =>{
+      this.getAssessments()
+    })
+  }
+  
   render() {
     return (
       <div className="padding-content exam">
@@ -73,6 +84,8 @@ export default class Index extends Component {
                   exams={this.state.exams}
                   addExam={this.addExam}
                   page={this.onChangePage}
+                  assessmentId={this.state.assessmentId}
+                  delete={this.deleteExam}
                 />
               </div>
             </div>

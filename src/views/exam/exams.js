@@ -5,15 +5,17 @@ const exams = (props) => {
   return (props.exams.entries.map((exam, index) => {
     return (
       <Exam
-        key={exam.id}
+        key={index}
         order={index + 1}
         exam={exam.id}
         page={props.page}
-        // task={leason.task}
+        exam= {exam}
         title={exam.name}
         percentage={exam.percentage}
         question={exam.include_question}
         classes={exam.classses}
+        assessmentId={props.assessmentId}
+        delete={() => props.delete(exam.id)}
       />
     )
   }))

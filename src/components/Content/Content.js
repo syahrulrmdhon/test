@@ -17,8 +17,10 @@ export default class Content extends Component {
     this.state = {
       activeTab: 1,
       homeroomActiveTab: 1,
-      startDate: null,
-      endDate: null,
+      dateFilter: {
+        startDate: null,
+        endDate: null
+      },
       knowledgeScore: null,
       skillScore: null,
       attitudeScore: null,
@@ -40,6 +42,7 @@ export default class Content extends Component {
       homeroomNote: '',
       extracurriculars: [],
       extracurricularNotes: [{description: ''}],
+      achievements: []
     }
 
     this.baseUrl = `${process.env.API_URL}v1/students/${this.props.studentId}`
@@ -57,6 +60,9 @@ export default class Content extends Component {
     this.noteChangeHandler = this.noteChangeHandler.bind(this)
     this.getHomeroomNote = this.getHomeroomNote.bind(this)
     this.changeExtracurricularNote = this.changeExtracurricularNote.bind(this)
+    this.handleDateFilter = this.handleDateFilter.bind(this)
+    this.achievementChangeHandler = this.achievementChangeHandler.bind(this)
+    this.handleBulkUpdate = this.handleBulkUpdate.bind(this)
   }
 
   componentDidMount() {
@@ -71,18 +77,6 @@ export default class Content extends Component {
         homeroomActiveTab: tab
       })
     }
-  }
-
-  handleChangeStartDate(date) {
-    this.setState({
-      startDate: date
-    })
-  }
-
-  handleChangeEndDate(date) {
-    this.setState({
-      endDate: date
-    });
   }
 
   toggle(tab) {
@@ -122,6 +116,9 @@ export default class Content extends Component {
       if (this.state.homeroomActiveTab === 2 && !this.state.extracurriculars.length) {
         this.getFilterExtracurricular()
         this.getExtracurricularNote()
+      }
+      else if (this.state.homeroomActiveTab === 3 && !this.state.achievements.length) {
+        this.getAchievementNote()
       }
     }
   }
@@ -198,13 +195,23 @@ export default class Content extends Component {
     })
   }
 
+  getAchievementNote() {
+    const url = `v1/students/${this.props.studentId}/teacher_notes?achievement_type=daily_result`
+
+    apiClient('get', url).then(response => {
+      this.setState({achievements: response.data.data.notes})
+      console.log(response.data.data)
+    })
+  }
+
   handleCreateHomeroomNote() {
     const url = `v1/students/${this.props.studentId}/create_notes`
     const data = {
       "achievement_type": "final_result",
       "user_achievement": {
         "user_id": this.props.studentId,
-        "description": this.state.inputHomeroomNote
+        "description": this.state.inputHomeroomNote,
+        "achievement_type": "final_result"
       }
     }
 
@@ -261,7 +268,51 @@ export default class Content extends Component {
         this.setState({disable: true})
     })
   }
+
+  achievementChangeHandler(event, id, field) {
+    const noteIndex = this.state.achievements.findIndex(note => {
+      return note.id === id;
+    });
+
+    const note = {
+      ...this.state.achievements[noteIndex]
+    };
+
+    note[field] = event.target.value;
+
+    const notes = [...this.state.achievements];
+
+    notes[noteIndex] = note;
+
+    this.setState({
+      achievements: notes
+    })
+    console.log(this.state.achievements)
+  }
+    // console.log(id)
+    // let achievements = this.state.achievements
+    // const achievement = achievements.find( achievement => achievement.id === id );
+    // // console.log(achievement)
+    // achievement.title = event.target.value
+    // achievement.description = event.target.value
+
+
+  // }
   
+  handleBulkUpdate(type, note) {
+    console.log(type, note)
+    const url = `v1/students/${this.props.studentId}/bulk_update`
+    const data = {
+      "user_id": this.props.studentId,
+      "achievement_type": type,
+      "user_achievements": this.state[note]
+    }
+    console.log(data)
+    apiClient('post', url, data).then(response => {
+      console.log(response)
+    })
+  }
+
   addExtracurricularNote() {
     this.setState({extracurricularNotes: [...this.state.extracurricularNotes, '']})
   }
@@ -271,7 +322,35 @@ export default class Content extends Component {
     this.setState({extracurricularNotes:this.state.extracurricularNotes})
   }
 
+  handleDateFilter(event, filter) {
+    let data = this.state.dateFilter
+    data[filter] = date
+    this.setState({dateFilter: data})
+    let dateFilter = this.state.date
+    if (dateFilter.startDate && dateFilter.endDate) {
+      
+      const path = `v1/students/${this.props.studentId}/attendance_recap?date_start=${dateFilter.startDate}&date_end=${dateFilter.endDate}`
+      apiClient('get', )
+    }
+  }
+
+  handleChangeStartDate(date) {
+    this.setState({
+      startDate: date
+    })
+  }
+
+  handleChangeEndDate(date) {
+    this.setState({
+      endDate: date
+    });
+  }
+
+
+
   render() {
+    // console.log(this.state.startDate)
+    // console.log(this.state.endDate)
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
     const tabHomeRoom = ['Catatan Wali Kelas', 'Estrakurikuler', 'Prestasi']
     
@@ -309,16 +388,18 @@ export default class Content extends Component {
                   <FormGroup className="absences-detail__form-group">
                     <Label className="absences-detail__filter-label" for="exampleSelect">Dari Tanggal</Label>
                     <DatePicker
-                      selected={this.state.startDate}
-                      onChange={this.handleChangeStartDate}
+                      selected={this.state.dateFilter.startDate}
+                      // onChange={this.handleChangeStartDate}
+                      onChange={(event) => this.handleDateFilter(event, 'startDate')}
                       className="absences-detail__input" />
                     <i className="absences-detail__angle-down-date fa fa-angle-down"></i>
                   </FormGroup>
                   <FormGroup className="absences-detail__form-group">
                     <Label className="absences-detail__filter-label" for="exampleSelect">Sampai Tanggal</Label>
                     <DatePicker
-                      selected={this.state.endDate}
-                      onChange={this.handleChangeEndDate}
+                      selected={this.state.dateFilter.endDate}
+                      onChange={(event) => this.handleDateFilter(event, 'endDate')}
+                      // onChange={this.handleChangeEndDate}
                       className="absences-detail__input" />
                     <i className="absences-detail__angle-down-date fa fa-angle-down"></i>
                   </FormGroup>
@@ -395,7 +476,10 @@ export default class Content extends Component {
                   extracurriculars={this.state.extracurriculars}
                   extracurricularNotes={this.state.extracurricularNotes}
                   changeExtracurricularNote={this.handleChange}
-                  addExtracurricularNote={(event) => this.addExtracurricularNote(event)} />
+                  addExtracurricularNote={(event) => this.addExtracurricularNote(event)}
+                  achievements={this.state.achievements}
+                  changeAchievementNote={this.achievementChangeHandler}
+                  saveAchievement={this.handleBulkUpdate} />
               </RightSide>
             </div>
           </TabPane>
