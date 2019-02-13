@@ -22,7 +22,7 @@ export default class Index extends Component {
           totalQuestion: '',
           selectedType: null 
       },
-      data: []
+      data: [],
     }
     this.handleCreateQuestion = this.handleCreateQuestion.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -116,7 +116,7 @@ export default class Index extends Component {
       }
     }
     else {
-      if (this.state.data.title === '' || this.state.data.selectedType === null) {
+      if (this.state.form.title === '' || this.state.form.selectedType === '') {
         disable = true
       }
     }

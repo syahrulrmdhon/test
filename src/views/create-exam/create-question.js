@@ -9,6 +9,7 @@ import { confirmAlert } from 'react-confirm-alert'
 var FontAwesome = require('react-fontawesome')
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import Choices from "./choices"
+import ErrorModal from '../global/error_modal'
 
 export default class question extends Component {
   constructor(props) {
@@ -35,7 +36,10 @@ export default class question extends Component {
       questionTypes: [],
       selectedBasicCompetence: null,
       selectedQuestionType: null,
-      is_correct_ans: 0
+      is_correct_ans: 0,
+      question_count: 0,
+      isError: false,
+
     }
 
     this.numbers = this.numbers.bind(this)
@@ -46,6 +50,7 @@ export default class question extends Component {
     this.reset = this.reset.bind(this)
     this.checkNextNumber = this.checkNextNumber.bind(this)
     this.setForm = this.setForm.bind(this)
+    this.validateForm = this.validateForm.bind(this)
   }
 
   componentDidMount() {
@@ -104,25 +109,43 @@ export default class question extends Component {
       this.setState({
         activeNumber: number,
       })
-      console.log(this.state.data)
     }
   
       this.setForm(number)
   }
 
+  validateForm(number) {
+    let params = {}
+
+    if(this.state.step !== null){
+        params['step'] = this.state.step
+    }
+
+    if(this.state.activeNumber !== null) {
+        params['number'] = this.state.activeNumber
+    }
+    let url = `v1/assessments/${this.state.assessmentId}/exams/new?`
+
+    apiClient('get', url, false, params).then(response => {
+      let data = response.data.data
+      if (data.exam.exam_questions_attributes.length === parseInt(data.exam.question_count) ) {
+        
+        let path = `v1/assessments/${this.state.assessmentId}/exams`
+        apiClient('post', path, data).then(response => {
+          const examId = response.data.data.exam.id
+          this.setState({examId: examId})
+          this.confirmAlert()
+        })
+      }
+      else if (this.state.data.exam.exam_questions_attributes.length < this.state.data.exam.question_count){
+        this.setState({activeNumber: this.state.activeNumber + 1})
+        this.setForm(number)
+      }
+    })
+  }
+
   checkNextNumber(number) {
-    getQuestion.call(this, this.state.assessmentId, this.state.activeNumber)
-    
-    if (this.state.data.exam.exam_questions_attributes.length == parseInt(this.state.data.exam.question_count) || (parseInt(this.state.data.exam.question_count) - this.state.data.exam.exam_questions_attributes.length) === 1) {
-      let path = `v1/assessments/${this.state.assessmentId}/exams`
-      apiClient('post', path, this.state.data).then(response => {
-        this.confirmAlert()
-      })
-    }
-    else if (this.state.data.exam.exam_questions_attributes.length < this.state.data.exam.question_count){
-      this.setState({activeNumber: this.state.activeNumber + 1})
-      this.setForm(number)
-    }
+    this.validateForm(number)
     if (!this.state.data.exam.exam_questions_attributes.length) {
       return false
     }
@@ -221,14 +244,13 @@ export default class question extends Component {
       this.reset()
     }
     else if (this.state.data.exam.question_count == 1) {
-      let path = `v1/assessments/${this.state.assessmentId}/exams`
-      apiClient('post', path, this.state.data).then(response => {
-        const examId = response.data.data.exam.id
-        this.setState({examId: examId})
-        this.confirmAlert()
-      })
+      this.validateForm(this.state.activeNumber)
     }
-    })
+    }).catch(error => {
+      this.setState({
+        isError: true
+      })
+  })  
   }
 
   redirect(to) {
@@ -281,9 +303,18 @@ export default class question extends Component {
     }
     
     let numbers = this.numbers()
+    
+    let error = []
+    if(this.state.isError){
+      error.push(<ErrorModal key={Math.random()} status="error" message="Gagal menyimpan soal, silahkan cek kembali data yang dibutuhkan" />)
+      this.setState({
+          isError: false,
+      })
+  }
     return (
       <div className="padding-content create-exam question-wrapper">
         <Header />
+        {error}
         <div className="margin-8">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
