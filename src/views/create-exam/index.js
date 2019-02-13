@@ -68,9 +68,9 @@ export default class Index extends Component {
         const form = this.state.form
         const examType = data.exam.exam_type
         const selectedType = this.state.examTypes.find( type => type.value === examType )
-        form.title = data.exam.name
-        form.totalQuestion = data.exam.question_count
-        form.selectedType = selectedType
+        form.title = data.exam.name || ''
+        form.totalQuestion = data.exam.question_count || ''
+        form.selectedType = selectedType || ''
         this.setState({form: form})
       }
     })
@@ -157,7 +157,8 @@ export default class Index extends Component {
                 placeholder='Pilih Tipe Tugas' />
               <div className={!this.state.checked ? "d-none" : ""}>
                 <label className="create-exam__label">Jumlah Soal Tugas</label>
-                <input type="text" className="form-control create-exam__input create-exam__input-amount mt-0" placeholder="Masukkan Jumlah Soal Tugas" disabled={this.state.checked ? false : true} value={this.state.form.totalQuestion} onChange={event => this.onChange(event, "totalQuestion")}/>
+                <input type="text" className="form-control create-exam__input create-exam__input-amount mt-0" placeholder="Masukkan Jumlah Soal Tugas" 
+                  disabled={this.state.checked ? false : true} value={this.state.form.totalQuestion} onChange={event => this.onChange(event, "totalQuestion")}/>
               </div>
             </div>
             <button onClick={this.btnClick} className="create-exam__button" disabled={disable}>Lanjut</button>

@@ -20,6 +20,7 @@ export default class Index extends Component {
     }
 
     this.addExam = this.addExam.bind(this)
+    this.deleteExam = this.deleteExam.bind(this)
   }
 
   componentDidMount() {
@@ -37,6 +38,14 @@ export default class Index extends Component {
   addExam() {
     this.props.history.push({pathname: `/create-exam/${this.state.assessmentId}`})
   }
+
+  deleteExam(id) {
+    const path = `v1/assessments/${this.state.assessmentId}/exams/${id}`
+
+    apiClient('delete', path).then(() =>{
+      this.getAssessments()
+    })
+  }
   
   render() {
     return (
@@ -51,7 +60,8 @@ export default class Index extends Component {
               <div className="col-sm-10 col-sm-10-custom right-block">
                 <Content
                   exams={this.state.exams}
-                  addExam={this.addExam}/>
+                  addExam={this.addExam}
+                  delete={this.deleteExam}/>
               </div>
             </div>
           </div>
