@@ -341,4 +341,3 @@ export function subjects(params = {}, options = {}){
         })
     })
 }
-
