@@ -19,6 +19,7 @@ import NoQuestions from '../views/beri-nilai/no-questions/no-questions'
 import Questions from '../views/beri-nilai/no-questions/questions'
 import NotFound from '../views/global/not-found'
 import NewScore from './../views/beri-nilai/new'
+import EditQuestion from '../views/create-exam/create-question'
 
 export const MainRoutes = [
     {
@@ -98,6 +99,10 @@ export const MainRoutes = [
     {
         path: '/question/:id',
         component: Question
+    },
+    {
+        path: '/edit/:id/exam/:id',
+        component: EditQuestion
     },
     {
         path: '/questions/:id',

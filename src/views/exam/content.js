@@ -4,7 +4,6 @@ import { NotAvailable } from '../../views/global/notAvailable'
 
 const content = (props) => {
   const exams = props.exams
-
   return (
     <div className="margin-top-6 margin-left-3 margin-right-6">
       <div className="row align-items-center">
@@ -21,7 +20,7 @@ const content = (props) => {
       <div className="exam__wrapper-panel">
         {
           exams.entries.length ?
-            <Exams exams={props.exams} page={props.page} delete={props.delete}/>
+            <Exams exams={props.exams} page={props.page} delete={props.delete} edit={props.edit}/>
           :
             <NotAvailable>Tugas belum tersedia</NotAvailable>
         }

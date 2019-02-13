@@ -39,7 +39,7 @@ export default class question extends Component {
       is_correct_ans: 0,
       question_count: 0,
       isError: false,
-
+      errorMessage: ''
     }
 
     this.numbers = this.numbers.bind(this)
@@ -237,6 +237,22 @@ export default class question extends Component {
     if(this.state.activeNumber !== null) {
       params['number'] = this.state.activeNumber
     }
+
+    if (data.exam_question.weight > 100) {
+      this.setState({
+        isError: true,
+        errorMessage: 'Bobot nilai tidak boleh lebih dari 100'
+      })
+      return false
+    }
+    else if (isNaN(data.exam_question.weight)) {
+      this.setState({
+        isError: true,
+        errorMessage: 'Bobot nilai harus berupa angka'
+      })
+      return false
+    }
+
     apiClient('post', path, data, params).then((response) => {
 
     if (this.state.data.exam.question_count > 1) {
@@ -248,7 +264,8 @@ export default class question extends Component {
     }
     }).catch(error => {
       this.setState({
-        isError: true
+        isError: true,
+        errorMessage: 'Gagal menyimpan soal, silahkan cek kembali data yang dibutuhkan'
       })
   })  
   }
@@ -262,7 +279,7 @@ export default class question extends Component {
     }
   }
 
-  confirmAlert() {
+  confirmAlert(text) {
     confirmAlert({
       customUI: ({ onClose, onConfirm, id}) => {
           return (
@@ -291,6 +308,7 @@ export default class question extends Component {
   }
 
   render() {
+    console.log(this.state.data)
     let choices = []
     if (this.state.form.problem_type === 'multiple_choice') {
       if(this.state.form.exam_question_choices_attributes.length > 0){
@@ -306,11 +324,11 @@ export default class question extends Component {
     
     let error = []
     if(this.state.isError){
-      error.push(<ErrorModal key={Math.random()} status="error" message="Gagal menyimpan soal, silahkan cek kembali data yang dibutuhkan" />)
+      error.push(<ErrorModal key={Math.random()} status="error" message={this.state.errorMessage} />)
       this.setState({
           isError: false,
       })
-  }
+    }
     return (
       <div className="padding-content create-exam question-wrapper">
         <Header />
@@ -334,7 +352,7 @@ export default class question extends Component {
                 placeholder='Pilih Kompetensi Dasar' />
               <label className="create-exam__label">Bobot Nilai</label>
               <input type="text" className="form-control create-exam__input create-exam__input-amount" onChange={(event) => this.onChange(event, 'weight')} value={this.state.form.weight} placeholder="Masukkan Bobot Nilai" />
-              <div className="create-exam__line" />
+              <div className="create-exam__separate" />
               <label className="create-exam__label">Tipe Soal</label>
               <Select
                 className="create-exam__input"

@@ -7,7 +7,6 @@ import '../../styles/exam.scss'
 import { apiClient } from "../../utils/apiClient"
 import { confirmAlert } from 'react-confirm-alert'
 
-
 export default class Index extends Component {
   constructor(props) {
     super(props)
@@ -25,6 +24,7 @@ export default class Index extends Component {
     this.onChangePage = this.onChangePage.bind(this)
     this.deleteExam = this.deleteExam.bind(this)
     this.delete = this.delete.bind(this)
+    this.toEdit = this.toEdit.bind(this)
   }
 
   componentDidMount() {
@@ -38,6 +38,12 @@ export default class Index extends Component {
         state: {assessment:assessment, exam:exam, class:classes}
      })
     },this)
+  }
+
+  toEdit(id) {
+    this.props.history.push({
+      pathname:`/edit/${this.state.assessmentId}/exam/${id}`
+   })
   }
 
   getAssessments() {
@@ -107,6 +113,7 @@ export default class Index extends Component {
                   page={this.onChangePage}
                   assessmentId={this.state.assessmentId}
                   delete={this.delete}
+                  edit={this.toEdit}
                 />
               </div>
             </div>
