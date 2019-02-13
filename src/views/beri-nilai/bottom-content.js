@@ -20,11 +20,15 @@ class BottomContent extends Component {
     super(props)
 
     this.state = {
-      data: [{}],
+      data: [],
+      dataChildSubject:[],
+      dataChildCompentency:[],
+      key:'',
       height: '',
       collapce: '',
       border: 'border-bottom',
       hidden: true,
+      element:'hidden',
       token: localStorage.getItem('token')
     }
     this.onClickToogle = this.onClickToogle.bind(this)
@@ -40,31 +44,35 @@ class BottomContent extends Component {
     })
   }
 
-  handleClick() {
+  handleClick(e,id, idx) {
+    let subject= []
+    let competency = []
     let hidden = true;
-    let border = 'line-separator'
+    let  dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
+    let filtering = dataArray.filter(item => item.user.id === id)
+    console.log('data', filtering)
+    filtering.map((x)=>{
+        console.log(x," x data")
+        subject = x.scores.subject_averages
+        competency = x.scores.competency_averages
+    })
     if (this.state.hidden === true) {
       hidden = false;
-      border = 'border-bottom';
     } else {
       hidden = true;
-      border = 'line-separator'
     }
+ 
+       
     this.setState({
-      hidden: hidden,
-      // border: border
+      hidden: hidden[1],
+      key:1,
+      dataChildSubject:subject,
+      dataChildCompentency:competency
     })
-    // console.log("here class", this.state.class + idx);
-    // let classes = ''
-    // if (this.state.class === 'td-hidden') {
-    //   classes = ""
-    // } else {
-    //   classes = "td-hidden"
-    // }
-    // this.setState({ class: classes })
+  
   }
 
-  handleNewScore(e, student) {
+  handleNewScore(e, student,) {
     e.preventDefault()
     console.log("here go")
     this.props.handleNewScoreParent(e, student)
@@ -82,8 +90,7 @@ class BottomContent extends Component {
         </div>
       )
     }
-    // const { hidden } = this.state;
-    console.log(this.state.hidden, "my hidden")
+
     const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     return (
       <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-bottom-2">
@@ -113,8 +120,8 @@ class BottomContent extends Component {
           <div className="content-student">
             {
               dataArray && dataArray.map(function (data, index) {
-                console.log(data,"my")
-                return     <div className="box-student margin-top-3 " key={Math.random()} >
+                console.log(data, "my")
+                return <div className="box-student margin-top-3 " key={Math.random()} >
                   <div className={classnames('border-full border-right border-left-col-red', this.state.border)}>
                     <div className="row">
                       <div className="col-sm-12 ">
@@ -129,35 +136,52 @@ class BottomContent extends Component {
                           <span className=" label-nilai ">N/A</span>
                         </div>
                         <div className="col-sm-2 align-left padding-2 ">
-                          <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) =>{this.props.handleNewScoreParent(e,data.user.id)}} />
+                          <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.handleNewScoreParent(e, data.user.id, index) }} />
                         </div>
                         <div className="col-sm-1 align-left padding-2 ">
-                          <i className="fa fas fa-ellipsis-h icon-table-pencil cred" onClick={(e) => { this.handleClick(e) }} ></i>
+                          <i className="fa fas fa-ellipsis-h icon-table-pencil cred" onClick={(e) => { this.handleClick(e, data.user.id) }} ></i>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="border-right border-bottom border-left-col-red" hidden={this.state.hidden}   >
+                  <div className="border-right border-bottom border-left-col-red" key={this.state.key}  hidden={this.state.hidden}  >
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="margin-side-10 padding-bottom-3 margin-top-5">
-                          <div className="second-head padding-1 ">
-                            <div className="row">
-                              <div className="col-sm-12">
-                                <div className="col-sm-4">
-                                    Bahasa Inggris
-                                </div>
-                                <div className="col-sm-4">
-                              asad
-                                </div>
-                                <div className="col-sm-4 align-center">
-                                  80
+                          {
+                            this.state.dataChildSubject.map((data) => {
+                              return <div className="second-head padding-1 " key={Math.random()}>
+                                <div className="row">
+                                  <div className="col-sm-12">
+                                    <div className="col-sm-4">
+                                      {data.school_subject.alias_name}
+                                    </div>
+                                    <div className="col-sm-4">
+                                    </div>
+                                    <div className="col-sm-4 align-center">
+                                      {data.score}
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-
-                            </div>
-                          </div>
-
+                            })
+                          }
+                          {
+                            this.state.dataChildCompentency.map((data) => {
+                              return <div className="padding-1" key={Math.random()}>
+                                <div className="row">
+                                  <div className="col-sm-12">
+                                    <div className="col-sm-8">
+                                      {data.basic_comp.competency_number+' '+data.basic_comp.content}
+                                    </div>
+                                    <div className="col-sm-4 align-center">
+                                      {data.score}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            })
+                          }
                         </div>
                       </div>
                     </div>
@@ -166,7 +190,7 @@ class BottomContent extends Component {
               }, this)
             }
             {/* start here */}
-        
+
           </div>
         </div>
       </div>
@@ -183,6 +207,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({ getParticipant }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(BottomContent);
-
-
 

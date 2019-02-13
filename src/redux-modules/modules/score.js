@@ -83,6 +83,7 @@ export function getParticipantsResult(){
 }
 
 export function set(payload) {
+    console.log(payload,"here payload")
     return {
         type: SET,
         payload

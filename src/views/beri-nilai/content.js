@@ -123,7 +123,8 @@ export default class Content extends Component {
                                                             {x.problem_type === 'essay' ? this.generateEssay(x.exam_question_choices) : this.generateSelect(x.exam_question_choices, i)}
                                                         </td>
                                                         <td className="align-center">
-                                                            {x.problem_type === 'essay' ? <input
+                                                            {
+                                                                x.problem_type === 'essay' ? <input
                                                                 type="text"
                                                                 className="right-content-score__skor"
                                                                 value={this.props.essay.score}
