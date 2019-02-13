@@ -2,14 +2,19 @@ import React, { Component } from 'react'
 import Header from './../../global/header'
 import './../../../styles/global/component.css'
 import './../../../styles/beri-nilai/main.scss'
-import { FormQuestion } from './helper'
 import { apiClient } from './../../../utils/apiClient'
+import { setError } from './../../../utils/common'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 export default class Questions extends Component {
     constructor(props) {
         super(props)
 
         this.state = ({
+            assessment_id: props.match.params.assessment_id,
+            exam_id: props.match.params.exam_id,
+            student_id: props.match.params.student_id,
             alias: '',
             examScore: {},
             exam_scores: [],
@@ -17,6 +22,9 @@ export default class Questions extends Component {
             dataPost: [],
             idSubject: '',
             fullname: this.props.location.fullname,
+            assessment_id: props.match.params.assessment_id,
+            exam_id: props.match.params.exam_id,
+            class_id: props.match.params.class_id,
             nilai: ''
         })
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,10 +33,7 @@ export default class Questions extends Component {
         this.getDataScores()
     }
     getDataScores() {
-        let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
-        let exam_id = '782a183b-a976-4e9f-b025-8cf46a45b646'
-        let exam_scores_id = 'ac67857a-ad71-4a97-9718-c71c47e2e4bc'
-        const url = `v1/assessments/${assessment_id}/exams/${exam_id}/exam_scores/${exam_scores_id}`
+        const url = `v1/assessments/${this.props.location.state.assessment}/exams/${this.props.location.state.exam}/exam_scores/${this.props.location.state.student}`
 
         apiClient('get', url).then(res => {
             res.data.data.collections.map((value) => {
@@ -46,10 +51,7 @@ export default class Questions extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
-        let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
-        let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
-        let exam_scores_id = '0eea9548-6397-4303-b980-e4b2bf34cc4a'
-        const url = `v1/assessments/${assessment_id}/exams/${exam_id}/exam_scores/${exam_scores_id}/bulk_fill_exam_scores`
+        const url = `v1/assessments/${this.props.location.state.assessment}/exams/${this.props.location.state.exam}/exam_scores/${this.props.location.state.student}/bulk_fill_exam_scores`
         const data = {
             exam_scores: [
                 {
@@ -61,9 +63,49 @@ export default class Questions extends Component {
         }
 
         apiClient('post', url, data).then(res => {
+            console.log('data', res.data.data.result)
+            event.preventDefault();
+
+            confirmAlert({
+                customUI: ({ onClose, onConfirm }) => {
+                    return (
+                        <div className="react-confirm-alert modal-alert">
+                            <div className="react-confirm-alert-body">
+                                <div className="header align-center">
+                                    <h1>Pastikan anda sudah mengisi nilai siswa ini </h1>
+                                </div>
+                                <div className="react-confirm-alert-button-group toggle">
+                                    <div className="align-center fullwidth">
+                                        <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
+                                        <a href="javascript:void(0);" className="btn green" onClick={() => { this.onConfirm(); onClose(); }}>Yakin</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+            })
         })
+            .catch(err => {
+                let response = err.response
+                let data = response.data
+                if (this.state.nilai === '') {
+                    this.setState({
+                        errors: setError(data),
+                    })
+                } else {
+                    this.onShowAlert(data)
+                }
+            })
+    }
+    onConfirm() {
+        event.preventDefault();
+        if(this.state.dataScores.length>0){
+            this.props.history.push(`/beri-nilai/${this.state.assessment_id}/exam/${this.state.exam_id}/class/${this.state.class_id}/flag/false`)
+        }
     }
     render() {
+        console.log(this.props.match.params.assessment_id,)
         let data = []
         if (this.state.dataScores.length > 0) {
             let scores = this.state.dataScores

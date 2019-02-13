@@ -21,15 +21,15 @@ class BottomContent extends Component {
 
     this.state = {
       data: [],
-      dataChildSubject:[],
-      dataChildCompentency:[],
-      key:'',
+      dataChildSubject: [],
+      dataChildCompentency: [],
+      key: '',
       selectIndex: -1,
       height: '',
       collapce: '',
       border: 'border-bottom',
       hidden: true,
-      element:'hidden',
+      element: 'hidden',
       token: localStorage.getItem('token')
     }
     this.onClickToogle = this.onClickToogle.bind(this)
@@ -45,35 +45,34 @@ class BottomContent extends Component {
     })
   }
 
-  handleClick(e,id, idx) {
-    let subject= []
+  handleClick(e, id, idx) {
+    let subject = []
     let competency = []
     let hidden = true;
-    let  dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
+    let dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     let filtering = dataArray.filter(item => item.user.id === id)
-    filtering.map((x)=>{
-        subject = x.scores.subject_averages
-        competency = x.scores.competency_averages
+    filtering.map((x) => {
+      subject = x.scores.subject_averages
+      competency = x.scores.competency_averages
     })
     if (this.state.hidden === true) {
       hidden = false;
     } else {
       hidden = true;
     }
- 
-    console.log(this.state.selectedQuestion,idx,"here 2")
-       
+
+
     this.setState({
       hidden: hidden[1],
-      key:1,
-      dataChildSubject:subject,
-      selectIndex: (this.state.selectIndex === idx ? -1: idx ),
-      dataChildCompentency:competency
+      key: 1,
+      dataChildSubject: subject,
+      selectIndex: (this.state.selectIndex === idx ? -1 : idx),
+      dataChildCompentency: competency
     })
-  
+
   }
 
-  handleNewScore(e, student,) {
+  handleNewScore(e, student, ) {
     e.preventDefault()
     this.props.handleNewScoreParent(e, student)
   }
@@ -109,7 +108,6 @@ class BottomContent extends Component {
           <div className="content-student">
             {
               dataArray && dataArray.map(function (data, index) {
-                console.log(data, "my")
                 return <div className="box-student margin-top-3 " key={Math.random()} >
                   <div className={classnames('border-full border-right border-left-col-red', this.state.border)}>
                     <div className="row">
@@ -133,7 +131,7 @@ class BottomContent extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className={classnames("border-right border-bottom border-left-col-red",`${this.state.selectIndex === index ? 'display-block' : 'display-none'}`)} key={this.state.key}    >
+                  <div className={classnames("border-right border-bottom border-left-col-red", `${this.state.selectIndex === index ? 'display-block' : 'display-none'}`)} key={this.state.key}    >
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="margin-side-10 padding-bottom-3 margin-top-5">
@@ -161,7 +159,7 @@ class BottomContent extends Component {
                                 <div className="row">
                                   <div className="col-sm-12">
                                     <div className="col-sm-8">
-                                      {data.basic_comp.competency_number+' '+data.basic_comp.content}
+                                      {data.basic_comp.competency_number + ' ' + data.basic_comp.content}
                                     </div>
                                     <div className="col-sm-4 align-center">
                                       {data.score}

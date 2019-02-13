@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Exams from './exams'
 
 const content = (props) => {
@@ -16,7 +16,10 @@ const content = (props) => {
         </div>
       </div>
       <div className="exam__wrapper-panel">
-        <Exams exams={props.exams} page={props.page}/>
+        <Exams
+          exams={props.exams}
+          page={props.page}
+        />
       </div>
     </div>
   )

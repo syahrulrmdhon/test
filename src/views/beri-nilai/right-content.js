@@ -8,7 +8,6 @@ import Select from './select';
 export class RightComponent extends Component {
 
   render() {
-    console.log(this.props.participant_not_passed,"here")
     return (
       <div className="right-content-kkm">
         <div className="margin-top-3 ">

@@ -18,23 +18,29 @@ export default class NoQuestions extends Component {
             dataNotPassed: [],
             users: {},
             scores: {},
+            score: [],
+            exam: {},
+            participant_passed: {},
+            participant_not_passed: [],
             data: [],
-            totalAverages: [],
             selectIndex: -1,
             hidden: true,
             key: '',
             dataChildSubject: [],
             dataChildCompentency: [],
+            assessment_id: props.match.params.assessment_id,
             exam_id: props.match.params.exam_id,
             class_id: props.match.params.class_id,
-            assessment_id: props.match.params.assessment_id,
+            score_id: ''
         }
 
         this.handleClickQuestion = this.handleClickQuestion.bind(this)
+        this.handleNewScore = this.handleNewScore.bind(this)
+        this.onChangePage = this.onChangePage.bind(this)
     }
     componentDidMount() {
         this.getDataResults()
-        this.getData()
+        this.fetchData()
     }
     handleClickQuestion(e, id, name) {
         e.preventDefault()
@@ -42,42 +48,19 @@ export default class NoQuestions extends Component {
             pathname: /questions/ + id, state: { fullname: name }
         })
     }
-    handleClick(e, id, idx) {
-        e.preventDefault()
-        let subject = []
-        let competency = []
-        let hidden = true
-        this.state.data.participants.map((value, i) => {
-            this.setState({
-                users: value.user,
-                scores: value.scores
-            })
+    handleNewScore(e, student) {
+        this.props.history.push({
+            pathname: '/questions/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
+            state: { data:this.state.score, assesment_id: this.state.assesment_id, exam_id: this.state.exam_id, class_id: this.state.class_id, student_id: student}
         })
-        let dataArray = this.state.users && this.state.scores && this.state.data
-        let filtering = dataArray.filter(item => item.users.id === id)
-        filtering.map((x) => {
-            subject = x.scores.subject_averages
-            competency = x.scores.competency_averages
+    }
+    onChangePage(e, student) {
+        this.props.history.push({
+            pathname: '/questions/' + this.state.assessment_id + '/exams/' + this.state.exam_id + '/student/' + student,
+            state: { assessment: this.state.assessment_id, exam: this.state.exam_id, student: student}
         })
-        if (this.state.hidden === true) {
-            hidden = false;
-        } else {
-            hidden = true;
-        }
-
-        this.setState({
-            hidden: hidden[1],
-            key: 1,
-            dataChildSubject: subject,
-            selectIndex: (this.state.selectIndex === idx ? -1 : idx),
-            dataChildCompentency: competency
-        })
-
     }
     getDataResults() {
-        // let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
-        // let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
-        // let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
         const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/participant_results`
 
         apiClient('get', url).then(res => {
@@ -89,20 +72,24 @@ export default class NoQuestions extends Component {
             })
         })
     }
-    getData() {
-        // let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
-        // let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
-        // let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
-        const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/participants`
-
+    fetchData() {
+        let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/participant_results`
         apiClient('get', url).then(res => {
             this.setState({
-                data: res.data.data.participants
+                score: res.data.data.participants,
+                exam: res.data.data.exam,
+                participant_passed: res.data.data.participants.passed,
+                participant_not_passed: res.data.data.participants.not_passed,
             })
         })
+            .catch(err => {
+                let response = err.response
+                let data = response.data
+
+            })
+
     }
     render() {
-        console.log('router', this.props.match.params.class_id)
         const tabMenu = ['Perolehan Nilai'];
         return (
             <div className="details-nilai bg-grey">
@@ -134,10 +121,11 @@ export default class NoQuestions extends Component {
                                 <div className="col-sm-9">
                                     <div className="content-block-evaluasi main-block-evaluasi">
                                         <BottomContentNoQuestions
-                                            data={this.state.data}
-                                            handleClickQuestion={this.handleClickQuestion}
-                                            selectIndex={this.state.selectIndex}
-                                            handleClick={this.handleClick}
+                                            exam={this.state.exam_id}
+                                            class={this.state.class_id}
+                                            asssessment={this.state.assessment_id}
+                                            handleNewScoreParent={this.handleNewScore}
+                                            page={this.onChangePage}
                                         />
                                     </div>
                                 </div>

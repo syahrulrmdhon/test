@@ -6,11 +6,13 @@ import classnames from 'classnames'
 
 export class Parent extends Component {
     render() {
+        console.log('data', this.props.data)
         let users = this.props.users
         let scores = this.props.scores
         let data = this.props.data
         let selectIndex = this.props.selectIndex
         let idx = this.props.idx
+        let content = []
 
         return <div className="box-student margin-top-3 " key={Math.random()} >
             <div className={classnames('border-full border-right border-left-col-red')}>
@@ -25,9 +27,12 @@ export class Parent extends Component {
                         </div>
                         <div className="col-sm-3 align-center padding-2 ">
                             {
-                                scores.total_averages.map((x, i) => {
-                                    return <span key={i} className="label-nilai ">{x.score === null ? "N/A" : x.score}</span>
-                                })
+                                scores.total_averages.length > 0 ?
+                                    scores.total_averages.map((x, i) => {
+                                        return <span key={i} className="label-nilai ">{x.score === null ? "N/A" : x.score}</span>
+                                    })
+                                :
+                                <span className="label-nilai ">N/A</span>
                             }
                         </div>
                         <div className="col-sm-2 align-left padding-2 ">
@@ -53,6 +58,7 @@ export class Child extends Component {
         let content = []
         let scores = this.props.scores
         let subject_averages = scores.subject_averages
+        console.log('subject',scores.total_averages)
         let competency_averages = scores.competency_averages
         if (subject_averages.length > 0) {
             content.push(
@@ -61,12 +67,12 @@ export class Child extends Component {
                         <div className="row">
                             <div className="col-sm-12">
                                 <div className="col-sm-4">
-                                    {/* {x.school_subject.alias_name} */}
+                                    {x.school_subject.alias_name}
                                 </div>
                                 <div className="col-sm-4">
                                 </div>
                                 <div className="col-sm-4 align-center">
-                                    {/* {x.score} */}
+                                    {x.score}
                                 </div>
                             </div>
                         </div>
@@ -142,19 +148,22 @@ export class UserNotPassed extends Component {
             <div className='margin-top-4 padding-4'>
                 {
                     this.props.notPassed.map((x, i) => {
-                        return <div key={i} className='row'>
+                        return <div key={i}>
                             <div className='row'>
-                                <div className='padding-right-2 padding-left-4'>
-                                    <Avatar src={Ava} size="30" round={true} />
+                                <div className='row'>
+                                    <div className='padding-right-2 padding-left-4'>
+                                        <Avatar src={Ava} size="30" round={true} />
+                                    </div>
+                                    <div className='padding-right-6'>
+                                        <span className='disblock'>{x.user.full_name}</span>
+                                        <p className='view'>{x.user.email}</p>
+                                    </div>
                                 </div>
-                                <div className='padding-right-6'>
-                                    <span className='disblock'>{x.user.full_name}</span>
-                                    <p className='view'>{x.user.email}</p>
+                                <div className='float-right padding-left-6 large-text-red-bold text-center'>
+                                    {x.total_average.score === null ? '-' : x.total_average.score}
                                 </div>
                             </div>
-                            <div className='float-right padding-left-6 large-text-red-bold text-center'>
-                                {x.total_average.score === null ? 'N/A' : x.total_average.score}
-                            </div>
+                            <br />
                         </div>
                     })
                 }

@@ -19,7 +19,7 @@ export default class Nilai extends Component {
       score: [],
       activeMenu: 1,
       exam: {},
-      exam_id:props.match.params.exam_id,
+      exam_id: props.match.params.exam_id,
       class_id: props.match.params.class_id,
       assessment_id: props.match.params.assessment_id,
       participant_passed: {},
@@ -28,7 +28,7 @@ export default class Nilai extends Component {
       competencySubjects: [],
       questionResults: [],
       examChart: [],
-      collapce:''
+      collapce: ''
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.fetchData = this.fetchData.bind(this)
@@ -36,7 +36,6 @@ export default class Nilai extends Component {
     this.handleNewScore = this.handleNewScore.bind(this)
   }
   componentDidMount() {
-    console.log("here exam id", this.state.exam_id + '+' + this.state.class_id + '+' + this.state.assessment_id)
 
     this.getQuestionsResults()
     this.getQuestions()
@@ -54,7 +53,6 @@ export default class Nilai extends Component {
   fetchData() {
     let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/participant_results`
     apiClient('get', url).then(res => {
-      console.log(res.data.data.participants.score_ranges, 'here at')
       this.setState({
         score: res.data.data.participants,
         exam: res.data.data.exam,
@@ -70,10 +68,7 @@ export default class Nilai extends Component {
 
   }
   getQuestionsResults() {
-    let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
-    let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
-    let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
-    const url = `v1/assessments/${assessment_id}/exams/${exam_id}/exam_classes/${exam_classes_id}/question_results`
+    const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/question_results`
 
     apiClient('get', url).then(res => {
       this.setState({
@@ -83,10 +78,7 @@ export default class Nilai extends Component {
     })
   }
   getQuestions() {
-    let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
-    let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
-    let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
-    const url = `v1/assessments/${assessment_id}/exams/${exam_id}/exam_classes/${exam_classes_id}/questions`
+    const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/questions`
 
     apiClient('get', url).then(res => {
       this.setState({
@@ -97,8 +89,7 @@ export default class Nilai extends Component {
     })
   }
 
-
-  handleNewScore(e, student){
+  handleNewScore(e, student) {
     e.preventDefault()
     // let collapce = this.state.collapce
     // if(collapce === ''){
@@ -113,19 +104,13 @@ export default class Nilai extends Component {
     let data = 'ac67857a-ad71-4a97-9718-c71c47e2e4bc'
 
     this.props.history.push({
-        pathname:'/assessment/'+this.state.assessment_id+'/exam/'+this.state.exam_id+'/class/'+this.state.class_id+'/student/'+student,
-        state: {data:data}
+      pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
+      state: { data: data }
     })
-
-
-}
-
-
+  }
 
   render() {
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
-    console.log(this.state.score.score_ranges, "my score")
-
     return (
       <div className="details-nilai bg-grey">
         <Header navbar={false} />
@@ -156,11 +141,11 @@ export default class Nilai extends Component {
               <div className="row margin-top-4 padding-bottom-6 ">
                 <div className="col-sm-9">
                   <div className="content-block main-block">
-                    <BottomContent 
-                      exam = {this.state.exam_id}
-                      class = {this.state.class_id}
-                      asssessment = {this.state.assessment_id}
-                      handleNewScoreParent = {this.handleNewScore}
+                    <BottomContent
+                      exam={this.state.exam_id}
+                      class={this.state.class_id}
+                      asssessment={this.state.assessment_id}
+                      handleNewScoreParent={this.handleNewScore}
                     />
                   </div>
                 </div>
@@ -172,9 +157,6 @@ export default class Nilai extends Component {
                   </div>
                 </div>
               </div>
-
-
-
             </TabPane>
 
             <TabPane tabId={2}>
@@ -206,7 +188,6 @@ export default class Nilai extends Component {
                   </div>
                 </div>
               </div>
-
             </TabPane>
           </TabContent>
         </div>
