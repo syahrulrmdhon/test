@@ -61,7 +61,9 @@ export default class Index extends Component {
                 <Content
                   exams={this.state.exams}
                   addExam={this.addExam}
-                  delete={this.deleteExam}/>
+                  assessmentId={this.state.assessmentId}
+                  delete={this.deleteExam}
+                />
               </div>
             </div>
           </div>

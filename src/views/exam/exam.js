@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import CircularProgressbar from 'react-circular-progressbar';
+import { NavLink } from 'react-router-dom';
 
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -22,8 +23,10 @@ const exam = (props) => {
           <div className="exam__task-of">Tugas {props.order}</div>
           <div className="exam__title">{props.title}</div>
           <div className="exam__action-wrapper">
-            <div className="exam__action">Pilih Kelas</div>
-            {/* {
+            <NavLink to= {`/pariticipant-class/${props.exam.assessment_id}/assessment/${props.exam.id}/exam`} >
+              <div className="exam__action">Pilih Kelas</div>
+            </NavLink>
+            {
               props.question &&
               <div className="exam__action">Lihat Soal</div>
             } */}
@@ -50,7 +53,7 @@ const exam = (props) => {
             props.classes.length ?
               <div className="exam__class-wrapper">
                 {props.classes.map((item, index) => {
-                  return <div key={item.id} className="exam__class">{item.name}</div>
+                  return <NavLink to={`/assessment/${props.assessmentId}/exam/${props.exam.id}/class/${item.id}`} key={item.id}><div className="exam__class">{item.name}</div></NavLink>
                 })}
               </div>
               :

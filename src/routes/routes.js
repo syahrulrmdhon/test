@@ -13,6 +13,7 @@ import CreateExam from '../views/create-exam/Index'
 import DetailNilai from './../views/beri-nilai/beri-nilai'
 import Question from '../views/create-exam/create-question'
 import ParticipantClass from '../views/exam/participant_class/new'
+import ParticipantUser from '../views/exam/participant_class/user_new'
 import NotFound from '../views/global/not-found'
 
 export const MainRoutes = [
@@ -70,8 +71,12 @@ export const MainRoutes = [
         component:DetailNilai
     },
     {
-        path: '/pariticipant-class' ,
+        path: '/pariticipant-class/:assessment_id/assessment/:exam_id/exam' ,
         component:ParticipantClass
+    },
+    {
+        path: '/pariticipant-user/:assessment_id/assessment/:exam_id/exam',
+        component: ParticipantUser,
     },
     {
         path: '/question/:id',
