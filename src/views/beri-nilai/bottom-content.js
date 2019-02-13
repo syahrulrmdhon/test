@@ -24,6 +24,7 @@ class BottomContent extends Component {
       dataChildSubject:[],
       dataChildCompentency:[],
       key:'',
+      selectIndex: -1,
       height: '',
       collapce: '',
       border: 'border-bottom',
@@ -50,9 +51,7 @@ class BottomContent extends Component {
     let hidden = true;
     let  dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     let filtering = dataArray.filter(item => item.user.id === id)
-    console.log('data', filtering)
     filtering.map((x)=>{
-        console.log(x," x data")
         subject = x.scores.subject_averages
         competency = x.scores.competency_averages
     })
@@ -62,11 +61,13 @@ class BottomContent extends Component {
       hidden = true;
     }
  
+    console.log(this.state.selectedQuestion,idx,"here 2")
        
     this.setState({
       hidden: hidden[1],
       key:1,
       dataChildSubject:subject,
+      selectIndex: (this.state.selectIndex === idx ? -1: idx ),
       dataChildCompentency:competency
     })
   
@@ -90,7 +91,7 @@ class BottomContent extends Component {
         </div>
       )
     }
-
+    console.log(this.state.selectIndex,"my index")
     const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     return (
       <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-bottom-2">
@@ -136,15 +137,15 @@ class BottomContent extends Component {
                           <span className=" label-nilai ">N/A</span>
                         </div>
                         <div className="col-sm-2 align-left padding-2 ">
-                          <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.handleNewScoreParent(e, data.user.id, index) }} />
+                          <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.handleNewScoreParent(e, data.user.id) }} />
                         </div>
                         <div className="col-sm-1 align-left padding-2 ">
-                          <i className="fa fas fa-ellipsis-h icon-table-pencil cred" onClick={(e) => { this.handleClick(e, data.user.id) }} ></i>
+                          <i className="fa fas fa-ellipsis-h icon-table-pencil cred" onClick={(e) => { this.handleClick(e, data.user.id, index) }} ></i>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="border-right border-bottom border-left-col-red" key={this.state.key}  hidden={this.state.hidden}  >
+                  <div className={classnames("border-right border-bottom border-left-col-red",`${this.state.selectIndex === index ? 'display-block' : 'display-none'}`)} key={this.state.key}    >
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="margin-side-10 padding-bottom-3 margin-top-5">
