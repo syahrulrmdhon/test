@@ -131,7 +131,7 @@ export default class Content extends Component {
     }
     render() {
         const { form } = this.props
-
+        console.log(form, "data form")
 
         let body = []
         body.push(
@@ -167,6 +167,7 @@ export default class Content extends Component {
                                                         {
                                                             x.exam_question_choices.map((cx, i) => {
                                                                 if (cx.is_correct_ans === true && x.problem_type === "multiple_choice") {
+                                                                    console.log(cx.symbol,"symbol")
                                                                     return <SelectData choice={this.props.choice} data={x} key={i} is_correct={cx.symbol} />
                                                                 }
                                                             })
