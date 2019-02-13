@@ -19,7 +19,7 @@ export default class Content extends Component {
   render() {
 
     return (
-      <div className="right-content col-10 padding-left-6 padding-right-6 padding-top-6">
+      <div className="right-content col-10 padding-left-6 padding-right-6 padding-top-6 h-auto">
           {this.props.children}
       </div>
     )
