@@ -6,11 +6,45 @@ const LOAD = 'modules/score/LOAD';
 const LOAD_SUCCESS = 'modules/score/LOAD_SUCCESS';
 const LOAD_FAIL = 'modules/score/LOAD_FAIL';
 const LOGOUT = 'modules/score/LOGOUT';
+const LOAD_SCORE = 'modules/score/LOAD_SCORE';
+const HANDLE_QUESTION = 'modules/score/HANDLE_QUESTION';
 
 const initialState = null;
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case HANDLE_QUESTION:
+            state.data['exam_scores'][action.index] = {
+                score_type: 'subject_average',
+                related_id: action.related_id,
+                score: action.value,
+            }
+            console.log(state)
+            return {
+                ...state,
+                loaded: true,
+                loading: false,
+                result: true,
+            }
+        case LOAD_SCORE:
+            delete state.error;
+            if (state.result !== action.result) {
+                if(action.result.data.collections){
+                    action.result.data['exam_scores'] = []
+                    action.result.data.collections.map((collection) => {
+                        action.result.data['exam_scores'].push({})
+                    })
+                }
+
+                return {
+                    ...state,
+                    loaded: true,
+                    loading: false,
+                    result: true,
+                    ...action.result
+                }
+            }
+        break;
         case LOAD:
             return {
                 ...state,
@@ -48,8 +82,44 @@ export default function reducer(state = initialState, action) {
     }
 }
 
+export function setScoreNoQuestion(event, index, related_id){
+    return{
+        type: HANDLE_QUESTION,
+        value: event.target.value,
+        index: index,
+        related_id: related_id,
+    }
+}
+
+export function getDataScores(assessment_id, exam_id,exam_scores_id){
+    const url = `v1/assessments/${assessment_id}/exams/${exam_id}/exam_scores/${exam_scores_id}`
+    const token = localStorage.getItem('token')
+    const schoolId = localStorage.getItem("school_id")
+    
+    return {
+        types: [LOAD, LOAD_SCORE, LOAD_FAIL],
+        promise: client => client.get(process.env.API_URL + url, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer ' + token,
+                'School-ID': schoolId
+
+            }
+        })
+    }
+    apiClient('get', url).then(res => {
+        res.data.data.collections.map((value) => {
+            this.setState({
+                dataScores: res.data.data.collections,
+                idSubject: value.id
+            })
+        })
+
+    })
+
+}
+
 export function getParticipant(exam, classess, assess) {
-    console.log(exam, classess, assess,"here set data")
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
     return {
@@ -59,13 +129,14 @@ export function getParticipant(exam, classess, assess) {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'Bearer ' + token,
                 'School-ID': schoolId
-
-            }
+           }
         })
     }
 }
 
-export function set(payload) {
+
+
+export function setSavedata(payload) {
     console.log(payload,"here payload")
     return {
         type: SET,
