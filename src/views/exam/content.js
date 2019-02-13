@@ -16,11 +16,7 @@ const content = (props) => {
         </div>
       </div>
       <div className="exam__wrapper-panel">
-      <Exams 
-        exams={props.exams}
-        assessmentId={props.assessmentId}
-        delete={props.delete}
-      />
+        <Exams exams={props.exams} page={props.page}/>
       </div>
     </div>
   )

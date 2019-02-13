@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Header from '../global/header'
-import Numbers from './numbers'
 import TabNumber from '../../components/TabContent/TabContent'
 import Select from 'react-select'
 import { questionTypes } from '../../utils/common'
@@ -8,10 +7,7 @@ import { apiClient } from '../../utils/apiClient'
 import { getQuestion } from '../../utils/exam'
 import { confirmAlert } from 'react-confirm-alert'
 var FontAwesome = require('react-fontawesome')
-
 import 'react-confirm-alert/src/react-confirm-alert.css'
-
-
 import Choices from "./choices"
 
 export default class question extends Component {
@@ -19,6 +15,7 @@ export default class question extends Component {
     super(props)
     this.state= {
       assessmentId: props.match.params.id,
+      examId: '',
       activeNumber: 1,
       filled: [],
       step: 'QuestionForm',
@@ -101,12 +98,13 @@ export default class question extends Component {
   }
 
   toggle(number) {
-    const data = this.state.data.exam.exam_questions_attributes[number - 1]
+    getQuestion.call(this, this.state.assessmentId, this.state.number)
     
     if (this.state.activeNumber !== number) {
       this.setState({
         activeNumber: number,
       })
+      console.log(this.state.data)
     }
   
       this.setForm(number)
@@ -225,6 +223,8 @@ export default class question extends Component {
     else if (this.state.data.exam.question_count == 1) {
       let path = `v1/assessments/${this.state.assessmentId}/exams`
       apiClient('post', path, this.state.data).then(response => {
+        const examId = response.data.data.exam.id
+        this.setState({examId: examId})
         this.confirmAlert()
       })
     }
@@ -232,15 +232,17 @@ export default class question extends Component {
   }
 
   redirect(to) {
-    console.log(to)
     if (to === 'back') {
       this.props.history.push({pathname: `/exam/${this.state.assessmentId}`})
+    }
+    else if (to === 'next') {
+      this.props.history.push({pathname: `/pariticipant-class/9${this.state.assessmentId}/assessment/${this.state.examId}/exam`})
     }
   }
 
   confirmAlert() {
     confirmAlert({
-      customUI: ({ onClose, onConfirm }) => {
+      customUI: ({ onClose, onConfirm, id}) => {
           return (
             <div className="create-exam">
               <div className="react-confirm-alert modal-alert ">
@@ -255,7 +257,7 @@ export default class question extends Component {
                       <div className="react-confirm-alert-button-group toggle">
                           <div className="align-center fullwidth">
                               <a href="javascript:void(0);" onClick={() => {this.redirect('back'); onClose(); }} className="btn default">Tidak</a>
-                              <a href="javascript:void(0);" className="btn green">Ya</a>
+                              <a href="javascript:void(0);" className="btn green" onClick={() => {this.redirect('next'); onClose(); }}>Ya</a>
                           </div>
                       </div>
                   </div>

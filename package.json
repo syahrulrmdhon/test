@@ -13,6 +13,7 @@
     "bootstrap": "^4.1.3",
     "font-awesome": "^4.7.0",
     "formik": "^1.4.2",
+    "fs": "^0.0.1-security",
     "highcharts": "^7.0.2",
     "highcharts-react-official": "^2.0.0",
     "jquery": "^3.3.1",

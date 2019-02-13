@@ -1,3 +1,5 @@
+import { classes } from "../../utils/common";
+
 const SET = 'modules/score/SET';
 const RESET = 'modules/score/RESET';
 const LOAD = 'modules/score/LOAD';
@@ -46,12 +48,13 @@ export default function reducer(state = initialState, action) {
     }
 }
 
-export function getParticipant() {
+export function getParticipant(exam, classess, assess) {
+    console.log(exam, classess, assess,"here set data")
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + `/v1/assessments/6ae41268-d737-4a87-bb54-1a9cfd1d69f8/exams/b4aa7bda-f96d-4665-8dc3-fe263ed670ed/exam_classes/1a5e496b-ffc4-445f-93b4-ef324e80e31c/participants`, {
+        promise: client => client.get(process.env.API_URL + `/v1/assessments/${assess}/exams/${exam}/exam_classes/${classess}/participants`, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'Bearer ' + token,
@@ -63,6 +66,7 @@ export function getParticipant() {
 }
 
 export function set(payload) {
+    console.log(payload,"here payload")
     return {
         type: SET,
         payload

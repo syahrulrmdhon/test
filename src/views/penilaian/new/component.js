@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-var FontAwesome = require('react-fontawesome')
 import Subject from './component/subject'
 import { subjects, basicComps, setErrorRuby } from './../../../utils/common'
 import { connect } from 'react-redux'
 import { apiClient } from '../../../utils/apiClient';
+var FontAwesome = require('react-fontawesome')
 
 class Componentt extends Component {
     constructor(props){

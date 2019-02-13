@@ -27,8 +27,8 @@ dev_deployment:
     - npm install
     - npm run build_dev
     - tar -cvf gredu_teacher_bundle.tar build/*
-    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@$DEV_HOST:~/_automaton/dev/landing
-    - ssh -t ubuntu@$DEV_HOST 'bash -i -c "~/_automaton/dev/dev_automaton.sh"'
+    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@$HOST_DEV:~/_automaton/dev/landing
+    - ssh -t ubuntu@$HOST_DEV 'bash -i -c "~/_automaton/dev/dev_automaton.sh"'
   tags:
     - docker-ffa
   only:
@@ -42,8 +42,8 @@ qa_deployment:
     - npm install
     - npm run build_qa
     - tar -cvf gredu_teacher_bundle.tar build/*
-    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@$DEV_HOST:~/_automaton/qa/landing
-    - ssh -t ubuntu@$DEV_HOST 'bash -i -c "~/_automaton/qa/qa_automaton.sh"'
+    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@$HOST_DEV:~/_automaton/qa/landing
+    - ssh -t ubuntu@$HOST_DEV 'bash -i -c "~/_automaton/qa/qa_automaton.sh"'
   tags:
     - docker-ffa
   only:
@@ -55,8 +55,8 @@ uat_deployment:
     - npm install
     - npm run build_uat
     - tar -cvf gredu_teacher_bundle.tar build/*
-    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@$DEV_HOST:~/_automaton/uat/landing
-    - ssh -t ubuntu@$DEV_HOST 'bash -i -c "~/_automaton/uat/uat_automaton.sh"'
+    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@$HOST_DEV:~/_automaton/uat/landing
+    - ssh -t ubuntu@$HOST_DEV 'bash -i -c "~/_automaton/uat/uat_automaton.sh"'
   tags:
     - docker-ffa
   only:
@@ -67,9 +67,9 @@ prod_deployment:
   script:
     - npm install
     - npm run build_prod
-    - tar -cvf gredu_teacher_bundle.tar build/*
-    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@1.2.3.4:~/_automaton/landing
-    - ssh -t ubuntu@1.2.3.4 'bash -i -c "~/_automaton/_automaton.sh"'
+    - tar -czvf gredu_teacher_bundle.tar build/*
+    - scp -v "$CI_PROJECT_DIR/gredu_teacher_bundle.tar" ubuntu@$HOST_PROD_001:~/_automaton/landing
+    - ssh -t ubuntu@$HOST_PROD_001 'bash -i -c "~/_automaton/_automaton.sh"'
   tags:
     - docker-ffa
   only:

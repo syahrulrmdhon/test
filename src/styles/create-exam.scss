@@ -159,11 +159,18 @@ $nunito_bold: 'NunitoBold';
       background-color: #ffffff;
       padding-left: 0px;
       padding-right: 0px;
+      border-radius: unset;
+
+      &.active {
+        background-color: #1a9d7f;
+        color: #ffffff;
+      }
     }
     .nav__tab {
       &-content {
         width: 35px;
-        border: 1px solid #cccccc;
+        border: 1px solid #f6f6f6;
+
       }
     }
     

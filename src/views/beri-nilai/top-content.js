@@ -1,32 +1,20 @@
 import React, { Component } from 'react'
-import { TabContent, TabPane, Form, FormGroup, Label, Input } from 'reactstrap'
-// import DatePicker from 'react-datepicker'
-
-// import AbsenceTable from './AbsenceTable'
-// import Homeroom from './Homeroom'
-// import LeftSide from '../LeftSide/LeftSide'
-// import Profile from './ProfileDetail'
-// import RightSide from '../RightSide/RightSide'
-// import ScoreTable from './ScoreTable'
-// import Tab from '../TabContent/TabContent'
-// import { apiClient } from '../../utils/apiClient'
-// import './../../styles/beri-nilai/main.scss';
-// import Highcharts from 'highcharts'
-// import HighchartsReact from 'highcharts-react-official'
 import SingleBarChat from './../../components/chart/index';
 import './../../styles/beri-nilai/card.scss';
-import Card from './card'
+import Card from './card';
+import { getParticipantsResult } from './../../redux-modules/modules/score'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 
 
 
-export default class Content extends Component {
+class Content extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {
-
-        }
+      
     }
+
 
     render() {
 
@@ -39,20 +27,32 @@ export default class Content extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="content-chart">
-                            <SingleBarChat />
+                        <div className="content-chart  margin-left-5">
+                            <SingleBarChat 
+                                chart={this.props.chart}
+                            />
                         </div>
 
                     </div>
                 </div>
                 <div className="col-sm-3" >
                     <div className="box-postition">
-                        <Card>
+                        <Card
+                            participant_passed={this.props.participant_passed}
+                            participant_not_passed={this.props.participant_not_passed}
+                        />
 
-                        </Card>
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+
+  export default Content;
+  
+  
+  
+  
+  

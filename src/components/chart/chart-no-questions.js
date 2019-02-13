@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 import { Chart } from 'react-google-charts'
 
-export default class ChartEvaluasi extends Component {
+export default class ChartNoQuestions extends Component {
     render() {
-        console.log(this.props.examChart)
         return (
-            <div style={{ display: 'flex' }}>
+            <div className="d-flex">
                 <Chart
                     width={'100%'}
                     height={'220px'}
                     chartType="Bar"
                     loader={<div>Loading Chart</div>}
-                    data={this.props.examChart}
+                    data={this.props.chart}
                     options={
                         {
-                            colors: ['#bfbfbf', '#eb363e'],
+                            colors: '#2fa8e7'
                         }
                     }
 
