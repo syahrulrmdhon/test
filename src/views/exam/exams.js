@@ -16,6 +16,7 @@ const exams = (props) => {
         classes={exam.classses}
         assessmentId={props.assessmentId}
         delete={() => props.delete(exam.id)}
+        edit={() => props.edit(exam.id)}
       />
     )
   }))
