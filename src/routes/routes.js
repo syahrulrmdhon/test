@@ -3,6 +3,7 @@ import Home from '../views/beranda/beranda'
 import Absensi from '../views/absensi/absensi'
 import Assessment from '../views/penilaian/penilaian'
 import AssessmentNew from '../views/penilaian/new'
+import AssessmentEdit from '../views/penilaian/edit'
 import DaftarNilai from '../views/daftar-nilai/daftar-nilai'
 import Rapor from '../views/rapor/rapor'
 import DaftarMurid from '../views/student/murid'
@@ -41,6 +42,10 @@ export const MainRoutes = [
     {
         path: '/penilaian/tambah',
         component: AssessmentNew
+    },
+    {
+        path: '/penilaian/edit/:id',
+        component: AssessmentEdit
     },
     {
         path: '/penilaian',
