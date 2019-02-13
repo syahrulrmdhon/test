@@ -132,6 +132,11 @@ export default class Content extends Component {
     render() {
         const { form } = this.props
 
+
+        let body = []
+        body.push(
+
+        )
         return (
             <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">
                 <div className="row rounded-10">
@@ -155,26 +160,19 @@ export default class Content extends Component {
                                         </thead>
                                         <tbody>
                                             {
-                                                form.map(function (x, i) {
+                                                form.map(function (x, index) {
                                                     return <tr key={Math.random()}>
                                                         <td className="align-left text-center">{x.qn_number}</td>
                                                         <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
                                                         {
                                                             x.exam_question_choices.map((cx, i) => {
-                                                                if (cx.is_correct_ans === true) {
-                                                                    return <SelectData choice={this.props.choice} data={x} is_correct={cx.symbol} />
+                                                                if (cx.is_correct_ans === true && x.problem_type === "multiple_choice") {
+                                                                    return <SelectData choice={this.props.choice} data={x} key={i} is_correct={cx.symbol} />
                                                                 }
                                                             })
                                                                   
                                                         }
                                                         <td className="align-center">{x.max_score}</td>
-
-                                                        {/* {
-                                                             
-                                                                x.exam_question_choices.map((array) => {
-                                                                    return  <td className="align-center">{array.is_correct_ans === null ? this.props.score_choice : x.max_score}</td>
-                                                                })
-                                                            } */}
                                                         <td>{x.weight}</td>
                                                     </tr>
                                                 }, this)

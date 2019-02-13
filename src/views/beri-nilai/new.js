@@ -66,6 +66,7 @@ export default class New extends Component {
     const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam}/exam_scores/${this.state.student_id}`
     console.log(url, "my url")
     apiClient('get', url).then(response => {
+      console.log(response.data.data,"data data")
       let array = response.data.data.collections[0];
       let choicePG = [];
       // let correct= []
