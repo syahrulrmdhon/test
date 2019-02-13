@@ -7,6 +7,8 @@ const exams = (props) => {
       <Exam
         key={index}
         order={index + 1}
+        exam={exam.id}
+        page={props.page}
         exam= {exam}
         title={exam.name}
         percentage={exam.percentage}

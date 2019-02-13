@@ -491,6 +491,16 @@ $nunito_bold: 'NunitoBold';
   letter-spacing: normal;
   color: #eb373e !important;
 }
+.col-sm-3 {
+  width: 23%;
+}
+
+table.table.beri-nilai tr.head{
+  background-color: #d8d8d8 !important;
+  text-transform: uppercase;
+  opacity: 0.9;
+  color: #7f92a1;
+}
 
 // large text bold
 .large-text-green-bold {
@@ -520,8 +530,12 @@ $nunito_bold: 'NunitoBold';
   font-size: 12px;
   color: #2d2d2d !important;
 }
+.border-left-col-green {
+  border-left:4px solid #1a9d7f !important;
+}
 .border-left-col-red {
   border-left:4px solid #eb373e !important;
+  z-index: 2000;
 }
 .border-left-col-yellow {
   border-left:4px solid #f2bc2d !important;
@@ -545,6 +559,130 @@ $nunito_bold: 'NunitoBold';
 .details-nilai .main-block {
   min-height: 350px;
 }
+
+.color-yellow-score {
+  color: #f2bc2d !important;
+  font-family: $nunito_bold;
+  font-size: 15.5px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.65;
+  letter-spacing: normal;
+}
+
+.main-height {
+  min-height: 380px!important;
+}
+
+.col-height {
+  height: 300px;
+  vertical-align: top !important;
+}
+
+.right-content-score {
+  margin:0px;
+  
+  &__title {
+    margin-top: 30px;
+    // margin-left: 15px;
+    margin-bottom: 30px;
+    font-family: $nunito_bold;
+    font-size: 15.5px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2d2d2d;
+  }
+
+  &__table-head{
+    background-color: #f3f3f6;
+  }
+  &__no{
+    width: 10px;
+  }
+  .table thead th{
+    height: 13.5px;
+    font-family: $nunito_bold;
+    font-size: 10px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.1px;
+    color: #333333;
+    border: transparent;
+  }
+  table tbody tr{
+    box-shadow: 0 2px 8px 0 rgba(30, 30, 30, 0.05);
+  }
+  
+  table tr.main-head{
+    background-color: #f3fcff;
+    text-transform: uppercase;
+    color: #7f92a1;
+  }
+  table th,
+  table td{
+    border: none;
+    padding: 10px;
+  }
+  table td{
+    vertical-align: middle;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.11;
+    letter-spacing: normal;
+    color: #333333;
+  }
+  table .btn{
+    padding: 3px 25px;
+  }
+  
+  tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #FFFFFF;
+  }
+
+  .select-list{
+    height: 40px;
+  }
+  .select-list .select__control{
+    min-height: auto;
+    height: 40px;
+    border: 1px solid #cccccc;
+  }
+  .select-list .select__indicator-separator{
+    background-color: #FFF;
+  }
+  .table-responsive{
+    min-height: 400px
+  }
+  table {
+    border-collapse: none !important;
+    max-width: 100%;  
+    border-spacing: 0em !important;
+    border: 1px solid #f3f3f6;
+    width: 100%;
+  }
+  .select__menu {
+      z-index: 999999;
+      position: absolute;
+  } 
+  &__skor {
+    width: 80px;
+  }
+
+  &__uraian {
+    width: 400px;
+    outline: none;
+  }
+
+  &__no {
+    width: 3px;
+  }
 
 /* content-block */
 .content-block-evaluasi{
@@ -573,4 +711,83 @@ $nunito_bold: 'NunitoBold';
 .content-block-evaluasi,
 .content-block-evaluasi.main-block-evaluasi .right-block-evaluasi{
   max-height: 600px;
+}
+}
+
+.tr-row {
+  width: 100%;
+  display: contents !important;
+
+}
+
+.td-hidden {
+  display: none
+}
+
+.content-bottom{
+  .header {
+    max-width: 100%;
+    height: 29.5px;
+    background-color: rgba(216, 216, 216, 0.14);
+  }
+
+  span{
+    vertical-align: middle;
+    font-family: $nunito_bold;
+    font-size: 12px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #333333;
+  }
+  
+  .content-student{
+
+    .box-student{
+      max-width: 100%;
+      // height: 29.5px;
+      background-color: #ffffff; 
+      // height: 43px;   
+    }
+
+    .label-content {
+      font-family: $nunito_semi_bold;
+      font-size: 11px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 0.91;
+      letter-spacing: normal;
+      color: #333333;
+    }
+    .icon-pencil {
+      cursor: pointer;
+    }
+
+    .dispay-second-row {
+      display: none;
+    }
+    .line-separator{
+      position: absolute;
+      right: 80px;
+      top: 67px;
+      border-top: 1px solid #eaeaea;
+      width: 143px;
+    }
+
+    .second-head {
+      max-width: 100%;
+      height: 23.5px;
+      background-color: rgba(178, 216, 216, 0.32);
+    }
+    .display-none {
+      display: none;
+    }
+    .display-block {
+      display: block
+    }
+  }
+
+  
 }

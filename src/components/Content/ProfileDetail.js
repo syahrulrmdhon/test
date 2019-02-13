@@ -12,35 +12,35 @@ export default class ProfileDetail extends Component {
           <img className="avatar" src={Avatar} alt="" />
         </div>
         <div className="mt-3 name">
-          {response.user.full_name}
+          {response && response.user && response.user.full_name}
         </div>
         <div className="ranking">
-          Peringkat {response.class_rank.rank ? response.class_rank.rank : '-' }
+          Peringkat { response && response.class_rank && response.class_rank.rank ? response && response.class_rank && response.class_rank.rank : '-' }
         </div>
         <div className="profile text-left">
           <div className="field">
             <div className="label">NIS:</div>
-            {response.user.nis}
+            {response && response.user && response.user.nis}
         </div>
           <div className="field">
             <div className="label">NISN:</div>
-            {response.user.nisn}
+            {response && response.user &&  response.user.nisn}
         </div>
           <div className="field">
             <div className="label">No. Telp:</div>
-            {response.user.phone_number}
+            {response && response.user && response.user.phone_number}
         </div>
           <div className="field">
             <div className="label">Nama Ayah:</div>
-            {response.parents.father.full_name}
+            {response && response.user &&  response.parents.father.full_name}
         </div>
           <div className="field">
             <div className="label">Nama Ibu:</div>
-            {response.parents.mother.full_name}
+            {response && response.user && response.parents.mother.full_name}
         </div>
           <div className="field">
             <div className="label">Alamat:</div>
-            {response.user.addresses[0].full_address.street}
+            {response && response.user &&  response.user.addresses[0].full_address.street}
         </div>
         </div>
       </div>

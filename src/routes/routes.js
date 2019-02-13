@@ -8,19 +8,21 @@ import Rapor from '../views/rapor/rapor'
 import DaftarMurid from '../views/student/murid'
 import StudentDetail from '../views/student/detail'
 import SwitchAccount from '../views/global/switch_account'
+import DetailNilai from './../views/beri-nilai/beri-nilai'
 import Exam from '../views/exam/index'
 import CreateExam from '../views/create-exam/Index'
-import DetailNilai from './../views/beri-nilai/beri-nilai'
 import Question from '../views/create-exam/create-question'
 import ParticipantClass from '../views/exam/participant_class/new'
 import ParticipantUser from '../views/exam/participant_class/user_new'
 import NotFound from '../views/global/not-found'
+import NewScore from './../views/beri-nilai/new'
 
 export const MainRoutes = [
     {
         path: '/',
         exact: true,
         component: Login
+  
     },
     {
         path: '/switch',
@@ -59,15 +61,23 @@ export const MainRoutes = [
         component: StudentDetail
     },
     {
+        path: '/nilai/',
+        component: DetailNilai
+    },
+    {
         path: '/exam/:id',
         component: Exam
+    },
+    {
+        path:'/assessment/:assessment_id/exam/:exam_id/class/:class_id/student/:student_id',
+        component:NewScore
     },
     {
         path: '/create-exam/:id',
         component: CreateExam
     },
     {
-        path: '/nilai' ,
+        path: '/assessment/:assessment_id/exam/:exam_id/class/:class_id' ,
         component:DetailNilai
     },
     {

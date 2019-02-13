@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Avatar from 'react-avatar';
-import Ava from './../../assets/images/img_avatar.png'
+import Ava from './../../assets/images/img_avatar.png';
+import Select from './select';
 
-export class componentName extends Component {
+export class RightComponent extends Component {
 
   render() {
+    console.log(this.props.participant_not_passed,"here")
     return (
       <div className="right-content-kkm">
         <div className="margin-top-3 ">
@@ -19,88 +21,30 @@ export class componentName extends Component {
             </div>
           </div>
         </div>
-        <div className="margin-top-5">
-          <div className="row  margin-top-1 padding-bottom-4">
-            <div className="col-sm-1">
-              <Avatar src={Ava} size="30" round={true} />
+        { 
+          this.props.participant_not_passed.map(function(data){
+            return   <div className="margin-top-5" key={Math.random()}>
+            <div className="row  margin-top-1 padding-bottom-4">
+                    <div className="col-sm-1">
+                      <Avatar src={Ava} size="30" round={true} />
+                    </div>
+                    <div className="col-sm-6">
+                      <div className="col-sm-12">
+                        <span className="kkm__name">{data.user.full_name }</span>
+                      </div>
+                      <div className="col-sm-12">
+                        <span className="kkm__email">{data.user.email}</span>
+                      </div>
+                    </div>
+                    <div className="col-sm-4">
+                      <span className="kkm__nilai">{data.total_average.score === null?0:data.total_average.score}</span>
+                    </div>
             </div>
-            <div className="col-sm-6">
-              <div className="col-sm-12">
-                <span className="kkm__name">James Bond</span>
-              </div>
-              <div className="col-sm-12">
-                <span className="kkm__email">james@ensyspace.com</span>
-              </div>
-            </div>
-            <div className="col-sm-4">
-              <span className="kkm__nilai">80</span>
-            </div>
+          
           </div>
-          <div className="row  margin-top-1 padding-bottom-4">
-            <div className="col-sm-1">
-              <Avatar src={Ava} size="30" round={true} />
-            </div>
-            <div className="col-sm-6">
-              <div className="col-sm-12">
-                <span className="kkm__name">James Bond</span>
-              </div>
-              <div className="col-sm-12">
-                <span className="kkm__email">james@ensyspace.com</span>
-              </div>
-            </div>
-            <div className="col-sm-4">
-              <span className="kkm__nilai">80</span>
-            </div>
-          </div>
-          <div className="row  margin-top-1 padding-bottom-4">
-            <div className="col-sm-1">
-              <Avatar src={Ava} size="30" round={true} />
-            </div>
-            <div className="col-sm-6">
-              <div className="col-sm-12">
-                <span className="kkm__name">James Bond</span>
-              </div>
-              <div className="col-sm-12">
-                <span className="kkm__email">james@ensyspace.com</span>
-              </div>
-            </div>
-            <div className="col-sm-4">
-              <span className="kkm__nilai">80</span>
-            </div>
-          </div>
-          <div className="row  margin-top-1 padding-bottom-4">
-            <div className="col-sm-1">
-              <Avatar src={Ava} size="30" round={true} />
-            </div>
-            <div className="col-sm-6">
-              <div className="col-sm-12">
-                <span className="kkm__name">James Bond</span>
-              </div>
-              <div className="col-sm-12">
-                <span className="kkm__email">james@ensyspace.com</span>
-              </div>
-            </div>
-            <div className="col-sm-4">
-              <span className="kkm__nilai">80</span>
-            </div>
-          </div>
-          <div className="row  margin-top-1 padding-bottom-4">
-            <div className="col-sm-1">
-              <Avatar src={Ava} size="30" round={true} />
-            </div>
-            <div className="col-sm-6">
-              <div className="col-sm-12">
-                <span className="kkm__name">James Bond</span>
-              </div>
-              <div className="col-sm-12">
-                <span className="kkm__email">james@ensyspace.com</span>
-              </div>
-            </div>
-            <div className="col-sm-4">
-              <span className="kkm__nilai">80</span>
-            </div>
-          </div>
-        </div>
+          })
+        }
+      
 
       </div>
     )
@@ -115,4 +59,4 @@ const mapDispatchToProps = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(componentName)
+export default connect(mapStateToProps, mapDispatchToProps)(RightComponent)

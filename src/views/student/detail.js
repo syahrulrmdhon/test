@@ -81,7 +81,7 @@ export default class Detail extends Component {
       <div className="detail bg-grey">
         <Header navbar={false} />
        
-        <div className="content-wrapper content-wrap-custom-size ">
+        <div className="content-wrapper content-wrap-custom-size margin-top-6">
           <div className="row detail-menu">
             <div className="offset-2 col-10 tab-menu">
               <TabMenu 

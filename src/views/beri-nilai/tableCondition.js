@@ -82,8 +82,8 @@ export class Collapse extends Component {
             classname = 'cred';
         }
         return (
-            <td>
-                <FontAwesome name="ellipsis-h" size="lg" className={classNames("icon-table-pencil", classname)} />
+            <td data-toggle="collapse" data-target={"#accordion"+this.props.idx}  className="clickable" >
+                <FontAwesome name="ellipsis-h" size="lg" className={classNames("icon-table-pencil", classname)} onClick={this.props.onClickToogles} />
             </td>
         )
     }
