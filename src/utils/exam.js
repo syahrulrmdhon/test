@@ -140,12 +140,11 @@ export function getQuestion(id, number) {
     }
     let url = `v1/assessments/${id}/exams/new?`
 
-    return apiClient('get', url, false, params).then(response => {
+    apiClient('get', url, false, params).then(response => {
         let data = response.data.data
         this.setState({
             data: data,
         })
-        return response.data.data
     })
 
 }

@@ -405,8 +405,6 @@ $nunito_bold: 'NunitoBold';
   margin-top:2%;
   margin-right: 1%;
   width: 100%;
-  
-
 }
 
 .search-in-table {
@@ -491,16 +489,6 @@ $nunito_bold: 'NunitoBold';
   letter-spacing: normal;
   color: #eb373e !important;
 }
-.col-sm-3 {
-  width: 23%;
-}
-
-table.table.beri-nilai tr.head{
-  background-color: #d8d8d8 !important;
-  text-transform: uppercase;
-  opacity: 0.9;
-  color: #7f92a1;
-}
 
 // large text bold
 .large-text-green-bold {
@@ -530,8 +518,9 @@ table.table.beri-nilai tr.head{
   font-size: 12px;
   color: #2d2d2d !important;
 }
-.border-left-col-green {
-  border-left:4px solid #1a9d7f !important;
+.view {
+  font-size: 9px;
+  color: #7f92a1 !important;
 }
 .border-left-col-red {
   border-left:4px solid #eb373e !important;
@@ -539,6 +528,9 @@ table.table.beri-nilai tr.head{
 }
 .border-left-col-yellow {
   border-left:4px solid #f2bc2d !important;
+}
+.border-left-col-green {
+  border-left:4px solid #259c7f !important;
 }
 
 .shadow-box {
@@ -560,130 +552,6 @@ table.table.beri-nilai tr.head{
   min-height: 350px;
 }
 
-.color-yellow-score {
-  color: #f2bc2d !important;
-  font-family: $nunito_bold;
-  font-size: 15.5px;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 0.65;
-  letter-spacing: normal;
-}
-
-.main-height {
-  min-height: 380px!important;
-}
-
-.col-height {
-  height: 300px;
-  vertical-align: top !important;
-}
-
-.right-content-score {
-  margin:0px;
-  
-  &__title {
-    margin-top: 30px;
-    // margin-left: 15px;
-    margin-bottom: 30px;
-    font-family: $nunito_bold;
-    font-size: 15.5px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #2d2d2d;
-  }
-
-  &__table-head{
-    background-color: #f3f3f6;
-  }
-  &__no{
-    width: 10px;
-  }
-  .table thead th{
-    height: 13.5px;
-    font-family: $nunito_bold;
-    font-size: 10px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: -0.1px;
-    color: #333333;
-    border: transparent;
-  }
-  table tbody tr{
-    box-shadow: 0 2px 8px 0 rgba(30, 30, 30, 0.05);
-  }
-  
-  table tr.main-head{
-    background-color: #f3fcff;
-    text-transform: uppercase;
-    color: #7f92a1;
-  }
-  table th,
-  table td{
-    border: none;
-    padding: 10px;
-  }
-  table td{
-    vertical-align: middle;
-    font-weight: 600;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.11;
-    letter-spacing: normal;
-    color: #333333;
-  }
-  table .btn{
-    padding: 3px 25px;
-  }
-  
-  tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-  }
-  tbody tr:nth-child(even) {
-    background-color: #FFFFFF;
-  }
-
-  .select-list{
-    height: 40px;
-  }
-  .select-list .select__control{
-    min-height: auto;
-    height: 40px;
-    border: 1px solid #cccccc;
-  }
-  .select-list .select__indicator-separator{
-    background-color: #FFF;
-  }
-  .table-responsive{
-    min-height: 400px
-  }
-  table {
-    border-collapse: none !important;
-    max-width: 100%;  
-    border-spacing: 0em !important;
-    border: 1px solid #f3f3f6;
-    width: 100%;
-  }
-  .select__menu {
-      z-index: 999999;
-      position: absolute;
-  } 
-  &__skor {
-    width: 80px;
-  }
-
-  &__uraian {
-    width: 400px;
-    outline: none;
-  }
-
-  &__no {
-    width: 3px;
-  }
-
 /* content-block */
 .content-block-evaluasi{
   position: relative;
@@ -699,6 +567,26 @@ table.table.beri-nilai tr.head{
   -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
   box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
 }
+.content-block-card {
+  position: relative;
+  padding: 2rem;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid #e9e9ef;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+}
+.content-block-card.main-block-card{
+  border: none;
+  box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+  border-radius: 5px;
+  padding: 0;
+}
 .content-block-evaluasi.main-block-evaluasi{
   border: none;
   box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
@@ -712,14 +600,52 @@ table.table.beri-nilai tr.head{
 .content-block-evaluasi.main-block-evaluasi .right-block-evaluasi{
   max-height: 600px;
 }
-}
 
-.tr-row {
+.search {
+  display: flex;
   width: 100%;
-  display: contents !important;
 
+  .input-field, .icon {
+    height: 38px;
+  }
 }
 
+.remedial {
+  margin: auto;
+  .btn-white {
+    position: absolute;
+    bottom: 10%;
+    margin-left: 10%;
+    width: 70%;
+  }
+}
+
+.box-question {
+  margin: auto;
+  width: 70%;
+  min-height: 20%;
+  background-color: #ffffff;
+  .form-question {
+    width: 70%;
+    margin: auto;
+  }
+}
+.input-question {
+  width: 100%;
+  font-family: $nunito_regular;
+}
+.subject-title {
+  color: #6d6d6d;
+  font-family: $nunito_regular;
+  font-size: 10px;
+}
+.btn-save-question {
+  background-color: #1a9d7f;
+  color: #ffffff;
+  font-family: $nunito_regular;
+  width: 30%;
+  text-align: center;
+}
 .td-hidden {
   display: none
 }
@@ -788,6 +714,4 @@ table.table.beri-nilai tr.head{
       display: block
     }
   }
-
-  
 }

@@ -14,6 +14,8 @@ import CreateExam from '../views/create-exam/Index'
 import Question from '../views/create-exam/create-question'
 import ParticipantClass from '../views/exam/participant_class/new'
 import ParticipantUser from '../views/exam/participant_class/user_new'
+import NoQuestions from '../views/beri-nilai/no-questions/no-questions'
+import Questions from '../views/beri-nilai/no-questions/questions'
 import NotFound from '../views/global/not-found'
 import NewScore from './../views/beri-nilai/new'
 
@@ -91,6 +93,14 @@ export const MainRoutes = [
     {
         path: '/question/:id',
         component: Question
+    },
+    {
+        path: '/questions/:id',
+        component: Questions
+    },
+    {
+        path: '/beri-nilai',
+        component: NoQuestions
     },
     {
         path: '*',

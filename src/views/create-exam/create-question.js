@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Header from '../global/header'
-import Numbers from './numbers'
 import TabNumber from '../../components/TabContent/TabContent'
 import Select from 'react-select'
 import { questionTypes } from '../../utils/common'
@@ -8,10 +7,7 @@ import { apiClient } from '../../utils/apiClient'
 import { getQuestion } from '../../utils/exam'
 import { confirmAlert } from 'react-confirm-alert'
 var FontAwesome = require('react-fontawesome')
-
 import 'react-confirm-alert/src/react-confirm-alert.css'
-
-
 import Choices from "./choices"
 
 export default class question extends Component {
@@ -102,12 +98,13 @@ export default class question extends Component {
   }
 
   toggle(number) {
-    const data = this.state.data.exam.exam_questions_attributes[number - 1]
+    getQuestion.call(this, this.state.assessmentId, this.state.number)
     
     if (this.state.activeNumber !== number) {
       this.setState({
         activeNumber: number,
       })
+      console.log(this.state.data)
     }
   
       this.setForm(number)
