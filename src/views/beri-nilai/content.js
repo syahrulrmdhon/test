@@ -7,6 +7,12 @@ import { apiClient } from '../../utils/apiClient'
 import RightContent from './../../components/RightSide/RightSide'
 import Select from 'react-select'
 import { setLabelSelect, checkProperties } from './../../utils/common'
+import SelectData from './select';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { setSavedata } from './../../redux-modules/modules/score'
+
+
 
 
 let choice = [
@@ -23,49 +29,83 @@ export default class Content extends Component {
         this.state = {
             activeTab: 1,
             score_choice: 0,
-            valueData: {}
+            valueData: {},
+            dataChoice: [],
+            correct: ''
         }
 
         this.generateSelect = this.generateSelect.bind(this)
         this.generateEssay = this.generateEssay.bind(this)
         this.onChangeSelect = this.onChangeSelect.bind(this)
         this.handlSave = this.handlSave.bind(this)
+        this.getDataChoice = this.getDataChoice.bind(this)
     }
+    componentDidMount() {
+        const choicePG = []
+        let arrayData = this.props.form
 
+        // arrayData && arrayData.exam_question_choices.map((x,i) => {
+        //     choicePG.push({value:x.symbol, label:x.symbol })
+        // })
+        console.log(this.props.form, "PGCHOICe")
+        this.setState({
+            dataChoice: choicePG
+        })
+    }
     onChangeSelect(event, props) {
         console.log(event, props, "my event");
         let is_answer = ''
-        props.map((array) => {
-            is_answer = array.is_correct_ans
-        })
-        if (is_answer === null) {
-            this.setState({
-                valueData: event,
-                score_choice: 0
-            })
-        } else {
-            this.setState({
-                score_choice: 0,
-                valueData: event
-            })
-        }
+
+        // props.map((array) => {
+        //     is_answer = array.is_correct_ans
+        // })
+        // if (is_answer === null) {
+        //     this.setState({
+        //         valueData: event,
+        //         score_choice: 0
+        //     })
+        // } else {
+        //     this.setState({
+        //         score_choice: 0,
+        //         valueData: event
+        //     })
+        // }
 
     }
 
+    getDataChoice() {
+        let data = this.props.form
+        console.log(data, "data form")
+    }
+
+
+
+
     generateSelect(x, index) {
-        console.log(x, "my xxxxx")
         let valueData = {}
-        x.map((array) => {
-            valueData = { value: array.symbol.toLowerCase(), label: array.symbol }
+        let choicePG = []
+        let form = this.props.form
+        let arrayData = form[0]
+        let correct = ''
+        arrayData.exam_question_choices.map((x, i) => {
+            choicePG.push({ value: x.symbol, label: x.symbol })
         })
+        form.map((dt, i) => {
+            dt.exam_question_choices.map((cx, i) => {
+                if (cx.is_correct_ans === true) {
+                    console.log('here', cx.symbol)
+                }
+            })
+        })
+
         const select = (
             <Select
                 onChange={(e) => { this.props.onChangeSelect(e, x) }}
-                value={setLabelSelect(choice, this.props.valueData.hasOwnProperty('value') === false ? valueData : this.props.valueData)}
+                value={choicePG.find((element) => { return element.value === correct })}
                 classNamePrefix='select'
                 name={index}
                 placeholder='- Pilih jawaban -'
-                options={choice}
+                options={choicePG}
             />
         )
         return select;
@@ -86,11 +126,12 @@ export default class Content extends Component {
 
     handlSave(e) {
         var table = document.getElementById('table-score');
-        this.props.handleSave(e,table)
-   
+        this.props.handleSave(e, table)
+
     }
     render() {
         const { form } = this.props
+
         return (
             <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">
                 <div className="row rounded-10">
@@ -115,29 +156,28 @@ export default class Content extends Component {
                                         <tbody>
                                             {
                                                 form.map(function (x, i) {
-                                                    console.log("data xxxxx", x)
                                                     return <tr key={Math.random()}>
                                                         <td className="align-left text-center">{x.qn_number}</td>
                                                         <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
-                                                        <td className="align-center">
-                                                            {x.problem_type === 'essay' ? this.generateEssay(x.exam_question_choices) : this.generateSelect(x.exam_question_choices, i)}
-                                                        </td>
-                                                        <td className="align-center">
-                                                            {
-                                                                x.problem_type === 'essay' ? <input
-                                                                type="text"
-                                                                className="right-content-score__skor"
-                                                                value={this.props.essay.score}
-                                                                onChange={(e) => { this.props.onChangeEssay(e, 'score') }}
-                                                            /> :
+                                                        {
+                                                            x.exam_question_choices.map((cx, i) => {
+                                                                if (cx.is_correct_ans === true) {
+                                                                    return <SelectData choice={this.props.choice} data={x} is_correct={cx.symbol} />
+                                                                }
+                                                            })
+                                                                  
+                                                        }
+                                                        <td className="align-center">{x.max_score}</td>
+
+                                                        {/* {
+                                                             
                                                                 x.exam_question_choices.map((array) => {
                                                                     return  <td className="align-center">{array.is_correct_ans === null ? this.props.score_choice : x.max_score}</td>
                                                                 })
-                                                            }
-                                                        </td>
+                                                            } */}
                                                         <td>{x.weight}</td>
                                                     </tr>
-                                                },this)    
+                                                }, this)
                                             }
 
                                         </tbody>
@@ -155,3 +195,14 @@ export default class Content extends Component {
         )
     }
 }
+
+// const mapStateToProps = state => ({
+//     // data: state
+//   })
+
+//   const mapDispatchToProps = dispatch => bindActionCreators({ setSavedata }, dispatch);
+//   export default connect(mapStateToProps, mapDispatchToProps)(Content);
+
+
+
+// this.props.valueData.hasOwnProperty('value') === false ? valueData : this.props.valueData)

@@ -75,23 +75,11 @@ class BottomContent extends Component {
 
   handleNewScore(e, student,) {
     e.preventDefault()
-    console.log("here go")
     this.props.handleNewScoreParent(e, student)
   }
 
 
   render() {
-    let content = []
-    if (this.state.data.length === 0) {
-      content.push(<Table key={1} />)
-    } else {
-      content.push(
-        <div className="margin-top-0 empty-data" key={1} >
-          Data belum tersedia.
-        </div>
-      )
-    }
-    console.log(this.state.selectIndex,"my index")
     const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     return (
       <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-bottom-2">

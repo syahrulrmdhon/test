@@ -39,6 +39,8 @@ export default class New extends Component {
         answer: '',
         score: ''
       },
+      choice:[],
+      is_correct:''
     }
 
     this.getGenerateForm = this.getGenerateForm.bind(this)
@@ -52,7 +54,6 @@ export default class New extends Component {
   componentDidMount() {
     this.getStudent()
     this.getGenerateForm()
-    console.log(this.props.location.state.data,"location")
   }
 
   redirect(){
@@ -65,8 +66,24 @@ export default class New extends Component {
     const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam}/exam_scores/${this.state.student_id}`
     console.log(url, "my url")
     apiClient('get', url).then(response => {
-      console.log(response.data.data, "response get form")
-      this.setState({
+      let array = response.data.data.collections[0];
+      let choicePG = [];
+      // let correct= []
+      array.exam_question_choices.map((x, i ) => {
+            choicePG.push({value:x.symbol, label:x.symbol })
+      })
+      response.data.data.collections.map((dt,i)=>{
+        dt.exam_question_choices.map((cx,i) =>{
+            if(cx.is_correct_ans  === true){
+                console.log('here', cx.symbol)
+            }
+      })
+    })
+
+
+    this.setState({
+
+        choice:choicePG,
         data: response.data.data,
         question: response.data.data.collections
       })
@@ -187,6 +204,7 @@ export default class New extends Component {
             onChangeSelect = {this.onChangeSelect}
             valueData = {this.state.valueData}
             score_choice={this.state.score_choice}
+            choice={this.state.choice}
           />
         </div>
       </div>

@@ -76,13 +76,14 @@ export function getParticipantsResult(){
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'Bearer ' + token,
                 'School-ID': schoolId
-
-            }
+           }
         })
     }
 }
 
-export function set(payload) {
+
+
+export function setSavedata(payload) {
     console.log(payload,"here payload")
     return {
         type: SET,
