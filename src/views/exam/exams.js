@@ -12,6 +12,7 @@ const exams = (props) => {
         percentage={exam.percentage}
         question={exam.include_question}
         classes={exam.classses}
+        assessmentId={props.assessmentId}
       />
     )
   }))

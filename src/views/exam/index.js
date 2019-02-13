@@ -51,7 +51,9 @@ export default class Index extends Component {
               <div className="col-sm-10 col-sm-10-custom right-block">
                 <Content
                   exams={this.state.exams}
-                  addExam={this.addExam}/>
+                  addExam={this.addExam}
+                  assessmentId={this.state.assessmentId}
+                />
               </div>
             </div>
           </div>

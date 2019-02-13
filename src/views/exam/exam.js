@@ -53,7 +53,7 @@ const exam = (props) => {
             props.classes.length ?
               <div className="exam__class-wrapper">
                 {props.classes.map((item, index) => {
-                  return <div key={item.id} className="exam__class">{item.name}</div>
+                  return <NavLink to={`/assessment/${props.assessmentId}/exam/${props.exam.id}/class/${item.id}`} key={item.id}><div className="exam__class">{item.name}</div></NavLink>
                 })}
               </div>
               :

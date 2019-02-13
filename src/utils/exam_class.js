@@ -35,6 +35,7 @@ export function getDataExamUser(step = 'ClassForm', assessment_id, exam_id){
         const classes = response.data.data.classes || []
 
         this.setState({
+            exam: response.data.data.exam || [],
             classes: classes
         })
     })

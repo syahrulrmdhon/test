@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
 import Header from '../../global/header'
 import { Nav, NavItem, NavLink } from 'reactstrap'
-import {getDataExamUser} from './../../../utils/exam_class'
+import ChooseUser from './choose_user'
+import { getParticipant } from './../../../redux-modules/modules/exam'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { apiClient } from './../../../utils/apiClient'
 
-export default class ParticipantUser extends Component {
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+
+class ParticipantUser extends Component {
     constructor(props){
         super(props)
 
@@ -13,20 +20,94 @@ export default class ParticipantUser extends Component {
             exam_id: this.props.match.params.exam_id || null,
             classes: [],
             activeTab: null,
+            exam: [],
         }
+        this.onToggle = this.onToggle.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
+        this.onConfirm = this.onConfirm.bind(this)
     }
 
     componentDidMount(){
-        getDataExamUser.call(this, this.state.step, this.state.assessment_id, this.state.exam_id)
+        this.props.getParticipant(this.state.step, this.state.assessment_id, this.state.exam_id);
+    }
+
+    onToggle(id){
+        this.setState({
+            activeTab: id,
+        })
+    }
+
+    onConfirm(){
+        event.preventDefault();
+        let participant_users = []
+        if(this.props.exam.data.classes){
+            this.props.exam.data.classes.map((classs) => {
+                if(classs.users){
+                    classs.users.map((user) => {
+                        if(user.is_selected){
+                            participant_users.push({
+                                class_id: classs.id,
+                                user_id: user.id,
+                            })
+                        }
+                    })
+                }
+            })
+        }
+        if(participant_users.length > 0){
+            let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/validate?step=ParticipantForm`
+            this.props.exam.data.exam.exam_participants_attributes = participant_users
+
+            apiClient('post', url, this.props.exam.data).then(res => {
+                let url_create = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes`
+                apiClient('post', url_create, this.props.exam.data).then(response => {
+                    this.props.history.push(`/exam/${this.state.assessment_id}`)
+                }).catch(error => {
+                    alert('error')
+                })
+            }).catch(error => {
+                console.log(error.response)
+            })  
+        } else {
+            alert('Pilih Siswa minimal 1')
+        }
+    }
+
+    onSubmit(){
+        event.preventDefault();
+
+        confirmAlert({
+            customUI: ({ onClose, onConfirm }) => {
+                return (
+                    <div className="react-confirm-alert modal-alert">
+                        <div className="react-confirm-alert-body">
+                            <div className="header align-center">
+                                <h1>Pastikan anda sudah centang partisipan siswa yang akan mengikuti tugas ini ? </h1>
+                            </div>
+                            <div className="react-confirm-alert-button-group toggle">
+                                <div className="align-center fullwidth">
+                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
+                                    <a href="javascript:void(0);" className="btn green" onClick={() => {this.onConfirm(); onClose();}}>Yakin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            },
+        })
     }
 
     render(){
         let tab = []
-        if(this.state.classes.length > 0){
-            this.state.classes.map((classs, idx) => {
+        let contentUser = []
+
+        const classes = this.props.exam && this.props.exam.data && this.props.exam.data.classes;
+
+        if(classes){
+            classes.map((classs, idx) => {
                 let active = null
 
-                if(this.state.activeTab == null && idx == 0){
+                if((this.state.activeTab == null && idx == 0) || (this.state.activeTab == classs.id)){
                     active = 'active'
                 }
 
@@ -34,10 +115,20 @@ export default class ParticipantUser extends Component {
                     <NavItem key={idx}>
                         <NavLink
                         className={active}
+                        onClick={() => {this.onToggle(classs.id)}}
                         >
                         {classs.name}
                         </NavLink>
                     </NavItem>
+                )
+
+                contentUser.push(
+                    <ChooseUser 
+                        key={idx} 
+                        index={idx}
+                        users={classs.users}
+                        isActived={active}
+                    />
                 )
             })
         }
@@ -61,63 +152,8 @@ export default class ParticipantUser extends Component {
                                     <div className="margin-vert-4">
                                         Nama Peserta Didik
                                     </div>
-                                    <div className="border-full padding-4 margin-bottom-2">
-                                        <div className="row">
-                                            <div className="col-sm-4">
-                                                <div className="checkbox-wrapper padding-1">
-                                                    <div className="checkbox-button">
-                                                        <input type="checkbox" id="check1" value="check1" name="checkbox" />
-                                                        <label htmlFor="check1"></label>
-                                                    </div>
-                                                    <label htmlFor="check1" className="checkbox-label">Aba Riza</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-4">
-                                                <div className="checkbox-wrapper padding-1">
-                                                    <div className="checkbox-button">
-                                                        <input type="checkbox" id="check1" value="check1" name="checkbox" />
-                                                        <label htmlFor="check1"></label>
-                                                    </div>
-                                                    <label htmlFor="check1" className="checkbox-label">Aba Riza</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-4">
-                                                <div className="checkbox-wrapper padding-1">
-                                                    <div className="checkbox-button">
-                                                        <input type="checkbox" id="check1" value="check1" name="checkbox" />
-                                                        <label htmlFor="check1"></label>
-                                                    </div>
-                                                    <label htmlFor="check1" className="checkbox-label">Aba Riza</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-4">
-                                                <div className="checkbox-wrapper padding-1">
-                                                    <div className="checkbox-button">
-                                                        <input type="checkbox" id="check1" value="check1" name="checkbox" />
-                                                        <label htmlFor="check1"></label>
-                                                    </div>
-                                                    <label htmlFor="check1" className="checkbox-label">Aba Riza</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-4">
-                                                <div className="checkbox-wrapper padding-1">
-                                                    <div className="checkbox-button">
-                                                        <input type="checkbox" id="check1" value="check1" name="checkbox" />
-                                                        <label htmlFor="check1"></label>
-                                                    </div>
-                                                    <label htmlFor="check1" className="checkbox-label">Aba Riza</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="checkbox-wrapper disblock">
-                                        <div className="checkbox-button">
-                                            <input type="checkbox" id="check1" value="check1" name="checkbox" />
-                                            <label htmlFor="check1"></label>
-                                        </div>
-                                        <label htmlFor="check1" className="checkbox-label">Pilih Semua Peserta Didik</label>
-                                    </div>
-                                    <button className="submit-btn margin-top-8" onClick={this.onSubmit}>Lanjut</button>
+                                    {contentUser}
+                                    <button className="submit-btn margin-top-8" onClick={this.onSubmit}>Simpan</button>
                                 </form>
                             </div>
                         </div>
@@ -127,3 +163,10 @@ export default class ParticipantUser extends Component {
         )
     }
 }
+const mapStateToProps = (state, props) => ({
+    exam: state.exam
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ getParticipant }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(ParticipantUser);
+  

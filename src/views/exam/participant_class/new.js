@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import Header from '../../global/header'
 var FontAwesome = require('react-fontawesome')
 import Classes from './classes'
-import {getDataExamClass} from './../../../utils/exam_class'
+// import {getDataExamClass} from './../../../utils/exam_class'
+import { getParticipant, addClass, removeClass } from './../../../redux-modules/modules/exam'
 import { getDate } from './../../../utils/common'
 import { apiClient } from './../../../utils/apiClient'
 
-export default class ParticipantClass extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+class ParticipantClass extends Component {
     constructor(props){
         super(props)
 
@@ -31,49 +35,42 @@ export default class ParticipantClass extends Component {
 
         this.addClass = this.addClass.bind(this)
         this.removeClass = this.removeClass.bind(this)
-        this.handleClassAttr = this.handleClassAttr.bind(this)
-        this.handleTimeAttr = this.handleTimeAttr.bind(this)        
-        this.handleBasicCompAttr = this.handleBasicCompAttr.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
     
 
     componentDidMount(){
-        getDataExamClass.call(this, this.state.step, this.state.assessment_id, this.state.exam_id)
+        this.props.getParticipant(this.state.step, this.state.assessment_id, this.state.exam_id)
+    }
+
+    addClass(){
+        this.props.addClass()
+    }
+
+    removeClass(index){
+        this.props.removeClass(index)
     }
 
     onSubmit(){
         event.preventDefault();
         let data = []
+        
+        if(this.props.exam.data.exam.exam_classes_attributes){
+            this.props.exam.data.exam.exam_classes_attributes.map((exam_classes_attribute, idx) => {
+                const start_date = (exam_classes_attribute.start_date == null) ? new Date() : new Date(exam_classes_attribute.start_date)
+                const deadline_date = (exam_classes_attribute.deadline_date == null) ? new Date() : new Date(exam_classes_attribute.deadline_date)
 
-        if(this.state.exam.exam_classes_attributes.length > 0) {
-            this.state.exam.exam_classes_attributes.map((exam_classes_attribute) => {
-                let comp_kkms = []
+                exam_classes_attribute.start_date = getDate('case-5', start_date)
+                exam_classes_attribute.deadline_date = getDate('case-5', deadline_date)
 
-                if(exam_classes_attribute.comp_kkms.length > 0){
-                    exam_classes_attribute.comp_kkms.map((com_kkm) => {
-                        com_kkm.class_id = com_kkm.class_id.value
-
-                        comp_kkms.push(com_kkm)
-                    })
-                }
-
-                data.push({
-                    class_id: exam_classes_attribute.class_id ? exam_classes_attribute.class_id.value : null,
-                    start_date: getDate('case-5', exam_classes_attribute.start_date),
-                    deadline_date: getDate('case-5', exam_classes_attribute.deadline_date),
-                    comp_kkms: comp_kkms,
-                })
+                this.props.exam.data.exam.exam_classes_attributes[idx] = exam_classes_attribute
             })
         }
 
         if(data){
-            let result = this.state.exam
-            result.exam_classes_attributes = data
-
             let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/validate?step=ClassForm`
 
-            apiClient('post', url, {exam: result}).then(response => {
+            apiClient('post', url, this.props.exam.data).then(response => {
                 this.props.history.push(`/pariticipant-user/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`)
             }).catch(error => {
                 console.log(error.response)
@@ -81,76 +78,19 @@ export default class ParticipantClass extends Component {
         }        
     }
 
-    handleClassAttr(event, c_index){
-        let class_attributes = this.state.exam.exam_classes_attributes
-        class_attributes[c_index]['class_id'] = event
-
-        this.setState({
-            exam: {
-                exam_classes_attributes: class_attributes
-            }
-        })
-    }
-
-    handleTimeAttr(newDate, fieldName, c_index){
-        let obj = this.state.exam.exam_classes_attributes
-        obj[c_index][fieldName] = newDate
-
-        this.setState(obj);
-    }
-
-    handleBasicCompAttr(event, basic_comp_id, c_index, key){
-        let class_attributes = this.state.exam.exam_classes_attributes
-        let basic_comps = class_attributes[c_index]['comp_kkms'] || []
-
-        basic_comps[key] = {
-            basic_comp_id: basic_comp_id,
-            class_id: class_attributes[c_index]['class_id'],
-            kkm: event.target.value,
-        }
-
-        class_attributes[c_index]['comp_kkms'] = basic_comps
-        this.setState({
-            exam: {
-                exam_classes_attributes: class_attributes
-            }
-        })
-    }   
-
-    addClass(){
-        let exam_classes_attribute = this.state.exam.exam_classes_attributes[0]
-        this.setState({
-            exam: {
-                exam_classes_attributes: this.state.exam.exam_classes_attributes.concat(exam_classes_attribute)
-            }
-        })
-    }
-
-    removeClass(index){
-        if(this.state.exam.exam_classes_attributes.indexOf(index) > -1){
-            this.state.exam.exam_classes_attributes.splice(index, 1);
-        }
-        this.setState({
-            exam: {
-                exam_classes_attributes: this.state.exam.exam_classes_attributes.slice(0, index).concat(this.state.exam.exam_classes_attributes.slice((index+1), this.state.exam.exam_classes_attributes.length)) 
-            }
-        })
-    }
-
     render(){
+        let exam_classes = this.props.exam && this.props.exam.data && this.props.exam.data.exam.exam_classes_attributes;
+        let basic_comps = this.props.exam && this.props.exam.data && this.props.exam.data.basic_comps;
+
         let class_view = []
-        if(this.state.exam.exam_classes_attributes.length > 0){
-            this.state.exam.exam_classes_attributes.map((data, idx) => {
+        if(exam_classes){
+            exam_classes.map((data, idx) => {
                 class_view.push(<Classes 
                     index={idx} 
                     key={Math.random()}  
                     data={data}
-                    class_filters={this.state.class_filters}
+                    basic_comps={basic_comps}
                     removeClass={this.removeClass}
-                    basic_comps={this.state.basic_comps}
-                    handleClassAttr={this.handleClassAttr}
-                    handleTimeAttr={this.handleTimeAttr}
-                    handleBasicCompAttr={this.handleBasicCompAttr}
                 />)
             })
         }
@@ -186,3 +126,14 @@ export default class ParticipantClass extends Component {
         )       
     }
 }
+
+const mapStateToProps = (state, props) => ({
+    exam: state.exam
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ 
+    getParticipant,
+    addClass,
+    removeClass
+}, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(ParticipantClass);

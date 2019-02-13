@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 import Select from 'react-select';
 import DatePicker from 'react-datepicker'
 var FontAwesome = require('react-fontawesome')
-import { setLabelSelect } from './../../../utils/common'
+import { 
+    handleClass,
+    handleTimeAttr,
+} from './../../../redux-modules/modules/exam'
 
-export default class Classes extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import BasicComp from './basic_comp'
+
+class Classes extends Component {
     constructor(props){
         super(props)
 
@@ -17,6 +24,9 @@ export default class Classes extends Component {
     }
 
     render(){
+        const class_filters = this.props.exam && this.props.exam.data && this.props.exam.data.class_filters;
+        const basic_comps = this.props.exam && this.props.exam.data && this.props.exam.data.basic_comps;
+
         let remove;
         if(this.props.index > 0){
             remove = <div className="col-sm-1">
@@ -26,33 +36,16 @@ export default class Classes extends Component {
             </div>
         }
 
-        let basic_comps = []
-        if(this.props.basic_comps.length > 0){
-            this.props.basic_comps.map((basic_comp, idx) => {
-
-                let basic_kkm = this.props.data.comp_kkms ? this.props.data.comp_kkms.find((element) => { return element.basic_comp_id == basic_comp.id }) : []
-                basic_kkm = (basic_kkm == undefined ) ? [] : basic_kkm
-
-                let kkm = basic_kkm.kkm
-
-                basic_comps.push(
-                    <div className="row margin-top-2" key={idx}>
-                        <div className="col-sm-6">
-                            <div className="bold">
-                                {basic_comp.competency_number} {basic_comp.content}
-                            </div>
-                        </div>
-                        <div className="col-sm-2">
-                            <div className="filter">
-                                <input 
-                                    className="disblock fullwidth" 
-                                    placeholder="Masukkan KKM" 
-                                    onChange={(event) => {this.props.handleBasicCompAttr(event, basic_comp.id, this.props.index, idx)}}
-                                    value={kkm}
-                               />
-                            </div>
-                        </div>
-                    </div>
+        let in_basic_comps = []
+        if(basic_comps){
+            basic_comps.map((basic_comp, idx) => {
+                in_basic_comps.push(
+                    <BasicComp 
+                        key={idx}
+                        class_index={this.props.index}
+                        index={idx}
+                        data={basic_comp}
+                    />
                 )
             })
         }
@@ -72,10 +65,10 @@ export default class Classes extends Component {
                                     className= "select-list"
                                     classNamePrefix= "select"
                                     placeholder= "Pilih Kelas"
-                                    name= "category"
-                                    options={this.props.class_filters}
-                                    onChange={(event) => {this.props.handleClassAttr(event, this.props.index)}}
-                                    value={setLabelSelect(this.props.class_filters, this.props.data.class_id)}
+                                    name= "class_id"
+                                    options={class_filters}
+                                    onChange={(event) => {this.props.handleClass(event, this.props.index)}}
+                                    value={class_filters.find((element) => { return element.value == this.props.data.class_id  })}
                                 />
                                 {/* <Error data={this.state.errors} fieldname= 'category' /> */}
                             </div>
@@ -124,9 +117,19 @@ export default class Classes extends Component {
                             <label className="content-label">K.D MEmahami Makna Denotasi dan Konotasi</label>
                     </div>
                 </div>
-                {basic_comps}
+                {in_basic_comps}
                 <div className="border-bottom margin-top-6"></div>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state, props) => ({
+    exam: state.exam
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    handleClass,
+    handleTimeAttr,
+}, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(Classes);
