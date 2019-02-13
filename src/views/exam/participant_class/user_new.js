@@ -61,7 +61,7 @@ class ParticipantUser extends Component {
             apiClient('post', url, this.props.exam.data).then(res => {
                 let url_create = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes`
                 apiClient('post', url_create, this.props.exam.data).then(response => {
-                    this.props.history.push(`/exam/${this.state.assessment_id}`)
+                    window.location.href = `/exam/${this.state.assessment_id}`;
                 }).catch(error => {
                     alert('error')
                 })
