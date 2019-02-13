@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from 'reactstrap'
-
+import { getDate } from '../../utils/common'
 export default class AbsenceTable extends Component {
   render() {
     return (
@@ -17,11 +17,30 @@ export default class AbsenceTable extends Component {
         <tbody>
         {
           this.props.attendances.attendances.results.entries.map( (attendance, index) => {
+            let date = '-'
+            if (attendance.attendance_date) {
+              date = getDate('case-1', new Date(attendance.attendance_date))
+            }
+
+            let status = '-'
+            if (attendance.status === 'abstain') {
+              status = 'Alpha'
+            }
+            else if (attendance.status === 'permission') {
+              status = 'Izin'
+            }
+            else if (attendance.status === 'sick') {
+              status = 'Sakit'
+            }
+            else {
+              status = 'Hadir'
+            }
+
             return <tr key={index}>
+              <td className={(date === '-') ? 'text-center' : ''}>{date}</td>
+              <td className={!attendance.time_range ? 'text-center' : '-'}>{attendance.time_range ? attendance.time_range : '-'}</td>
               <td>-</td>
-              <td>-</td>
-              <td>-</td>
-              <td>{attendance.status}</td>
+              <td className={(status === '-' ? 'text-center' : '')}>{status}</td>
             </tr>
           })
         }

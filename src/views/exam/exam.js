@@ -28,10 +28,10 @@ const exam = (props) => {
             </NavLink>
             {
               props.question &&
-              <div className="exam__action">Pilih Soal</div>
-            }
+              <div className="exam__action">Lihat Soal</div>
+            } */}
             <div className="exam__action">Ubah</div>
-            <div className="exam__action">Hapus</div>
+            <div className="exam__action" onClick={props.delete}>Hapus</div>
           </div>
         </div>
         <div className="col-sm-2 d-flex">

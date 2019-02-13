@@ -7,7 +7,8 @@ export default class Homeroom extends Component {
   render() {
     let inputHomeroomNote = this.props.inputHomeroomNote
     let inputExtracurricularNote = this.props.extracurricularNotes
-    
+    let achievements = this.props.achievements
+
     return (
       <div>
         <TabContent activeTab={this.props.activeTab}>
@@ -66,10 +67,28 @@ export default class Homeroom extends Component {
 
           </TabPane>
           <TabPane tabId={3}>
-            <Input className="homeroom-teacher__input" type="text" placeholder="Tulis Judul Prestasi disini ..."></Input>
-            <Input className="homeroom-teacher__input mt-4" rows="5" type="textarea" placeholder="Tulis Deskripsi Prestasi disini ..."/> 
+          <Form className="homeroom-teacher__form">
+
+          {
+            achievements.length === 0 ?
+              <div>
+                <Input className="homeroom-teacher__input" type="text" placeholder="Tulis Judul Prestasi disini ..."></Input>
+                <Input className="homeroom-teacher__input mt-4" rows="5" type="textarea" placeholder="Tulis Deskripsi Prestasi disini ..."/> 
+              </div>
+            :
+              achievements.map(achievement => {
+                return (
+                  <div key={achievement.id} className='margin-bottom-6'>
+                    <Input onChange={(event) => this.props.changeAchievementNote(event, achievement.id, 'title')} className="homeroom-teacher__input mt-0" type="text" placeholder="Tulis Judul Prestasi disini ..." value={achievement.title} />
+                    <Input onChange={(event) => this.props.changeAchievementNote(event, achievement.id, 'description')} className="homeroom-teacher__input mt-4" rows="5" type="textarea" placeholder="Tulis Deskripsi Prestasi disini ..." value={achievement.description} />
+                  </div>
+                )
+              })
+            }
+            
             <div className="homeroom-teacher__add-extracurricular">+ <span>Tambah Prestasi lainnya</span></div>
-            <Button className="homeroom-teacher__save">Simpan</Button>
+            </Form>
+            <Button onClick={() => this.props.saveAchievement('daily_result', 'achievements')} className="homeroom-teacher__save">Simpan</Button>
           </TabPane>
         </TabContent>
       </div>
