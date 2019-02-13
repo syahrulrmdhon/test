@@ -295,3 +295,50 @@ export function questionTypes(params={}){
         this.setState({questionTypes: result})
     })
 }
+
+export function basicComps(params = {}, options = {}){
+    let listOptions = options.listOptions || false
+    let fieldName = options.fieldName || 'basic_comps'
+
+    apiClient('get', 'v1/filters/basic_comps', false, params).then(response => response.data).then(data => {
+        let basic_comps = data.data.basic_comps || []
+        let obj = {}
+        
+        if((basic_comps.length > 0) && listOptions){
+            const temps = basic_comps
+            basic_comps = []
+            
+            temps.map((temp, idx) => {
+                basic_comps.push({
+                    value: temp.id,
+                    label: temp.competency_number + ' ' + temp.content,
+                })
+            })
+        }
+        obj[fieldName] = basic_comps
+        this.setState(obj)
+    })
+}
+
+export function subjects(params = {}, options = {}){
+    let listOptions = options.listOptions || false
+
+    apiClient('get', 'v1/filters/subjects', false, params).then(response => response.data).then(data => {
+        let subjects = data.data.subjects || []
+        
+        if((subjects.length > 0) && listOptions){
+            const temps = subjects
+            subjects = []
+            
+            temps.map((temp, idx) => {
+                subjects.push({
+                    value: temp.id,
+                    label: temp.subject_name,
+                })
+            })
+        }    
+        this.setState({
+            subjects: subjects,
+        })
+    })
+}

@@ -26,6 +26,8 @@ export class Parent extends Component {
                         <div className="col-sm-3 align-center padding-2 ">
                             {
                                 scores.total_averages.map((x, i) => {
+                                    console.log('scores', scores.total_averages)
+                                    console.log(x)
                                     return <span key={i} className="label-nilai ">{x.score === null ? "N/A" : x.score}</span>
                                 })
                             }
