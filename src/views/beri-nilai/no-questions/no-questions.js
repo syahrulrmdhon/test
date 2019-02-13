@@ -22,9 +22,12 @@ export default class NoQuestions extends Component {
             totalAverages: [],
             selectIndex: -1,
             hidden: true,
-            key:'',
+            key: '',
             dataChildSubject: [],
             dataChildCompentency: [],
+            exam_id: props.match.params.exam_id,
+            class_id: props.match.params.class_id,
+            assessment_id: props.match.params.assessment_id,
         }
 
         this.handleClickQuestion = this.handleClickQuestion.bind(this)
@@ -44,7 +47,7 @@ export default class NoQuestions extends Component {
         let subject = []
         let competency = []
         let hidden = true
-        this.state.data.participants.map((value,i)=>{
+        this.state.data.participants.map((value, i) => {
             this.setState({
                 users: value.user,
                 scores: value.scores
@@ -72,10 +75,10 @@ export default class NoQuestions extends Component {
 
     }
     getDataResults() {
-        let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
-        let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
-        let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
-        const url = `v1/assessments/${assessment_id}/exams/${exam_id}/exam_classes/${exam_classes_id}/participant_results`
+        // let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
+        // let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
+        // let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
+        const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/participant_results`
 
         apiClient('get', url).then(res => {
             let dataParticipants = res.data.data.participants
@@ -87,10 +90,10 @@ export default class NoQuestions extends Component {
         })
     }
     getData() {
-        let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
-        let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
-        let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
-        const url = `v1/assessments/${assessment_id}/exams/${exam_id}/exam_classes/${exam_classes_id}/participants`
+        // let assessment_id = '6ae41268-d737-4a87-bb54-1a9cfd1d69f8'
+        // let exam_id = 'b4aa7bda-f96d-4665-8dc3-fe263ed670ed'
+        // let exam_classes_id = '1a5e496b-ffc4-445f-93b4-ef324e80e31c'
+        const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/participants`
 
         apiClient('get', url).then(res => {
             this.setState({
@@ -99,6 +102,7 @@ export default class NoQuestions extends Component {
         })
     }
     render() {
+        console.log('router', this.props.match.params.class_id)
         const tabMenu = ['Perolehan Nilai'];
         return (
             <div className="details-nilai bg-grey">
