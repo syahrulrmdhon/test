@@ -17,6 +17,7 @@ class Componentt extends Component {
             subject_list: [{}],
             assessment_subjects_attributes: [],
             subjects: [],
+            assessment: {},
         }
         this.addSubject = this.addSubject.bind(this)
         this.removeSubject = this.removeSubject.bind(this)
@@ -42,13 +43,16 @@ class Componentt extends Component {
                     this.getSubjectList()
                 }
             }
+            this.setState({
+                assessment: assessment
+            })
         })
     }
 
     onSubmit(event){
         event.preventDefault();
         let result = []
-        let data = this.props.assessment
+        let data = this.state.assessment
         // before save
         if(this.state.assessment_subjects_attributes.length > 0){
             this.state.assessment_subjects_attributes.map((assessment_subject, idx) => {
@@ -90,7 +94,7 @@ class Componentt extends Component {
     }
 
     setSubject(event, props){
-        const category = this.props.assessment.category || null
+        const category = this.state.assessment.category || null
 
         if(category && event.value){
             basicComps.call(this, {
