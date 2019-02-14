@@ -19,30 +19,30 @@ export class RightComponent extends Component {
             </div>
           </div>
         </div>
-        { 
-          this.props.participant_not_passed.map(function(data){
-            return   <div className="margin-top-5" key={Math.random()}>
-            <div className="row  margin-top-1 padding-bottom-4">
-                    <div className="col-sm-1">
-                      <Avatar src={Ava} size="30" round={true} />
-                    </div>
-                    <div className="col-sm-6">
-                      <div className="col-sm-12">
-                        <span className="under-kkm">{data.user.full_name }</span>
-                      </div>
-                      <div className="col-sm-12">
-                        <span className="email-under-kkm">{data.user.email}</span>
-                      </div>
-                    </div>
-                    <div className="col-sm-4">
-                      <span className="under-kkm-score padding-5">{data.total_average.score === null?0:data.total_average.score}</span>
-                    </div>
+        {
+          this.props.participant_not_passed.map(function (data) {
+            return <div className="margin-top-5" key={Math.random()}>
+              <div className="row  margin-top-1 padding-bottom-4">
+                <div className="col-sm-1">
+                  <Avatar src={Ava} size="30" round={true} />
+                </div>
+                <div className="col-sm-6">
+                  <div className="col-sm-12">
+                    <span className="under-kkm">{data.user.full_name}</span>
+                  </div>
+                  <div className="col-sm-12">
+                    <span className="email-under-kkm">{data.user.email}</span>
+                  </div>
+                </div>
+                <div className="col-sm-4">
+                  <span className="under-kkm-score padding-5">{data.total_average.score === null ? 0 : data.total_average.score}</span>
+                </div>
+              </div>
+
             </div>
-          
-          </div>
           })
         }
-          </div>
+      </div>
     )
   }
 }

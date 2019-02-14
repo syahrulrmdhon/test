@@ -73,7 +73,6 @@ export default class Header extends Component {
     }
 
     render() {
-        console.log(this.props)
 
         const l_school = !!(localStorage.getItem('school')) ? localStorage.getItem('school') : ''
         let school = null
