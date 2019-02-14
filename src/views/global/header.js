@@ -73,6 +73,8 @@ export default class Header extends Component {
     }
 
     render() {
+        console.log(this.props)
+
         const l_school = !!(localStorage.getItem('school')) ? localStorage.getItem('school') : ''
         let school = null
         if(l_school){
@@ -104,9 +106,9 @@ export default class Header extends Component {
                 school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()} className={actived} onClick={() => {this.onChangeSchool(school)}} value={school.id} ><FontAwesome className="check-school" name= {icon} /> {seeMore(school.name, 20)} </MenuItem>)
             })
         }
-        const { navbar } = this.props
+        const { navbar, location } = this.props
         let navbarOpt = navbar === undefined?true:false
-
+        let path = location === undefined ? '/murid' : location
 
         return (
             <div className="fix-nav">
@@ -144,7 +146,7 @@ export default class Header extends Component {
                         </Navbar>
                     </div>
                 </div>
-                <Menu  navbar={navbarOpt} />
+                <Menu  navbar={navbarOpt} location={path} />
             </div>
         )
     }

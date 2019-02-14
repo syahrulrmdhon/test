@@ -82,7 +82,9 @@ export default class Table extends Component {
                         <td className="align-right padding-right-6">
                             <NavLink to={url} className="btn default margin-right-4">Lihat</NavLink>
                             <FontAwesome name="trash" className="margin-left-2 margin-right-2 cgreen" onClick={this.delete.bind(this, value)} />
-                            <FontAwesome name="edit" className="margin-left-2 cgreen" />
+                            <NavLink to={`/penilaian/edit/${value.id}`}>
+                                <FontAwesome name="edit" className="margin-left-2 cgreen" />
+                            </NavLink>
                         </td>
                     </tr>
                 )

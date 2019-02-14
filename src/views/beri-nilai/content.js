@@ -10,7 +10,7 @@ import { setLabelSelect, checkProperties } from './../../utils/common'
 import SelectData from './select';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { setSavedata } from './../../redux-modules/modules/score'
+import { getDataScoreQuestion, handleScore } from './../../redux-modules/modules/score'
 
 
 
@@ -23,7 +23,7 @@ let choice = [
     { value: 'e', label: 'E' },
 ]
 
-export default class Content extends Component {
+class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,18 +39,6 @@ export default class Content extends Component {
         this.onChangeSelect = this.onChangeSelect.bind(this)
         this.handlSave = this.handlSave.bind(this)
         this.getDataChoice = this.getDataChoice.bind(this)
-    }
-    componentDidMount() {
-        const choicePG = []
-        let arrayData = this.props.form
-
-        // arrayData && arrayData.exam_question_choices.map((x,i) => {
-        //     choicePG.push({value:x.symbol, label:x.symbol })
-        // })
-        console.log(this.props.form, "PGCHOICe")
-        this.setState({
-            dataChoice: choicePG
-        })
     }
     onChangeSelect(event, props) {
         console.log(event, props, "my event");
@@ -130,8 +118,42 @@ export default class Content extends Component {
 
     }
     render() {
-        const { form } = this.props
+        const question_exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.collections || []
+        const exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.exam_question || []
 
+        let content = []
+        console.log("my exam", this.props)
+        question_exam.map(function (x, index) {
+            let merge_content = []
+            console.log(exam[index],"exam index")
+            if(x.problem_type == 'multiple_choice'){
+                merge_content.push(<SelectData choices={x.exam_question_choices} max_score={x.max_score} index={index} exam={exam[index]} />)
+                merge_content.push(<td className="align-center">{exam[index]['score']}</td>)
+            } else {
+                merge_content.push(
+                    <td> <input 
+                        type="text" 
+                        onChange={(e) => {this.props.handleScore(e, index, 'ans')}} 
+                        className="padding-1 fullwidth" 
+                        defaultValue={exam[index]['ans']}
+                    /> </td>
+                )
+                merge_content.push(
+                    <td><input 
+                        type="text" 
+                        onChange={(e) => {this.props.handleScore(e, index, 'score')}}    
+                        defaultValue={exam[index]['score']}
+                    /></td>
+                )
+            }
+
+            content.push(<tr key={Math.random()}>
+                <td className="align-left text-center">{x.qn_number}</td>
+                <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
+                {merge_content}
+                <td>{x.weight}</td>
+            </tr>)
+        }, this)
         return (
             <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">
                 <div className="row rounded-10">
@@ -154,34 +176,8 @@ export default class Content extends Component {
                                             <th>Bobot</th>
                                         </thead>
                                         <tbody>
-                                            {
-                                                form.map(function (x, i) {
-                                                    return <tr key={Math.random()}>
-                                                        <td className="align-left text-center">{x.qn_number}</td>
-                                                        <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
-                                                        {
-                                                            x.exam_question_choices.map((cx, i) => {
-                                                                if (cx.is_correct_ans === true) {
-                                                                    return <SelectData choice={this.props.choice} data={x} is_correct={cx.symbol} />
-                                                                }
-                                                            })
-                                                                  
-                                                        }
-                                                        <td className="align-center">{x.max_score}</td>
-
-                                                        {/* {
-                                                             
-                                                                x.exam_question_choices.map((array) => {
-                                                                    return  <td className="align-center">{array.is_correct_ans === null ? this.props.score_choice : x.max_score}</td>
-                                                                })
-                                                            } */}
-                                                        <td>{x.weight}</td>
-                                                    </tr>
-                                                }, this)
-                                            }
-
+                                            {content}
                                         </tbody>
-
                                     </table>
                                     <div className="margin-top-3 align-right">
                                         <button className="submit-btn" onClick={this.handlSave}>Submit </button>
@@ -196,12 +192,12 @@ export default class Content extends Component {
     }
 }
 
-// const mapStateToProps = state => ({
-//     // data: state
-//   })
+const mapStateToProps = state => ({
+    data_exam: state.score
+})
 
-//   const mapDispatchToProps = dispatch => bindActionCreators({ setSavedata }, dispatch);
-//   export default connect(mapStateToProps, mapDispatchToProps)(Content);
+const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreQuestion,handleScore }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(Content);
 
 
 

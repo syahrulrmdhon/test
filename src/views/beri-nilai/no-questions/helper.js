@@ -188,10 +188,12 @@ export class Subjects extends Component {
     render() {
         let data = this.props.data
         let classname = ''
+        let ix = this.props.ix
         let average = data.scores.total_averages
         let competencies = this.props.competencies
         let subjects = data.scores.subject_averages
         let predicate = data.scores.total_average.predicate
+        let border = 'border-left-col-red'
 
         if (predicate === 'a' || predicate === 'b') {
             classname = 'border-left-col-green col-sm-3 padding-1'
@@ -201,8 +203,7 @@ export class Subjects extends Component {
             classname = 'border-left-col-red col-sm-3 padding-1'
         }
 
-        // return <div className={classnames(`${this.state.selectIndex === index ? 'display-block' : 'display-none'}`)} key={this.state.key}    >
-        return <div className={classname}>
+        return <div className={classnames("border-right border-bottom ", border, `${this.props.indx === ix ? 'display-block' : 'display-none'}`)}>
             <div className='row'>
                 <div className='col-sm-12'>
                     <div className='margin-side-10 padding-bottom-3 margin-top-5'>
@@ -217,7 +218,7 @@ export class Subjects extends Component {
                                             <div className="col-sm-4">
                                             </div>
                                             <div className="col-sm-4 align-center">
-                                                {data.average_score.score}
+                                                {data.average_score.score === null ? 'N/A' : data.average_score.score}
                                             </div>
                                         </div>
                                     </div>
@@ -233,8 +234,11 @@ export class Subjects extends Component {
                                                 <div className="col-sm-8">
                                                     {value.basic_comp.competency_number + ' ' + value.basic_comp.content}
                                                 </div>
+                                                <SubjectScore
+                                                    data={value}
+                                                />
                                                 <div className="col-sm-4 align-center">
-                                                    {value.average_score.score}
+                                                    {value.average_score.score === null ? 'N/A' : value.average_score.score}
                                                 </div>
                                             </div>
                                         </div>
@@ -244,6 +248,28 @@ export class Subjects extends Component {
                         }
                     </div>
                 </div>
+            </div>
+        </div>
+    }
+}
+
+export class SubjectScore extends Component {
+    render() {
+        let data = this.props.data
+        let predicate = data.average_score.predicate
+        let classnames = ''
+
+        if (predicate === 'a' || predicate === 'b') {
+            classnames = 'large-text-red-bold'
+        } else if (predicate === 'c') {
+            classnames = 'large-text-red-bold'
+        } else if (predicate === 'd') {
+            classnames = 'large-text-red-bold'
+        }
+
+        return <div className="col-sm-4 align-center">
+            <div className={classnames}>
+                {data.average_score.score === null ? 'N/A' : data.average_score.score}
             </div>
         </div>
     }

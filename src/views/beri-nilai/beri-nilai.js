@@ -107,10 +107,11 @@ export default class Nilai extends Component {
       pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
       state: { data: data }
     })
-  }
+}
 
   render() {
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
+
     return (
       <div className="details-nilai bg-grey">
         <Header navbar={false} />

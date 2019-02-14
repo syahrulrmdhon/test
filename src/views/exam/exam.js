@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom';
 
 import 'react-circular-progressbar/dist/styles.css';
 
-
-
 const exam = (props) => {
   const styles = {
     path: {
@@ -17,7 +15,7 @@ const exam = (props) => {
       stroke: 'ededed',
     }
   }
-  // console.log(props.e,"my key")
+  
   return (
     <div className="exam__panel">
       <div className="row h-100">
@@ -25,14 +23,14 @@ const exam = (props) => {
           <div className="exam__task-of">Tugas {props.order}</div>
           <div className="exam__title">{props.title}</div>
           <div className="exam__action-wrapper">
-            <NavLink to={`/pariticipant-class/${props.exam.assessment_id}/assessment/${props.exam.id}/exam`} >
-              <div className="exam__action">Pilih Kelas</div>
+            <NavLink to= {`/pariticipant-class/${props.exam.assessment_id}/assessment/${props.exam.id}/exam`} className="exam__action" >
+              Pilih Kelas
             </NavLink>
             {
               props.question &&
               <div className="exam__action">Lihat Soal</div>
-            } */}
-            <div className="exam__action">Ubah</div>
+            }
+            {/* <div className="exam__action" onClick={props.edit}>Ubah</div> */}
             <div className="exam__action" onClick={props.delete}>Hapus</div>
           </div>
         </div>

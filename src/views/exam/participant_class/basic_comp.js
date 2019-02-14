@@ -23,6 +23,7 @@ class BasicComp extends Component {
                         <input 
                             className="disblock fullwidth" 
                             placeholder="Masukkan KKM" 
+                            required={true}
                             onChange={(event) => {this.props.handleBC(event, this.props.class_index, this.props.index)}}
                             value={this.props.basic_comp.kkm || ''}
                         />

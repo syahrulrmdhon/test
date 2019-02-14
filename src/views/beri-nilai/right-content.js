@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Avatar from 'react-avatar';
 import Ava from './../../assets/images/img_avatar.png';
-import Select from './select';
 
 export class RightComponent extends Component {
 

@@ -6,6 +6,8 @@ import { assessmentType, setLabelSelect, setErrorRuby } from './../../../utils/c
 import { apiClient } from '../../../utils/apiClient'
 import Error from '../../global/error'
 
+import ErrorModal from './../../global/error_modal'
+
 const category_types = [
     { value: 'knowledge', label: 'Pengetahuan' },
     { value: 'skill', label: 'Keterampilan' },
@@ -25,7 +27,8 @@ export default class Basic extends Component {
             assessment_type: "",
             school_id: localStorage.getItem("school_id") || "",
             assessment_classes_attributes: [],
-            errors: {}
+            errors: {},
+            isError: false
         }
 
         this.addClass = this.addClass.bind(this)
@@ -96,12 +99,14 @@ export default class Basic extends Component {
             this.props.callBack('basic')
         }).catch(error => {
             this.setState({
+                isError: true,
                 errors: setErrorRuby(error.response.data, [
                     'category',
                     'assessment_type',
                     'name',
                     'assessment_class',
                 ])
+
             })
         })
     }
@@ -152,6 +157,7 @@ export default class Basic extends Component {
     }
 
     render(){
+        let error = []
         let class_view = []
         if(this.state.class_list.length > 0){
             this.state.class_list.map((x, idx) => {
@@ -164,9 +170,17 @@ export default class Basic extends Component {
                 />)
             })
         }
+
+        if(this.state.isError){
+            error.push(<ErrorModal key={Math.random()} status="error" message="Gagal menambah partisipan kelas, cek kembali data yang dibutuhkan" />)
+            this.setState({
+                isError: false,
+            })
+        }
         
         return(
             <div>
+                {error}
                 <div className="row">
                     <div className="col-sm-10">
                         <div className="content-input margin-top-10">

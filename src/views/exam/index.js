@@ -5,6 +5,7 @@ import Filter from './filter'
 import Content from './content'
 import '../../styles/exam.scss'
 import { apiClient } from "../../utils/apiClient"
+import { confirmAlert } from 'react-confirm-alert'
 
 export default class Index extends Component {
   constructor(props) {
@@ -22,6 +23,8 @@ export default class Index extends Component {
     this.addExam = this.addExam.bind(this)
     this.onChangePage = this.onChangePage.bind(this)
     this.deleteExam = this.deleteExam.bind(this)
+    this.delete = this.delete.bind(this)
+    this.toEdit = this.toEdit.bind(this)
   }
 
   componentDidMount() {
@@ -42,6 +45,12 @@ export default class Index extends Component {
     }
   }
 
+  toEdit(id) {
+    this.props.history.push({
+      pathname:`/edit/${this.state.assessmentId}/exam/${id}`
+   })
+  }
+
   getAssessments() {
     const path = `v1/assessments/${this.state.assessmentId}`
 
@@ -57,21 +66,42 @@ export default class Index extends Component {
     })
   }
 
-
-
-
   addExam() {
     this.props.history.push({ pathname: `/create-exam/${this.state.assessmentId}` })
   }
 
   deleteExam(id) {
     const path = `v1/assessments/${this.state.assessmentId}/exams/${id}`
-
-    apiClient('delete', path).then(() => {
+    
+    apiClient('delete', path).then(() =>{
       this.getAssessments()
     })
   }
-
+  
+  delete(value) {
+    confirmAlert({
+      customUI: ({ onClose, onConfirm}) => {
+        return (
+          <div className="create-exam" key={Math.random()}> 
+            <div className="react-confirm-alert modal-alert ">
+              <div className="react-confirm-alert-body">
+                  <div className="header align-center">
+                    <h1>Apakah anda yakin ingin menghapus tugas ini?</h1>
+                  </div>
+                  <div className="react-confirm-alert-button-group toggle">
+                    <div className="align-center fullwidth">
+                      <a href="javascript:void(0);" onClick={onClose} className="btn default">Tidak</a>
+                      <a href="javascript:void(0);" className="btn green" onClick={() => { this.deleteExam(value); onClose(); }}>Ya</a>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        )
+      },
+    })
+  }
+  
   render() {
     return (
       <div className="padding-content exam">
@@ -88,7 +118,8 @@ export default class Index extends Component {
                   addExam={this.addExam}
                   page={this.onChangePage}
                   assessmentId={this.state.assessmentId}
-                  delete={this.deleteExam}
+                  delete={this.delete}
+                  edit={this.toEdit}
                 />
               </div>
             </div>

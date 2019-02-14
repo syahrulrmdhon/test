@@ -41,7 +41,6 @@ class BottomContent extends Component {
             height: 'col-height'
         })
     }
-
     handleClick(e, id, idx) {
         let subject = []
         let competency = []
@@ -58,7 +57,6 @@ class BottomContent extends Component {
             hidden = true;
         }
 
-
         this.setState({
             hidden: hidden[1],
             key: 1,
@@ -66,24 +64,14 @@ class BottomContent extends Component {
             selectIndex: (this.state.selectIndex === idx ? -1 : idx),
             dataChildCompentency: competency
         })
-
     }
-
-    // handleClickQuestion(e, id, name) {
-    //     e.preventDefault()
-    //     this.props.history.push({
-    //         pathname: /questions/ + id, state: { fullname: name }
-    //     })
-    // }
-
     handleNewScore(e, student, ) {
         e.preventDefault()
         this.props.handleNewScoreParent(e, student)
     }
 
-
     render() {
-        const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
+        const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants
         return (
             <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-top-4 margin-bottom-2">
                 <div className="content-bottom">
@@ -157,19 +145,6 @@ class BottomContent extends Component {
                                                 <Averages
                                                     data={data}
                                                 />
-
-                                                {/* {
-                                                    data.scores.total_averages.length > 0  ?
-                                                        data.scores.total_averages.map((x, i) => {
-                                                            return <div className="col-sm-3 align-center padding-2 " key={i}>
-                                                                <span className=" label-nilai ">{x.score === null ? 'N/A' : x.score}</span>
-                                                            </div>
-                                                        })
-                                                        :
-                                                        <div className="col-sm-3 align-center padding-2">
-                                                            <span className=" label-nilai ">N/A</span>
-                                                        </div>
-                                                } */}
                                                 <div className="col-sm-2 align-left padding-2 ">
                                                     <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.page(e, data.user.id, this.props.class) }} />
                                                 </div>
@@ -180,6 +155,8 @@ class BottomContent extends Component {
                                         </div>
                                     </div>
                                     <Subjects
+                                        indx={this.state.selectIndex}
+                                        ix={index}
                                         data={data}
                                         index={this.state.selectIndex}
                                         competencies={this.state.dataChildCompentency}
