@@ -143,7 +143,7 @@ export class TotalAverage extends Component {
 export class Users extends Component {
     render() {
         let data = this.props.data
-        let classname = ''
+        let classname = 'col-sm-3 padding-1'
         let predicate = data.scores.total_average.predicate
         let fullname = data.user.full_name
 

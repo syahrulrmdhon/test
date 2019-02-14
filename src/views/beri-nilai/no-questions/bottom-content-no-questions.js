@@ -7,8 +7,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import classnames from 'classnames'
 import { Users, Subjects, Averages } from './helper'
-import Avatar from 'react-avatar';
-import Ava from './../../../assets/images/img_avatar.png'
 import Pencil from './../../../assets/images/beri_nilai.svg'
 var FontAwesome = require('react-fontawesome')
 
