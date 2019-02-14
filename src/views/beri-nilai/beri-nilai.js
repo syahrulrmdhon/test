@@ -10,7 +10,11 @@ import BottomContentEvaluasi from './evaluasi/bottom-content-evaluasi'
 import { apiClient } from '../../utils/apiClient'
 import RightContent from './right-content'
 import SubjectEvaluasi from './evaluasi/subject-evaluasi';
-export default class Nilai extends Component {
+import { getParticipant } from './../../redux-modules/modules/score'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+class Nilai extends Component {
   constructor(props) {
     super(props)
 
@@ -28,12 +32,15 @@ export default class Nilai extends Component {
       competencySubjects: [],
       questionResults: [],
       examChart: [],
-      collapce: ''
+      collapce: '',
+      search: ''
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.fetchData = this.fetchData.bind(this)
     this.toggleMenu = this.toggleMenu.bind(this)
     this.handleNewScore = this.handleNewScore.bind(this)
+    this.onChangeSelect = this.onChangeSelect.bind(this)
+    this.onSubmmit = this.onSubmmit.bind(this)
   }
   componentDidMount() {
 
@@ -88,26 +95,27 @@ export default class Nilai extends Component {
 
     })
   }
+  onChangeSelect(e) {
+    this.setState({
+      search: e.target.value
+    })
+  }
 
   handleNewScore(e, student) {
     e.preventDefault()
-    // let collapce = this.state.collapce
-    // if(collapce === ''){
-    //     this.setState({
-    //         collapce:'collapce'
-    //     })
-    // }else{
-    //     this.setState({
-    //         collapce:''
-    //     })
-    // }
     let data = 'ac67857a-ad71-4a97-9718-c71c47e2e4bc'
-
     this.props.history.push({
       pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
       state: { data: data }
     })
-}
+
+
+  }
+
+  onSubmmit(){
+    console.log(this.state.search,"search")
+    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.asssessment_id, this.state.search )
+  }
 
   render() {
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
@@ -147,6 +155,9 @@ export default class Nilai extends Component {
                       class={this.state.class_id}
                       asssessment={this.state.assessment_id}
                       handleNewScoreParent={this.handleNewScore}
+                      search={this.state.search}
+                      onChange={this.onChangeSelect}
+                      submit={this.onSubmmit}
                     />
                   </div>
                 </div>
@@ -197,4 +208,11 @@ export default class Nilai extends Component {
   }
 }
 
+
+const mapStateToProps = state => ({
+  user: state.score
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ getParticipant }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(Nilai);
 
