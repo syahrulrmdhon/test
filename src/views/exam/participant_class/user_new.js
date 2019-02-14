@@ -57,7 +57,7 @@ class ParticipantUser extends Component {
         if(participant_users.length > 0){
             let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/validate?step=ParticipantForm`
             this.props.exam.data.exam.exam_participants_attributes = participant_users
-
+       
             apiClient('post', url, this.props.exam.data).then(res => {
                 let url_create = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes`
                 apiClient('post', url_create, this.props.exam.data).then(response => {
@@ -66,7 +66,6 @@ class ParticipantUser extends Component {
                     alert('error')
                 })
             }).catch(error => {
-                console.log(error.response)
             })  
         } else {
             alert('Pilih Siswa minimal 1')
