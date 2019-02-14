@@ -25,11 +25,14 @@ class BottomContent extends Component {
             border: 'border-bottom',
             hidden: true,
             element: 'hidden',
-            token: localStorage.getItem('token')
+            token: localStorage.getItem('token'),
+            search: ''
         }
         this.onClickToogle = this.onClickToogle.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.handleNewScore = this.handleNewScore.bind(this)
+        this.handleSearch = this.handleSearch.bind(this)
+        this.onSubmmit = this.onSubmmit.bind(this)
     }
     componentDidMount() {
         this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment)
@@ -37,6 +40,11 @@ class BottomContent extends Component {
     onClickToogle() {
         this.setState({
             height: 'col-height'
+        })
+    }
+    handleSearch(e) {
+        this.setState({
+            search: e.target.value
         })
     }
     handleClick(e, id, idx) {
@@ -67,9 +75,26 @@ class BottomContent extends Component {
         e.preventDefault()
         this.props.handleNewScoreParent(e, student)
     }
+    onSubmmit() {
+        console.log(this.state.search, "search")
+        this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment, this.state.search)
+    }
 
     render() {
         const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants
+        let border = 'border-left-col-green'
+        dataArray && dataArray.map((x) => {
+            let status = x.scores.total_average.result_status
+            if (status === 'very_good') {
+                console.log("here very good")
+                border = 'border-left-col-green'
+            } else if (status === 'need_attention') {
+                border = 'border-left-col-red'
+                console.log("or here")
+            } else if (status === null) {
+                border = 'border-left-col-red'
+            }
+        })
         return (
             <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-top-4 margin-bottom-2">
                 <div className="content-bottom">
@@ -97,8 +122,9 @@ class BottomContent extends Component {
                                                 placeholder="Cari murid disini..."
                                                 name="search"
                                                 onChange={this.handleSearch}
+                                                value={this.state.search}
                                             />
-                                            <i className="fa fa-search icon"></i>
+                                            <i className="fa fa-search icon" onClick={this.onSubmmit}></i>
                                         </div>
                                     </div>
                                 </div>

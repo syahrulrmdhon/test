@@ -113,6 +113,7 @@ export default class Questions extends Component {
                         </div>
                         <div className='col-sm-6 margin-bottom-4'>
                             <label className='disblock padding-bottom-2 subject-title'>Nilai</label>
+                            
                             <input
                                 className='input-question'
                                 name='nilai'
