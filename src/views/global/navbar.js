@@ -38,7 +38,7 @@ export default class MenuBar extends Component {
                             navbar === false?
                             <div className="bg-white">
                             <div className="back">
-                                <Link to="/murid">&lt; Kembali</Link>
+                                <Link to={this.props.location}>&lt; Kembali</Link>
                             </div>
                             </div>
                             :

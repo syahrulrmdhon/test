@@ -3,7 +3,7 @@ import { assessmentType } from './common'
 import { apiClient } from './apiClient'
 import { Answer } from '../views/beri-nilai/evaluasi/table-conditions';
 
-export function assessmentGetData(){
+export function assessmentGetData(p_category = false){
     let params = {}
     let models = 'assessments'
     let category = this.state.activeTab
@@ -20,10 +20,11 @@ export function assessmentGetData(){
         params['school_subject_id'] = this.state.school_subject_id.value
     }
 
-    let url = 'v1/assessments?category=' + category
+    let url = 'v1/assessments?category=' + (p_category ? p_category : category)
     apiClient('get', url, false, params).then(response => {
         let assessments = response.data.data.assessments
         let data = assessments.entries
+        console.log(response)
 
         let paginate = {
             size: assessments.size,
@@ -59,13 +60,14 @@ export function multipleQuestion(value = false) {
 
     if (value.length > 0) {
         value.map((question, key) => {
+            console.log('question', question)
             let isCorrect = question.is_correct_ans
             if (isCorrect === null || isCorrect === false) {
                 classname = 'bold'
                 result.push(
                     <div className={classname} key={key}>
                         <div className="disblock margin-bottom-1">
-                            {question.symbol.toLowerCase()}). {(question.content || '-')} <span className={classname}>({question.ans_count} Murid)</span>
+                            {question.symbol === null ? 'N/A' : question.symbol}). {(question.content || '-')} <span className={classname}>({question.ans_count} Murid)</span>
                         </div>
                     </div>
                 )
@@ -74,7 +76,7 @@ export function multipleQuestion(value = false) {
                 result.push(
                     <div className={classname} key={key}>
                         <div className="disblock margin-bottom-1">
-                            {question.symbol.toLowerCase()}). {(question.content || '-')} <span className={classname}>({question.ans_count} Murid)</span>
+                            {question.symbol === null ? 'N/A': question.symbol}). {(question.content || '-')} <span className={classname}>({question.ans_count} Murid)</span>
                         </div>
                     </div>
                 )
@@ -107,17 +109,47 @@ export function assessmentShow(id) {
     })
 }
 
-export function assessmentLabel(value){
+export function assessmentLabel(value, color = false){
+    let result = ''
     switch(value){
         case 'task':
-            return 'Tugas'
+            result = (color) ? 'bcgreen' : 'Tugas'
+        break
         case 'daily_exam':
-            return 'UH'
+            result = (color) ? 'bcblue' : 'UH'
+        break
         case 'midterm_exam':
-            return 'UTS'
+            result = (color) ? 'bcblack2' : 'UTS'
+        break
         case 'final_exam':
-            return 'UAS'
+            result = (color) ? 'bcred' : 'UAS'
+        break
         default:
             return 'N/A'
     }
+    return result
+}
+
+export function getQuestion(id, number) {
+    let params = {}
+
+    if(this.state.step !== null){
+        params['step'] = this.state.step
+    }
+
+    if(this.state.activeNumber !== null) {
+        params['number'] = this.state.activeNumber
+    }
+    let url = `v1/assessments/${id}/exams/new?`
+
+    apiClient('get', url, false, params).then(response => {
+        let data = response.data.data
+        data.assessment_basic_comps.map(competence => {
+            competence.label = `${competence.competency_number} ${competence.label} (${competence.subject_name})`
+        })
+        this.setState({
+            data: data,
+        })
+    })
+
 }

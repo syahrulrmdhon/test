@@ -4,6 +4,37 @@ $nunito_semi_bold: 'NunitoSemiBold';
 $nunito_bold: 'NunitoBold';
 
 .create-exam {
+
+
+  .modal-alert .header {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .modal-alert .header > h1 {
+    color: #4a4a4a;
+    font-family: $nunito_bold;
+    margin: 0px auto;
+  }
+
+  .modal-alert .close {
+    color: #ff7366;
+    font-size: 20px;
+    position: absolute;
+    right: 15px;
+  }
+
+  .alert-body {
+    width: 60%;
+    font-size: 12px;
+    color: #4a4a4a;
+    font-family: "NunitoSemiBold";
+    margin: 0px auto;
+    text-align: center;
+    padding-top: 20px;
+  }
+
   .content-wrapper {
     position: relative;
     box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
@@ -12,12 +43,11 @@ $nunito_bold: 'NunitoBold';
     width: 70%;
     height: 510px;
     margin: 0px auto;
-    padding: 38.5px 85px 27.5px;
+    padding: 38.5px 120px 27.5px 85px;
   }
 
   &__title-wrapper {
-    padding-left: 10px;
-    width: 110px;
+    width: 120px;
   }
 
   &__form-title {
@@ -48,11 +78,28 @@ $nunito_bold: 'NunitoBold';
     margin: 10px 0px 18px;
     width: 550px;
     height: 38px;
+
+    &-symbol {
+      width: auto;
+      height: 38px;
+      margin: 10px 0px 18px;
+    }
   }
   
   &__input-amount {
     width: 300px;
   }
+
+  &__choice {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+
+  &__radio {
+    margin-right: 10px;
+  }
+
 
   &__button {
     background-color: #1a9d7f;
@@ -72,6 +119,13 @@ $nunito_bold: 'NunitoBold';
       border: none;
       color: #ffffff;
       opacity: .65;
+    }
+
+    &--back {
+      background-color: #ffffff;
+      color: #1a9d7f;
+      border: 1px solid #1a9d7f;
+      margin-right: 15px;
     }
   }
 
@@ -96,6 +150,77 @@ $nunito_bold: 'NunitoBold';
 
     &__menu {
       width: 300px;
+    }
+  }
+
+  &.question-wrapper {
+    .nav-link {
+      color: #1a9d7f;
+      background-color: #ffffff;
+      padding-left: 0px;
+      padding-right: 0px;
+      border-radius: unset;
+
+      &.active {
+        background-color: #1a9d7f;
+        color: #ffffff;
+      }
+    }
+    .nav__tab {
+      &-content {
+        width: 35px;
+        border: 1px solid #f6f6f6;
+
+      }
+    }
+    
+    .tab-wrapper.create-exam__input {
+      width: auto;
+      height: auto;
+    }
+
+    .content-wrapper {
+      height: 100%;
+    }
+
+    .create-exam {
+      &__button {
+        position: static;
+        bottom: unset;
+      }
+
+      &__separate {
+        width: 100%;
+        height: 1px;
+        background-color: #eeeeee;
+        margin: 30px auto;
+      }
+
+      &__line {
+        width: 35px;
+        height: 2px;
+        background-color: #1a9d7f;
+        margin: 0px auto;
+      }
+    }
+
+    .add-icon {
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      background-color: #05a558;
+      color: #ffffff;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .add-wrapper {
+      color: #05a558;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
     }
   }
 }

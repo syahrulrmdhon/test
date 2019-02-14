@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-var FontAwesome = require('react-fontawesome')
 import Subject from './component/subject'
 import { subjects, basicComps, setErrorRuby } from './../../../utils/common'
 import { connect } from 'react-redux'
 import { apiClient } from '../../../utils/apiClient';
+var FontAwesome = require('react-fontawesome')
 
 class Componentt extends Component {
     constructor(props){
@@ -14,7 +14,7 @@ class Componentt extends Component {
         this.state = {
             class_ids: [],
             school_level: school.level,
-            subject_list: this.props.componentt,
+            subject_list: [{}],
             assessment_subjects_attributes: [],
             subjects: [],
         }
@@ -28,21 +28,24 @@ class Componentt extends Component {
     }
 
     componentDidMount(){
-        let assessment = this.props.assessment
+        // let assessment = this.props.assessment
         let class_ids = []
-        
-        if(assessment !== undefined){
-            if(Object.entries(assessment).length > 0){
-                assessment.assessment_classes_attributes.map((classes_attribute, idx) => {
-                    class_ids.push(classes_attribute.class_id)
-                })
-                this.state.class_ids = class_ids
-                this.getSubjectList()
+
+        apiClient('get', "v1/assessments/new").then(response => {
+            const assessment = response.data.data.assessment
+            if(assessment !== undefined){
+                if(Object.entries(assessment).length > 0){
+                    assessment.assessment_classes_attributes.map((classes_attribute, idx) => {
+                        class_ids.push(classes_attribute.class_id)
+                    })
+                    this.state.class_ids = class_ids
+                    this.getSubjectList()
+                }
             }
-        }
+        })
     }
 
-    onSubmit(){
+    onSubmit(event){
         event.preventDefault();
         let result = []
         let data = this.props.assessment
@@ -166,7 +169,7 @@ class Componentt extends Component {
                     removeSubject= {this.removeSubject}
                     assessment_subject={this.state.assessment_subjects_attributes[idx]}
                     subjects={this.state.subjects}
-                    handleSubject={(value) => {this.handleSubject}}
+                    handleSubject={(value) => {this.handleSubject()}}
                     assessment={this.props.assessment}
                     setSubject={this.setSubject}
                     setKD={this.setKD}
@@ -201,10 +204,11 @@ class Componentt extends Component {
         )
     }
 }
-const mapStateToProps = (state = false) => {
-    return {
-        componentt: state.assessment.component || [{}],
-    }
-}
+// const mapStateToProps = (state = false) => {
+//     return {
+//         componentt: state.assessment.component || [{}],
+//     }
+// }
 
-export default connect(mapStateToProps)(Componentt)
+export default Componentt
+// export default connect(mapStateToProps)(Componentt)

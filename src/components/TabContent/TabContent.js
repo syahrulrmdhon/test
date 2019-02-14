@@ -35,7 +35,7 @@ export default class ContentTab extends Component {
 
   render() {
     return (
-      <div>
+      <div className={["tab-wrapper", this.props.class].join(' ')}>
         {this.tabs(this.props.tab)}
       </div>
     )
