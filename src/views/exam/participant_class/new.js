@@ -10,6 +10,8 @@ import { apiClient } from './../../../utils/apiClient'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import ErrorModal from './../../global/error_modal'
+
 class ParticipantClass extends Component {
     constructor(props){
         super(props)
@@ -30,7 +32,8 @@ class ParticipantClass extends Component {
                     }
                 ],
                 exam_participants_attributes: [],
-            }
+            },
+            isError: false,
         }
 
         this.addClass = this.addClass.bind(this)
@@ -73,12 +76,15 @@ class ParticipantClass extends Component {
             apiClient('post', url, this.props.exam.data).then(response => {
                 this.props.history.push(`/pariticipant-user/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`)
             }).catch(error => {
-                console.log(error.response)
+                this.setState({
+                    isError: true
+                })
             })   
         }        
     }
 
     render(){
+        let error = []
         let exam_classes = this.props.exam && this.props.exam.data && this.props.exam.data.exam.exam_classes_attributes;
         let basic_comps = this.props.exam && this.props.exam.data && this.props.exam.data.basic_comps;
 
@@ -95,8 +101,16 @@ class ParticipantClass extends Component {
             })
         }
 
+        if(this.state.isError){
+            error.push(<ErrorModal key={Math.random()} status="error" message="Gagal menambah partisipan kelas, cek kembali data yang dibutuhkan" />)
+            this.setState({
+                isError: false,
+            })
+        }
+
         return(
             <div className="padding-content">
+                {error}
                 <Header />
                 <div className="container">
                     <div className="margin-8">

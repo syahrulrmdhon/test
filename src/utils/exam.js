@@ -3,7 +3,7 @@ import { assessmentType } from './common'
 import { apiClient } from './apiClient'
 import { Answer } from '../views/beri-nilai/evaluasi/table-conditions';
 
-export function assessmentGetData(){
+export function assessmentGetData(p_category = false){
     let params = {}
     let models = 'assessments'
     let category = this.state.activeTab
@@ -20,10 +20,11 @@ export function assessmentGetData(){
         params['school_subject_id'] = this.state.school_subject_id.value
     }
 
-    let url = 'v1/assessments?category=' + category
+    let url = 'v1/assessments?category=' + (p_category ? p_category : category)
     apiClient('get', url, false, params).then(response => {
         let assessments = response.data.data.assessments
         let data = assessments.entries
+        console.log(response)
 
         let paginate = {
             size: assessments.size,
@@ -142,6 +143,9 @@ export function getQuestion(id, number) {
 
     apiClient('get', url, false, params).then(response => {
         let data = response.data.data
+        data.assessment_basic_comps.map(competence => {
+            competence.label = `${competence.competency_number} ${competence.label} (${competence.subject_name})`
+        })
         this.setState({
             data: data,
         })

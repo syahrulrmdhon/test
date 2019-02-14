@@ -3,6 +3,7 @@ import Home from '../views/beranda/beranda'
 import Absensi from '../views/absensi/absensi'
 import Assessment from '../views/penilaian/penilaian'
 import AssessmentNew from '../views/penilaian/new'
+import AssessmentEdit from '../views/penilaian/edit'
 import DaftarNilai from '../views/daftar-nilai/daftar-nilai'
 import Rapor from '../views/rapor/rapor'
 import DaftarMurid from '../views/student/murid'
@@ -18,6 +19,7 @@ import NoQuestions from '../views/beri-nilai/no-questions/no-questions'
 import Questions from '../views/beri-nilai/no-questions/questions'
 import NotFound from '../views/global/not-found'
 import NewScore from './../views/beri-nilai/new'
+import EditQuestion from '../views/create-exam/create-question'
 
 export const MainRoutes = [
     {
@@ -41,6 +43,10 @@ export const MainRoutes = [
     {
         path: '/penilaian/tambah',
         component: AssessmentNew
+    },
+    {
+        path: '/penilaian/edit/:id',
+        component: AssessmentEdit
     },
     {
         path: '/penilaian',
@@ -93,6 +99,10 @@ export const MainRoutes = [
     {
         path: '/question/:id',
         component: Question
+    },
+    {
+        path: '/edit/:id/exam/:id',
+        component: EditQuestion
     },
     {
         path: '/questions/:id',

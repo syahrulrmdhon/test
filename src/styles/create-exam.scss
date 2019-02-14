@@ -189,11 +189,18 @@ $nunito_bold: 'NunitoBold';
         bottom: unset;
       }
 
-      &__line {
+      &__separate {
         width: 100%;
         height: 1px;
         background-color: #eeeeee;
         margin: 30px auto;
+      }
+
+      &__line {
+        width: 35px;
+        height: 2px;
+        background-color: #1a9d7f;
+        margin: 0px auto;
       }
     }
 

@@ -30,7 +30,7 @@ class Componentt extends Component {
     componentDidMount(){
         let assessment = this.props.assessment
         let class_ids = []
-        
+        console.log(assessment)
         if(assessment !== undefined){
             if(Object.entries(assessment).length > 0){
                 assessment.assessment_classes_attributes.map((classes_attribute, idx) => {
