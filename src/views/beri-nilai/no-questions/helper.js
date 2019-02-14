@@ -118,7 +118,7 @@ export class Pencil extends Component {
 export class TotalAverage extends Component {
     render() {
         let scores = this.props.scores
-        let classname = ''
+        let classname = 'large-text-red-bold text-center'
         let totalAverage = scores.total_averages
         let score = ''
         totalAverage.map((x, i) => {
@@ -143,7 +143,7 @@ export class TotalAverage extends Component {
 export class Users extends Component {
     render() {
         let data = this.props.data
-        let classname = 'col-sm-3 padding-1'
+        let classname = 'border-left-col-red col-sm-3 padding-1'
         let predicate = data.scores.total_average.predicate
         let fullname = data.user.full_name
 
@@ -152,7 +152,7 @@ export class Users extends Component {
         } else if (predicate === 'c') {
             classname = 'border-left-col-yellow col-sm-3 padding-1'
         } else if (predicate === 'd') {
-            classname = 'boder-left-col-red col-sm-3 padding-1'
+            classname = 'border-left-col-red col-sm-3 padding-1'
         }
 
 
@@ -166,7 +166,7 @@ export class Users extends Component {
 export class Averages extends Component {
     render() {
         let data = this.props.data
-        let classname = ''
+        let classname = 'large-text-red-bold label-nilai'
         let score = data.scores.total_average.score
         let predicate = data.scores.total_average.predicate
 
@@ -187,7 +187,7 @@ export class Averages extends Component {
 export class Subjects extends Component {
     render() {
         let data = this.props.data
-        let classname = ''
+        let classname = 'border-left-col-red col-sm-3 padding-1'
         let ix = this.props.ix
         let average = data.scores.total_averages
         let competencies = this.props.competencies
@@ -228,11 +228,12 @@ export class Subjects extends Component {
                         {
                             subjects.map((x, i) => {
                                 x.competency_averages.map((value, i) => {
+                                    console.log('value xxx', value)
                                     return <div className="padding-1" key={Math.random()}>
                                         <div className="row">
                                             <div className="col-sm-12">
                                                 <div className="col-sm-8">
-                                                    {value.basic_comp.competency_number + ' ' + value.basic_comp.content}
+                                                    {value.basic_comp.competency_number === null ? 'N/A' : value.basic_comp.competency_number + ' ' + value.basic_comp.content === null ? 'N/A' : value.basic_comp.competency_number}
                                                 </div>
                                                 <SubjectScore
                                                     data={value}
@@ -257,7 +258,7 @@ export class SubjectScore extends Component {
     render() {
         let data = this.props.data
         let predicate = data.average_score.predicate
-        let classnames = ''
+        let classnames = 'large-text-red-bold'
 
         if (predicate === 'a' || predicate === 'b') {
             classnames = 'large-text-red-bold'
