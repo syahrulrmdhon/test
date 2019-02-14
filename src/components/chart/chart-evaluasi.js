@@ -3,7 +3,6 @@ import { Chart } from 'react-google-charts'
 
 export default class ChartEvaluasi extends Component {
     render() {
-        console.log(this.props.examChart)
         return (
             <div style={{ display: 'flex' }}>
                 <Chart

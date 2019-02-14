@@ -60,13 +60,14 @@ export function multipleQuestion(value = false) {
 
     if (value.length > 0) {
         value.map((question, key) => {
+            console.log('question', question)
             let isCorrect = question.is_correct_ans
             if (isCorrect === null || isCorrect === false) {
                 classname = 'bold'
                 result.push(
                     <div className={classname} key={key}>
                         <div className="disblock margin-bottom-1">
-                            {question.symbol.toLowerCase()}). {(question.content || '-')} <span className={classname}>({question.ans_count} Murid)</span>
+                            {question.symbol === null ? 'N/A' : question.symbol}). {(question.content || '-')} <span className={classname}>({question.ans_count} Murid)</span>
                         </div>
                     </div>
                 )
@@ -75,7 +76,7 @@ export function multipleQuestion(value = false) {
                 result.push(
                     <div className={classname} key={key}>
                         <div className="disblock margin-bottom-1">
-                            {question.symbol.toLowerCase()}). {(question.content || '-')} <span className={classname}>({question.ans_count} Murid)</span>
+                            {question.symbol === null ? 'N/A': question.symbol}). {(question.content || '-')} <span className={classname}>({question.ans_count} Murid)</span>
                         </div>
                     </div>
                 )

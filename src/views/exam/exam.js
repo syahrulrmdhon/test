@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import CircularProgressbar from 'react-circular-progressbar';
 import { NavLink } from 'react-router-dom';
 
@@ -38,8 +38,8 @@ const exam = (props) => {
           <div className="exam__score-wrapper">
             <div className="exam__circular-wrapper">
               <CircularProgressbar
-              percentage={!props.percentage ? 0 : props.percentage}
-              styles={styles} />
+                percentage={!props.percentage ? 0 : props.percentage}
+                styles={styles} />
             </div>
             <div className="exam__percentage-wrapper">
               <div className="exam__percentage">{!props.percentage ? 0 : props.percentage}%</div>
@@ -52,13 +52,15 @@ const exam = (props) => {
           {
             props.classes.length ?
               <div className="exam__class-wrapper">
-                {props.classes.map((item, index) => {
-                  return <div key={item.id} className="exam__class" onClick={(e) => {props.page(e, item.id,item.assessment_id, item.exam_id)}} >{item.name}</div>
-                })}
+                {
+                  props.classes.map((item, index) => {
+                    return <div key={item.id} className="exam__class" onClick={(e) => { props.page(e, item.id, item.assessment_id, item.exam_id, item.flag) }} >{item.name}</div>
+                  })
+                }
               </div>
               :
               <div className="exam__not-class">Belum ada kelas yang ditugaskan</div>
-            }
+          }
         </div>
       </div>
     </div>

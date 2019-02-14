@@ -7,7 +7,6 @@ import Ava from './../../assets/images/img_avatar.png';
 export class RightComponent extends Component {
 
   render() {
-    console.log(this.props.participant_not_passed,"here")
     return (
       <div className="right-content-kkm">
         <div className="margin-top-3 ">

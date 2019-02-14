@@ -31,7 +31,7 @@ class BottomContent extends Component {
       hidden: true,
       element: 'hidden',
       token: localStorage.getItem('token'),
-      dataChild:[]
+      dataChild: []
     }
     this.onClickToogle = this.onClickToogle.bind(this)
     this.handleClick = this.handleClick.bind(this)
@@ -49,20 +49,19 @@ class BottomContent extends Component {
 
   handleClick(e, id, idx) {
     let subject = []
-   
     let dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     let child = []
     let filtering = dataArray.filter(item => item.user.id === id)
     filtering.map((e) => {
-        console.log(e.scores.subject_averages,"child")
-        child = e.scores.subject_averages
-    } )
-    console.log(child,"data")
-   
-    
+      console.log(e.scores.subject_averages, "child")
+      child = e.scores.subject_averages
+    })
+    console.log(child, "data")
+
+
 
     this.setState({
-      dataChild:child,
+      dataChild: child,
       selectIndex: (this.state.selectIndex === idx ? -1 : idx),
     })
 
@@ -73,25 +72,25 @@ class BottomContent extends Component {
     this.props.handleNewScoreParent(e, student)
   }
 
-  generateNilai(data){
-    console.log(data.scores.total_average,"data atas")
+  generateNilai(data) {
+    console.log(data.scores.total_average, "data atas")
     let scoresData = []
     let status = data.scores.total_average.result_status
-    if(status === 'very_good'){
-      scoresData.push( <span className="label-green">{data.scores.total_average.score}</span>)
-    }else if(status === 'good'){
-      scoresData.push( <span className="label-green">{data.scores.total_average.score}</span>)
-    }else if(status === 'enough'){
-      scoresData.push( <span className="label-yellow">{data.scores.total_average.score}</span>)
+    if (status === 'very_good') {
+      scoresData.push(<span className="label-green">{data.scores.total_average.score}</span>)
+    } else if (status === 'good') {
+      scoresData.push(<span className="label-green">{data.scores.total_average.score}</span>)
+    } else if (status === 'enough') {
+      scoresData.push(<span className="label-yellow">{data.scores.total_average.score}</span>)
 
-    }else if(status === 'need_attention'){
-      scoresData.push( <span className="beri-nilai">{data.scores.total_average.score}</span>)
+    } else if (status === 'need_attention') {
+      scoresData.push(<span className="beri-nilai">{data.scores.total_average.score}</span>)
     }
-    else{
-      scoresData.push( <span className="label-nilai">N/A</span>)
+    else {
+      scoresData.push(<span className="label-nilai">N/A</span>)
     }
     const scores = (
-    <div>   {scoresData}</div> 
+      <div>   {scoresData}</div>
 
     )
     return scores
@@ -113,7 +112,7 @@ class BottomContent extends Component {
     //         }
     //       })
     // })
-    console.log(this.state.dataChild,"data array")
+    console.log(this.state.dataChild, "data array")
     return (
       <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-bottom-2">
         <div className="content-bottom">
@@ -142,7 +141,6 @@ class BottomContent extends Component {
           <div className="content-student">
             {
               dataArray && dataArray.map(function (data, index) {
-                console.log(data, "hehe")
                 return <div className="box-student margin-top-3 " key={Math.random()} >
                   <div className={classnames('border-full border-right', border)}>
                     <div className="row">
@@ -155,8 +153,8 @@ class BottomContent extends Component {
                           <span className="label-content">{data.user.email}</span>
                         </div>
                         <div className="col-sm-3 align-center padding-2 ">
-                        {this.generateNilai(data)}
-                         
+                          {this.generateNilai(data)}
+
                         </div>
                         <div className="col-sm-2 align-left padding-2 ">
                           <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.handleNewScoreParent(e, data.user.id) }} />
@@ -167,13 +165,13 @@ class BottomContent extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className={classnames("border-right border-bottom ",border, `${this.state.selectIndex === index ? 'display-block' : 'display-none'}`)} key={this.state.key}    >
+                  <div className={classnames("border-right border-bottom ", border, `${this.state.selectIndex === index ? 'display-block' : 'display-none'}`)} key={this.state.key}    >
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="margin-side-10 padding-bottom-3 margin-top-5">
                           {
                             this.state.dataChild.map((data) => {
-                              console.log(data,"data child")
+                              console.log(data, "data child")
                               return <div>
                                 <div className="second-head padding-1 " key={Math.random()}>
                                   <div className="row">
@@ -184,7 +182,7 @@ class BottomContent extends Component {
                                       <div className="col-sm-4">
                                       </div>
                                       <div className="col-sm-4 align-center">
-                                        {data.average_score.score === null?'N/A':data.average_score.score }
+                                        {data.average_score.score === null ? 'N/A' : data.average_score.score}
                                       </div>
 
                                     </div>
@@ -199,7 +197,7 @@ class BottomContent extends Component {
                                             {data.basic_comp.competency_number + ' ' + data.basic_comp.content}
                                           </div>
                                           <div className="col-sm-4 align-center">
-                                            {data.average_score.score === null?'N/A':data.average_score.score}
+                                            {data.average_score.score === null ? 'N/A' : data.average_score.score}
                                           </div>
                                         </div>
                                       </div>
