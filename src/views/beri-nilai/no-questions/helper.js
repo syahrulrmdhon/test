@@ -187,7 +187,7 @@ export class Averages extends Component {
 export class Subjects extends Component {
     render() {
         let data = this.props.data
-        let classname = 'border-left-col-red col-sm-3 padding-1'
+        let classname = ''
         let ix = this.props.ix
         let average = data.scores.total_averages
         let competencies = this.props.competencies
@@ -203,7 +203,7 @@ export class Subjects extends Component {
             classname = 'border-left-col-red col-sm-3 padding-1'
         }
 
-        return <div className={classnames("border-right border-bottom ", border, `${this.props.indx === ix ? 'display-block' : 'display-none'}`)}>
+        return <div className={classnames("border-right border-bottom ", data.scores.total_average.result_status === null || data.scores.total_average.result_status === 'need_attention' ?'border-left-col-red':data.scores.total_average.result_status === 'very_good' || data.scores.total_average.result_status === 'good'?'border-left-col-green':'border-left-col-yellow', `${this.props.indx === ix ? 'display-block' : 'display-none'}`)}>
             <div className='row'>
                 <div className='col-sm-12'>
                     <div className='margin-side-10 padding-bottom-3 margin-top-5'>
@@ -228,7 +228,6 @@ export class Subjects extends Component {
                         {
                             subjects.map((x, i) => {
                                 x.competency_averages.map((value, i) => {
-                                    console.log('value xxx', value)
                                     return <div className="padding-1" key={Math.random()}>
                                         <div className="row">
                                             <div className="col-sm-12">
