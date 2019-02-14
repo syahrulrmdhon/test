@@ -38,11 +38,11 @@ const exam = (props) => {
           <div className="exam__score-wrapper">
             <div className="exam__circular-wrapper">
               <CircularProgressbar
-                percentage={!props.percentage ? 0 : props.percentage}
+                percentage={props.percentage}
                 styles={styles} />
             </div>
             <div className="exam__percentage-wrapper">
-              <div className="exam__percentage">{!props.percentage ? 0 : props.percentage}%</div>
+              <div className="exam__percentage">{props.percentage}%</div>
               <div className="exam__percentage-label">Nilai Terisi</div>
             </div>
           </div>

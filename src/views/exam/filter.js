@@ -14,12 +14,14 @@ const filter = (props) => {
               classNamePrefix="select"
               placeholder="Pilih Kelas"
               name="class_id"
-              options={props.classes} />
+              value={props.selectedClass}
+              options={props.classes} 
+              onChange={(event) => props.filter(event)}/>
           </div>
           <div className="content-input margin-top-6">
-            <button className="filter-btn">Filter</button>
           </div>
         </form>
+        <button className="filter-btn" onClick={() => props.getExams()}>Filter</button>
       </div>
     </div>
   )
