@@ -275,7 +275,7 @@ export default class question extends Component {
       this.props.history.push({pathname: `/exam/${this.state.assessmentId}`})
     }
     else if (to === 'next') {
-      this.props.history.push({pathname: `/pariticipant-class/9${this.state.assessmentId}/assessment/${this.state.examId}/exam`})
+      this.props.history.push({pathname: `/pariticipant-class/${this.state.assessmentId}/assessment/${this.state.examId}/exam`})
     }
   }
 
@@ -308,7 +308,6 @@ export default class question extends Component {
   }
 
   render() {
-    console.log(this.state.data)
     let choices = []
     if (this.state.form.problem_type === 'multiple_choice') {
       if(this.state.form.exam_question_choices_attributes.length > 0){

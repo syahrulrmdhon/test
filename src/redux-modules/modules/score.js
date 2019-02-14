@@ -234,12 +234,14 @@ export function getDataScoreQuestion(assessment, exam, student, classess) {
 }
 
 
-export function getParticipant(exam, classess, assess) {
+export function getParticipant(exam, classess, assess, name) {
+    console.log(name, "first render")
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
+    let full_name = name === undefined?'':name
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + `/v1/assessments/${assess}/exams/${exam}/exam_classes/${classess}/participants`, {
+        promise: client => client.get(process.env.API_URL + `/v1/assessments/${assess}/exams/${exam}/exam_classes/${classess}/participants?full_name=${full_name}`, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'Bearer ' + token,

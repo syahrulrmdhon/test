@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import './../../styles/global/component.css'
 import Select from 'react-select'
-import {
-  Table,
-} from 'reactstrap';
 import './../../styles/beri-nilai/main.scss'
 import { getParticipant } from './../../redux-modules/modules/score'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Score, AvatarComponent, Collapse } from './tableCondition';
 import classnames from 'classnames'
 import Avatar from 'react-avatar';
 import Ava from './../../assets/images/img_avatar.png'
@@ -36,6 +32,7 @@ class BottomContent extends Component {
     this.onClickToogle = this.onClickToogle.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.handleNewScore = this.handleNewScore.bind(this)
+    this.generateBorder = this.generateBorder.bind(this)
     this.generateNilai = this.generateNilai.bind(this)
   }
   componentDidMount() {
@@ -53,7 +50,6 @@ class BottomContent extends Component {
     let child = []
     let filtering = dataArray.filter(item => item.user.id === id)
     filtering.map((e) => {
-      console.log(e.scores.subject_averages, "child")
       child = e.scores.subject_averages
     })
     console.log(child, "data")
@@ -96,25 +92,87 @@ class BottomContent extends Component {
     return scores
   }
 
+  generateBorder(data){
+    let scoresData = []
+    let status = data.scores.total_average.result_status
+    if (status === 'very_good') {
+      scoresData.push(<span className="label-green">{data.scores.total_average.score}</span>)
+    } else if (status === 'good') {
+      scoresData.push(<span className="label-green">{data.scores.total_average.score}</span>)
+    } else if (status === 'enough') {
+      scoresData.push(<span className="label-yellow">{data.scores.total_average.score}</span>)
+
+    } else if (status === 'need_attention') {
+      scoresData.push(<span className="beri-nilai">{data.scores.total_average.score}</span>)
+    }
+    else {
+      scoresData.push(<span className="label-nilai">N/A</span>)
+    }
+    const scores = (
+      <div>   {scoresData}</div>
+
+    )
+    return scores
+  }
+
 
   render() {
     const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
-    let border = 'border-left-col-red'
-    let lengthArr = 0
-    // dataArray && dataArray.map((data, idx) =>{
-    //   lengthArr = data.scores.competency_averages.length 
-    //   console.log(lengthArr, "sataus")
-    //   dataArray[idx].global_scores = data.scores.total_averages 
-    //   data.scores.competency_averages.map((e) => {
-    //         let status = e.result_status 
-    //         if(status  === 'very_good' && lengthArr !== 0){
-    //           border = 'border-left-col-green'
-    //         }
-    //       })
-    // })
-    console.log(this.state.dataChild, "data array")
+    let border = 'border-left-col-green'
+    console.log(dataArray,"my data")
+    dataArray && dataArray.map((x) => {
+        let status = x.scores.total_average.result_status
+        console.log(status,"my status")
+        if(status === 'very_good' ){
+          console.log("here very good")
+          border = 'border-left-col-green'
+        }else if(status === 'need_attention') {
+          border = 'border-left-col-red'
+          console.log("or here")
+        }else if(status === null){
+          border = 'border-left-col-red'
+        }
+    })
+  
     return (
       <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-bottom-2">
+        <div className='row padding-bottom-5'>
+          <div className='col-sm-12'>
+            <div className='margin-top-4 padding-side-0'>
+              <div className='row'>
+                <div className='col-sm-4'>
+                  <div className='margin-top-2'>
+                    <span className="tit">Hasil Perolehan Nilai</span>
+                  </div>
+                </div>
+                <div className='col-sm-8'>
+                  <div className='row'>
+                    <div className='col-sm-4'>
+                      <Select
+                        placeholder='Urut Berdasarkan'
+                        classNamePrefix='select'
+                      />
+                    </div>
+                    <div className='col-sm-8'>
+                      <div className='search'>
+                        <input
+                          autoComplete="off"
+                          className="input-field"
+                          type="text"
+                          placeholder="Cari murid disini..."
+                          name="search"
+                          onChange={this.props.onChange}
+                          value={this.props.search}
+                        />
+                        <i className="fa fa-search icon" onClick={this.props.submit}></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="content-bottom">
           <div className="header">
             <div className="row">
@@ -142,7 +200,7 @@ class BottomContent extends Component {
             {
               dataArray && dataArray.map(function (data, index) {
                 return <div className="box-student margin-top-3 " key={Math.random()} >
-                  <div className={classnames('border-full border-right', border)}>
+                  <div className={classnames('border-full border-right', data.scores.total_average.result_status === null || data.scores.total_average.result_status === 'need_attention' ?'border-left-col-red':data.scores.total_average.result_status === 'good' ||  data.scores.total_average.result_status === 'very_good'?'border-left-col-green':'border-left-col-yellow')}>
                     <div className="row">
                       <div className="col-sm-12 ">
                         <div className="col-sm-3  padding-1">
@@ -154,24 +212,22 @@ class BottomContent extends Component {
                         </div>
                         <div className="col-sm-3 align-center padding-2 ">
                           {this.generateNilai(data)}
-
                         </div>
                         <div className="col-sm-2 align-left padding-2 ">
                           <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.handleNewScoreParent(e, data.user.id) }} />
                         </div>
                         <div className="col-sm-1 align-left padding-2 ">
-                          <i className="fa fas fa-ellipsis-h icon-table-pencil cred" onClick={(e) => { this.handleClick(e, data.user.id, index) }} ></i>
+                          <i className={classnames("fa fas fa-ellipsis-h icon-table-pencil",data.scores.total_average.result_status === null || data.scores.total_average.result_status === 'need_attention' ?'cred':data.scores.total_average.result_status === 'very_good'?'cgreen':'cyellow')} onClick={(e) => { this.handleClick(e, data.user.id, index) }} ></i>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className={classnames("border-right border-bottom ", border, `${this.state.selectIndex === index ? 'display-block' : 'display-none'}`)} key={this.state.key}    >
+                  <div className={classnames("border-right border-bottom ", data.scores.total_average.result_status === null || data.scores.total_average.result_status === 'need_attention' ?'border-left-col-red':data.scores.total_average.result_status === 'very_good' || data.scores.total_average.result_status === 'good'?'border-left-col-green':'border-left-col-yellow', `${this.state.selectIndex === index ? 'display-block' : 'display-none'}`)} key={this.state.key}    >
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="margin-side-10 padding-bottom-3 margin-top-5">
                           {
                             this.state.dataChild.map((data) => {
-                              console.log(data, "data child")
                               return <div>
                                 <div className="second-head padding-1 " key={Math.random()}>
                                   <div className="row">
