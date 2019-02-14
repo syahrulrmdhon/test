@@ -80,7 +80,7 @@ class BottomContent extends Component {
       scoresData.push(<span className="label-yellow">{data.scores.total_average.score}</span>)
 
     } else if (status === 'need_attention') {
-      scoresData.push(<span className="beri-nilai">{data.scores.total_average.score}</span>)
+      scoresData.push(<span className="label-nilai">{data.scores.total_average.score}</span>)
     }
     else {
       scoresData.push(<span className="label-nilai">N/A</span>)
@@ -238,22 +238,26 @@ class BottomContent extends Component {
                                       <div className="col-sm-4">
                                       </div>
                                       <div className="col-sm-4 align-center">
-                                        {data.average_score.score === null ? 'N/A' : data.average_score.score}
+                                        {data.average_score.result_status === 'very_good' || data.average_score.result_status ==='good' ?<span className="label-green">{data.average_score.score}</span>:data.average_score.result_status === 'need_attention' || data.average_score.result_status === null?<span className="label-nilai">{data.average_score.score}</span>:<span className="label-yellow">{data.average_score.score}</span> }
                                       </div>
 
                                     </div>
                                   </div>
                                 </div>
                                 {
-                                  data.competency_averages.map((data) => {
+                                  data.competency_averages.map((datax) => {
+                                    console.log(datax,"herex")
                                     return <div className="padding-1" key={Math.random()}>
                                       <div className="row">
                                         <div className="col-sm-12">
-                                          <div className="col-sm-8">
-                                            {data.basic_comp.competency_number + ' ' + data.basic_comp.content}
+                                          <div className="col-sm-6">
+                                            {datax.basic_comp.competency_number + ' ' + datax.basic_comp.content}
+                                          </div>
+                                          <div className="col-sm-2">
+                                          {datax.average_score.result_status === 'very_good'?<span className="label-green align-center">Sangat Memuaskan</span>:datax.average_score.result_status === 'need_attention'?<span className="label-nilai">Evaluasi Ulang</span>:<span className="label-yellow">{datax.average_score.score}</span> }
                                           </div>
                                           <div className="col-sm-4 align-center">
-                                            {data.average_score.score === null ? 'N/A' : data.average_score.score}
+                                            {datax.average_score.result_status === 'very_good' || datax.average_score.result_status ==='good' ?<span className="label-green">{data.average_score.score}</span>:datax.average_score.result_status === 'need_attention' || datax.average_score.result_status === null?<span className="label-nilai">{datax.average_score.score}</span>:<span className="label-yellow">{datax.average_score.score}</span> }
                                           </div>
                                         </div>
                                       </div>
