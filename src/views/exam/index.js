@@ -34,7 +34,7 @@ export default class Index extends Component {
     this.state.exams.entries.map(function(array, idx){
       this.props.history.push({
         pathname:'/assessment/'+assessment +'/exam/'+ exam + '/class/'+ classes,
-        state: {assessment:assessment, exam:exam, class:classes}
+        state: {assessment:assessment, exam:exam, class:classes, path: this.props.location.pathname}
      })
     },this)
   }

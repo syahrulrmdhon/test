@@ -120,11 +120,8 @@ export default class Nilai extends Component {
 
 }
 
-
-
   render() {
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
-    console.log(this.state.score.score_ranges, "my score")
 
     return (
       <div className="details-nilai bg-grey">
