@@ -31,29 +31,14 @@ export function seeMore(value, s_count = 50){
     return value
 }
 
-export function setErrorRuby(data = {}, fields = []){
+export function setErrorRuby(data = {}){
     let result = {}
     let errors = data.errors || []
 
-    // var array1 = [5, 12, 8, 130, 44];
-    // var found = array1.find(function (element) {
-    //   return element ==  10;
-    // });
-
-    // console.log(found);
-    // return false;
-
     if(typeof errors == 'object'){
         for (var error in errors) {
-            
-            let found = fields.find(function (element) {
-                return element ==  error;
-            });
-
-            if(typeof found != 'undefined'){
-                if (errors.hasOwnProperty(error)) {
-                    result[error] = errors[error]
-                }
+            if (errors.hasOwnProperty(error)) {
+                result[error] = errors[error]
             }
         }
     }
@@ -118,6 +103,13 @@ export function getDate(format = 'case-1', date = new Date){
             break
             case 'case-4': // 2019-01-20
                 result = new Intl.DateTimeFormat('sq-AL', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(date)
+            break
+            case 'case-5': // 2019-01-20 00:00
+                const tempDate = getDate('case-4', date)
+                const tempTime = getDate('case-3', date)
+
+                result = `${tempDate} ${tempTime}`
+            break
         }
     }
     return result
@@ -207,53 +199,6 @@ export function changeFormatOptions(values = []){
     return result;
 }
 
-export function basicComps(params = {}, options = {}){
-    let listOptions = options.listOptions || false
-    let fieldName = options.fieldName || 'basic_comps'
-
-    apiClient('get', 'v1/filters/basic_comps', false, params).then(response => response.data).then(data => {
-        let basic_comps = data.data.basic_comps || []
-        let obj = {}
-        
-        if((basic_comps.length > 0) && listOptions){
-            const temps = basic_comps
-            basic_comps = []
-            
-            temps.map((temp, idx) => {
-                basic_comps.push({
-                    value: temp.id,
-                    label: temp.competency_number + ' ' + temp.content,
-                })
-            })
-        }
-        obj[fieldName] = basic_comps
-        this.setState(obj)
-    })
-}
-
-export function subjects(params = {}, options = {}){
-    let listOptions = options.listOptions || false
-
-    apiClient('get', 'v1/filters/subjects', false, params).then(response => response.data).then(data => {
-        let subjects = data.data.subjects || []
-        
-        if((subjects.length > 0) && listOptions){
-            const temps = subjects
-            subjects = []
-            
-            temps.map((temp, idx) => {
-                subjects.push({
-                    value: temp.id,
-                    label: temp.subject_name,
-                })
-            })
-        }    
-        this.setState({
-            subjects: subjects,
-        })
-    })
-}
-
 export function assessmentType(params = {}, event = {}, fieldName = 'assessment_type'){
     if(params){
         apiClient('get', 'v1/filters/assessment_types', false, params).then(response => {
@@ -324,12 +269,75 @@ export function examTypes(params={}){
 }
 
 export function checkProperties(obj) {
-    console.log(obj)
     for (let key in obj) {
+        console.log(obj[key],"here ch uti")
         if (obj[key] === null || obj[key] === "" || obj[key] === undefined) {
             return true;
-            // break;
         }
     }
+    
     return false;
+}
+
+export function questionTypes(params={}){
+    const path = 'v1/filters/problem_types'
+    apiClient('get', path, false, params).then(response => response.data).then(data => {
+        let result = []
+
+        if(data.data.problem_types.length > 0){
+            data.data.problem_types.map((type, key) => (
+                result.push({
+                    label: type.value,
+                    value: type.key,
+                })
+            ))
+        }
+        this.setState({questionTypes: result})
+    })
+}
+
+export function basicComps(params = {}, options = {}){
+    let listOptions = options.listOptions || false
+    let fieldName = options.fieldName || 'basic_comps'
+
+    apiClient('get', 'v1/filters/basic_comps', false, params).then(response => response.data).then(data => {
+        let basic_comps = data.data.basic_comps || []
+        let obj = {}
+        
+        if((basic_comps.length > 0) && listOptions){
+            const temps = basic_comps
+            basic_comps = []
+            
+            temps.map((temp, idx) => {
+                basic_comps.push({
+                    value: temp.id,
+                    label: temp.competency_number + ' ' + temp.content,
+                })
+            })
+        }
+        obj[fieldName] = basic_comps
+        this.setState(obj)
+    })
+}
+export function subjects(params = {}, options = {}){
+    let listOptions = options.listOptions || false
+
+    apiClient('get', 'v1/filters/subjects', false, params).then(response => response.data).then(data => {
+        let subjects = data.data.subjects || []
+        
+        if((subjects.length > 0) && listOptions){
+            const temps = subjects
+            subjects = []
+            
+            temps.map((temp, idx) => {
+                subjects.push({
+                    value: temp.id,
+                    label: temp.subject_name,
+                })
+            })
+        }    
+        this.setState({
+            subjects: subjects,
+        })
+    })
 }
