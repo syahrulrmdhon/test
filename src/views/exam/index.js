@@ -17,7 +17,9 @@ export default class Index extends Component {
         total_entries: 0,
         total_pages: 0,
         entries: []
-      }
+      },
+      classes: [],
+      selectedClass: null
     }
 
     this.addExam = this.addExam.bind(this)
@@ -25,6 +27,8 @@ export default class Index extends Component {
     this.deleteExam = this.deleteExam.bind(this)
     this.delete = this.delete.bind(this)
     this.toEdit = this.toEdit.bind(this)
+    this.getAssessments = this.getAssessments.bind(this)
+    this.filterClass = this.filterClass.bind(this)
   }
 
   componentDidMount() {
@@ -52,9 +56,15 @@ export default class Index extends Component {
   }
 
   getAssessments() {
+    let params = {}
+
+    if (this.state.selectedClass !== null) {
+      params['class_id'] = this.state.selectedClass.value
+    }
+
     const path = `v1/assessments/${this.state.assessmentId}`
 
-    apiClient('get', path).then(response => {
+    apiClient('get', path, false, params).then(response => {
       response.data.data.exams.entries.map(function (data, index) {
         data && data.classses.map(function (i, j) {
           i.assessment_id = data.assessment_id;
@@ -62,7 +72,7 @@ export default class Index extends Component {
           i.flag = data.include_question
         }, this)
       }, this)
-      this.setState({ exams: response.data.data.exams })
+      this.setState({ exams: response.data.data.exams, classes: response.data.data.classes})
     })
   }
 
@@ -77,6 +87,15 @@ export default class Index extends Component {
     apiClient('delete', path).then(() =>{
       this.getAssessments()
     })
+  }
+
+  filterClass(event) {
+    let params = {}
+
+    if (event) {
+      this.setState({selectedClass: event})
+      params['class_id'] = event.value
+    }
   }
   
   delete(value) {
@@ -111,7 +130,7 @@ export default class Index extends Component {
           <div className="content-block main-block">
             <div className="row">
               <div className="col-sm-2 col-sm-2-custom left-block">
-                <Filter classes={this.state.classes} />
+                <Filter classes={this.state.classes} filter={this.filterClass} selectedClass={this.state.selectedClass} getExams={this.getAssessments}/>
               </div>
               <div className="col-sm-10 col-sm-10-custom right-block">
                 <Content
