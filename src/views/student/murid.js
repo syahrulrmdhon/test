@@ -46,8 +46,15 @@ class DaftarMurid extends Component {
             this.setState({data: data})
         })
     }
+    
     getAttendancePrecentage(cell) {
-        return `${cell}%`
+        if (cell === null) {
+            cell = '-'
+        }
+        else {
+            cell = `${cell}%`
+        }
+        return `${cell}`
     }
     
     onRowClick(row) {
@@ -81,7 +88,7 @@ class DaftarMurid extends Component {
                                         NISN
                                     <i className="fa fa-sort"></i>
                                     </TableHeaderColumn>
-                                    <TableHeaderColumn columnClassName="name" dataField="full_name" dataSort>
+                                    <TableHeaderColumn columnClassName="student-detail__name" dataField="full_name" dataSort>
                                         Nama Murid
                                     <i className="fa fa-sort"></i>
                                     </TableHeaderColumn>

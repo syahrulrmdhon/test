@@ -12,10 +12,10 @@ export class RightComponent extends Component {
         <div className="margin-top-3 ">
           <div className="row">
             <div className="col-sm-7">
-              <span className="kkm__title">Nilai di Bawah KKM</span>
+              <span className="title-kkm">Nilai di Bawah KKM</span>
             </div>
             <div className="col-sm-5">
-              <span className="kkm__showall">Lihat Semua</span>
+              <span className="show-all">Lihat Semua</span>
             </div>
           </div>
         </div>
@@ -28,22 +28,20 @@ export class RightComponent extends Component {
                 </div>
                 <div className="col-sm-6">
                   <div className="col-sm-12">
-                    <span className="kkm__name">{data.user.full_name}</span>
+                    <span className="under-kkm">{data.user.full_name}</span>
                   </div>
                   <div className="col-sm-12">
-                    <span className="kkm__email">{data.user.email}</span>
+                    <span className="email-under-kkm">{data.user.email}</span>
                   </div>
                 </div>
                 <div className="col-sm-4">
-                  <span className="kkm__nilai">{data.total_average.score === null ? 0 : data.total_average.score}</span>
+                  <span className="under-kkm-score padding-5">{data.total_average.score === null ? 0 : data.total_average.score}</span>
                 </div>
               </div>
 
             </div>
           })
         }
-
-
       </div>
     )
   }
