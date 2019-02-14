@@ -8,10 +8,8 @@ export class Parent extends Component {
     render() {
         let users = this.props.users
         let scores = this.props.scores
-        let data = this.props.data
         let selectIndex = this.props.selectIndex
         let idx = this.props.idx
-        let content = []
 
         return <div className="box-student margin-top-3 " key={Math.random()} >
             <div className={classnames('border-full border-right border-left-col-red')}>
@@ -115,31 +113,6 @@ export class Pencil extends Component {
     }
 }
 
-export class TotalAverage extends Component {
-    render() {
-        let scores = this.props.scores
-        let classname = 'large-text-red-bold text-center'
-        let totalAverage = scores.total_averages
-        let score = ''
-        totalAverage.map((x, i) => {
-            score = x.score
-            let predicate = x.predicate
-            if (totalAverage.length === 0) {
-                classname = 'large-text-red-bold text-center'
-            } else if (totalAverage.length !== 0 && (predicate === 'a' || predicate == 'b')) {
-                classname = 'large-text-green-bold text-center'
-            } else if (totalAverage.length !== 0 && predicate === 'c') {
-                classname = 'large-text-yellow-bold text-center'
-            } else if (totalAverage.length !== 0 && predicate === 'd') {
-                classname = 'large-text-red-bold text-center'
-            }
-        })
-
-        return <div className={classname}>{score}</div>
-
-    }
-}
-
 export class Users extends Component {
     render() {
         let data = this.props.data
@@ -166,16 +139,16 @@ export class Users extends Component {
 export class Averages extends Component {
     render() {
         let data = this.props.data
-        let classname = 'large-text-red-bold label-nilai'
         let score = data.scores.total_average.score
-        let predicate = data.scores.total_average.predicate
+        let status = data.scores.total_average.result_status
+        let classname = ''
 
-        if (predicate === 'a' || predicate === 'b') {
-            classname = 'large-text-green-bold label-nilai'
-        } else if (predicate === 'c') {
-            classname = 'large-text-yellow-bold label-nilai'
-        } else if (predicate === 'd') {
-            classname = 'large-text-red-bold label-nilai'
+        if (status === 'very_good' || status === 'good') {
+            classname = 'large-text-green-bold'
+        } else if (status === 'enough') {
+            classname = 'large-text-yellow-bold '
+        } else if (status === 'need_attention') {
+            classname = 'large-text-red-bold'
         }
 
         return <div className='col-sm-3 align-center padding-2'>
@@ -187,63 +160,58 @@ export class Averages extends Component {
 export class Subjects extends Component {
     render() {
         let data = this.props.data
-        let classname = ''
+        let average = data.scores.total_average
         let ix = this.props.ix
-        let average = data.scores.total_averages
-        let competencies = this.props.competencies
         let subjects = data.scores.subject_averages
-        let predicate = data.scores.total_average.predicate
-        let border = 'border-left-col-red'
+        let status = data.scores.total_average.result_status
+        let classname = 'col-sm-3 padding-1'
 
-        if (predicate === 'a' || predicate === 'b') {
+        if (status === 'very_good' || status === 'good') {
             classname = 'border-left-col-green col-sm-3 padding-1'
-        } else if (predicate === 'c') {
+        } else if (status === 'enough') {
             classname = 'border-left-col-yellow col-sm-3 padding-1'
-        } else if (predicate === 'd') {
+        } else if (status === 'need_attention') {
             classname = 'border-left-col-red col-sm-3 padding-1'
         }
 
-        return <div className={classnames("border-right border-bottom ", data.scores.total_average.result_status === null || data.scores.total_average.result_status === 'need_attention' ?'border-left-col-red':data.scores.total_average.result_status === 'very_good' || data.scores.total_average.result_status === 'good'?'border-left-col-green':'border-left-col-yellow', `${this.props.indx === ix ? 'display-block' : 'display-none'}`)}>
+        return <div className={classnames("border-right border-bottom ", data.scores.total_average.result_status === null || data.scores.total_average.result_status === 'need_attention' ? 'border-left-col-red' : data.scores.total_average.result_status === 'very_good' || data.scores.total_average.result_status === 'good' ? 'border-left-col-green' : 'border-left-col-yellow', `${this.props.indx === ix ? 'display-block' : 'display-none'}`)}>
             <div className='row'>
                 <div className='col-sm-12'>
                     <div className='margin-side-10 padding-bottom-3 margin-top-5'>
                         {
                             subjects.map((data) => {
-                                return <div className='second-head padding-1' key={Math.random()}>
-                                    <div className="row">
-                                        <div className="col-sm-12">
-                                            <div className="col-sm-4">
-                                                {data.subject_name}
-                                            </div>
-                                            <div className="col-sm-4">
-                                            </div>
-                                            <div className="col-sm-4 align-center">
-                                                {data.average_score.score === null ? 'N/A' : data.average_score.score}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            })
-                        }
-                        {
-                            subjects.map((x, i) => {
-                                x.competency_averages.map((value, i) => {
-                                    return <div className="padding-1" key={Math.random()}>
+                                return <div key={Math.random()}>
+                                    <div className='second-head padding-1' key={Math.random()}>
                                         <div className="row">
                                             <div className="col-sm-12">
-                                                <div className="col-sm-8">
-                                                    {value.basic_comp.competency_number === null ? 'N/A' : value.basic_comp.competency_number + ' ' + value.basic_comp.content === null ? 'N/A' : value.basic_comp.competency_number}
+                                                <div className="col-sm-4">
+                                                    {data.subject_name}
                                                 </div>
-                                                <SubjectScore
-                                                    data={value}
+                                                <div className="col-sm-4">
+                                                </div>
+                                                <SubjectAverage
+                                                    score={average}
                                                 />
-                                                <div className="col-sm-4 align-center">
-                                                    {value.average_score.score === null ? 'N/A' : value.average_score.score}
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                })
+                                    {
+                                        data.competency_averages.map((data) => {
+                                            return <div className="padding-1" key={Math.random()}>
+                                                <div className="row">
+                                                    <div className="col-sm-12">
+                                                        <div className="col-sm-8">
+                                                            {data.basic_comp.competency_number + ' ' + data.basic_comp.content}
+                                                        </div>
+                                                        <SubjectScore
+                                                            data={data}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        })
+                                    }
+                                </div>
                             })
                         }
                     </div>
@@ -252,24 +220,43 @@ export class Subjects extends Component {
         </div>
     }
 }
+export class SubjectAverage extends Component {
+    render() {
+        let data = this.props.score
+        let score = data.score
+        let status = data.result_status
+        let classname = 'col-sm-4 align-center'
 
+        if (status === 'very_good' || status === 'good') {
+            classname = 'large-text-green-bold col-sm-4 align-center'
+        } else if (status === 'enough') {
+            classname = 'large-text-yellow-bold col-sm-4 align-center'
+        } else if (status === 'need_attention') {
+            classname = 'large-text-red-bold col-sm-4 align-center'
+        }
+        return <div className={classname}>
+            {score === null ? 'N/A' : score}
+        </div>
+    }
+}
 export class SubjectScore extends Component {
     render() {
         let data = this.props.data
-        let predicate = data.average_score.predicate
-        let classnames = 'large-text-red-bold'
+        let status = data.average_score.result_status
+        let score = data.average_score.score
+        let classnames = ''
 
-        if (predicate === 'a' || predicate === 'b') {
-            classnames = 'large-text-red-bold'
-        } else if (predicate === 'c') {
-            classnames = 'large-text-red-bold'
-        } else if (predicate === 'd') {
-            classnames = 'large-text-red-bold'
+        if (status === 'very_good' || status === 'good') {
+            classnames = 'large-text-green-bold'
+        } else if (status === 'enough') {
+            classnames = 'large-text-yellow-bold'
+        } else if (status === 'need_attention') {
+            classnames = 'large-text-green-bold'
         }
 
         return <div className="col-sm-4 align-center">
             <div className={classnames}>
-                {data.average_score.score === null ? 'N/A' : data.average_score.score}
+                {score === null ? 'N/A' : score}
             </div>
         </div>
     }
@@ -287,12 +274,12 @@ export class UserNotPassed extends Component {
                                     <div className='padding-right-2 padding-left-4'>
                                         <Avatar src={Ava} size="30" round={true} />
                                     </div>
-                                    <div className='padding-right-6'>
+                                    <div className='padding-right-4'>
                                         <span className='disblock'>{x.user.full_name}</span>
                                         <p className='view'>{x.user.email}</p>
                                     </div>
                                 </div>
-                                <div className='float-right padding-left-6 large-text-red-bold text-center'>
+                                <div className='float-right padding-left-4 large-text-red-bold'>
                                     {x.total_average.score === null ? '-' : x.total_average.score}
                                 </div>
                             </div>
