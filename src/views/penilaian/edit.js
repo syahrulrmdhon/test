@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Header from '../global/header'
 import classnames from 'classnames'
 import Select from 'react-select';
-import { assessmentType } from './../../utils/common'
+import { assessmentType, changeFormatOptions } from './../../utils/common'
 
 import {getAssessment} from './../../redux-modules/modules/assessment'
 import { connect } from 'react-redux';
@@ -42,12 +42,6 @@ class Edit extends Component {
         this.props.getAssessment(this.state.assessment_id)
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if (prevProps.assessment !== this.props.assessment) {
-            let category = this.props.assessment.category
-        }
-    }
-
     render(){
         let menu_view = []
         menu_arr.map((menu, idx) => {
@@ -74,6 +68,7 @@ class Edit extends Component {
         const name = assessment ? assessment.name : ''
         const category = assessment ? assessment.category : ''
         const assessment_type = assessment ? assessment.assessment_type : ''
+        const assessment_types = this.props.assessment ? changeFormatOptions(this.props.assessment.assessment_types) : []
         
         return(
             <div className="padding-content">
@@ -132,9 +127,9 @@ class Edit extends Component {
                                                     classNamePrefix= "select"
                                                     placeholder= "Pilih Tipe Penilaian"
                                                     name= "assessment_type"
-                                                    options= {this.state.assessment_types}
+                                                    options= {assessment_types}
                                                     onChange= {this.handleAttribute}
-                                                    // value= {this.state.assessment_type}
+                                                    value= {assessment_types.find((element) => { return element.value == assessment_type })}
                                                 />
                                                 <Error data={this.state.errors} fieldname= 'category' />
                                             </div>
