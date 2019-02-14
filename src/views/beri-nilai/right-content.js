@@ -42,9 +42,7 @@ export class RightComponent extends Component {
           </div>
           })
         }
-      
-
-      </div>
+          </div>
     )
   }
 }
