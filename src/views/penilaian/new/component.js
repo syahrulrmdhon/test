@@ -14,7 +14,7 @@ class Componentt extends Component {
         this.state = {
             class_ids: [],
             school_level: school.level,
-            subject_list: this.props.componentt,
+            subject_list: [{}],
             assessment_subjects_attributes: [],
             subjects: [],
         }
@@ -201,10 +201,11 @@ class Componentt extends Component {
         )
     }
 }
-const mapStateToProps = (state = false) => {
-    return {
-        componentt: state.assessment.component || [{}],
-    }
-}
+// const mapStateToProps = (state = false) => {
+//     return {
+//         componentt: state.assessment.component || [{}],
+//     }
+// }
 
-export default connect(mapStateToProps)(Componentt)
+export default Componentt
+// export default connect(mapStateToProps)(Componentt)

@@ -28,7 +28,8 @@ export default function reducer(state = initialState, action = {}) {
                     loaded: true,
                     loading: false,
                     result: true,
-                    ...action.result.data.assessment
+                    assessment_types: action.result.data.assessment_types,
+                    ...action.result.data.assessment,
                 }
             }
         break;
