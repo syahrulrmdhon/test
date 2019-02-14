@@ -143,6 +143,9 @@ export function getQuestion(id, number) {
 
     apiClient('get', url, false, params).then(response => {
         let data = response.data.data
+        data.assessment_basic_comps.map(competence => {
+            competence.label = `${competence.competency_number} ${competence.label} (${competence.subject_name})`
+        })
         this.setState({
             data: data,
         })

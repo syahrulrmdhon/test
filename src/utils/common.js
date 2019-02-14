@@ -319,7 +319,6 @@ export function basicComps(params = {}, options = {}){
         this.setState(obj)
     })
 }
-
 export function subjects(params = {}, options = {}){
     let listOptions = options.listOptions || false
 
