@@ -62,6 +62,7 @@ export default class Index extends Component {
 
   addExam() {
     this.props.history.push({pathname: `/create-exam/${this.state.assessmentId}`})
+    this.getAssessments()
   }
 
   deleteExam(id) {
