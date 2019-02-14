@@ -21,9 +21,7 @@ export default class Questions extends Component {
             dataScores: [],
             dataPost: [],
             idSubject: '',
-            fullname: this.props.location.fullname,
-            assessment_id: props.match.params.assessment_id,
-            exam_id: props.match.params.exam_id,
+            fullname: props.location.fullname,
             class_id: props.match.params.class_id,
             nilai: ''
         })
@@ -63,7 +61,6 @@ export default class Questions extends Component {
         }
 
         apiClient('post', url, data).then(res => {
-            console.log('data', res.data.data.result)
             event.preventDefault();
 
             confirmAlert({
@@ -72,7 +69,7 @@ export default class Questions extends Component {
                         <div className="react-confirm-alert modal-alert">
                             <div className="react-confirm-alert-body">
                                 <div className="header align-center">
-                                    <h1>Pastikan anda sudah mengisi nilai siswa ini </h1>
+                                    <h1>Pastikan anda sudah mengisi nilai siswa </h1>
                                 </div>
                                 <div className="react-confirm-alert-button-group toggle">
                                     <div className="align-center fullwidth">
@@ -99,13 +96,11 @@ export default class Questions extends Component {
             })
     }
     onConfirm() {
-        event.preventDefault();
-        if(this.state.dataScores.length>0){
-            this.props.history.push(`/beri-nilai/${this.state.assessment_id}/exam/${this.state.exam_id}/class/${this.state.class_id}/flag/false`)
-        }
+        this.props.history.push({
+            pathname: '/beri-nilai/' + this.props.location.state.assessment + '/exam/' + this.props.location.state.exam + '/class/' + this.props.location.state.class_id,
+        })
     }
     render() {
-        console.log(this.props.match.params.assessment_id,)
         let data = []
         if (this.state.dataScores.length > 0) {
             let scores = this.state.dataScores

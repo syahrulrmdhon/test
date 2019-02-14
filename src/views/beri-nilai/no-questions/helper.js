@@ -6,7 +6,6 @@ import classnames from 'classnames'
 
 export class Parent extends Component {
     render() {
-        console.log('data', this.props.data)
         let users = this.props.users
         let scores = this.props.scores
         let data = this.props.data
@@ -31,8 +30,8 @@ export class Parent extends Component {
                                     scores.total_averages.map((x, i) => {
                                         return <span key={i} className="label-nilai ">{x.score === null ? "N/A" : x.score}</span>
                                     })
-                                :
-                                <span className="label-nilai ">N/A</span>
+                                    :
+                                    <span className="label-nilai large-text-red-bold">N/A</span>
                             }
                         </div>
                         <div className="col-sm-2 align-left padding-2 ">
@@ -58,7 +57,6 @@ export class Child extends Component {
         let content = []
         let scores = this.props.scores
         let subject_averages = scores.subject_averages
-        console.log('subject',scores.total_averages)
         let competency_averages = scores.competency_averages
         if (subject_averages.length > 0) {
             content.push(
@@ -139,6 +137,115 @@ export class TotalAverage extends Component {
 
         return <div className={classname}>{score}</div>
 
+    }
+}
+
+export class Users extends Component {
+    render() {
+        let data = this.props.data
+        let classname = ''
+        let predicate = data.scores.total_average.predicate
+        let fullname = data.user.full_name
+
+        if (predicate === 'a' || predicate === 'b') {
+            classname = 'border-left-col-green col-sm-3 padding-1'
+        } else if (predicate === 'c') {
+            classname = 'border-left-col-yellow col-sm-3 padding-1'
+        } else if (predicate === 'd') {
+            classname = 'boder-left-col-red col-sm-3 padding-1'
+        }
+
+
+        return < div className={classname} >
+            <Avatar src={Ava} size="30" round={true} />
+            <span className="padding-left-2  label-content ">{fullname}</span>
+        </div >
+    }
+}
+
+export class Averages extends Component {
+    render() {
+        let data = this.props.data
+        let classname = ''
+        let score = data.scores.total_average.score
+        let predicate = data.scores.total_average.predicate
+
+        if (predicate === 'a' || predicate === 'b') {
+            classname = 'large-text-green-bold label-nilai'
+        } else if (predicate === 'c') {
+            classname = 'large-text-yellow-bold label-nilai'
+        } else if (predicate === 'd') {
+            classname = 'large-text-red-bold label-nilai'
+        }
+
+        return <div className='col-sm-3 align-center padding-2'>
+            <span className={classname}>{score === null ? 'N/A' : score}</span>
+        </div>
+    }
+}
+
+export class Subjects extends Component {
+    render() {
+        let data = this.props.data
+        let classname = ''
+        let average = data.scores.total_averages
+        let competencies = this.props.competencies
+        let subjects = data.scores.subject_averages
+        let predicate = data.scores.total_average.predicate
+
+        if (predicate === 'a' || predicate === 'b') {
+            classname = 'border-left-col-green col-sm-3 padding-1'
+        } else if (predicate === 'c') {
+            classname = 'border-left-col-yellow col-sm-3 padding-1'
+        } else if (predicate === 'd') {
+            classname = 'border-left-col-red col-sm-3 padding-1'
+        }
+
+        // return <div className={classnames(`${this.state.selectIndex === index ? 'display-block' : 'display-none'}`)} key={this.state.key}    >
+        return <div className={classname}>
+            <div className='row'>
+                <div className='col-sm-12'>
+                    <div className='margin-side-10 padding-bottom-3 margin-top-5'>
+                        {
+                            subjects.map((data) => {
+                                return <div className='second-head padding-1' key={Math.random()}>
+                                    <div className="row">
+                                        <div className="col-sm-12">
+                                            <div className="col-sm-4">
+                                                {data.subject_name}
+                                            </div>
+                                            <div className="col-sm-4">
+                                            </div>
+                                            <div className="col-sm-4 align-center">
+                                                {data.average_score.score}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            })
+                        }
+                        {
+                            subjects.map((x, i) => {
+                                x.competency_averages.map((value, i) => {
+                                    return <div className="padding-1" key={Math.random()}>
+                                        <div className="row">
+                                            <div className="col-sm-12">
+                                                <div className="col-sm-8">
+                                                    {value.basic_comp.competency_number + ' ' + value.basic_comp.content}
+                                                </div>
+                                                <div className="col-sm-4 align-center">
+                                                    {value.average_score.score}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                })
+                            })
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 }
 

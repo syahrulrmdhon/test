@@ -54,10 +54,10 @@ export default class NoQuestions extends Component {
             state: { data:this.state.score, assesment_id: this.state.assesment_id, exam_id: this.state.exam_id, class_id: this.state.class_id, student_id: student}
         })
     }
-    onChangePage(e, student) {
+    onChangePage(e, student, class_id) {
         this.props.history.push({
-            pathname: '/questions/' + this.state.assessment_id + '/exams/' + this.state.exam_id + '/student/' + student,
-            state: { assessment: this.state.assessment_id, exam: this.state.exam_id, student: student}
+            pathname: '/questions/' + this.state.assessment_id + '/exams/' + this.state.exam_id + '/student/' + student + '/' + class_id,
+            state: { assessment: this.state.assessment_id, exam: this.state.exam_id, student: student, class_id: class_id}
         })
     }
     getDataResults() {
