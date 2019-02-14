@@ -42,7 +42,7 @@ class Componentt extends Component {
         }
     }
 
-    onSubmit(){
+    onSubmit(event){
         event.preventDefault();
         let result = []
         let data = this.props.assessment
@@ -166,7 +166,7 @@ class Componentt extends Component {
                     removeSubject= {this.removeSubject}
                     assessment_subject={this.state.assessment_subjects_attributes[idx]}
                     subjects={this.state.subjects}
-                    handleSubject={(value) => {this.handleSubject}}
+                    handleSubject={(value) => {this.handleSubject()}}
                     assessment={this.props.assessment}
                     setSubject={this.setSubject}
                     setKD={this.setKD}

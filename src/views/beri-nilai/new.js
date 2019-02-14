@@ -8,6 +8,11 @@ import TabMenu from '../../components/TabDetail/TabDetail'
 import Content from './content'
 import { apiClient } from '../../utils/apiClient'
 import { setError } from './../../utils/common'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getDataScoreQuestion } from './../../redux-modules/modules/score'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 let choice = [
   { value: 'a', label: 'A' },
@@ -17,7 +22,7 @@ let choice = [
   { value: 'e', label: 'E' },
 ]
 
-export default class New extends Component {
+ class New extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -49,11 +54,14 @@ export default class New extends Component {
     this.onChangeEssay = this.onChangeEssay.bind(this)
     this.onChangeSelect = this.onChangeSelect.bind(this)
     this.redirect = this.redirect.bind(this)
+    this.handleSaveDate = this.handleSaveDate.bind(this)
   }
 
   componentDidMount() {
     this.getStudent()
     this.getGenerateForm()
+    this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id )
+
   }
 
   redirect(){
@@ -80,6 +88,7 @@ export default class New extends Component {
       })
     })
 
+    
 
     this.setState({
 
@@ -101,40 +110,35 @@ export default class New extends Component {
     })
   }
 
-  handleSave(e, table) {
-    console.log(this.state.valueData, " hit here")
-    var user_problem_answers = [];
-    var rows = table.getElementsByTagName('tr');
-    let quest_id = {}
-    this.state.question.map((array) => {
-      quest_id = array.id
+  handleSave(e) {
+    e.preventDefault()
+
+      confirmAlert({
+        customUI: ({ onClose, onConfirm }) => {
+            return (
+                <div className="react-confirm-alert modal-alert">
+                    <div className="react-confirm-alert-body">
+                        <div className="header align-center">
+                            <h1> Penilaian berhasil dibuat </h1>
+                        </div>
+                        <div className="react-confirm-alert-button-group toggle">
+                            <div className="align-center fullwidth">
+                                <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
+                                <a href="javascript:void(0);" className="btn green" onClick={() => {this.handleSaveDate(); onClose();}}>Yakin</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        },
     })
-    for (let i = 0; i < rows.length; i++) {
-      if (rows[i].cells[1].innerHTML === 'Essay') {
-        user_problem_answers.push({
-          user_id: this.props.match.params.student_id,
-          exam_id: this.props.match.params.exam_id,
-          class_id: this.props.match.params.class_id,
-          exam_question_id: quest_id,
-          ans: this.state.essay.answer,
-          score: this.state.score_choice
-        })
+  }
 
-      } else {
-        user_problem_answers.push({
-          user_id: this.props.match.params.student_id,
-          exam_id: this.props.match.params.exam_id,
-          class_id: this.props.match.params.class_id,
-          ans: this.state.valueData.label,
-          score: rows[i].cells[3].firstChild.innerHTML,
-          exam_question_id: quest_id,
+  handleSaveDate(){
+    let arrayData =  this.props.data_score && this.props.data_score.score && this.props.data_score.score.data && this.props.data_score.score.data.exam_question;
 
-        })
-
-      }
-    }
     let data = {}
-    data['user_problem_answers'] = user_problem_answers 
+    data['user_problem_answers'] =  arrayData
     console.log("here hit now", data)
     let url = `v1/assessments/${this.props.match.params.assessment_id}/exams/${this.props.match.params.exam_id}/exam_scores/${this.props.match.params.student_id}/bulk_fill_answers`
     
@@ -144,19 +148,17 @@ export default class New extends Component {
       .catch(err => {
           let response = err.response
           let data = response.data
-          console.log(this.state.email, this.state.password, "here")
-          if(this.state.email || this.state.password === ''){
-              this.setState({
-                  errors: setError(data),
-              })
-          }else{
-              this.onShowAlert(data)
-              console.log("or here")
-          }
+          // if(this.state.email || this.state.password === ''){
+          //     this.setState({
+          //         errors: setError(data),
+          //     })
+          // }else{
+          //     this.onShowAlert(data)
+          //     console.log("or here")
+          // }
           
         console.log(err)
       })
-
   }
 
 
@@ -188,6 +190,7 @@ export default class New extends Component {
   }
 
   render() {
+    console.log("render id", this.props.data_score)
     return (
       <div className="detail bg-grey">
         <Header navbar={false} />
@@ -211,3 +214,11 @@ export default class New extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  data_score: state
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreQuestion }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(New);
+
