@@ -13,14 +13,14 @@ export default class KkmNoQuestions extends Component {
                         <span className='float-right view margin-top-2'>Lihat Semua</span>
                     </div>
                 </div>
-                <div className='row'>
-                    <UserNotPassed
-                        notPassed={this.props.notPassed}
-                    />
+                <div className='row box-not-passed h-100'>
+                        <UserNotPassed
+                            notPassed={this.props.notPassed}
+                        />
                 </div>
-                    <div className='remedial padding-top-6'>
-                        <button className='btn-white'>Remedial</button>
-                    </div>
+                <div className='remedial padding-top-6'>
+                    <button className='btn-white'>Remedial</button>
+                </div>
             </div>
         )
     }

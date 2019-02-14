@@ -46,7 +46,6 @@ class BottomContent extends Component {
 
   handleClick(e, id, idx) {
     let subject = []
-
     let dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     let child = []
     let filtering = dataArray.filter(item => item.user.id === id)
@@ -200,7 +199,6 @@ class BottomContent extends Component {
           <div className="content-student">
             {
               dataArray && dataArray.map(function (data, index) {
-                console.log(data, "hehe")
                 return <div className="box-student margin-top-3 " key={Math.random()} >
                   <div className={classnames('border-full border-right', data.scores.total_average.result_status === null || data.scores.total_average.result_status === 'need_attention' ?'border-left-col-red':data.scores.total_average.result_status === 'good' ||  data.scores.total_average.result_status === 'very_good'?'border-left-col-green':'border-left-col-yellow')}>
                     <div className="row">

@@ -109,7 +109,7 @@ export const MainRoutes = [
         component: Questions
     },
     {
-        path: '/beri-nilai/:assessment_id/exam/:exam_id/class/:class_id/student/:student_id',
+        path: '/beri-nilai/:assessment_id/exam/:exam_id/class/:class_id',
         component: NoQuestions
     },
     {

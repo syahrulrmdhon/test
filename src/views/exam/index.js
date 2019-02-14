@@ -12,7 +12,7 @@ export default class Index extends Component {
     super(props)
     this.state = {
       assessmentId: this.props.match.params.id,
-      exams: {  
+      exams: {
         size: 0,
         total_entries: 0,
         total_pages: 0,
@@ -31,13 +31,18 @@ export default class Index extends Component {
     this.getAssessments()
   }
 
-  onChangePage(e,classes,assessment,exam) {
-    this.state.exams.entries.map(function(array, idx){
+  onChangePage(e, classes, assessment, exam, flag) {
+    if(flag===true){
       this.props.history.push({
-        pathname:'/assessment/'+assessment +'/exam/'+ exam + '/class/'+ classes,
-        state: {assessment:assessment, exam:exam, class:classes, path: this.props.location.pathname}
-     })
-    },this)
+        pathname: '/assessment/' + assessment + '/exam/' + exam + '/class/' + classes + '/flag/' + flag,
+        state: { assessment: assessment, exam: exam, class: classes, flag: flag }
+      })
+    } else {
+      this.props.history.push({
+        pathname: '/beri-nilai/' + assessment + '/exam/' + exam + '/class/' + classes + '/flag/' + flag,
+        state: { assessment: assessment, exam: exam, class: classes, flag: flag }
+      })
+    }
   }
 
   toEdit(id) {
@@ -52,8 +57,9 @@ export default class Index extends Component {
     apiClient('get', path).then(response => {
       response.data.data.exams.entries.map(function (data, index) {
         data && data.classses.map(function (i, j) {
-           i.assessment_id  = data.assessment_id;
-           i.exam_id = data.id;
+          i.assessment_id = data.assessment_id;
+          i.exam_id = data.id;
+          i.flag = data.include_question
         }, this)
       }, this)
       this.setState({ exams: response.data.data.exams })
@@ -62,6 +68,7 @@ export default class Index extends Component {
 
   addExam() {
     this.props.history.push({pathname: `/create-exam/${this.state.assessmentId}`})
+    this.getAssessments()
   }
 
   deleteExam(id) {

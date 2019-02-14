@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Exams from './exams'
 import { NotAvailable } from '../../views/global/notAvailable'
 
