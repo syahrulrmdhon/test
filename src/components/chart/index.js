@@ -4,6 +4,7 @@ import { Chart } from "react-google-charts";
 
 export default class SingleBarChat extends Component {
   render() {
+    console.log(this.props.participant,"my data chart")
     return (
       <div style={{ display: 'flex' }}>
       <Chart

@@ -33,6 +33,8 @@ class Nilai extends Component {
       questionResults: [],
       examChart: [],
       collapce: '',
+      data:[],
+      prevPath: '',
       search: ''
     }
     this.toggleMenu = this.toggleMenu.bind(this)
@@ -61,6 +63,7 @@ class Nilai extends Component {
     let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/participant_results`
     apiClient('get', url).then(res => {
       this.setState({
+        data: res.data.data,
         score: res.data.data.participants,
         exam: res.data.data.exam,
         participant_passed: res.data.data.participants.passed,
@@ -84,6 +87,7 @@ class Nilai extends Component {
       })
     })
   }
+
   getQuestions() {
     const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/questions`
 
@@ -95,6 +99,7 @@ class Nilai extends Component {
 
     })
   }
+
   onChangeSelect(e) {
     this.setState({
       search: e.target.value
@@ -105,21 +110,24 @@ class Nilai extends Component {
     e.preventDefault()
     let data = 'ac67857a-ad71-4a97-9718-c71c47e2e4bc'
     this.props.history.push({
-      pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
-      state: { data: data }
+      // pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
+      pathname: '/assessment/6ae41268-d737-4a87-bb54-1a9cfd1d69f8/exam/782a183b-a976-4e9f-b025-8cf46a45b646/class/' + this.state.class_id + '/student/ac67857a-ad71-4a97-9718-c71c47e2e4bc',
+      state: { data: data, conditon:'skill' }
     })
-
-
   }
 
   onSubmmit(){
-    console.log(this.state.search,"search")
     this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.asssessment_id, this.state.search )
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      this.setState({ prevPath: this.props.location })
+    }
+  }
   render() {
+    console.log(this.props.location,"my path")
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
-
     return (
       <div className="details-nilai bg-grey">
         <Header navbar={false} />
@@ -142,6 +150,7 @@ class Nilai extends Component {
                       chart={this.state.score.score_ranges}
                       exam={this.state.exam}
                       participant_passed={this.state.participant_passed}
+                      data={this.state.score}
                       participant_not_passed={this.state.participant_not_passed}
                     />
                   </div>

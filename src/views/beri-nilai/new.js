@@ -61,6 +61,7 @@ let choice = [
     this.getStudent()
     this.getGenerateForm()
     this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id )
+    console.log("my condition", this.props.location.state.conditon)
 
   }
 
@@ -140,7 +141,8 @@ let choice = [
     let data = {}
     data['user_problem_answers'] =  arrayData
     console.log("here hit now", data)
-    let url = `v1/assessments/${this.props.match.params.assessment_id}/exams/${this.props.match.params.exam_id}/exam_scores/${this.props.match.params.student_id}/bulk_fill_answers`
+    let url = `v1/assessments/782a183b-a976-4e9f-b025-8cf46a45b646/exams/782a183b-a976-4e9f-b025-8cf46a45b646/exam_scores/ac67857a-ad71-4a97-9718-c71c47e2e4bc/bulk_fill_answers`
+    // let url = `v1/assessments/${this.props.match.params.assessment_id}/exams/${this.props.match.params.exam_id}/exam_scores/${this.props.match.params.student_id}/bulk_fill_answers`
     
     apiClient('post', url, data).then(res => {
       this.redirect()
@@ -148,15 +150,6 @@ let choice = [
       .catch(err => {
           let response = err.response
           let data = response.data
-          // if(this.state.email || this.state.password === ''){
-          //     this.setState({
-          //         errors: setError(data),
-          //     })
-          // }else{
-          //     this.onShowAlert(data)
-          //     console.log("or here")
-          // }
-          
         console.log(err)
       })
   }
@@ -208,6 +201,7 @@ let choice = [
             valueData = {this.state.valueData}
             score_choice={this.state.score_choice}
             choice={this.state.choice}
+            type={this.props.location.state.conditon}
           />
         </div>
       </div>
