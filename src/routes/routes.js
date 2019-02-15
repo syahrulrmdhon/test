@@ -20,6 +20,7 @@ import Questions from '../views/beri-nilai/no-questions/questions'
 import NotFound from '../views/global/not-found'
 import NewScore from './../views/beri-nilai/new'
 import EditQuestion from '../views/create-exam/create-question'
+import Regist from './../views/auth/regist'
 
 export const MainRoutes = [
     {
@@ -27,6 +28,10 @@ export const MainRoutes = [
         exact: true,
         component: Login
   
+    },
+    {
+        path: '/regist',
+        component: Regist
     },
     {
         path: '/switch',
