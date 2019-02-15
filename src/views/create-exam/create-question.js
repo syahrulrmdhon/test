@@ -129,7 +129,6 @@ export default class question extends Component {
     apiClient('get', url, false, params).then(response => {
       let data = response.data.data
       if (data.exam.exam_questions_attributes.length === parseInt(data.exam.question_count) ) {
-        
         let path = `v1/assessments/${this.state.assessmentId}/exams`
         apiClient('post', path, data).then(response => {
           const examId = response.data.data.exam.id
@@ -254,19 +253,30 @@ export default class question extends Component {
     }
 
     apiClient('post', path, data, params).then((response) => {
-
-    if (this.state.data.exam.question_count > 1) {
-      this.checkNextNumber(this.state.activeNumber)
-      this.reset()
-    }
-    else if (this.state.data.exam.question_count == 1) {
-      this.validateForm(this.state.activeNumber)
-    }
+      if (this.state.data.exam.question_count > 1) {
+        console.log('lebih dari 1')
+        this.checkNextNumber(this.state.activeNumber)
+        this.reset()
+      }
+      else if (this.state.data.exam.question_count == 1) {
+        console.log('ppppp')
+        this.validateForm(this.state.activeNumber)
+      }
     }).catch(error => {
-      this.setState({
-        isError: true,
-        errorMessage: 'Gagal menyimpan soal, silahkan cek kembali data yang dibutuhkan'
-      })
+      this.setState({isError: true})
+      // console.log(error.response.data.errors.exam.fill_exam_question_comps[0].case)
+      if (error.response.data.errors.exam.fill_exam_question_comps[0].case === 'check_all_comps'){
+        let errors = error.response.data.errors.exam.fill_exam_question_comps[0]
+        console.log('error beda kompetensi')
+        this.setState({
+          errorMessage: 'Ada kompetensi dasar yang belum digunakan'
+        })
+      }
+      else {
+        this.setState({
+          errorMessage: 'Gagal menyimpan soal, silahkan cek kembali data yang dibutuhkan'
+        })
+      }
   })  
   }
 
@@ -322,7 +332,7 @@ export default class question extends Component {
     let numbers = this.numbers()
     
     let error = []
-    if(this.state.isError){
+    if (this.state.isError && this.state.errorMessage !== ''){
       error.push(<ErrorModal key={Math.random()} status="error" message={this.state.errorMessage} />)
       this.setState({
           isError: false,

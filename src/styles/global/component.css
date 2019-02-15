@@ -57,8 +57,8 @@ button:focus{
   color: #7f92a1 !important;
 }
 
-.select__input {
-  display: none !important;
+.select__input input {
+  height: unset;
 }
 
 option {
