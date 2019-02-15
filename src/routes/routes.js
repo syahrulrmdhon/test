@@ -24,6 +24,7 @@ import NotFound from '../views/global/not-found'
 import NewScore from './../views/beri-nilai/new'
 import EditQuestion from '../views/create-exam/create-question'
 import Regist from './../views/auth/regist'
+import Forgot from './../views/auth/forgot'
 
 export const MainRoutes = [
     {
@@ -35,6 +36,10 @@ export const MainRoutes = [
     {
         path: '/regist',
         component: Regist
+    },
+    {
+        path: '/forgot',
+        component: Forgot
     },
     {
         path: '/switch',
