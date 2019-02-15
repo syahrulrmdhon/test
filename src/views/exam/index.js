@@ -19,7 +19,10 @@ export default class Index extends Component {
         entries: []
       },
       classes: [],
-      selectedClass: null
+      selectedClass: null,
+      assessment: {
+        name: ''
+      }
     }
 
     this.addExam = this.addExam.bind(this)
@@ -72,7 +75,7 @@ export default class Index extends Component {
           i.flag = data.include_question
         }, this)
       }, this)
-      this.setState({ exams: response.data.data.exams, classes: response.data.data.classes})
+      this.setState({ exams: response.data.data.exams, classes: response.data.data.classes, assessment: response.data.data.assessment})
     })
   }
 
@@ -140,6 +143,7 @@ export default class Index extends Component {
                   assessmentId={this.state.assessmentId}
                   delete={this.delete}
                   edit={this.toEdit}
+                  assessment={this.state.assessment}
                 />
               </div>
             </div>
