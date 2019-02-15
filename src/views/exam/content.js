@@ -9,7 +9,7 @@ const content = (props) => {
       <div className="row align-items-center">
         <div className="col-sm-6 exam__wrapper-title">
           <label className="header-title">Daftar Tugas</label>
-          <div className="exam__topic-description">Topik 3 Memahami Makna Denotasi dan Konotasi dalam Percakapan</div>
+          <div className="exam__topic-description">{props.assessment.name}</div>
         </div>
         <div className="col-sm-6">
           <div className="float-right">
