@@ -1,6 +1,11 @@
 import { apiClient } from './apiClient'
 import React, { Component } from 'react'
 
+export function removeField(values, idx){
+    let removed = values.splice(idx, 1)
+    return values
+}
+
 export function setLabelSelect(lists, values = {}){
     let label = ''
     lists.map((list, idx) => {
@@ -188,13 +193,15 @@ export function getMonthIndo(month = false){
 
 export function changeFormatOptions(values = []){
     let result = []
-    if(values.length > 0){
-        values.map((value, idx) => {
-            result[idx] = {
-                value: value.key,
-                label: value.value,
-            }
-        })
+    if(values){
+        if(values.length > 0){
+            values.map((value, idx) => {
+                result[idx] = {
+                    value: value.key,
+                    label: value.value,
+                }
+            })
+        }
     }
     return result;
 }
