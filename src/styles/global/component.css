@@ -57,6 +57,10 @@ button:focus{
   color: #7f92a1 !important;
 }
 
+.select__input {
+  display: none !important;
+}
+
 option {
   margin: auto;
   font-family: "Nunito Sans", sans-serif;
