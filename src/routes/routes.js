@@ -24,7 +24,8 @@ import NotFound from '../views/global/not-found'
 import NewScore from './../views/beri-nilai/new'
 import EditQuestion from '../views/create-exam/create-question'
 import Regist from './../views/auth/regist'
-import Forgot from './../views/auth/forgot'
+import Forgot from '../views/auth/forgot/forgot'
+import Notif from './../views/auth/forgot/notif'
 
 export const MainRoutes = [
     {
@@ -40,6 +41,10 @@ export const MainRoutes = [
     {
         path: '/forgot',
         component: Forgot
+    },
+    {
+        path:'/notif-forgot',
+        component: Notif
     },
     {
         path: '/switch',

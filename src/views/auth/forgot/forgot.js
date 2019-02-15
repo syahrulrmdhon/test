@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import './../../styles/global/component.css'
-import './../../styles/beri-nilai/main.scss'
-import Logo from './../../assets/images/gredu-complete.svg'
+import './../../../styles/global/component.css'
+import './../../../styles/beri-nilai/main.scss'
+import Logo from './../../../assets/images/gredu-complete.svg'
 import { Link } from 'react-router-dom'
 
 export default class Forgot extends Component {
