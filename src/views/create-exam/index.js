@@ -7,6 +7,9 @@ import { examTypes } from '../../utils/common'
 import { apiClient } from '../../utils/apiClient'
 import { checkProperties } from '../../utils/common'
 import { assessmentShow } from '../../utils/exam'
+import ErrorModal from '../global/error_modal'
+
+import 'react-confirm-alert/src/react-confirm-alert.css'
 import '../../styles/create-exam.scss'
 
 export default class Index extends Component {
@@ -23,6 +26,8 @@ export default class Index extends Component {
           selectedType: null 
       },
       data: [],
+      isError: false,
+      errorMessage: 'Terjadi kesalahan, silahkan untuk memeriksa data anda kembali.'
     }
     this.handleCreateQuestion = this.handleCreateQuestion.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -103,11 +108,24 @@ export default class Index extends Component {
         if (response.status === 200){
           this.props.history.push({pathname: `/question/${assessmentId}`, data: this.state.form})
         }
+      }).catch(error => {
+        this.setState({isError: true})
+        if (error.response.data.errors.exam.question_count[0].case === 'check_question_count') {
+          this.setState({errorMessage: 'Jumlah soal tidak boleh lebih kecil dari jumlah kompetensi dasar yang terdapat di topik.'})
+        }
       })
     }
   }
 
   render() {
+    let error = []
+    if(this.state.isError){
+      error.push(<ErrorModal key={Math.random()} status="error" message={this.state.errorMessage} />)
+      this.setState({
+          isError: false,
+      })
+    }
+
     let disable = false
     
     if (this.state.checked) {
@@ -124,6 +142,7 @@ export default class Index extends Component {
     return (
       <div className="padding-content create-exam">
         <Header />
+        {error}
         <div className="margin-8">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
