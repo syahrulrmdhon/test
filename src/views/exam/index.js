@@ -80,7 +80,17 @@ export default class Index extends Component {
   }
 
   addExam() {
-    this.props.history.push({pathname: `/create-exam/${this.state.assessmentId}`})
+    let category = this.state.assessment ? this.state.assessment.category : null
+
+    switch(category){
+      case 'skill':
+        this.props.history.push({pathname: `/create-skill/${this.state.assessmentId}`})
+      break;
+      default:
+        this.props.history.push({pathname: `/create-exam/${this.state.assessmentId}`})
+      break;
+    }
+
     this.getAssessments()
   }
 
@@ -128,7 +138,7 @@ export default class Index extends Component {
   render() {
     return (
       <div className="padding-content exam">
-        <Header />
+        <Header navbar={true} location='/penilaian' />
         <div className="margin-8">
           <div className="content-block main-block">
             <div className="row">
