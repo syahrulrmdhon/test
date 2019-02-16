@@ -34,11 +34,11 @@ export const MainRoutes = [
     {
         path: '/',
         exact: true,
-        component: Login
+        component: Regist
     },
     {
-        path: '/regist',
-        component: Regist
+        path: '/Login',
+        component: Login
     },
     {
         path: '/forgot',

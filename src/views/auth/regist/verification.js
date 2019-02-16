@@ -3,6 +3,14 @@ import Logo from './../../../assets/images/logo.svg'
 import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
 
 export default class Verification extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            email: ''
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
     render() {
         return (
             <div className="verification">
