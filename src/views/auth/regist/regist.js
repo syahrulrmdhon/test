@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
 import { Link } from 'react-router-dom'
 import 'react-datepicker/dist/react-datepicker.css'
-import Logo from './../../assets/images/gredu-complete.svg'
-import Calendar from './../../assets/images/calendar.svg'
-import './../../styles/global/component.css'
+import Logo from './../../../assets/images/gredu-complete.svg'
+import Calendar from './../../../assets/images/calendar.svg'
+import './../../../styles/global/component.css'
 
 export default class Regist extends Component {
     constructor(props) {

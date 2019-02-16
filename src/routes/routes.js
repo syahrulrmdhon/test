@@ -23,16 +23,18 @@ import Questions from '../views/beri-nilai/no-questions/questions'
 import NotFound from '../views/global/not-found'
 import NewScore from './../views/beri-nilai/new'
 import EditQuestion from '../views/create-exam/create-question'
-import Regist from './../views/auth/regist'
+import Regist from '../views/auth/regist/regist'
 import Forgot from '../views/auth/forgot/forgot'
 import Notif from './../views/auth/forgot/notif'
+import Verification from '../views/auth/regist/verification';
+import NotifRegist from '../views/auth/regist/notif-regist';
+import NewPassword from '../views/auth/password/new-password';
 
 export const MainRoutes = [
     {
         path: '/',
         exact: true,
         component: Login
-  
     },
     {
         path: '/regist',
@@ -45,6 +47,18 @@ export const MainRoutes = [
     {
         path:'/notif-forgot',
         component: Notif
+    },
+    {
+        path: '/verification',
+        component: Verification
+    },
+    {
+        path:'/notif-regist',
+        component: NotifRegist
+    },
+    {
+        path:'/new-password',
+        component: NewPassword
     },
     {
         path: '/switch',
