@@ -38,6 +38,19 @@ export function assessmentGetData(p_category = false){
     })
 }
 
+export function basic_comp_lists(values){
+    let result = []
+    if(values.length > 0){
+        values.map((value, idx) => {
+            result.push({
+                label: `${value.competency_number} ${value.label}`,
+                value: value.id,
+            })
+        })
+    }
+    return result
+}
+
 export function categoryType(value = false) {
     assessmentType(value)
 }

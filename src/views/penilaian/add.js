@@ -92,7 +92,6 @@ class Add extends Component {
                 this.props.history.push('/penilaian/tambah-component')
             }
         }).catch(err => {
-            console.log(err)
             error({
                 message: `Gagal ${msg} Topik, periksa kembali data yang dibutuhkan`,
                 btns: [

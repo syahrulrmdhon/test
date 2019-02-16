@@ -9,6 +9,7 @@ import AssessmentComponent from '../views/penilaian/add_component'
 
 // exam - skill
 import AddSkill from './../views/exam/skill/add'
+import QuestionSkill from './../views/exam/skill/add_question'
 
 import DaftarNilai from '../views/daftar-nilai/daftar-nilai'
 import Rapor from '../views/rapor/rapor'
@@ -104,6 +105,10 @@ export const MainRoutes = [
     {
         path: '/create-skill/:id',
         component: AddSkill
+    },
+    {
+        path: '/question-skill/:id',
+        component: QuestionSkill
     },
     // END SKILL
     
