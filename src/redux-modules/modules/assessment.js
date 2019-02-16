@@ -82,8 +82,8 @@ export default function reducer(state = initialState, action = {}) {
             state[action.fieldName] = action.value
             return{
                 ...state,
-                loaded: false,
-                loading: true,
+                loaded: true,
+                loading: false,
             }
         case ADD_CLASS: 
             state.assessment_classes_attributes = state.assessment_classes_attributes.concat([{ class_id: null }])
@@ -101,7 +101,7 @@ export default function reducer(state = initialState, action = {}) {
             }
         case GET_NEW:
             let assessment = action.result.data.assessment ? action.result.data.assessment : {}
-            console.log(assessment)
+
             if(Object.entries(assessment) == 0){
                 assessment = {
                     name: "",

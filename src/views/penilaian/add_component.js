@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Header from '../global/header'
 import AddSubject from './new/add_subject'
 import { NavLink } from 'react-router-dom'
-import { error } from './../global/modal'
+import { error, modal } from './../global/modal'
 import { apiClient } from './../../utils/apiClient'
 import Tab from './new/tab'
 
@@ -41,6 +41,16 @@ class AddComponent extends Component {
         }
 
         apiClient('post', url, data).then(response => {
+            modal({
+                message: 'Selamat',
+                description: 'Anda berhasil menyimpan topik, silakan klik tombol lihat untuk membuat tugas.',
+                btns: [
+                    {
+                        label: 'Selesai',
+                        className: 'btn green',
+                    }
+                ]
+            })
             if(assessment_id){
                 apiClient('put', `v1/assessments/${assessment_id}`, data).then(response => {
                     this.props.history.push(`/penilaian`)

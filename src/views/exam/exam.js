@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom';
 
 import 'react-circular-progressbar/dist/styles.css';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 const exam = (props) => {
   const styles = {
     path: {
@@ -15,7 +18,7 @@ const exam = (props) => {
       stroke: 'ededed',
     }
   }
-  
+
   return (
     <div className="exam__panel">
       <div className="row h-100">
@@ -54,7 +57,7 @@ const exam = (props) => {
               <div className="exam__class-wrapper">
                 {
                   props.classes.map((item, index) => {
-                    return <div key={item.id} className="exam__class" onClick={(e) => { props.page(e, item.id, item.assessment_id, item.exam_id, item.flag) }} >{item.name}</div>
+                    return <div key={item.id} className="exam__class" onClick={(e) => { props.page(e, item.id, item.assessment_id, item.exam_id, item.flag, props.assessment.category) }} >{item.name}</div>
                   })
                 }
               </div>
@@ -66,4 +69,9 @@ const exam = (props) => {
     </div>
   )
 };
-export default exam
+
+const mapStateToProps = (state, props) => ({
+  assessment: state.assessment
+})
+
+export default connect(mapStateToProps)(exam)

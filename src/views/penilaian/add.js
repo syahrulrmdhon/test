@@ -14,7 +14,7 @@ import { bindActionCreators } from 'redux';
 
 import { assessmentType } from './../../utils/common'
 import { apiClient } from './../../utils/apiClient'
-import {error} from './../global/modal'
+import {error, modal} from './../global/modal'
 
 const category_types = [
     { value: 'knowledge', label: 'Pengetahuan' },
@@ -70,6 +70,18 @@ class Add extends Component {
         delete data.assessment_subjects_attributes
 
         apiClient('post', url, data).then(response => {
+
+            modal({
+                message: 'Selamat',
+                description: 'Anda sudah menyimpan data topik, selanjutnya anda masukkan data komponen topik',
+                btns: [
+                    {
+                        label: 'Selanjutnya',
+                        className: 'btn green',
+                    }
+                ]
+            })
+
             if(assessment_id){
                 apiClient('put', `v1/assessments/${assessment_id}`, data).then(response => {
                     this.props.history.push(`/penilaian/edit-component/${assessment_id}`)
@@ -80,14 +92,13 @@ class Add extends Component {
                 this.props.history.push('/penilaian/tambah-component')
             }
         }).catch(err => {
-            console.log(err)
             error({
                 message: `Gagal ${msg} Topik, periksa kembali data yang dibutuhkan`,
                 btns: [
                     {
                         label: 'Ulangi',
                         className: "btn bcred cwhite",
-                    }
+                    },
                 ]
             })
         })
