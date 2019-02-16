@@ -5,19 +5,18 @@ import 'react-datepicker/dist/react-datepicker.css'
 import Logo from './../../../assets/images/gredu-complete.svg'
 import Calendar from './../../../assets/images/calendar.svg'
 import './../../../styles/global/component.css'
-import { apiClient } from '../../../utils/apiClient';
+import { AuthClient } from '../../../utils/auth-client'
+import { error, modal } from './../../global/modal'
 
 export default class Regist extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            startDate: new Date(),
+            // startDate: new Date(),
             uniqueCode: '',
             dob: ''
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleChange(e) {
         console.log(e.target.value)
@@ -27,14 +26,36 @@ export default class Regist extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
-        const url = 'authentication/register'
+        const url = `authentication/register`
         const regist = {
             unique_id: this.state.uniqueCode,
             dob: this.state.dob
         }
 
-        apiClient('post', url, regist).then(res => {
-            this.props.history.push('/verification')
+        AuthClient('post', url, regist).then(res => {
+            localStorage.setItem("token_auth", res.data.data.auth_token)
+            modal({
+                message: 'Selamat',
+                description: 'Data yang Anda masukkan benar',
+                btns: [
+                    {
+                        label: 'Lanjut',
+                        className: 'btn green',
+                        event: this.props.history.push('/verification')
+                    }
+                ]
+            })
+        }).catch(err=>{
+            console.log(err)
+            error({
+                message: 'Gagal, akun user tidak ditemukan',
+                btns: [
+                    {
+                        label: 'Ulangi',
+                        className: 'btn bcred cwhite'
+                    }
+                ]
+            })
         })
     }
 
@@ -52,7 +73,7 @@ export default class Regist extends Component {
                         </div>
                         <div className="right-content-login col-lg-6">
                             <div className="main-right col-12">
-                                <form onSubmit={this.handleSubmit}>
+                                <form onSubmit={this.handleSubmit.bind(this)}>
                                     <h5 className='header-auth'><strong>Daftarkan akun Gredu kamu</strong></h5>
                                     <br />
                                     <p className='text-left'>

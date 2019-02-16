@@ -34,6 +34,7 @@
     "react-fontawesome": "^1.6.1",
     "react-google-charts": "^3.0.10",
     "react-image": "^1.5.1",
+    "react-input-calendar": "^0.5.4",
     "react-modal": "^3.8.1",
     "react-paginate": "^6.2.1",
     "react-redux": "^6.0.0",

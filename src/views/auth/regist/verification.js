@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Logo from './../../../assets/images/logo.svg'
 import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
+import {AuthClient} from './../../../utils/auth-client'
+import { error, modal } from './../../global/modal'
 
 export default class Verification extends Component {
     constructor(props) {
@@ -9,7 +11,45 @@ export default class Verification extends Component {
         this.state = {
             email: ''
         }
-        this.handleChange = this.handleChange.bind(this)
+    }
+    handleChange(e) {
+        console.log(e.target.value)
+        let verification = {}
+        verification[e.target.name] = e.target.value
+        this.setState(verification)
+    }
+    handleSubmit(e) {
+        e.preventDefault()
+        const url = `${process.env.API_URL}`
+        const endpoint = `authentication/verification_email?url=${url}:code`
+        const verification = {
+            email: this.state.email
+        }
+
+        AuthClient('post', endpoint, verification).then(res => {
+            console.log(res)
+            modal({
+                message: 'Selamat',
+                description: 'Lanjut ke langkah selanjutnya',
+                btns: [
+                    {
+                        label: 'Lanjut',
+                        className: 'btn green',
+                        event: this.props.history.push('/notif-regist')
+                    }
+                ]
+            })
+        }).catch(err => {
+            error({
+                message: 'Gagal, ulangi lagi',
+                btns: [
+                    {
+                        label: 'Ulangi',
+                        className: 'btn bcred cwhite'
+                    }
+                ]
+            })
+        })
     }
     render() {
         return (
@@ -33,21 +73,28 @@ export default class Verification extends Component {
                     <div className="direct align-center margin-top-6">
                         Masukkan email baru
                     </div>
-                    <div className="margin-top-6">
-                        <div className="row">
-                            <div className="col-sm-offset-4 col-sm-4">
-                                <input className="email fullwidth padding-4" placeholder='Masukkan Email Baru...'>
-                                </input>
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <div className="margin-top-6">
+                            <div className="row">
+                                <div className="col-sm-offset-4 col-sm-4">
+                                    <input
+                                        value={this.state.email}
+                                        type='text' name='email'
+                                        onChange={this.handleChange.bind(this)}
+                                        className="email fullwidth padding-4"
+                                        placeholder='Masukkan Email Baru...'
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className='margin-top-6'>
-                        <div className='row'>
-                            <div className='col-sm-offset-4 col-sm-4'>
-                                <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
+                        <div className='margin-top-6'>
+                            <div className='row'>
+                                <div className='col-sm-offset-4 col-sm-4'>
+                                    <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                 </div>
             </div>
