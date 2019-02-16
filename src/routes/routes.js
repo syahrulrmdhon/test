@@ -53,6 +53,7 @@ export const MainRoutes = [
     },
     {
         path: '/verification',
+        exact:true,
         component: Verification
     },
     {
@@ -60,7 +61,7 @@ export const MainRoutes = [
         component: NotifRegist
     },
     {
-        path:'/new-password/:code',
+        path:'/verification/:code',
         component: NewPassword
     },
     {

@@ -38,7 +38,6 @@ export default class NotifRegist extends Component {
         }
 
         AuthClient('post', endpoint, data).then(res => {
-            console.log(res)
             modal({
                 message: 'Selamat',
                 description: 'Lanjut ke langkah selanjutnya',

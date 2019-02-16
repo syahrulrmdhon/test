@@ -9,25 +9,24 @@ export default class Verification extends Component {
         super(props)
 
         this.state = {
-            email: ''
+            email: '',
+            url: props.location
         }
     }
     handleChange(e) {
-        console.log(e.target.value)
         let verification = {}
         verification[e.target.name] = e.target.value
         this.setState(verification)
     }
     handleSubmit(e) {
         e.preventDefault()
-        const url = `${process.env.API_URL}`
+        const url = window.location.href + '/:code'
         const endpoint = `authentication/verification_email?url=${url}:code`
         const verification = {
             email: this.state.email
         }
 
         AuthClient('post', endpoint, verification).then(res => {
-            console.log(res)
             modal({
                 message: 'Selamat',
                 description: 'Lanjut ke langkah selanjutnya',

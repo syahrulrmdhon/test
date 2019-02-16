@@ -1192,7 +1192,6 @@ table.table.beri-nilai tr.head {
     cursor: pointer;
     border-radius: 5px;
   }
-  
   .btn-white:hover {
     filter: brightness(90%);
   }
@@ -1226,5 +1225,10 @@ table.table.beri-nilai tr.head {
     position: relative;
     width: 30%;
     margin-left: 35%;
+  }
+  .ava {
+    margin: 0px auto;
+    position: absolute;
+    left: 47%;
   }
 }

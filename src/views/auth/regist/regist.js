@@ -58,7 +58,6 @@ export default class Regist extends Component {
             })
         })
     }
-
     render() {
         return (
             <div className="background">
