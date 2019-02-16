@@ -7,7 +7,13 @@ import '../../styles/exam.scss'
 import { apiClient } from "../../utils/apiClient"
 import { confirmAlert } from 'react-confirm-alert'
 
-export default class Index extends Component {
+import {
+  getAssessment,
+} from './../../redux-modules/modules/assessment'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+class Index extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -35,14 +41,15 @@ export default class Index extends Component {
   }
 
   componentDidMount() {
+    this.props.getAssessment(this.state.assessmentId)
     this.getAssessments()
   }
 
-  onChangePage(e, classes, assessment, exam, flag) {
+  onChangePage(e, classes, assessment, exam, flag, assessment_category) {
     if(flag===true){
       this.props.history.push({
         pathname: '/assessment/' + assessment + '/exam/' + exam + '/class/' + classes + '/flag/' + flag,
-        state: { assessment: assessment, exam: exam, class: classes, flag: flag }
+        state: { assessment: assessment, exam: exam, class: classes, flag: flag, assessment_category: assessment_category }
       })
     } else {
       this.props.history.push({
@@ -163,3 +170,12 @@ export default class Index extends Component {
     )
   }
 }
+
+const mapStateToProps = (state, props) => ({
+  assessment: state.assessment
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ 
+  getAssessment,
+}, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

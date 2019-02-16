@@ -959,6 +959,9 @@ thead {
 .align-center {
   text-align: center !important;
 }
+.valign-center {
+  vertical-align: middle !important;
+}
 
 /* Text Right = Tulisannya di right */
 .align-right {
@@ -1167,6 +1170,9 @@ label.header-title.form{
 .select-list{
   height: 40px;
 }
+.select-list .select__menu{
+  z-index: 99999;
+}
 .select-list .select__control{
   min-height: auto;
   height: 40px;
@@ -1248,11 +1254,22 @@ table.table.assessment .btn{
   padding: 3px 25px;
 }
 
+table.work-step thead > tr > td{
+  padding: 15px;
+  border: none;
+}
+table.work-step thead > tr > td label,
+table.work-step tbody > tr > td label.header-title
+{
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
 tbody tr:nth-child(odd) {
   background-color: #f9f9f9;
 }
 tbody tr:nth-child(even) {
-  background-color: #FFFFFF;
+  background-color: #fdfdfd;
 }
 
 .padding-content{
