@@ -747,7 +747,7 @@ thead {
 
 /* Color */
 /* Green */
-.cgreen {
+.cgreen, {
   color: #05a558;
 }
 .cgreen:hover, .cgreen:focus {
@@ -796,6 +796,9 @@ thead {
 /* White */
 .cwhite {
   color: white;
+}
+.cwhite:hover, .cwhite:focus{
+  color: #f7f7f7;
 }
 
 /* Background Color */
@@ -1362,23 +1365,32 @@ tbody tr:nth-child(even) {
   padding: 0;
 }
 .modal-alert .header{
-  padding:20px;
+  padding: 10px;
   opacity: 0.6;
   background-color: rgba(235, 244, 254, 0.5);
 }
 .modal-alert .header > h1{
+  font-family: 'NunitoBold';
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: 0.3px;
   text-align: center;
+  letter-spacing: 0.3px;
   color: #4a4a4a;
   font-size: 14px;
+}
+.react-confirm-alert-body{
+  width: 350px;
 }
 .modal-alert .toggle{
   padding: 0px 20px 20px 20px;
   text-align: center;
+}
+.modal-alert .toggle span.description{
+  font-size: 12px;
+  font-weight: 600;
+  color: #4a4a4a;
 }
 /* bootstrap */
 .open > .dropdown-menu {

@@ -7,6 +7,9 @@ import AssessmentNew from '../views/penilaian/add'
 import AssessmentComponent from '../views/penilaian/add_component'
 // import AssessmentEdit from '../views/penilaian/edit'
 
+// exam - skill
+import AddSkill from './../views/exam/skill/add'
+
 import DaftarNilai from '../views/daftar-nilai/daftar-nilai'
 import Rapor from '../views/rapor/rapor'
 import DaftarMurid from '../views/student/murid'
@@ -66,6 +69,13 @@ export const MainRoutes = [
         component: Assessment
     },
     // END PENILAIAN
+    
+    // SKILL
+    {
+        path: '/create-skill/:id',
+        component: AddSkill
+    },
+    // END SKILL
     
     {
         path: '/daftar-nilai',

@@ -5,6 +5,7 @@ import Select from 'react-select';
 import { getDate, setError } from '../../utils/common'
 import Error from '../global/error'
 import { apiClient } from '../../utils/apiClient'
+import {modal} from './../global/modal'
 
 export default class ScheduleModal extends Component{
     constructor(props) {
@@ -69,6 +70,19 @@ export default class ScheduleModal extends Component{
                 if(method == 'delete'){
                     apiClient(method, url).then(response => {
                         let items = response.data.data.items || []
+
+                        modal({
+                            message: 'Selamat',
+                            description: `Berhasil hapus jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))} di jam ${activity_schedule.start_time} sampai ${activity_schedule.end_time}`,
+                            btns: [
+                                {
+                                    label: 'Selesai',
+                                    className: 'btn bcgreen cwhite',
+                                    event: this.props.callBack(items)
+                                }
+                            ]
+                        })
+
                         this.props.callBack(items)
                     })
                 }
@@ -126,7 +140,18 @@ export default class ScheduleModal extends Component{
                 })
     
                 let items = response.data.data.items || []
-                this.props.callBack(items)
+                
+                modal({
+                    message: 'Selamat',
+                    description: `Berhasil ubah jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))}`,
+                    btns: [
+                        {
+                            label: 'Selesai',
+                            className: 'btn bcgreen cwhite',
+                            event: this.props.callBack(items)
+                        }
+                    ]
+                })
             }).catch(error => {
                 let response = error.response
                 let data = response.data
@@ -144,7 +169,20 @@ export default class ScheduleModal extends Component{
                 })
     
                 let items = response.data.data.items || []
-                this.props.callBack(items)
+
+                modal({
+                    message: 'Selamat',
+                    description: `Berhasil tambah jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))}`,
+                    btns: [
+                        {
+                            label: 'Selesai',
+                            className: 'btn bcgreen cwhite',
+                            event: this.props.callBack(items)
+                        }
+                    ]
+                })
+
+                // this.props.callBack(items)
             }).catch(error => {
                 let response = error.response
                 let data = response.data
