@@ -18,8 +18,14 @@ export default class NewPassword extends Component {
             password: '',
             repassword: '',
             user: {},
-            contentType: 'image/png'
+            contentType: 'image/png',
+            editor:''
         }
+        this.setEditorRef = this.setEditorRef.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+    componentDidMount(){
+       
     }
     onClose() {
         this.setState({ preview: null })
@@ -41,41 +47,55 @@ export default class NewPassword extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
+
+
+        var result =  this.state.editor.state.image.currentSrc.split(';')
+        var base = result[1].split(',')
         const url = `authentication/activate`
         const user = {
             password: this.state.password,
-            repassword: this.state.repassword,
+            password_confirmation: this.state.repassword,
             user_picture: {
-                src: this.state.src,
+                src: base[1],
                 content_type: this.state.contentType
             }
         }
 
-        AuthClient('post', url, user).then(res => {
-            modal({
-                message: 'Selamat',
-                description: 'Data yang Anda masukkan benar',
-                btns: [
-                    {
-                        label: 'Lanjut',
-                        className: 'btn green',
-                        event: this.props.history.push('/verification')
-                    }
-                ]
+        let data = {}
+        data['user'] = user
+            AuthClient('post', url, data).then(res => {
+                modal({
+                    message: 'Selamat',
+                    description: 'Data yang Anda masukkan benar',
+                    btns: [
+                        {
+                            label: 'Lanjut',
+                            className: 'btn green',
+                            event: this.props.history.push('/verification')
+                        }
+                    ]
+                })
+            }).catch(err => {
+                console.log(err)
+                error({
+                    message: 'Gagal, akun user tidak ditemukan',
+                    btns: [
+                        {
+                            label: 'Ulangi',
+                            className: 'btn bcred cwhite'
+                        }
+                    ]
+                })
             })
-        }).catch(err => {
-            console.log(err)
-            error({
-                message: 'Gagal, akun user tidak ditemukan',
-                btns: [
-                    {
-                        label: 'Ulangi',
-                        className: 'btn bcred cwhite'
-                    }
-                ]
-            })
+     }
+    setEditorRef(editor){
+        // this.editor = editor
+        this.setState({
+            editor:editor
         })
     }
+
+
     render() {
         return (
             <div className='verification'>
@@ -95,6 +115,7 @@ export default class NewPassword extends Component {
                                 labelStyle={{ fontSize: '8px' }}
                                 onCrop={this.onCrop.bind(this)}
                                 onClose={this.onClose.bind(this)}
+                                ref={this.setEditorRef}
                             // onBeforeFileLoad={this.onBeforeFileLoad.bind(this)}
                             />
                         </div>
