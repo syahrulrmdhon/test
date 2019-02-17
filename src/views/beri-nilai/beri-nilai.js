@@ -110,9 +110,9 @@ class Nilai extends Component {
     e.preventDefault()
     let data = 'ac67857a-ad71-4a97-9718-c71c47e2e4bc'
     this.props.history.push({
-      // pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
-      pathname: '/assessment/6ae41268-d737-4a87-bb54-1a9cfd1d69f8/exam/782a183b-a976-4e9f-b025-8cf46a45b646/class/' + this.state.class_id + '/student/ac67857a-ad71-4a97-9718-c71c47e2e4bc',
-      state: { data: data, conditon:'skill' }
+      pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
+      // pathname: '/assessment/6ae41268-d737-4a87-bb54-1a9cfd1d69f8/exam/782a183b-a976-4e9f-b025-8cf46a45b646/class/' + this.state.class_id + '/student/ac67857a-ad71-4a97-9718-c71c47e2e4bc',
+      state: { data: data, conditon:this.props.location.state.assessment_category }
     })
   }
 
