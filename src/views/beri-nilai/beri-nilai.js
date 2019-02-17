@@ -128,9 +128,10 @@ class Nilai extends Component {
   render() {
     console.log(this.props.location,"my path")
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
+    let path = `/exam/${this.state.assessment_id}`
     return (
       <div className="details-nilai bg-grey">
-        <Header navbar={false} />
+        <Header navbar={false} location={path} />
         <div className="content-wrapper content-wrap-custom-size ">
           <div className="row detail-menu">
             <div className="offset-2 col-sm-10 tab-menu tab-position">
