@@ -5,6 +5,8 @@ import {apiClient} from './../../../utils/apiClient'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
+import { modal } from './../../global/modal'
+
 import { assessmentGetData } from './../../../utils/exam' // getdata
 import { NavLink } from 'react-router-dom'
 
@@ -31,7 +33,17 @@ export default class Table extends Component {
         let url = 'v1/assessments/' + assessment_id
         
         apiClient('delete', url).then(response => {
-            assessmentGetData.call(this, value.category)
+            modal({
+                message: 'Berhasil',
+                description: `Anda telah berhasil menghapus topik ${value.name}`,
+                btns: [
+                    {
+                        label: 'Selesai',
+                        className: 'btn green',
+                        event: assessmentGetData.call(this, value.category),
+                    }
+                ]
+            })
         })
     }
 
@@ -99,7 +111,7 @@ export default class Table extends Component {
                     <thead>
                         <tr className="main-head">
                             <th></th>
-                            <th>Judul Topik</th>
+                            <th width="40%">Judul Topik</th>
                             <th>Mata Pelajaran</th>
                             <th>{add_field_category}</th>
                             <th>Tanggal Dibuat</th>

@@ -7,6 +7,10 @@ import AssessmentNew from '../views/penilaian/add'
 import AssessmentComponent from '../views/penilaian/add_component'
 // import AssessmentEdit from '../views/penilaian/edit'
 
+// exam - skill
+import AddSkill from './../views/exam/skill/add'
+import QuestionSkill from './../views/exam/skill/add_question'
+
 import DaftarNilai from '../views/daftar-nilai/daftar-nilai'
 import Rapor from '../views/rapor/rapor'
 import DaftarMurid from '../views/student/murid'
@@ -23,13 +27,43 @@ import Questions from '../views/beri-nilai/no-questions/questions'
 import NotFound from '../views/global/not-found'
 import NewScore from './../views/beri-nilai/new'
 import EditQuestion from '../views/create-exam/create-question'
+import Regist from '../views/auth/regist/regist'
+import Forgot from '../views/auth/forgot/forgot'
+import Notif from './../views/auth/forgot/notif'
+import Verification from '../views/auth/regist/verification';
+import NotifRegist from '../views/auth/regist/notif-regist';
+import NewPassword from '../views/auth/password/new-password';
 
 export const MainRoutes = [
     {
         path: '/',
         exact: true,
+        component: Regist
+    },
+    {
+        path: '/Login',
         component: Login
-  
+    },
+    {
+        path: '/forgot',
+        component: Forgot
+    },
+    {
+        path:'/notif-forgot',
+        component: Notif
+    },
+    {
+        path: '/verification',
+        exact:true,
+        component: Verification
+    },
+    {
+        path:'/notif-regist',
+        component: NotifRegist
+    },
+    {
+        path:'/verification/:code',
+        component: NewPassword
     },
     {
         path: '/switch',
@@ -66,6 +100,17 @@ export const MainRoutes = [
         component: Assessment
     },
     // END PENILAIAN
+    
+    // SKILL
+    {
+        path: '/create-skill/:id',
+        component: AddSkill
+    },
+    {
+        path: '/question-skill/:id',
+        component: QuestionSkill
+    },
+    // END SKILL
     
     {
         path: '/daftar-nilai',
