@@ -1,21 +1,26 @@
 import React, { Component } from 'react'
 import Header from '../global/header'
+import { getData, handleSwitch, handleEvent } from './../../redux-modules/modules/question'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import TabNumber from '../../components/TabContent/TabContent'
 import Select from 'react-select'
 import { questionTypes } from '../../utils/common'
 import { apiClient } from '../../utils/apiClient'
 import { getQuestion } from '../../utils/exam'
 import { confirmAlert } from 'react-confirm-alert'
-var FontAwesome = require('react-fontawesome')
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import Choices from "./choices"
 import ErrorModal from '../global/error_modal'
+var FontAwesome = require('react-fontawesome')
 
-export default class question extends Component {
+
+class Question extends Component {
   constructor(props) {
     super(props)
     this.state= {
       assessmentId: props.match.params.id,
+      step: 'QuestionForm',
       examId: '',
       activeNumber: 1,
       filled: [],
@@ -39,7 +44,8 @@ export default class question extends Component {
       is_correct_ans: 0,
       question_count: 0,
       isError: false,
-      errorMessage: ''
+      errorMessage: '',
+      // basicCompetences: []
     }
 
     this.numbers = this.numbers.bind(this)
@@ -51,11 +57,14 @@ export default class question extends Component {
     this.checkNextNumber = this.checkNextNumber.bind(this)
     this.setForm = this.setForm.bind(this)
     this.validateForm = this.validateForm.bind(this)
+    // this.basicCompetences = this.basicCompetences.bind(this)
   }
 
   componentDidMount() {
-    getQuestion.call(this, this.state.assessmentId, this.state.activeNumber)
+    // getQuestion.call(this, this.state.assessmentId, this.state.activeNumber)
+    this.props.getData(this.state.assessmentId, this.state.step)
     questionTypes.call(this)
+    // this.basicCompetences()
   }
 
   setForm(number) {
@@ -152,8 +161,11 @@ export default class question extends Component {
 
   numbers() {
     let result = []
-    for (let counter = 1; counter <= this.state.data.exam.question_count; counter++) {
+    if (this.props.exam.questionForm) {
+      console.log(this.props.exam.questionForm, 'fidfdifid')
+      for (let counter = 1; counter <= this.props.exam.questionForm.exam.question_count; counter++) {
         result.push(counter)
+      }
     }
     return result
   }
@@ -254,20 +266,16 @@ export default class question extends Component {
 
     apiClient('post', path, data, params).then((response) => {
       if (this.state.data.exam.question_count > 1) {
-        console.log('lebih dari 1')
         this.checkNextNumber(this.state.activeNumber)
         this.reset()
       }
       else if (this.state.data.exam.question_count == 1) {
-        console.log('ppppp')
         this.validateForm(this.state.activeNumber)
       }
     }).catch(error => {
       this.setState({isError: true})
-      // console.log(error.response.data.errors.exam.fill_exam_question_comps[0].case)
       if (error.response.data.errors.exam.fill_exam_question_comps[0].case === 'check_all_comps'){
         let errors = error.response.data.errors.exam.fill_exam_question_comps[0]
-        console.log('error beda kompetensi')
         this.setState({
           errorMessage: 'Ada kompetensi dasar yang belum digunakan'
         })
@@ -318,6 +326,15 @@ export default class question extends Component {
   }
 
   render() {
+    
+    let data = this.props.exam.questionForm
+    let basicCompetences = []
+    let selectedBasicCompetence = ''
+
+    if (data) {
+        basicCompetences = this.props.exam.basicCompetencies
+        selectedBasicCompetence = data.exam_question.basic_comp_id
+    }
     let choices = []
     if (this.state.form.problem_type === 'multiple_choice') {
       if(this.state.form.exam_question_choices_attributes.length > 0){
@@ -338,6 +355,7 @@ export default class question extends Component {
           isError: false,
       })
     }
+
     return (
       <div className="padding-content create-exam question-wrapper">
         <Header />
@@ -353,14 +371,16 @@ export default class question extends Component {
               <TabNumber class='create-exam__input' tab={numbers} toggle={this.toggle} activeTab={this.state.activeNumber}/>
               <label className="create-exam__label">Kompetensi Dasar</label>
               <Select
+                // value={this.state.examTypes.find(type => {return type.value === examType})}
+
                 className="create-exam__input"
                 classNamePrefix="select"
-                value={this.state.selectedBasicCompetence}
-                onChange={event => this.onChange(event, 'basic_comp_id')}
-                options={this.state.data.assessment_basic_comps}
+                value={basicCompetences.find(competence => {return competence.value === selectedBasicCompetence})}
+                onChange={event => this.props.handleEvent(event.value, 'basic_comp_id', this.state.step)}
+                options={basicCompetences}
                 placeholder='Pilih Kompetensi Dasar' />
               <label className="create-exam__label">Bobot Nilai</label>
-              <input type="text" className="form-control create-exam__input create-exam__input-amount" onChange={(event) => this.onChange(event, 'weight')} value={this.state.form.weight} placeholder="Masukkan Bobot Nilai" />
+              <input type="text" className="form-control create-exam__input create-exam__input-amount" onChange={(event) => this.props.handleEvent(event, 'weight', this.state.step)} value={this.state.form.weight} placeholder="Masukkan Bobot Nilai" />
               <div className="create-exam__separate" />
               <label className="create-exam__label">Tipe Soal</label>
               <Select
@@ -399,3 +419,20 @@ export default class question extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (state, props) => ({
+  exam: state.question,
+  // data: state.exam,
+  // switch: state
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getData,
+    handleSwitch,
+    handleEvent
+  }, dispatch
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Question)

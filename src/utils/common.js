@@ -250,7 +250,6 @@ export function grades(){
 
 export function schoolYears(){
     apiClient('get', 'v1/filters/school_years').then(response => response.data).then(data => {
-        console.log(data);
 
         this.setState({
             school_years: (data.data.school_years.length > 0) ? data.data.school_years : []
@@ -277,7 +276,6 @@ export function examTypes(params={}){
 
 export function checkProperties(obj) {
     for (let key in obj) {
-        console.log(obj[key],"here ch uti")
         if (obj[key] === null || obj[key] === "" || obj[key] === undefined) {
             return true;
         }
