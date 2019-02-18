@@ -33,6 +33,8 @@ import Notif from './../views/auth/forgot/notif'
 import Verification from '../views/auth/regist/verification';
 import NotifRegist from '../views/auth/regist/notif-regist';
 import NewPassword from '../views/auth/password/new-password';
+import ExamDetail from './../views/exam/detail/index'
+
 
 export const MainRoutes = [
     {
@@ -155,6 +157,11 @@ export const MainRoutes = [
     {
         path: '/pariticipant-user/:assessment_id/assessment/:exam_id/exam',
         component: ParticipantUser,
+    },
+    {   
+        path: '/all-question/:assessment_id/assessment/:exam_id/exam',
+        exact: true,
+        component:ExamDetail
     },
     {
         path: '/question/:id',

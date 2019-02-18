@@ -4,12 +4,14 @@ import assessment from './modules/assessment'
 import exam from './modules/exam'
 import skill from './modules/exam/skill'
 import score from './modules/score'
+import questionDetail from './modules/questionDetail'
 
 export default combineReducers({
   user,
   assessment,
   exam,
   skill,
+  questionDetail,
   score
 })
 
