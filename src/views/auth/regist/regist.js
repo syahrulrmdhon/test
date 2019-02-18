@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
 import { Link } from 'react-router-dom'
 import 'react-datepicker/dist/react-datepicker.css'
+import './../../../styles/auth.css'
 import Logo from './../../../assets/images/gredu-complete.svg'
-import Calendar from './../../../assets/images/calendar.svg'
 import './../../../styles/global/component.css'
 import { error, modal } from './../../global/modal'
-import { getDate } from './../../../utils/common'
 import moment from 'moment/moment.js'
-import { apiClient } from '../../../utils/apiClient';
+import { apiClient } from '../../../utils/apiClient'
 
 export default class Regist extends Component {
     constructor(props) {
@@ -95,7 +94,7 @@ export default class Regist extends Component {
                                         placeholder='Unique Code'
 
                                     />
-                                    <div className='date-register'>
+                                    <div>
                                         <DatePicker
                                             className="col-sm-12"
                                             selected={this.state.selectedDate}

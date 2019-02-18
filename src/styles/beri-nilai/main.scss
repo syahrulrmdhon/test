@@ -880,11 +880,12 @@ table.table.beri-nilai tr.head {
   }
 
   .content-student {
+    max-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     .box-student {
       max-width: 100%;
-      // height: 29.5px;
       background-color: #ffffff;
-      // height: 43px;
     }
 
     .label-content {
@@ -1007,7 +1008,7 @@ table.table.beri-nilai tr.head {
   margin: auto;
   .btn-white {
     position: absolute;
-    bottom: 10%;
+    bottom: 3%;
     margin-left: 10%;
     width: 70%;
   }
@@ -1026,7 +1027,9 @@ table.table.beri-nilai tr.head {
   color: #7f92a1 !important;
 }
 .box-not-passed {
-  overflow: auto;
+  max-height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .cgreen-light {
   font-family: $nunito_bold;
@@ -1247,9 +1250,24 @@ table.table.beri-nilai tr.head {
   bottom: 20px;
   color: #4a4a4a;
 }
-.date-register {
-  .react-datepicker-wrapper,
-  .react-datepicker__input-container {
-    display: block;
-  }
+.loader {
+  margin: auto;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
