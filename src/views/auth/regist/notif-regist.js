@@ -52,10 +52,11 @@ export default class NotifRegist extends Component {
             })
         }).catch(err => {
             error({
-                message: 'Gagal, ulangi lagi',
+                message: 'Email sudah terkirim, cek kembali email Anda',
+                description: 'Email sudah terkirim, cek kembali email Anda',
                 btns: [
                     {
-                        label: 'Ulangi',
+                        label: 'Tutup',
                         className: 'btn bcred cwhite'
                     }
                 ]
