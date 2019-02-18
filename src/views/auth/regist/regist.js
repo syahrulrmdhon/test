@@ -41,6 +41,7 @@ export default class Regist extends Component {
         }
 
         apiClient('post', url, regist).then(res => {
+            localStorage.setItem("regist_token", res.data.data.auth_token)
             modal({
                 message: 'Berhasil',
                 description: 'Data yang Anda masukkan benar',

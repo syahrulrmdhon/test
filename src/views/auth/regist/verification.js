@@ -68,6 +68,7 @@ export default class Verification extends Component {
         })
     }
     render() {
+        console.log(localStorage.getItem('regist_token'))
         return (
             <div className="verification">
                 <div className="header padding-2">

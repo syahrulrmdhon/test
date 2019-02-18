@@ -9,12 +9,12 @@ export const apiClient = (method, url, request, params = {}) => {
     let headers =  {
         'Content-Type': 'application/json',
     }
-
     if(token) {
         headers['Authorization'] = 'Bearer ' + token
     }else if(regist_token) {
         headers['Authorization'] = 'Bearer ' + regist_token
     }
+    console.log(headers)
 
     if(schoolId) {
         headers['School-ID'] = schoolId
