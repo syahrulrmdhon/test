@@ -7,19 +7,24 @@ import Calendar from './../../../assets/images/calendar.svg'
 import './../../../styles/global/component.css'
 import { AuthClient } from '../../../utils/auth-client'
 import { error, modal } from './../../global/modal'
+import { getDate } from './../../../utils/common'
+import moment from 'moment/moment.js'
 
 export default class Regist extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            // startDate: new Date(),
             uniqueCode: '',
-            dob: ''
+            dob: '',
+            selectedDate: new Date()
         }
     }
+    handleDateChange(date) {
+        let format = moment(date).format('YYYY-MM-DD')
+        this.setState({ selectedDate: format })
+    }
     handleChange(e) {
-        console.log(e.target.value)
         let regist = {}
         regist[e.target.name] = e.target.value
         this.setState(regist)
@@ -29,7 +34,7 @@ export default class Regist extends Component {
         const url = `authentication/register`
         const regist = {
             unique_id: this.state.uniqueCode,
-            dob: this.state.dob
+            dob: this.state.selectedDate
         }
 
         AuthClient('post', url, regist).then(res => {
@@ -46,7 +51,6 @@ export default class Regist extends Component {
                 ]
             })
         }).catch(err => {
-            console.log(err)
             error({
                 message: 'Gagal, akun user tidak ditemukan',
                 btns: [
@@ -80,26 +84,26 @@ export default class Regist extends Component {
                                     </p>
                                     <br /><br />
                                     <br /><br />
-                                    <div className='row'>
-                                        <input
-                                            value={this.state.uniqueCode}
-                                            onChange={this.handleChange.bind(this)}
-                                            type='text' name='uniqueCode'
-                                            className='col-sm-12 margin-bottom-2'
-                                            placeholder='Unique Code'
+                                    <input
+                                        value={this.state.uniqueCode}
+                                        onChange={this.handleChange.bind(this)}
+                                        type='text' name='uniqueCode'
+                                        className='w-100 margin-bottom-2'
+                                        placeholder='Unique Code'
+
+                                    />
+                                    <div className='date-register'>
+                                        <DatePicker
+                                            className="col-sm-12"
+                                            selected={this.state.selectedDate}
+                                            onChange={this.handleDateChange.bind(this)}
+                                            showMonthDropdown
+                                            showYearDropdown
+                                            dropdownMode="select"
+                                            dateFormat="yyyy-MM-dd"
                                         />
                                     </div>
-                                        <div className='row border-bottom'>
-                                        <div className='col-sm-12'>
-                                            <input
-                                                value={this.state.dob}
-                                                onChange={this.handleChange.bind(this)}
-                                                type='text' name='dob'
-                                                placeholder='yyyy-mm-dd'
-                                            />
-                                            <i className="float-right fa fa-calendar calendar-icon" aria-hidden="true" />
-                                        </div>
-                                        </div>
+                                    <i className="float-right fa fa-calendar calendar-icon" aria-hidden="true" />
                                     <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
                                     <div className='float-right margin-top-4'>
                                         <p>Sudah punya akun?<Link to="/login" className='normal-text-green'> Login Disini</Link></p>

@@ -5,8 +5,8 @@ import Logo from './../../../assets/images/logo.svg'
 import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
 import ReactDOM from 'react-dom'
 import Avatar from 'react-avatar-edit'
-import { AuthClient } from '../../../utils/auth-client';
-import { modal } from './../../global/modal'
+import { AuthClient } from '../../../utils/auth-client'
+import { modal, error } from '../../global/modal';
 
 
 
@@ -26,30 +26,19 @@ export default class NewPassword extends Component {
         this.setEditorRef = this.setEditorRef.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-    componentDidMount(){
-       
-    }
     onClose() {
         this.setState({ preview: null })
     }
     onCrop(preview) {
         this.setState({ preview })
     }
-    // onBeforeFileLoad(e) {
-    //     if (e.target.files[0].size > 71680) {
-    //         alert("File is too big!");
-    //         e.target.value = "";
-    //     };
-    // }
     handleChange(e) {
-        console.log(e.target.value)
         let regist = {}
         regist[e.target.name] = e.target.value
         this.setState(regist)
     }
     handleSubmit(e) {
         e.preventDefault()
-
 
         var result =  this.state.editor.state.image.currentSrc.split(';')
         var base = result[1].split(',')
@@ -78,9 +67,8 @@ export default class NewPassword extends Component {
                     ]
                 })
             }).catch(err => {
-                console.log(err)
-                err({
-                    message: 'Gagal, akun user tidak ditemukan',
+                error({
+                    message: 'Gagal, data salah atau tidak lengkap',
                     btns: [
                         {
                             label: 'Ulangi',

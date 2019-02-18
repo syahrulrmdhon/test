@@ -51,20 +51,21 @@ export const MainRoutes = [
         component: Forgot
     },
     {
-        path:'/notif-forgot',
+        path: '/notif-forgot',
         component: Notif
     },
     {
         path: '/verification',
-        exact:true,
+        exact: true,
         component: Verification
     },
     {
-        path:'/notif-regist',
+        path: '/notif-regist',
+        exact: true,
         component: NotifRegist
     },
     {
-        path:'/verification/:code',
+        path: '/verification/:code',
         component: NewPassword
     },
     {
@@ -102,7 +103,7 @@ export const MainRoutes = [
         component: Assessment
     },
     // END PENILAIAN
-    
+
     // SKILL
     {
         path: '/create-skill/:id',
@@ -113,7 +114,7 @@ export const MainRoutes = [
         component: QuestionSkill
     },
     // END SKILL
-    
+
     {
         path: '/daftar-nilai',
         component: DaftarNilai
@@ -139,29 +140,29 @@ export const MainRoutes = [
         component: Exam
     },
     {
-        path:'/assessment/:assessment_id/exam/:exam_id/class/:class_id/student/:student_id',
-        component:NewScore
+        path: '/assessment/:assessment_id/exam/:exam_id/class/:class_id/student/:student_id',
+        component: NewScore
     },
     {
         path: '/create-exam/:id',
         component: CreateExam
     },
     {
-        path: '/assessment/:assessment_id/exam/:exam_id/class/:class_id' ,
-        component:DetailNilai
+        path: '/assessment/:assessment_id/exam/:exam_id/class/:class_id',
+        component: DetailNilai
     },
     {
-        path: '/pariticipant-class/:assessment_id/assessment/:exam_id/exam' ,
-        component:ParticipantClass
+        path: '/pariticipant-class/:assessment_id/assessment/:exam_id/exam',
+        component: ParticipantClass
     },
     {
         path: '/pariticipant-user/:assessment_id/assessment/:exam_id/exam',
         component: ParticipantUser,
     },
-    {   
+    {
         path: '/all-question/:assessment_id/assessment/:exam_id/exam',
         exact: true,
-        component:ExamDetail
+        component: ExamDetail
     },
     {
         path: '/question/:id',

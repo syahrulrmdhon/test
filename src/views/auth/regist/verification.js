@@ -37,11 +37,12 @@ export default class Verification extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
-        const url = window.location.href + '/:code'
-        const endpoint = `authentication/verification_email?url=${url}:code`
+        const url = window.location.href + '/:code&token_type=base64'
+        const endpoint = `authentication/verification_email?url=${url}`
         const verification = {
             email: this.state.email
         }
+        console.log('url endpoint', endpoint)
 
         AuthClient('post', endpoint, verification).then(res => {
             modal({
