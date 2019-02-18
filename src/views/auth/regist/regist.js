@@ -20,9 +20,13 @@ export default class Regist extends Component {
             selectedDate: new Date()
         }
     }
+
     handleDateChange(date) {
-        let format = moment(date).format('YYYY-MM-DD')
-        this.setState({ selectedDate: format })
+        let formatter = moment(date).format('YYYY-MM-DD')
+        let formatted = new Date(formatter)
+        this.setState({ 
+            selectedDate: formatted
+        })
     }
     handleChange(e) {
         let regist = {}
@@ -40,7 +44,7 @@ export default class Regist extends Component {
         AuthClient('post', url, regist).then(res => {
             localStorage.setItem("token_auth", res.data.data.auth_token)
             modal({
-                message: 'Selamat',
+                message: 'Berhasil',
                 description: 'Data yang Anda masukkan benar',
                 btns: [
                     {
@@ -52,7 +56,7 @@ export default class Regist extends Component {
             })
         }).catch(err => {
             error({
-                message: 'Gagal, akun user tidak ditemukan',
+                message: 'Gagal, data salah atau tidak lengkap',
                 btns: [
                     {
                         label: 'Ulangi',
@@ -101,6 +105,7 @@ export default class Regist extends Component {
                                             showYearDropdown
                                             dropdownMode="select"
                                             dateFormat="yyyy-MM-dd"
+                                            withPortal
                                         />
                                     </div>
                                     <i className="float-right fa fa-calendar calendar-icon" aria-hidden="true" />

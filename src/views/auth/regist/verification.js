@@ -42,7 +42,6 @@ export default class Verification extends Component {
         const verification = {
             email: this.state.email
         }
-        console.log('url endpoint', endpoint)
 
         AuthClient('post', endpoint, verification).then(res => {
             modal({

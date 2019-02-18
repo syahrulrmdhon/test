@@ -47,14 +47,12 @@ class Login extends Component {
             .catch(err => {
                 let response = err.response
                 let data = response.data
-                console.log(this.state.email, this.state.password, "here")
                 if (this.state.email || this.state.password === '') {
                     this.setState({
                         errors: setError(data),
                     })
                 } else {
                     this.onShowAlert(data)
-                    console.log("or here")
                 }
 
 
@@ -90,7 +88,6 @@ class Login extends Component {
 
     render() {
         const { visible, message, errors } = this.state;
-        console.log(errors, "my err")
         return (
             <div className="background">
                 <div className="login">
