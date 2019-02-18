@@ -96,7 +96,7 @@ export default class Regist extends Component {
                                     />
                                     <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
                                     <div className='float-right margin-top-4'>
-                                        <p>Sudah punya akun?<Link to="/" className='normal-text-green'> Login Disini</Link></p>
+                                        <p>Sudah punya akun?<Link to="/login" className='normal-text-green'> Login Disini</Link></p>
                                     </div>
                                 </form>
                             </div>
