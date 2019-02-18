@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Logo from './../../../assets/images/logo.svg'
 import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
-import {AuthClient} from './../../../utils/auth-client'
+import { AuthClient } from './../../../utils/auth-client'
 import { error, modal } from './../../global/modal'
 
 export default class Verification extends Component {
@@ -10,8 +10,25 @@ export default class Verification extends Component {
 
         this.state = {
             email: '',
+            user: {},
+            fullname: '',
             url: props.location
         }
+    }
+    componentDidMount() {
+        this.getDataUser()
+    }
+    getDataUser() {
+        const url = `authentication/verification_email`
+
+        AuthClient('get', url).then(res => {
+            let dataUser = res.data.data.user
+            this.setState({
+                user: dataUser,
+                fullname: dataUser.full_name
+            })
+
+        })
     }
     handleChange(e) {
         let verification = {}
@@ -28,8 +45,8 @@ export default class Verification extends Component {
 
         AuthClient('post', endpoint, verification).then(res => {
             modal({
-                message: 'Selamat',
-                description: 'Lanjut ke langkah selanjutnya',
+                message: 'Berhasil',
+                description: 'Periksa kotak masuk email Anda',
                 btns: [
                     {
                         label: 'Lanjut',
@@ -61,7 +78,7 @@ export default class Verification extends Component {
                         <img src={LogoFull} />
                     </div>
                     <div className="title margin-top-6 align-center">
-                        Selamat Datang! Mario Noya
+                        Selamat Datang! {this.state.fullname}
                     </div>
                     <div className="info align-center margin-top-6">
                         Berikut informasi Akun kamu yang terdaftar di data kami. Informasi ini

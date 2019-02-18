@@ -15,9 +15,9 @@ export default class NotifRegist extends Component {
         }
     }
     componentDidMount() {
-        this.getDataScores()
+        this.getDataUser()
     }
-    getDataScores() {
+    getDataUser() {
         const url = `authentication/verification_email`
 
         AuthClient('get', url).then(res => {
@@ -34,7 +34,9 @@ export default class NotifRegist extends Component {
         const url = `${process.env.API_URL}`
         const endpoint = `authentication/verification_email?url=${url}/:code`
         const data = {
-            email: this.state.email
+            user: {
+                email: this.state.email
+            }
         }
 
         AuthClient('post', endpoint, data).then(res => {

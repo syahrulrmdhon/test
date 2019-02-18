@@ -5,6 +5,28 @@ import Logo from './../../../assets/images/gredu-complete.svg'
 import { Link } from 'react-router-dom'
 
 export default class Notif extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            user:{}
+        }
+    }
+    componentDidMount() {
+        this.getDataUser()
+    }
+    getDataUser() {
+        const url = `authentication/verification_email`
+
+        AuthClient('get', url).then(res => {
+            let dataUser = res.data.data.user
+            this.setState({
+                user: dataUser,
+                email: dataUser.email
+            })
+
+        })
+    }
     render() {
         return (
             <div className="background">

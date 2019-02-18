@@ -45,7 +45,7 @@ export default class Regist extends Component {
                     }
                 ]
             })
-        }).catch(err=>{
+        }).catch(err => {
             console.log(err)
             error({
                 message: 'Gagal, akun user tidak ditemukan',
@@ -75,25 +75,31 @@ export default class Regist extends Component {
                                 <form onSubmit={this.handleSubmit.bind(this)}>
                                     <h5 className='header-auth'><strong>Daftarkan akun Gredu kamu</strong></h5>
                                     <br />
-                                    <p className='text-left'>
+                                    <p className='text-left desc'>
                                         Jika kamu belum mengetahui Unique Code untuk mendaftarkan akun, silahkan kontak email kami <span className='normal-text-green'>help@gredu.asia</span>
                                     </p>
                                     <br /><br />
                                     <br /><br />
-                                    <input
-                                        value={this.state.uniqueCode}
-                                        onChange={this.handleChange.bind(this)}
-                                        type='text' name='uniqueCode'
-                                        className='col-sm-12 margin-bottom-2'
-                                        placeholder='Unique Code'
-                                    />
-                                    <input
-                                        value={this.state.dob}
-                                        onChange={this.handleChange.bind(this)}
-                                        type='text' name='dob'
-                                        className='col-sm-12'
-                                        placeholder='yyyy-mm-dd'
-                                    />
+                                    <div className='row'>
+                                        <input
+                                            value={this.state.uniqueCode}
+                                            onChange={this.handleChange.bind(this)}
+                                            type='text' name='uniqueCode'
+                                            className='col-sm-12 margin-bottom-2'
+                                            placeholder='Unique Code'
+                                        />
+                                    </div>
+                                        <div className='row border-bottom'>
+                                        <div className='col-sm-12'>
+                                            <input
+                                                value={this.state.dob}
+                                                onChange={this.handleChange.bind(this)}
+                                                type='text' name='dob'
+                                                placeholder='yyyy-mm-dd'
+                                            />
+                                            <i className="float-right fa fa-calendar calendar-icon" aria-hidden="true" />
+                                        </div>
+                                        </div>
                                     <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
                                     <div className='float-right margin-top-4'>
                                         <p>Sudah punya akun?<Link to="/login" className='normal-text-green'> Login Disini</Link></p>

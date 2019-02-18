@@ -73,7 +73,7 @@ export default class NewPassword extends Component {
                         {
                             label: 'Lanjut',
                             className: 'btn green',
-                            event: this.props.history.push('/verification')
+                            event: this.props.history.push('/')
                         }
                     ]
                 })

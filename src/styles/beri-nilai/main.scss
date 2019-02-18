@@ -1232,3 +1232,16 @@ table.table.beri-nilai tr.head {
     left: 47%;
   }
 }
+.desc {
+  font-family: $nunito_regular;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: #4a4a4a;
+}
+.border-bottom { 
+  border-bottom: solid 1px #4a4a4a;
+}

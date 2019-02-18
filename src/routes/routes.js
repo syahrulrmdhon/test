@@ -40,11 +40,11 @@ export const MainRoutes = [
     {
         path: '/',
         exact: true,
-        component: Regist
+        component: Login
     },
     {
-        path: '/Login',
-        component: Login
+        path: '/regist',
+        component: Regist
     },
     {
         path: '/forgot',
