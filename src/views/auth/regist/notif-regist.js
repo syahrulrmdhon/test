@@ -53,7 +53,6 @@ export default class NotifRegist extends Component {
         }).catch(err => {
             error({
                 message: 'Email sudah terkirim, cek kembali email Anda',
-                description: 'Email sudah terkirim, cek kembali email Anda',
                 btns: [
                     {
                         label: 'Tutup',
