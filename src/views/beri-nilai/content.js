@@ -44,20 +44,6 @@ class Content extends Component {
         console.log(event, props, "my event");
         let is_answer = ''
 
-        // props.map((array) => {
-        //     is_answer = array.is_correct_ans
-        // })
-        // if (is_answer === null) {
-        //     this.setState({
-        //         valueData: event,
-        //         score_choice: 0
-        //     })
-        // } else {
-        //     this.setState({
-        //         score_choice: 0,
-        //         valueData: event
-        //     })
-        // }
 
     }
 
@@ -121,38 +107,79 @@ class Content extends Component {
         const question_exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.collections || []
         const exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.exam_question || []
 
+        let main_content = []
+        const type = this.props.type
         let content = []
-        console.log("my exam", this.props)
+        if (type === 'skill') {
+            main_content.push(
+                <thead className="right-content-score__table-head">
+                    <th className="right-content-score__no align-left text-center">No</th>
+                    <th>Indikator</th>
+                    <th className="align-center">Skor</th>
+                    <th>Bobot</th>
+                </thead>
+            )
+        } else {
+           main_content.push(<thead className="right-content-score__table-head">
+                <th className="right-content-score__no align-left text-center">No</th>
+                <th>Tipe Soal</th>
+                <th className="align-center">Jawaban Soal</th>
+                <th className="align-center">Skor</th>
+                <th>Bobot</th>
+            </thead>)
+        }
+
         question_exam.map(function (x, index) {
             let merge_content = []
-            console.log(exam[index],"exam index")
-            if(x.problem_type == 'multiple_choice'){
+            if (x.problem_type == 'multiple_choice') {
                 merge_content.push(<SelectData choices={x.exam_question_choices} max_score={x.max_score} index={index} exam={exam[index]} />)
                 merge_content.push(<td className="align-center">{exam[index]['score']}</td>)
             } else {
                 merge_content.push(
-                    <td> <input 
-                        type="text" 
-                        onChange={(e) => {this.props.handleScore(e, index, 'ans')}} 
-                        className="padding-1 fullwidth" 
+                    <td> <input
+                        type="text"
+                        onChange={(e) => { this.props.handleScore(e, index, 'ans') }}
+                        className="padding-1 fullwidth"
                         defaultValue={exam[index]['ans']}
                     /> </td>
                 )
                 merge_content.push(
-                    <td><input 
-                        type="text" 
-                        onChange={(e) => {this.props.handleScore(e, index, 'score')}}    
+                    <td><input
+                        type="text"
+                        onChange={(e) => { this.props.handleScore(e, index, 'score') }}
                         defaultValue={exam[index]['score']}
                     /></td>
                 )
             }
 
-            content.push(<tr key={Math.random()}>
-                <td className="align-left text-center">{x.qn_number}</td>
-                <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
-                {merge_content}
-                <td>{x.weight}</td>
-            </tr>)
+            let merge_content_skill = []
+            merge_content_skill.push(
+                <td><input
+                    type="text"
+                    className="align-center box-right"
+                    onChange={(e) => { this.props.handleScore(e, index, 'score') }}
+                    defaultValue={exam[index]['score']}
+                /></td>
+            )
+
+
+            if (type === 'skill') {
+                content.push(<tr key={Math.random()}>
+                    <td className="align-left text-center">{x.qn_number}</td>
+                    <td className="align-left text-left" key={x.problem_type}>{x.question}</td>
+                    {merge_content_skill}
+                    <td>{x.weight}</td>
+                </tr>)
+            } else {
+                content.push(<tr key={Math.random()}>
+                    <td className="align-left text-center">{x.qn_number}</td>
+                    <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
+                    {merge_content}
+                    <td>{x.weight}</td>
+                </tr>)
+            }
+
+
         }, this)
         return (
             <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">
@@ -168,13 +195,7 @@ class Content extends Component {
                             <div>
                                 <div className="table-responsive">
                                     <table id="table-score" className="right-content-score____table">
-                                        <thead className="right-content-score__table-head">
-                                            <th className="right-content-score__no align-left text-center">No</th>
-                                            <th>Tipe Soal</th>
-                                            <th className="align-center">Jawaban Soal</th>
-                                            <th className="align-center">Skor</th>
-                                            <th>Bobot</th>
-                                        </thead>
+                                        {main_content}
                                         <tbody>
                                             {content}
                                         </tbody>
@@ -196,9 +217,8 @@ const mapStateToProps = state => ({
     data_exam: state.score
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreQuestion,handleScore }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreQuestion, handleScore }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
 
 
 
-// this.props.valueData.hasOwnProperty('value') === false ? valueData : this.props.valueData)

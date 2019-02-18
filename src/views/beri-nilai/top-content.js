@@ -30,6 +30,7 @@ class Content extends Component {
                         <div className="content-chart  margin-left-5">
                             <SingleBarChat 
                                 chart={this.props.chart}
+                                participant={this.props.data}
                             />
                         </div>
 

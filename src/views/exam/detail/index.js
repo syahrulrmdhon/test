@@ -1,0 +1,67 @@
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import Header from './../../global/header'
+import '../../../styles/exam.scss'
+import Head from './header-title'
+import Question from './question'
+import  { getExamQuestion }  from './../../../redux-modules/modules/questionDetail'
+import { bindActionCreators } from 'redux';
+import Right from './right'
+
+ class index extends Component {
+  constructor(props){
+    super(props)
+
+
+  }
+
+  componentDidMount(){
+    this.props.getExamQuestion(this.props.match.params.exam_id, this.props.match.params.assessment_id)
+  }
+
+  render() {
+    return (
+      <div className="question padding-content">
+        <div>
+          <Header />
+        </div>
+        <div className="main-layout">
+
+        <div className="col-sm-12">
+          <div className="col-sm-8">
+            <div className="padding-top-4">
+                <div className="col-sm-12">
+                  <Head />
+                </div>
+                <div className="col-sm-12">
+                  <div className="margin-top-3">
+                    <Question />
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div className="col-sm-4">
+              <div className="padding-top-4">
+                <div className="">
+                  <div className="col-sm-12">
+                    <Right />
+                  </div>
+                </div>
+              </div>
+          
+          </div>
+          </div>
+
+        </div>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({
+  question: state.questionDetail
+})
+
+
+const mapDispatchToProps = dispatch => bindActionCreators({ getExamQuestion }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(index)

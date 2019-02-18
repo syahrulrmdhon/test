@@ -29,9 +29,13 @@ const exam = (props) => {
             <NavLink to= {`/pariticipant-class/${props.exam.assessment_id}/assessment/${props.exam.id}/exam`} className="exam__action" >
               Pilih Kelas
             </NavLink>
-            {
+              {
               props.question &&
-              <div className="exam__action">Lihat Soal</div>
+              <div className="exam__action">
+                <NavLink to={`/all-question/${props.exam.assessment_id}/assessment/${props.exam.id}/exam/`} className="exam__action" >
+                  Lihat soal
+                </NavLink>
+              </div>
             }
             {/* <div className="exam__action" onClick={props.edit}>Ubah</div> */}
             <div className="exam__action" onClick={props.delete}>Hapus</div>
