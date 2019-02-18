@@ -13,6 +13,9 @@ const REMOVE_SUBJECT = 'modules/assessment/REMOVE_SUBJECT';
 const ADD_KD = 'modules/assessment/ADD_KD';
 const HANDLE_KD = 'modules/assessment/HANDLE_KD';
 const HANDLE_SUBJECT = 'modules/assessment/HANDLE_SUBJECT';
+const HANDLE_ATTITUDE = 'modules/assessment/HANDLE_ATTITUDE';
+const HANDLE_ATTITUDE_ITEM = 'modules/assessment/HANDLE_ATTITUDE_ITEM';
+const REMOVE_ATTITUDE_ITEM = 'modules/assessment/REMOVE_ATTITUDE_ITEM';
 
 const initialState = {
     assessment: null,
@@ -30,8 +33,39 @@ const headers = {
 
 export default function reducer(state = initialState, action = {}) {
     switch(action.type){
+        case REMOVE_ATTITUDE_ITEM:
+            state.user_attitudes_attributes = removeField(state.user_attitudes_attributes, action.idx)
+            return{
+                ...state,
+                loaded: false,
+                loading: true,
+            }
+        case HANDLE_ATTITUDE_ITEM:
+            state.user_attitudes_attributes = state.user_attitudes_attributes.concat({
+                class_id: null,
+                user_id: null,
+                score: null,
+                description: null,
+            })
+            return{
+                ...state,
+                loaded: false,
+                loading: true,
+            }
+        case HANDLE_ATTITUDE:
+            state.assessment_attitudes_attributes[action.idx]['school_attitude_id'] = action.value
+            return{
+                ...state,
+                loaded: false,
+                loading: true,
+            }
         case HANDLE_SUBJECT:
             state.assessment_subjects_attributes[action.idx]['school_subject_id'] = action.value
+            
+            if(action.flag == 'attitude'){
+                delete state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes']
+            }
+
             return{
                 ...state,
                 loaded: false,
@@ -101,7 +135,6 @@ export default function reducer(state = initialState, action = {}) {
             }
         case GET_NEW:
             let assessment = action.result.data.assessment ? action.result.data.assessment : {}
-
             if(Object.entries(assessment) == 0){
                 assessment = {
                     name: "",
@@ -109,6 +142,7 @@ export default function reducer(state = initialState, action = {}) {
                     assessment_type: "",
                     school_id: school_id,
                     assessment_classes_attributes: [{ class_id: null }],
+                    assessment_attitudes_attributes:[{ school_attitude_id: null }],
                     assessment_subjects_attributes: []
                 }
             }
@@ -120,6 +154,23 @@ export default function reducer(state = initialState, action = {}) {
                         basic_comp_id: null,
                     }]
                 }]
+            }
+
+            if(assessment.category == 'attitude'){
+                if(assessment.assessment_subjects_attributes.length > 0){
+                    assessment.assessment_subjects_attributes.map((value, idx) => {
+                        delete assessment.assessment_subjects_attributes[idx]['assessment_basic_comps_attributes']
+                    })
+                }
+
+                if(assessment.user_attitudes_attributes.length == 0){
+                    assessment.user_attitudes_attributes.push({
+                        class_id: null,
+                        user_id: null,
+                        score: null,
+                        description: null,
+                    })
+                }
             }
 
             return {
@@ -160,11 +211,33 @@ export default function reducer(state = initialState, action = {}) {
     }
 }
 
-export function handleSubject(value, index){
+export function removeAttitudeItem(idx){
+    return {
+        type: REMOVE_ATTITUDE_ITEM,
+        idx: idx,
+    }
+}
+
+export function handleAttitudeItem(){
+    return {
+        type: HANDLE_ATTITUDE_ITEM,
+    }
+}
+
+export function handleAttitude(value, idx){
+    return {
+        type: HANDLE_ATTITUDE,
+        value: value,
+        idx: idx,
+    }
+}
+
+export function handleSubject(value, index, flag = false){
     return{
         type: HANDLE_SUBJECT,
         value: value,
         idx: index,
+        flag: flag,
     }
 }
 

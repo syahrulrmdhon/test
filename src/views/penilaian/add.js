@@ -3,6 +3,7 @@ import Header from '../global/header'
 import './../../styles/penilaian.css'
 import Tab from './new/tab'
 import AddClass from './new/add_class'
+import AddAttitude from './new/add_attitude'
 import Select from 'react-select';
 // redux
 import {
@@ -66,11 +67,16 @@ class Add extends Component {
             url = `v1/assessments/${assessment_id}/validate_update`
             msg = 'ubah'
         }
-        
-        delete data.assessment_subjects_attributes
 
-        apiClient('post', url, data).then(response => {
+        if(data.category == 'attitude'){
+            delete data.assessment_classes_attributes
+            delete data.user_attitudes_attributes
+        } else {
+            delete data.assessment_subjects_attributes
+            delete data.assessment_attitudes_attributes
+        }
 
+        apiClient('post', url, data, { category: data.category }).then(response => {
             modal({
                 message: 'Selamat',
                 description: 'Anda sudah menyimpan data topik, selanjutnya anda masukkan data komponen topik',
@@ -105,9 +111,17 @@ class Add extends Component {
     }
 
     render(){
-        let name = this.props.assessment !== undefined ? this.props.assessment.name : null
-        let category = this.props.assessment !== undefined ? this.props.assessment.category : null
-        let assessment_type = this.props.assessment !== undefined ? this.props.assessment.assessment_type : null
+        const {name, category, assessment_type} = this.props.assessment
+        let addOnLayout = ''
+
+        switch(assessment_type){
+            case 'daily':
+                addOnLayout = <AddAttitude />
+            break;
+            default:
+                addOnLayout = <AddClass />
+            break
+        }
 
         return(
             <div className="padding-content">
@@ -170,7 +184,7 @@ class Add extends Component {
                                         </div>
                                     </div>
                                     <div className="border-top margin-top-6"></div>
-                                    <AddClass />
+                                    {addOnLayout}
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <div className="margin-top-6">

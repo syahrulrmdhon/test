@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import Header from '../global/header'
-import AddSubject from './new/add_subject'
 import { NavLink } from 'react-router-dom'
 import { error, modal } from './../global/modal'
 import { apiClient } from './../../utils/apiClient'
 import Tab from './new/tab'
+
+import AddSubject from './new/add_subject'
+import AddDailyAttitude from './new/add_daily_attitude'
 
 // redux
 import {
@@ -79,6 +81,31 @@ class AddComponent extends Component {
     }
 
     render(){
+        const { category, assessment_type } = this.props.assessment
+        let resultView = ''
+
+        switch(category){
+            case 'attitude':
+                switch(assessment_type){
+                    case 'daily':
+                        resultView = <div className="row">
+                            <div className="col-sm-12">
+                                <AddDailyAttitude />
+                            </div>
+                        </div>
+                    break;
+                }
+            break;
+            case 'skill':
+            case 'knowledge':
+                resultView = <div className="row">
+                    <div className="col-sm-10">
+                        <AddSubject />
+                    </div>
+                </div>
+            break;
+        }
+
         let urlBack = '/penilaian/tambah'
         if(this.state.assessment_id){
             urlBack = `/penilaian/edit/${this.state.assessment_id}`
@@ -94,11 +121,7 @@ class AddComponent extends Component {
                                 <form>
                                     <label className="header-title form disblock">{this.state.label}</label>   
                                     <Tab tab={this.state.tab} />
-                                    <div className="row">
-                                        <div className="col-sm-10">
-                                            <AddSubject />
-                                        </div>
-                                    </div>
+                                    {resultView}
                                     <div className="margin-top-4 padding-top-4">
                                         <NavLink to={urlBack}>
                                             <button className="submit-btn default margin-right-2" >Kembali</button>

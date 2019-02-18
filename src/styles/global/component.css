@@ -26,6 +26,11 @@ button:focus {
   margin-bottom: 20px;
 }
 
+/* textarea */
+textarea.textarea-box{
+  min-height: 100px;
+}
+
 /* dropdown */
 
 .select__indicator-separator {
@@ -1527,6 +1532,13 @@ tbody tr:nth-child(even) {
   font-weight: 600;
   color: #4a4a4a;
 }
+
+/* react-datepicker */
+.react-datepicker-wrapper,
+.react-datepicker__input-container{
+  display: block;
+}
+
 /* bootstrap */
 
 .open>.dropdown-menu {

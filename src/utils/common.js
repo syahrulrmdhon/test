@@ -326,6 +326,7 @@ export function basicComps(params = {}, options = {}){
         this.setState(obj)
     })
 }
+
 export function subjects(params = {}, options = {}){
     let listOptions = options.listOptions || false
 
@@ -345,6 +346,30 @@ export function subjects(params = {}, options = {}){
         }    
         this.setState({
             subjects: subjects,
+        })
+    })
+}
+
+export function attitudeAspects(params = {}, options = {}){
+    let listOptions = options.listOptions || false
+
+    apiClient('get', '/v1/filters/attitude_aspects', false, params).then(response => {
+        let attitudeAspects = response.data.data.attitude_aspects || []
+
+        if((attitudeAspects.length > 0) && listOptions){
+            const temps = attitudeAspects
+            attitudeAspects = []
+            
+            temps.map((temp, idx) => {
+                attitudeAspects.push({
+                    value: temp.id,
+                    label: temp.alias_name,
+                })
+            })
+        }
+
+        this.setState({
+            attitude_aspects: attitudeAspects,
         })
     })
 }
