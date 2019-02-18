@@ -5,10 +5,10 @@ import 'react-datepicker/dist/react-datepicker.css'
 import Logo from './../../../assets/images/gredu-complete.svg'
 import Calendar from './../../../assets/images/calendar.svg'
 import './../../../styles/global/component.css'
-import { AuthClient } from '../../../utils/auth-client'
 import { error, modal } from './../../global/modal'
 import { getDate } from './../../../utils/common'
 import moment from 'moment/moment.js'
+import { apiClient } from '../../../utils/apiClient';
 
 export default class Regist extends Component {
     constructor(props) {
@@ -41,8 +41,7 @@ export default class Regist extends Component {
             dob: this.state.selectedDate
         }
 
-        AuthClient('post', url, regist).then(res => {
-            localStorage.setItem("token_auth", res.data.data.auth_token)
+        apiClient('post', url, regist).then(res => {
             modal({
                 message: 'Berhasil',
                 description: 'Data yang Anda masukkan benar',
@@ -105,7 +104,7 @@ export default class Regist extends Component {
                                             showYearDropdown
                                             dropdownMode="select"
                                             dateFormat="yyyy-MM-dd"
-                                            withPortal
+                                            // withPortal
                                         />
                                     </div>
                                     <i className="float-right fa fa-calendar calendar-icon" aria-hidden="true" />

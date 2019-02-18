@@ -3,7 +3,7 @@ import Logo from './../../../assets/images/logo.svg'
 import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
 import { Link } from 'react-router-dom'
 import { error, modal } from './../../global/modal'
-import { AuthClient } from '../../../utils/auth-client';
+import { apiClient } from '../../../utils/apiClient'
 
 export default class NotifRegist extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ export default class NotifRegist extends Component {
     getDataUser() {
         const url = `authentication/verification_email`
 
-        AuthClient('get', url).then(res => {
+        apiClient('get', url).then(res => {
             let dataUser = res.data.data.user
             this.setState({
                 user: dataUser,
@@ -38,7 +38,7 @@ export default class NotifRegist extends Component {
                 email: this.state.email
         }
 
-        AuthClient('post', endpoint, data).then(res => {
+        apiClient('post', endpoint, data).then(res => {
             modal({
                 message: 'Selamat',
                 description: 'Lanjut ke langkah selanjutnya',

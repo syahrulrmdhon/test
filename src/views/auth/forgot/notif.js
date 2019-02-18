@@ -3,8 +3,8 @@ import './../../../styles/global/component.css'
 import './../../../styles/beri-nilai/main.scss'
 import Logo from './../../../assets/images/gredu-complete.svg'
 import { Link } from 'react-router-dom'
-import { AuthClient } from '../../../utils/auth-client'
 import { error, modal } from './../../global/modal'
+import { apiClient } from '../../../utils/apiClient';
 
 export default class Notif extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ export default class Notif extends Component {
     getDataUser() {
         const url = `authentication/verification_email`
 
-        AuthClient('get', url).then(res => {
+        apiClient('get', url).then(res => {
             let dataUser = res.data.data.user
             this.setState({
                 user: dataUser,
@@ -39,7 +39,7 @@ export default class Notif extends Component {
 
         }
 
-        AuthClient('post', url, forgot).then(res => {
+        apiClient('post', url, forgot).then(res => {
             modal({
                 message: 'Berhasil',
                 description: 'Permintaan Anda sudah dikirim ulang',
