@@ -34,6 +34,8 @@ import Verification from '../views/auth/regist/verification';
 import NotifRegist from '../views/auth/regist/notif-regist';
 import NewPassword from '../views/auth/password/new-password';
 import ExamDetail from './../views/exam/detail/index'
+import DetailScoreAttitude from './../views/beri-nilai/attitude/'
+
 
 
 export const MainRoutes = [
@@ -178,6 +180,10 @@ export const MainRoutes = [
     {
         path: '/beri-nilai/:assessment_id/exam/:exam_id/class/:class_id',
         component: NoQuestions
+    },
+    {
+        path:'/score/attitude/',
+        component:DetailScoreAttitude
     },
     {
         path: '*',
