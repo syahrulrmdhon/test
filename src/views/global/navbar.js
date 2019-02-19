@@ -9,12 +9,12 @@ import { getMenu } from './../../redux-modules/modules/menu'
 
 
 const menus = [
-    { name: "Beranda", link: "/home" },
-    { name: "Absensi", link: "/absen" },
-    { name: "Penilaian", link: "/penilaian" },
-    { name: "Daftar Nilai", link: "/daftar-nilai" },
-    { name: "Rapor Kelas", link: "/rapor" },
-    { name: "Daftar Murid", link: "/murid" },
+    { name: "Beranda", link: "/home", role: 'all' },
+    { name: "Absensi", link: "/absen", role: 'all' },
+    { name: "Penilaian", link: "/penilaian", role: 'all' },
+    { name: "Daftar Nilai", link: "/daftar-nilai", role: 'all' },
+    { name: "Rapor Kelas", link: "/rapor", role: 'homeroom' },
+    { name: "Daftar Murid", link: "/murid", role: 'all' },
 ]
 
 class MenuBar extends Component {
@@ -27,7 +27,7 @@ class MenuBar extends Component {
             navbar: props.navbar || true
         };
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.getMenu()
     }
     toggle() {
@@ -36,39 +36,58 @@ class MenuBar extends Component {
         });
     }
     render() {
+        let content = []
         const { navbar } = this.props
-        const menu = this.props.menu && this.props.menu.Menu && this.props.menu.Menu.data
-        console.log(menu,"here")
+        const user_type = localStorage.getItem('homeroom_class')
+        if (user_type === 'null') {
+            menus.map(function (data, index) {
+                if (data.role === 'all') {
+                    content.push(
+                        <NavLink className="font-grey" key={index} to={data.link} activeClassName="active-menu">
+                            {data.name}
+                        </NavLink>
+                    )
+                    }
+            })
+        } else {
+            menus.map(function (data, index) {
+                    content.push(
+                        <NavLink className="font-grey" key={index} to={data.link} activeClassName="active-menu">
+                            {data.name}
+                        </NavLink>
+                    )
+            })
+        }
         return (
             <div className="menu-bar">
                 <div className="bg-white size-nav">
-                           { 
-                            navbar === false?
+                    {
+                        navbar === false ?
                             <div className="bg-white">
-                            <div className="back">
-                                <Link to={this.props.location}>&lt; Kembali</Link>
-                            </div>
-                            </div>
-                            :
-                               <div className="topnav">
-                                <div className="menu">
-                                        {
-                                            menus.map(function (data, index) {
-                                                return  <NavLink className="font-grey" key={index} to={data.link} activeClassName="active-menu">
-                                                        {data.name}
-                                                    </NavLink>
-                                            })
-                                        }
+                                <div className="back">
+                                    <Link to={this.props.location}>&lt; Kembali</Link>
                                 </div>
                             </div>
-                           }
-                    </div>
+                            :
+                            <div className="topnav">
+                                <div className="menu">
+                                    {content
+                                    }
+                                </div>
+                            </div>
+                    }
+                </div>
             </div>
         )
     }
 }
 const mapStateToProps = state => ({
     menu: state
-  })
+})
 const mapDispatchToProps = dispatch => bindActionCreators({ getMenu }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(MenuBar)
+
+
+
+
+
