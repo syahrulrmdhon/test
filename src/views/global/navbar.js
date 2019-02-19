@@ -3,6 +3,9 @@ import '../../styles/global/header.scss'
 import '../../styles/global/component.css'
 import '../../styles/global/navbar.scss'
 import { NavLink, Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { getMenu } from './../../redux-modules/modules/menu'
 
 
 const menus = [
@@ -14,7 +17,7 @@ const menus = [
     { name: "Daftar Murid", link: "/murid" },
 ]
 
-export default class MenuBar extends Component {
+class MenuBar extends Component {
     constructor(props) {
         super(props);
 
@@ -24,6 +27,9 @@ export default class MenuBar extends Component {
             navbar: props.navbar || true
         };
     }
+    componentDidMount(){
+        this.props.getMenu()
+    }
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -31,6 +37,8 @@ export default class MenuBar extends Component {
     }
     render() {
         const { navbar } = this.props
+        const menu = this.props.menu && this.props.menu.Menu && this.props.menu.Menu.data
+        console.log(menu,"here")
         return (
             <div className="menu-bar">
                 <div className="bg-white size-nav">
@@ -59,3 +67,8 @@ export default class MenuBar extends Component {
         )
     }
 }
+const mapStateToProps = state => ({
+    menu: state
+  })
+const mapDispatchToProps = dispatch => bindActionCreators({ getMenu }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBar)
