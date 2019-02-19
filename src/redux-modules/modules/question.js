@@ -6,6 +6,8 @@ const LOAD_FAIL = 'modules/question/LOAD_FAIL'
 const GET_DATA = 'modules/question/GET_DATA'
 const HANDLE_SWITCH = 'modules/question/HANDLE_EVENT'
 const HANDLE_EVENT = 'modules/question/HANDLE_INPUT'
+const HANDLE_NUMBER = 'modules/question/HANDLE_NUMBER'
+
 
 const initialState = {
   switch: true
@@ -18,8 +20,7 @@ export default function reducer(state = initialState, action) {
       delete state.error
       if (action.step === 'BasicForm') {
         const data = action.result.data.exam
-        console.log(data, 'response')
-        // console.log(data, 'basic form')
+
         state.basicForm = {
           assessment_id: action.id,
           name: data.name || '',
@@ -30,38 +31,34 @@ export default function reducer(state = initialState, action) {
         }
         state.switch = true
         state.basicCompetencies = basicCompetencies
-        console.log(state, 'redux')
+        state.is_correct_ans = 0
+        state.number = 1
       }
       else if (action.step === 'QuestionForm') {
-
+        
         const data = action.result.data
         state.questionForm = data
         basicCompetencies.map(competence => {     
           competence.label = `${competence.competency_number} ${competence.label} (${competence.subject_name})`
         })
         state.basicCompetencies = basicCompetencies
-        console.log(data, 'question form redus')
 
-        // console.log(state, 'qyuestion form')
-        if (data.exam_question.exam_question_choices !== null) {
-          // console.log(data, 'question form redux')
-          state.initialQuestion = {
-              weight: data.exam_question.exam_question_choices.weight || ''
-          //   problem_type
-          //   question
-          //   school_subject_id
-          //   basic_comp_id
-          //   exam_question_choices_attributes: [{order: 0, symbol: '', content: ''}]
-          //   assessment_id: action.id,
-          //   name: data.name || '',
-          //   exam_type: data.exam_type,
-          //   question_count: data.question_count || '',
-          //   is_remedial: data.is_remedial || false,
-          //   include_question: data.include_question || true
-          }
+        if (data.exam_question.exam_question_choices === null) {
+          data.exam.exam_questions_attributes.push({
+            weight: '',
+            exam_question_choices_attributes: [{order: 0, symbol: '', content: ''}],
+            problem_type: null,
+            basic_comp_id: null,
+            question: '',
+            school_subject_id: ''
+          })
+          state.is_correct_ans = 0
+        }
+        else if (data.exam.exam_questions_attributes.length) {
+          const correctAnswer = data.exam.exam_questions_attributes[state.number - 1].exam_question_choices_attributes.findIndex(choice => { return choice.is_correct_ans === true})
+          state.is_correct_ans = correctAnswer
         }
       }
-      // console.log(state, 'ini dari redux')
       return {
         ...state,
         loaded: true,
@@ -79,12 +76,44 @@ export default function reducer(state = initialState, action) {
       if (action.step === 'BasicForm'){
         state.basicForm[action.field] = action.value
       }
-      else if (action.step === 'QuestionForm') {
-        // console.log(state.questionForm.exam_question[], 'ppppff')
-        state.questionForm.exam_question[action.field] = action.value
+      else if (action.step === 'QuestionForm') {        
+        const data = state.questionForm.exam
+
+        if (action.field === 'symbol' || action.field === 'content') {
+          
+          const index = data.exam_questions_attributes[state.number - 1].exam_question_choices_attributes.findIndex(choice => {
+            return choice.order === action.order;
+          })
+          
+          data.exam_questions_attributes[state.number - 1].exam_question_choices_attributes[index][action.field] = action.value
+        }
+        else if (action.field === 'is_correct_ans') {
+          data.exam_questions_attributes[state.number - 1].exam_question_choices_attributes.map(choice => delete choice[action.field])
+          state[action.field] = parseInt(action.value)
+          data.exam_questions_attributes[state.number - 1].exam_question_choices_attributes[state[action.field]][action.field] = true
+        }
+        else if (action.field === 'basic_comp_id') {
+          data.exam_questions_attributes[state.number - 1][action.field] = action.value
+          const competence = state.basicCompetencies.find(competence => {return competence.value === action.value})
+          data.exam_questions_attributes[state.number - 1].school_subject_id = competence.school_subject_id
+        }
+        else {
+          data.exam_questions_attributes[state.number - 1][action.field] = action.value
+        }
       }
-      console.log(state, 'opopop')
       return{
+        ...state,
+        loaded: false,
+        loading: true,
+      }
+    case HANDLE_NUMBER:
+      if (action.next) {
+        state.number = state.number + action.value
+      }
+      else {
+        state.number = action.value
+      }
+      return {
         ...state,
         loaded: false,
         loading: true,
@@ -125,13 +154,23 @@ const headers = {
     }
 }
 
-export function getData(assessmentId = false, step = '') {
+export function getData(assessmentId = false, step = '', number, examId) {
+
   let url = `v1/assessments/${assessmentId}/exams/new?step=${step}`
-  console.log(url)
-  return{
+
+  if (number) {
+    url = `v1/assessments/${assessmentId}/exams/new?step=${step}&number=${number}`
+  }
+  
+  if (step && examId) {
+    url = `v1/assessments/${assessmentId}/exams/${examId}/edit?step=${step}`
+  }
+
+  return {
       types: [LOAD, GET_DATA, LOAD_FAIL],
       id: assessmentId,
       step: step,
+      examId: examId,
       promise: client => client.get(process.env.API_URL + url, headers)
   }
 }
@@ -143,11 +182,20 @@ export function handleSwitch(value) {
   }
 }
 
-export function handleEvent(value, field, step){
+export function handleEvent(value, field, step, order) {
   return {
       type: HANDLE_EVENT,
       value: value,
       field: field,
-      step: step
+      step: step,
+      order: order
+  }
+}
+
+export function handleNumber(value, next = true) {
+  return {
+      type: HANDLE_NUMBER,
+      value: value,
+      next: next,
   }
 }

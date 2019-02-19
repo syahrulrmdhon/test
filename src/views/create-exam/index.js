@@ -11,7 +11,7 @@ import { apiClient } from '../../utils/apiClient'
 import { checkProperties } from '../../utils/common'
 import { assessmentShow } from '../../utils/exam'
 import ErrorModal from '../global/error_modal'
-import {error} from './../global/modal'
+import { error } from './../global/modal'
 
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import '../../styles/create-exam.scss'
@@ -21,6 +21,7 @@ class Index extends Component {
     super(props)
     this.state = {
       assessmentId: props.match.params.id,
+      examId: props.match.params.examId,
       step: 'BasicForm',
       category: 'knowledge',
       examTypes: [],
@@ -31,19 +32,38 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    this.props.getData(this.state.assessmentId, this.state.step)
+    if (this.state.examId) {
+      this.props.getData(this.state.assessmentId, this.state.step, false, this.state.examId)
+    }
+    else {
+      this.props.getData(this.state.assessmentId, this.state.step)      
+    }
     examTypes.call(this, {category: this.state.category})
   }
 
   onSubmit() {
     const assessmentId = this.state.assessmentId
-    let path = `v1/assessments/${assessmentId}/exams`
+    const examId = this.state.examId
 
     let data = {
-      exam: 
-        this.props.exam.basicForm
+      exam: this.props.exam.basicForm
     }
+    if (examId) {
+      const path = `v1/assessments/${assessmentId}/exams/${examId}`
+      const request = {
+        exam: {
+          name: data.exam.name,
+          exam_type: data.exam.exam_type
+        }
+      }
+      apiClient('put', path, request).then(() => {
+        this.props.history.push({pathname: `/exam/${assessmentId}`})
+      })
+      return
+    }
+
     if (data.exam.include_question === false) {
+      const path = `v1/assessments/${assessmentId}/exams`
       data.exam.question_count = 0
       
       apiClient('post', path, data).then(response => {
@@ -61,7 +81,7 @@ class Index extends Component {
       })
     }
     else if (data.exam.include_question === true) {
-      path = `v1/assessments/${assessmentId}/exams/validate?step=${this.state.step}`
+      const path = `v1/assessments/${assessmentId}/exams/validate?step=${this.state.step}`
       apiClient('post', path, data).then(response => {
         this.props.history.push({pathname: `/question/${assessmentId}`, data: data})
       }).catch(err => {
@@ -93,10 +113,8 @@ class Index extends Component {
 
 
   render() {
-    console.log(this.props.exam)
-
     let disable = false
-
+  
     if (this.props.exam.switch) {
       if (checkProperties(this.props.exam.basicForm)) {
         disable = true
@@ -123,24 +141,27 @@ class Index extends Component {
         <div className="margin-8">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
-              <div className="create-exam__form-title">Tambah Tugas</div>
+              <div className="create-exam__form-title">{this.state.examId ? "Ubah Tugas" : "Tambah Tugas"}</div>
               <div className="create-exam__line"></div>
             </div>
             <div className="create-exam__form-wrapper">
-              <div className="d-flex create-exam__input h-auto mb-5">
-                <Switch
-                  onChange={this.props.handleSwitch}
-                  checked={this.props.exam.switch}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  onHandleColor="#ffffff"
-                  onColor="#1a9d7f"
-                  offColor="#cccccc"
-                  id="normal-switch"
-                  height={18}
-                  width={35} />
-                <label className="create-exam__label pl-2">Buat Soal Online</label>
-              </div>
+              {
+                !this.state.examId &&
+                <div className="d-flex create-exam__input h-auto mb-5">
+                  <Switch
+                    onChange={this.props.handleSwitch}
+                    checked={this.props.exam.switch}
+                    uncheckedIcon={false}
+                    checkedIcon={false}
+                    onHandleColor="#ffffff"
+                    onColor="#1a9d7f"
+                    offColor="#cccccc"
+                    id="normal-switch"
+                    height={18}
+                    width={35} />
+                  <label className="create-exam__label pl-2">Buat Soal Online</label>
+                </div>
+              }
               <label className="create-exam__label">Judul Tugas</label>
               <input type="text" className="form-control create-exam__input" placeholder="Masukkan Judul Tugas" onChange={event => this.props.handleEvent(event.target.value, "name", this.state.step)} value={name}/>
               <label className="create-exam__label">Tipe Tugas</label>
@@ -154,10 +175,10 @@ class Index extends Component {
               <div className={!this.props.exam.switch ? "d-none" : ""}>
                 <label className="create-exam__label">Jumlah Soal Tugas</label>
                 <input type="text" className="form-control create-exam__input create-exam__input-amount mt-0" placeholder="Masukkan Jumlah Soal Tugas" 
-                  value={question_count} onChange={event => this.props.handleEvent(event.target.value, "question_count", this.state.step)}/>
+                value={question_count} onChange={event => this.props.handleEvent(event.target.value, "question_count", this.state.step)} disabled={this.state.examId ? true : false}/>
               </div>
             </div>
-            <button onClick={this.onSubmit} className="create-exam__button" disabled={disable}>Lanjut</button>
+            <button onClick={this.onSubmit} className="create-exam__button" disabled={this.state.examId ? false : disable}>{this.state.examId ? "Simpan" : "Lanjut"}</button>
           </div>
         </div>
       </div>
