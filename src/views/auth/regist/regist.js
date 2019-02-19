@@ -8,6 +8,7 @@ import './../../../styles/global/component.css'
 import { error, modal } from './../../global/modal'
 import moment from 'moment/moment.js'
 import { apiClient } from '../../../utils/apiClient'
+import { getDate } from './../../../utils/common'
 
 export default class Regist extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ export default class Regist extends Component {
     handleDateChange(date) {
         let formatter = moment(date).format('YYYY-MM-DD')
         let formatted = new Date(formatter)
-        this.setState({ 
+        this.setState({
             selectedDate: formatted
         })
     }
@@ -104,6 +105,7 @@ export default class Regist extends Component {
                                             showYearDropdown
                                             dropdownMode="select"
                                             dateFormat="yyyy-MM-dd"
+                                            value={getDate('case-1', this.state.selectedDate)}
                                         />
                                     </div>
                                     <i className="float-right fa fa-calendar calendar-auth" aria-hidden="true" />
