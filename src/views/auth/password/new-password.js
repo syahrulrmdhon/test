@@ -5,9 +5,8 @@ import Logo from './../../../assets/images/logo.svg'
 import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
 import ReactDOM from 'react-dom'
 import Avatar from 'react-avatar-edit'
-import { modal, error } from '../../global/modal';
-import { apiClient } from '../../../utils/apiClient';
-
+import { modal, error } from '../../global/modal'
+import { apiClient } from '../../../utils/apiClient'
 
 
 export default class NewPassword extends Component {
@@ -21,7 +20,7 @@ export default class NewPassword extends Component {
             repassword: '',
             user: {},
             contentType: 'image/png',
-            editor:'',
+            editor: '',
             token: this.props.match.params.code
         }
         this.setEditorRef = this.setEditorRef.bind(this)
@@ -45,7 +44,7 @@ export default class NewPassword extends Component {
         e.preventDefault()
         console.log('method')
 
-        var result =  this.state.editor.state.image.currentSrc.split(';')
+        var result = this.state.editor.state.image.currentSrc.split(';')
         var base = result[1].split(',')
         const url = `authentication/activate`
         const user = {
@@ -59,35 +58,34 @@ export default class NewPassword extends Component {
 
         let data = {}
         data['user'] = user
-            apiClient('post', url, data).then(res => {
-                localStorage.clear()
-                modal({
-                    message: 'Selamat',
-                    description: 'Password berhasil dibuat',
-                    btns: [
-                        {
-                            label: 'Lanjut',
-                            className: 'btn green',
-                            event: this.props.history.push('/')
-                        }
-                    ]
-                })
-            }).catch(err => {
-                error({
-                    message: 'Gagal, data salah atau tidak lengkap',
-                    btns: [
-                        {
-                            label: 'Ulangi',
-                            className: 'btn bcred cwhite'
-                        }
-                    ]
-                })
+        apiClient('post', url, data).then(res => {
+            localStorage.clear()
+            modal({
+                message: 'Selamat',
+                description: 'Password berhasil dibuat',
+                btns: [
+                    {
+                        label: 'Lanjut',
+                        className: 'btn green',
+                        event: this.props.history.push('/')
+                    }
+                ]
             })
-     }
-    setEditorRef(editor){
-        // this.editor = editor
+        }).catch(err => {
+            error({
+                message: 'Gagal, data salah atau tidak lengkap',
+                btns: [
+                    {
+                        label: 'Ulangi',
+                        className: 'btn bcred cwhite'
+                    }
+                ]
+            })
+        })
+    }
+    setEditorRef(editor) {
         this.setState({
-            editor:editor
+            editor: editor
         })
     }
 
@@ -113,7 +111,6 @@ export default class NewPassword extends Component {
                                 onCrop={this.onCrop.bind(this)}
                                 onClose={this.onClose.bind(this)}
                                 ref={this.setEditorRef}
-                            // onBeforeFileLoad={this.onBeforeFileLoad.bind(this)}
                             />
                         </div>
                         <br /><br /><br /><br />

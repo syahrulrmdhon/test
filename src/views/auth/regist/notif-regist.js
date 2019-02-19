@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Logo from './../../../assets/images/logo.svg'
-import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
+import Letter from './../../../assets/images/letter@3x.png'
 import { Link } from 'react-router-dom'
 import { error, modal } from './../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
@@ -70,7 +70,7 @@ export default class NotifRegist extends Component {
                 </div>
                 <div className="body-gredu">
                     <div className="align-center">
-                        <img src={LogoFull} />
+                        <img src={Letter} />
                     </div>
                     <div className="title margin-top-6 align-center">
                         Verifikasi Email Kamu

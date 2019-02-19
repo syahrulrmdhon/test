@@ -1221,7 +1221,7 @@ table.table.beri-nilai tr.head {
     right: 0;
     color: #4a4a4a;
   }
-  .input {
+.input {
     border: none;
     border-bottom: solid 0.5px #cccccc;
     margin: auto;
@@ -1284,4 +1284,9 @@ table.table.beri-nilai tr.head {
   100% {
     transform: rotate(360deg);
   }
+}
+.input-mask {
+  display: block;
+  border: none;
+  border-bottom: solid 1px #cccccc;
 }
