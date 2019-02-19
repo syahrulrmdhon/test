@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom'
 import Avatar from 'react-avatar-edit'
 import { modal, error } from '../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
-
+import PasswordMask from 'react-password-mask'
 
 export default class NewPassword extends Component {
     constructor(props) {
@@ -121,20 +121,33 @@ export default class NewPassword extends Component {
                         <div className="direct align-center margin-top-6 margin-bottom-4">
                             Buat Password Baru Kamu
                         </div>
-                        <input
-                            value={this.state.password}
-                            onChange={this.handleChange.bind(this)}
-                            type='text' name='password'
-                            placeholder='Kata Kunci'
-                            className='input'
-                        />
-                        <input
+                        <div className='regist'>
+                            <PasswordMask
+                                className='mask'
+                                inputClassName='password-mask-input'
+                                buttonClassName='fa fa-eye password-mask-button'
+                                name='password' placeholder='Kata Kunci'
+                                value={this.state.password}
+                                onChange={this.handleChange.bind(this)}
+                            />
+                        </div>
+                        <div className='regist margin-top-2'>
+                            <PasswordMask
+                                className='mask'
+                                inputClassName='password-mask-input'
+                                buttonClassName='fa fa-eye password-mask-button'
+                                name='repassword' placeholder='Ketik Kembali Kata Kunci'
+                                value={this.state.repassword}
+                                onChange={this.handleChange.bind(this)}
+                            />
+                        </div>
+                        {/* <input
                             value={this.state.repassword}
                             onChange={this.handleChange.bind(this)}
                             type='text' name='repassword'
                             placeholder='Ketik Kembali Kata Kunci'
                             className='input margin-top-2'
-                        />
+                        /> */}
                         <div className='margin-top-2'>
                             <div className='col-sm-12'>
                                 <div className='row'>

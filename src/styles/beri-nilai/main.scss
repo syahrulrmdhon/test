@@ -1221,7 +1221,7 @@ table.table.beri-nilai tr.head {
     right: 0;
     color: #4a4a4a;
   }
-.input {
+  .input {
     border: none;
     border-bottom: solid 0.5px #cccccc;
     margin: auto;
@@ -1285,8 +1285,20 @@ table.table.beri-nilai tr.head {
     transform: rotate(360deg);
   }
 }
-.input-mask {
-  display: block;
+.mask {
   border: none;
-  border-bottom: solid 1px #cccccc;
+  margin: auto;
+  position: relative;
+  width: 30%;
+  margin-left: 35%;
+  .password-mask-input {
+    border: none;
+    border-bottom: solid 0.5px #cccccc;
+  }
+  .fa-eye { 
+    font-size: 12px;
+  }
+  .password-mask-button {
+    background: transparent !important;
+  }
 }

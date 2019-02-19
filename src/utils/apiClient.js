@@ -5,29 +5,28 @@ export const apiClient = (method, url, request, params = {}) => {
     const token = localStorage.getItem('token')
     const regist_token = localStorage.getItem('regist_token')
     const schoolId = localStorage.getItem("school_id")
-    
-    let headers =  {
+
+    let headers = {
         'Content-Type': 'application/json',
     }
-    if(token) {
+    if (token) {
         headers['Authorization'] = 'Bearer ' + token
-    }else if(regist_token) {
+    } else if (regist_token) {
         headers['Authorization'] = 'Bearer ' + regist_token
     }
-    console.log(headers)
 
-    if(schoolId) {
+    if (schoolId) {
         headers['School-ID'] = schoolId
     }
 
-    switch(method){
+    switch (method) {
         case 'get':
-            return Axios.get(baseUrl + url, {headers: headers, params: params})
+            return Axios.get(baseUrl + url, { headers: headers, params: params })
         case 'post':
-            return Axios.post(baseUrl + url, request, {headers: headers, params: params})
+            return Axios.post(baseUrl + url, request, { headers: headers, params: params })
         case 'put':
             return Axios({ url: baseUrl + url, headers: headers, method: 'PUT', data: request })
-        case 'delete': 
+        case 'delete':
             return Axios({ url: baseUrl + url, headers: headers, method: 'DELETE' })
     }
 }

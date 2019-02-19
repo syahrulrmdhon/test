@@ -9,6 +9,7 @@ import { error, modal } from './../../global/modal'
 import moment from 'moment/moment.js'
 import { apiClient } from '../../../utils/apiClient'
 import { getDate } from './../../../utils/common'
+import uaParserJs from 'ua-parser-js'
 
 export default class Regist extends Component {
     constructor(props) {
@@ -20,7 +21,6 @@ export default class Regist extends Component {
             selectedDate: new Date()
         }
     }
-
     handleDateChange(date) {
         let formatter = moment(date).format('YYYY-MM-DD')
         let formatted = new Date(formatter)
