@@ -56,7 +56,7 @@ export default class Regist extends Component {
             })
         }).catch(err => {
             error({
-                message: 'Gagal, data salah atau tidak lengkap',
+                message: 'Gagal...Data salah, tidak lengkap, atau sudah terdaftar',
                 btns: [
                     {
                         label: 'Ulangi',
