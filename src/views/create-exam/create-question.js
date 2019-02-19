@@ -267,7 +267,7 @@ class Question extends Component {
         <div className="margin-8">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
-              <div className="create-exam__form-title">Buat Soal Online</div>
+              <div className="create-exam__form-title">Buat Soal</div>
               <div className="create-exam__line"></div>
             </div>
             <div className="create-exam__form-wrapper">
