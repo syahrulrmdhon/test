@@ -6,6 +6,8 @@ import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
 import ReactDOM from 'react-dom'
 import Avatar from 'react-avatar-edit'
 import { AuthClient } from '../../../utils/auth-client';
+import { modal } from './../../global/modal'
+
 
 
 export default class NewPassword extends Component {
@@ -66,7 +68,7 @@ export default class NewPassword extends Component {
             AuthClient('post', url, data).then(res => {
                 modal({
                     message: 'Selamat',
-                    description: 'Data yang Anda masukkan benar',
+                    description: 'Password berhasil dibuat',
                     btns: [
                         {
                             label: 'Lanjut',
@@ -77,7 +79,7 @@ export default class NewPassword extends Component {
                 })
             }).catch(err => {
                 console.log(err)
-                error({
+                err({
                     message: 'Gagal, akun user tidak ditemukan',
                     btns: [
                         {
