@@ -30,7 +30,7 @@ export default class TableKeterampilan extends Component {
                                         {x.score.score === null ? "-" : x.score.score}
                                     </td>
                                 })}
-                                <td>{data.final_scores.total.score === null ? "-" : data.final_scores.total.score}</td>
+                                <td>{data.final_scores.attendance_report.percentage === null ? "-" : data.final_scores.attendance_report.percentage + '%'}</td>
                                 <td>
                                     <ArrowKeterampilan
                                         arrow={data.final_scores.total_average.improvement_status}
