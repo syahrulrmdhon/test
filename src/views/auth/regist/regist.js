@@ -9,7 +9,6 @@ import { error, modal } from './../../global/modal'
 import moment from 'moment/moment.js'
 import { apiClient } from '../../../utils/apiClient'
 import { getDate } from './../../../utils/common'
-import uaParserJs from 'ua-parser-js'
 
 export default class Regist extends Component {
     constructor(props) {
@@ -111,7 +110,7 @@ export default class Regist extends Component {
                                     <i className="float-right fa fa-calendar calendar-auth" aria-hidden="true" />
                                     <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
                                     <div className='float-right margin-top-4'>
-                                        <p>Sudah punya akun?<Link to="/login" className='normal-text-green'> Login Disini</Link></p>
+                                        <p>Sudah punya akun?<Link to="/" className='normal-text-green'> Login Disini</Link></p>
                                     </div>
                                 </form>
                             </div>
