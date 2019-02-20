@@ -9,8 +9,7 @@ import { apiClient } from './../../../utils/apiClient'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-import ErrorModal from './../../global/error_modal'
+import {modal} from './../../global/modal'
 
 class ParticipantClass extends Component {
     constructor(props){
@@ -33,7 +32,6 @@ class ParticipantClass extends Component {
                 ],
                 exam_participants_attributes: [],
             },
-            isError: false,
         }
 
         this.addClass = this.addClass.bind(this)
@@ -74,10 +72,27 @@ class ParticipantClass extends Component {
             let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/validate?step=ClassForm`
 
             apiClient('post', url, this.props.exam.data).then(response => {
-                this.props.history.push(`/pariticipant-user/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`)
+                modal({
+                    message: 'Berhasil',
+                    description: 'Anda telah berhasil menyimpan partisipan kelas, selanjutnya anda masukkan user dari setiap kelas tersebut.',
+                    btns: [
+                        {
+                            label: 'Selanjutnya',
+                            className: 'btn green',
+                            event: this.props.history.push(`/pariticipant-user/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`)
+                        }
+                    ]
+                })
             }).catch(error => {
-                this.setState({
-                    isError: true
+                modal({
+                    message: 'Gagal',
+                    description: 'Anda gagal menyimpan partisipan kelas, periksa kembali data yang dibutuhkan.',
+                    btns: [
+                        {
+                            label: 'Ulangi',
+                            className: 'btn bcred cwhite',
+                        }
+                    ]
                 })
             })   
         }        
@@ -101,17 +116,12 @@ class ParticipantClass extends Component {
             })
         }
 
-        if(this.state.isError){
-            error.push(<ErrorModal key={Math.random()} status="error" message="Gagal menambah partisipan kelas, cek kembali data yang dibutuhkan" />)
-            this.setState({
-                isError: false,
-            })
-        }
-
         return(
             <div className="padding-content">
-                {error}
-                <Header />
+                <Header 
+                    navbar={true}
+                    location={`/exam/${this.state.assessment_id}`}
+                />
                 <div className="container">
                     <div className="margin-8">
                         <div className="content-block main-block">

@@ -60,9 +60,19 @@ class Index extends Component {
   }
 
   toEdit(id) {
-    this.props.history.push({
-      pathname:`/edit/${this.state.assessmentId}/exam/${id}`
-   })
+    let category = this.state.assessment ? this.state.assessment.category : null
+    switch(category){
+      case 'skill':
+        this.props.history.push({
+            pathname:`/edit-skill/${this.state.assessmentId}/exam/${id}`
+        })
+      break;
+      default:
+        this.props.history.push({
+            pathname:`/edit/${this.state.assessmentId}/exam/${id}`
+        })
+      break;
+    }
   }
 
   getAssessments() {
