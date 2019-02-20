@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 export class question extends Component {
     render() {
         const question = this.props.question && this.props.question.data && this.props.question.data.exam_questions;
-        console.log(question, "ini question")
+        console.log(this.props.question , "ini question")
         let content = []
         question && question.map((data, idx) => {
             if (data.problem_type === 'multiple_choice') {

@@ -16,7 +16,7 @@ export class Right extends Component {
             })
             content.push(<div key={Math.random()}>
                 <div className="padding-5">
-                    <span className="question__bascop">Kurikulum Dasar - {data.subject_name} </span>
+                    <span className="question__bascop">Kompetensi Dasar - {data.subject_name} </span>
                     {content_value}
                 </div>
             </div>)
