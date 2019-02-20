@@ -41,7 +41,7 @@ export default class TableAttendance extends Component {
                                 <th>Sakit</th>
                                 <th>Ijin</th>
                                 <th>Alpha</th>
-                                <th>Keterangan</th>
+                                {/* <th>Keterangan</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -78,9 +78,9 @@ export default class TableAttendance extends Component {
                                             <div className="check"></div>
                                             </div>
                                         </td>
-                                        <td className="align-center">
+                                        {/* <td className="align-center">
                                             <button className="show bg-white" onClick={this.showModal}>Lihat Keterangan</button>
-                                        </td>
+                                        </td> */}
                                     </tr>
                                 }, this)
                             }
