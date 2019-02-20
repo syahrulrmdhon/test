@@ -154,7 +154,7 @@ class BottomContent extends Component {
                                                     <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.page(e, data.user.id, this.props.class) }} />
                                                 </div>
                                                 <div className="col-sm-1 align-left padding-2 ">
-                                                    <i className="fa fas fa-ellipsis-h icon-table-pencil cred" onClick={(e) => { this.handleClick(e, data.user.id, index) }} ></i>
+                                                    <i className="fa fa-ellipsis-h icon-table-pencil cred" onClick={(e) => { this.handleClick(e, data.user.id, index) }} ></i>
                                                 </div>
                                             </div>
                                         </div>

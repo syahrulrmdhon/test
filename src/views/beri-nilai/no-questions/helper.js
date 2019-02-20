@@ -226,11 +226,13 @@ export class SubjectAverage extends Component {
         let classname = 'col-sm-4 align-center'
 
         if (status === 'very_good' || status === 'good') {
-            classname = 'large-text-green-bold col-sm-8 text-right'
+            classname = 'large-text-green-bold col-sm-8 text-right padding-right-6'
         } else if (status === 'enough') {
-            classname = 'large-text-yellow-bold col-sm-8 text-right'
+            classname = 'large-text-yellow-bold col-sm-8 text-right padding-right-6'
         } else if (status === 'need_attention') {
-            classname = 'large-text-red-bold col-sm-8 text-right'
+            classname = 'large-text-red-bold col-sm-8 text-right padding-right-6'
+        } else {
+            classname = 'col-sm-8 text-right padding-right-6'
         }
         return <div className={classname}>
             {score === null ? 'N/A' : score}
@@ -246,18 +248,20 @@ export class SubjectScore extends Component {
         let p = ''
 
         if (status === 'very_good' || status === 'good') {
-            classnames = 'large-text-green-bold col-sm-1 float-right text-right'
+            classnames = 'large-text-green-bold col-sm-4 text-right'
             p = 'Hasil sangat memuaskan'
         } else if (status === 'enough') {
-            classnames = 'large-text-yellow-bold col-sm-1 float-right text-right'
+            classnames = 'large-text-yellow-bold col-sm-4 text-right'
             p = 'Hasil cukup memuaskan'
         } else if (status === 'need_attention') {
-            classnames = 'large-text-red-bold col-sm-1 float-right text-right'
+            classnames = 'large-text-red-bold col-sm-4 text-right'
             p = 'Siswa butuh perhatian'
+        } else {
+            classnames = 'col-sm-4 text-right'
         }
 
         return <div className="col-sm-6 align-center">
-            <div className='col-sm-5'>
+            <div className='col-sm-8'>
                 {p}
             </div>
             <div className={classnames}>
@@ -291,7 +295,7 @@ export class UserNotPassed extends Component {
                                         </div>
                                         <div className='col-sm-2'>
                                             <div className='float-right padding-left-4 large-text-red-bold'>
-                                                {x.total_average.score === null ? '-' : x.total_average.score}
+                                                {x.total_average.score === null ? 'N/A' : x.total_average.score}
                                             </div>
                                         </div>
                                     </div>
