@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import DailyAttitudeItem from './daily_attitude_item'
 
 import {
-    handleAttitudeItem,
+    addAttitudeItem,
 } from './../../../redux-modules/modules/assessment'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -29,7 +29,7 @@ class AddDailyAttitude extends Component {
                 {user_attitude_item}
                 <div className="row">
                     <div className="col-sm-11">
-                        <a href="javascript:void(0);" className="float-right" onClick={this.props.handleAttitudeItem} >
+                        <a href="javascript:void(0);" className="float-right" onClick={this.props.addAttitudeItem} >
                             <FontAwesome name="plus-circle" /> Tambah Peserta Didik
                         </a>
                     </div>
@@ -44,6 +44,6 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 
-    handleAttitudeItem,
+    addAttitudeItem,
 }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(AddDailyAttitude)

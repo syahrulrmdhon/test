@@ -5,6 +5,7 @@ import Absensi from '../views/absensi/absensi'
 import Assessment from '../views/penilaian/penilaian'
 import AssessmentNew from '../views/penilaian/add'
 import AssessmentComponent from '../views/penilaian/add_component'
+import AttitudeDetail from '../views/penilaian/attitude_detail'
 // import AssessmentEdit from '../views/penilaian/edit'
 
 // exam - skill
@@ -101,6 +102,10 @@ export const MainRoutes = [
         path: '/penilaian',
         component: Assessment
     },
+    {
+        path: '/attitude/:id/:category',
+        component: AttitudeDetail
+    },
     // END PENILAIAN
     
     // SKILL
@@ -110,6 +115,14 @@ export const MainRoutes = [
     },
     {
         path: '/question-skill/:id',
+        component: QuestionSkill
+    },
+    {
+        path: '/edit-skill/:id/exam/:exam_id',
+        component: AddSkill
+    },
+    {
+        path: '/edit-question-skill/:id/exam/:exam_id',
         component: QuestionSkill
     },
     // END SKILL

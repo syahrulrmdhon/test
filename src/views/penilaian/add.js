@@ -13,7 +13,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { assessmentType } from './../../utils/common'
+import { assessmentType, getDate } from './../../utils/common'
 import { apiClient } from './../../utils/apiClient'
 import {error, modal} from './../global/modal'
 
@@ -47,6 +47,7 @@ class Add extends Component {
             let category = this.props.assessment.category
             if(category !== undefined){
                 assessmentType.call(this, {category: category})
+                // this.props.getNew(this.state.assessment_id, category)
             }
         }
     }
@@ -69,8 +70,22 @@ class Add extends Component {
         }
 
         if(data.category == 'attitude'){
-            delete data.assessment_classes_attributes
-            delete data.user_attitudes_attributes
+            switch(data.assessment_type){
+                case 'daily':
+                    data.event_date = getDate('case-4', new Date(data.event_date))
+                    delete data.assessment_classes_attributes
+                    delete data.user_attitudes_attributes
+                break;
+                case 'final_aspect':
+                    delete data.assessment_attitudes_attributes
+                    delete data.assessment_subjects_attributes
+                    delete data.user_attitudes_attributes
+                break;
+                case 'final_subject':
+                delete data.assessment_attitudes_attributes
+                delete data.assessment_subjects_attributes
+                break;
+            }
         } else {
             delete data.assessment_subjects_attributes
             delete data.assessment_attitudes_attributes
@@ -78,7 +93,7 @@ class Add extends Component {
 
         apiClient('post', url, data, { category: data.category }).then(response => {
             modal({
-                message: 'Selamat',
+                message: 'Berhasil',
                 description: 'Anda sudah menyimpan data topik, selanjutnya anda masukkan data komponen topik',
                 btns: [
                     {
@@ -98,6 +113,7 @@ class Add extends Component {
                 this.props.history.push('/penilaian/tambah-component')
             }
         }).catch(err => {
+            console.log(err.response)
             error({
                 message: `Gagal ${msg} Topik, periksa kembali data yang dibutuhkan`,
                 btns: [

@@ -14,12 +14,16 @@ const ADD_KD = 'modules/assessment/ADD_KD';
 const HANDLE_KD = 'modules/assessment/HANDLE_KD';
 const HANDLE_SUBJECT = 'modules/assessment/HANDLE_SUBJECT';
 const HANDLE_ATTITUDE = 'modules/assessment/HANDLE_ATTITUDE';
-const HANDLE_ATTITUDE_ITEM = 'modules/assessment/HANDLE_ATTITUDE_ITEM';
+const ADD_ATTITUDE_ITEM = 'modules/assessment/ADD_ATTITUDE_ITEM';
 const REMOVE_ATTITUDE_ITEM = 'modules/assessment/REMOVE_ATTITUDE_ITEM';
+const HANDLE_ATTITUDE_ITEM = 'modules/assessment/HANDLE_ATTITUDE_ITEM';
+const LOAD_SHOW = 'modules/assessment/LOAD_SHOW';
+const REMOVE_KD = 'modules/assessment/REMOVE_KD';
 
 const initialState = {
     assessment: null,
     assessment_classes_attributes: null,
+    user_attitudes: null,
 };
 
 const school_id = localStorage.getItem("school_id")
@@ -33,6 +37,13 @@ const headers = {
 
 export default function reducer(state = initialState, action = {}) {
     switch(action.type){
+        case HANDLE_ATTITUDE_ITEM:
+            state.user_attitudes_attributes[action.idx][action.fieldName] = action.value
+            return{
+                ...state,
+                loaded: false,
+                loading: true,
+            }
         case REMOVE_ATTITUDE_ITEM:
             state.user_attitudes_attributes = removeField(state.user_attitudes_attributes, action.idx)
             return{
@@ -40,12 +51,15 @@ export default function reducer(state = initialState, action = {}) {
                 loaded: false,
                 loading: true,
             }
-        case HANDLE_ATTITUDE_ITEM:
+        case ADD_ATTITUDE_ITEM:
             state.user_attitudes_attributes = state.user_attitudes_attributes.concat({
                 class_id: null,
                 user_id: null,
                 score: null,
                 description: null,
+                full_name: '',
+                data: [],
+                options: [],
             })
             return{
                 ...state,
@@ -66,6 +80,13 @@ export default function reducer(state = initialState, action = {}) {
                 delete state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes']
             }
 
+            return{
+                ...state,
+                loaded: false,
+                loading: true,
+            }
+        case REMOVE_KD:
+            state.assessment_subjects_attributes[action.subject_index]['assessment_basic_comps_attributes'] = removeField(state.assessment_subjects_attributes[action.subject_index]['assessment_basic_comps_attributes'], action.index)
             return{
                 ...state,
                 loaded: false,
@@ -147,7 +168,7 @@ export default function reducer(state = initialState, action = {}) {
                 }
             }
 
-            if(assessment.assessment_subjects_attributes.length == 0){
+            if(assessment.assessment_subjects_attributes && assessment.assessment_subjects_attributes.length == 0){
                 assessment.assessment_subjects_attributes = [{
                     school_subject_id: null,
                     assessment_basic_comps_attributes: [{
@@ -156,19 +177,27 @@ export default function reducer(state = initialState, action = {}) {
                 }]
             }
 
+            if(!assessment.assessment_attitudes_attributes || assessment.assessment_attitudes_attributes.length == 0){
+                assessment.assessment_attitudes_attributes = [{
+                    school_attitude_id: null,
+                }]
+            }
+
             if(assessment.category == 'attitude'){
-                if(assessment.assessment_subjects_attributes.length > 0){
+                if(assessment.assessment_subjects_attributes && assessment.assessment_subjects_attributes.length > 0){
                     assessment.assessment_subjects_attributes.map((value, idx) => {
                         delete assessment.assessment_subjects_attributes[idx]['assessment_basic_comps_attributes']
                     })
                 }
 
-                if(assessment.user_attitudes_attributes.length == 0){
+                if(assessment.user_attitudes_attributes && assessment.user_attitudes_attributes.length == 0){
                     assessment.user_attitudes_attributes.push({
                         class_id: null,
                         user_id: null,
                         score: null,
                         description: null,
+                        full_name: null,
+                        data: [],
                     })
                 }
             }
@@ -192,6 +221,19 @@ export default function reducer(state = initialState, action = {}) {
                 result: false,
                 error: action.error
             }
+        case LOAD_SHOW:
+            delete state.error;
+            if (state.result !== action.result) {
+                console.log(action.result.data.user_attitudes)
+                return {
+                    // ...state,
+                    loaded: true,
+                    loading: false,
+                    result: true,
+                    ...action.result.data.assessment,
+                    ...action.result.data.user_attitudes,
+                }
+            }
         case LOAD_SUCCESS:
             delete state.error;
             if (state.result !== action.result) {
@@ -211,6 +253,15 @@ export default function reducer(state = initialState, action = {}) {
     }
 }
 
+export function handleAttitudeItem(value, idx, fieldName){
+    return {
+        type: HANDLE_ATTITUDE_ITEM,
+        value: value,
+        idx: idx,
+        fieldName: fieldName,
+    }
+}
+
 export function removeAttitudeItem(idx){
     return {
         type: REMOVE_ATTITUDE_ITEM,
@@ -218,9 +269,9 @@ export function removeAttitudeItem(idx){
     }
 }
 
-export function handleAttitudeItem(){
+export function addAttitudeItem(){
     return {
-        type: HANDLE_ATTITUDE_ITEM,
+        type: ADD_ATTITUDE_ITEM,
     }
 }
 
@@ -254,6 +305,14 @@ export function addKD(idx){
     return {
         type: ADD_KD,
         idx: idx,
+    }
+}
+
+export function removeKD(subject_index, index){
+    return {
+        type: REMOVE_KD,
+        subject_index: subject_index,
+        index: index,
     }
 }
 
@@ -307,6 +366,10 @@ export function getNew(assessment_id = false){
         url = `v1/assessments/${assessment_id}/edit`
     }
 
+    // if(category == 'attitude'){
+    //     url = `${url}?category=${category}`
+    // }
+
     return{
         types: [LOAD, GET_NEW, LOAD_FAIL],
         promise: client => client.get(process.env.API_URL + url, headers)
@@ -319,6 +382,16 @@ export function getAssessment(assessment_id){
 
     return{
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+        promise: client => client.get(process.env.API_URL + url, headers)
+    }
+}
+
+export function showAssessment(assessment_id, category = 'knowledge'){
+    let params = {}
+    let url = `v1/assessments/${assessment_id}?category=${category}`
+
+    return{
+        types: [LOAD, LOAD_SHOW, LOAD_FAIL],
         promise: client => client.get(process.env.API_URL + url, headers)
     }
 }

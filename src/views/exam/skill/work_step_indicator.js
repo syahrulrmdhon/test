@@ -82,7 +82,7 @@ class WorkStepIndicator extends Component {
         return(
             <div className="margin-top-6">
                 <label className="header-title">{this.props.key_value}</label>
-                <div className="table-responsive margin-top-2">
+                <div className="table-responsive unset margin-top-2">
                     <table className="table work-step">
                         <thead>
                             <tr>

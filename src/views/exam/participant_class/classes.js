@@ -24,6 +24,7 @@ class Classes extends Component {
     }
 
     render(){
+        const data = this.props.exam && this.props.exam.data && this.props.exam.data.exam.exam_classes_attributes[this.props.index] || []
         const class_filters = this.props.exam && this.props.exam.data && this.props.exam.data.class_filters;
         const basic_comps = this.props.exam && this.props.exam.data && this.props.exam.data.basic_comps;
 
@@ -50,9 +51,10 @@ class Classes extends Component {
             })
         }
 
-        const start_date = this.props.data.start_date ? new Date(this.props.data.start_date) : new Date()
-        const deadline_date = this.props.data.deadline_date ? new Date(this.props.data.deadline_date) : new Date()
+        let { start_date, deadline_date, class_id } = data
 
+        start_date = start_date ? new Date(start_date) : new Date()
+        deadline_date = deadline_date ? new Date(deadline_date) : new Date()
 
         return(
             <div>
@@ -68,9 +70,8 @@ class Classes extends Component {
                                     name= "class_id"
                                     options={class_filters}
                                     onChange={(event) => {this.props.handleClass(event, this.props.index)}}
-                                    value={class_filters.find((element) => { return element.value == this.props.data.class_id  })}
+                                    value={class_filters.find((element) => { return element.value == class_id  })}
                                 />
-                                {/* <Error data={this.state.errors} fieldname= 'category' /> */}
                             </div>
                         </div>
                         <div className="col-sm-1">
@@ -125,7 +126,7 @@ class Classes extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    exam: state.exam
+    exam: state.exam,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

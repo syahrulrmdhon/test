@@ -7,6 +7,7 @@ import Tab from './new/tab'
 
 import AddSubject from './new/add_subject'
 import AddDailyAttitude from './new/add_daily_attitude'
+import AddFinalAttitude from './new/add_final_attitude'
 
 // redux
 import {
@@ -42,27 +43,62 @@ class AddComponent extends Component {
             msg = 'ubah'
         }
 
+        switch(data.category){
+            case 'attitude':
+                switch(data.assessment_type){
+                    case 'final_aspect':
+                        delete data.user_attitudes_attributes
+                        delete data.assessment_subjects_attributes
+                    break;
+                    case 'final_subject':
+                        delete data.assessment_attitudes_attributes
+                        delete data.user_attitudes_attributes
+                    break;
+                    case 'daily':
+                        delete data.assessment_classes_attributes
+                    break;
+                }
+            break;
+            case 'skill':
+            case 'knowledge':
+                delete data.assessment_attitudes_attributes
+                delete data.user_attitudes_attributes
+            break;
+        }
+
         apiClient('post', url, data).then(response => {
-            modal({
-                message: 'Selamat',
-                description: 'Anda berhasil menyimpan topik, silakan klik tombol lihat untuk membuat tugas.',
-                btns: [
-                    {
-                        label: 'Selesai',
-                        className: 'btn green',
-                    }
-                ]
-            })
             if(assessment_id){
                 apiClient('put', `v1/assessments/${assessment_id}`, data).then(response => {
-                    this.props.history.push(`/penilaian`)
+                    // this.props.history.push(`/penilaian`)
+                    modal({
+                        message: 'Selamat',
+                        description: `Anda berhasil ${msg} topik, silakan klik tombol lihat untuk membuat tugas.`,
+                        btns: [
+                            {
+                                label: 'Selesai',
+                                className: 'btn green',
+                                event: () => { window.location.href = "/penilaian" }
+                            }
+                        ]
+                    })
                 }).catch(err => {
                     console.log(err)
                 })
             } else {
                 url = 'v1/assessments?category=' + data.category
                 apiClient('post', url, data).then(response => {
-                    window.location.href = "/penilaian"            
+                    modal({
+                        message: 'Selamat',
+                        description: 'Anda berhasil menyimpan topik, silakan klik tombol lihat untuk membuat tugas.',
+                        btns: [
+                            {
+                                label: 'Selesai',
+                                className: 'btn green',
+                                event: () => { window.location.href = "/penilaian" }
+                            }
+                        ]
+                    })
+                    // window.location.href = "/penilaian"            
                 }).catch(response => {
                     console.log(response)
                 })
@@ -91,6 +127,14 @@ class AddComponent extends Component {
                         resultView = <div className="row">
                             <div className="col-sm-12">
                                 <AddDailyAttitude />
+                            </div>
+                        </div>
+                    break;
+                    case 'final_aspect':
+                    case 'final_subject':
+                        resultView = <div className="row">
+                            <div className="col-sm-12">
+                                <AddFinalAttitude />
                             </div>
                         </div>
                     break;

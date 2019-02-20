@@ -93,9 +93,9 @@ class ParticipantClass extends Component {
             exam_classes.map((data, idx) => {
                 class_view.push(<Classes 
                     index={idx} 
-                    key={Math.random()}  
-                    data={data}
-                    basic_comps={basic_comps}
+                    key={idx}  
+                    // data={data}
+                    // basic_comps={basic_comps}
                     removeClass={this.removeClass}
                 />)
             })
