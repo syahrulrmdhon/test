@@ -21,31 +21,17 @@ class BottomContent extends Component {
             key: '',
             selectIndex: -1,
             height: '',
-            collapce: '',
             border: 'border-bottom',
             hidden: true,
             element: 'hidden',
             token: localStorage.getItem('token'),
             search: ''
         }
-        this.onClickToogle = this.onClickToogle.bind(this)
         this.handleClick = this.handleClick.bind(this)
-        this.handleNewScore = this.handleNewScore.bind(this)
-        this.handleSearch = this.handleSearch.bind(this)
-        this.onSubmmit = this.onSubmmit.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
     componentDidMount() {
         this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment)
-    }
-    onClickToogle() {
-        this.setState({
-            height: 'col-height'
-        })
-    }
-    handleSearch(e) {
-        this.setState({
-            search: e.target.value
-        })
     }
     handleClick(e, id, idx) {
         let subject = []
@@ -71,13 +57,10 @@ class BottomContent extends Component {
             dataChildCompentency: competency
         })
     }
-    handleNewScore(e, student, ) {
-        e.preventDefault()
-        this.props.handleNewScoreParent(e, student)
-    }
-    onSubmmit() {
-        console.log(this.state.search, "search")
-        this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment, this.state.search)
+    onSubmit() {
+        let search = event.target.value
+        this.setState({ search: search })
+        this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment, search)
     }
 
     render() {
@@ -86,11 +69,9 @@ class BottomContent extends Component {
         dataArray && dataArray.map((x) => {
             let status = x.scores.total_average.result_status
             if (status === 'very_good') {
-                console.log("here very good")
                 border = 'border-left-col-green'
             } else if (status === 'need_attention') {
                 border = 'border-left-col-red'
-                console.log("or here")
             } else if (status === null) {
                 border = 'border-left-col-red'
             }
@@ -121,10 +102,10 @@ class BottomContent extends Component {
                                                 type="text"
                                                 placeholder="Cari murid disini..."
                                                 name="search"
-                                                onChange={this.handleSearch}
+                                                onChange={this.onSubmit}
                                                 value={this.state.search}
                                             />
-                                            <i className="fa fa-search icon" onClick={this.onSubmmit}></i>
+                                            <i className="fa fa-search icon"></i>
                                         </div>
                                     </div>
                                 </div>

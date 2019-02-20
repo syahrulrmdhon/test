@@ -19,7 +19,7 @@ export default class KkmNoQuestions extends Component {
                         />
                 </div>
                 <div className='remedial padding-top-6'>
-                    <button className='btn-white'>Remedial</button>
+                    {/* <button className='btn-white'>Remedial</button> */}
                 </div>
             </div>
         )
