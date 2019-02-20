@@ -4,6 +4,7 @@ import Classses from './basic/classses'
 import { assessmentType, setLabelSelect, setErrorRuby } from './../../../utils/common'
 import { apiClient } from '../../../utils/apiClient'
 import Error from '../../global/error'
+
 import ErrorModal from './../../global/error_modal'
 var FontAwesome = require('react-fontawesome')
 
