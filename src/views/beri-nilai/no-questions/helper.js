@@ -198,7 +198,7 @@ export class Subjects extends Component {
                                             return <div className="padding-1" key={Math.random()}>
                                                 <div className="row">
                                                     <div className="col-sm-12">
-                                                        <div className="col-sm-6">
+                                                        <div className="col-sm-6 text-justify">
                                                             {data.basic_comp.competency_number + ' ' + data.basic_comp.content}
                                                         </div>
                                                         <SubjectScore
@@ -226,11 +226,11 @@ export class SubjectAverage extends Component {
         let classname = 'col-sm-4 align-center'
 
         if (status === 'very_good' || status === 'good') {
-            classname = 'large-text-green-bold col-sm-8 text-right padding-right-6'
+            classname = 'large-text-green-bold col-sm-8 text-right'
         } else if (status === 'enough') {
-            classname = 'large-text-yellow-bold col-sm-8 text-right padding-right-6'
+            classname = 'large-text-yellow-bold col-sm-8 text-right'
         } else if (status === 'need_attention') {
-            classname = 'large-text-red-bold col-sm-8 text-right padding-right-6'
+            classname = 'large-text-red-bold col-sm-8 text-right'
         }
         return <div className={classname}>
             {score === null ? 'N/A' : score}
@@ -246,18 +246,18 @@ export class SubjectScore extends Component {
         let p = ''
 
         if (status === 'very_good' || status === 'good') {
-            classnames = 'large-text-green-bold col-sm-2 float-right'
+            classnames = 'large-text-green-bold col-sm-1 float-right text-right'
             p = 'Hasil sangat memuaskan'
         } else if (status === 'enough') {
-            classnames = 'large-text-yellow-bold col-sm-2 float-right'
+            classnames = 'large-text-yellow-bold col-sm-1 float-right text-right'
             p = 'Hasil cukup memuaskan'
         } else if (status === 'need_attention') {
-            classnames = 'large-text-red-bold col-sm-2 float-right'
+            classnames = 'large-text-red-bold col-sm-1 float-right text-right'
             p = 'Siswa butuh perhatian'
         }
 
         return <div className="col-sm-6 align-center">
-            <div className='col-sm-4'>
+            <div className='col-sm-5'>
                 {p}
             </div>
             <div className={classnames}>
@@ -275,20 +275,29 @@ export class UserNotPassed extends Component {
                     this.props.notPassed.map((x, i) => {
                         return <div key={i}>
                             <div className='row'>
-                                <div className='row'>
-                                    <div className='padding-right-2 padding-left-4'>
-                                        <Avatar src={Ava} size="30" round={true} />
-                                    </div>
-                                    <div className='padding-right-4'>
-                                        <span className='disblock'>{x.user.full_name}</span>
-                                        <p className='view'>{x.user.email}</p>
+                                <div className='col-sm-12'>
+                                    <div className='row'>
+                                        <div className='col-sm-10'>
+                                            <div className='row'>
+                                                <div className='col-sm-2'>
+                                                    <Avatar src={Ava} size="30" round={true} />
+                                                </div>
+                                                <div className='col-sm-10'>
+                                                    <span className='disblock'>{x.user.full_name}</span>
+                                                    <p className='view'>{x.user.email}</p>
+                                                    <br/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='col-sm-2'>
+                                            <div className='float-right padding-left-4 large-text-red-bold'>
+                                                {x.total_average.score === null ? '-' : x.total_average.score}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className='float-right padding-left-4 large-text-red-bold'>
-                                    {x.total_average.score === null ? '-' : x.total_average.score}
-                                </div>
+                                <br />
                             </div>
-                            <br />
                         </div>
                     })
                 }

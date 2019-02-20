@@ -134,7 +134,10 @@ class ParticipantUser extends Component {
 
         return (
             <div className="padding-content">
-               <Header />
+               <Header 
+                    navbar={true}
+                    location={`/pariticipant-class/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`}
+               />
                <div className="container">
                     <div className="margin-8">
                         <div className="content-block main-block">
