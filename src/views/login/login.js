@@ -14,11 +14,11 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            visible:false,
+            visible: false,
             user: {},
             errors: {},
             schools: [],
-            message:''
+            message: ''
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -47,25 +47,23 @@ class Login extends Component {
             .catch(err => {
                 let response = err.response
                 let data = response.data
-                console.log(this.state.email, this.state.password, "here")
-                if(this.state.email || this.state.password === ''){
+                if (this.state.email || this.state.password === '') {
                     this.setState({
                         errors: setError(data),
                     })
-                }else{
+                } else {
                     this.onShowAlert(data)
-                    console.log("or here")
                 }
-                
+
 
             })
     }
 
-    onShowAlert(data){
-        this.setState({visible:true,message:data.error.user_authentication[0]},()=>{
-          window.setTimeout(()=>{
-            this.setState({visible:false})
-          },2000)
+    onShowAlert(data) {
+        this.setState({ visible: true, message: data.error.user_authentication[0] }, () => {
+            window.setTimeout(() => {
+                this.setState({ visible: false })
+            }, 2000)
         });
     }
 
@@ -73,8 +71,8 @@ class Login extends Component {
         apiClient('get', 'v1/schools/list').then(response => {
             let schools = response.data.data.schools
             let school_length = schools.length
-            
-            if(school_length > 1){
+
+            if (school_length > 1) {
                 localStorage.setItem("school_list", JSON.stringify(schools))
                 this.props.history.push('/switch')
             } else { // case school only 1
@@ -88,9 +86,8 @@ class Login extends Component {
         })
     }
 
-   render() {
-        const { visible, message,errors } = this.state;
-        console.log(errors,"my err")
+    render() {
+        const { visible, message, errors } = this.state;
         return (
             <div className="background">
                 <div className="login">
@@ -106,25 +103,28 @@ class Login extends Component {
                             <div className="main-right col-12">
 
                                 <Alert color="danger" className="alert" isOpen={visible}>
-                                        {message}
+                                    {message}
                                 </Alert>
 
                                 <form onSubmit={this.handleSubmit}>
-                                <h5><strong>Masuk ke akun Gredu kamu</strong></h5>
-                                <br /><br />
-                                <input type="text" name="email" onChange={this.handleChange.bind(this)} value={this.state.email} placeholder="Alamat Email" className="col-12"></input>
-                                <Error data={this.state.errors} fieldname= 'email' />
-                                <br /><br />
-                                <input type="password" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
-                                <Error data={this.state.errors} fieldname= 'password' />
-                                <br /><br />
-                                <button type="submit" className="btn btn-young-green col-12">Masuk</button>
-                                <br /><br />
-                                <br />
+                                    <h5><strong>Masuk ke akun Gredu kamu</strong></h5>
+                                    <br /><br />
+                                    <input type="text" name="email" onChange={this.handleChange.bind(this)} value={this.state.email} placeholder="Alamat Email" className="col-12"></input>
+                                    <Error data={this.state.errors} fieldname='email' />
+                                    <br /><br />
+                                    <input type="password" name="password" onChange={this.handleChange.bind(this)} value={this.state.password} placeholder="Kata Sandi" className="col-12"></input>
+                                    <Error data={this.state.errors} fieldname='password' />
+                                    <br /><br />
+                                    <button type="submit" className="btn btn-young-green col-12">Masuk</button>
+                                    <div className='float-right margin-top-4'>
+                                        <p>Lupa kata sandi?<Link to="/forgot" className='normal-text-green'> Klik Disini</Link></p>
+                                    </div>
+                                    <br /><br />
+                                    <br />
                                 </form>
                             </div>
                             <div className="verification">
-                                <p>Belum punya akun?<Link to="/verification"> Verifikasi Akun</Link></p>
+                                <p>Belum punya akun?<Link to="/regist"> Verifikasi Akun</Link></p>
                             </div>
                             <br /><br />
                             <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
