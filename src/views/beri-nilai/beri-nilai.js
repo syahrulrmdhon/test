@@ -203,7 +203,7 @@ class Nilai extends Component {
                   </div>
                 </div>
                 <div className="col-sm-3">
-                  <div className="content-block-evaluasi main-block-evaluasi">
+                  <div className="content-block-card main-block-card">
                     <SubjectEvaluasi
                       competencySubjects={this.state.competencySubjects}
                     />
