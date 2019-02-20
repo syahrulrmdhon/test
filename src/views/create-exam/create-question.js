@@ -16,7 +16,6 @@ import { error, modal } from './../global/modal'
 
 var FontAwesome = require('react-fontawesome')
 
-
 class Question extends Component {
   constructor(props) {
     super(props)
@@ -262,12 +261,12 @@ class Question extends Component {
 
     return (
       <div className="padding-content create-exam question-wrapper">
-        <Header />
+        <Header navbar={true} location={`/create-exam/${this.state.assessmentId}`} />
         {error}
         <div className="margin-8">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
-              <div className="create-exam__form-title">Buat Soal</div>
+              <div className="create-exam__form-title">{this.state.examId ? "Ubah Soal" : "Buat Soal"}</div>
               <div className="create-exam__line"></div>
             </div>
             <div className="create-exam__form-wrapper">

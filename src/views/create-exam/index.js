@@ -137,7 +137,8 @@ class Index extends Component {
     }
     return (
       <div className="padding-content create-exam">
-        <Header />
+        <Header navbar={true} location={`/exam/${this.state.assessmentId}`} />
+        
         <div className="margin-8">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
@@ -159,7 +160,7 @@ class Index extends Component {
                     id="normal-switch"
                     height={18}
                     width={35} />
-                  <label className="create-exam__label pl-2">Buat Soal Online</label>
+                  <label className="create-exam__label pl-2">Buat Soal</label>
                 </div>
               }
               <label className="create-exam__label">Judul Tugas</label>

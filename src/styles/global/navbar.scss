@@ -48,4 +48,8 @@ $nunito_semi_bold: 'NunitoSemiBold';
   .back a {
     color: #009D81;
   }
+
+  .back a:hover {
+    text-decoration: none;
+  }
 }
