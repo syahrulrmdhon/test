@@ -12,6 +12,7 @@ import {
     addSubject,
     removeSubject,
     handleSubject,
+    removeKD,
 } from './../../../redux-modules/modules/assessment'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -114,6 +115,7 @@ class AddSubject extends Component {
                         <AddKD 
                             index_subject={idx}
                             basic_comps= {this.state[parameter] || []}
+                            removeKD={this.props.removeKD}
                         />
                         <div className="border-top margin-top-5"></div>
                     </div>
@@ -139,5 +141,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     addSubject,
     removeSubject,
     handleSubject,
+    removeKD,
 }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(AddSubject)

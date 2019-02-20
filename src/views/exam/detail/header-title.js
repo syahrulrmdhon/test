@@ -10,7 +10,7 @@ export class HeaderTitle extends Component {
     const data = this.props.question && this.props.question.data && this.props.question.data.subject_competencies
     const assessment = this.props.question && this.props.question.data
     let content = []
-    console.log(assessment ,"assessment")
+  
     data && data.map((data, idx) => {
       content.push(<div key={Math.random()}>
         <div className="padding-2">
@@ -30,7 +30,7 @@ export class HeaderTitle extends Component {
                 <span className="question__title">Tugas 1</span>
               </div>
               <div className="col-sm-2">
-                <span className="question__update">Ubah</span>
+                <span className="question__update" onClick={() => this.props.redirect()}>Ubah</span>
               </div>
             </div>
           </div>

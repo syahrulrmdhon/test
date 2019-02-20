@@ -5,8 +5,8 @@ import { apiClient } from '../../utils/apiClient'
 import { getUser } from '../../utils/common'
 import Logo from './../../assets/images/gredu-complete.svg';
 import { Alert } from 'reactstrap';
-import { setError } from '../../utils/common'
 import Error from '../global/error'
+import { modal } from './../global/modal'
 
 class Login extends Component {
     constructor(props) {
@@ -47,15 +47,13 @@ class Login extends Component {
             .catch(err => {
                 let response = err.response
                 let data = response.data
-                if (this.state.email || this.state.password === '') {
-                    this.setState({
-                        errors: setError(data),
-                    })
-                } else {
-                    this.onShowAlert(data)
-                }
 
+                let description = data.error.user_authentication.join(', ')
 
+                modal({
+                    message: 'Gagal Login',
+                    description: 'Gagal melakukan login, username atau password Anda tidak valid'
+                })
             })
     }
 

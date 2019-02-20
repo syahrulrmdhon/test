@@ -170,9 +170,15 @@ export default function reducer(state = initialState, action) {
     }
 }
 
-export function getNew(assessment_id){
+export function getNew(assessment_id, exam_id = false){
     let params = {}
-    let url = `/v1/assessments/${assessment_id}/exams/new?step=BasicForm&category=skill`
+    let url;
+
+    if(exam_id){
+        url = `/v1/assessments/${assessment_id}/exams/${exam_id}/edit?step=BasicForm`
+    } else {
+        url = `/v1/assessments/${assessment_id}/exams/new?step=BasicForm&category=skill`
+    }
 
     return{
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],

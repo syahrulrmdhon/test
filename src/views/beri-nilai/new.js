@@ -184,10 +184,10 @@ let choice = [
   }
 
   render() {
-    console.log("render id", this.props.data_score)
+    const path = `/assessment/${this.state.assessment_id}/exam/${this.state.exam}/class/${this.state.class_id}/flag/true`
     return (
       <div className="detail bg-grey">
-        <Header navbar={false} />
+        <Header navbar={false} location={path} />
         <div className="content-wrapper content-wrap-custom-size ">
           <Content
             dataProfile={this.state.profile}

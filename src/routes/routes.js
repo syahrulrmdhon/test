@@ -5,6 +5,7 @@ import Absensi from '../views/absensi/absensi'
 import Assessment from '../views/penilaian/penilaian'
 import AssessmentNew from '../views/penilaian/add'
 import AssessmentComponent from '../views/penilaian/add_component'
+import AttitudeDetail from '../views/penilaian/attitude_detail'
 // import AssessmentEdit from '../views/penilaian/edit'
 
 // exam - skill
@@ -26,6 +27,7 @@ import NoQuestions from '../views/beri-nilai/no-questions/no-questions'
 import Questions from '../views/beri-nilai/no-questions/questions'
 import NotFound from '../views/global/not-found'
 import NewScore from './../views/beri-nilai/new'
+import EditExam from '../views/create-exam/index'
 import EditQuestion from '../views/create-exam/create-question'
 import Regist from '../views/auth/regist/regist'
 import Forgot from '../views/auth/forgot/forgot'
@@ -34,6 +36,8 @@ import Verification from '../views/auth/regist/verification';
 import NotifRegist from '../views/auth/regist/notif-regist';
 import NewPassword from '../views/auth/password/new-password';
 import ExamDetail from './../views/exam/detail/index'
+import DetailScoreAttitude from './../views/beri-nilai/attitude/'
+
 
 
 export const MainRoutes = [
@@ -102,6 +106,10 @@ export const MainRoutes = [
         path: '/penilaian',
         component: Assessment
     },
+    {
+        path: '/attitude/:id/:category',
+        component: AttitudeDetail
+    },
     // END PENILAIAN
 
     // SKILL
@@ -111,6 +119,14 @@ export const MainRoutes = [
     },
     {
         path: '/question-skill/:id',
+        component: QuestionSkill
+    },
+    {
+        path: '/edit-skill/:id/exam/:exam_id',
+        component: AddSkill
+    },
+    {
+        path: '/edit-question-skill/:id/exam/:exam_id',
         component: QuestionSkill
     },
     // END SKILL
@@ -169,8 +185,12 @@ export const MainRoutes = [
         component: Question
     },
     {
-        path: '/edit/:id/exam/:id',
+        path: '/edit/:id/exam/:examId/question',
         component: EditQuestion
+    },
+    {
+        path: '/edit/:id/exam/:examId',
+        component: EditExam
     },
     {
         path: '/questions/:id',
@@ -179,6 +199,10 @@ export const MainRoutes = [
     {
         path: '/beri-nilai/:assessment_id/exam/:exam_id/class/:class_id',
         component: NoQuestions
+    },
+    {
+        path:'/score/attitude/',
+        component:DetailScoreAttitude
     },
     {
         path: '*',

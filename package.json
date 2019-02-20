@@ -22,6 +22,7 @@
     "popper.js": "^1.14.6",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
+    "react-autocomplete": "^1.8.1",
     "react-avatar": "^3.4.6",
     "react-avatar-edit": "^0.7.1",
     "react-awesome-modal": "^2.0.5",

@@ -194,14 +194,14 @@ export function getMonthIndo(month = false) {
     return result
 }
 
-export function changeFormatOptions(values = []) {
+export function changeFormatOptions(values = [], params = {key: 'key', value: 'value'}){
     let result = []
     if (values) {
         if (values.length > 0) {
             values.map((value, idx) => {
                 result[idx] = {
-                    value: value.key,
-                    label: value.value,
+                    value: value[params.key],
+                    label: value[params.value],
                 }
             })
         }
@@ -253,7 +253,6 @@ export function grades() {
 
 export function schoolYears() {
     apiClient('get', 'v1/filters/school_years').then(response => response.data).then(data => {
-        console.log(data);
 
         this.setState({
             school_years: (data.data.school_years.length > 0) ? data.data.school_years : []
@@ -348,6 +347,42 @@ export function subjects(params = {}, options = {}) {
         }
         this.setState({
             subjects: subjects,
+        })
+    })
+}
+
+export function attitudeAspects(params = {}, options = {}){
+    let listOptions = options.listOptions || false
+
+    apiClient('get', '/v1/filters/attitude_aspects', false, params).then(response => {
+        let attitudeAspects = response.data.data.attitude_aspects || []
+
+        if((attitudeAspects.length > 0) && listOptions){
+            const temps = attitudeAspects
+            attitudeAspects = []
+            
+            temps.map((temp, idx) => {
+                attitudeAspects.push({
+                    value: temp.id,
+                    label: temp.alias_name,
+                })
+            })
+        }
+
+        this.setState({
+            attitude_aspects: attitudeAspects,
+        })
+    })
+}
+
+export function attitudeScores(params = {}, options = {}){
+    let listOptions = options.listOptions || false
+
+    apiClient('get', '/v1/filters/attitude_scores', false, params).then(response => {
+        let attitudeScores = response.data.data.attitude_scores || []
+
+        this.setState({
+            attitude_scores: attitudeScores,
         })
     })
 }

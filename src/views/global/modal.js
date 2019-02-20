@@ -8,19 +8,19 @@ export function modal(params){
             let view_btn = []
             if(params.btns){
                 params.btns.map((btn, idx) => {
-                    const { label, className, event } = btn
-
-                    // if(event == 'close'){
-                    //     event = onClose
-                    // }
-
+                    let { label, className, event } = btn
+                    
+                    if(event == undefined){
+                        event = onClose
+                    }
+                    
                     view_btn.push(
-                        <a href="javascript:void(0);" key={idx} className={className} onClick={onClose}>{label}</a>
+                        <a href="javascript:void(0);" key={idx} className={className} onClick={event}>{label}</a>
                     )
                 })
             } else {
                 view_btn.push(
-                    <a href="javascript:void(0);" className="btn bcred cwhite" onClick={onClose}>Ulangi</a>
+                    <a href="javascript:void(0);" key={Math.random()} className="btn bcred cwhite" onClick={onClose}>Ulangi</a>
                 )
             }
 
@@ -63,12 +63,12 @@ export function error(params){
                     // }
 
                     view_btn.push(
-                        <a href="javascript:void(0);" className={className} onClick={onClose}>{label}</a>
+                        <a href="javascript:void(0);" key={idx} className={className} onClick={onClose}>{label}</a>
                     )
                 })
             } else {
                 view_btn.push(
-                    <a href="javascript:void(0);" className="btn bcred cwhite" onClick={onClose}>Ulangi</a>
+                    <a href="javascript:void(0);" key={Math.random()} className="btn bcred cwhite" onClick={onClose}>Ulangi</a>
                 )
             }
 

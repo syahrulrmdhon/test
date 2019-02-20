@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 export class question extends Component {
     render() {
         const question = this.props.question && this.props.question.data && this.props.question.data.exam_questions;
-        console.log(question, "ini question")
         let content = []
         question && question.map((data, idx) => {
             if (data.problem_type === 'multiple_choice') {
@@ -70,7 +69,7 @@ export class question extends Component {
                 <div className="position-bullet" >
                     <span className=" bullet bcgreen"></span>
                     <span className="padding-left-2 question____correct_ans">Warna jawaban yang benar</span>
-                    <span className="question__update">Ubah</span>
+                    <span className="question__update" onClick={() => this.props.redirect('question')}>Ubah</span>
                 </div>
                 {content}
             </div>

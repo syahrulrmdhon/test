@@ -28,7 +28,7 @@ class Add extends Component{
     }
 
     componentDidMount(){
-        this.props.getNew(this.state.assessment_id)
+        this.props.getNew(this.state.assessment_id, this.state.exam_id)
         examTypes.call(this, {category: 'skill'})
     }
 
@@ -72,7 +72,7 @@ class Add extends Component{
     }
 
     render(){
-
+        console.log(this.props.exam)
         const { exam_type, name, is_remedial } = this.props.exam ? this.props.exam : [] 
 
         return(
