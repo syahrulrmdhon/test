@@ -22,16 +22,26 @@ class AddClass extends Component {
         }
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.assessment !== this.props.assessment){
+            if(this.props.assessment.assessment_type == 'final_aspect'){
+                classes.call(this, {attendance_type: 'homeroom'})
+            }
+        }
+    }
+
     componentDidMount(){
         classes.call(this, {attendance_type: 'subject'})
     }
 
     render(){
         let classes = []
+        let addClass = ''
         if(this.props.assessment_classes){
             this.props.assessment_classes.map((assessment_class, idx) => {
                 let remove;
                 let class_id = assessment_class.class_id || null
+                console.log("my scalss", this.props.assessment_classeset)
 
                 if(idx > 0){
                     remove = <div className="col-sm-1">
@@ -67,25 +77,31 @@ class AddClass extends Component {
             })
         }
 
+        if(this.props.assessment.category !== 'attitude'){
+            addClass = <div className="row">
+                <div className="col-sm-6">
+                    <div className="float-right margin-top-2">
+                        <a href="javascript:void(0);" onClick={this.props.addClass} >
+                            <FontAwesome name="plus-circle" /> Tambah Kelas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+
         return(
             <div>
                 {classes}
-                <div className="row">
-                    <div className="col-sm-6">
-                        <div className="float-right margin-top-2">
-                            <a href="javascript:void(0);" onClick={this.props.addClass} >
-                                <FontAwesome name="plus-circle" /> Tambah Kelas
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {addClass}
             </div>
         )
     }
 }
 
 const mapStateToProps = (state, props) => ({
+    assessment: state.assessment,
     assessment_classes: state.assessment ? state.assessment.assessment_classes_attributes : [{}],
+    assessment_classeset: state.assessment ,
 })
 const mapDispatchToProps = dispatch => bindActionCreators({ 
     addClass,
