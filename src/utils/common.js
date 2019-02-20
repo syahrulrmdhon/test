@@ -253,7 +253,6 @@ export function grades() {
 
 export function schoolYears() {
     apiClient('get', 'v1/filters/school_years').then(response => response.data).then(data => {
-        console.log(data);
 
         this.setState({
             school_years: (data.data.school_years.length > 0) ? data.data.school_years : []

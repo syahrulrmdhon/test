@@ -63,12 +63,12 @@ export function error(params){
                     // }
 
                     view_btn.push(
-                        <a href="javascript:void(0);" className={className} onClick={onClose}>{label}</a>
+                        <a key={Math.random()} href="javascript:void(0);" className={className} onClick={onClose}>{label}</a>
                     )
                 })
             } else {
                 view_btn.push(
-                    <a href="javascript:void(0);" className="btn bcred cwhite" onClick={onClose}>Ulangi</a>
+                    <a key={Math.random()} href="javascript:void(0);" className="btn bcred cwhite" onClick={onClose}>Ulangi</a>
                 )
             }
 

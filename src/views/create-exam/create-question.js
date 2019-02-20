@@ -1,283 +1,186 @@
 import React, { Component } from 'react'
 import Header from '../global/header'
+import { getData, handleSwitch, handleEvent, handleNumber } from './../../redux-modules/modules/question'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import TabNumber from '../../components/TabContent/TabContent'
 import Select from 'react-select'
 import { questionTypes } from '../../utils/common'
 import { apiClient } from '../../utils/apiClient'
 import { getQuestion } from '../../utils/exam'
 import { confirmAlert } from 'react-confirm-alert'
-var FontAwesome = require('react-fontawesome')
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import Choices from "./choices"
 import ErrorModal from '../global/error_modal'
+import { error, modal } from './../global/modal'
 
-export default class question extends Component {
+var FontAwesome = require('react-fontawesome')
+
+
+class Question extends Component {
   constructor(props) {
     super(props)
     this.state= {
       assessmentId: props.match.params.id,
-      examId: '',
-      activeNumber: 1,
-      filled: [],
       step: 'QuestionForm',
-      data: {
-        exam: {
-          question_count: null
-        }
-      },
-      form: {
-        problem_type: null,
-        exam_question_choices_attributes: [{order: 0, symbol: '', content: ''},],
-        weight: '',
-        basic_comp_id: null,
-        question: '',
-        school_subject_id: ''
-      },
+      examId: props.match.params.examId || '',
+      activeNumber: 1,
+      
       questionTypes: [],
-      selectedBasicCompetence: null,
-      selectedQuestionType: null,
-      is_correct_ans: 0,
-      question_count: 0,
       isError: false,
-      errorMessage: ''
+      errorMessage: '',
     }
 
     this.numbers = this.numbers.bind(this)
     this.toggle = this.toggle.bind(this)
-    this.onChange = this.onChange.bind(this)
     this.addChoices = this.addChoices.bind(this)
-    this.saveHandler = this.saveHandler.bind(this)
-    this.reset = this.reset.bind(this)
-    this.checkNextNumber = this.checkNextNumber.bind(this)
-    this.setForm = this.setForm.bind(this)
-    this.validateForm = this.validateForm.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   componentDidMount() {
-    getQuestion.call(this, this.state.assessmentId, this.state.activeNumber)
+    this.props.getData(this.state.assessmentId, this.state.step, false, this.state.examId)
+    this.props.handleNumber(this.state.activeNumber, false)
     questionTypes.call(this)
   }
-
-  setForm(number) {
-    let activeNumber = this.state.activeNumber
-
-    if (number) {
-      activeNumber = number 
-    }
-    const data = this.state.data.exam.exam_questions_attributes[activeNumber - 1]
-
-    if (!this.state.data.exam.exam_questions_attributes.length || data === undefined) {
-      this.reset()
-      return false
-    }
-
-    const type = this.state.questionTypes.find(type => type.value === data.problem_type || null)
-    const competence = this.state.data.assessment_basic_comps.find(competence => competence.value === data.basic_comp_id)
-    const correctAnswer = data.exam_question_choices_attributes.find(choice => {
-      return choice.is_correct_ans === true
-    })
-    this.setState({
-      form: {
-        problem_type: data.problem_type || null,
-        exam_question_choices_attributes: data.exam_question_choices_attributes || [{order: 0}],
-        weight: data.weight || '',
-        basic_comp_id: data.basic_comp_id || null,
-        question: data.question || '',
-        school_subject_id: data.school_subject_id || ''
-      },
-      selectedQuestionType: type,
-      selectedBasicCompetence: competence,
-      is_correct_ans: correctAnswer.order
-    })
-  }
   
-  componentDidUpdate(prevProps, nextState) {
-    if (nextState.data !== this.state.data) {
-      if (this.state.activeNumber === 1) {
-        this.setForm()
-      }
-      else if (nextState.activeNumber === this.state.activeNumber) {
-        this.setForm(this.state.activeNumber)
-      }
-    }
-  }
-
   toggle(number) {
-    getQuestion.call(this, this.state.assessmentId, this.state.number)
-    
+
+    if (!this.state.examId) {
+      this.props.getData(this.state.assessmentId, this.state.step, number)
+
+    }
+    this.props.handleNumber(number, false)
     if (this.state.activeNumber !== number) {
       this.setState({
         activeNumber: number,
       })
     }
-  
-      this.setForm(number)
   }
 
-  validateForm(number) {
-    let params = {}
+  numbers() {
+    let result = []
+    if (this.props.exam.questionForm) {
+      for (let counter = 1; counter <= this.props.exam.questionForm.exam.question_count; counter++) {
+        result.push(counter)
+      }
+    }
+    return result
+  }
 
-    if(this.state.step !== null){
-        params['step'] = this.state.step
+  addChoices() {
+    const choices = this.props.exam.questionForm.exam.exam_questions_attributes[this.props.exam.number - 1].exam_question_choices_attributes
+    
+    choices.push({order: (choices.length - 1) + 1})
+    this.props.handleEvent(choices, 'exam_question_choices_attributes', this.state.step)
+  }
+
+  onSubmit() {
+    const path = `v1/assessments/${this.state.assessmentId}/exams/validate?`
+    let data = {
+      exam_question: this.props.exam.questionForm.exam.exam_questions_attributes[this.props.exam.number - 1]
+    }
+    let params = {
+      step: this.state.step,
+      number: this.state.activeNumber
+    }
+    
+    if (isNaN(data.exam_question.weight)) {
+      error({
+        message: `Bobot nilai harus berupa angka`,
+        btns: [
+          {
+            label: 'Ulangi',
+            className: 'btn bcred cwhite'
+          }
+        ]
+      })
+      return false
+    }
+    else if (data.exam_question.weight > 100) {
+      error({
+        message: `Bobot nilai tidak boleh lebih dari 100`,
+        btns: [
+          {
+            label: 'Ulangi',
+            className: 'btn bcred cwhite'
+          }
+        ]
+      })
+      return false
     }
 
-    if(this.state.activeNumber !== null) {
-        params['number'] = this.state.activeNumber
-    }
-    let url = `v1/assessments/${this.state.assessmentId}/exams/new?`
+    if (this.state.examId) {
+      const path = `v1/assessments/${this.state.assessmentId}/exams/${this.state.examId}`
+      
+      data = this.props.exam.questionForm.exam.exam_questions_attributes
 
-    apiClient('get', url, false, params).then(response => {
-      let data = response.data.data
-      if (data.exam.exam_questions_attributes.length === parseInt(data.exam.question_count) ) {
+      const request = {
+        exam: {
+          exam_questions_attributes: data
+        }
+      }
+
+      apiClient('put', path, request).then((response) => {
+        modal({
+          message: 'Berhasil',
+          description: `Soal berhasil disimpan`,
+          btns: [
+            {
+              label: 'Selesai',
+              className: 'btn green',
+            }
+          ]
+        })
+      })
+      return
+    }
+
+    apiClient('post', path, data, params).then(() => {
+      if (this.props.exam.questionForm.exam.question_count > this.props.exam.number) {
+        this.setState({
+          activeNumber: this.state.activeNumber + 1
+        })
+        this.props.handleNumber(1)
+        this.props.getData(this.state.assessmentId, this.state.step, this.props.exam.number)
+      }
+      else if (this.props.exam.questionForm.exam.question_count == this.props.exam.number){
         let path = `v1/assessments/${this.state.assessmentId}/exams`
-        apiClient('post', path, data).then(response => {
+
+        this.props.getData(this.state.assessmentId, this.state.step)
+        let body = {
+          exam_question: this.props.exam.questionForm.exam
+        }
+
+        apiClient('post', path, body).then(response => {
           const examId = response.data.data.exam.id
           this.setState({examId: examId})
           this.confirmAlert()
         })
       }
-      else if (this.state.data.exam.exam_questions_attributes.length < this.state.data.exam.question_count){
-        this.setState({activeNumber: this.state.activeNumber + 1})
-        this.setForm(number)
-      }
-    })
-  }
-
-  checkNextNumber(number) {
-    this.validateForm(number)
-    if (!this.state.data.exam.exam_questions_attributes.length) {
-      return false
-    }
-  }
-
-  numbers() {
-    let result = []
-    for (let counter = 1; counter <= this.state.data.exam.question_count; counter++) {
-        result.push(counter)
-    }
-    return result
-  }
-
-  onChange(event, prop, id) {
-    const data = this.state.form
-
-    if (prop === 'problem_type') {
-      data[prop] = event.value
-      this.setState({selectedQuestionType: event})
-    }
-    else if (prop === 'basic_comp_id') {
-      data[prop] = event.value
-      data.school_subject_id = event.school_subject_id
-      this.setState({selectedBasicCompetence: event})
-    }
-    else if (prop === 'symbol' || prop === 'content') {
-      const index = data.exam_question_choices_attributes.findIndex(choice => {
-        return choice.order === id;
-      })
-      data.exam_question_choices_attributes[index][prop] = event.target.value
-    }
-    else if (prop === 'is_correct_ans') {
-      data.exam_question_choices_attributes.map(choice => delete choice[prop])
-      this.state[prop] = parseInt(event.target.id)
-    }
-    else if (prop === 'answerEssay') {
-      if (this.state.form.problem_type )
-      this.state[prop] = event.target.value
-    }
-    else {
-      data[prop] = event.target.value
-    }
-
-    this.setState({form: data})
-  }
-
-  addChoices() {
-    const choices = this.state.form.exam_question_choices_attributes
-    choices.push({order: (choices.length - 1) + 1})
-    this.setState({
-      form: {
-        ...this.state.form,
-        exam_question_choices_attributes: choices
-      }
-    })
-  }
-
-  reset() {
-    this.setState({
-      selectedBasicCompetence: null,
-      selectedQuestionType: null,
-      form: {
-        exam_question_choices_attributes: [{order: 0}],
-        weight: '',
-        problem_type: null,
-        basic_comp_id: null,
-        question: '',
-        school_subject_id: ''
-      },
-      is_correct_ans: 0
-
-    })
-  }
-
-  saveHandler() {
-    const path = `v1/assessments/${this.state.assessmentId}/exams/validate?`
-    const form = this.state.form
-    const data = {
-      exam_question: form
-    }
-    const correctAnswer = this.state.is_correct_ans
-    data.exam_question.exam_question_choices_attributes[correctAnswer].is_correct_ans = true
-    let params = {}
-
-    if(this.state.step !== null){
-      params['step'] = this.state.step
-    }
-
-    if(this.state.activeNumber !== null) {
-      params['number'] = this.state.activeNumber
-    }
-
-    if (data.exam_question.weight > 100) {
-      this.setState({
-        isError: true,
-        errorMessage: 'Bobot nilai tidak boleh lebih dari 100'
-      })
-      return false
-    }
-    else if (isNaN(data.exam_question.weight)) {
-      this.setState({
-        isError: true,
-        errorMessage: 'Bobot nilai harus berupa angka'
-      })
-      return false
-    }
-
-    apiClient('post', path, data, params).then((response) => {
-      if (this.state.data.exam.question_count > 1) {
-        console.log('lebih dari 1')
-        this.checkNextNumber(this.state.activeNumber)
-        this.reset()
-      }
-      else if (this.state.data.exam.question_count == 1) {
-        console.log('ppppp')
-        this.validateForm(this.state.activeNumber)
-      }
-    }).catch(error => {
-      this.setState({isError: true})
-      // console.log(error.response.data.errors.exam.fill_exam_question_comps[0].case)
-      if (error.response.data.errors.exam.fill_exam_question_comps[0].case === 'check_all_comps'){
-        let errors = error.response.data.errors.exam.fill_exam_question_comps[0]
-        console.log('error beda kompetensi')
-        this.setState({
-          errorMessage: 'Ada kompetensi dasar yang belum digunakan'
+    }).catch(err => {
+      if (!err.response.data.errors.exam_questions.length) {
+        error({
+          message: `Gagal membuat soal, silahkan periksa kembali data yang dibutuhkan`,
+          btns: [
+            {
+              label: 'Ulangi',
+              className: 'btn bcred cwhite'
+            }
+          ]
         })
       }
-      else {
-        this.setState({
-          errorMessage: 'Gagal menyimpan soal, silahkan cek kembali data yang dibutuhkan'
+      else if (err.response.data.errors.exam.fill_exam_question_comps[0].case === 'check_all_comps'){
+        error({
+          message: `Ada kompetensi dasar yang belum digunakan`,
+          btns: [
+            {
+              label: 'Ulangi',
+              className: 'btn bcred cwhite'
+            }
+          ]
         })
       }
-  })  
+    })  
   }
 
   redirect(to) {
@@ -292,52 +195,71 @@ export default class question extends Component {
   confirmAlert(text) {
     confirmAlert({
       customUI: ({ onClose, onConfirm, id}) => {
-          return (
-            <div className="create-exam">
-              <div className="react-confirm-alert modal-alert ">
-                  <div className="react-confirm-alert-body">
-                      <div className="header align-center">
-                          <h1>Tugas Berhasil Disimpan</h1>
-                          <FontAwesome name="times-circle" className="close" onClick={onClose}/>
-                      </div>
-                      <div className="alert-body">
-                        Apakah anda ingin lanjut mengisi form untuk memilih Kelas dan Peserta Didik?
-                      </div>
-                      <div className="react-confirm-alert-button-group toggle">
-                          <div className="align-center fullwidth">
-                              <a href="javascript:void(0);" onClick={() => {this.redirect('back'); onClose(); }} className="btn default">Tidak</a>
-                              <a href="javascript:void(0);" className="btn green" onClick={() => {this.redirect('next'); onClose(); }}>Ya</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              </div>
-          )
+        return (
+          <div className="create-exam">
+            <div className="react-confirm-alert modal-alert ">
+                <div className="react-confirm-alert-body">
+                    <div className="header align-center">
+                        <h1>Tugas Berhasil Disimpan</h1>
+                        <FontAwesome name="times-circle" className="close" onClick={onClose}/>
+                    </div>
+                    <div className="alert-body">
+                      Apakah anda ingin lanjut mengisi form untuk memilih Kelas dan Peserta Didik?
+                    </div>
+                    <div className="react-confirm-alert-button-group toggle">
+                        <div className="align-center fullwidth">
+                            <a href="javascript:void(0);" onClick={() => {this.redirect('back'); onClose(); }} className="btn default">Tidak</a>
+                            <a href="javascript:void(0);" className="btn green" onClick={() => {this.redirect('next'); onClose(); }}>Ya</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        )
       },
-  })
+    })
   }
 
   render() {
+    
+    let data = this.props.exam.questionForm
+    let basicCompetences = []
+    let selectedBasicCompetence = ''
+    let weight = ''
+    let problem_type = ''
+    let question = ''
+    let index = this.state.activeNumber - 1
     let choices = []
-    if (this.state.form.problem_type === 'multiple_choice') {
-      if(this.state.form.exam_question_choices_attributes.length > 0){
-        this.state.form.exam_question_choices_attributes.map((x, idx) => {
+    let numbers = this.numbers()
+    let error = []
+    let questionCount = ''
+    
+    if (data) {
+      basicCompetences = this.props.exam.basicCompetencies
+      selectedBasicCompetence = data.exam.exam_questions_attributes[index] ? data.exam.exam_questions_attributes[index].basic_comp_id : null
+      weight = data.exam.exam_questions_attributes[index] ? data.exam.exam_questions_attributes[index].weight : ''
+      problem_type = data.exam.exam_questions_attributes[index] ? data.exam.exam_questions_attributes[index].problem_type : null
+      question = data.exam.exam_questions_attributes[index] ? data.exam.exam_questions_attributes[index].question : 'null'
+      questionCount = data.exam.question_count
+    }
+
+    if (problem_type === 'multiple_choice') {
+      if(data.exam.exam_questions_attributes[index].exam_question_choices_attributes.length > 0){
+        data.exam.exam_questions_attributes[index].exam_question_choices_attributes.map((x, idx) => {
           choices.push(
-            <Choices changed={this.onChange} key={idx} id={idx} correctAnswer={this.state.is_correct_ans} data={this.state.form}/>
+            <Choices key={idx} order={idx} correctAnswer={this.props.exam.is_correct_ans}/>
           )
         })
       }
     }
     
-    let numbers = this.numbers()
-    
-    let error = []
     if (this.state.isError && this.state.errorMessage !== ''){
       error.push(<ErrorModal key={Math.random()} status="error" message={this.state.errorMessage} />)
       this.setState({
-          isError: false,
+        isError: false,
       })
     }
+
     return (
       <div className="padding-content create-exam question-wrapper">
         <Header />
@@ -345,7 +267,7 @@ export default class question extends Component {
         <div className="margin-8">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
-              <div className="create-exam__form-title">Buat Soal Online</div>
+              <div className="create-exam__form-title">Buat Soal</div>
               <div className="create-exam__line"></div>
             </div>
             <div className="create-exam__form-wrapper">
@@ -355,32 +277,32 @@ export default class question extends Component {
               <Select
                 className="create-exam__input"
                 classNamePrefix="select"
-                value={this.state.selectedBasicCompetence}
-                onChange={event => this.onChange(event, 'basic_comp_id')}
-                options={this.state.data.assessment_basic_comps}
+                value={basicCompetences.find(competence => {return competence.value === selectedBasicCompetence}) || null}
+                onChange={event => this.props.handleEvent(event.value, 'basic_comp_id', this.state.step)}
+                options={basicCompetences}
                 placeholder='Pilih Kompetensi Dasar' />
               <label className="create-exam__label">Bobot Nilai</label>
-              <input type="text" className="form-control create-exam__input create-exam__input-amount" onChange={(event) => this.onChange(event, 'weight')} value={this.state.form.weight} placeholder="Masukkan Bobot Nilai" />
+              <input type="text" className="form-control create-exam__input create-exam__input-amount" onChange={(event) => this.props.handleEvent(event.target.value, 'weight', this.state.step)} value={weight} placeholder="Masukkan Bobot Nilai" />
               <div className="create-exam__separate" />
               <label className="create-exam__label">Tipe Soal</label>
               <Select
                 className="create-exam__input"
                 classNamePrefix="select"
-                value={this.state.selectedQuestionType}
-                onChange={event => this.onChange(event, 'problem_type')}
+                value={this.state.questionTypes.find(type => {return type.value === problem_type}) || null}
+                onChange={event => this.props.handleEvent(event.value, 'problem_type', this.state.step)}
                 options={this.state.questionTypes}
                 placeholder='Pilih Tipe Soal' />
 
-                { this.state.form.problem_type &&
+                { problem_type &&
                   <div>
                     <label className="create-exam__label">Soal</label>
-                    <textarea className="form-control create-exam__input w-100" rows="5" placeholder="Berikan Pertanyaan" onChange={(event) => this.onChange(event, 'question')} value={this.state.form.question}/>
-                    <div className={(this.state.selectedQuestionType.value === 'essay') ? 'd-block' : 'd-none'}>
+                    <textarea className="form-control create-exam__input w-100" rows="5" placeholder="Berikan Pertanyaan" onChange={(event) => this.props.handleEvent(event.target.value, 'question', this.state.step)} value={question}/>
+                    <div className={(problem_type === 'essay') ? 'd-block' : 'd-none'}>
                       <label className="create-exam__label">Berikan Jawaban</label>
-                      <textarea className="form-control create-exam__input w-100" rows="5" placeholder="Berikan Jawaban" onChange={(event) => this.onChange(event, 'content', 0)} 
-                        value={this.state.form.exam_question_choices_attributes[0].content}/>
+                      <textarea className="form-control create-exam__input w-100" rows="5" placeholder="Berikan Jawaban" onChange={(event) => this.props.handleEvent(event.target.value, 'content', this.state.step, 0)} 
+                        value={this.props.exam.questionForm.exam.exam_questions_attributes[this.state.activeNumber - 1].exam_question_choices_attributes[0].content}/>
                     </div>
-                    <div className={(this.state.selectedQuestionType.value === 'multiple_choice') ? 'd-block' : 'd-none'}>
+                    <div className={(problem_type === 'multiple_choice') ? 'd-block' : 'd-none'}>
                       <label className="create-exam__label">Berikan Jawaban</label>
                       {choices}
                       <div className="add-wrapper" onClick={this.addChoices}>
@@ -392,10 +314,26 @@ export default class question extends Component {
                 }
             </div>
             {/* <button className="create-exam__button create-exam__button--back">Kembali</button> */}
-            <button className="create-exam__button" onClick={this.saveHandler}>Simpan</button>
+            <button className="create-exam__button" onClick={this.onSubmit}>{this.state.examId ? "Simpan" : (this.state.activeNumber == questionCount) ? "Simpan" : "Lanjut"}</button>
           </div>
         </div>
       </div>
     )
   }
 }
+
+
+const mapStateToProps = (state, props) => ({
+  exam: state.question,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getData,
+    handleSwitch,
+    handleEvent,
+    handleNumber
+  }, dispatch
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Question)

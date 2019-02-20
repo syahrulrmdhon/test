@@ -37,7 +37,7 @@ const exam = (props) => {
                 </NavLink>
               </div>
             }
-            {/* <div className="exam__action" onClick={props.edit}>Ubah</div> */}
+            <div className="exam__action" onClick={props.edit}>Ubah</div>
             <div className="exam__action" onClick={props.delete}>Hapus</div>
           </div>
         </div>
