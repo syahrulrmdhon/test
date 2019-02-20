@@ -46,7 +46,7 @@ export default function reducer(state = initialState, action) {
         if (data.exam_question.exam_question_choices === null) {
           data.exam.exam_questions_attributes.push({
             weight: '',
-            exam_question_choices_attributes: [{order: 0, symbol: '', content: ''}],
+            exam_question_choices_attributes: [{order: 0, symbol: '', content: '', is_correct_ans: true}],
             problem_type: null,
             basic_comp_id: null,
             question: '',
