@@ -11,7 +11,7 @@ export default class ProfileDetail extends Component {
         <div className="avatar-wrapper">
           <img className="avatar" src={Avatar} alt="" />
         </div>
-        <div className="mt-3 name">
+        <div className="mt-3 detail-name">
           {response && response.user && response.user.full_name}
         </div>
         <div className="ranking">

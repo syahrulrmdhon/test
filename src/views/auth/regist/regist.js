@@ -2,24 +2,32 @@ import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
 import { Link } from 'react-router-dom'
 import 'react-datepicker/dist/react-datepicker.css'
+import './../../../styles/auth.css'
 import Logo from './../../../assets/images/gredu-complete.svg'
-import Calendar from './../../../assets/images/calendar.svg'
 import './../../../styles/global/component.css'
-import { AuthClient } from '../../../utils/auth-client'
 import { error, modal } from './../../global/modal'
+import moment from 'moment/moment.js'
+import { apiClient } from '../../../utils/apiClient'
+import { getDate } from './../../../utils/common'
 
 export default class Regist extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            // startDate: new Date(),
             uniqueCode: '',
-            dob: ''
+            dob: '',
+            selectedDate: new Date()
         }
     }
+    handleDateChange(date) {
+        let formatter = moment(date).format('YYYY-MM-DD')
+        let formatted = new Date(formatter)
+        this.setState({
+            selectedDate: formatted
+        })
+    }
     handleChange(e) {
-        console.log(e.target.value)
         let regist = {}
         regist[e.target.name] = e.target.value
         this.setState(regist)
@@ -29,13 +37,13 @@ export default class Regist extends Component {
         const url = `authentication/register`
         const regist = {
             unique_id: this.state.uniqueCode,
-            dob: this.state.dob
+            dob: this.state.selectedDate
         }
 
-        AuthClient('post', url, regist).then(res => {
-            localStorage.setItem("token_auth", res.data.data.auth_token)
+        apiClient('post', url, regist).then(res => {
+            localStorage.setItem("regist_token", res.data.data.auth_token)
             modal({
-                message: 'Selamat',
+                message: 'Berhasil',
                 description: 'Data yang Anda masukkan benar',
                 btns: [
                     {
@@ -45,10 +53,9 @@ export default class Regist extends Component {
                     }
                 ]
             })
-        }).catch(err=>{
-            console.log(err)
+        }).catch(err => {
             error({
-                message: 'Gagal, akun user tidak ditemukan',
+                message: 'Gagal...Data salah, tidak lengkap, atau sudah terdaftar',
                 btns: [
                     {
                         label: 'Ulangi',
@@ -75,7 +82,7 @@ export default class Regist extends Component {
                                 <form onSubmit={this.handleSubmit.bind(this)}>
                                     <h5 className='header-auth'><strong>Daftarkan akun Gredu kamu</strong></h5>
                                     <br />
-                                    <p className='text-left'>
+                                    <p className='text-left desc'>
                                         Jika kamu belum mengetahui Unique Code untuk mendaftarkan akun, silahkan kontak email kami <span className='normal-text-green'>help@gredu.asia</span>
                                     </p>
                                     <br /><br />
@@ -84,19 +91,26 @@ export default class Regist extends Component {
                                         value={this.state.uniqueCode}
                                         onChange={this.handleChange.bind(this)}
                                         type='text' name='uniqueCode'
-                                        className='col-sm-12 margin-bottom-2'
+                                        className='w-100 margin-bottom-2'
                                         placeholder='Unique Code'
+
                                     />
-                                    <input
-                                        value={this.state.dob}
-                                        onChange={this.handleChange.bind(this)}
-                                        type='text' name='dob'
-                                        className='col-sm-12'
-                                        placeholder='yyyy-mm-dd'
-                                    />
+                                    <div className='auth'>
+                                        <DatePicker
+                                            className="col-sm-12"
+                                            selected={this.state.selectedDate}
+                                            onChange={this.handleDateChange.bind(this)}
+                                            showMonthDropdown
+                                            showYearDropdown
+                                            dropdownMode="select"
+                                            dateFormat="yyyy-MM-dd"
+                                            value={getDate('case-1', this.state.selectedDate)}
+                                        />
+                                    </div>
+                                    <i className="float-right fa fa-calendar calendar-auth" aria-hidden="true" />
                                     <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
                                     <div className='float-right margin-top-4'>
-                                        <p>Sudah punya akun?<Link to="/login" className='normal-text-green'> Login Disini</Link></p>
+                                        <p>Sudah punya akun?<Link to="/" className='normal-text-green'> Login Disini</Link></p>
                                     </div>
                                 </form>
                             </div>

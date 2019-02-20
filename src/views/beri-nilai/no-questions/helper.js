@@ -117,14 +117,14 @@ export class Users extends Component {
     render() {
         let data = this.props.data
         let classname = 'border-left-col-red col-sm-3 padding-1'
-        let predicate = data.scores.total_average.predicate
+        let status = data.scores.total_average.result_status
         let fullname = data.user.full_name
 
-        if (predicate === 'a' || predicate === 'b') {
+        if (status === 'very_good' || status === 'good') {
             classname = 'border-left-col-green col-sm-3 padding-1'
-        } else if (predicate === 'c') {
+        } else if (status === 'enough') {
             classname = 'border-left-col-yellow col-sm-3 padding-1'
-        } else if (predicate === 'd') {
+        } else if (status === 'need_attention') {
             classname = 'border-left-col-red col-sm-3 padding-1'
         }
 
@@ -187,8 +187,6 @@ export class Subjects extends Component {
                                                 <div className="col-sm-4">
                                                     {data.subject_name}
                                                 </div>
-                                                <div className="col-sm-4">
-                                                </div>
                                                 <SubjectAverage
                                                     score={average}
                                                 />
@@ -200,7 +198,7 @@ export class Subjects extends Component {
                                             return <div className="padding-1" key={Math.random()}>
                                                 <div className="row">
                                                     <div className="col-sm-12">
-                                                        <div className="col-sm-8">
+                                                        <div className="col-sm-6">
                                                             {data.basic_comp.competency_number + ' ' + data.basic_comp.content}
                                                         </div>
                                                         <SubjectScore
@@ -228,11 +226,11 @@ export class SubjectAverage extends Component {
         let classname = 'col-sm-4 align-center'
 
         if (status === 'very_good' || status === 'good') {
-            classname = 'large-text-green-bold col-sm-4 align-center'
+            classname = 'large-text-green-bold col-sm-8 text-right padding-right-6'
         } else if (status === 'enough') {
-            classname = 'large-text-yellow-bold col-sm-4 align-center'
+            classname = 'large-text-yellow-bold col-sm-8 text-right padding-right-6'
         } else if (status === 'need_attention') {
-            classname = 'large-text-red-bold col-sm-4 align-center'
+            classname = 'large-text-red-bold col-sm-8 text-right padding-right-6'
         }
         return <div className={classname}>
             {score === null ? 'N/A' : score}
@@ -245,16 +243,23 @@ export class SubjectScore extends Component {
         let status = data.average_score.result_status
         let score = data.average_score.score
         let classnames = ''
+        let p = ''
 
         if (status === 'very_good' || status === 'good') {
-            classnames = 'large-text-green-bold'
+            classnames = 'large-text-green-bold col-sm-2 float-right'
+            p = 'Hasil sangat memuaskan'
         } else if (status === 'enough') {
-            classnames = 'large-text-yellow-bold'
+            classnames = 'large-text-yellow-bold col-sm-2 float-right'
+            p = 'Hasil cukup memuaskan'
         } else if (status === 'need_attention') {
-            classnames = 'large-text-green-bold'
+            classnames = 'large-text-red-bold col-sm-2 float-right'
+            p = 'Siswa butuh perhatian'
         }
 
-        return <div className="col-sm-4 align-center">
+        return <div className="col-sm-6 align-center">
+            <div className='col-sm-4'>
+                {p}
+            </div>
             <div className={classnames}>
                 {score === null ? 'N/A' : score}
             </div>

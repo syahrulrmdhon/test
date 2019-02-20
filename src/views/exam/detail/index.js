@@ -13,10 +13,20 @@ import Right from './right'
     super(props)
 
 
+      this.redirect = this.redirect.bind(this)
   }
 
   componentDidMount(){
     this.props.getExamQuestion(this.props.match.params.exam_id, this.props.match.params.assessment_id)
+  }
+
+  redirect(edit) {
+    if (edit === 'question') {
+      this.props.history.push({pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}/${edit}`})
+    }
+    else {
+      this.props.history.push({pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}`})
+    }
   }
 
   render() {
@@ -32,11 +42,11 @@ import Right from './right'
           <div className="col-sm-8">
             <div className="padding-top-4">
                 <div className="col-sm-12">
-                  <Head />
+                  <Head redirect={this.redirect}/>
                 </div>
                 <div className="col-sm-12">
                   <div className="margin-top-3">
-                    <Question />
+                    <Question redirect={this.redirect}/>
                   </div>
                 </div>
               </div>
