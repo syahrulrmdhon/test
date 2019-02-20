@@ -50,8 +50,7 @@ class AddQuestion extends Component {
             data.exam_questions_attributes = exam_questions
         }
 
-        let url = `/v1/assessments/${this.state.assessment_id}/exams/validate?step=QuestionForm&category=skill`
-
+        let url = `v1/assessments/${this.state.assessment_id}/exams/validate?step=QuestionForm&category=skill`
         apiClient('post', url, data).then(response => {
             apiClient('post', `/v1/assessments/${this.state.assessment_id}/exams`, data).then(response => {
                 modal({
@@ -67,6 +66,7 @@ class AddQuestion extends Component {
                 })
             })
         }).catch(err => {
+            console.log(err.response)
             modal({
                 message: 'Gagal',
                 description: `Gagal ${msg} komponen beri soal keterampilan, periksa kembali data yang dibutuhkan`,
