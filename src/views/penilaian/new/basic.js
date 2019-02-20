@@ -67,7 +67,7 @@ export default class Basic extends Component {
         })
     }
 
-    onSubmit(){
+    onSubmit(event){
         event.preventDefault(); 
         let class_attributes = []
         if(this.state.assessment_classes_attributes.length > 0){
