@@ -26,6 +26,11 @@ button:focus {
   margin-bottom: 20px;
 }
 
+/* textarea */
+textarea.textarea-box{
+  min-height: 100px;
+}
+
 /* dropdown */
 
 .select__indicator-separator {
@@ -704,6 +709,26 @@ thead {
   padding-bottom: 30px !important;
 }
 
+.padding-vert-7 {
+  padding-top: 35px !important;
+  padding-bottom: 35px !important;
+}
+
+.padding-vert-8 {
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+}
+
+.padding-vert-9 {
+  padding-top: 45px !important;
+  padding-bottom: 45px !important;
+}
+
+.padding-vert-10 {
+  padding-top: 50px !important;
+  padding-bottom: 50px !important;
+}
+
 /* Padding All Reset */
 
 .padding-0 {
@@ -1060,6 +1085,7 @@ strong, .bold {
 
 .normal-text-green {
   color: #45c4a6;
+  cursor: pointer;
 }
 
 /* Large Font */
@@ -1106,6 +1132,16 @@ strong, .bold {
 
 .border-full {
   border: 1px solid #f7f7f7 !important;
+}
+
+.border-left-green{
+  border-left: 4px solid #199d7f !important;
+}
+.border-left-yellow{
+  border-left: 4px solid #f0b20a !important;
+}
+.border-left-red{
+  border-left: 4px solid #eb373e !important;
 }
 
 .box-shadow {
@@ -1205,6 +1241,10 @@ label.header-title {
   color: #505050;
   font-family: "NunitoBold";
   font-size: 14px;
+}
+
+label.header-title.f12{
+  font-size: 12px;
 }
 
 label.header-title.form {
@@ -1310,6 +1350,9 @@ ul.toggle>li.nav-item a.active {
   /* min-height: 450px;
   overflow-x: auto;
   margin-top: 20px; */
+}
+.table-responsive.unset{
+  overflow-x: unset;
 }
 
 .table-content {
@@ -1527,6 +1570,13 @@ tbody tr:nth-child(even) {
   font-weight: 600;
   color: #4a4a4a;
 }
+
+/* react-datepicker */
+.react-datepicker-wrapper,
+.react-datepicker__input-container{
+  display: block;
+}
+
 /* bootstrap */
 
 .open>.dropdown-menu {
@@ -1580,10 +1630,10 @@ ul.toggle.tab-class>li.nav-item a {
   color: #1a9d7f !important;
 }
 
-ul.toggle>li.nav-item a.active {
+/* ul.toggle>li.nav-item a.active {
   background-color: #1a9d7f;
   color: #FFF !important;
-}
+} */
 
 /* Radio & Checkbox Button */
 

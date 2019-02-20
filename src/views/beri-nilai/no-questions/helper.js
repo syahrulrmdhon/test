@@ -251,7 +251,7 @@ export class SubjectScore extends Component {
         } else if (status === 'enough') {
             classnames = 'large-text-yellow-bold'
         } else if (status === 'need_attention') {
-            classnames = 'large-text-green-bold'
+            classnames = 'large-text-red-bold'
         }
 
         return <div className="col-sm-4 align-center">

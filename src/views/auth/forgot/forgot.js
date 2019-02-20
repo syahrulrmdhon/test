@@ -23,13 +23,16 @@ export default class Forgot extends Component {
         e.preventDefault()
         const url = `authentication/forgot_password`
         const forgot = {
-            email: this.state.email
+            user: {
+                email: this.state.email
+            }
+
         }
 
         AuthClient('post', url, forgot).then(res => {
             console.log(res)
             modal({
-                message: 'Selamat',
+                message: 'Berhasil',
                 description: 'Permintaan Anda sudah dikirim',
                 btns: [
                     {
@@ -81,10 +84,10 @@ export default class Forgot extends Component {
                                         className='col-sm-12'></input>
                                     <br /><br />
                                     <button type='submit' className='btn-young-green margin-top-4'>
-                                        Daftar
+                                        Kirim
                                     </button>
                                     <div className='float-right margin-top-4'>
-                                        <p>Sudah ingat kata kunci?<Link to="/login" className='normal-text-green'> Login Disini</Link></p>
+                                        <p>Sudah ingat kata kunci?<Link to="/" className='normal-text-green'> Login Disini</Link></p>
                                     </div>
                                 </form>
                             </div>

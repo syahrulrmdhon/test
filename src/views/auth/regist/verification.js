@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Logo from './../../../assets/images/logo.svg'
 import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
-import {AuthClient} from './../../../utils/auth-client'
 import { error, modal } from './../../global/modal'
+import { apiClient } from '../../../utils/apiClient';
 
 export default class Verification extends Component {
     constructor(props) {
@@ -10,8 +10,25 @@ export default class Verification extends Component {
 
         this.state = {
             email: '',
+            user: {},
+            fullname: '',
             url: props.location
         }
+    }
+    componentDidMount() {
+        this.getDataUser()
+    }
+    getDataUser() {
+        const url = `authentication/verification_email`
+
+        apiClient('get', url).then(res => {
+            let dataUser = res.data.data.user
+            this.setState({
+                user: dataUser,
+                fullname: dataUser.full_name
+            })
+
+        })
     }
     handleChange(e) {
         let verification = {}
@@ -20,16 +37,16 @@ export default class Verification extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
-        const url = window.location.href + '/:code'
-        const endpoint = `authentication/verification_email?url=${url}:code`
+        const url = window.location.href + '/:code&token_type=base64'
+        const endpoint = `authentication/verification_email?url=${url}`
         const verification = {
             email: this.state.email
         }
 
-        AuthClient('post', endpoint, verification).then(res => {
+        apiClient('post', endpoint, verification).then(res => {
             modal({
-                message: 'Selamat',
-                description: 'Lanjut ke langkah selanjutnya',
+                message: 'Berhasil',
+                description: 'Periksa kotak masuk email Anda',
                 btns: [
                     {
                         label: 'Lanjut',
@@ -61,7 +78,7 @@ export default class Verification extends Component {
                         <img src={LogoFull} />
                     </div>
                     <div className="title margin-top-6 align-center">
-                        Selamat Datang! Mario Noya
+                        Selamat Datang! {this.state.fullname}
                     </div>
                     <div className="info align-center margin-top-6">
                         Berikut informasi Akun kamu yang terdaftar di data kami. Informasi ini

@@ -5,10 +5,9 @@ import Logo from './../../../assets/images/logo.svg'
 import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
 import ReactDOM from 'react-dom'
 import Avatar from 'react-avatar-edit'
-import { AuthClient } from '../../../utils/auth-client';
-import { modal } from './../../global/modal'
-
-
+import { modal, error } from '../../global/modal'
+import { apiClient } from '../../../utils/apiClient'
+import PasswordMask from 'react-password-mask'
 
 export default class NewPassword extends Component {
     constructor(props) {
@@ -21,13 +20,14 @@ export default class NewPassword extends Component {
             repassword: '',
             user: {},
             contentType: 'image/png',
-            editor:''
+            editor: '',
+            token: this.props.match.params.code
         }
         this.setEditorRef = this.setEditorRef.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-    componentDidMount(){
-       
+    componentDidMount() {
+        console.log('masuk')
     }
     onClose() {
         this.setState({ preview: null })
@@ -35,23 +35,16 @@ export default class NewPassword extends Component {
     onCrop(preview) {
         this.setState({ preview })
     }
-    // onBeforeFileLoad(e) {
-    //     if (e.target.files[0].size > 71680) {
-    //         alert("File is too big!");
-    //         e.target.value = "";
-    //     };
-    // }
     handleChange(e) {
-        console.log(e.target.value)
         let regist = {}
         regist[e.target.name] = e.target.value
         this.setState(regist)
     }
     handleSubmit(e) {
         e.preventDefault()
+        console.log('method')
 
-
-        var result =  this.state.editor.state.image.currentSrc.split(';')
+        var result = this.state.editor.state.image.currentSrc.split(';')
         var base = result[1].split(',')
         const url = `authentication/activate`
         const user = {
@@ -65,40 +58,40 @@ export default class NewPassword extends Component {
 
         let data = {}
         data['user'] = user
-            AuthClient('post', url, data).then(res => {
-                modal({
-                    message: 'Selamat',
-                    description: 'Password berhasil dibuat',
-                    btns: [
-                        {
-                            label: 'Lanjut',
-                            className: 'btn green',
-                            event: this.props.history.push('/verification')
-                        }
-                    ]
-                })
-            }).catch(err => {
-                console.log(err)
-                err({
-                    message: 'Gagal, akun user tidak ditemukan',
-                    btns: [
-                        {
-                            label: 'Ulangi',
-                            className: 'btn bcred cwhite'
-                        }
-                    ]
-                })
+        apiClient('post', url, data).then(res => {
+            localStorage.clear()
+            modal({
+                message: 'Selamat',
+                description: 'Password berhasil dibuat',
+                btns: [
+                    {
+                        label: 'Lanjut',
+                        className: 'btn green',
+                        event: this.props.history.push('/')
+                    }
+                ]
             })
-     }
-    setEditorRef(editor){
-        // this.editor = editor
+        }).catch(err => {
+            error({
+                message: 'Gagal, data salah atau tidak lengkap',
+                btns: [
+                    {
+                        label: 'Ulangi',
+                        className: 'btn bcred cwhite'
+                    }
+                ]
+            })
+        })
+    }
+    setEditorRef(editor) {
         this.setState({
-            editor:editor
+            editor: editor
         })
     }
 
 
     render() {
+        console.log('props', this.state.token)
         return (
             <div className='verification'>
                 <div className="header padding-2">
@@ -118,7 +111,6 @@ export default class NewPassword extends Component {
                                 onCrop={this.onCrop.bind(this)}
                                 onClose={this.onClose.bind(this)}
                                 ref={this.setEditorRef}
-                            // onBeforeFileLoad={this.onBeforeFileLoad.bind(this)}
                             />
                         </div>
                         <br /><br /><br /><br />
@@ -129,20 +121,33 @@ export default class NewPassword extends Component {
                         <div className="direct align-center margin-top-6 margin-bottom-4">
                             Buat Password Baru Kamu
                         </div>
-                        <input
-                            value={this.state.password}
-                            onChange={this.handleChange.bind(this)}
-                            type='text' name='password'
-                            placeholder='Kata Kunci'
-                            className='input'
-                        />
-                        <input
+                        <div className='regist'>
+                            <PasswordMask
+                                className='mask'
+                                inputClassName='password-mask-input'
+                                buttonClassName='fa fa-eye password-mask-button'
+                                name='password' placeholder='Kata Kunci'
+                                value={this.state.password}
+                                onChange={this.handleChange.bind(this)}
+                            />
+                        </div>
+                        <div className='regist margin-top-2'>
+                            <PasswordMask
+                                className='mask'
+                                inputClassName='password-mask-input'
+                                buttonClassName='fa fa-eye password-mask-button'
+                                name='repassword' placeholder='Ketik Kembali Kata Kunci'
+                                value={this.state.repassword}
+                                onChange={this.handleChange.bind(this)}
+                            />
+                        </div>
+                        {/* <input
                             value={this.state.repassword}
                             onChange={this.handleChange.bind(this)}
                             type='text' name='repassword'
                             placeholder='Ketik Kembali Kata Kunci'
                             className='input margin-top-2'
-                        />
+                        /> */}
                         <div className='margin-top-2'>
                             <div className='col-sm-12'>
                                 <div className='row'>
