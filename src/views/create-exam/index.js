@@ -83,7 +83,10 @@ class Index extends Component {
     else if (data.exam.include_question === true) {
       const path = `v1/assessments/${assessmentId}/exams/validate?step=${this.state.step}`
       apiClient('post', path, data).then(response => {
-        this.props.history.push({pathname: `/question/${assessmentId}`, data: data})
+        this.props.history.push({
+          pathname: `/question/${assessmentId}`, data: data,
+          state: {status: 'create-exam'}          
+        })
       }).catch(err => {
         if (err.response.data.errors.exam.question_count[0].case === 'check_question_count') {
           error({
@@ -137,9 +140,23 @@ class Index extends Component {
       question_count = this.props.exam.basicForm.question_count
       examType = this.props.exam.basicForm.exam_type
     }
+
+    let menu = ''
+    let path = ''
+
+    if (this.props.location.state) {
+      menu = this.props.location.state.status
+      if (menu === 'exam') {
+        path = `/exam/${this.state.assessmentId}`
+      }
+      else {
+        path = `/all-question/${this.state.assessmentId}/assessment/${this.state.examId}/exam/`
+      }
+    }
+
     return (
       <div className="padding-content create-exam">
-        <Header navbar={true} location={`/exam/${this.state.assessmentId}`} />
+        <Header navbar={true} location={path} />
         
         <div className="margin-8">
           <div className="content-wrapper">

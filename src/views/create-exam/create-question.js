@@ -259,9 +259,19 @@ class Question extends Component {
       })
     }
 
+    let menu = this.props.location.state.status
+    let path = ''
+
+    if (menu === 'create-exam') {
+      path = `/create-exam/${this.state.assessmentId}`
+    }
+    else {
+      path = `/all-question/${this.state.assessmentId}/assessment/${this.state.examId}/exam/`
+    }
+
     return (
       <div className="padding-content create-exam question-wrapper">
-        <Header navbar={true} location={`/create-exam/${this.state.assessmentId}`} />
+        <Header navbar={true} location={path} />
         {error}
         <div className="margin-8">
           <div className="content-wrapper">
