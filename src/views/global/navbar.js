@@ -14,7 +14,7 @@ const menus = [
     { name: "Penilaian", link: "/penilaian", role: 'all' },
     { name: "Daftar Nilai", link: "/daftar-nilai", role: 'all' },
     { name: "Rapor Kelas", link: "/rapor", role: 'homeroom' },
-    { name: "Daftar Murid", link: "/murid", role: 'all' },
+    { name: "Daftar Murid", link: "/murid", role: 'homeroom' },
 ]
 
 class MenuBar extends Component {
