@@ -91,9 +91,10 @@ export default class NoQuestions extends Component {
     }
     render() {
         const tabMenu = ['Perolehan Nilai'];
+        let path = `/exam/${this.state.assessment_id}`
         return (
             <div className="details-nilai bg-grey">
-                <Header navbar={false} />
+                <Header navbar={false} location={path}/>
                 <div className="content-wrapper content-wrap-custom-size">
                     <div className="row">
                         <div className="detail-menu">
