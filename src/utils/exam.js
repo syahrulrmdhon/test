@@ -126,16 +126,25 @@ export function assessmentLabel(value, color = false){
     let result = ''
     switch(value){
         case 'task':
-            result = (color) ? 'bcgreen' : 'Tugas'
+            result = (color) ? 'bclblue' : 'Tugas'
         break
         case 'daily_exam':
-            result = (color) ? 'bcblue' : 'UH'
+            result = (color) ? 'bclgreen' : 'UH'
         break
         case 'midterm_exam':
-            result = (color) ? 'bcblack2' : 'UTS'
+            result = (color) ? 'bcorange' : 'UTS'
         break
         case 'final_exam':
             result = (color) ? 'bcred' : 'UAS'
+        break
+        case 'daily':
+            result = (color) ? 'bcorange' : 'Sikap Harian'
+        break
+        case 'final_subject':
+            result = (color) ? 'bclblue' : 'Sikap Mata Pelajaran'
+        break
+        case 'final_aspect':
+            result = (color) ? 'bclgreen' : 'Sikap Akhir Aspek'
         break
         default:
             return 'N/A'

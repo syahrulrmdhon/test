@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 var FontAwesome = require('react-fontawesome');
+import classnames from 'classnames'
 import {combineNameSubject, assessmentLabel} from './../../../utils/exam'
 import {apiClient} from './../../../utils/apiClient'
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -73,21 +74,26 @@ export default class Table extends Component {
         let content = []
         if(this.state.data.length > 0){
             this.state.data.map((value, idx) => {
+                const { category } = value
+                
+                let url = ''
                 let totalExam = ''
                 let subjectName = combineNameSubject(value.school_subjects)
-                let url = 'exam/'+value.id
+                let color = assessmentLabel(value.assessment_type, true)
 
-                if(value.category == 'attitude'){
+                if(category == 'attitude'){
                     totalExam = combineNameSubject(value.school_attitudes)
+                    url = `attitude/${value.id}/${category}`
                 } else {
+                    url = 'exam/'+value.id
                     let label = assessmentLabel(value.assessment_type)
                     totalExam = value.exam_count + ' (' + label + ')'
                 }
                 
                 content.push(
                     <tr key={idx} >
-                        <td className="align-center"><span className="bullet bcgreen"></span></td>
-                        <td><NavLink to={url}>{value.name}</NavLink></td>
+                        <td className="align-center"><span className={classnames("bullet", color)}></span></td>
+                        <td>{value.name}</td>
                         <td>{subjectName}</td>
                         <td>{totalExam}</td>
                         <td>{value.created_date}</td>
