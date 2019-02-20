@@ -3,6 +3,7 @@ import Header from '../global/header'
 import './../../styles/penilaian.css'
 import Tab from './new/tab'
 import AddClass from './new/add_class'
+import AddAttitude from './new/add_attitude'
 import Select from 'react-select';
 // redux
 import {
@@ -12,7 +13,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { assessmentType } from './../../utils/common'
+import { assessmentType, getDate } from './../../utils/common'
 import { apiClient } from './../../utils/apiClient'
 import {error, modal} from './../global/modal'
 
@@ -46,6 +47,7 @@ class Add extends Component {
             let category = this.props.assessment.category
             if(category !== undefined){
                 assessmentType.call(this, {category: category})
+                // this.props.getNew(this.state.assessment_id, category)
             }
         }
     }
@@ -66,13 +68,32 @@ class Add extends Component {
             url = `v1/assessments/${assessment_id}/validate_update`
             msg = 'ubah'
         }
-        
-        delete data.assessment_subjects_attributes
 
-        apiClient('post', url, data).then(response => {
+        if(data.category == 'attitude'){
+            switch(data.assessment_type){
+                case 'daily':
+                    data.event_date = getDate('case-4', new Date(data.event_date))
+                    delete data.assessment_classes_attributes
+                    delete data.user_attitudes_attributes
+                break;
+                case 'final_aspect':
+                    delete data.assessment_attitudes_attributes
+                    delete data.assessment_subjects_attributes
+                    delete data.user_attitudes_attributes
+                break;
+                case 'final_subject':
+                delete data.assessment_attitudes_attributes
+                delete data.assessment_subjects_attributes
+                break;
+            }
+        } else {
+            delete data.assessment_subjects_attributes
+            delete data.assessment_attitudes_attributes
+        }
 
+        apiClient('post', url, data, { category: data.category }).then(response => {
             modal({
-                message: 'Selamat',
+                message: 'Berhasil',
                 description: 'Anda sudah menyimpan data topik, selanjutnya anda masukkan data komponen topik',
                 btns: [
                     {
@@ -92,6 +113,7 @@ class Add extends Component {
                 this.props.history.push('/penilaian/tambah-component')
             }
         }).catch(err => {
+            console.log(err.response)
             error({
                 message: `Gagal ${msg} Topik, periksa kembali data yang dibutuhkan`,
                 btns: [
@@ -105,9 +127,17 @@ class Add extends Component {
     }
 
     render(){
-        let name = this.props.assessment !== undefined ? this.props.assessment.name : null
-        let category = this.props.assessment !== undefined ? this.props.assessment.category : null
-        let assessment_type = this.props.assessment !== undefined ? this.props.assessment.assessment_type : null
+        const {name, category, assessment_type} = this.props.assessment
+        let addOnLayout = ''
+
+        switch(assessment_type){
+            case 'daily':
+                addOnLayout = <AddAttitude />
+            break;
+            default:
+                addOnLayout = <AddClass />
+            break
+        }
 
         return(
             <div className="padding-content">
@@ -170,7 +200,7 @@ class Add extends Component {
                                         </div>
                                     </div>
                                     <div className="border-top margin-top-6"></div>
-                                    <AddClass />
+                                    {addOnLayout}
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <div className="margin-top-6">

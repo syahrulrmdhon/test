@@ -5,13 +5,13 @@ export default class ProfileDetail extends Component {
   
   render() {
     const response = this.props.dataProfile
-
+    console.log(response,"myr")
     return (
       <div>
         <div className="avatar-wrapper">
           <img className="avatar" src={Avatar} alt="" />
         </div>
-        <div className="mt-3 name">
+        <div className="mt-3 detail-name">
           {response && response.user && response.user.full_name}
         </div>
         <div className="ranking">
@@ -36,7 +36,7 @@ export default class ProfileDetail extends Component {
         </div>
           <div className="field">
             <div className="label">Nama Ibu:</div>
-            {response && response.user && response.parents.mother.full_name}
+            {response && response.parents && response.parents.mother && response.parents.mother.full_name}
         </div>
           <div className="field">
             <div className="label">Alamat:</div>

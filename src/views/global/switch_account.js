@@ -6,8 +6,7 @@ var FontAwesome = require('react-fontawesome');
 import classnames from 'classnames'
 import { getUser } from '../../utils/common'
 
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+import {modal} from './../global/modal'
 
 export default class SwitchAccount extends Component {
     constructor(props){
@@ -33,13 +32,9 @@ export default class SwitchAccount extends Component {
         }
     }
 
-    // changeAccount(school, e){
-    //     console.log(school);
-    // }
     onConfirm(school_id){
         localStorage.setItem("school_id", school_id)
         getUser(true)
-        // this.props.history.push('/home')
     }
 
     logout(){
@@ -50,24 +45,20 @@ export default class SwitchAccount extends Component {
     submit(school, e){
         const school_name = !!(school) ? school.name : 'N/A'
 
-        confirmAlert({
-            customUI: ({ onClose, onConfirm }) => {
-                return (
-                    <div className="react-confirm-alert modal-alert">
-                        <div className="react-confirm-alert-body">
-                            <div className="header align-center">
-                                <h1>Apakah anda yakin ingin beralih ke sekolah {school_name}? </h1>
-                            </div>
-                            <div className="react-confirm-alert-button-group toggle">
-                                <div className="align-center fullwidth">
-                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Tidak</a>
-                                    <a href="javascript:void(0);" className="btn green" onClick={() => { this.onConfirm(school.id); onClose(); }}>Ya</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )
-            },
+        modal({
+            message: 'Beralih',
+            description: `Apakah anda yakin ingin beralih ke sekolah ${school_name}?`,
+            btns: [
+                {
+                    label: 'Tidak',
+                    className: 'btn default',
+                },
+                {
+                    label: 'Ya',
+                    className: 'btn green',
+                    event: () => {this.onConfirm(school.id); onClose();},
+                },
+            ]
         })
     }
 

@@ -44,7 +44,7 @@ export default class TableEvaluasi extends Component {
             <th className="text-left">Pemahaman Materi</th>
           </tr>
         </thead>
-        <tbody className="evaluasi">
+        <tbody className="content-student">
           {content}
         </tbody>
       </Table>
