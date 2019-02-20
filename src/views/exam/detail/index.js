@@ -30,10 +30,11 @@ import Right from './right'
   }
 
   render() {
+    const path = `/exam/${this.props.match.params.assessment_id}`
     return (
       <div className="question padding-content">
         <div>
-          <Header />
+          <Header navbar={false} location={path} />
         </div>
         <div className="main-layout">
 

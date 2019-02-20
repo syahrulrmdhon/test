@@ -17,8 +17,6 @@ import { bindActionCreators } from 'redux';
 class Nilai extends Component {
   constructor(props) {
     super(props)
-
-
     this.state = {
       score: [],
       activeMenu: 1,

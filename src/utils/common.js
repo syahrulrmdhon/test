@@ -1,23 +1,23 @@
 import { apiClient } from './apiClient'
 import React, { Component } from 'react'
 
-export function removeField(values, idx){
+export function removeField(values, idx) {
     let removed = values.splice(idx, 1)
     return values
 }
 
-export function setLabelSelect(lists, values = {}){
+export function setLabelSelect(lists, values = {}) {
     let label = ''
     lists.map((list, idx) => {
         let key = list.value
         let set_value = !!(values) ? values.value : ''
 
-        if(key == set_value){
+        if (key == set_value) {
             label = list.label;
         }
     })
 
-    if(label != ''){
+    if (label != '') {
         values.label = label
         return values
     } else {
@@ -25,10 +25,10 @@ export function setLabelSelect(lists, values = {}){
     }
 }
 
-export function seeMore(value, s_count = 50){
+export function seeMore(value, s_count = 50) {
     const count = value.length
-    
-    if(s_count < count){
+
+    if (s_count < count) {
         value = value.substring(0, s_count);
         value += '...'
     }
@@ -36,11 +36,11 @@ export function seeMore(value, s_count = 50){
     return value
 }
 
-export function setErrorRuby(data = {}){
+export function setErrorRuby(data = {}) {
     let result = {}
     let errors = data.errors || []
 
-    if(typeof errors == 'object'){
+    if (typeof errors == 'object') {
         for (var error in errors) {
             if (errors.hasOwnProperty(error)) {
                 result[error] = errors[error]
@@ -50,11 +50,11 @@ export function setErrorRuby(data = {}){
     return result
 }
 
-export function setError(data = []){
+export function setError(data = []) {
     let result = {}
     let errors = data.errors || []
 
-    if(errors.length > 0){
+    if (errors.length > 0) {
         errors.map((error, idx) => {
             result[error.field_ref] = error.description
         });
@@ -62,12 +62,12 @@ export function setError(data = []){
     return result
 }
 
-export function getUser(redirect = false){
+export function getUser(redirect = false) {
     const url = 'v1/users'
-    apiClient('get', url).then(res=>{
+    apiClient('get', url).then(res => {
         localStorage.setItem("user_id", res.data.data.user.id)
 
-        if(res.data.data.homeroom_class != null){
+        if (res.data.data.homeroom_class != null) {
             localStorage.setItem("class_id", res.data.data.homeroom_class.id)
         }
 
@@ -77,124 +77,127 @@ export function getUser(redirect = false){
         localStorage.setItem("current_period", JSON.stringify(res.data.data.current_period))
         localStorage.setItem("homeroom_class", JSON.stringify(res.data.data.homeroom_class))
 
-        if(redirect){
+        if (redirect) {
             window.location.href = "/home";
         }
     })
 }
 
-export function getDate(format = 'case-1', date = new Date){
+export function getDate(format = 'case-1', date = new Date) {
     let result = ''
 
-    if(!!(date)){
+    if (!!(date)) {
         let dt = date.getDate()
         let month = date.getMonth()
         let year = date.getUTCFullYear()
 
-        switch(format){
+        switch (format) {
             case 'case-1': // 25 Novermber 2018
-                month = getMonthIndo(month)    
-                result = dt+' '+month+' '+year
-            break
+                month = getMonthIndo(month)
+                result = dt + ' ' + month + ' ' + year
+                break
             case 'case-2': // Senin, Minggu
                 let day = date.getDay()
                 result = getDayIndo(day)
-            break
+                break
             case 'case-3':
                 let hour = date.getHours()
                 let minute = date.getMinutes()
-                
+
                 result = hour + ':' + minute
-            break
+                break
             case 'case-4': // 2019-01-20
-                result = new Intl.DateTimeFormat('sq-AL', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(date)
-            break
+                result = new Intl.DateTimeFormat('sq-AL', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(date)
+                break
             case 'case-5': // 2019-01-20 00:00
                 const tempDate = getDate('case-4', date)
                 const tempTime = getDate('case-3', date)
 
                 result = `${tempDate} ${tempTime}`
-            break
+                break
+            case 'case-6': //31-12-2019
+                result = new Intl.DateTimeFormat('id-Id', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(date)
+                break
         }
     }
     return result
 }
 
-export function getDayIndo(day = false){
+export function getDayIndo(day = false) {
     let result = ''
-    switch(day.toString()){
+    switch (day.toString()) {
         case '0':
             result = 'Minggu'
-        break
+            break
         case '1':
             result = 'Senin'
-        break
+            break
         case '2':
             result = 'Selasa'
-        break
+            break
         case '3':
             result = 'Rabu'
-        break
+            break
         case '4':
             result = 'Kamis'
-        break
+            break
         case '5':
             result = 'Jumat'
-        break
+            break
         case '6':
             result = 'Sabtu'
-        break
+            break
     }
     return result
 }
 
-export function getMonthIndo(month = false){
+export function getMonthIndo(month = false) {
     let result = ''
-    switch(month.toString()){
+    switch (month.toString()) {
         case '0':
             result = 'Januari'
-        break
+            break
         case '1':
             result = 'Februari'
-        break
+            break
         case '2':
             result = 'Maret'
-        break
+            break
         case '3':
             result = 'April'
-        break
+            break
         case '4':
             result = 'Mei'
-        break
+            break
         case '5':
             result = 'Juni'
-        break
+            break
         case '6':
             result = 'Juli'
-        break
+            break
         case '7':
             result = 'Agustus'
-        break
+            break
         case '8':
             result = 'September'
-        break
+            break
         case '9':
             result = 'Oktober'
-        break
+            break
         case '10':
             result = 'November'
-        break
+            break
         case '11':
             result = 'Desember'
-        break
+            break
     }
     return result
 }
 
-export function changeFormatOptions(values = []){
+export function changeFormatOptions(values = []) {
     let result = []
-    if(values){
-        if(values.length > 0){
+    if (values) {
+        if (values.length > 0) {
             values.map((value, idx) => {
                 result[idx] = {
                     value: value.key,
@@ -206,11 +209,11 @@ export function changeFormatOptions(values = []){
     return result;
 }
 
-export function assessmentType(params = {}, event = {}, fieldName = 'assessment_type'){
-    if(params){
+export function assessmentType(params = {}, event = {}, fieldName = 'assessment_type') {
+    if (params) {
         apiClient('get', 'v1/filters/assessment_types', false, params).then(response => {
             var obj = {}
-            let result = response.data.data.assessment_types  
+            let result = response.data.data.assessment_types
             let assessment_types = changeFormatOptions(result)
             event = setLabelSelect(assessment_types, event)
 
@@ -221,11 +224,11 @@ export function assessmentType(params = {}, event = {}, fieldName = 'assessment_
     }
 }
 
-export function classes(params = {}){
+export function classes(params = {}) {
     apiClient('get', 'v1/filters/classes', false, params).then(response => response.data).then(data => {
         let result = []
 
-        if(data.data.classes.length > 0){
+        if (data.data.classes.length > 0) {
             data.data.classes.map((classs, key) => (
                 result.push({
                     label: classs.name,
@@ -240,7 +243,7 @@ export function classes(params = {}){
     })
 }
 
-export function grades(){
+export function grades() {
     apiClient('get', 'v1/filters/grades').then(response => response.data).then(data => {
         this.setState({
             grades: (data.data.grades.length > 0) ? data.data.grades : []
@@ -248,7 +251,7 @@ export function grades(){
     })
 }
 
-export function schoolYears(){
+export function schoolYears() {
     apiClient('get', 'v1/filters/school_years').then(response => response.data).then(data => {
 
         this.setState({
@@ -257,12 +260,12 @@ export function schoolYears(){
     })
 }
 
-export function examTypes(params={}){
+export function examTypes(params = {}) {
     const path = 'v1/filters/exam_types'
     apiClient('get', path, false, params).then(response => response.data).then(data => {
         let result = []
 
-        if(data.data.exam_types.length > 0){
+        if (data.data.exam_types.length > 0) {
             data.data.exam_types.map((type, key) => (
                 result.push({
                     label: type.value,
@@ -270,26 +273,27 @@ export function examTypes(params={}){
                 })
             ))
         }
-        this.setState({examTypes: result})
+        this.setState({ examTypes: result })
     })
 }
 
 export function checkProperties(obj) {
     for (let key in obj) {
+        console.log(obj[key], "here ch uti")
         if (obj[key] === null || obj[key] === "" || obj[key] === undefined) {
             return true;
         }
     }
-    
+
     return false;
 }
 
-export function questionTypes(params={}){
+export function questionTypes(params = {}) {
     const path = 'v1/filters/problem_types'
     apiClient('get', path, false, params).then(response => response.data).then(data => {
         let result = []
 
-        if(data.data.problem_types.length > 0){
+        if (data.data.problem_types.length > 0) {
             data.data.problem_types.map((type, key) => (
                 result.push({
                     label: type.value,
@@ -297,22 +301,22 @@ export function questionTypes(params={}){
                 })
             ))
         }
-        this.setState({questionTypes: result})
+        this.setState({ questionTypes: result })
     })
 }
 
-export function basicComps(params = {}, options = {}){
+export function basicComps(params = {}, options = {}) {
     let listOptions = options.listOptions || false
     let fieldName = options.fieldName || 'basic_comps'
 
     apiClient('get', 'v1/filters/basic_comps', false, params).then(response => response.data).then(data => {
         let basic_comps = data.data.basic_comps || []
         let obj = {}
-        
-        if((basic_comps.length > 0) && listOptions){
+
+        if ((basic_comps.length > 0) && listOptions) {
             const temps = basic_comps
             basic_comps = []
-            
+
             temps.map((temp, idx) => {
                 basic_comps.push({
                     value: temp.id,
@@ -324,23 +328,23 @@ export function basicComps(params = {}, options = {}){
         this.setState(obj)
     })
 }
-export function subjects(params = {}, options = {}){
+export function subjects(params = {}, options = {}) {
     let listOptions = options.listOptions || false
 
     apiClient('get', 'v1/filters/subjects', false, params).then(response => response.data).then(data => {
         let subjects = data.data.subjects || []
-        
-        if((subjects.length > 0) && listOptions){
+
+        if ((subjects.length > 0) && listOptions) {
             const temps = subjects
             subjects = []
-            
+
             temps.map((temp, idx) => {
                 subjects.push({
                     value: temp.id,
                     label: temp.subject_name,
                 })
             })
-        }    
+        }
         this.setState({
             subjects: subjects,
         })

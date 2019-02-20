@@ -50,6 +50,7 @@ export default class Detail extends Component {
     const url = `v1/students/${this.state.studentId}`
 
     apiClient('get', url).then(response => {
+      console.log(response.data.data , "res")
       this.setState({profile: response.data.data})
     })
   }

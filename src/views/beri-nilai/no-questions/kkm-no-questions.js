@@ -10,7 +10,7 @@ export default class KkmNoQuestions extends Component {
                         <p className='float-left normal-text-bold margin-top-2'>Nilai dibawah KKM</p>
                     </div>
                     <div className='col-sm-4'>
-                        <span className='float-right view margin-top-2'>Lihat Semua</span>
+                        {/* <span className='float-right view margin-top-2'>Lihat Semua</span> */}
                     </div>
                 </div>
                 <div className='row box-not-passed h-100'>

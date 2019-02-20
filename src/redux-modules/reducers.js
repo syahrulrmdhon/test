@@ -5,6 +5,7 @@ import exam from './modules/exam'
 import skill from './modules/exam/skill'
 import score from './modules/score'
 import questionDetail from './modules/questionDetail'
+import Menu from './modules/menu'
 import question from './modules/question'
 
 export default combineReducers({
@@ -14,6 +15,7 @@ export default combineReducers({
   skill,
   questionDetail,
   score,
+  Menu,
   question
 })
 
