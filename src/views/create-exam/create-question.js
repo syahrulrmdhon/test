@@ -11,6 +11,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'
 import Choices from "./choices"
 import ErrorModal from '../global/error_modal'
 
+
 export default class question extends Component {
   constructor(props) {
     super(props)
