@@ -16,8 +16,8 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_DATA:
     const basicCompetencies = action.result.data.assessment_basic_comps
-
-      delete state.error
+    
+    delete state.error
       if (action.step === 'BasicForm') {
         const data = action.result.data.exam
 

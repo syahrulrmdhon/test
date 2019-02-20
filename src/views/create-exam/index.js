@@ -121,8 +121,10 @@ class Index extends Component {
       }
     }
     else {
-      if (this.props.exam.basicForm.name === '' || this.props.exam.basicForm.exam_type === '') {
-        disable = true
+      if (this.props.exam.basicForm) {
+        if (this.props.exam.basicForm.name === '' || this.props.exam.basicForm.exam_type === '') {
+          disable = true
+        }
       }
     }
 
