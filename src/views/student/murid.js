@@ -61,7 +61,10 @@ class DaftarMurid extends Component {
     }
     
     onRowClick(row) {
-        this.props.history.push('detail/' + row.id);
+        this.props.history.push({
+            pathname:'detail/' + row.id,
+            state: {status:'murid'}
+        });
     }
 
     componentDidMount() {

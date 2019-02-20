@@ -246,7 +246,10 @@ export default class Attendance extends Component {
 
   nameClicked(event, id) {
     event.preventDefault()
-    this.props.history.push('detail/' + id);
+    this.props.history.push({
+        pathname:'detail/' + id,
+        state: {status:'absensi'}
+    });
   }
 
   render() {

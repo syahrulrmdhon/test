@@ -30,7 +30,7 @@ export default class Forgot extends Component {
         }
 
         AuthClient('post', url, forgot).then(res => {
-            console.log(res)
+            localStorage.setItem('email', res.data.data.user.email)
             modal({
                 message: 'Berhasil',
                 description: 'Permintaan Anda sudah dikirim',
@@ -43,7 +43,6 @@ export default class Forgot extends Component {
                 ]
             })
         }).catch(err => {
-            console.log(err)
             error({
                 message: 'Gagal, email tidak terdaftar',
                 btns: [
