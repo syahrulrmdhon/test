@@ -77,10 +77,18 @@ export default class Detail extends Component {
 
   render() {
     const tabMenu = ['Rincian Nilai', 'Rincian Absensi', 'Catatan Wali Kelas'];
+    const menu = this.props.location.state.status
+    let path = ''
+    if(menu === 'absensi'){
+      path='/absen'
+    }else{
+      path='/murid'
+    }
+    
   
     return (
       <div className="detail bg-grey">
-        <Header navbar={false} />
+        <Header navbar={false} location={path} />
        
         <div className="content-wrapper content-wrap-custom-size margin-top-6">
           <div className="row detail-menu">
