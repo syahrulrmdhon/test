@@ -52,7 +52,7 @@
 /* schedule */
 .schedule{
     overflow: auto;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     overflow-y: scroll;
     max-height: 680px;
 }
