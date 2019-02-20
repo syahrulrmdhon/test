@@ -1085,6 +1085,7 @@ strong, .bold {
 
 .normal-text-green {
   color: #45c4a6;
+  cursor: pointer;
 }
 
 /* Large Font */

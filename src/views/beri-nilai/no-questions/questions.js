@@ -69,11 +69,11 @@ export default class Questions extends Component {
                         <div className="react-confirm-alert modal-alert">
                             <div className="react-confirm-alert-body">
                                 <div className="header align-center">
-                                    <h1>Pastikan anda sudah mengisi nilai siswa </h1>
+                                    <h1>Yakin merubah nilai siswa ini? </h1>
                                 </div>
                                 <div className="react-confirm-alert-button-group toggle">
                                     <div className="align-center fullwidth">
-                                        <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
+                                        <a href="javascript:void(0);" className="btn default" onClick={onClose}>Kembali</a>
                                         <a href="javascript:void(0);" className="btn green" onClick={() => { this.onConfirm(); onClose(); }}>Yakin</a>
                                     </div>
                                 </div>

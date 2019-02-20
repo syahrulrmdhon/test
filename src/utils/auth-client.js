@@ -8,8 +8,6 @@ export const AuthClient = (method, url, request, params = {}) => {
         'Authorization': 'Bearer ' + token_auth
     }
 
-    console.log(headers,"my header")
-
     switch (method) {
         case 'get':
             return axios.get(baseUrl + url, { headers: headers, params: params })

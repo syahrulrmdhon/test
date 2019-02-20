@@ -24,7 +24,7 @@ export function assessmentGetData(p_category = false){
     apiClient('get', url, false, params).then(response => {
         let assessments = response.data.data.assessments
         let data = assessments.entries
-        console.log(response)
+        // console.log(response)
 
         let paginate = {
             size: assessments.size,

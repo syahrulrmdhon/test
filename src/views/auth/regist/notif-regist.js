@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Logo from './../../../assets/images/logo.svg'
-import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
+import Letter from './../../../assets/images/letter@3x.png'
 import { Link } from 'react-router-dom'
 import { error, modal } from './../../global/modal'
-import { AuthClient } from '../../../utils/auth-client';
+import { apiClient } from '../../../utils/apiClient'
 
 export default class NotifRegist extends Component {
     constructor(props) {
@@ -15,12 +15,12 @@ export default class NotifRegist extends Component {
         }
     }
     componentDidMount() {
-        this.getDataScores()
+        this.getDataUser()
     }
-    getDataScores() {
+    getDataUser() {
         const url = `authentication/verification_email`
 
-        AuthClient('get', url).then(res => {
+        apiClient('get', url).then(res => {
             let dataUser = res.data.data.user
             this.setState({
                 user: dataUser,
@@ -32,15 +32,15 @@ export default class NotifRegist extends Component {
     handleSubmit(e) {
         e.preventDefault()
         const url = `${process.env.API_URL}`
-        const endpoint = `authentication/verification_email?url=${url}/:code`
+        const endpoint = `authentication/verification_email?url=${url}/:code&token_type=base64`
         const data = {
-            email: this.state.email
+                email: this.state.email
         }
 
-        AuthClient('post', endpoint, data).then(res => {
+        apiClient('post', endpoint, data).then(res => {
             modal({
-                message: 'Selamat',
-                description: 'Lanjut ke langkah selanjutnya',
+                message: 'Berhasil',
+                description: 'Email sudah terkirim, cek kembali email Anda',
                 btns: [
                     {
                         label: 'Lanjut',
@@ -51,10 +51,10 @@ export default class NotifRegist extends Component {
             })
         }).catch(err => {
             error({
-                message: 'Gagal, ulangi lagi',
+                message: 'Email sudah terkirim, cek kembali email Anda',
                 btns: [
                     {
-                        label: 'Ulangi',
+                        label: 'Tutup',
                         className: 'btn bcred cwhite'
                     }
                 ]
@@ -69,7 +69,7 @@ export default class NotifRegist extends Component {
                 </div>
                 <div className="body-gredu">
                     <div className="align-center">
-                        <img src={LogoFull} />
+                        <img src={Letter} />
                     </div>
                     <div className="title margin-top-6 align-center">
                         Verifikasi Email Kamu
@@ -96,7 +96,7 @@ export default class NotifRegist extends Component {
                     <div className='contact margin-top-2'>
                         Ada kendala di akun ini?
                         <span className='normal-text-green'>
-                            <Link to='/verification'>&nbsp;Hubungi Gredu</Link>
+                            <a href="mailto:miftahulkhoir@gredu.asia">&nbsp;Hubungi Gredu</a>
                         </span>
                     </div>
                     {/* <p className="contact">Ada kendala di akun ini?</p> */}
