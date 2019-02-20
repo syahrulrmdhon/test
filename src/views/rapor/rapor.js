@@ -78,7 +78,7 @@ export default class Rapor extends Component {
       let semester = [];
       for (var i in res.data.data) {
         const datum = res.data.data[i];
-        datum.map(function(data, i) {
+        datum.map(function (data, i) {
           semester.push({ value: data.id, label: data.period_name });
         });
       }
@@ -96,7 +96,7 @@ export default class Rapor extends Component {
       let status = [];
       for (var i in res.data.data) {
         const datum = res.data.data[i];
-        datum.map(function(data, i) {
+        datum.map(function (data, i) {
           status.push({ value: data.key, label: data.value });
         });
       }
@@ -111,17 +111,17 @@ export default class Rapor extends Component {
   getKnowledge() {
     let url = `v1/scores/report?semester=${
       this.state.selectedSemester.label
-    }&category=knowledge&class_id=${localStorage.getItem(
-      "class_id"
-    )}&risk_status=${this.state.selectedStatus.value}`;
+      }&category=knowledge&class_id=${localStorage.getItem(
+        "class_id"
+      )}&risk_status=${this.state.selectedStatus.value}`;
     return apiClient("get", url);
   }
   getMountKnowledge() {
     let url = `v1/scores/report?semester=${
       this.state.semesterActive
-    }&category=knowledge&class_id=${localStorage.getItem(
-      "class_id"
-    )}&risk_status=all`;
+      }&category=knowledge&class_id=${localStorage.getItem(
+        "class_id"
+      )}&risk_status=all`;
     return apiClient("get", url);
   }
   notKnowledge() {
@@ -134,33 +134,33 @@ export default class Rapor extends Component {
   getSkill() {
     let url = `v1/scores/report?semester=${
       this.state.selectedSemester.label
-    }&category=skill&class_id=${localStorage.getItem("class_id")}&risk_status=${
+      }&category=skill&class_id=${localStorage.getItem("class_id")}&risk_status=${
       this.state.selectedStatus.value
-    }`;
+      }`;
     return apiClient("get", url);
   }
   getMountSkill() {
     let url = `v1/scores/report?semester=${
       this.state.semesterActive
-    }&category=skill&class_id=${localStorage.getItem(
-      "class_id"
-    )}&risk_status=all`;
+      }&category=skill&class_id=${localStorage.getItem(
+        "class_id"
+      )}&risk_status=all`;
     return apiClient("get", url);
   }
   getAttitude() {
     let url = `v1/scores/report?semester=${
       this.state.selectedSemester.label
-    }&category=attitude&class_id=${localStorage.getItem(
-      "class_id"
-    )}&risk_status=${this.state.selectedStatus.value}`;
+      }&category=attitude&class_id=${localStorage.getItem(
+        "class_id"
+      )}&risk_status=${this.state.selectedStatus.value}`;
     return apiClient("get", url);
   }
   getMountAttitude() {
     let url = `v1/scores/report?semester=${
       this.state.semesterActive
-    }&category=attitude&class_id=${localStorage.getItem(
-      "class_id"
-    )}&risk_status=all`;
+      }&category=attitude&class_id=${localStorage.getItem(
+        "class_id"
+      )}&risk_status=all`;
     return apiClient("get", url);
   }
   getMountData() {
@@ -215,12 +215,15 @@ export default class Rapor extends Component {
   }
   nameClicked(e, id) {
     e.preventDefault();
-    this.props.history.push("detail/" + id);
+    this.props.history.push({
+      pathname: 'detail/' + id,
+      state: { status: 'rapor' }
+    });
   }
   render() {
     return (
       <div className="padding-content h-100">
-        <Header />
+        <Header/>
         <div className="content">
           <div className="row row-rapor">
             <div className="left-content col-2">
@@ -293,15 +296,15 @@ export default class Rapor extends Component {
               >
                 <TabPane tabId="1">
                   {!this.state.tableKnowledge ||
-                  this.state.tableKnowledge.length === 0 ? (
-                    <NotAvailable>{this.notKnowledge()}</NotAvailable>
-                  ) : (
-                    <TablePengetahuan
-                      tableKnowledge={this.state.tableKnowledge}
-                      dTableKnowledge={this.state.dTableKnowledge}
-                      nameClicked={this.nameClicked}
-                    />
-                  )}
+                    this.state.tableKnowledge.length === 0 ? (
+                      <NotAvailable>{this.notKnowledge()}</NotAvailable>
+                    ) : (
+                      <TablePengetahuan
+                        tableKnowledge={this.state.tableKnowledge}
+                        dTableKnowledge={this.state.dTableKnowledge}
+                        nameClicked={this.nameClicked}
+                      />
+                    )}
                 </TabPane>
                 <TabPane tabId="2">
                   <TableKeterampilan
