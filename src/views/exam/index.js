@@ -69,7 +69,8 @@ class Index extends Component {
       break;
       default:
         this.props.history.push({
-            pathname:`/edit/${this.state.assessmentId}/exam/${id}`
+            pathname:`/edit/${this.state.assessmentId}/exam/${id}`,
+            state: {status: 'exam'}
         })
       break;
     }
@@ -104,7 +105,10 @@ class Index extends Component {
         this.props.history.push({pathname: `/create-skill/${this.state.assessmentId}`})
       break;
       default:
-        this.props.history.push({pathname: `/create-exam/${this.state.assessmentId}`})
+        this.props.history.push({
+          pathname: `/create-exam/${this.state.assessmentId}`,
+          state: {status: 'exam'}
+        })
       break;
     }
 

@@ -22,10 +22,16 @@ import Right from './right'
 
   redirect(edit) {
     if (edit === 'question') {
-      this.props.history.push({pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}/${edit}`})
+      this.props.history.push({
+        pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}/${edit}`,
+        state: {status: 'all-question'}
+      })
     }
     else {
-      this.props.history.push({pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}`})
+      this.props.history.push({
+        pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}`,
+        state: {status: 'all-question'}
+      })
     }
   }
 
