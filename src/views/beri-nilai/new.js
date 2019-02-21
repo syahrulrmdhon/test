@@ -4,23 +4,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/student/detail.scss'
 
 import Header from '../global/header'
-import TabMenu from '../../components/TabDetail/TabDetail'
 import Content from './content'
 import { apiClient } from '../../utils/apiClient'
-import { setError } from './../../utils/common'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getDataScoreQuestion } from './../../redux-modules/modules/score'
+import {  getStudent } from './../../redux-modules/modules/student'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
-
-let choice = [
-  { value: 'a', label: 'A' },
-  { value: 'b', label: 'B' },
-  { value: 'c', label: 'C' },
-  { value: 'd', label: 'D' },
-  { value: 'e', label: 'E' },
-]
 
  class New extends Component {
   constructor(props, context) {
@@ -34,7 +25,7 @@ let choice = [
       valueData: {},
       exam: props.match.params.exam_id,
       question: [],
-      studentId: this.props.match.params.id,
+      studentId: this.props.match.params.student_id,
       class_id: props.match.params.class_id,
       assessment_id: props.match.params.assessment_id,
       student_id:props.match.params.student_id,
@@ -61,8 +52,7 @@ let choice = [
     this.getStudent()
     this.getGenerateForm()
     this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id )
-    console.log("my condition", this.props.location.state.conditon)
-
+    this.props.getStudent(this.state.student_id)
   }
 
   redirect(){
@@ -102,7 +92,7 @@ let choice = [
   }
 
   getStudent() {
-    const url = `/v1/students/5f5bc281-9906-4b2e-b87c-29867361c7bf`
+    const url = `/v1/students/${this.state.student_id}`
 
     apiClient('get', url).then(response => {
       console.log(response)
@@ -194,7 +184,7 @@ let choice = [
             subjects={this.state.subjects}
             studentId={this.state.studentId}
             form={this.state.question}
-            student={this.state.student}
+            // student={this.state.student}
             handleSave={this.handleSave}
             onChangeEssay={this.onChangeEssay}
             essay={this.state.essay}
@@ -211,9 +201,9 @@ let choice = [
 }
 
 const mapStateToProps = state => ({
-  data_score: state
+  data_score: state,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreQuestion }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreQuestion, getStudent }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(New);
 

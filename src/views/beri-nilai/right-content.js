@@ -35,7 +35,7 @@ export class RightComponent extends Component {
                   </div>
                 </div>
                 <div className="col-sm-4">
-                  <span className="under-kkm-score padding-5">{data.total_average.score === null ? 0 : data.total_average.score}</span>
+                  <span className="under-kkm-score padding-5">{data.total_average.score === null ? 'N/A' : data.total_average.score}</span>
                 </div>
               </div>
 

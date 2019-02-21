@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import Avatar from './../../assets/images/img_avatar.png'
 
 export default class ProfileDetail extends Component {
-  
   render() {
     const response = this.props.dataProfile
-    console.log(response,"myr")
     return (
       <div>
         <div className="avatar-wrapper">
@@ -32,7 +30,7 @@ export default class ProfileDetail extends Component {
         </div>
           <div className="field">
             <div className="label">Nama Ayah:</div>
-            {response && response.user &&  response.parents.father.full_name}
+            {response && response.parents && response.parents.father && response.parents.father.full_name}
         </div>
           <div className="field">
             <div className="label">Nama Ibu:</div>

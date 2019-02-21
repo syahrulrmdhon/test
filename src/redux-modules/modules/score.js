@@ -49,12 +49,11 @@ export default function reducer(state = initialState, action) {
             }
             break;
         case HANDLING_SCORE:
-            state.data.exam_question[action.idx][action.field_name] = action.e.target.value
+            state.data.exam_question[action.idx][action.field_name] = action.value
             return {
                 ...state,
                 loaded: true,
                 loading: false,
-                result: true,
             } 
         // break;
            
@@ -180,14 +179,13 @@ export function handlingSelect(e, idx, pick, max_score){
     }   
 }
 
-export function handleScore(e, index, field_name){
+export function handleScore(value,index, field_name){
+    // console.log(e, index, field_name)
     return {
         type:HANDLING_SCORE,
-        e:e,
         idx:index,
-        field_name: field_name,
-        
-
+        field_name: field_name,        
+        value:value
     }
 }
 
