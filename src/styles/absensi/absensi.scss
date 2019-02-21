@@ -13,6 +13,12 @@ $nunito_extra_bold: 'NunitoExtraBold';
   font-family: "Nunito Sans", sans-serif;
   overflow-y: hidden;
 
+  &__name {
+    color: #2099e8;
+    font-family: $nunito_bold;
+    cursor: pointer;
+  }
+
   .left-content {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -62,12 +68,6 @@ $nunito_extra_bold: 'NunitoExtraBold';
     background-color: #f9f9f9;
     border: 1px solid #cccccc;
     margin-bottom: 0px;
-
-    &__name {
-      color: #2099e8;
-      font-family: $nunito_bold;
-      cursor: pointer;
-    }
   }
 
   thead {
@@ -149,6 +149,10 @@ $nunito_extra_bold: 'NunitoExtraBold';
   .status {
     position: relative;
     justify-content: center;
+
+    label {
+      cursor: pointer;
+    }
   }
 
   input[type=radio]:checked ~ .check::before{
