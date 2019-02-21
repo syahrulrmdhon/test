@@ -92,10 +92,15 @@ $nunito_bold: 'NunitoBold';
     display: flex;
     align-items: center;
     padding-bottom: 10px;
+
+    label {
+      padding-left: 10px;
+      cursor: pointer;
+    }
   }
 
   &__radio {
-    margin-right: 10px;
+    cursor: pointer;
   }
 
 
