@@ -5,7 +5,7 @@ export default class ProfileDetail extends Component {
   
   render() {
     const response = this.props.dataProfile
-    console.log(response,"myr")
+
     return (
       <div>
         <div className="avatar-wrapper">
