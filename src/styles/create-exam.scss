@@ -4,8 +4,6 @@ $nunito_semi_bold: 'NunitoSemiBold';
 $nunito_bold: 'NunitoBold';
 
 .create-exam {
-
-
   .modal-alert .header {
     display: flex;
     align-items: center;
@@ -94,10 +92,15 @@ $nunito_bold: 'NunitoBold';
     display: flex;
     align-items: center;
     padding-bottom: 10px;
+
+    label {
+      padding-left: 10px;
+      cursor: pointer;
+    }
   }
 
   &__radio {
-    margin-right: 10px;
+    cursor: pointer;
   }
 
 
@@ -126,6 +129,10 @@ $nunito_bold: 'NunitoBold';
       color: #1a9d7f;
       border: 1px solid #1a9d7f;
       margin-right: 15px;
+    }
+
+    &__radio {
+      cursor: pointer;
     }
   }
 

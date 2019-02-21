@@ -25,7 +25,7 @@ export default class TableSikap extends Component {
                                     {data.subject_score_details.bp === null ? "-" : data.subject_score_details.bp}
                                 </td>
                                 <td>
-                                    {data.attendance_report.percentage === null ? "-" : data.attendance_report.percentage}
+                                    {data.attendance_report.percentage === null ? "-" : data.attendance_report.percentage + '%'}
                                 </td>
                             </tr>
                         }, this)

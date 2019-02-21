@@ -16,11 +16,10 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_DATA:
     const basicCompetencies = action.result.data.assessment_basic_comps
-
-      delete state.error
+    
+    delete state.error
       if (action.step === 'BasicForm') {
         const data = action.result.data.exam
-
         state.basicForm = {
           assessment_id: action.id,
           name: data.name || '',
@@ -35,8 +34,8 @@ export default function reducer(state = initialState, action) {
         state.number = 1
       }
       else if (action.step === 'QuestionForm') {
-        
         const data = action.result.data
+
         state.questionForm = data
         basicCompetencies.map(competence => {     
           competence.label = `${competence.competency_number} ${competence.label} (${competence.subject_name})`
@@ -46,7 +45,7 @@ export default function reducer(state = initialState, action) {
         if (data.exam_question.exam_question_choices === null) {
           data.exam.exam_questions_attributes.push({
             weight: '',
-            exam_question_choices_attributes: [{order: 0, symbol: '', content: ''}],
+            exam_question_choices_attributes: [{order: 0, symbol: '', content: '', is_correct_ans: true}],
             problem_type: null,
             basic_comp_id: null,
             question: '',
@@ -80,11 +79,9 @@ export default function reducer(state = initialState, action) {
         const data = state.questionForm.exam
 
         if (action.field === 'symbol' || action.field === 'content') {
-          
           const index = data.exam_questions_attributes[state.number - 1].exam_question_choices_attributes.findIndex(choice => {
             return choice.order === action.order;
           })
-          
           data.exam_questions_attributes[state.number - 1].exam_question_choices_attributes[index][action.field] = action.value
         }
         else if (action.field === 'is_correct_ans') {
@@ -112,6 +109,10 @@ export default function reducer(state = initialState, action) {
       }
       else {
         state.number = action.value
+        if (state.questionForm) {
+          const correctAnswer = state.questionForm.exam.exam_questions_attributes[state.number - 1].exam_question_choices_attributes.findIndex(choice => { return choice.is_correct_ans === true})
+          state.is_correct_ans = correctAnswer
+        }
       }
       return {
         ...state,
@@ -194,8 +195,8 @@ export function handleEvent(value, field, step, order) {
 
 export function handleNumber(value, next = true) {
   return {
-      type: HANDLE_NUMBER,
-      value: value,
-      next: next,
+    type: HANDLE_NUMBER,
+    value: value,
+    next: next,
   }
 }
