@@ -18,6 +18,7 @@ module.exports = (env) => ({
         historyApiFallback: true,
         contentBase: path.join(__dirname, 'build'),
         compress: true,
+        port:9000
     },
     devtool: ( 'production' === env.TARGET_ENV ? 'source-map' : 'cheap-module-eval-source-map' ),
     output: {

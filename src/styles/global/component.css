@@ -1760,3 +1760,8 @@ ul.toggle.tab-class>li.nav-item a.active {
   margin-top: -6px;
   vertical-align: bottom;
 }
+
+button,
+input {
+  outline: none;
+}
