@@ -222,6 +222,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
   .table-responsive {
     margin-top: 0px;
     min-height: auto;
+    overflow-x: unset;
   }
 }
 
