@@ -237,7 +237,7 @@ export default class Rapor extends Component {
                   </span>
                 </div>
               </div>
-              <TabContent activeTab={this.state.activeTab} className='margin-left-1 margin-right-1'>
+              <TabContent activeTab={this.state.activeTab} className='tab-content-nilai margin-left-1 margin-right-1'>
                 <TabPane tabId='1'>
                   {!this.state.tableKnowledge || this.state.tableKnowledge.length === 0 ? (
                     <NotAvailable>Data belum tersedia.</NotAvailable>

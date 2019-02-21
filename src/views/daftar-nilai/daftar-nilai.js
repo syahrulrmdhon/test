@@ -213,7 +213,7 @@ export default class DaftarNilai extends Component {
                 </div>
               </div>
 
-              <TabContent className="margin-left-1 margin-right-1" activeTab={this.state.activeTab}>
+              <TabContent className="tab-content-nilai margin-left-1 margin-right-1" activeTab={this.state.activeTab}>
                 <TabPane tabId="1">
                   {!this.state.tableKnowledge ||
                     this.state.tableKnowledge.length === 0 ? (
