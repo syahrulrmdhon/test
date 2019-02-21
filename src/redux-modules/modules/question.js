@@ -7,11 +7,12 @@ const GET_DATA = 'modules/question/GET_DATA'
 const HANDLE_SWITCH = 'modules/question/HANDLE_EVENT'
 const HANDLE_EVENT = 'modules/question/HANDLE_INPUT'
 const HANDLE_NUMBER = 'modules/question/HANDLE_NUMBER'
-
+const HANDLE_REMOVE = 'modules/question/HANDLE_REMOVE'
 
 const initialState = {
   switch: true
 }
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_DATA:
@@ -76,26 +77,26 @@ export default function reducer(state = initialState, action) {
         state.basicForm[action.field] = action.value
       }
       else if (action.step === 'QuestionForm') {        
-        const data = state.questionForm.exam
+        const data = state.questionForm.exam.exam_questions_attributes[state.number - 1]
 
         if (action.field === 'symbol' || action.field === 'content') {
-          const index = data.exam_questions_attributes[state.number - 1].exam_question_choices_attributes.findIndex(choice => {
+          const index = data.exam_question_choices_attributes.findIndex(choice => {
             return choice.order === action.order;
           })
-          data.exam_questions_attributes[state.number - 1].exam_question_choices_attributes[index][action.field] = action.value
+          data.exam_question_choices_attributes[index][action.field] = action.value
         }
         else if (action.field === 'is_correct_ans') {
-          data.exam_questions_attributes[state.number - 1].exam_question_choices_attributes.map(choice => delete choice[action.field])
+          data.exam_question_choices_attributes.map(choice => delete choice[action.field])
           state[action.field] = parseInt(action.value)
-          data.exam_questions_attributes[state.number - 1].exam_question_choices_attributes[state[action.field]][action.field] = true
+          data.exam_question_choices_attributes[state[action.field]][action.field] = true
         }
         else if (action.field === 'basic_comp_id') {
-          data.exam_questions_attributes[state.number - 1][action.field] = action.value
+          data[action.field] = action.value
           const competence = state.basicCompetencies.find(competence => {return competence.value === action.value})
-          data.exam_questions_attributes[state.number - 1].school_subject_id = competence.school_subject_id
+          data.school_subject_id = competence.school_subject_id
         }
         else {
-          data.exam_questions_attributes[state.number - 1][action.field] = action.value
+          data[action.field] = action.value
         }
       }
       return{
@@ -113,6 +114,28 @@ export default function reducer(state = initialState, action) {
           const correctAnswer = state.questionForm.exam.exam_questions_attributes[state.number - 1].exam_question_choices_attributes.findIndex(choice => { return choice.is_correct_ans === true})
           state.is_correct_ans = correctAnswer
         }
+      }
+      return {
+        ...state,
+        loaded: false,
+        loading: true,
+      }
+    case HANDLE_REMOVE:
+      let data = state.questionForm.exam.exam_questions_attributes[state.number - 1].exam_question_choices_attributes
+
+      data.splice(action.value, 1)
+      const correctAnswer = data.findIndex(choice => { return choice.is_correct_ans === true})
+
+      if (action.value !== data.length) {
+        let items = data.slice(-action.value)
+        items.map(item => {
+          item.order = item.order - 1
+        })
+      }
+
+      if (correctAnswer === -1) {
+        state.is_correct_ans = 0
+        data[state.is_correct_ans].is_correct_ans = true
       }
       return {
         ...state,
@@ -198,5 +221,12 @@ export function handleNumber(value, next = true) {
     type: HANDLE_NUMBER,
     value: value,
     next: next,
+  }
+}
+
+export function handleRemove(value, field, step) {
+  return {
+    type: HANDLE_REMOVE,
+    value: value,
   }
 }
