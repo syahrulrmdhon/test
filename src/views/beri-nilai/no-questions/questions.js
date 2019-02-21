@@ -4,8 +4,8 @@ import './../../../styles/global/component.css'
 import './../../../styles/beri-nilai/main.scss'
 import { apiClient } from './../../../utils/apiClient'
 import { setError } from './../../../utils/common'
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 export default class Questions extends Component {
     constructor(props) {
