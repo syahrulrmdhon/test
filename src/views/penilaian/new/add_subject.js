@@ -13,6 +13,7 @@ import {
     removeSubject,
     handleSubject,
     removeKD,
+    handleKD,
 } from './../../../redux-modules/modules/assessment'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -26,16 +27,42 @@ class AddSubject extends Component {
 
         this.state = {
             subjects: [],
+            basic_comp_ids: [],
         }
 
         this.getSubjectList = this.getSubjectList.bind(this)
         this.setSubject = this.setSubject.bind(this)
+        this.changeKD = this.changeKD.bind(this)
+        this.setKD = this.setKD.bind(this)
+    }
+
+    componentDidMount(){
+        this.getSubjectList()
     }
 
     componentDidUpdate(prevProps){
         if(prevProps.assessment != this.props.assessment){
             this.getSubjectList()
         }
+    }
+
+    setKD(value, category, index, disabled_data = []){
+        basicComps.call(this, {
+            category: category,
+            school_subject_id: value,
+        }, {
+            listOptions: true,
+            disabled_data: disabled_data,
+            fieldName: "basic_comps_" + index
+        })
+    }
+
+    changeKD(value, subject_index, index){
+        const school_subject_id = this.props.assessment_subjects[subject_index]['school_subject_id']
+        const category = this.props.assessment.category
+
+        this.props.handleKD(value, subject_index, index)
+        this.setKD(school_subject_id, category, subject_index, this.props.assessment_subjects[subject_index]['assessment_basic_comps_attributes'])
     }
 
     getSubjectList(){
@@ -54,13 +81,7 @@ class AddSubject extends Component {
         const category = this.props.assessment.category
 
         if(category && event.value){
-            basicComps.call(this, {
-                category: category,
-                school_subject_id: event.value,
-            }, {
-                listOptions: true,
-                fieldName: "basic_comps_" + idx
-            })
+            this.setKD(event.value, category, idx)
         }
         this.props.handleSubject(event.value, idx)
     }
@@ -82,6 +103,7 @@ class AddSubject extends Component {
             this.props.assessment_subjects.map((subject, idx) => {
                 let remove;
                 let parameter = "basic_comps_" + idx
+                let basic_comps = subject.basic_comps || []
 
                 if(idx > 0){
                     remove = <div className="col-sm-1 margin-top-9">
@@ -92,7 +114,7 @@ class AddSubject extends Component {
                 }
 
                 subjects.push(
-                    <div key={idx}>
+                    <div key={Math.random()}>
                         <div className="row">
                             <div className="col-sm-6">
                                 <div className="content-input margin-top-5">
@@ -114,8 +136,9 @@ class AddSubject extends Component {
                         </div>
                         <AddKD 
                             index_subject={idx}
-                            basic_comps= {this.state[parameter] || []}
+                            basic_comps= {this.state[parameter] || basic_comps}
                             removeKD={this.props.removeKD}
+                            changeKD={this.changeKD}
                         />
                         <div className="border-top margin-top-5"></div>
                     </div>
@@ -142,5 +165,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     removeSubject,
     handleSubject,
     removeKD,
+    handleKD,
 }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(AddSubject)

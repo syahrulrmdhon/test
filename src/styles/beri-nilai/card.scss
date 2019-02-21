@@ -11,6 +11,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
   height: 220px;
   .card-evaluasi {
     height: 125%;
+    overflow-y: scroll;
     border: solid 0.5px #cccccc;
     border-radius: 5px;
     padding: 10px;

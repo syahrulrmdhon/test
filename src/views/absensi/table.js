@@ -49,7 +49,7 @@ export default class TableAttendance extends Component {
                                 data.map((attendance, index) => {
                                     return <tr key={attendance.user_id}>
                                         <td className="text-center number">{index + 1}</td>
-                                        <td className="absensi__name" onClick={(event) => (this.props.nameClicked(event, attendance.user_id))}>{attendance.name}</td>
+                                        <td onClick={(event) => (this.props.nameClicked(event, attendance.user_id))}><span className="absensi__name">{attendance.name}</span></td>
                                         <td className="align-center" title="Hadir">
                                         <div className="status">
                                             <label htmlFor={'present-' + attendance.user_id}></label>

@@ -3,8 +3,8 @@ import Logo from './../../../assets/images/logo.svg'
 import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
 import { error, modal } from './../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
-import { loadReCaptcha } from 'react-recaptcha-google'
-import { ReCaptcha } from 'react-recaptcha-google'
+// import { loadReCaptcha } from 'react-recaptcha-google'
+// import { ReCaptcha } from 'react-recaptcha-google'
 
 export default class Verification extends Component {
     constructor(props) {
@@ -16,28 +16,27 @@ export default class Verification extends Component {
             fullname: '',
             url: props.location
         }
-        this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
-        this.verifyCallback = this.verifyCallback.bind(this);
+        // this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
+        // this.verifyCallback = this.verifyCallback.bind(this);
     }
     componentDidMount() {
         this.getDataUser()
-        loadReCaptcha()
-        if (this.captchaDemo) {
-            console.log("started, just a second...")
-            this.captchaDemo.reset();
-            this.captchaDemo.execute();
-        }
+        // loadReCaptcha()
+        // if (this.captchaDemo) {
+        //     console.log("started, just a second...")
+        //     this.captchaDemo.reset();
+        //     this.captchaDemo.execute();
+        // }
     }
-    onLoadRecaptcha() {
-        if (this.captchaDemo) {
-            this.captchaDemo.reset();
-            this.captchaDemo.execute();
-        }
-    }
-    verifyCallback(recaptchaToken) {
-        // Here you will get the final recaptchaToken!!!  
-        console.log(recaptchaToken, "<= your recaptcha token")
-    }
+    // onLoadRecaptcha() {
+    //     if (this.captchaDemo) {
+    //         this.captchaDemo.reset();
+    //         this.captchaDemo.execute();
+    //     }
+    // }
+    // verifyCallback(recaptchaToken) {
+    //     console.log(recaptchaToken, "<= your recaptcha token")
+    // }
     getDataUser() {
         const url = `authentication/verification_email`
 
@@ -77,8 +76,9 @@ export default class Verification extends Component {
             })
         })
             .catch(err => {
+                let errMsg = err.response.data.errors[0].description[0]
                 error({
-                    message: 'Format email ' + this.state.email + ' salah',
+                    message: errMsg,
                     btns: [
                         {
                             label: 'Ulangi',
@@ -127,11 +127,11 @@ export default class Verification extends Component {
                         <div className='margin-top-4'>
                             <div className='row'>
                                 <div className='col-sm-offset-4 col-sm-4'>
-                                    <ReCaptcha
+                                    {/* <ReCaptcha
                                         sitekey="6LfmsZIUAAAAAF6hxijf2Z1__aiR6vEz6rCuKeDe"
                                         onloadCallback={this.onLoadRecaptcha}
                                         verifyCallback={this.verifyCallback}
-                                    />
+                                    /> */}
                                 </div>
                             </div>
                         </div>

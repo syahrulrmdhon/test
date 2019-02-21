@@ -92,12 +92,22 @@ $nunito_bold: 'NunitoBold';
     display: flex;
     align-items: center;
     padding-bottom: 10px;
+
+    label {
+      padding-left: 10px;
+      cursor: pointer;
+    }
   }
 
   &__radio {
-    margin-right: 10px;
+    cursor: pointer;
   }
 
+  &__remove {
+    color: #eb373e;
+    margin-left: 20px;
+    font-size: 14px;
+  }
 
   &__button {
     background-color: #1a9d7f;

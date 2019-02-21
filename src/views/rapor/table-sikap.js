@@ -4,21 +4,21 @@ import { Table } from 'reactstrap'
 export default class TableSikap extends Component {
     render() {
         return (
-            <Table bordered striped responsive hover className="table-nilai">
+            <Table bordered striped responsive hover>
                 <thead>
                     <tr>
-                        <th>Nama Siswa</th>
+                        <th className='align-top'>Nama Siswa</th>
                         {
                             this.props.dTableAttitude && this.props.dTableAttitude.final_scores && this.props.dTableAttitude.final_scores.subjects.map(function (x, i) {
-                                return <th key={i}>
+                                return <th key={i} className='align-top'>
                                     {x.name}
                                 </th>
                             })
                         }
-                        <th>Kehadiran (%)</th>
+                        <th className='align-top'>Kehadiran</th>
                     </tr>
                 </thead>
-                <tbody className="table-nilai">
+                <tbody>
                     {
                         this.props.tableAttitude.map(function (data, i) {
                             return <tr key={i}>

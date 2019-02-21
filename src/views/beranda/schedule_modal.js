@@ -122,11 +122,13 @@ export default class ScheduleModal extends Component{
         let id = this.state.id
 
         let classs_id = (this.state.classs_id) ? this.state.classs_id.value : null
+        let start_time = getDate('case-3', this.state.start_time)
+        let end_time = getDate('case-3', this.state.end_time)
 
         let data = {
             activity_schedule: {
-                start_time: getDate('case-3', this.state.start_time),
-                end_time: getDate('case-3', this.state.end_time),
+                start_time: start_time,
+                end_time: end_time,
                 classs_id: classs_id,
                 description: this.state.description,
             }
@@ -143,7 +145,7 @@ export default class ScheduleModal extends Component{
                 
                 modal({
                     message: 'Selamat',
-                    description: `Berhasil ubah jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))}`,
+                    description: `Berhasil ubah jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))} di jam ${start_time} sampai ${end_time}`,
                     btns: [
                         {
                             label: 'Selesai',
@@ -172,7 +174,7 @@ export default class ScheduleModal extends Component{
 
                 modal({
                     message: 'Selamat',
-                    description: `Berhasil tambah jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))}`,
+                    description: `Berhasil tambah jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))}  di jam ${start_time} sampai ${end_time}`,
                     btns: [
                         {
                             label: 'Selesai',

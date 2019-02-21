@@ -8,19 +8,19 @@ export default class TableKeterampilan extends Component {
             <Table bordered striped responsive hover>
                 <thead>
                     <tr>
-                        <th>Nama Siswa</th>
+                        <th className='align-top'>Nama Siswa</th>
                         {
                             this.props.dTableSkill && this.props.dTableSkill.final_scores && this.props.dTableSkill.final_scores.subjects.map(function (x, i) {
-                                return <th key={i}>
+                                return <th key={i} className='align-top'>
                                     {x.name}
                                 </th>
                             })
                         }
-                        <th>Kehadiran (%)</th>
-                        <th>Total Nilai (GPA)</th>
+                        <th className='align-top'>Kehadiran</th>
+                        <th className='align-top'>Total Nilai (GPA)</th>
                     </tr>
                 </thead>
-                <tbody className="table-nilai">
+                <tbody>
                     {
                         this.props.tableSkill.map(function (data, i) {
                             return <tr key={i}>
