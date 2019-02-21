@@ -16,7 +16,7 @@ export default class Detail extends Component {
       startDate: null,
       endDate: null,
       studentId: this.props.match.params.id,
-      profile: { 
+      profile: {
         user: {
           full_name: '',
           phone_number: '',
@@ -45,7 +45,7 @@ export default class Detail extends Component {
   componentDidMount() {
     this.getStudentDetail()
   }
-  
+
   getStudentDetail() {
     const url = `v1/students/${this.state.studentId}`
 
@@ -78,29 +78,33 @@ export default class Detail extends Component {
     const tabMenu = ['Rincian Nilai', 'Rincian Absensi', 'Catatan Wali Kelas'];
     const menu = this.props.location.state.status
     let path = ''
-    if(menu === 'absensi'){
-      path='/absen'
-    }else{
-      path='/murid'
+    if (menu === 'absensi') {
+      path = '/absen'
+    } else if (menu === 'rapor') {
+      path = '/rapor'
+    } else if (menu === 'daftar-nilai') {
+      path = '/daftar-nilai'
+    } else {
+      path = '/murid'
     }
-    
-  
+
+
     return (
       <div className="detail bg-grey">
         <Header navbar={false} location={path} />
         <div className="content-wrapper content-wrap-custom-size margin-top-6">
           <div className="row detail-menu">
             <div className="offset-2 col-10 tab-menu">
-              <TabMenu 
+              <TabMenu
                 menu={tabMenu}
                 activeMenu={this.state.activeMenu}
                 toggle={this.toggleMenu} />
             </div>
           </div>
-          <Content 
+          <Content
             activeTab={this.state.activeMenu}
             dataProfile={this.state.profile}
-            subjects={this.state.subjects} 
+            subjects={this.state.subjects}
             studentId={this.state.studentId} />
         </div>
       </div>

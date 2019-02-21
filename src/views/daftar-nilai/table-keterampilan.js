@@ -12,7 +12,7 @@ export default class TableKeterampilan extends Component {
                         <th>Rata-Rata</th>
                     </tr>
                 </thead>
-                <tbody className="table-nilai">
+                <tbody>
                     {
                         this.props.tableSkill.map(function (data, i) {
                             return <tr key={i}>

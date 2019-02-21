@@ -16,8 +16,8 @@ export default class Verification extends Component {
             fullname: '',
             url: props.location
         }
-        this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
-        this.verifyCallback = this.verifyCallback.bind(this);
+        // this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
+        // this.verifyCallback = this.verifyCallback.bind(this);
     }
     componentDidMount() {
         this.getDataUser()
@@ -76,8 +76,9 @@ export default class Verification extends Component {
             })
         })
             .catch(err => {
+                let errMsg = err.response.data.errors[0].description[0]
                 error({
-                    message: 'Format email ' + this.state.email + ' salah',
+                    message: errMsg,
                     btns: [
                         {
                             label: 'Ulangi',

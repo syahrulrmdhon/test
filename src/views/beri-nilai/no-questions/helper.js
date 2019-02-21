@@ -295,7 +295,7 @@ export class UserNotPassed extends Component {
                                         </div>
                                         <div className='col-sm-2'>
                                             <div className='float-right padding-left-4 large-text-red-bold'>
-                                                {x.total_average.score === null ? 'N/A' : x.total_average.score}
+                                                {x.total_average.score === null ? '0' : x.total_average.score}
                                             </div>
                                         </div>
                                     </div>
