@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./../../styles/daftar-nilai.css";
+import './../../styles/score.scss'
 
 import Header from "../global/header";
 
@@ -167,7 +167,7 @@ export default class DaftarNilai extends Component {
       <div className="padding-content h-100">
         <Header />
         <div className="content">
-          <div className="row row-daftar-nilai">
+          <div className="row row-score">
             <div className="left-content col-2">
               <FilterNilai
                 id="mySelect"
@@ -213,14 +213,13 @@ export default class DaftarNilai extends Component {
                 </div>
               </div>
 
-              <TabContent className="tab-content-nilai margin-left-1 margin-right-1" activeTab={this.state.activeTab}>
+              <TabContent className="tab-content-score margin-left-1 margin-right-1" activeTab={this.state.activeTab}>
                 <TabPane tabId="1">
                   {!this.state.tableKnowledge ||
                     this.state.tableKnowledge.length === 0 ? (
                       <NotAvailable>Mohon pilih semua filter untuk menampilkan data.</NotAvailable>
                     ) : (
                       <TablePengetahuan
-                      className="table-daftar-nilai"
                         tableKnowledge={this.state.tableKnowledge}
                         idxScores={this.state.idxScores}
                         idxTugas={this.state.idxTugas}
@@ -234,11 +233,10 @@ export default class DaftarNilai extends Component {
                       <NotAvailable>Mohon pilih semua filter untuk menampilkan data.</NotAvailable>
                     ) : (
                       <TableKeterampilan
-                      className="table-daftar-nilai"
                         tableSkill={this.state.tableSkill}
                         idxScoresSkill={this.state.idxScoresSkill}
                         nameClicked={this.nameClicked}
-                      /> 
+                      />
                     )}
                 </TabPane>
                 <TabPane tabId="3">
@@ -247,7 +245,6 @@ export default class DaftarNilai extends Component {
                       <NotAvailable>Mohon pilih semua filter untuk menampilkan data.</NotAvailable>
                     ) : (
                       <TableSikap
-                      className="table-daftar-nilai"
                         tableAttitude={this.state.tableAttitude}
                         nameClicked={this.nameClicked}
                       />

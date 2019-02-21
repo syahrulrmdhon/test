@@ -2,7 +2,7 @@
   height: 97%;
 }
 
-.row-daftar-nilai {
+.row-score {
   margin-top: 40px;
   height: 97%;
   background-color: white;
@@ -10,27 +10,26 @@
   -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
   -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
   box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  .left-content {
+    height: 100%;
+    width: 90%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .right-content {
+    height: 100%;
+    width: 90%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .tab-content-score {
+    max-height: 450px;
+    overflow-y: scroll;
+  }
 }
-
-.left-content {
-  height: 100%;
-  width: 90%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-.table-daftar-nilai {
-  max-height: 500px;
-  overflow-y: scroll;
-}
-.right-content {
-  height: 100%;
-  width: 90%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-.tab-content-nilai {
-  max-height: 450px;
-  overflow-y: scroll;
+.arrow img {
+  width: 10px;
+  height: 20px;
 }
 .tab-pane {
   height: 100%;

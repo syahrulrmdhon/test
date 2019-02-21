@@ -20,7 +20,7 @@ export default class TablePengetahuan extends Component {
                         <th className='align-top'>Total Nilai (GPA)</th>
                     </tr>
                 </thead>
-                <tbody className='table-nilai'>
+                <tbody>
                     {
                         this.props.tableKnowledge.map(function (data, i) {
                             return <tr key={i}>

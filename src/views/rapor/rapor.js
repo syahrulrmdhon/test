@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './../../styles/rapor.css'
+import './../../styles/score.scss'
 import './../../styles/global/component.css'
 
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
@@ -193,7 +193,7 @@ export default class Rapor extends Component {
       <div className='padding-content h-100'>
         <Header />
         <div className='content'>
-          <div className='row row-rapor'>
+          <div className='row row-score'>
             <div className='left-content col-2'>
               <FilterRapor
                 listSemester={this.state.listSemester}
@@ -237,7 +237,7 @@ export default class Rapor extends Component {
                   </span>
                 </div>
               </div>
-              <TabContent activeTab={this.state.activeTab} className='tab-content-nilai margin-left-1 margin-right-1'>
+              <TabContent activeTab={this.state.activeTab} className='tab-content-score margin-left-1 margin-right-1'>
                 <TabPane tabId='1'>
                   {!this.state.tableKnowledge || this.state.tableKnowledge.length === 0 ? (
                     <NotAvailable>Data belum tersedia.</NotAvailable>
