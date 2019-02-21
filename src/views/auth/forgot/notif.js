@@ -11,23 +11,9 @@ export default class Notif extends Component {
         super(props)
 
         this.state = {
-            user: {}
+            user: {},
+            email: localStorage.getItem('email')
         }
-    }
-    componentDidMount() {
-        this.getDataUser()
-    }
-    getDataUser() {
-        const url = `authentication/verification_email`
-
-        apiClient('get', url).then(res => {
-            let dataUser = res.data.data.user
-            this.setState({
-                user: dataUser,
-                email: dataUser.email
-            })
-
-        })
     }
     handleSubmit(e) {
         e.preventDefault()
@@ -38,6 +24,7 @@ export default class Notif extends Component {
             }
 
         }
+        localStorage.clear()
 
         apiClient('post', url, forgot).then(res => {
             modal({
@@ -47,9 +34,11 @@ export default class Notif extends Component {
                     {
                         label: 'Tutup',
                         className: 'btn green',
-                        // event: this.props.history.push('/notif-forgot')
                     }
                 ]
+            })
+            this.setState({
+                email: this.state.email
             })
         }).catch(err => {
             error({

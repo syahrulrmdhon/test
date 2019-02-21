@@ -97,7 +97,7 @@ export default class DaftarNilai extends Component {
       let subject = [];
       for (var i in res.data.data) {
         const datum = res.data.data[i];
-        datum.map(function(data, i) {
+        datum.map(function (data, i) {
           subject.push({ value: data.id, label: data.subject_name });
         });
       }
@@ -123,9 +123,9 @@ export default class DaftarNilai extends Component {
   getKnowledge() {
     let url = `v1/scores/index?semester=${
       this.state.selectedSemester.label
-    }&category=knowledge&class_id=${
+      }&category=knowledge&class_id=${
       this.state.selectedClass.value
-    }&school_subject_id=${this.state.selectedSubject.value}`;
+      }&school_subject_id=${this.state.selectedSubject.value}`;
     return apiClient("get", url);
   }
   notKnowledge() {
@@ -138,9 +138,9 @@ export default class DaftarNilai extends Component {
   getSkill() {
     let url = `v1/scores/index?semester=${
       this.state.selectedSemester.label
-    }&category=skill&class_id=${
+      }&category=skill&class_id=${
       this.state.selectedClass.value
-    }&school_subject_id=${this.state.selectedSubject.value}`;
+      }&school_subject_id=${this.state.selectedSubject.value}`;
     return apiClient("get", url);
   }
   notSkill() {
@@ -153,9 +153,9 @@ export default class DaftarNilai extends Component {
   getAttitude() {
     let url = `v1/scores/index?semester=${
       this.state.selectedSemester.label
-    }&category=attitude&class_id=${
+      }&category=attitude&class_id=${
       this.state.selectedClass.value
-    }&school_subject_id=${this.state.selectedSubject.value}`;
+      }&school_subject_id=${this.state.selectedSubject.value}`;
     return apiClient("get", url);
   }
   notAttitude() {
@@ -193,7 +193,10 @@ export default class DaftarNilai extends Component {
   }
   nameClicked(e, id) {
     e.preventDefault();
-    this.props.history.push("detail/" + id);
+    this.props.history.push({
+      pathname: 'detail/' + id,
+      state: { status: 'daftar-nilai' }
+    });
   }
   render() {
     return (
@@ -273,39 +276,39 @@ export default class DaftarNilai extends Component {
               >
                 <TabPane tabId="1">
                   {!this.state.tableKnowledge ||
-                  this.state.tableKnowledge.length === 0 ? (
-                    <NotAvailable>{this.notKnowledge()}</NotAvailable>
-                  ) : (
-                    <TablePengetahuan
-                      tableKnowledge={this.state.tableKnowledge}
-                      idxScores={this.state.idxScores}
-                      idxTugas={this.state.idxTugas}
-                      nameClicked={this.nameClicked}
-                    />
-                  )}
+                    this.state.tableKnowledge.length === 0 ? (
+                      <NotAvailable>{this.notKnowledge()}</NotAvailable>
+                    ) : (
+                      <TablePengetahuan
+                        tableKnowledge={this.state.tableKnowledge}
+                        idxScores={this.state.idxScores}
+                        idxTugas={this.state.idxTugas}
+                        nameClicked={this.nameClicked}
+                      />
+                    )}
                 </TabPane>
                 <TabPane tabId="2">
                   {!this.state.tableSkill ||
-                  this.state.tableSkill.length === 0 ? (
-                    <NotAvailable>{this.notSkill()}</NotAvailable>
-                  ) : (
-                    <TableKeterampilan
-                      tableSkill={this.state.tableSkill}
-                      idxScoresSkill={this.state.idxScoresSkill}
-                      nameClicked={this.nameClicked}
-                    />
-                  )}
+                    this.state.tableSkill.length === 0 ? (
+                      <NotAvailable>{this.notSkill()}</NotAvailable>
+                    ) : (
+                      <TableKeterampilan
+                        tableSkill={this.state.tableSkill}
+                        idxScoresSkill={this.state.idxScoresSkill}
+                        nameClicked={this.nameClicked}
+                      />
+                    )}
                 </TabPane>
                 <TabPane tabId="3">
                   {!this.state.tableAttitude ||
-                  this.state.tableAttitude.length === 0 ? (
-                    <NotAvailable>{this.notAttitude()}</NotAvailable>
-                  ) : (
-                    <TableSikap
-                      tableAttitude={this.state.tableAttitude}
-                      nameClicked={this.nameClicked}
-                    />
-                  )}
+                    this.state.tableAttitude.length === 0 ? (
+                      <NotAvailable>{this.notAttitude()}</NotAvailable>
+                    ) : (
+                      <TableSikap
+                        tableAttitude={this.state.tableAttitude}
+                        nameClicked={this.nameClicked}
+                      />
+                    )}
                 </TabPane>
               </TabContent>
             </div>
