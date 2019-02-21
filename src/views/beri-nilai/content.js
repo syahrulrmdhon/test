@@ -27,18 +27,7 @@ class Content extends Component {
         })
     }
 
-    handleForm(ans, index) {
-        const render = (
-            <td> <input
-                type="text"
-                onChange={this.onChange}
-                className="padding-1 fullwidth"
-                // defaultValue={ans}
-                value={this.state.data}
-            /> </td>
-        )
-        return render;
-    }
+
     render() {
         const exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.exam_question || []
         let main_content = []
@@ -65,6 +54,15 @@ class Content extends Component {
         let merge_content = []
 
         exam.map((x, index) => {
+            let merge_content_skill = []
+            merge_content_skill.push(
+                <td><input
+                    type="text"
+                    className="align-center box-right"
+                    onChange={(e) => { this.props.handleScore(e, index, 'score') }}
+                    defaultValue={x.score}
+                /></td>
+            )
             if (x.problem_type === 'multiple_choice') {
                 merge_content.push(<SelectData choices={x.exam_question_choices} max_score={x.max_score} index={index} exam={x} />)
                 merge_content.push(<td className="align-center">{x.score}</td>)
@@ -85,21 +83,6 @@ class Content extends Component {
                     /></td>
                 )
             }
-        })
-
-
-
-        exam.map((x, index) => {
-            let merge_content_skill = []
-            console.log(x.ans,"here")
-            merge_content_skill.push(
-                <td><input
-                    type="text"
-                    className="align-center box-right"
-                    onChange={(e) => { this.props.handleScore(e, index, 'score') }}
-                    defaultValue={x.score}
-                /></td>
-            )
 
             if (type === 'skill') {
                 content.push(<tr key={index}>
