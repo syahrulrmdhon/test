@@ -181,6 +181,7 @@ class Content extends Component {
 
 
         }, this)
+        console.log("here", this.props.student)
         return (
             <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">
                 <div className="row rounded-10">
