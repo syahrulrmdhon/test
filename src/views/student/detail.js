@@ -50,7 +50,6 @@ export default class Detail extends Component {
     const url = `v1/students/${this.state.studentId}`
 
     apiClient('get', url).then(response => {
-      console.log(response.data.data , "res")
       this.setState({profile: response.data.data})
     })
   }
@@ -89,7 +88,6 @@ export default class Detail extends Component {
     return (
       <div className="detail bg-grey">
         <Header navbar={false} location={path} />
-       
         <div className="content-wrapper content-wrap-custom-size margin-top-6">
           <div className="row detail-menu">
             <div className="offset-2 col-10 tab-menu">
