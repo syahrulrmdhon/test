@@ -13,6 +13,7 @@ class App extends Component {
     const token = localStorage.getItem('token')
     const regist_token = localStorage.getItem('regist_token')
     const user_id = localStorage.getItem('user_id')
+    const path_url = this.props.location.pathname
 
     if(regist_token == null){
       if(token == null){
@@ -25,7 +26,11 @@ class App extends Component {
           localStorage.clear()
           this.props.history.push('/')
         }
-      } 
+      }else{
+        if(path_url == '/'){
+          this.props.history.push('/home')
+        }
+      }
     }
   }
 

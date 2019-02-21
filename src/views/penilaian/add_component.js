@@ -69,7 +69,6 @@ class AddComponent extends Component {
         apiClient('post', url, data).then(response => {
             if(assessment_id){
                 apiClient('put', `v1/assessments/${assessment_id}`, data).then(response => {
-                    // this.props.history.push(`/penilaian`)
                     modal({
                         message: 'Selamat',
                         description: `Anda berhasil ${msg} topik, silakan klik tombol lihat untuk membuat tugas.`,
@@ -77,10 +76,10 @@ class AddComponent extends Component {
                             {
                                 label: 'Selesai',
                                 className: 'btn green',
-                                event: () => { window.location.href = "/penilaian" }
                             }
                         ]
                     })
+                    this.props.history.push(`/penilaian`)
                 }).catch(err => {
                     console.log(err)
                 })
@@ -94,15 +93,14 @@ class AddComponent extends Component {
                             {
                                 label: 'Selesai',
                                 className: 'btn green',
-                                event: () => { window.location.href = "/penilaian" }
                             }
                         ]
                     })
-                    // window.location.href = "/penilaian"            
                 }).catch(response => {
                     console.log(response)
                 })
             }
+            this.props.history.push(`/penilaian`)
         }).catch(response => {
             error({
                 message: `Gagal ${msg} komponen topik, periksa kembali data yang dibutuhkan`,

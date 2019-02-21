@@ -103,6 +103,11 @@ $nunito_bold: 'NunitoBold';
     cursor: pointer;
   }
 
+  &__remove {
+    color: #eb373e;
+    margin-left: 20px;
+    font-size: 14px;
+  }
 
   &__button {
     background-color: #1a9d7f;

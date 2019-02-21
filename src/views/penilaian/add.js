@@ -54,7 +54,7 @@ class Add extends Component {
 
     onCategoryType(event){
         assessmentType.call(this, {category: event.value})
-        this.props.handleEvent(event.value, 'category')
+        this.props.handleEvent(event.value, 'category', ['assessment_type'])
     }
 
     onSubmit(){
@@ -128,6 +128,7 @@ class Add extends Component {
 
     render(){
         const {name, category, assessment_type} = this.props.assessment
+        console.log(assessment_type)
         let addOnLayout = ''
 
         switch(assessment_type){
@@ -187,14 +188,14 @@ class Add extends Component {
                                             <div className="content-input margin-top-4">
                                                 <label className="content-label">Tipe Penilaian</label>
                                                 <Select
-                                                    isClearable
+                                                    // isClearable
                                                     className= "select-list"
                                                     classNamePrefix= "select"
                                                     placeholder= "Pilih Tipe Penilaian"
                                                     name= "assessment_type"
                                                     options={this.state.assessment_types}
                                                     onChange={(event) => {this.props.handleEvent(event.value, 'assessment_type')}}
-                                                    value={this.state.assessment_types.find((element) => {  return element.value == assessment_type})}
+                                                    defaultInputValue={this.state.assessment_types.find((element) => {  return element.value == assessment_type})}
                                                 />
                                             </div>
                                         </div>

@@ -43,8 +43,9 @@ export default class Forgot extends Component {
                 ]
             })
         }).catch(err => {
+            let errMsg =  err.response.data.errors[0].desc
             error({
-                message: 'Gagal, email tidak terdaftar',
+                message: errMsg,
                 btns: [
                     {
                         label: 'Ulangi',

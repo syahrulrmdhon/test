@@ -67,8 +67,9 @@ export default class NewPassword extends Component {
                 ]
             })
         }).catch(err => {
+            let errMsg = err.response.data.errors[0].description[0]
             error({
-                message: 'Gagal, data salah atau tidak lengkap',
+                message: errMsg,
                 btns: [
                     {
                         label: 'Ulangi',

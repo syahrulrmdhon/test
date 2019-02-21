@@ -8,7 +8,6 @@ export default class TablePengetahuan extends Component {
       let data = this.props.tableKnowledge
       data.map((data) => {
         let score = data.subject_score_details
-        console.log('socre', score)
         content.push(
           <tr key={Math.random()}>
             <td className='student-name' onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
@@ -69,7 +68,7 @@ export default class TablePengetahuan extends Component {
             <th>Nilai Rapor</th>
           </tr>
         </thead>
-        <tbody className="table-nilai">
+        <tbody>
           {content}
         </tbody>
       </Table>

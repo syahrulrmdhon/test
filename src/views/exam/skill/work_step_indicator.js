@@ -28,7 +28,7 @@ class WorkStepIndicator extends Component {
 
                 if(idx > 0){
                     action = <td className="align-center valign-center">
-                        <a href="javascript:void(0);">
+                        <a href="javascript:void(0);" onClick={() => {this.props.removeIndicator(this.props.key_value, idx)}}>
                             <FontAwesome name="trash" />
                         </a>
                     </td>
@@ -37,7 +37,7 @@ class WorkStepIndicator extends Component {
                 }
                 
                 items.push(
-                    <tr key={idx}>
+                    <tr key={Math.random()}>
                         <td className="align-center valign-center">
                             <label className="header-title">{idx + 1}</label>
                         </td>
