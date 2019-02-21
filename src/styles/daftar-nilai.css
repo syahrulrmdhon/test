@@ -18,16 +18,19 @@
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
+.table-daftar-nilai {
+  max-height: 500px;
+  overflow-y: scroll;
+}
 .right-content {
   height: 100%;
   width: 90%;
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
 .tab-content {
-  height: 100%;
+  max-height: 450px;
+  overflow-y: scroll;
 }
 .tab-pane {
   height: 100%;

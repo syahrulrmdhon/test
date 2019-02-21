@@ -117,53 +117,17 @@ export default class DaftarNilai extends Component {
   onChangeSubject(selectedSubject) {
     this.setState({ selectedSubject });
   }
-  disabledSelectSubject() {
-    document.getElementById("mySelect").disabled = true;
-  }
   getKnowledge() {
-    let url = `v1/scores/index?semester=${
-      this.state.selectedSemester.label
-      }&category=knowledge&class_id=${
-      this.state.selectedClass.value
-      }&school_subject_id=${this.state.selectedSubject.value}`;
+    let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`;
     return apiClient("get", url);
-  }
-  notKnowledge() {
-    if (!this.state.tableKnowledge) {
-      return "";
-    } else {
-      return "Mohon pilih semua filter untuk menampilkan data.";
-    }
   }
   getSkill() {
-    let url = `v1/scores/index?semester=${
-      this.state.selectedSemester.label
-      }&category=skill&class_id=${
-      this.state.selectedClass.value
-      }&school_subject_id=${this.state.selectedSubject.value}`;
+    let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=skill&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`;
     return apiClient("get", url);
-  }
-  notSkill() {
-    if (!this.state.tableSkill) {
-      return "";
-    } else {
-      return "Mohon pilih semua filter untuk menampilkan data.";
-    }
   }
   getAttitude() {
-    let url = `v1/scores/index?semester=${
-      this.state.selectedSemester.label
-      }&category=attitude&class_id=${
-      this.state.selectedClass.value
-      }&school_subject_id=${this.state.selectedSubject.value}`;
+    let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=attitude&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`;
     return apiClient("get", url);
-  }
-  notAttitude() {
-    if (!this.state.tableAttitude) {
-      return "";
-    } else {
-      return "Mohon pilih semua filter untuk menampilkan data.";
-    }
   }
   handleSubmit() {
     let dataKnowledge = [];
@@ -230,38 +194,17 @@ export default class DaftarNilai extends Component {
                   <span className="float-right margin-right-1">
                     <Nav tabs className="toggle border-0 pull-right">
                       <NavItem className="tab-nilai">
-                        <NavLink
-                          className={classnames({
-                            active: this.state.activeTab === "1"
-                          })}
-                          onClick={() => {
-                            this.toggle("1");
-                          }}
-                        >
+                        <NavLink className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.toggle("1"); }}>
                           Pengetahuan
                         </NavLink>
                       </NavItem>
                       <NavItem className="tab-nilai">
-                        <NavLink
-                          className={classnames({
-                            active: this.state.activeTab === "2"
-                          })}
-                          onClick={() => {
-                            this.toggle("2");
-                          }}
-                        >
+                        <NavLink className={classnames({ active: this.state.activeTab === "2" })} onClick={() => { this.toggle("2"); }}>
                           Keterampilan
                         </NavLink>
                       </NavItem>
                       <NavItem className="tab-nilai">
-                        <NavLink
-                          className={classnames({
-                            active: this.state.activeTab === "3"
-                          })}
-                          onClick={() => {
-                            this.toggle("3");
-                          }}
-                        >
+                        <NavLink className={classnames({ active: this.state.activeTab === "3" })} onClick={() => { this.toggle("3"); }}>
                           Sikap
                         </NavLink>
                       </NavItem>
@@ -270,16 +213,14 @@ export default class DaftarNilai extends Component {
                 </div>
               </div>
 
-              <TabContent
-                className="margin-left-1 margin-right-1"
-                activeTab={this.state.activeTab}
-              >
+              <TabContent className="margin-left-1 margin-right-1" activeTab={this.state.activeTab}>
                 <TabPane tabId="1">
                   {!this.state.tableKnowledge ||
                     this.state.tableKnowledge.length === 0 ? (
-                      <NotAvailable>{this.notKnowledge()}</NotAvailable>
+                      <NotAvailable>Mohon pilih semua filter untuk menampilkan data.</NotAvailable>
                     ) : (
                       <TablePengetahuan
+                      className="table-daftar-nilai"
                         tableKnowledge={this.state.tableKnowledge}
                         idxScores={this.state.idxScores}
                         idxTugas={this.state.idxTugas}
@@ -290,21 +231,23 @@ export default class DaftarNilai extends Component {
                 <TabPane tabId="2">
                   {!this.state.tableSkill ||
                     this.state.tableSkill.length === 0 ? (
-                      <NotAvailable>{this.notSkill()}</NotAvailable>
+                      <NotAvailable>Mohon pilih semua filter untuk menampilkan data.</NotAvailable>
                     ) : (
                       <TableKeterampilan
+                      className="table-daftar-nilai"
                         tableSkill={this.state.tableSkill}
                         idxScoresSkill={this.state.idxScoresSkill}
                         nameClicked={this.nameClicked}
-                      />
+                      /> 
                     )}
                 </TabPane>
                 <TabPane tabId="3">
                   {!this.state.tableAttitude ||
                     this.state.tableAttitude.length === 0 ? (
-                      <NotAvailable>{this.notAttitude()}</NotAvailable>
+                      <NotAvailable>Mohon pilih semua filter untuk menampilkan data.</NotAvailable>
                     ) : (
                       <TableSikap
+                      className="table-daftar-nilai"
                         tableAttitude={this.state.tableAttitude}
                         nameClicked={this.nameClicked}
                       />
