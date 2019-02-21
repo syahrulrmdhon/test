@@ -8,6 +8,7 @@ import { modal } from './../../global/modal'
 // redux
 import {
     getComponent,
+    removeIndicator,
 } from './../../../redux-modules/modules/exam/skill'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -18,14 +19,14 @@ class AddQuestion extends Component {
 
         this.state = {
             assessment_id: this.props.match.params.id,
-            exam_id: this.props.match.params.exam_id,
+            exam_id: this.props.match.params.exam_id || null,
         }
         
         this.onSubmit = this.onSubmit.bind(this)
     }
 
     componentDidMount(){
-        this.props.getComponent(this.state.assessment_id)
+        this.props.getComponent(this.state.assessment_id, this.state.exam_id)
     }
 
     onSubmit(){
@@ -34,6 +35,8 @@ class AddQuestion extends Component {
         const problem_type_sets = this.props.problem_type_sets
         const data = this.props.exam
         let msg = 'tambah'
+        let url;
+        let action;
 
         let exam_questions = []
         if(problem_types.length > 0){
@@ -50,9 +53,31 @@ class AddQuestion extends Component {
             data.exam_questions_attributes = exam_questions
         }
 
-        let url = `v1/assessments/${this.state.assessment_id}/exams/validate?step=QuestionForm&category=skill`
-        apiClient('post', url, data).then(response => {
-            apiClient('post', `/v1/assessments/${this.state.assessment_id}/exams`, data).then(response => {
+        if(this.state.exam_id){
+            msg = 'ubah'
+            action = 'put'
+            url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}`
+        } else {
+            action = 'post'
+            url = `v1/assessments/${this.state.assessment_id}/exams/validate?step=QuestionForm&category=skill`
+        }
+
+        apiClient(action, url, data).then(response => {
+            if(!this.state.exam_id){
+                apiClient('post', `/v1/assessments/${this.state.assessment_id}/exams`, data).then(response => {
+                    modal({
+                        message: 'Berhasil',
+                        description: `Selamat berhasil ${msg} komponen beri soal keterampilan`,
+                        btns: [
+                            {
+                                label: 'Selesai',
+                                className: 'btn green',
+                            }
+                        ],
+                        event: this.props.history.push(`/exam/${this.state.assessment_id}`)
+                    })
+                })
+            } else {
                 modal({
                     message: 'Berhasil',
                     description: `Selamat berhasil ${msg} komponen beri soal keterampilan`,
@@ -64,9 +89,8 @@ class AddQuestion extends Component {
                     ],
                     event: this.props.history.push(`/exam/${this.state.assessment_id}`)
                 })
-            })
+            }
         }).catch(err => {
-            console.log(err.response)
             modal({
                 message: 'Gagal',
                 description: `Gagal ${msg} komponen beri soal keterampilan, periksa kembali data yang dibutuhkan`,
@@ -90,7 +114,8 @@ class AddQuestion extends Component {
                     <WorkStepIndicator 
                         index={idx}
                         key_value={problem_type}
-                        key={idx}
+                        key={Math.random()}
+                        removeIndicator={this.props.removeIndicator}
                     />
                 )
             })
@@ -130,5 +155,6 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 
     getComponent,
+    removeIndicator,
 }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(AddQuestion)

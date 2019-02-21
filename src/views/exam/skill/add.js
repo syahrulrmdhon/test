@@ -34,17 +34,23 @@ class Add extends Component{
 
     onSubmit(){
         event.preventDefault(); 
-        let data = this.props.exam
+        let data = {}
+        data['exam'] = this.props.exam
+        data['problem_types'] = this.props.problem_types
         data.include_question = false
         let url = `/v1/assessments/${this.state.assessment_id}/exams/validate?step=BasicForm&category=skill`
         let msg = 'tambah'
+        let action = 'post'
+        let route = `/question-skill/${this.state.assessment_id}`
 
         if(this.state.exam_id){
-            url = ''
+            url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}`
             msg = 'ubah'
+            action = 'put'
+            route = `/edit-question-skill/${this.state.assessment_id}/exam/${this.state.exam_id}`
         }
 
-        apiClient('post', url, data).then(response => {
+        apiClient(action, url, data).then(response => {
             modal({
                 message: 'Berhasil',
                 description: `Selamat berhasil ${msg} tugas keterampilan, selanjutnya masuk ke form beri soal`,
@@ -52,7 +58,7 @@ class Add extends Component{
                     {
                         label: 'Selanjutnya',
                         className: 'btn green',
-                        event: this.props.history.push(`/question-skill/${this.state.assessment_id}`)
+                        event: this.props.history.push(route)
                     }
                 ]
             })
@@ -72,7 +78,7 @@ class Add extends Component{
     }
 
     render(){
-        console.log(this.props.exam)
+        console.log(this.props.problem_types)
         const { exam_type, name, is_remedial } = this.props.exam ? this.props.exam : [] 
 
         return(
@@ -134,7 +140,8 @@ class Add extends Component{
     }
 }
 const mapStateToProps = (state, props) => ({
-    exam: state.skill.exam
+    exam: state.skill.exam,
+    problem_types: state.skill.problem_types,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 
