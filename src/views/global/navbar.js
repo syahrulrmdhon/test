@@ -47,15 +47,15 @@ class MenuBar extends Component {
                             {data.name}
                         </NavLink>
                     )
-                    }
+                }
             })
         } else {
             menus.map(function (data, index) {
-                    content.push(
-                        <NavLink className="font-grey" key={index} to={data.link} activeClassName="active-menu">
-                            {data.name}
-                        </NavLink>
-                    )
+                content.push(
+                    <NavLink className="font-grey" key={index} to={data.link} activeClassName="active-menu">
+                        {data.name}
+                    </NavLink>
+                )
             })
         }
         return (
@@ -64,8 +64,10 @@ class MenuBar extends Component {
                     {
                         navbar === false ?
                             <div className="bg-white">
-                                <div className="back">
-                                    <Link to={this.props.location}>&lt; Kembali</Link>
+                                <div className="menu">
+                                    <div className="back">
+                                        <Link to={this.props.location}>&lt; Kembali</Link>
+                                    </div>
                                 </div>
                             </div>
                             :
