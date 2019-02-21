@@ -23,7 +23,8 @@ export default class Questions extends Component {
             idSubject: '',
             fullname: props.location.fullname,
             class_id: props.match.params.class_id,
-            nilai: ''
+            nilai: '',
+            flag: false
         })
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -97,10 +98,11 @@ export default class Questions extends Component {
     }
     onConfirm() {
         this.props.history.push({
-            pathname: '/beri-nilai/' + this.props.location.state.assessment + '/exam/' + this.props.location.state.exam + '/class/' + this.props.location.state.class_id,
+            pathname: '/beri-nilai/' + this.props.location.state.assessment + '/exam/' + this.props.location.state.exam + '/class/' + this.props.location.state.class_id + '/flag' + this.state.flag,
         })
     }
     render() {
+        const path = `/beri-nilai/${this.props.location.state.assessment}/exam/${this.props.location.state.exam}/class/${this.props.location.state.class_id}/flag/${this.state.flag}`
         let data = []
         if (this.state.dataScores.length > 0) {
             let scores = this.state.dataScores
@@ -129,7 +131,7 @@ export default class Questions extends Component {
         }
         return (
             <div className='padding-content'>
-                <Header navbar={false} />
+                <Header navbar={false} location={path}/>
                 <div className='box-question margin-top-4 box-shadow'>
                     <div className='form-question'>
                         <div className='title-content-evaluasi padding-top-6'>
