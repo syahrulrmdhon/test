@@ -19,13 +19,22 @@ class AddKD extends Component {
         super(props)
 
         this.state = {
-            basic_comps: this.props.basic_comps,
+            basic_comps: [],
         }
     }
 
-    componentDidMount(){
-        const school_subject_id = this.props.assessment_subject ? this.props.assessment_subject.school_subject_id : null
-        // basicComps.call(this,)
+    componentDidMount(){        
+        this.setState({
+            basic_comps: this.props.basic_comps
+        })
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.basic_comps !== this.props.basic_comps){
+            this.setState({
+                basic_comps: this.props.basic_comps,
+            })
+        }
     }
 
     render(){
@@ -44,17 +53,16 @@ class AddKD extends Component {
                 let value = (this.props.basic_comps.length > 0) ? this.props.basic_comps.find((element) => { return element.value == basic_comp.basic_comp_id }) : null
 
                 basic_comps.push(
-                    <div className="row" key={idx}>
+                    <div className="row" key={Math.random()}>
                         <div className="col-sm-10">
                             <div className="content-input margin-top-4">
                                 <label className="content-label">Kompetensi Dasar</label>
                                 <Select
-                                    isClearable
                                     className= "select-list"
                                     classNamePrefix= "select"
                                     placeholder= "Pilih Kompetensi Dasar"
-                                    options={this.props.basic_comps}
-                                    onChange={(event) => {this.props.handleKD(event.value, this.props.index_subject, idx)}}
+                                    options={this.state.basic_comps}
+                                    onChange={(event) => { this.props.changeKD(event.value, this.props.index_subject, idx)}} //}}
                                     value={value}
                                 />
                             </div>

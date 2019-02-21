@@ -43,7 +43,7 @@ export function basic_comp_lists(values){
     if(values.length > 0){
         values.map((value, idx) => {
             result.push({
-                label: `${value.competency_number} ${value.label}`,
+                label: `${value.label}`,
                 value: value.id,
             })
         })
