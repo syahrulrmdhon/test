@@ -43,10 +43,8 @@ class Question extends Component {
   }
   
   toggle(number) {
-
     if (!this.state.examId) {
       this.props.getData(this.state.assessmentId, this.state.step, number)
-
     }
     this.props.handleNumber(number, false)
     if (this.state.activeNumber !== number) {
