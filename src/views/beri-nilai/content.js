@@ -10,21 +10,40 @@ import { getDataScoreQuestion, handleScore } from './../../redux-modules/modules
 class Content extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            data:''
+        }
         this.handlSave = this.handlSave.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
     handlSave(e) {
         this.props.handleSave(e)
 
     }
+   
+    onChange(e){
+        this.setState({
+            data:e.target.value
+        })
+    }
+
+    handleForm(ans, index) {
+        const render = (
+            <td> <input
+                type="text"
+                onChange={this.onChange}
+                className="padding-1 fullwidth"
+                // defaultValue={ans}
+                value={this.state.data}
+            /> </td>
+        )
+        return render;
+    }
     render() {
-        const question_exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.collections || []
         const exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.exam_question || []
-        console.log(question_exam,"my quest")
-        console.log(exam,"my quest")
         let main_content = []
         const type = this.props.type
         let content = []
-
         if (type === 'skill') {
             main_content.push(
                 <thead className="right-content-score__table-head">
@@ -43,58 +62,60 @@ class Content extends Component {
                 <th>Bobot</th>
             </thead>)
         }
+        let merge_content = []
 
-        question_exam.map((x, index) => {
-            let merge_content = []
+        exam.map((x, index) => {
             if (x.problem_type === 'multiple_choice') {
-                merge_content.push(<SelectData choices={x.exam_question_choices} max_score={x.max_score} index={index} exam={exam[index]} />)
-                merge_content.push(<td className="align-center">{exam[index]['score']}</td>)
+                merge_content.push(<SelectData choices={x.exam_question_choices} max_score={x.max_score} index={index} exam={x} />)
+                merge_content.push(<td className="align-center">{x.score}</td>)
             } else {
                 merge_content.push(
                     <td> <input
                         type="text"
                         onChange={(e) => { this.props.handleScore(e.target.value, index, 'ans') }}
                         className="padding-1 fullwidth"
-                        defaultValue={exam[index]['ans']}
+                        defaultValue={x.ans}
                     /> </td>
                 )
                 merge_content.push(
                     <td><input
                         type="text"
                         onChange={(e) => { this.props.handleScore(e.target.value, index, 'score') }}
-                        defaultValue={exam[index]['score']}
+                        defaultValue={x.score}
                     /></td>
                 )
             }
+        })
 
+
+
+        exam.map((x, index) => {
             let merge_content_skill = []
+            console.log(x.ans,"here")
             merge_content_skill.push(
                 <td><input
                     type="text"
                     className="align-center box-right"
                     onChange={(e) => { this.props.handleScore(e, index, 'score') }}
-                    defaultValue={exam[index]['score']}
+                    defaultValue={x.score}
                 /></td>
             )
 
-
             if (type === 'skill') {
-                content.push(<tr key={Math.random()}>
+                content.push(<tr key={index}>
                     <td className="align-left text-center">{x.qn_number}</td>
                     <td className="align-left text-left" key={x.problem_type}>{x.question}</td>
                     {merge_content_skill}
                     <td>{x.weight}</td>
                 </tr>)
             } else {
-                content.push(<tr key={Math.random()}>
+                content.push(<tr key={index}>
                     <td className="align-left text-center">{x.qn_number}</td>
                     <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
                     {merge_content}
                     <td>{x.weight}</td>
                 </tr>)
             }
-
-
         }, this)
         return (
             <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">
