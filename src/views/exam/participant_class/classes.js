@@ -115,7 +115,7 @@ class Classes extends Component {
                 </div>
                 <div className="row margin-top-6">
                     <div className="col-sm-6">
-                            <label className="content-label">K.D MEmahami Makna Denotasi dan Konotasi</label>
+                            <label className="content-label header-title">Kompetensi Dasar</label>
                     </div>
                 </div>
                 {in_basic_comps}
