@@ -38,7 +38,7 @@ export default function reducer(state = initialState, action) {
 
         state.questionForm = data
         basicCompetencies.map(competence => {     
-          competence.label = `${competence.competency_number} ${competence.label} (${competence.subject_name})`
+          competence.label = `${competence.label} (${competence.subject_name})`
         })
         state.basicCompetencies = basicCompetencies
 
