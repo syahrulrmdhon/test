@@ -116,7 +116,7 @@ export default class Header extends Component {
                         <Navbar expand="md" className="font-white">
                             <NavbarBrand>
                                 <img className="logo" src={Logo} alt="" />
-                                    <span className="font-white header-title">{school_name}</span>
+                                    <span className="font-white header-title margin-left-1">{school_name}</span>
                                     </NavbarBrand>
                                     <NavbarToggler onClick={this.toggle} />
                                     <Collapse isOpen={this.state.isOpen} navbar>
@@ -134,7 +134,7 @@ export default class Header extends Component {
                                                 </ButtonToolbar>
                                             </NavItem>
                                     <NavItem>
-                                        <NavLink className="font-white logout" href="javascript:void(0);" onClick={this.logout}>
+                                        <NavLink className="font-white logout margin-left-2" href="javascript:void(0);" onClick={this.logout}>
                                             <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
                                         </NavLink>
                                     </NavItem>
