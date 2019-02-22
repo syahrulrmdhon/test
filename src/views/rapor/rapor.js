@@ -12,6 +12,7 @@ import TableKeterampilan from './table-keterampilan'
 import TableSikap from './table-sikap'
 import { apiClient } from '../../utils/apiClient'
 import { NotAvailable } from '../../views/global/notAvailable'
+import Page from './../../components/Title'
 
 export default class Rapor extends Component {
   constructor(props) {
@@ -190,6 +191,7 @@ export default class Rapor extends Component {
   }
   render() {
     return (
+      <Page title="Rapor">
       <div className='padding-content h-100'>
         <Header />
         <div className='content'>
@@ -281,6 +283,7 @@ export default class Rapor extends Component {
           </div>
         </div>
       </div>
+      </Page>
     )
   }
 }
