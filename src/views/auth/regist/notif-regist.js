@@ -96,7 +96,7 @@ export default class NotifRegist extends Component {
                     <div className='contact margin-top-2'>
                         Ada kendala di akun ini?
                         <span className='normal-text-green'>
-                            <a href="mailto:miftahulkhoir@gredu.asia">&nbsp;Hubungi Gredu</a>
+                            <a href="mailto:help@gredu.asia">&nbsp;Hubungi Gredu</a>
                         </span>
                     </div>
                     {/* <p className="contact">Ada kendala di akun ini?</p> */}
