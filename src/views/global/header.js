@@ -125,11 +125,14 @@ export default class Header extends Component {
                                             <NavItem>
                                                 <ButtonToolbar>
                                                     <DropdownButton
+                                                        // disabled={true}
                                                         bsStyle='info'
                                                         title={user_name}
                                                         id='dropdown-profile'
                                                     >
-                                                        <MenuItem eventKey="1"><FontAwesome name="user" /> <span className="profile">Profil</span></MenuItem>
+                                                        <MenuItem eventKey="1"><FontAwesome name="user" /> 
+                                                        <span className="profile">Profil</span>
+                                                        </MenuItem>
                                                         {school_account}
                                                     </DropdownButton>
                                                 </ButtonToolbar>

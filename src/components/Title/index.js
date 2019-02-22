@@ -14,7 +14,7 @@ export default class Title extends Component {
                     link={[
                         {
                             rel: 'icon',
-                              href: Favicon
+                            href: Favicon
                         }
                     ]}
                 />
