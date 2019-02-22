@@ -115,7 +115,7 @@ export default class Header extends Component {
                     <div className="fix-nav">
                         <Navbar expand="md" className="font-white">
                             <NavbarBrand>
-                                <img className="logo" src={school_logo} alt="" />
+                                <img className="logo" src={Logo} alt="" />
                                 &emsp;
                                     <span className="font-white header-title">{school_name}</span>
                                     </NavbarBrand>

@@ -3,7 +3,9 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AsyncChunkNames = require('webpack-async-chunk-names-plugin');
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 const publicPath = "/"
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 const API_URL = {
     production: JSON.stringify('https://api.core.gredu.co/'),
@@ -17,8 +19,7 @@ module.exports = (env) => ({
     devServer: {
         historyApiFallback: true,
         contentBase: path.join(__dirname, 'build'),
-        compress: true,
-        port:9000
+        compress: true
     },
     devtool: ( 'production' === env.TARGET_ENV ? 'source-map' : 'cheap-module-eval-source-map' ),
     output: {
@@ -79,7 +80,13 @@ module.exports = (env) => ({
             'process.env': {
                 'API_URL': API_URL[env.TARGET_ENV]
             }
-        })
+        }),
+        new CopyPlugin([
+            { from: './public/logo.ico' },
+          ]),
+          new ManifestPlugin({
+            fileName: 'asset-manifest.json',
+        }),
     ],
     optimization: {
         splitChunks: {
