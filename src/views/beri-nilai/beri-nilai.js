@@ -13,6 +13,7 @@ import SubjectEvaluasi from './evaluasi/subject-evaluasi';
 import { getParticipant } from './../../redux-modules/modules/score'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Page from './../../components/Title'
 
 class Nilai extends Component {
   constructor(props) {
@@ -128,6 +129,7 @@ class Nilai extends Component {
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
     let path = `/exam/${this.state.assessment_id}`
     return (
+      <Page title="Detail Score">
       <div className="details-nilai bg-grey">
         <Header navbar={false} location={path} />
         <div className="content-wrapper content-wrap-custom-size ">
@@ -140,7 +142,7 @@ class Nilai extends Component {
               />
             </div>
           </div>
-          <TabContent activeTab={this.state.activeMenu}>
+          <TabContent activeTab={this.state.activeMenu}  >
             <TabPane tabId={1} >
               <div className="row">
                 <div className="col-sm-12">
@@ -212,6 +214,7 @@ class Nilai extends Component {
           </TabContent>
         </div>
       </div>
+      </Page>
     )
   }
 }

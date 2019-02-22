@@ -59,7 +59,7 @@ export default class Regist extends Component {
                 message: errMsg,
                 btns: [
                     {
-                        label: 'Ulangi',
+                        label: 'Tutup',
                         className: 'btn bcred cwhite'
                     }
                 ]
