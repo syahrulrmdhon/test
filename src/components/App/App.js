@@ -26,7 +26,9 @@ class App extends Component {
           localStorage.clear()
           this.props.history.push('/')
         }
-      }else{
+      }else if(token !=null ){
+        this.props.history.push('/home')
+      } else {
         if(path_url == '/'){
           this.props.history.push('/home')
         }

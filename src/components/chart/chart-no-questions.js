@@ -16,6 +16,7 @@ export default class ChartNoQuestions extends Component {
                     data={this.props.chart}
                     options={
                         {
+                            legend: {position: 'none'},
                             colors: '#2fa8e7',
                             animation: { duration: 1000, easing: 'out', },
                         }

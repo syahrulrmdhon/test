@@ -76,9 +76,10 @@ export default class Verification extends Component {
             })
         })
             .catch(err => {
-                let errMsg = err.response.data.errors[0].description[0]
+                // let errMsg = err.response.data.errors[0].description[0]
+                console.log(err.response.data.errors)
                 error({
-                    message: errMsg,
+                    message: 'errMsg',
                     btns: [
                         {
                             label: 'Ulangi',
