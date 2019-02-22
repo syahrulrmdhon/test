@@ -116,7 +116,6 @@ export default class Header extends Component {
                         <Navbar expand="md" className="font-white">
                             <NavbarBrand>
                                 <img className="logo" src={Logo} alt="" />
-                                &emsp;
                                     <span className="font-white header-title">{school_name}</span>
                                     </NavbarBrand>
                                     <NavbarToggler onClick={this.toggle} />
@@ -134,7 +133,6 @@ export default class Header extends Component {
                                                     </DropdownButton>
                                                 </ButtonToolbar>
                                             </NavItem>
-                                            &emsp;
                                     <NavItem>
                                         <NavLink className="font-white logout" href="javascript:void(0);" onClick={this.logout}>
                                             <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
