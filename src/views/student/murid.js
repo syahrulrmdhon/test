@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import './../../styles/global/component.css'
 import './../../styles/student/murid.scss'
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
-
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
-
 import Header from '../global/header'
 import { apiClient } from '../../utils/apiClient'
+import Page from  './../../components/Title'
 
 class DaftarMurid extends Component {
     constructor(props) {
@@ -78,6 +77,7 @@ class DaftarMurid extends Component {
             onRowClick: this.onRowClick
         };
         return (
+            <Page title='Daftar Murid'>
             <div className="padding-content student-list">
                 <Header></Header>
                 <div className="margin-8">
@@ -129,6 +129,7 @@ class DaftarMurid extends Component {
                     </div>
                 </div>
             </div>
+            </Page>
         )
     }
 }
