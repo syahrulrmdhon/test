@@ -10,7 +10,6 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const API_URL = {
     production: JSON.stringify('https://api.core.gredu.co/'),
     development: JSON.stringify('https://dev.api.core.gredu.co/'),
-    // development: JSON.stringify('https://0669cbd7.ngrok.io/'),
     uat:JSON.stringify('https://aut.api.core.gredu.co/'),
     qa: JSON.stringify('https://qa.api.core.gredu.co/')
 }
@@ -60,7 +59,7 @@ module.exports = (env) => ({
                 }]
             },
             {
-                test: /\.(ttf|woff|eot|png|svg|pdf|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+                test: /\.(ttf|woff|ico|eot|png|svg|pdf|woff(2)?)(\?[a-z0-9=&.]+)?$/,
                 loader: "file-loader"
             }
 
@@ -82,7 +81,7 @@ module.exports = (env) => ({
             }
         }),
         new CopyPlugin([
-            { from: './public/logo.ico' },
+            { from: './src/assets/images/logo.ico' },
           ]),
           new ManifestPlugin({
             fileName: 'asset-manifest.json',
