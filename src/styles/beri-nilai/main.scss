@@ -1306,7 +1306,15 @@ table.table.beri-nilai tr.head {
     background: transparent !important;
   }
 
-  .right-height{
-    max-height: 200px;
-  }
+  
+}
+
+.right-height{
+  height:40%;
+  overflow-x: scroll;
+}
+
+.right-height-kkm{
+  height:559px;
+  overflow-x: scroll;
 }

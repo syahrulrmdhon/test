@@ -102,7 +102,6 @@ class BottomContent extends Component {
       scoresData.push(<span className="label-green">{data.scores.total_average.score}</span>)
     } else if (status === 'enough') {
       scoresData.push(<span className="label-yellow">{data.scores.total_average.score}</span>)
-
     } else if (status === 'need_attention') {
       scoresData.push(<span className="beri-nilai">{data.scores.total_average.score}</span>)
     }
@@ -111,29 +110,72 @@ class BottomContent extends Component {
     }
     const scores = (
       <div>   {scoresData}</div>
-
     )
     return scores
   }
 
+  generatePredicate(data) {
+    if (data === 'very_good') {
+      const render = (
+        <span>Sangat Memuaskan</span>
+      )
+      return render;
+    } else if (data === 'good') {
+      const render = (
+        <span>Memuaskan</span>
+      )
+      return render;
+    } else if (data === 'enough') {
+      const render = (
+        <span>Butuh Perhatian</span>
+      )
+      return render;
+    } else if (data === 'need_attention') {
+      const render = (
+        <span>Evaluasi Ulang</span>
+      )
+      return render;
+
+    } else {
+      const render = (
+        <span>N/a</span>
+      )
+      return render;
+    }
+  }
+
+
+
+
+  generateSubNilai(data, score) {
+    if (data === 'very_good') {
+      const render = (
+        <span className="label-green">{score}</span>)
+      return render;
+    } else if (data === 'good') {
+      const render = (
+        <span className="label-green">{score}</span>)
+      return render;
+    } else if (data === 'enough') {
+      const render = (
+        <span className="label-yellow-score">{score}</span>
+      )
+      return render;
+    } else if (data === 'need_attention') {
+      const render = (
+        <span className="label-nilai">{score}</span>
+      )
+      return render;
+
+    } else {
+      const render = (
+        <span className="label-nilai">N/A</span>)
+      return render;
+    }
+  }
 
   render() {
     const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
-    let border = 'border-left-col-green'
-    console.log(dataArray, "my data")
-    dataArray && dataArray.map((x) => {
-      let status = x.scores.total_average.result_status
-      console.log(status, "my status")
-      if (status === 'very_good') {
-        console.log("here very good")
-        border = 'border-left-col-green'
-      } else if (status === 'need_attention') {
-        border = 'border-left-col-red'
-        console.log("or here")
-      } else if (status === null) {
-        border = 'border-left-col-red'
-      }
-    })
     return (
       <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-bottom-2">
         <div className='row padding-bottom-5'>
@@ -253,12 +295,13 @@ class BottomContent extends Component {
                                           </div>
                                           <div className="col-sm-2">
                                             <div className="align-center">
-                                              {datax.average_score.result_status === 'very_good' ? <span className="label-green align-center">Sangat Memuaskan</span> : datax.average_score.result_status === 'need_attention' ? <span className="label-nilai">Evaluasi Ulang</span> : <span className="label-yellow-score">Butuh Perhatian</span>}
+                                              {this.generatePredicate(datax.average_score.result_status)}
+                                              {/* {datax.average_score.result_status === 'very_good' ? <span className="label-green align-center">Sangat Memuaskan</span> : datax.average_score.result_status === 'need_attention' ? <span className="label-nilai">Evaluasi Ulang</span> : <span className="label-yellow-score">Butuh Perhatian</span>} */}
                                             </div>
                                           </div>
                                           <div className="col-sm-4 align-center">
                                             <div className="align-center">
-                                              {datax.average_score.result_status === 'very_good' || datax.average_score.result_status === 'good' ? <span className="label-green">{data.average_score.score}</span> : datax.average_score.result_status === 'need_attention' || datax.average_score.result_status === null ? <span className="label-nilai">{datax.average_score.score}</span> : <span className="label-yellow-score">{datax.average_score.score}</span>}
+                                              {this.generateSubNilai(datax.average_score.result_status, data.average_score.score)}
                                             </div>
                                           </div>
                                         </div>

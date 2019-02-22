@@ -9,8 +9,8 @@ export class RightComponent extends Component {
     // console.log(this.props.participant_not_passed.slice(0,5) ,"obj  ") 
 
     return (
-      <div className="right-content-kkm">
-        <div className="margin-top-3 ">
+      <div className="right-content-kkm ">
+        <div className="margin-top-3  ">
           <div className="row">
             <div className="col-sm-7">
               <span className="title-kkm">Nilai di Bawah KKM</span>
@@ -21,10 +21,10 @@ export class RightComponent extends Component {
           </div>
         </div>
         {
-          this.props.participant_not_passed.slice(0,5).map(function (data) {
+          this.props.participant_not_passed.map(function (data) {
             return <div className="">
              <div className="margin-top-5" key={Math.random()}>
-              <div className="row  margin-top-1 padding-bottom-4">
+              <div className="row margin-top-1 padding-bottom-4">
                 <div className="col-sm-1">
                   <Avatar src={Ava} size="30" round={true} />
                 </div>
