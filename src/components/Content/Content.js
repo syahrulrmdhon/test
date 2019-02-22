@@ -10,6 +10,8 @@ import RightSide from '../RightSide/RightSide'
 import ScoreTable from './ScoreTable'
 import Tab from '../TabContent/TabContent'
 import { apiClient } from '../../utils/apiClient'
+import { modal } from './../../views/global/modal'
+
 
 export default class Content extends Component {
   constructor(props, context) {
@@ -74,7 +76,7 @@ export default class Content extends Component {
   homeroomTab(tab) {
     if (this.state.homeroomActiveTab !== tab) {
       this.setState({
-        homeroomActiveTab: tab
+        homeroomActiveTab: 1
       })
     }
   }
@@ -200,7 +202,6 @@ export default class Content extends Component {
 
     apiClient('get', url).then(response => {
       this.setState({achievements: response.data.data.notes})
-      console.log(response.data.data)
     })
   }
 
@@ -217,6 +218,16 @@ export default class Content extends Component {
 
     apiClient('post', url, data).then(response => {
         this.setState({disable: true})
+        modal({
+          message: 'Berhasil',
+          description: `Catatan berhasil disimpan`,
+          btns: [
+            {
+              label: 'Selesai',
+              className: 'btn green',
+            }
+          ]
+        })
     })
   }
   
