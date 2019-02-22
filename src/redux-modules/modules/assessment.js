@@ -64,7 +64,7 @@ export default function reducer(state = initialState, action = {}) {
             return{
                 ...state,
                 loaded: false,
-                loading: true,
+                loading: true,          
             }
         case HANDLE_ATTITUDE:
             state.assessment_attitudes_attributes[action.idx]['school_attitude_id'] = action.value

@@ -2,27 +2,19 @@ import React, { Component } from 'react'
 
 import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/student/detail.scss'
+import { error, modal } from './../global/modal'
 
 import Header from '../global/header'
-import TabMenu from '../../components/TabDetail/TabDetail'
 import Content from './content'
 import { apiClient } from '../../utils/apiClient'
-import { setError } from './../../utils/common'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getDataScoreQuestion } from './../../redux-modules/modules/score'
+import { getStudent } from './../../redux-modules/modules/student'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
-let choice = [
-  { value: 'a', label: 'A' },
-  { value: 'b', label: 'B' },
-  { value: 'c', label: 'C' },
-  { value: 'd', label: 'D' },
-  { value: 'e', label: 'E' },
-]
-
- class New extends Component {
+class New extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -34,18 +26,18 @@ let choice = [
       valueData: {},
       exam: props.match.params.exam_id,
       question: [],
-      studentId: this.props.match.params.id,
+      studentId: this.props.match.params.student_id,
       class_id: props.match.params.class_id,
       assessment_id: props.match.params.assessment_id,
-      student_id:props.match.params.student_id,
+      student_id: props.match.params.student_id,
       profile: {},
       score_choice: 0,
       essay: {
         answer: '',
         score: ''
       },
-      choice:[],
-      is_correct:''
+      choice: [],
+      is_correct: ''
     }
 
     this.getGenerateForm = this.getGenerateForm.bind(this)
@@ -60,15 +52,14 @@ let choice = [
   componentDidMount() {
     this.getStudent()
     this.getGenerateForm()
-    this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id )
-    console.log("my condition", this.props.location.state.conditon)
-
+    this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id)
+    this.props.getStudent(this.state.student_id)
   }
 
-  redirect(){
+  redirect() {
     this.props.history.push({
-      pathname:'/assessment/'+this.state.assessment_id +'/exam/'+ this.state.exam + '/class/'+ this.state.class_id,
-      state: { assessment_category: this.props.location.state.conditon}
+      pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam + '/class/' + this.state.class_id,
+      state: { assessment_category: this.props.location.state.conditon }
     })
   }
 
@@ -78,23 +69,22 @@ let choice = [
     apiClient('get', url).then(response => {
       let array = response.data.data.collections[0];
       let choicePG = [];
-      // let correct= []
-      array.exam_question_choices.map((x, i ) => {
-            choicePG.push({value:x.symbol, label:x.symbol })
+      array.exam_question_choices.map((x, i) => {
+        choicePG.push({ value: x.symbol, label: x.symbol })
       })
-      response.data.data.collections.map((dt,i)=>{
-        dt.exam_question_choices.map((cx,i) =>{
-            if(cx.is_correct_ans  === true){
-                console.log('here', cx.symbol)
-            }
+      response.data.data.collections.map((dt, i) => {
+        dt.exam_question_choices.map((cx, i) => {
+          if (cx.is_correct_ans === true) {
+            console.log('here', cx.symbol)
+          }
+        })
       })
-    })
 
-    
 
-    this.setState({
 
-        choice:choicePG,
+      this.setState({
+
+        choice: choicePG,
         data: response.data.data,
         question: response.data.data.collections
       })
@@ -102,7 +92,7 @@ let choice = [
   }
 
   getStudent() {
-    const url = `/v1/students/5f5bc281-9906-4b2e-b87c-29867361c7bf`
+    const url = `/v1/students/${this.state.student_id}`
 
     apiClient('get', url).then(response => {
       console.log(response)
@@ -115,43 +105,67 @@ let choice = [
   handleSave(e) {
     e.preventDefault()
 
-      confirmAlert({
-        customUI: ({ onClose, onConfirm }) => {
-            return (
-                <div className="react-confirm-alert modal-alert">
-                    <div className="react-confirm-alert-body">
-                        <div className="header align-center">
-                            <h1> Penilaian berhasil dibuat </h1>
-                        </div>
-                        <div className="react-confirm-alert-button-group toggle">
-                            <div className="align-center fullwidth">
-                                <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
-                                <a href="javascript:void(0);" className="btn green" onClick={() => {this.handleSaveDate(); onClose();}}>Yakin</a>
-                            </div>
-                        </div>
-                    </div>
+    confirmAlert({
+      customUI: ({ onClose, onConfirm }) => {
+        return (
+          <div className="react-confirm-alert modal-alert">
+            <div className="react-confirm-alert-body">
+              <div className="header align-center">
+                <h1>Mohon isi semua skor </h1>
+              </div>
+              <div className="react-confirm-alert-button-group toggle">
+                <div className="align-center fullwidth">
+                  <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
+                  <a href="javascript:void(0);" className="btn green" onClick={() => { this.handleSaveDate(); onClose(); }}>Yakin</a>
                 </div>
-            )
-        },
+              </div>
+            </div>
+          </div>
+        )
+      },
     })
   }
 
-  handleSaveDate(){
-    let arrayData =  this.props.data_score && this.props.data_score.score && this.props.data_score.score.data && this.props.data_score.score.data.exam_question;
+  handleSaveDate() {
+    let arrayData = this.props.data_score && this.props.data_score.score && this.props.data_score.score.data && this.props.data_score.score.data.exam_question;
 
     let data = {}
-    data['user_problem_answers'] =  arrayData
-    console.log("here hit now", data)
-    // let url = `v1/assessments/782a183b-a976-4e9f-b025-8cf46a45b646/exams/782a183b-a976-4e9f-b025-8cf46a45b646/exam_scores/ac67857a-ad71-4a97-9718-c71c47e2e4bc/bulk_fill_answers`
+    let dataWillSave = []
+    arrayData.map((data, index) => {
+      dataWillSave.push({ ans: data.ans, exam_question_id: data.exam_question_id, score: data.score })
+    })
+    data['user_problem_answers'] = dataWillSave
     let url = `v1/assessments/${this.props.match.params.assessment_id}/exams/${this.props.match.params.exam_id}/exam_scores/${this.props.match.params.student_id}/bulk_fill_answers`
-    
     apiClient('post', url, data).then(res => {
-      this.redirect()
-  })
+      modal({
+        message: 'Berhasil',
+        description: 'Data yang Anda masukkan benar',
+        btns: [
+          {
+            label: 'Lanjut',
+            className: 'btn green',
+            event: this.props.history.push({
+              pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam + '/class/' + this.state.class_id,
+              state: { assessment_category: this.props.location.state.conditon }
+            })
+          }
+        ]
+      })
+    })
       .catch(err => {
-          let response = err.response
-          let data = response.data
-        console.log(err)
+        let response = err.response
+        let data = response.data.status_code
+        if(data === 400) {
+          error({
+            message: 'Gagal semua form harus diisi',
+            btns: [
+                {
+                    label: 'Ulangi',
+                    className: 'btn bcred cwhite'
+                }
+            ]
+        })
+        }
       })
   }
 
@@ -194,12 +208,12 @@ let choice = [
             subjects={this.state.subjects}
             studentId={this.state.studentId}
             form={this.state.question}
-            student={this.state.student}
+            // student={this.state.student}
             handleSave={this.handleSave}
             onChangeEssay={this.onChangeEssay}
             essay={this.state.essay}
-            onChangeSelect = {this.onChangeSelect}
-            valueData = {this.state.valueData}
+            onChangeSelect={this.onChangeSelect}
+            valueData={this.state.valueData}
             score_choice={this.state.score_choice}
             choice={this.state.choice}
             type={this.props.location.state.conditon}
@@ -211,9 +225,9 @@ let choice = [
 }
 
 const mapStateToProps = state => ({
-  data_score: state
+  data_score: state,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreQuestion }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreQuestion, getStudent }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(New);
 

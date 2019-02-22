@@ -170,7 +170,7 @@ class Nilai extends Component {
                   </div>
                 </div>
                 <div className="col-sm-3">
-                  <div className="content-block main-block padding-5  ">
+                  <div className="content-block main-block padding-5 right-height ">
                     <RightContent
                       participant_not_passed={this.state.participant_not_passed}
                     />

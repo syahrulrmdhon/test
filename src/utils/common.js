@@ -290,7 +290,6 @@ export function examTypes(params = {}) {
 
 export function checkProperties(obj) {
     for (let key in obj) {
-        console.log(obj[key], "here ch uti")
         if (obj[key] === null || obj[key] === "" || obj[key] === undefined) {
             return true;
         }
