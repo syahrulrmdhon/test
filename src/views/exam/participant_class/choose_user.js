@@ -26,7 +26,7 @@ class ChooseUser extends Component {
         this.props.itemCheckbox(this.state.index, idx, !bool)
     }
 
-    allCheckbox(bool){
+    allCheckbox(bool, index){
         this.setState({
             allChecked: !bool
         })
@@ -36,6 +36,7 @@ class ChooseUser extends Component {
 
     render(){
         let view_users = []
+        let selectedAll = true
         if(this.props.classs.users){
             this.props.classs.users.map((user, idx) => {
                 view_users.push(
@@ -56,6 +57,10 @@ class ChooseUser extends Component {
                         </div>
                     </div>
                 )
+
+                if(user.is_selected == false){
+                    selectedAll = false
+                }
             })
         } else {
             view_users.push(
@@ -84,8 +89,8 @@ class ChooseUser extends Component {
                                 id="check1" 
                                 value="check1" 
                                 name="checkbox" 
-                                defaultChecked={false} 
-                                onClick={() => {this.allCheckbox(this.state.allChecked, this.props.index)}} 
+                                defaultChecked={selectedAll} 
+                                onClick={(event) => {this.allCheckbox(selectedAll, this.props.index)}} 
                             />
                             <label htmlFor="check1"></label>
                         </div>

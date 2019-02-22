@@ -117,11 +117,11 @@ export default class Table extends Component {
                     <thead>
                         <tr className="main-head">
                             <th></th>
-                            <th width="40%">Judul Topik</th>
+                            <th width="25%">Judul Topik</th>
                             <th>Mata Pelajaran</th>
-                            <th>{add_field_category}</th>
-                            <th>Tanggal Dibuat</th>
-                            <th className="align-right padding-right-6">Tindakan</th>
+                            <th width="15%">{add_field_category}</th>
+                            <th width="10%">Tanggal Dibuat</th>
+                            <th width="25%" className="align-right padding-right-6">Tindakan</th>
                         </tr>
                     </thead>
                     <tbody>
