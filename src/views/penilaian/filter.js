@@ -67,7 +67,7 @@ export default class Filter extends Component {
                                 onChange={this.props.onChangeAttr}
                             />
                         </div>
-                        <div className="content-input margin-top-6">
+                        <div className="content-input margin-top-6 align-center">
                             <button 
                                 className="submit-btn"
                                 onClick={this.props.onFilter}

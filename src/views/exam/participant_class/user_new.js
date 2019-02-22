@@ -111,7 +111,7 @@ class ParticipantUser extends Component {
                 }
 
                 tab.push(
-                    <NavItem key={idx}>
+                    <NavItem key={Math.random()}>
                         <NavLink
                         className={active}
                         onClick={() => {this.onToggle(classs.id)}}
@@ -121,14 +121,15 @@ class ParticipantUser extends Component {
                     </NavItem>
                 )
 
-                contentUser.push(
-                    <ChooseUser 
-                        key={idx} 
-                        index={idx}
-                        users={classs.users}
-                        isActived={active}
-                    />
-                )
+                if(active == 'active'){
+                    contentUser.push(
+                        <ChooseUser 
+                            key={Math.random()} 
+                            index={idx}
+                            isActived={active}
+                        />
+                    )
+                }
             })
         }
 
