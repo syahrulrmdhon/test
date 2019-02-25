@@ -129,6 +129,7 @@ export default function reducer(state = initialState, action) {
                 loading: true,
             }
         case LOAD_SUCCESS:
+        console.log(action,"action")
             delete state.error;
             if (state.result !== action.result) {
                 return {
