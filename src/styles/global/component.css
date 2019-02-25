@@ -1765,6 +1765,6 @@ ul.toggle.tab-class>li.nav-item a.active {
 }
 
 button,
-input {
+input, td {
   outline: none;
 }
