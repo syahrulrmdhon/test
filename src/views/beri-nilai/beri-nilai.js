@@ -38,7 +38,8 @@ class Nilai extends Component {
       collapce: '',
       data: [],
       prevPath: '',
-      search: ''
+      search: '',
+      valueOpt:''
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.fetchData = this.fetchData.bind(this)
@@ -46,6 +47,7 @@ class Nilai extends Component {
     this.handleNewScore = this.handleNewScore.bind(this)
     this.onChangeSelect = this.onChangeSelect.bind(this)
     this.onSubmmit = this.onSubmmit.bind(this)
+    this.onChangeScore = this.onChangeScore.bind(this)
   }
   componentDidMount() {
 
@@ -106,6 +108,12 @@ class Nilai extends Component {
     })
   }
 
+  onChangeScore(valueOpt){
+    this.setState({ valueOpt })
+    let data = valueOpt.value ? valueOpt.value:''
+    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.assessment_id, '', data)
+  }
+
   handleNewScore(e, student) {
     e.preventDefault()
     let data = 'ac67857a-ad71-4a97-9718-c71c47e2e4bc'
@@ -116,7 +124,7 @@ class Nilai extends Component {
   }
 
   onSubmmit() {
-    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.asssessment_id, this.state.search)
+    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.asssessment_id, this.state.search,'')
   }
 
   componentWillReceiveProps(nextProps) {
@@ -169,6 +177,8 @@ class Nilai extends Component {
                         search={this.state.search}
                         onChange={this.onChangeSelect}
                         submit={this.onSubmmit}
+                        valueOpt={this.state.valueOpt}
+                        onChangeScore={this.onChangeScore}
                       />
                     </div>
                   </div>

@@ -194,9 +194,12 @@ class BottomContent extends Component {
                   <div className='row'>
                     <div className='col-sm-4'>
                       <Select
+                        isClearable
                         placeholder='Urut Berdasarkan'
                         classNamePrefix='select'
                         options={data_option}
+                        value={this.props.valueOpt}
+                        onChange={this.props.onChangeScore}
                       />
                     </div>
                     <div className='col-sm-8'>
