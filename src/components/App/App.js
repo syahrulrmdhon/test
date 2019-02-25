@@ -33,52 +33,24 @@ class App extends Component {
         }
       }
     }
-window.addEventListener('orientationchange', this.doOnOrientationChange(this));
-this.doOnOrientationChange();
-
-    // window.addEventListener("resize", this.resize.bind(this));
-    // this.resize();
+    
+    this.disableScreen();
   }
-  doOnOrientationChange () {
+
+  disableScreen () {
     const width = window.screen.width
 
-    console.log('popopo')
     if (width <= 700){
-      console.log('ppppp')
       disable({
-        message: `Resolusi tidak di support`,
-        btns: [
-          {
-            label: 'Ulangi',
-            className: 'btn bcred cwhite'
-          }
-        ],
-        disable: true
+        message: `Resolusi layar tidak mendukung.`,
       })
     }
-
 }
-  
-  
+
 // Initial execution if needed
 
   render() {
     const width = window.screen.width
-
-    // if (width <= 700){
-    //   console.log('ppppp')
-    //   disable({
-    //     message: `Resolusi tidak di support`,
-    //     btns: [
-    //       {
-    //         label: 'Ulangi',
-    //         className: 'btn bcred cwhite'
-    //       }
-    //     ],
-    //     disable: true
-    //   })
-    // }
-
     return (
       <div className="h-100">
         {/* <main className="h-100"> */}
@@ -91,9 +63,7 @@ this.doOnOrientationChange();
               })}
             </Switch>
           }
-          
         {/* </main> */}
-
       </div>
     )
   }
