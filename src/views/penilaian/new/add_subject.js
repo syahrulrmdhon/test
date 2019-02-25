@@ -89,7 +89,7 @@ class AddSubject extends Component {
     render(){
         let addSection = ''
         let subjects = []
-        if(school.school_level == 'elementary_school'){
+        if(school.level == 'elementary_school'){
             addSection = <div className="margin-top-5">
                 <div className="margin-top-2">
                     <a href="javascript:void(0);" onClick={this.props.addSubject} >

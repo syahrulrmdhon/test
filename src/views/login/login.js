@@ -98,8 +98,7 @@ class Login extends Component {
                             </div>
                         </div>
                         <div className="right-content-login col-md-6">
-                            <div className="main-right col-md-12">
-
+                            <div className="main-right col-12">
                                 <Alert color="danger" className="alert" isOpen={visible}>
                                     {message}
                                 </Alert>
