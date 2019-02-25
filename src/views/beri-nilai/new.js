@@ -198,7 +198,7 @@ class New extends Component {
   }
 
   render() {
-    const path = `/assessment/${this.state.assessment_id}/exam/${this.state.exam}/class/${this.state.class_id}/flag/true`
+    const path = `/assessment/${this.state.assessment_id}/exam/${this.state.exam}/category/${this.props.location.state.conditon}/class/${this.state.class_id}/flag/true`
     return (
       <div className="detail bg-grey">
         <Header navbar={false} location={path} />
