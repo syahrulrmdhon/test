@@ -37,6 +37,7 @@ import NotifRegist from '../views/auth/regist/notif-regist';
 import NewPassword from '../views/auth/password/new-password';
 import ExamDetail from './../views/exam/detail/index'
 import DetailScoreAttitude from './../views/beri-nilai/attitude/'
+import NewAttitudeScore from './../views/beri-nilai/attitude/new'
 
 
 
@@ -202,7 +203,12 @@ export const MainRoutes = [
     },
     {
         path:'/score/attitude/',
+        exact:true,
         component:DetailScoreAttitude
+    },
+    {
+        path:'/score/attitude/new',
+        component:NewAttitudeScore
     },
     {
         path: '*',
