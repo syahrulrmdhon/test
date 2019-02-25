@@ -135,7 +135,7 @@ export default class Header extends Component {
                     <div className="fix-nav">
                         <Navbar expand="md" className="font-white">
                             <NavbarBrand>
-                                <img className="logo" src={Logo} alt="" />
+                                <img className="logo" src={school_logo} alt="" />
                                     <span className="font-white header-title margin-left-4">{school_name}</span>
                                     </NavbarBrand>
                                     <NavbarToggler onClick={this.toggle} />
