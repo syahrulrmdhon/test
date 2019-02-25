@@ -8,7 +8,6 @@ import { bindActionCreators } from 'redux'
 import classnames from 'classnames'
 import { Users, Subjects, Averages } from './helper'
 import Pencil from './../../../assets/images/beri_nilai.svg'
-var FontAwesome = require('react-fontawesome')
 
 class BottomContent extends Component {
     constructor(props) {
@@ -25,7 +24,8 @@ class BottomContent extends Component {
             hidden: true,
             element: 'hidden',
             token: localStorage.getItem('token'),
-            search: ''
+            search: '',
+            valueOpt: ''
         }
         this.handleClick = this.handleClick.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -62,8 +62,22 @@ class BottomContent extends Component {
         this.setState({ search: search })
         this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment, search)
     }
-
+    handleChange(valueOpt) {
+        this.setState({ valueOpt })
+        let data = valueOpt.value ? valueOpt.value : ''
+        this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment, '', data)
+    }
     render() {
+        let list = [
+            {
+                value: 'highest',
+                label: 'Tertinggi'
+            },
+            {
+                value: 'lowest',
+                label: 'Terendah'
+            }
+        ]
         const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants
         let border = 'border-left-col-green'
         dataArray && dataArray.map((x) => {
@@ -90,6 +104,9 @@ class BottomContent extends Component {
                                 <div className='row'>
                                     <div className='col-sm-4'>
                                         <Select
+                                            options={list}
+                                            value={this.state.valueOpt}
+                                            onChange={this.handleChange.bind(this)}
                                             placeholder='Urut Berdasarkan'
                                             classNamePrefix='select'
                                         />
