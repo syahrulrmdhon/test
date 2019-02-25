@@ -38,7 +38,7 @@ export default class ScoreTable extends Component {
                           <td className={!description ? 'text-center' : ''}>{description ? description : '-'}</td>
                           <td>{subject.score.score ? subject.score.score : '-'}</td>
                           <td>{subject.score.predicate ? subject.score.predicate : '-'}</td>
-                          <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>Lihat Deskripsi</td>
+                          <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>-</td>
                         </tr>
                       })
                     }
@@ -89,7 +89,7 @@ export default class ScoreTable extends Component {
                           <td className={!description ? 'text-center' : ''}>{description ? description : '-'}</td>
                           <td>{subject.score.score ? subject.score.score : '-'}</td>
                           <td>{subject.score.predicate ? subject.score.predicate : '-'}</td>
-                          <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>Lihat Deskripsi</td>
+                          <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>-</td>
                         </tr>
                       })
                     }
