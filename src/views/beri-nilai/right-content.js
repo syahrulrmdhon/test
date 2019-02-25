@@ -16,7 +16,6 @@ export class RightComponent extends Component {
               <span className="title-kkm">Nilai di Bawah KKM</span>
             </div>
             <div className="col-sm-5">
-              <span className="show-all">Lihat Semua</span>
             </div>
           </div>
         </div>

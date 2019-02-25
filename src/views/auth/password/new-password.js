@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-// import Avatar from 'react-avatar'
-import Ava from './../../../assets/images/img_avatar.png'
 import Logo from './../../../assets/images/logo.svg'
-import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
-import ReactDOM from 'react-dom'
 import Avatar from 'react-avatar-edit'
 import { modal, error } from '../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
@@ -39,15 +35,20 @@ export default class NewPassword extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
+        var base = []
+        if (this.state.editor.state.image) {
+            var currentSrc = this.state.editor.state.image.currentSrc
+            var result = currentSrc.split(';')
+            base = result[1].split(',')
+        }
 
-        var result = this.state.editor.state.image.currentSrc.split(';')
-        var base = result[1].split(',')
         const url = `authentication/activate`
         const user = {
             password: this.state.password,
             password_confirmation: this.state.repassword,
             user_picture: {
                 src: base[1],
+                // src: encodedString,
                 content_type: this.state.contentType
             }
         }
@@ -56,7 +57,7 @@ export default class NewPassword extends Component {
         apiClient('post', url, data).then(res => {
             localStorage.clear()
             modal({
-                message: 'Selamat',
+                message: 'Berhasil',
                 description: 'Password berhasil dibuat',
                 btns: [
                     {
@@ -68,15 +69,28 @@ export default class NewPassword extends Component {
             })
         }).catch(err => {
             let errMsg = err.response.data.errors[0].description[0]
-            error({
-                message: errMsg,
-                btns: [
-                    {
-                        label: 'Ulangi',
-                        className: 'btn bcred cwhite'
-                    }
-                ]
-            })
+
+            if (base.length > 0) {
+                error({
+                    message: errMsg,
+                    btns: [
+                        {
+                            label: 'Ulangi',
+                            className: 'btn bcred cwhite'
+                        }
+                    ]
+                })
+            } else {
+                error({
+                    message: 'Photo harus di unggah',
+                    btns: [
+                        {
+                            label: 'Ulangi',
+                            className: 'btn bcred cwhite'
+                        }
+                    ]
+                })
+            }
         })
     }
     setEditorRef(editor) {

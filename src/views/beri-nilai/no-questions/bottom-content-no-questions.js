@@ -103,13 +103,13 @@ class BottomContent extends Component {
                             <div className='col-sm-8'>
                                 <div className='row'>
                                     <div className='col-sm-4'>
-                                        <Select
+                                        {/* <Select
                                             options={list}
                                             value={this.state.valueOpt}
                                             onChange={this.handleChange.bind(this)}
                                             placeholder='Urut Berdasarkan'
                                             classNamePrefix='select'
-                                        />
+                                        /> */}
                                     </div>
                                     <div className='col-sm-8'>
                                         <div className='search'>
