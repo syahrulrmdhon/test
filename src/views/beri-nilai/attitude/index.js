@@ -13,7 +13,7 @@ export class index extends Component {
                     <Header navbar={false} />
                 </div>
                 <div className="padding-content">
-                    <div className="margin-side bg-white">
+                    <div className="margin-side bg-white margin-top-7">
                         <div className="margin-side-5">
                             <div className="padding-top-3">
                                 <div className="block">
