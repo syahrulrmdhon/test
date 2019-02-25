@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import Header from '../global/header'
 import AttitudeDetailItem from './detail/attitude_detail_item'
+import { 
+    apiClient 
+} from './../../utils/apiClient'
 import {
     getDate
 } from './../../utils/common'
+import {
+    modal
+} from './../global/modal'
 
 import {
     showAssessment,
@@ -19,10 +25,50 @@ class AttitudeDetail extends Component {
             assessment_id: this.props.match.params.id,
             category: this.props.match.params.category,
         }
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
     componentDidMount(){
         this.props.showAssessment(this.state.assessment_id, this.state.category)
+    }
+
+    onSubmit(event){
+        event.preventDefault();
+        let entries = this.props.assessment.entries
+        let data = []
+
+        if(entries.length > 0){
+            entries.map((element, idx) => {
+                data[idx] = {
+                    user_id: element.user_id,
+                    class_id: element.class_id,
+                    score: element.score,
+                    description: element.description,
+                }
+            })
+        }
+
+        let url = `v1/assessments/${this.state.assessment_id}/user_attitudes`
+        apiClient('post', url, {user_attitudes: data}).then(response => {
+            modal({
+                message: 'Berhasil',
+                description: 'Berhasil merubah skor sikap',
+                btns: [
+                    {
+                        label: 'Berhasil',
+                        className: 'btn green',
+                    }
+                ]
+            })
+            this.props.history.push('/penilaian')
+
+        }).catch(err => {
+            console.log(err.response)
+            modal({
+                message: 'Gagal',
+                description: 'Gagal merubah skor sikap, periksa kembali data yang dibutuhkan',
+            })
+        })
     }
 
     render(){
@@ -34,7 +80,7 @@ class AttitudeDetail extends Component {
             this.props.assessment.entries.map((user_attitude, idx) => {
                 users.push(
                     <AttitudeDetailItem
-                        key={idx}
+                        key={user_attitude.payload || idx}
                         index={idx}
                     />
                 )
@@ -73,7 +119,7 @@ class AttitudeDetail extends Component {
                                 <div className="row">
                                     <div className="col-sm-12">
                                         <div className="margin-top-6 float-right">
-                                            <button className="submit-btn" onClick={this.onSubmit}>Lanjut</button>
+                                            <button className="submit-btn" onClick={this.onSubmit}>Simpan</button>
                                         </div>
                                     </div>
                                 </div>
