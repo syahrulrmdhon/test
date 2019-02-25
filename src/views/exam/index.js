@@ -6,6 +6,7 @@ import Content from './content'
 import '../../styles/exam.scss'
 import { apiClient } from "../../utils/apiClient"
 import { confirmAlert } from 'react-confirm-alert'
+import Page from './../../components/Title'
 
 import {
   getAssessment,
@@ -158,6 +159,7 @@ class Index extends Component {
   
   render() {
     return (
+      <Page title="Tugas">
       <div className="padding-content exam">
         <Header navbar={true} location='/penilaian' />
         <div className="margin-8">
@@ -181,6 +183,7 @@ class Index extends Component {
           </div>
         </div>
       </div>
+      </Page>
     )
   }
 }
