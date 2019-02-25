@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
 import { Link } from 'react-router-dom'
 import 'react-datepicker/dist/react-datepicker.css'
-import './../../../styles/auth.css'
 import Logo from './../../../assets/images/gredu-complete.svg'
 import './../../../styles/global/component.css'
 import { error, modal } from './../../global/modal'
@@ -17,7 +16,7 @@ export default class Regist extends Component {
         this.state = {
             uniqueCode: '',
             dob: '',
-            selectedDate: new Date()
+            selectedDate: null
         }
     }
     handleDateChange(date) {
@@ -41,7 +40,7 @@ export default class Regist extends Component {
         }
 
         apiClient('post', url, regist).then(res => {
-            localStorage.setItem("regist_token", res.data.data.auth_token)
+            localStorage.setItem('regist_token', res.data.data.auth_token)
             modal({
                 message: 'Berhasil',
                 description: 'Data yang Anda masukkan benar',
@@ -68,23 +67,23 @@ export default class Regist extends Component {
     }
     render() {
         return (
-            <div className="background">
-                <div className="login">
-                    <div className="row box col-12">
-                        <div className="left-content col-lg-6">
-                            <div className="main-left">
-                                <img src={Logo} alt=""></img>
+            <div className='background'>
+                <div className='login'>
+                    <div className='row box col-sm-12'>
+                        <div className='left-content col-sm-6'>
+                            <div className='main-left'>
+                                <img src={Logo} alt=''></img>
                                 <br /><br />
                                 <h3>Web Teacher</h3>
                             </div>
                         </div>
-                        <div className="right-content-login col-lg-6">
-                            <div className="main-right col-12">
+                        <div className='right-content-login col-sm-6'>
+                            <div className='main-right col-sm-12'>
                                 <form onSubmit={this.handleSubmit.bind(this)}>
                                     <h5 className='header-auth'><strong>Daftarkan akun Gredu kamu</strong></h5>
                                     <br />
                                     <p className='text-left desc'>
-                                        Jika kamu belum mengetahui Unique Code untuk mendaftarkan akun, silahkan kontak email kami <span className='normal-text-green'>help@gredu.asia</span>
+                                        Jika kamu belum mengetahui Kode Unik untuk mendaftarkan akun, silahkan kontak email kami <span className='normal-text-green'>help@gredu.asia</span>
                                     </p>
                                     <br /><br />
                                     <br /><br />
@@ -93,30 +92,35 @@ export default class Regist extends Component {
                                         onChange={this.handleChange.bind(this)}
                                         type='text' name='uniqueCode'
                                         className='w-100 margin-bottom-2'
-                                        placeholder='Unique Code'
+                                        placeholder='Kode Unik'
 
                                     />
                                     <div className='auth'>
                                         <DatePicker
-                                            className="col-sm-12"
+                                            className='col-sm-12'
                                             selected={this.state.selectedDate}
                                             onChange={this.handleDateChange.bind(this)}
                                             showMonthDropdown
                                             showYearDropdown
-                                            dropdownMode="select"
-                                            dateFormat="yyyy-MM-dd"
+                                            dropdownMode='select'
+                                            dateFormat='yyyy-MM-dd'
                                             value={getDate('case-1', this.state.selectedDate)}
-                                        />
+                                            placeholderText='Tanggal Lahir'
+                                        >
+                                            <div style={{ color: '#4a4a4a', fontSize: '12px', textAlign: 'center' }}>
+                                                Pilih Tanggal Lahir Anda
+                                            </div>
+                                        </DatePicker>
                                     </div>
-                                    <i className="float-right fa fa-calendar calendar-auth" aria-hidden="true" />
+                                    <i className='float-right fa fa-calendar calendar-auth' aria-hidden='true' />
                                     <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
                                     <div className='float-right margin-top-4'>
-                                        <p>Sudah punya akun?<Link to="/" className='normal-text-green'> Login Disini</Link></p>
+                                        <p>Sudah punya akun?<Link to='/' className='normal-text-green'> Masuk Disini</Link></p>
                                     </div>
                                 </form>
                             </div>
                             <br /><br />
-                            <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
+                            <p className='copyright'>Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                         </div>
                     </div>
                 </div>

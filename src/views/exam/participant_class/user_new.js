@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { apiClient } from './../../../utils/apiClient'
 
+import Page from './../../../components/Title'
+
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
@@ -134,35 +136,37 @@ class ParticipantUser extends Component {
         }
 
         return (
-            <div className="padding-content">
-               <Header 
-                    navbar={true}
-                    location={`/pariticipant-class/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`}
-               />
-               <div className="container">
-                    <div className="margin-8">
-                        <div className="content-block main-block">
-                            <div className="margin-side-10 padding-10">
-                                <form>
-                                    <label className="header-title form disblock">Pilih Peserta Didik</label>
-                                    <div className="margin-top-10">
-                                        <div className="margin-top-4">
-                                            <Nav tabs className="toggle tab-class">
-                                                {tab}
-                                            </Nav>
+            <Page title="Partisipan siswa">
+                <div className="padding-content">
+                <Header 
+                        navbar={true}
+                        location={`/pariticipant-class/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`}
+                />
+                <div className="container">
+                        <div className="margin-8">
+                            <div className="content-block main-block">
+                                <div className="margin-side-10 padding-10">
+                                    <form>
+                                        <label className="header-title form disblock">Pilih Peserta Didik</label>
+                                        <div className="margin-top-10">
+                                            <div className="margin-top-4">
+                                                <Nav tabs className="toggle tab-class">
+                                                    {tab}
+                                                </Nav>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="margin-vert-4">
-                                        Nama Peserta Didik
-                                    </div>
-                                    {contentUser}
-                                    <button className="submit-btn margin-top-8" onClick={this.onSubmit}>Simpan</button>
-                                </form>
+                                        <div className="margin-vert-4">
+                                            Nama Peserta Didik
+                                        </div>
+                                        {contentUser}
+                                        <button className="submit-btn margin-top-8" onClick={this.onSubmit}>Simpan</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Page>
         )
     }
 }
