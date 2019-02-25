@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-
 import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/student/detail.scss'
-
 import Header from '../global/header'
 import TabMenu from '../../components/TabDetail/TabDetail'
 import Content from '../../components/Content/Content'
 import { apiClient } from '../../utils/apiClient'
+import Page from './../../components/Title'
 
 export default class Detail extends Component {
   constructor(props, context) {
@@ -50,7 +49,7 @@ export default class Detail extends Component {
     const url = `v1/students/${this.state.studentId}`
 
     apiClient('get', url).then(response => {
-      this.setState({profile: response.data.data})
+      this.setState({ profile: response.data.data })
     })
   }
 
@@ -88,26 +87,27 @@ export default class Detail extends Component {
       path = '/murid'
     }
 
-
     return (
-      <div className="detail bg-grey">
-        <Header navbar={false} location={path} />
-        <div className="content-wrapper content-wrap-custom-size margin-top-6">
-          <div className="row detail-menu">
-            <div className="offset-2 col-10 tab-menu">
-              <TabMenu
-                menu={tabMenu}
-                activeMenu={this.state.activeMenu}
-                toggle={this.toggleMenu} />
+      <Page title='Detail Murid'>
+        <div className="detail bg-grey">
+          <Header navbar={false} location={path} />
+          <div className="content-wrapper content-wrap-custom-size margin-top-6">
+            <div className="row detail-menu">
+              <div className="offset-2 col-10 tab-menu">
+                <TabMenu
+                  menu={tabMenu}
+                  activeMenu={this.state.activeMenu}
+                  toggle={this.toggleMenu} />
+              </div>
             </div>
+            <Content
+              activeTab={this.state.activeMenu}
+              dataProfile={this.state.profile}
+              subjects={this.state.subjects}
+              studentId={this.state.studentId} />
           </div>
-          <Content
-            activeTab={this.state.activeMenu}
-            dataProfile={this.state.profile}
-            subjects={this.state.subjects}
-            studentId={this.state.studentId} />
         </div>
-      </div>
+      </Page>
     )
   }
 }
