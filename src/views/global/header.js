@@ -108,6 +108,26 @@ export default class Header extends Component {
         const { navbar, location } = this.props
         let navbarOpt = navbar === undefined?true:false
         let path = location === undefined ? '/murid' : location
+        let text = ''
+        if(this.state.schoolList.length > 1){
+            text = <NavItem>
+                <ButtonToolbar>
+                    <DropdownButton
+                        // disabled={true}
+                        bsStyle='info'
+                        title={user_name}
+                        id='dropdown-profile'
+                    >
+                        {/* <MenuItem eventKey="1"><FontAwesome name="user" /> 
+                        <span className="profile">Profil</span>
+                        </MenuItem> */}
+                        {school_account}
+                    </DropdownButton>
+                </ButtonToolbar>
+            </NavItem>
+        } else {
+            text = <button id="dropdown-profile" class="btn btn-info">{user_name}<span class="caret"></span></button>
+        }
 
         return (
             <div className="fix-nav">
@@ -116,32 +136,18 @@ export default class Header extends Component {
                         <Navbar expand="md" className="font-white">
                             <NavbarBrand>
                                 <img className="logo" src={Logo} alt="" />
-                                    <span className="font-white header-title margin-left-1">{school_name}</span>
+                                    <span className="font-white header-title margin-left-4">{school_name}</span>
                                     </NavbarBrand>
                                     <NavbarToggler onClick={this.toggle} />
                                     <Collapse isOpen={this.state.isOpen} navbar>
                                         <Nav className="ml-auto" navbar>
+                                            {text}
                                             <NavItem>
-                                                <ButtonToolbar>
-                                                    <DropdownButton
-                                                        // disabled={true}
-                                                        bsStyle='info'
-                                                        title={user_name}
-                                                        id='dropdown-profile'
-                                                    >
-                                                        <MenuItem eventKey="1"><FontAwesome name="user" /> 
-                                                        <span className="profile">Profil</span>
-                                                        </MenuItem>
-                                                        {school_account}
-                                                    </DropdownButton>
-                                                </ButtonToolbar>
+                                                <NavLink className="font-white logout margin-left-2" href="javascript:void(0);" onClick={this.logout}>
+                                                    <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
+                                                </NavLink>
                                             </NavItem>
-                                    <NavItem>
-                                        <NavLink className="font-white logout margin-left-2" href="javascript:void(0);" onClick={this.logout}>
-                                            <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
-                                        </NavLink>
-                                    </NavItem>
-                                </Nav>
+                                        </Nav>
                             </Collapse>
                         </Navbar>
                     </div>

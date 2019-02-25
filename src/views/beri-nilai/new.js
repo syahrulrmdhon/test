@@ -111,7 +111,7 @@ class New extends Component {
           <div className="react-confirm-alert modal-alert">
             <div className="react-confirm-alert-body">
               <div className="header align-center">
-                <h1>Mohon isi semua skor </h1>
+                <h1>Apakah anda yakin? </h1>
               </div>
               <div className="react-confirm-alert-button-group toggle">
                 <div className="align-center fullwidth">

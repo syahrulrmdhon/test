@@ -22,7 +22,8 @@ export default class Tab extends Component {
                     <NavItem>
                         <NavLink
                         className={classnames({ active: this.props.activeTab === 'skill' })}
-                        onClick={() => { this.props.tabToggle('skill'); }}
+                        // onClick={() => { this.props.tabToggle('skill'); }}
+                        onClick={() => { this.props.tabToggle('knowledge'); }}
                         >
                         Keterampilan
                         </NavLink>
@@ -30,7 +31,8 @@ export default class Tab extends Component {
                     <NavItem>
                         <NavLink
                         className={classnames({ active: this.props.activeTab === 'attitude' })}
-                        onClick={() => { this.props.tabToggle('attitude'); }}
+                        onClick={() => { this.props.tabToggle('knowledge'); }}
+                        // onClick={() => { this.props.tabToggle('attitude'); }}
                         >
                         Sikap
                         </NavLink>
