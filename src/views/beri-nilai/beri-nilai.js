@@ -109,9 +109,9 @@ class Nilai extends Component {
   }
 
   onChangeScore(valueOpt){
-    console.log(valueOpt,"opt score")
     this.setState({ valueOpt })
-    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.asssessment_id, '', valueOpt.value)
+    let data = valueOpt.value ? valueOpt.value:''
+    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.assessment_id, '', data)
   }
 
   handleNewScore(e, student) {
