@@ -73,8 +73,7 @@ class MenuBar extends Component {
                             :
                             <div className="topnav">
                                 <div className="menu">
-                                    {content
-                                    }
+                                    {content}
                                 </div>
                             </div>
                     }
