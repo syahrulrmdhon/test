@@ -1,16 +1,53 @@
 import React, { Component } from 'react'
 
 import { TabContent, TabPane, Input, Button, Form } from 'reactstrap'
+import Select from 'react-select'
+import { getData, getExtracurriculars, handleEvent, handleNumber } from './../../redux-modules/modules/teacherNote'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-export default class Homeroom extends Component {
+class Homeroom extends Component {
 
   render() {
     let inputHomeroomNote = this.props.inputHomeroomNote
-    let inputExtracurricularNote = this.props.extracurricularNotes
+    // let inputExtracurricularNote = this.props.extracurricularNotes
     let achievements = this.props.achievements
+    let data = this.props.notes
+    let extracurriculars = []
+    let notes = []
+    // let disable = true
+    let body = []
+    
+    if (data) {
+      extracurriculars = data.extracurriculars
+      if (data.notes) {
+        data.notes.map((note, index) => {
+          notes.push(
+            <div key={index}>
+              <Select
+                // className="create-exam__input"
+                classNamePrefix="select"
+                value={extracurriculars.find(extracurricular => {return extracurricular.value === note.extracurricular_id}) || null}
+                onChange={event => this.props.handleEvent(event.value, 'extracurricular_id', note.id)}
+                options={extracurriculars}
+                placeholder='Pilih Tipe Ekstrakurikuler' />  
+              <Input value={note.description} onChange={event => this.props.handleEvent(event.target.value, 'description', note.id)} className="homeroom-teacher__input mt-3" rows="5" type="textarea" placeholder="Tulis Deskripsi Estrakurikuler disini ..."/>   
+            </div>
+          )
+          let noteId = {}
+          if (note.id) {
+            noteId = {
+              id: note.id
+            }
+          }
+          body.push({extracurricular_id: note.extracurricular_id, description: note.description, id: (note.id) ? note.id : ''})
+        })
+      }
+    }
 
     return (
       <div>
+
         <TabContent activeTab={this.props.activeTab}>
           <TabPane tabId={1}>
             <Form>
@@ -31,39 +68,10 @@ export default class Homeroom extends Component {
           </TabPane>
           <TabPane tabId={2}>
             <Form className="homeroom-teacher__form">
-              {
-                inputExtracurricularNote.length === 0 ?
-                  <div>
-                    <Input className="homeroom-teacher__select" type="select" name="select">
-                    {
-                      this.props.extracurriculars.map((extracurricular, index) => {
-                        return <option key={index}>{extracurricular.name}</option>
-                      })
-                    }
-                    </Input>
-                    <i className="homeroom-teacher__angle-down fa fa-angle-down"></i>
-                    <Input value={inputExtracurricularNote} onChange={(event) => this.props.changeExtracurricularNote(event, note.id)} className="homeroom-teacher__input mt-3" rows="5" type="textarea" placeholder="Tulis Deskripsi Estrakurikuler disini ..."/> 
-                  </div>
-                : 
-                this.props.extracurricularNotes.map((note, index) => {
-                  return (
-                    <div key={index} className="homeroom-teacher__form-group">
-                      <Input className="homeroom-teacher__select" type="select" name="select">
-                        {
-                          this.props.extracurriculars.map((extracurricular, index) => {
-                            return <option key={index}>{extracurricular.name}</option>
-                          })
-                        }
-                      </Input>
-                      <i className="homeroom-teacher__angle-down fa fa-angle-down"></i>
-                      <Input value={note.description} onChange={(event) => this.props.changeExtracurricularNote(event, note.id)} className="homeroom-teacher__input mt-3" rows="5" type="textarea" placeholder="Tulis Deskripsi Estrakurikuler disini ..."/> 
-                    </div>
-                  )
-                })
-              }
+              {notes}
               <div onClick={this.props.addExtracurricularNote} className="homeroom-teacher__add-extracurricular">+ <span>Tambah Estrakurikuler lainnya</span></div>
             </Form>
-            <Button className="homeroom-teacher__save">Simpan</Button>
+            <Button className="homeroom-teacher__save" onClick={() => this.props.saveAchievement('extracurricular', 'user_extracurriculars', body)}>Simpan</Button>
 
           </TabPane>
           <TabPane tabId={3}>
@@ -95,3 +103,17 @@ export default class Homeroom extends Component {
     )
   }
 }
+
+const mapStateToProps = (state, props) => ({
+  notes: state.teacherNote,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getData,
+    getExtracurriculars,
+    handleEvent
+  }, dispatch
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Homeroom)

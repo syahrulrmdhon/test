@@ -9,11 +9,18 @@ import Profile from './ProfileDetail'
 import RightSide from '../RightSide/RightSide'
 import ScoreTable from './ScoreTable'
 import Tab from '../TabContent/TabContent'
+import { getData, getExtracurriculars, handleEvent, handleNumber } from './../../redux-modules/modules/teacherNote'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { apiClient } from '../../utils/apiClient'
+<<<<<<< Updated upstream
 import { modal } from './../../views/global/modal'
 
+=======
+import { error, modal } from './../../views/global/modal'
+>>>>>>> Stashed changes
 
-export default class Content extends Component {
+class Content extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -183,18 +190,20 @@ export default class Content extends Component {
 
   getHomeroomNote() {
     const url = `v1/students/${this.props.studentId}/teacher_notes?achievement_type=final_result`
-
     apiClient('get', url).then(response => {
       this.setState({inputHomeroomNote: response.data.data.notes})
     })
   }
   
   getExtracurricularNote() {
-    const url = `v1/students/${this.props.studentId}/teacher_notes?achievement_type=extracurricular`
+    // const url = `v1/students/${this.props.studentId}/teacher_notes?achievement_type=extracurricular`
+    this.props.getExtracurriculars()    
+    this.props.getData(this.props.studentId, 'extracurricular')
 
-    apiClient('get', url).then(response => {
-      this.setState({extracurricularNotes: response.data.data.notes})
-    })
+
+    // apiClient('get', url).then(response => {
+    //   this.setState({extracurricularNotes: response.data.data.notes})
+    // })
   }
 
   getAchievementNote() {
@@ -220,7 +229,11 @@ export default class Content extends Component {
         this.setState({disable: true})
         modal({
           message: 'Berhasil',
+<<<<<<< Updated upstream
           description: `Catatan berhasil disimpan`,
+=======
+          description: 'Catatan berhasil disimpan',
+>>>>>>> Stashed changes
           btns: [
             {
               label: 'Selesai',
@@ -309,14 +322,17 @@ export default class Content extends Component {
 
   // }
   
-  handleBulkUpdate(type, note) {
+  handleBulkUpdate(type, note, data) {
     const url = `v1/students/${this.props.studentId}/bulk_update`
-    const data = {
-      "user_id": this.props.studentId,
-      "achievement_type": type,
-      "user_achievements": this.state[note]
+    let request = {
+      user_id: this.props.studentId,
+      achievement_type: type,
+      [note]: data
     }
-    apiClient('post', url, data).then(response => {
+    console.log(request)
+
+    apiClient('post', url, request).then(response => {
+      console.log(response)
     })
   }
 
@@ -493,3 +509,17 @@ export default class Content extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (state, props) => ({
+  notes: state.teacherNote,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    getData,
+    getExtracurriculars,
+  }, dispatch
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Content)
