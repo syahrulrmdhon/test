@@ -238,7 +238,7 @@ export function getParticipant(exam, classess, assess, name, sort) {
     const schoolId = localStorage.getItem("school_id")
     let full_name = name === undefined?'':name
     let sort_by_exam_score = sort ? sort:''
-    console.log(process.env.API_URL + `/v1/assessments/${assess}/exams/${exam}/exam_classes/${classess}/participants?full_name=${full_name}&sort_by_exam_score=${sort_by_exam_score}`,"here")
+    // console.log(process.env.API_URL + `/v1/assessments/${assess}/exams/${exam}/exam_classes/${classess}/participants?full_name=${full_name}&sort_by_exam_score=${sort_by_exam_score}`,"here")
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
         promise: client => client.get(process.env.API_URL + `/v1/assessments/${assess}/exams/${exam}/exam_classes/${classess}/participants?full_name=${full_name}&sort_by_exam_score=${sort_by_exam_score}`, {

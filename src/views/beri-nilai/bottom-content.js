@@ -12,8 +12,8 @@ import Pencil from './../../assets/images/beri_nilai.svg';
 
 
 const data_option = [
-  {value:'highest', label:'Highest'},
-  {value:'lowest', label:'Lowest'},
+  {value:'highest', label:'Nilai Tertinggi'},
+  {value:'lowest', label:'Nilai Terendah'},
 ]
 
 class BottomContent extends Component {
