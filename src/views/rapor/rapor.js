@@ -219,23 +219,23 @@ export default class Rapor extends Component {
                 </div>
                 <div className='col-8'>
                   <span className='float-right margin-right-1'>
-                    {/* <Nav tabs className='toggle border-0 pull-right'>
+                    <Nav tabs className='toggle border-0 pull-right'>
                       <NavItem className='tab-nilai'>
                         <NavLink className={classnames({active: this.state.activeTab === '1'})} onClick={() => {this.toggle('1')}}>
                           Pengetahuan
                         </NavLink>
                       </NavItem>
                       <NavItem className='tab-nilai'>
-                        <NavLink className={classnames({active: this.state.activeTab === '2'})} onClick={() => {this.toggle('2')}}>
+                        <NavLink className={classnames({active: this.state.activeTab === '2'})} onClick={() => {this.toggle('1')}}>
                           Keterampilan
                         </NavLink>
                       </NavItem>
                       <NavItem className='tab-nilai'>
-                        <NavLink className={classnames({active: this.state.activeTab === '3'})} onClick={() => {this.toggle('3')}}>
+                        <NavLink className={classnames({active: this.state.activeTab === '3'})} onClick={() => {this.toggle('1')}}>
                           Sikap
                         </NavLink>
                       </NavItem>
-                    </Nav> */}
+                    </Nav>
                   </span>
                 </div>
               </div>
