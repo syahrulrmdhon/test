@@ -8,6 +8,7 @@ import questionDetail from './modules/questionDetail'
 import Menu from './modules/menu'
 import question from './modules/question'
 import student from './modules/student'
+import attitude from './modules/attitude'
 
 export default combineReducers({
   user,
@@ -18,6 +19,7 @@ export default combineReducers({
   score,
   Menu,
   question,
-  student
+  student,
+  attitude
 })
 

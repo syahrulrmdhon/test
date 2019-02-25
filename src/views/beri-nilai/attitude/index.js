@@ -3,8 +3,19 @@ import { connect } from 'react-redux'
 import Panel from './panel'
 import Header from './../../global/header'
 import './../../../styles/attitude.scss'
+import { getDataScoreAttitude } from './../../../redux-modules/modules/attitude'
+import { bindActionCreators } from 'redux';
 
+const data = 'add0e9de-bf3a-4c6b-b611-6b5f6a6893dc'
 export class index extends Component {
+    // constructor(props){
+    //     super(props)
+        
+        
+    // }
+    componentDidMount(){
+        this.props.getDataScoreAttitude(data)
+    }
 
     render() {
         return (
@@ -34,12 +45,9 @@ export class index extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(index)
+const mapStateToProps = state => ({
+    // user: state.score
+  })
+  
+  const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreAttitude }, dispatch);
+  export default connect(mapStateToProps, mapDispatchToProps)(index);
