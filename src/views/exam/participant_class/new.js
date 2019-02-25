@@ -7,6 +7,8 @@ import { getParticipant, addClass, removeClass } from './../../../redux-modules/
 import { getDate } from './../../../utils/common'
 import { apiClient } from './../../../utils/apiClient'
 
+import Page from './../../../components/Title'
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {modal} from './../../global/modal'
@@ -117,36 +119,38 @@ class ParticipantClass extends Component {
         }
 
         return(
-            <div className="padding-content">
-                <Header 
-                    navbar={true}
-                    location={`/exam/${this.state.assessment_id}`}
-                />
-                <div className="container">
-                    <div className="margin-8">
-                        <div className="content-block main-block">
-                            <div className="margin-side-10 padding-10">
-                                <form>
-                                    <label className="header-title form disblock">Kelas yang ditugaskan</label>
-                                    {class_view}
-                                    <div className="row margin-top-6">
-                                        <div className="col-sm-6">
-                                            <a href="javascript:void(0);" onClick={this.addClass} >
-                                                <FontAwesome name="plus-circle" /> Tambah Kelas
-                                            </a>
+            <Page title="Kelas yang ditugaskan">
+                <div className="padding-content">
+                    <Header 
+                        navbar={true}
+                        location={`/exam/${this.state.assessment_id}`}
+                    />
+                    <div className="container">
+                        <div className="margin-8">
+                            <div className="content-block main-block">
+                                <div className="margin-side-10 padding-10">
+                                    <form>
+                                        <label className="header-title form disblock">Kelas yang ditugaskan</label>
+                                        {class_view}
+                                        <div className="row margin-top-6">
+                                            <div className="col-sm-6">
+                                                <a href="javascript:void(0);" onClick={this.addClass} >
+                                                    <FontAwesome name="plus-circle" /> Tambah Kelas
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="row margin-top-6">
-                                        <div className="cols-sm-12">
-                                            <button className="submit-btn" onClick={this.onSubmit}>Lanjut</button>
+                                        <div className="row margin-top-6">
+                                            <div className="cols-sm-12">
+                                                <button className="submit-btn" onClick={this.onSubmit}>Lanjut</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Page>
         )       
     }
 }
