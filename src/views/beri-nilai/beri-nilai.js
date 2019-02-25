@@ -15,6 +15,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Page from './../../components/Title'
 
+
+
+
 class Nilai extends Component {
   constructor(props) {
     super(props)
@@ -25,6 +28,7 @@ class Nilai extends Component {
       exam_id: props.match.params.exam_id,
       class_id: props.match.params.class_id,
       assessment_id: props.match.params.assessment_id,
+      category_id: props.match.params.category_id,
       participant_passed: {},
       participant_not_passed: [],
       questionEvaluations: [],
@@ -107,7 +111,7 @@ class Nilai extends Component {
     let data = 'ac67857a-ad71-4a97-9718-c71c47e2e4bc'
     this.props.history.push({
       pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
-      state: { data: data, conditon: this.props.location.state.assessment_category }
+      state: { data: data, conditon: this.state.category_id }
     })
   }
 
