@@ -84,7 +84,7 @@ export default class Regist extends Component {
                                     <h5 className='header-auth'><strong>Daftarkan akun Gredu kamu</strong></h5>
                                     <br />
                                     <p className='text-left desc'>
-                                        Jika kamu belum mengetahui Unique Code untuk mendaftarkan akun, silahkan kontak email kami <span className='normal-text-green'>help@gredu.asia</span>
+                                        Jika kamu belum mengetahui Kode Unik untuk mendaftarkan akun, silahkan kontak email kami <span className='normal-text-green'>help@gredu.asia</span>
                                     </p>
                                     <br /><br />
                                     <br /><br />

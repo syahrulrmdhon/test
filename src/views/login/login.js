@@ -89,16 +89,16 @@ class Login extends Component {
         return (
             <div className="background">
                 <div className="login">
-                    <div className="row box col-sm-12">
-                        <div className="left-content col-sm-6">
+                    <div className="row box">
+                        <div className="left-content col-md-6">
                             <div className="main-left">
                                 <img src={Logo} alt=""></img>
                                 <br /><br />
                                 <h3>Web Teacher</h3>
                             </div>
                         </div>
-                        <div className="right-content-login col-sm-6">
-                            <div className="main-right col-sm-12">
+                        <div className="right-content-login col-md-6">
+                            <div className="main-right col-md-12">
 
                                 <Alert color="danger" className="alert" isOpen={visible}>
                                     {message}
