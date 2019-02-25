@@ -3,6 +3,7 @@ import { Switch, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { CustomPropsRoute } from './../../components';
 import { MainRoutes } from './../../routes/routes';
+import { disable } from './../../views/global/modal'
 
 class App extends Component {
   constructor(props){
@@ -32,19 +33,65 @@ class App extends Component {
         }
       }
     }
+window.addEventListener('orientationchange', this.doOnOrientationChange(this));
+this.doOnOrientationChange();
+
+    // window.addEventListener("resize", this.resize.bind(this));
+    // this.resize();
   }
+  doOnOrientationChange () {
+    const width = window.screen.width
+
+    console.log('popopo')
+    if (width <= 700){
+      console.log('ppppp')
+      disable({
+        message: `Resolusi tidak di support`,
+        btns: [
+          {
+            label: 'Ulangi',
+            className: 'btn bcred cwhite'
+          }
+        ],
+        disable: true
+      })
+    }
+
+}
+  
+  
+// Initial execution if needed
 
   render() {
+    const width = window.screen.width
+
+    // if (width <= 700){
+    //   console.log('ppppp')
+    //   disable({
+    //     message: `Resolusi tidak di support`,
+    //     btns: [
+    //       {
+    //         label: 'Ulangi',
+    //         className: 'btn bcred cwhite'
+    //       }
+    //     ],
+    //     disable: true
+    //   })
+    // }
+
     return (
       <div className="h-100">
         {/* <main className="h-100"> */}
-          <Switch>
-            {MainRoutes.map((route, key) => {
-              return (
-                <CustomPropsRoute {...route} key={key} />
-              )
-            })}
-          </Switch>
+          { width > 700 &&
+            <Switch>
+              {MainRoutes.map((route, key) => {
+                return (
+                  <CustomPropsRoute {...route} key={key} />
+                )
+              })}
+            </Switch>
+          }
+          
         {/* </main> */}
 
       </div>
