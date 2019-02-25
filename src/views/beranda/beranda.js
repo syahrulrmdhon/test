@@ -9,6 +9,8 @@ import classnames from 'classnames'
 import { apiClient } from '../../utils/apiClient'
 import { classes } from '../../utils/common'
 
+import Page from './../../components/Title'
+
 var FontAwesome = require('react-fontawesome');
 
 
@@ -103,24 +105,26 @@ class Beranda extends Component {
         let icon = (this.state.isSideBar == 'expand') ? 'arrow-left' : 'calendar'
 
         return (
-            <div className="body-content padding-content">
-                <Header history={this.props.history} />
-                <div className={classnames("sidebar", this.state.isSideBar)}>
-                    <div className="mainbar">
-                        <FontAwesome name={icon} className="minimize-side-bar" onClick={this.clickSideBar} />
-                        <SideBar isSideBar={this.state.isSideBar} classes={this.state.classes} onChangeClass={this.onChangeClass} changeCalendar={this.changeCalendar} />
+            <Page title="Beranda">
+                <div className="body-content padding-content">
+                    <Header history={this.props.history} />
+                    <div className={classnames("sidebar", this.state.isSideBar)}>
+                        <div className="mainbar">
+                            <FontAwesome name={icon} className="minimize-side-bar" onClick={this.clickSideBar} />
+                            <SideBar isSideBar={this.state.isSideBar} classes={this.state.classes} onChangeClass={this.onChangeClass} changeCalendar={this.changeCalendar} />
+                        </div>
                     </div>
-                </div>
-                <div className={classnames("row margin-right-0 schedule-range", this.state.isSideBar)}>
-                    <div className="col-sm-12">
-                        <div className="margin-2">
-                            <div className={classnames("schedule padding-4", this.state.isSideBar)}>
-                              {this.state.scheduleList}
+                    <div className={classnames("row margin-right-0 schedule-range", this.state.isSideBar)}>
+                        <div className="col-sm-12">
+                            <div className="margin-2">
+                                <div className={classnames("schedule padding-4", this.state.isSideBar)}>
+                                {this.state.scheduleList}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Page>
         )
     }
 }
