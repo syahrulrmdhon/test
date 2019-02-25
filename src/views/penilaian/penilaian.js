@@ -84,10 +84,10 @@ class Penilaian extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* <Tab 
+                                        <Tab 
                                             activeTab={this.state.activeTab}
                                             tabToggle={this.tabToggle} 
-                                        /> */}
+                                        />
                                         <Index  data={this.state.data} category={this.state.activeTab} />
                                     </div>
                                 </div>
