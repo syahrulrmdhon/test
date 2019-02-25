@@ -36,7 +36,7 @@ export default class IndexAssessment extends Component {
         }
 
         return(
-            <div className="margin-top-4">
+            <div>
                 {content}
             </div>
         )
