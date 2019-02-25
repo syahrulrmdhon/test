@@ -13,7 +13,7 @@ import { getDate } from './../../../utils/common'
 export default class Regist extends Component {
     constructor(props) {
         super(props)
-        
+
         this.state = {
             uniqueCode: '',
             dob: '',
@@ -70,16 +70,16 @@ export default class Regist extends Component {
         return (
             <div className='background'>
                 <div className='login'>
-                    <div className='row box col-12'>
-                        <div className='left-content col-lg-6'>
+                    <div className='row box col-sm-12'>
+                        <div className='left-content col-sm-6'>
                             <div className='main-left'>
                                 <img src={Logo} alt=''></img>
                                 <br /><br />
                                 <h3>Web Teacher</h3>
                             </div>
                         </div>
-                        <div className='right-content-login col-lg-6'>
-                            <div className='main-right col-12'>
+                        <div className='right-content-login col-sm-6'>
+                            <div className='main-right col-sm-12'>
                                 <form onSubmit={this.handleSubmit.bind(this)}>
                                     <h5 className='header-auth'><strong>Daftarkan akun Gredu kamu</strong></h5>
                                     <br />
@@ -107,7 +107,11 @@ export default class Regist extends Component {
                                             dateFormat='yyyy-MM-dd'
                                             value={getDate('case-1', this.state.selectedDate)}
                                             placeholderText='Tanggal Lahir'
-                                        />
+                                        >
+                                            <div style={{ color: '#4a4a4a', fontSize: '12px', textAlign: 'center' }}>
+                                                Pilih Tanggal Lahir Anda
+                                            </div>
+                                        </DatePicker>
                                     </div>
                                     <i className='float-right fa fa-calendar calendar-auth' aria-hidden='true' />
                                     <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
