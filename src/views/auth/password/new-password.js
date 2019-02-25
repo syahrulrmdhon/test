@@ -26,9 +26,6 @@ export default class NewPassword extends Component {
         this.setEditorRef = this.setEditorRef.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-    componentDidMount() {
-        console.log('masuk')
-    }
     onClose() {
         this.setState({ preview: null })
     }
@@ -42,7 +39,6 @@ export default class NewPassword extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
-        console.log('method')
 
         var result = this.state.editor.state.image.currentSrc.split(';')
         var base = result[1].split(',')
@@ -55,7 +51,6 @@ export default class NewPassword extends Component {
                 content_type: this.state.contentType
             }
         }
-
         let data = {}
         data['user'] = user
         apiClient('post', url, data).then(res => {
@@ -72,8 +67,9 @@ export default class NewPassword extends Component {
                 ]
             })
         }).catch(err => {
+            let errMsg = err.response.data.errors[0].description[0]
             error({
-                message: 'Gagal, data salah atau tidak lengkap',
+                message: errMsg,
                 btns: [
                     {
                         label: 'Ulangi',
@@ -91,7 +87,6 @@ export default class NewPassword extends Component {
 
 
     render() {
-        console.log('props', this.state.token)
         return (
             <div className='verification'>
                 <div className="header padding-2">
@@ -123,7 +118,7 @@ export default class NewPassword extends Component {
                         </div>
                         <div className='regist'>
                             <PasswordMask
-                                className='mask'
+                                className='mask' id='password'
                                 inputClassName='password-mask-input'
                                 buttonClassName='fa fa-eye password-mask-button'
                                 name='password' placeholder='Kata Kunci'
@@ -133,7 +128,7 @@ export default class NewPassword extends Component {
                         </div>
                         <div className='regist margin-top-2'>
                             <PasswordMask
-                                className='mask'
+                                className='mask' id='repassword'
                                 inputClassName='password-mask-input'
                                 buttonClassName='fa fa-eye password-mask-button'
                                 name='repassword' placeholder='Ketik Kembali Kata Kunci'
@@ -141,13 +136,6 @@ export default class NewPassword extends Component {
                                 onChange={this.handleChange.bind(this)}
                             />
                         </div>
-                        {/* <input
-                            value={this.state.repassword}
-                            onChange={this.handleChange.bind(this)}
-                            type='text' name='repassword'
-                            placeholder='Ketik Kembali Kata Kunci'
-                            className='input margin-top-2'
-                        /> */}
                         <div className='margin-top-2'>
                             <div className='col-sm-12'>
                                 <div className='row'>

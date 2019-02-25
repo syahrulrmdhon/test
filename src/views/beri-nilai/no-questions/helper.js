@@ -141,7 +141,7 @@ export class Averages extends Component {
         let data = this.props.data
         let score = data.scores.total_average.score
         let status = data.scores.total_average.result_status
-        let classname = ''
+        let classname = 'large-text-red-bold'
 
         if (status === 'very_good' || status === 'good') {
             classname = 'large-text-green-bold'
@@ -164,13 +164,15 @@ export class Subjects extends Component {
         let ix = this.props.ix
         let subjects = data.scores.subject_averages
         let status = data.scores.total_average.result_status
-        let classname = 'col-sm-3 padding-1'
+        let classname = ''
 
         if (status === 'very_good' || status === 'good') {
             classname = 'border-left-col-green col-sm-3 padding-1'
         } else if (status === 'enough') {
             classname = 'border-left-col-yellow col-sm-3 padding-1'
         } else if (status === 'need_attention') {
+            classname = 'border-left-col-red col-sm-3 padding-1'
+        } else {
             classname = 'border-left-col-red col-sm-3 padding-1'
         }
 
@@ -198,7 +200,7 @@ export class Subjects extends Component {
                                             return <div className="padding-1" key={Math.random()}>
                                                 <div className="row">
                                                     <div className="col-sm-12">
-                                                        <div className="col-sm-6">
+                                                        <div className="col-sm-6 text-justify">
                                                             {data.basic_comp.competency_number + ' ' + data.basic_comp.content}
                                                         </div>
                                                         <SubjectScore
@@ -223,13 +225,15 @@ export class SubjectAverage extends Component {
         let data = this.props.score
         let score = data.score
         let status = data.result_status
-        let classname = 'col-sm-4 align-center'
+        let classname = ''
 
         if (status === 'very_good' || status === 'good') {
             classname = 'large-text-green-bold col-sm-8 text-right padding-right-6'
         } else if (status === 'enough') {
             classname = 'large-text-yellow-bold col-sm-8 text-right padding-right-6'
         } else if (status === 'need_attention') {
+            classname = 'large-text-red-bold col-sm-8 text-right padding-right-6'
+        } else {
             classname = 'large-text-red-bold col-sm-8 text-right padding-right-6'
         }
         return <div className={classname}>
@@ -245,19 +249,24 @@ export class SubjectScore extends Component {
         let classnames = ''
         let p = ''
 
-        if (status === 'very_good' || status === 'good') {
-            classnames = 'large-text-green-bold col-sm-2 float-right'
-            p = 'Hasil sangat memuaskan'
+        if (status === 'very_good') {
+            classnames = 'large-text-green-bold col-sm-4 text-right'
+            p = 'Sangat memuaskan'
+        } else if (status === 'good') {
+            classnames = 'large-text-green-bold col-sm-4 text-right'
+            p = 'Memuaskan'
         } else if (status === 'enough') {
-            classnames = 'large-text-yellow-bold col-sm-2 float-right'
-            p = 'Hasil cukup memuaskan'
+            classnames = 'large-text-yellow-bold col-sm-4 text-right'
+            p = 'Butuh perhatian'
         } else if (status === 'need_attention') {
-            classnames = 'large-text-red-bold col-sm-2 float-right'
-            p = 'Siswa butuh perhatian'
+            classnames = 'large-text-red-bold col-sm-4 text-right'
+            p = 'Evaluasi ulang'
+        } else {
+            classnames = 'large-text-red-bold col-sm-4 text-right'
         }
 
         return <div className="col-sm-6 align-center">
-            <div className='col-sm-4'>
+            <div className='col-sm-8'>
                 {p}
             </div>
             <div className={classnames}>
@@ -275,20 +284,29 @@ export class UserNotPassed extends Component {
                     this.props.notPassed.map((x, i) => {
                         return <div key={i}>
                             <div className='row'>
-                                <div className='row'>
-                                    <div className='padding-right-2 padding-left-4'>
-                                        <Avatar src={Ava} size="30" round={true} />
-                                    </div>
-                                    <div className='padding-right-4'>
-                                        <span className='disblock'>{x.user.full_name}</span>
-                                        <p className='view'>{x.user.email}</p>
+                                <div className='col-sm-12'>
+                                    <div className='row'>
+                                        <div className='col-sm-10'>
+                                            <div className='row'>
+                                                <div className='col-sm-2'>
+                                                    <Avatar src={Ava} size="30" round={true} />
+                                                </div>
+                                                <div className='col-sm-10'>
+                                                    <span className='disblock'>{x.user.full_name}</span>
+                                                    <p className='view'>{x.user.email}</p>
+                                                    <br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='col-sm-2'>
+                                            <div className='float-right padding-left-4 large-text-red-bold'>
+                                                {x.total_average.score === null ? '0' : x.total_average.score}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className='float-right padding-left-4 large-text-red-bold'>
-                                    {x.total_average.score === null ? '-' : x.total_average.score}
-                                </div>
+                                <br />
                             </div>
-                            <br />
                         </div>
                     })
                 }

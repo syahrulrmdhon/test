@@ -90,6 +90,7 @@ export default function reducer(state = initialState, action) {
         case LOAD_SUCCESS:
             delete state.error;
             if (state.result !== action.result) {
+                console.log(action.result)
 
                 if(action.result.data.exam.exam_classes_attributes.length == 0){
                     action.result.data.exam.exam_classes_attributes = buildClass(action.result.data.exam.exam_classes_attributes, action.result.data.basic_comps)

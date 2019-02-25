@@ -5,7 +5,7 @@ import TableEvaluasi from "./table-evaluasi";
 export default class BottomContentEvaluasi extends Component {
   render() {
     return (
-      <div className="bottom-contents">
+      <div className="bottom-content-evaluasi">
         <div className="title-content-evaluasi margin-bottom-2 margin-top-4">
           <div className="padding-4">
             <div className="row">

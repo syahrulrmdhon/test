@@ -111,7 +111,7 @@ class ParticipantUser extends Component {
                 }
 
                 tab.push(
-                    <NavItem key={idx}>
+                    <NavItem key={Math.random()}>
                         <NavLink
                         className={active}
                         onClick={() => {this.onToggle(classs.id)}}
@@ -121,20 +121,24 @@ class ParticipantUser extends Component {
                     </NavItem>
                 )
 
-                contentUser.push(
-                    <ChooseUser 
-                        key={idx} 
-                        index={idx}
-                        users={classs.users}
-                        isActived={active}
-                    />
-                )
+                if(active == 'active'){
+                    contentUser.push(
+                        <ChooseUser 
+                            key={Math.random()} 
+                            index={idx}
+                            isActived={active}
+                        />
+                    )
+                }
             })
         }
 
         return (
             <div className="padding-content">
-               <Header />
+               <Header 
+                    navbar={true}
+                    location={`/pariticipant-class/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`}
+               />
                <div className="container">
                     <div className="margin-8">
                         <div className="content-block main-block">

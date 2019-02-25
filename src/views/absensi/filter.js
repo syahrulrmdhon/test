@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker'
 export default class FilterAbsensi extends Component {
     
     render() {
+        const now = new Date()
         return (
             <div className="filter">
                 <div className="title">Filter</div>
@@ -12,11 +13,12 @@ export default class FilterAbsensi extends Component {
                     <label>Pilih Tanggal</label>
                     <div className="position-relative">
                         <DatePicker
-                             className="w-100"
+                            className="w-100"
                             selected={this.props.selectedDate}
                             onChange={this.props.handleDateChange}
                             placeholderText="Weeks start on Monday"
-                            value={getDate('case-1', this.props.selectedDate)} 
+                            value={getDate('case-1', this.props.selectedDate)}
+                            maxDate = {now}
                             />
                         <i className="fa fa-calendar calendar-icon" aria-hidden="true" />
                     </div>

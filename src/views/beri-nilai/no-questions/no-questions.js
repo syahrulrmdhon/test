@@ -6,6 +6,7 @@ import TopContentNoQuestions from './top-content-no-questions'
 import BottomContentNoQuestions from './bottom-content-no-questions'
 import KkmNoQuestions from './kkm-no-questions'
 import { TabContent, TabPane } from 'reactstrap'
+import Page from './../../../components/Title'
 
 export default class NoQuestions extends Component {
     constructor(props) {
@@ -51,13 +52,13 @@ export default class NoQuestions extends Component {
     handleNewScore(e, student) {
         this.props.history.push({
             pathname: '/questions/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
-            state: { data:this.state.score, assesment_id: this.state.assesment_id, exam_id: this.state.exam_id, class_id: this.state.class_id, student_id: student}
+            state: { data: this.state.score, assesment_id: this.state.assesment_id, exam_id: this.state.exam_id, class_id: this.state.class_id, student_id: student }
         })
     }
     onChangePage(e, student, class_id) {
         this.props.history.push({
             pathname: '/questions/' + this.state.assessment_id + '/exams/' + this.state.exam_id + '/student/' + student + '/' + class_id,
-            state: { assessment: this.state.assessment_id, exam: this.state.exam_id, student: student, class_id: class_id}
+            state: { assessment: this.state.assessment_id, exam: this.state.exam_id, student: student, class_id: class_id }
         })
     }
     getDataResults() {
@@ -91,54 +92,57 @@ export default class NoQuestions extends Component {
     }
     render() {
         const tabMenu = ['Perolehan Nilai'];
+        let path = `/exam/${this.state.assessment_id}`
         return (
-            <div className="details-nilai bg-grey">
-                <Header navbar={false} />
-                <div className="content-wrapper content-wrap-custom-size">
-                    <div className="row">
-                        <div className="detail-menu">
-                            <div className="offset-2 col-sm-10 tab-menu tab-position">
-                                <Tab menu={tabMenu} activeMenu={this.state.activeMenu} />
+            <Page title='Beri Nilai Tidak Buat Soal'>
+                <div className="details-nilai bg-grey">
+                    <Header navbar={false} location={path} />
+                    <div className="content-wrapper content-wrap-custom-size">
+                        <div className="row">
+                            <div className="detail-menu">
+                                <div className="offset-2 col-sm-10 tab-menu tab-position">
+                                    <Tab menu={tabMenu} activeMenu={this.state.activeMenu} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <TabContent activeTab={this.state.activeMenu}>
-                        <TabPane tabId={1}>
-                            <div className="row">
-                                <div className="col-sm-12">
-                                    <div className="content-block-evaluasi main-block-evaluasi">
-                                        <div className="padding-4">
-                                            <TopContentNoQuestions
-                                                chart={this.state.dataChart}
-                                                passed={this.state.dataPassed.length}
-                                                notPassed={this.state.dataNotPassed.length}
-                                            />
+                        <TabContent activeTab={this.state.activeMenu}>
+                            <TabPane tabId={1}>
+                                <div className="row">
+                                    <div className="col-sm-12">
+                                        <div className="content-block-evaluasi main-block-evaluasi">
+                                            <div className="padding-4">
+                                                <TopContentNoQuestions
+                                                    chart={this.state.dataChart}
+                                                    passed={this.state.dataPassed.length}
+                                                    notPassed={this.state.dataNotPassed.length}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="row margin-top-2">
-                                <div className="col-sm-9">
-                                    <div className="content-block-evaluasi main-block-evaluasi">
-                                        <BottomContentNoQuestions
-                                            exam={this.state.exam_id}
-                                            class={this.state.class_id}
-                                            asssessment={this.state.assessment_id}
-                                            handleNewScoreParent={this.handleNewScore}
-                                            page={this.onChangePage}
-                                        />
+                                <div className="row margin-top-2">
+                                    <div className="col-sm-9">
+                                        <div className="content-block-evaluasi main-block-evaluasi">
+                                            <BottomContentNoQuestions
+                                                exam={this.state.exam_id}
+                                                class={this.state.class_id}
+                                                asssessment={this.state.assessment_id}
+                                                handleNewScoreParent={this.handleNewScore}
+                                                page={this.onChangePage}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-3">
+                                        <div className="content-block-card main-block-card">
+                                            <KkmNoQuestions notPassed={this.state.dataNotPassed} />
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="col-sm-3">
-                                    <div className="content-block-card main-block-card">
-                                        <KkmNoQuestions notPassed={this.state.dataNotPassed} />
-                                    </div>
-                                </div>
-                            </div>
-                        </TabPane>
-                    </TabContent>
+                            </TabPane>
+                        </TabContent>
+                    </div>
                 </div>
-            </div>
+            </Page>
         )
     }
 }

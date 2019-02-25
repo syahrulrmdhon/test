@@ -54,10 +54,6 @@ $nunito_light: 'NunitoLight';
       border-right: 1px solid #b2d8d8;
       font-family: $nunito_light;
       color: #000000;
-
-      &:last-child {
-        border-right: none;
-      }
     }
 
     tbody tr {
@@ -65,6 +61,7 @@ $nunito_light: 'NunitoLight';
         border-top: none;
         border-right: 1px solid #b2d8d8;
         border-bottom: 1px solid #b2d8d8;
+        cursor: pointer;
     
         &:last-child {
           border-right: none;
@@ -98,5 +95,9 @@ $nunito_light: 'NunitoLight';
   .fa-sort {
     float: right;
     color: #1a9d7f;
+  }
+
+  .cell-border-right {
+    border-right: 1px solid #b2d8d8;
   }
 }

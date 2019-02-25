@@ -7,11 +7,12 @@ const LOAD_SUCCESS = 'modules/exam/skill/LOAD_SUCCESS';
 const LOAD_FAIL = 'modules/exam/skill/LOAD_FAIL';
 const ADD_WORK_STEP = 'modules/exam/skill/ADD_WORK_STEP';
 const REMOVE_WORK_STEP = 'modules/exam/skill/REMOVE_WORK_STEP';
-const HANDLE_EVENT = 'modules/assessment/HANDLE_EVENT';
-const HANDLE_WORK_STEP = 'modules/assessment/HANDLE_WORK_STEP';
-const LOAD_COMPONENT = 'modules/assessment/LOAD_COMPONENT';
-const ADD_INDICATOR = 'modules/assessment/ADD_INDICATOR';
-const HANDLE_PROBLEM_SET = 'modules/assessment/HANDLE_PROBLEM_SET';
+const HANDLE_EVENT = 'modules/exam/skill/HANDLE_EVENT';
+const HANDLE_WORK_STEP = 'modules/exam/skill/HANDLE_WORK_STEP';
+const LOAD_COMPONENT = 'modules/exam/skill/LOAD_COMPONENT';
+const ADD_INDICATOR = 'modules/exam/skill/ADD_INDICATOR';
+const REMOVE_INDICATOR = 'modules/exam/skill/REMOVE_INDICATOR';
+const HANDLE_PROBLEM_SET = 'modules/exam/skill/HANDLE_PROBLEM_SET';
 
 const initialState = {
     exam: {},
@@ -63,6 +64,13 @@ export default function reducer(state = initialState, action) {
                 loaded: true,
                 loading: false,
             }
+        case REMOVE_INDICATOR:
+            state.problem_type_sets[action.key_value] = removeField(state.problem_type_sets[action.key_value], action.idx)
+            return{
+                ...state,
+                loaded: true,
+                loading: false,
+            }
         case LOAD_COMPONENT: 
             delete state.error;
             if (state.result !== action.result) {
@@ -93,7 +101,7 @@ export default function reducer(state = initialState, action) {
             break; 
         return false
         case HANDLE_WORK_STEP:
-            state.exam.problem_types[action.idx] = action.value
+            state.problem_types[action.idx] = action.value
             return{
                 ...state,
                 loaded: true,
@@ -123,15 +131,14 @@ export default function reducer(state = initialState, action) {
         case LOAD_SUCCESS:
             delete state.error;
             if (state.result !== action.result) {
-
-                if(!action.result.data.exam.problem_types){
-                    action.result.data.exam['problem_types'] = [
+                if(action.result.data.problem_types.length == 0){
+                    action.result.data['problem_types'] = [
                         '',
                     ]
                 }
 
                 return {
-                    ...state,
+                    // ...state,
                     loaded: true,
                     loading: false,
                     result: true,
@@ -215,9 +222,16 @@ export function handleWorkStep(value, idx){
     }
 }
 
-export function getComponent(assessment_id){
+export function getComponent(assessment_id, exam_id = false){
     let params = {}
-    let url = `/v1/assessments/${assessment_id}/exams/new?step=QuestionForm&category=skill`
+    let url;
+
+    if(exam_id){
+        url = `/v1/assessments/${assessment_id}/exams/${exam_id}/edit?step=QuestionForm`
+    } else {
+        url = `/v1/assessments/${assessment_id}/exams/new?step=QuestionForm&category=skill`
+    }
+
 
     return{
         types: [LOAD, LOAD_COMPONENT, LOAD_FAIL],
@@ -229,6 +243,14 @@ export function addIndicator(key_value){
     return {
         type: ADD_INDICATOR,
         key_value: key_value,
+    }
+}
+
+export function removeIndicator(key_value, idx){
+    return {
+        type: REMOVE_INDICATOR,
+        key_value: key_value,
+        idx: idx,
     }
 }
 

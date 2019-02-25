@@ -9,7 +9,7 @@ import { assessmentType } from '../../utils/common'
 import Tab from './index/tab'
 import { NavLink } from 'react-router-dom'
 
-import Pagination from './../global/pagination'
+// import Pagination from './../global/pagination'
 
 class Penilaian extends Component {
     constructor(props) {
@@ -59,7 +59,7 @@ class Penilaian extends Component {
                 <div className="margin-8">
                     <div className="content-block main-block">
                         <div className="row">
-                            <div className="col-sm-2 left-block">
+                            <div className="col-sm-3 left-block">
                                 <Filter
                                     assessment_types={this.state.assessment_types}
                                     onChangeAttr={this.onChangeAttr}
@@ -69,7 +69,7 @@ class Penilaian extends Component {
                                     school_subject_id={this.state.school_subject_id}
                                 />
                             </div>
-                            <div className="col-sm-10 right-block">
+                            <div className="col-sm-9 right-block">
                                 <div className="margin-top-6 margin-left-3 margin-right-6">
                                     <div className="row">
                                         <div className="col-sm-6">
@@ -87,7 +87,6 @@ class Penilaian extends Component {
                                     />
                                     <Index  data={this.state.data} category={this.state.activeTab} />
                                 </div>
-                                <Pagination />
                             </div>
                         </div>
                     </div>

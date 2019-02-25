@@ -54,11 +54,12 @@ export default class Regist extends Component {
                 ]
             })
         }).catch(err => {
+            let errMsg = err.response.data.errors[0].desc
             error({
-                message: 'Gagal...Data salah, tidak lengkap, atau sudah terdaftar',
+                message: errMsg,
                 btns: [
                     {
-                        label: 'Ulangi',
+                        label: 'Tutup',
                         className: 'btn bcred cwhite'
                     }
                 ]

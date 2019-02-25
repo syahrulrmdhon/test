@@ -9,6 +9,7 @@ import { apiClient } from '../../utils/apiClient'
 import { NotAvailable } from '../../views/global/notAvailable'
 import { getDate } from '../../utils/common'
 import { LabelInfo } from '../../views/global/labelInfo'
+import Page from './../../components/Title'
 
 export default class Attendance extends Component {
   constructor(props) {
@@ -21,9 +22,9 @@ export default class Attendance extends Component {
       this.classId = this.homeroomClass.id
     }
 
-    this.selectedClass = this.classId ? {label: this.homeroomClass.name, value: this.classId} : {}
+    this.selectedClass = this.classId ? { label: this.homeroomClass.name, value: this.classId } : {}
     this.state = {
-      selectedAttendanceType: (this.homeroomClass!== 'null') ? {label: 'Absensi Harian', value: this.homeroomClass.class_type} : {label: 'Absensi Mata Pelajaran', value: 'subject'},
+      selectedAttendanceType: (this.homeroomClass !== 'null') ? { label: 'Absensi Harian', value: this.homeroomClass.class_type } : { label: 'Absensi Mata Pelajaran', value: 'subject' },
       selectedClass: this.selectedClass,
       subjects: [],
       selectedSubject: "",
@@ -64,7 +65,8 @@ export default class Attendance extends Component {
 
     apiClient('get', route).then(response => {
       const data = response.data.data.attendance_types.map(({ key }) => ({
-        label: (key === 'homeroom' ? 'Absensi Harian' : 'Absensi Mata Pelajaran'), value: key })
+        label: (key === 'homeroom' ? 'Absensi Harian' : 'Absensi Mata Pelajaran'), value: key
+      })
       )
 
       this.setState({ attendanceTypes: data })
@@ -99,17 +101,17 @@ export default class Attendance extends Component {
   }
 
   selectAttendanceType(type) {
-    this.setState({selectedAttendanceType: type})
+    this.setState({ selectedAttendanceType: type })
 
     if (type.value === this.homeroomClass.class_type) {
-      this.setState({selectedClass: this.selectedClass, selectedSubject: '', subjects: []})
+      this.setState({ selectedClass: this.selectedClass, selectedSubject: '', subjects: [] })
     }
     this.getClass(type.value)
 
   }
 
   selectClass(item) {
-    this.setState({selectedClass: item})
+    this.setState({ selectedClass: item })
     const classId = item.value
     if (item.value !== this.classId) {
       this.getSubject(classId)
@@ -117,10 +119,10 @@ export default class Attendance extends Component {
   }
 
   selectSubject(subject) {
-    this.setState({selectedSubject: subject})
+    this.setState({ selectedSubject: subject })
   }
 
-  getAttendances(type, name=undefined, classId, subjectId) {
+  getAttendances(type, name = undefined, classId, subjectId) {
     const date = getDate('case-4', this.state.selectedDate)
     let route = `v1/attendances/index?class_id=${classId}&attendance_date=${date}${name !== undefined ? '&full_name=' + name : ''}`
 
@@ -133,7 +135,7 @@ export default class Attendance extends Component {
       let attendances = []
 
       data.data.user_attendances.map(student => {
-        attendances.push({user_id: student.user.id, name: student.user.full_name, status: student.attendance.status !== null ? student.attendance.status : 'present'})
+        attendances.push({ user_id: student.user.id, name: student.user.full_name, status: student.attendance.status !== null ? student.attendance.status : 'present' })
       })
 
       this.setState({
@@ -146,8 +148,8 @@ export default class Attendance extends Component {
   }
 
   reset() {
-    this.setState({searchName: ''})
-    this.setState({searchAttendances: []})
+    this.setState({ searchName: '' })
+    this.setState({ searchAttendances: [] })
   }
 
   handleFilterSubmit() {
@@ -210,12 +212,12 @@ export default class Attendance extends Component {
   }
 
   handleDateChange(date) {
-    this.setState({selectedDate: date})
+    this.setState({ selectedDate: date })
   }
 
-  filterAttendances(filter){
+  filterAttendances(filter) {
     const data = this.state.attendances
-    data = data.filter((item) =>  {
+    data = data.filter((item) => {
       return item.name.includes(filter);
     });
   }
@@ -223,92 +225,97 @@ export default class Attendance extends Component {
   handleSearchAttendance(event) {
     let search = event.target.value
     const attendances = this.state.attendances
-    this.setState({searchName: search})
+    this.setState({ searchName: search })
 
     if (search) {
       search = search.toLowerCase()
       const attendances = this.state.attendances
-      let data = attendances.filter((attendance) =>  {
+      let data = attendances.filter((attendance) => {
         return attendance.name.toLowerCase().includes(event.target.value.toLowerCase());
       });
 
       if (data.length === 0) {
-        this.setState({searchAttendances: null})
+        this.setState({ searchAttendances: null })
       }
       else {
-        this.setState({searchAttendances: data})
+        this.setState({ searchAttendances: data })
       }
     }
     else {
-      this.setState({searchAttendances: attendances})
+      this.setState({ searchAttendances: attendances })
     }
   }
 
   nameClicked(event, id) {
     event.preventDefault()
-    this.props.history.push('detail/' + id);
+    this.props.history.push({
+      pathname: 'detail/' + id,
+      state: { status: 'absensi' }
+    });
   }
 
   render() {
     return (
-      <div className="absensi padding-content">
-        <Header />
-        <div className="content margin-8">
-          <div className="row margin-0">
-            <div className="col-sm-10 bg-white rounded-10 normal-box-shadow">
-              <div className="row">
-                <div className="col-sm-3 left-content">
-                  <FilterAbsensi
-                    attendanceTypes={this.state.attendanceTypes}
-                    selectAttendanceType={this.selectAttendanceType}
-                    selectedAttendanceType={this.state.selectedAttendanceType}
-                    classes={this.state.classes}
-                    selectedClass={this.state.selectedClass}
-                    selectClass={this.selectClass}
-                    subjects={this.state.subjects}
-                    selectedSubject={this.state.selectedSubject}
-                    selectSubject={this.selectSubject}
-                    handleFilterSubmit={this.handleFilterSubmit}
-                    selectedDate={this.state.selectedDate}
-                    handleDateChange={this.handleDateChange} />
-                </div>
-                <div className="col-sm-9 center-content">
-                  <div className="search-container">
-                    <div className='date'>Tanggal {getDate('case-1', this.state.selectedDate)}</div>
-                    <div className="search">
-                      <input onChange={this.handleSearchAttendance} className="input-field" type="text" placeholder="Cari siswa disini..." name="search" value={this.state.searchName}/>
-                      <i className="fa fa-search icon"></i>
-                    </div>
+      <Page title='Absensi'>
+        <div className="absensi padding-content">
+          <Header />
+          <div className="content margin-8">
+            <div className="row margin-0">
+              <div className="col-sm-10 bg-white rounded-10 normal-box-shadow">
+                <div className="row">
+                  <div className="col-sm-3 left-content">
+                    <FilterAbsensi
+                      attendanceTypes={this.state.attendanceTypes}
+                      selectAttendanceType={this.selectAttendanceType}
+                      selectedAttendanceType={this.state.selectedAttendanceType}
+                      classes={this.state.classes}
+                      selectedClass={this.state.selectedClass}
+                      selectClass={this.selectClass}
+                      subjects={this.state.subjects}
+                      selectedSubject={this.state.selectedSubject}
+                      selectSubject={this.selectSubject}
+                      handleFilterSubmit={this.handleFilterSubmit}
+                      selectedDate={this.state.selectedDate}
+                      handleDateChange={this.handleDateChange} />
                   </div>
-                  {
-                    (!this.state.attendances || this.state.attendances.length === 0 || this.state.searchAttendances === null) ?
-                      <NotAvailable>{this.notStudent()}</NotAvailable>
-                      :
-                      <div>
-                        <TableAbsensi
-                          attendances={this.state.attendances}
-                          searchAttendances={this.state.searchAttendances}
-                          attendanceStatus={this.state.attendanceStatus}
-                          handleOptionChange={this.handleAttendanceStatusChange}
-                          nameClicked={this.nameClicked} />
-                        <div className="wrapper-save">
-                          <LabelInfo className="info">Tekan tombol <span>Simpan</span> untuk merubah data</LabelInfo>
-                          <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-sm-3 save">Simpan</button>
-                        </div>
+                  <div className="col-sm-9 center-content">
+                    <div className="search-container">
+                      <div className='date'>Tanggal {getDate('case-1', this.state.selectedDate)}</div>
+                      <div className="search">
+                        <input onChange={this.handleSearchAttendance} className="input-field" type="text" placeholder="Cari siswa disini..." name="search" value={this.state.searchName} />
+                        <i className="fa fa-search icon"></i>
                       </div>
-                  }
+                    </div>
+                    {
+                      (!this.state.attendances || this.state.attendances.length === 0 || this.state.searchAttendances === null) ?
+                        <NotAvailable>{this.notStudent()}</NotAvailable>
+                        :
+                        <div>
+                          <TableAbsensi
+                            attendances={this.state.attendances}
+                            searchAttendances={this.state.searchAttendances}
+                            attendanceStatus={this.state.attendanceStatus}
+                            handleOptionChange={this.handleAttendanceStatusChange}
+                            nameClicked={this.nameClicked} />
+                          <div className="wrapper-save">
+                            <LabelInfo className="info">Tekan tombol <span>Simpan</span> untuk merubah data</LabelInfo>
+                            <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-sm-3 save">Simpan</button>
+                          </div>
+                        </div>
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-sm-2 right">
-              <CardAbsensi
-                attended={this.state.attended}
-                unattended={this.state.unattended}
-                percentage={this.state.percentage} />
+              <div className="col-sm-2 right">
+                <CardAbsensi
+                  attended={this.state.attended}
+                  unattended={this.state.unattended}
+                  percentage={this.state.percentage} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Page>
     )
   }
 }

@@ -64,7 +64,7 @@ export default function reducer(state = initialState, action = {}) {
             return{
                 ...state,
                 loaded: false,
-                loading: true,
+                loading: true,          
             }
         case HANDLE_ATTITUDE:
             state.assessment_attitudes_attributes[action.idx]['school_attitude_id'] = action.value
@@ -75,7 +75,13 @@ export default function reducer(state = initialState, action = {}) {
             }
         case HANDLE_SUBJECT:
             state.assessment_subjects_attributes[action.idx]['school_subject_id'] = action.value
-            
+            if(state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes']){
+                state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes'].map((assessment_basic_comps, idx) => {
+                    state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes'][idx][basic_comp_id] = null
+                })
+            }
+            console.log(state.assessment_subjects_attributes[action.idx])
+
             if(action.flag == 'attitude'){
                 delete state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes']
             }
@@ -136,6 +142,13 @@ export default function reducer(state = initialState, action = {}) {
             }
         case HANDLE_EVENT:
             state[action.fieldName] = action.value
+
+            if(action.relates.length > 0){
+                action.relates.map((key, idx) => {
+                    state[key] = ''
+                })
+            }
+
             return{
                 ...state,
                 loaded: true,
@@ -339,11 +352,12 @@ export function handleEventClass(value, idx, fieldName){
     }
 }
 
-export function handleEvent(value, fieldName){
+export function handleEvent(value, fieldName, relates = []){
     return {
         type: HANDLE_EVENT,
         value: value,
         fieldName: fieldName,
+        relates: relates,
     }
 }
 

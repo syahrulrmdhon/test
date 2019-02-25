@@ -115,9 +115,8 @@ export default class Header extends Component {
                     <div className="fix-nav">
                         <Navbar expand="md" className="font-white">
                             <NavbarBrand>
-                                <img className="logo" src={school_logo} alt="" />
-                                &emsp;
-                                    <span className="font-white header-title">{school_name}</span>
+                                <img className="logo" src={Logo} alt="" />
+                                    <span className="font-white header-title margin-left-1">{school_name}</span>
                                     </NavbarBrand>
                                     <NavbarToggler onClick={this.toggle} />
                                     <Collapse isOpen={this.state.isOpen} navbar>
@@ -125,18 +124,20 @@ export default class Header extends Component {
                                             <NavItem>
                                                 <ButtonToolbar>
                                                     <DropdownButton
+                                                        // disabled={true}
                                                         bsStyle='info'
                                                         title={user_name}
                                                         id='dropdown-profile'
                                                     >
-                                                        <MenuItem eventKey="1"><FontAwesome name="user" /> <span className="profile">Profil</span></MenuItem>
+                                                        <MenuItem eventKey="1"><FontAwesome name="user" /> 
+                                                        <span className="profile">Profil</span>
+                                                        </MenuItem>
                                                         {school_account}
                                                     </DropdownButton>
                                                 </ButtonToolbar>
                                             </NavItem>
-                                            &emsp;
                                     <NavItem>
-                                        <NavLink className="font-white logout" href="javascript:void(0);" onClick={this.logout}>
+                                        <NavLink className="font-white logout margin-left-2" href="javascript:void(0);" onClick={this.logout}>
                                             <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
                                         </NavLink>
                                     </NavItem>

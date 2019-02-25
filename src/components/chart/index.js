@@ -12,7 +12,7 @@ export default class SingleBarChat extends Component {
         height={'220px'}
         chartType="Bar"
         color="red"
-        loader={<div>Loading Chart</div>}
+        loader={<div className='loader'></div>}
         data={this.props.chart}
         options={{
           legend: {position: 'none'},

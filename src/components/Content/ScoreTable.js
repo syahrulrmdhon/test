@@ -38,7 +38,7 @@ export default class ScoreTable extends Component {
                           <td className={!description ? 'text-center' : ''}>{description ? description : '-'}</td>
                           <td>{subject.score.score ? subject.score.score : '-'}</td>
                           <td>{subject.score.predicate ? subject.score.predicate : '-'}</td>
-                          <td><Link to="">Lihat Deskripsi</Link></td>
+                          <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>Lihat Deskripsi</td>
                         </tr>
                       })
                     }
@@ -89,7 +89,7 @@ export default class ScoreTable extends Component {
                           <td className={!description ? 'text-center' : ''}>{description ? description : '-'}</td>
                           <td>{subject.score.score ? subject.score.score : '-'}</td>
                           <td>{subject.score.predicate ? subject.score.predicate : '-'}</td>
-                          <td><Link to="">Lihat Deskripsi</Link></td>
+                          <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>Lihat Deskripsi</td>
                         </tr>
                       })
                     }
@@ -100,13 +100,13 @@ export default class ScoreTable extends Component {
               <Table className="table-amount">
                 <tbody>
                 <tr className="total-score">
-                      <td colSpan="2" className="border-right-0 text-center">Jumlah Nilai Pengetahuan</td>
+                      <td colSpan="2" className="border-right-0 text-center">Jumlah Nilai Keterampilan</td>
                       <td className="border-left-0 border-right-0 text-center">{skillScore.total.score ? skillScore.total.score : '-'}</td>
                       <td className="border-left-0 border-right-0"></td>
                       <td className="border-left-0"></td>
                     </tr>
                     <tr className="average-score">
-                      <td colSpan="2" className="border-right-0 text-center">Nilai Pengetahuan Rata-Rata</td>
+                      <td colSpan="2" className="border-right-0 text-center">Nilai Keterampilan Rata-Rata</td>
                       <td className="border-left-0 border-right-0 text-center">{skillScore.total_average.score ? skillScore.total_average.score : '-'}</td>
                       <td className="border-left-0 border-right-0"></td>
                       <td className="border-left-0"></td>
@@ -155,15 +155,17 @@ export default class ScoreTable extends Component {
               </div>
               <div className="border-hidden"></div>
               <div className="total-status">
+              <div>
                   <div className="pull-left">
                     Total Sikap Butuh Perhatian
                     <br />
                     Total Sikap Sangat Baik
                   </div>
-                  <div>
-                    {attitudeScore.recap.subjects.bp} (<span>tiga</span>)
+                  <div style={{width: "260px"}}>
+                    {attitudeScore.recap.subjects.bp} <div className="pull-right">Sikap</div>
                     <br />
-                    {attitudeScore.recap.subjects.sb} (<span>lima</span>)
+                    {attitudeScore.recap.subjects.sb} <div className="pull-right">Sikap</div>
+                  </div>
                   </div>
                 </div>
               </div>

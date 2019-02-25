@@ -49,17 +49,16 @@ export default function reducer(state = initialState, action) {
             }
             break;
         case HANDLING_SCORE:
-            state.data.exam_question[action.idx][action.field_name] = action.e.target.value
+            state.data.exam_question[action.idx][action.field_name] = action.value
             return {
                 ...state,
                 loaded: true,
                 loading: false,
-                result: true,
             } 
         // break;
            
         case HANDLE_QUESTION_ONCHANGE:
-            console.log(state, "my state")
+            console.log(action, "my state")
             state.data.exam_question[action.idx]['ans'] = action.e.value
             state.data.exam_question[action.idx]['score'] = (action.e.value === action.pick) ? action.max_score : 0
             console.log(state.data.exam_question[action.idx]['score'] = (action.e.value === action.pick) ? action.max_score : 0,"here now e")
@@ -72,20 +71,23 @@ export default function reducer(state = initialState, action) {
 
         case LOAD_SCORE_QUESTION:
             delete state.error
-            console.log(action.result,"my result")
             if (state.result !== action.result) {
                 if (action.result.data.collections) {
                     action.result.data['exam_question'] = []
                     action.result.data.collections.map((collection) => {
-                        console.log(collection,"collection")
                             action.result.data['exam_question'].push({
                                 ans: collection.user_problem_answer ? collection.user_problem_answer.ans:null ,
                                 score: collection.user_problem_answer ? collection.user_problem_answer.score:null,
                                 exam_question_id: collection.id,
                                 user_id: action.data.student ,
                                 exam_id: action.data.exam,
-                                class_id: action.data.classess
-
+                                class_id: action.data.classess,
+                                problem_type:collection.problem_type,
+                                user_problem_answer:collection.user_problem_answer,
+                                exam_question_choices: collection.exam_question_choices,
+                                qn_number: collection.qn_number,
+                                weight:collection.weight,
+                                max_score: collection.max_score
                             })
                         
                     })
@@ -170,7 +172,7 @@ export function setScoreNoQuestion(event, index, related_id) {
 }
 
 export function handlingSelect(e, idx, pick, max_score){
-    console.log(max_score,"here max")
+    console.log("hit",e, idx, pick, max_score)
     return {
         type:HANDLE_QUESTION_ONCHANGE,
         e:e,
@@ -180,14 +182,13 @@ export function handlingSelect(e, idx, pick, max_score){
     }   
 }
 
-export function handleScore(e, index, field_name){
+export function handleScore(value,index, field_name){
+    // console.log(e, index, field_name)
     return {
         type:HANDLING_SCORE,
-        e:e,
         idx:index,
-        field_name: field_name,
-        
-
+        field_name: field_name,        
+        value:value
     }
 }
 
@@ -212,7 +213,6 @@ export function getDataScores(assessment_id, exam_id, exam_scores_id) {
 }
 
 export function getDataScoreQuestion(assessment, exam, student, classess) {
-    console.log("hit me")
     const url = `v1/assessments/${assessment}/exams/${exam}/exam_scores/${student}`
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
@@ -234,7 +234,6 @@ export function getDataScoreQuestion(assessment, exam, student, classess) {
 
 
 export function getParticipant(exam, classess, assess, name) {
-    console.log(name, "first render")
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
     let full_name = name === undefined?'':name

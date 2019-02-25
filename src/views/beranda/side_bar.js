@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Calendar from 'react-calendar'; // https://www.npmjs.com/package/react-calendar
 import { getDate } from '../../utils/common'
 
+var FontAwesome = require('react-fontawesome');
+
 export default class SideBar extends Component{
     constructor(props) {
         super(props);
@@ -39,6 +41,8 @@ export default class SideBar extends Component{
                         value={this.state.date}
                         prev2Label={ null }
                         next2Label={ null }
+                        prevLabel={<FontAwesome name="chevron-left" />}
+                        nextLabel={<FontAwesome name="chevron-right" />}
                         onChange={this.props.changeCalendar}
                     />
                 </div>

@@ -25,14 +25,25 @@ export function setLabelSelect(lists, values = {}) {
     }
 }
 
-export function seeMore(value, s_count = 50) {
+export function seeMore(value, s_count = 50, options = {}) {
     const count = value.length
+    const {expanded, see_more, callBack} = options
+    let seeMore;
 
     if (s_count < count) {
-        value = value.substring(0, s_count);
-        value += '...'
+        if(expanded){
+            value += '...'
+            seeMore = 'ciutkan'
+        } else {
+            value = value.substring(0, s_count);
+            value += '...'
+
+            if(see_more){
+                seeMore = 'lihat lebih lanjut'
+            }
+        }
     }
-    value = <span className="profile" title={value}>{value}</span>
+    value = <span className="profile" title={value}>{value}<span className="cgreen pointer" onClick={callBack}>{seeMore}</span></span>
     return value
 }
 
@@ -279,7 +290,6 @@ export function examTypes(params = {}) {
 
 export function checkProperties(obj) {
     for (let key in obj) {
-        console.log(obj[key], "here ch uti")
         if (obj[key] === null || obj[key] === "" || obj[key] === undefined) {
             return true;
         }
@@ -307,20 +317,34 @@ export function questionTypes(params = {}) {
 
 export function basicComps(params = {}, options = {}) {
     let listOptions = options.listOptions || false
+    let disabled_data = options.disabled_data || []
     let fieldName = options.fieldName || 'basic_comps'
 
     apiClient('get', 'v1/filters/basic_comps', false, params).then(response => response.data).then(data => {
         let basic_comps = data.data.basic_comps || []
         let obj = {}
+        let disableds = {}
+        if(disabled_data.length > 0){
+            disabled_data.map((disabled, idx) => {
+                disableds[disabled.basic_comp_id] = disabled.basic_comp_id
+            })
+        }
 
         if ((basic_comps.length > 0) && listOptions) {
             const temps = basic_comps
             basic_comps = []
 
             temps.map((temp, idx) => {
+                let check_disabled = false
+
+                if(disableds[temp.id] !== undefined){
+                    check_disabled = true
+                }
+
                 basic_comps.push({
                     value: temp.id,
                     label: temp.competency_number + ' ' + temp.content,
+                    isDisabled: check_disabled,
                 })
             })
         }

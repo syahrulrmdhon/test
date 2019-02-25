@@ -30,7 +30,7 @@ export default class Forgot extends Component {
         }
 
         AuthClient('post', url, forgot).then(res => {
-            console.log(res)
+            localStorage.setItem('email', res.data.data.user.email)
             modal({
                 message: 'Berhasil',
                 description: 'Permintaan Anda sudah dikirim',
@@ -43,9 +43,9 @@ export default class Forgot extends Component {
                 ]
             })
         }).catch(err => {
-            console.log(err)
+            let errMsg = err.response.data.errors[0].desc
             error({
-                message: 'Gagal, email tidak terdaftar',
+                message: errMsg,
                 btns: [
                     {
                         label: 'Ulangi',
@@ -81,7 +81,8 @@ export default class Forgot extends Component {
                                         onChange={this.handleChange.bind(this)}
                                         type='text' name='email'
                                         placeholder='Alamat Email'
-                                        className='col-sm-12'></input>
+                                        className='col-sm-12'
+                                    />
                                     <br /><br />
                                     <button type='submit' className='btn-young-green margin-top-4'>
                                         Kirim
