@@ -219,3 +219,26 @@
     height: 40px;
     border-radius: 5px;
 }
+
+@media screen and (max-width: 1169px) and (min-width: 800px) {
+    .sidebar.expand {
+        width: 280px;
+    }
+    .schedule-range.expand {
+        margin-left: 280px;
+    }
+    .schedule .content-block{
+        width: 60%;
+    }
+    .minimize .schedule .content-block {
+        width: 40%;
+    }
+}
+@media screen and (max-width: 1169px) and (min-width: 992px) {
+    .schedule .content-block{
+        width: 40%;
+    }
+    .minimize .schedule .content-block {
+        width: 30%;
+    }
+}

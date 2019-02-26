@@ -78,7 +78,6 @@ class Add extends Component{
     }
 
     render(){
-        console.log(this.props.problem_types)
         const { exam_type, name, is_remedial } = this.props.exam ? this.props.exam : [] 
 
         return(
