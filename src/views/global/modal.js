@@ -89,3 +89,27 @@ export function error(params){
         },
     })
 }
+
+export function disable(params) {
+    confirmAlert({
+        customUI: ({ onClose, onConfirm }) => {
+            let view_btn = []
+
+            return (
+                <div className="react-confirm-alert modal-alert">
+                    <div className="react-confirm-alert-body">
+                        <div className="header align-center">
+                            <h1>{params.message}</h1>
+                        </div>
+                        <div className="react-confirm-alert-button-grop toggle">
+                            <div className="align-center fullwidth">
+                                <div style={{marginTop: "10px"}}>Silahkan gunakan tablet atau komputer dengan layar 10 inci.</div>
+                                {view_btn}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        },
+    })
+}

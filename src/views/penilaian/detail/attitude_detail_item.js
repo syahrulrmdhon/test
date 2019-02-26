@@ -1,39 +1,75 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
+import Select from 'react-select';
 
 import {
-    getScore
+    getScore,
 } from './../../../utils/attitude'
+
+import {
+    attitudeScores,
+} from './../../../utils/common'
+
+import {
+    handleUpdateAttitude,
+} from './../../../redux-modules/modules/assessment'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 class AttitudeDetailItem extends Component {
+    constructor(props){
+        super(props)
+
+        this.state = {
+            attitude_scores: [],
+        }
+    }
+
+    componentDidMount(){
+        attitudeScores.call(this)
+    }
+
     render(){
         let {full_name, score, description} = this.props.users
-        console.log(this.props.users)
-
         const { text, color } = getScore(score, true)
 
         return(
             <div className="row margin-top-2">
                 <div className="col-sm-12">
                     <div className={classnames("border-full padding-4", color)}>
-                        <div className="row">
+                        <div className="row align-items">
                             <div className="col-sm-3">
                                 <label className="header-title f12">
                                     {full_name}
                                 </label>
                             </div>
                             <div className="col-sm-3">
-                                <label className="header-title f12">
+                                <div className="content-input">
+                                    <Select 
+                                        className= "select-list"
+                                        classNamePrefix= "select"
+                                        placeholder= "Pilih nilai sikap"
+                                        name= "score"
+                                        onChange={(event) => {this.props.handleUpdateAttitude(event.value, this.props.index, 'score')}}
+                                        options={this.state.attitude_scores}
+                                        value={this.state.attitude_scores.find((element) => { return element.value == score })}
+                                    />
+                                </div>
+                                {/* <label className="header-title f12">
                                     {text}
-                                </label>
+                                </label> */}
                             </div>
                             <div className="col-sm-6">
-                                <label className="header-title f12">
-                                    {description}
-                                </label>
+                                <div className="content-input">
+                                    <input 
+                                        className="fullwidth"
+                                        value={description}
+                                        placeholder="Masukkan deskripsi"
+                                        name="description"
+                                        onChange={(event) => {this.props.handleUpdateAttitude(event.target.value, this.props.index, 'description')}}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -47,6 +83,6 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 
-    // showAssessment,
+    handleUpdateAttitude,
 }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(AttitudeDetailItem)

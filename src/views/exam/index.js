@@ -48,7 +48,7 @@ class Index extends Component {
   onChangePage(e, classes, assessment, exam, flag, assessment_category) {
     if(flag===true){
       this.props.history.push({
-        pathname: '/assessment/' + assessment + '/exam/' + exam + '/class/' + classes + '/flag/' + flag,
+        pathname: '/assessment/' + assessment + '/exam/' + exam + '/category/' + assessment_category +'/class/' + classes + '/flag/' + flag,
         state: { assessment: assessment, exam: exam, class: classes, flag: flag, assessment_category: assessment_category }
       })
     } else {

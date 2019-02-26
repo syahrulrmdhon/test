@@ -164,7 +164,7 @@ export const MainRoutes = [
         component: CreateExam
     },
     {
-        path: '/assessment/:assessment_id/exam/:exam_id/class/:class_id',
+        path: '/assessment/:assessment_id/exam/:exam_id/category/:category_id/class/:class_id',
         component: DetailNilai
     },
     {

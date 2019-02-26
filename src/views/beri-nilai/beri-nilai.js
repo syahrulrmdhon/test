@@ -15,6 +15,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Page from './../../components/Title'
 
+
+
+
 class Nilai extends Component {
   constructor(props) {
     super(props)
@@ -25,6 +28,7 @@ class Nilai extends Component {
       exam_id: props.match.params.exam_id,
       class_id: props.match.params.class_id,
       assessment_id: props.match.params.assessment_id,
+      category_id: props.match.params.category_id,
       participant_passed: {},
       participant_not_passed: [],
       questionEvaluations: [],
@@ -34,7 +38,8 @@ class Nilai extends Component {
       collapce: '',
       data: [],
       prevPath: '',
-      search: ''
+      search: '',
+      valueOpt:''
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.fetchData = this.fetchData.bind(this)
@@ -42,6 +47,7 @@ class Nilai extends Component {
     this.handleNewScore = this.handleNewScore.bind(this)
     this.onChangeSelect = this.onChangeSelect.bind(this)
     this.onSubmmit = this.onSubmmit.bind(this)
+    this.onChangeScore = this.onChangeScore.bind(this)
   }
   componentDidMount() {
 
@@ -102,17 +108,23 @@ class Nilai extends Component {
     })
   }
 
+  onChangeScore(valueOpt){
+    console.log("here hitted",valueOpt)
+    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.assessment_id, '', valueOpt)
+    this.setState({ valueOpt })
+  }
+
   handleNewScore(e, student) {
     e.preventDefault()
     let data = 'ac67857a-ad71-4a97-9718-c71c47e2e4bc'
     this.props.history.push({
       pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
-      state: { data: data, conditon: this.props.location.state.assessment_category }
+      state: { data: data, conditon: this.state.category_id }
     })
   }
 
   onSubmmit() {
-    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.asssessment_id, this.state.search)
+    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.asssessment_id, this.state.search,'')
   }
 
   componentWillReceiveProps(nextProps) {
@@ -165,6 +177,8 @@ class Nilai extends Component {
                         search={this.state.search}
                         onChange={this.onChangeSelect}
                         submit={this.onSubmmit}
+                        valueOpt={this.state.valueOpt}
+                        onChangeScore={this.onChangeScore}
                       />
                     </div>
                   </div>

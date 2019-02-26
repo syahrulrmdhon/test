@@ -3,6 +3,7 @@ import { Switch, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { CustomPropsRoute } from './../../components';
 import { MainRoutes } from './../../routes/routes';
+import { disable } from './../../views/global/modal'
 
 class App extends Component {
   constructor(props){
@@ -32,21 +33,37 @@ class App extends Component {
         }
       }
     }
+    
+    this.disableScreen();
   }
 
+  disableScreen () {
+    const width = window.screen.width
+
+    if (width <= 700){
+      disable({
+        message: `Resolusi layar tidak mendukung.`,
+      })
+    }
+}
+
+// Initial execution if needed
+
   render() {
+    const width = window.screen.width
     return (
       <div className="h-100">
         {/* <main className="h-100"> */}
-          <Switch>
-            {MainRoutes.map((route, key) => {
-              return (
-                <CustomPropsRoute {...route} key={key} />
-              )
-            })}
-          </Switch>
+          { width > 700 &&
+            <Switch>
+              {MainRoutes.map((route, key) => {
+                return (
+                  <CustomPropsRoute {...route} key={key} />
+                )
+              })}
+            </Switch>
+          }
         {/* </main> */}
-
       </div>
     )
   }

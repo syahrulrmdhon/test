@@ -9,9 +9,12 @@ import classnames from 'classnames'
 import Avatar from 'react-avatar';
 import Ava from './../../assets/images/img_avatar.png'
 import Pencil from './../../assets/images/beri_nilai.svg';
-import { error, modal } from './../global/modal'
 
-var FontAwesome = require('react-fontawesome');
+
+const data_option = [
+  {value:'highest', label:'Nilai Tertinggi'},
+  {value:'lowest', label:'Nilai Terendah'},
+]
 
 class BottomContent extends Component {
   constructor(props) {
@@ -190,10 +193,14 @@ class BottomContent extends Component {
                 <div className='col-sm-8'>
                   <div className='row'>
                     <div className='col-sm-4'>
-                      <Select
+                      {/* <Select
+                        isClearable
                         placeholder='Urut Berdasarkan'
                         classNamePrefix='select'
-                      />
+                        options={data_option}
+                        value={this.props.valueOpt}
+                        onChange={this.props.onChangeScore}
+                      /> */}
                     </div>
                     <div className='col-sm-8'>
                       <div className='search'>

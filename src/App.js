@@ -9,6 +9,8 @@ library.add(faStroopwafel)
 
 class App extends Component {
   render() {
+  console.log('ooooooo')
+
     return (
       <div className="App">
         <header className="App-header">
