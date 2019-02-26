@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Table, TabContent, TabPane } from 'reactstrap'
+import { NotAvailable } from '../../views/global/notAvailable'
 
 import '../../styles/student/table.scss'
 
@@ -10,13 +11,13 @@ export default class ScoreTable extends Component {
     const knowledgeScore = this.props.knowledgeScore
     const skillScore = this.props.skillScore
     const attitudeScore = this.props.attitudeScore
-
+    
     return (
-      <div>
-        <TabContent activeTab={this.props.activeTab}>
+      <div className="h-100">
+        <TabContent activeTab={this.props.activeTab} className="h-100">
           <TabPane className="knowledge" tabId={1}>
             {
-              knowledgeScore &&
+              knowledgeScore ?
               <div>
                 <div className="table-content">
                 <Table bordered striped responsive>
@@ -63,11 +64,15 @@ export default class ScoreTable extends Component {
                   </tbody>
                 </Table>
               </div>
+              :
+              <div className="is-empty">
+                <NotAvailable>Data tidak tersedia</NotAvailable>
+              </div>
             }
           </TabPane>
           <TabPane className="knowledge" tabId={2}>
             {
-              skillScore &&
+              skillScore ?
               <div>
                 <div className="table-content">
                 <Table bordered striped responsive>
@@ -113,6 +118,10 @@ export default class ScoreTable extends Component {
                     </tr>
                 </tbody>
               </Table>
+              </div>
+              : 
+              <div className="is-empty">
+                <NotAvailable>Data tidak tersedia</NotAvailable>
               </div>
             }
           </TabPane>
