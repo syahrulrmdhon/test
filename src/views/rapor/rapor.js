@@ -226,12 +226,12 @@ export default class Rapor extends Component {
                         </NavLink>
                       </NavItem>
                       <NavItem className='tab-nilai'>
-                        <NavLink className={classnames({active: this.state.activeTab === '2'})} onClick={() => {this.toggle('1')}}>
+                        <NavLink className={classnames({active: this.state.activeTab === '2'})} onClick={() => {this.toggle('2')}}>
                           Keterampilan
                         </NavLink>
                       </NavItem>
                       <NavItem className='tab-nilai'>
-                        <NavLink className={classnames({active: this.state.activeTab === '3'})} onClick={() => {this.toggle('1')}}>
+                        <NavLink className={classnames({active: this.state.activeTab === '3'})} onClick={() => {this.toggle('3')}}>
                           Sikap
                         </NavLink>
                       </NavItem>
