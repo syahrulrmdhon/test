@@ -8,7 +8,7 @@ import '../../styles/student/table.scss'
 export default class ScoreTable extends Component {
 
   render() {
-    const knowledgeScore = ''
+    const knowledgeScore = this.props.knowledgeScore
     const skillScore = this.props.skillScore
     const attitudeScore = this.props.attitudeScore
     
@@ -72,7 +72,7 @@ export default class ScoreTable extends Component {
           </TabPane>
           <TabPane className="knowledge" tabId={2}>
             {
-              skillScore &&
+              skillScore ?
               <div>
                 <div className="table-content">
                 <Table bordered striped responsive>
@@ -118,6 +118,10 @@ export default class ScoreTable extends Component {
                     </tr>
                 </tbody>
               </Table>
+              </div>
+              : 
+              <div className="is-empty">
+                <NotAvailable>Data tidak tersedia</NotAvailable>
               </div>
             }
           </TabPane>
