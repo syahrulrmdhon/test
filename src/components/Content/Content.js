@@ -150,7 +150,7 @@ export default class Content extends Component {
   }
 
   getFilterSubject() {
-    const url = `v1/filters/subjects`
+    const url = `v1/filters/subjects?class_id=${localStorage.getItem('class_id')}`
 
     apiClient('get', url).then(response => {
       this.setState({subjects: response.data.data.subjects})
