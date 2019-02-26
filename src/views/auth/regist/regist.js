@@ -16,7 +16,9 @@ export default class Regist extends Component {
         this.state = {
             uniqueCode: '',
             dob: '',
-            selectedDate: null
+            selectedDate: null,
+            message: '',
+            visible: false
         }
     }
     handleDateChange(date) {
@@ -69,7 +71,7 @@ export default class Regist extends Component {
         return (
             <div className='background'>
                 <div className='login'>
-                    <div className='row box col-sm-12'>
+                    <div className='row box'>
                         <div className='left-content col-sm-6'>
                             <div className='main-left'>
                                 <img src={Logo} alt=''></img>
@@ -78,7 +80,7 @@ export default class Regist extends Component {
                             </div>
                         </div>
                         <div className='right-content-login col-sm-6'>
-                            <div className='main-right col-sm-12'>
+                            <div className='main-right col-12'>
                                 <form onSubmit={this.handleSubmit.bind(this)}>
                                     <h5 className='header-auth'><strong>Daftarkan akun Gredu kamu</strong></h5>
                                     <br />

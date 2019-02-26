@@ -1304,22 +1304,40 @@ table.table.beri-nilai tr.head {
     border: none;
     border-bottom: solid 0.5px #cccccc;
   }
-  .fa-eye { 
+  .fa-eye {
     font-size: 12px;
   }
   .password-mask-button {
     background: transparent !important;
   }
-
-  
 }
-
-.right-height{
-  height:40%;
+.right-height {
+  height: 40%;
+  overflow-x: scroll;
+}
+.right-height-kkm {
+  height: 559px;
   overflow-x: scroll;
 }
 
-.right-height-kkm{
-  height:559px;
-  overflow-x: scroll;
+@media only screen and (min-width: 800px) {
+  .verification {
+    .ava {
+      left: 45%;
+    }
+  }
+}
+@media only screen and (min-width:1000px) {
+  .verification {
+    .ava{
+      left: 46%;
+    }
+  }
+}
+@media only screen and (min-width:1200px) {
+  .verification {
+    .ava{
+      left: 47%;
+    }
+  }
 }
