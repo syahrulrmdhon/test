@@ -149,11 +149,7 @@ export default class Content extends Component {
   }
 
   getFilterSubject() {
-<<<<<<< HEAD
     const url = `v1/filters/subjects?user_id=${this.props.studentId}`
-=======
-    const url = `v1/filters/subjects?class_id=${localStorage.getItem('class_id')}`
->>>>>>> 3d6d21dfdcc804b9e2d46f6a7186473bcaa30286
 
     apiClient('get', url).then(response => {
       this.setState({subjects: response.data.data.subjects})
