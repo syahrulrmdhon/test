@@ -13,12 +13,7 @@ import { getData, getExtracurriculars, handleEvent, handleNumber } from './../..
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { apiClient } from '../../utils/apiClient'
-<<<<<<< Updated upstream
 import { modal } from './../../views/global/modal'
-
-=======
-import { error, modal } from './../../views/global/modal'
->>>>>>> Stashed changes
 
 class Content extends Component {
   constructor(props, context) {
@@ -229,11 +224,8 @@ class Content extends Component {
         this.setState({disable: true})
         modal({
           message: 'Berhasil',
-<<<<<<< Updated upstream
-          description: `Catatan berhasil disimpan`,
-=======
+
           description: 'Catatan berhasil disimpan',
->>>>>>> Stashed changes
           btns: [
             {
               label: 'Selesai',
