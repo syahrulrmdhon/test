@@ -156,6 +156,16 @@ $nunito_bold: "NunitoBold";
     margin-left: -3px;
     top: 0;
   }
+
+  &__add-score {
+    font-family: $nunito_semi_bold;
+    font-size: 7.5px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #1a9d7f
+  }
 }
 
 .score-attitude-new {
@@ -244,4 +254,10 @@ $nunito_bold: "NunitoBold";
     border-right: unset;
     background-color: #ffffff !important;
 }
+  .to-do-position {
+      align-items: bottom;
+  }
+
+  
+  
 }

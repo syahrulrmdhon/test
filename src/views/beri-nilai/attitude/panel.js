@@ -4,30 +4,34 @@ import Avatar from 'react-avatar';
 import Ava from './../../../assets/images/img_avatar.png'
 import { getDataScoreAttitude } from './../../../redux-modules/modules/attitude'
 import { bindActionCreators } from 'redux';
+import Todo from './../../../assets/images/to-do.svg';
+
+var FontAwesome = require('react-fontawesome');
+
 
 export class Panel extends Component {
     render() {
         let data_panel_classes = this.props.data_panel && this.props.data_panel && this.props.data_panel.attitude && this.props.data_panel.attitude.data && this.props.data_panel.attitude.data.classes
         let content = []
-        data_panel_classes && data_panel_classes.map((x, index) => {
+        data_panel_classes && data_panel_classes.map((x) => {
             x.users.map((data) => {
                 let merge = []
-                if(data.score === 2){
+                if (data.score === 2) {
                     merge.push(
                         <span className="score-attitude__score-sb margin-left-1 ">SB</span>
                     )
-                }else if(data.score === 1){
+                } else if (data.score === 1) {
                     merge.push(
                         <span className="score-attitude__score-b ">{data.score}</span>
                     )
-                }else if(data.score === 0){
+                } else if (data.score === 0) {
                     merge.push(
                         <span className="score-attitude__score ">{data.score}</span>
                     )
-                }else{
+                } else {
                     merge.push(
                         <span className="score-attitude__score ">N/A</span>
-                    )                    
+                    )
                 }
 
                 content.push(<div className="row margin-top-4">
@@ -46,7 +50,7 @@ export class Panel extends Component {
                                             <span className="score-attitude__predicate">Sikap Sangat Baik</span>
                                         </div>
                                         <div className="col-sm-5">
-                                            {data.attitude_recap && data.attitude_recap.sb ? <span className="score-attitude__count-predicate-good">{data.attitude_recap && data.attitude_recap.sb}</span> : <span className="score-attitude__count-predicate-need-attention"> N/A </span>} 
+                                            {data.attitude_recap && data.attitude_recap.sb ? <span className="score-attitude__count-predicate-good">{data.attitude_recap && data.attitude_recap.sb}</span> : <span className="score-attitude__count-predicate-need-attention"> N/A </span>}
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +60,7 @@ export class Panel extends Component {
                                             <span className="score-attitude__predicate">Sikap Baik</span>
                                         </div>
                                         <div className="col-sm-5">
-                                            {data.attitude_recap && data.attitude_recap.sb ?  <span className="score-attitude__count-predicate-enough"> {data.attitude_recap && data.attitude_recap.b} </span>:   <span className="score-attitude__count-predicate-need-attention">N/A</span>}
+                                            {data.attitude_recap && data.attitude_recap.sb ? <span className="score-attitude__count-predicate-enough"> {data.attitude_recap && data.attitude_recap.b} </span> : <span className="score-attitude__count-predicate-need-attention">N/A</span>}
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +77,7 @@ export class Panel extends Component {
                             </div>
                             <div className="col-sm-2 padding-3">
                                 <div className="score-box border-full padding-top-2 padding-left-4 ">
-                                   {merge}
+                                    {merge}
                                 </div>
                             </div>
                             <div className="col-sm-3">
@@ -83,19 +87,17 @@ export class Panel extends Component {
                                             <span className="score-attitude__desc-title">Diskripsi Sikap</span>
                                         </div>
                                         <div className="col-sm-12">
-                                            <span n className="score-attitude__desc-body">{data.description}</span>
+                                            <span className="score-attitude__desc-body">{data.description}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-sm-1">
                                 <div className="row padding-top-3 padding-bottom-3">
-                                    <div className="padding-2 line-desc ">
-                                        <div className="col-sm-12">
-                                            <span className="score-attitude__desc-title">Diskripsi Sikap</span>
-                                        </div>
-                                        <div className="col-sm-12">
-                                            <span n className="score-attitude__desc-body">{data.description}</span>
+                                    <div className="col-sm-12">
+                                        <div className="score-attitude__add-score padding-top-6">
+                                            <img src={Todo} alt="" width="15" className="margin-top-1" />
+                                            <span className="padding-left-1" >Beri Nilai</span>
                                         </div>
                                     </div>
                                 </div>
