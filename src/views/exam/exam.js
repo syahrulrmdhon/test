@@ -27,7 +27,7 @@ const exam = (props) => {
           <div className="exam__title">{props.title}</div>
           <div className="exam__action-wrapper">
             <NavLink to= {`/pariticipant-class/${props.exam.assessment_id}/assessment/${props.exam.id}/exam`} className="exam__action" >
-              Pilih Kelas
+              Tambah Kelas
             </NavLink>
               {
               props.question &&
@@ -55,7 +55,7 @@ const exam = (props) => {
           </div>
         </div>
         <div className="col-sm-5 exam__assigned-class-wrapper">
-          <div className="exam__assigned-class align-items-start">KELAS YANG DITUGASKAN</div>
+          <div className="exam__assigned-class align-items-start">PILIH KELAS UNTUK MEMBERI NILAI</div>
           {
             props.classes.length ?
               <div className="exam__class-wrapper">
