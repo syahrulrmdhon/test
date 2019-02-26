@@ -111,7 +111,7 @@ class New extends Component {
           <div className="react-confirm-alert modal-alert">
             <div className="react-confirm-alert-body">
               <div className="header align-center">
-                <h1>Mohon isi semua skor </h1>
+                <h1>Apakah anda yakin? </h1>
               </div>
               <div className="react-confirm-alert-button-group toggle">
                 <div className="align-center fullwidth">
@@ -145,7 +145,7 @@ class New extends Component {
             label: 'Lanjut',
             className: 'btn green',
             event: this.props.history.push({
-              pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam + '/class/' + this.state.class_id,
+              pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam + '/category/' +  this.props.location.state.conditon + '/class/' + this.state.class_id,
               state: { assessment_category: this.props.location.state.conditon }
             })
           }

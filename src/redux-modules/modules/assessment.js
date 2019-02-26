@@ -19,6 +19,7 @@ const REMOVE_ATTITUDE_ITEM = 'modules/assessment/REMOVE_ATTITUDE_ITEM';
 const HANDLE_ATTITUDE_ITEM = 'modules/assessment/HANDLE_ATTITUDE_ITEM';
 const LOAD_SHOW = 'modules/assessment/LOAD_SHOW';
 const REMOVE_KD = 'modules/assessment/REMOVE_KD';
+const HANDLE_UPDATE_ATTITUDE = 'modules/assessment/HANDLE_UPDATE_ATTITUDE';
 
 const initialState = {
     assessment: null,
@@ -37,6 +38,14 @@ const headers = {
 
 export default function reducer(state = initialState, action = {}) {
     switch(action.type){
+        case HANDLE_UPDATE_ATTITUDE:
+            state.entries[action.index][action.fieldName] = action.value
+            state.entries[action.index]['payload'] = Math.random()
+            return {
+                ...state,
+                loaded: false,
+                loading: true,
+            }
         case HANDLE_ATTITUDE_ITEM:
             state.user_attitudes_attributes[action.idx][action.fieldName] = action.value
             return{
@@ -80,7 +89,6 @@ export default function reducer(state = initialState, action = {}) {
                     state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes'][idx][basic_comp_id] = null
                 })
             }
-            console.log(state.assessment_subjects_attributes[action.idx])
 
             if(action.flag == 'attitude'){
                 delete state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes']
@@ -238,7 +246,6 @@ export default function reducer(state = initialState, action = {}) {
         case LOAD_SHOW:
             delete state.error;
             if (state.result !== action.result) {
-                console.log(action.result.data.user_attitudes)
                 return {
                     // ...state,
                     loaded: true,
@@ -408,5 +415,14 @@ export function showAssessment(assessment_id, category = 'knowledge'){
     return{
         types: [LOAD, LOAD_SHOW, LOAD_FAIL],
         promise: client => client.get(process.env.API_URL + url, headers)
+    }
+}
+
+export function handleUpdateAttitude(value, index, fieldName){
+    return {
+        type: HANDLE_UPDATE_ATTITUDE,
+        value: value,
+        index: index,
+        fieldName: fieldName,
     }
 }

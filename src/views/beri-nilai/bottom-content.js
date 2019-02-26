@@ -12,8 +12,8 @@ import Pencil from './../../assets/images/beri_nilai.svg';
 
 
 const data_option = [
-  {value:'highest', label:'Highest'},
-  {value:'lowest', label:'Lowest'},
+  {value:'highest', label:'Nilai Tertinggi'},
+  {value:'lowest', label:'Nilai Terendah'},
 ]
 
 class BottomContent extends Component {
@@ -193,14 +193,14 @@ class BottomContent extends Component {
                 <div className='col-sm-8'>
                   <div className='row'>
                     <div className='col-sm-4'>
-                      <Select
+                      {/* <Select
                         isClearable
                         placeholder='Urut Berdasarkan'
                         classNamePrefix='select'
                         options={data_option}
                         value={this.props.valueOpt}
                         onChange={this.props.onChangeScore}
-                      />
+                      /> */}
                     </div>
                     <div className='col-sm-8'>
                       <div className='search'>

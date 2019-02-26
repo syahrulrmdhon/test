@@ -1045,6 +1045,9 @@ thead {
 .valign-center {
   vertical-align: middle !important;
 }
+.align-items{
+  align-items: center;
+}
 
 /* Text Right = Tulisannya di right */
 
@@ -1762,6 +1765,6 @@ ul.toggle.tab-class>li.nav-item a.active {
 }
 
 button,
-input {
+input, td {
   outline: none;
 }

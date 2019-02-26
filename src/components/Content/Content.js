@@ -12,7 +12,6 @@ import Tab from '../TabContent/TabContent'
 import { apiClient } from '../../utils/apiClient'
 import { modal } from './../../views/global/modal'
 
-
 export default class Content extends Component {
   constructor(props, context) {
     super(props, context);
@@ -84,7 +83,7 @@ export default class Content extends Component {
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
-        activeTab: tab
+        activeTab: 1
       })
     }
   }
@@ -150,7 +149,7 @@ export default class Content extends Component {
   }
 
   getFilterSubject() {
-    const url = `v1/filters/subjects`
+    const url = `v1/filters/subjects?user_id=${this.props.studentId}`
 
     apiClient('get', url).then(response => {
       this.setState({subjects: response.data.data.subjects})

@@ -129,6 +129,7 @@ export default class Verification extends Component {
                                 <div className='col-sm-offset-4 col-sm-4'>
                                     {/* <ReCaptcha
                                         sitekey="6LfmsZIUAAAAAF6hxijf2Z1__aiR6vEz6rCuKeDe"
+                                        sitekey='6LfmsZIUAAAAAPBJa8bL9KkTcvf9cd5sv-mg2-fs'
                                         onloadCallback={this.onLoadRecaptcha}
                                         verifyCallback={this.verifyCallback}
                                     /> */}
