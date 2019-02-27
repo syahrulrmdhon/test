@@ -105,7 +105,12 @@ class AddQuestion extends Component {
     }
 
     render(){
-        const urlBack = `/create-skill/${this.state.assessment_id}`
+        let urlBack = ''
+        if(this.state.exam_id){
+            urlBack = `/exam/${this.state.assessment_id}`
+        } else {
+            urlBack = `/create-skill/${this.state.assessment_id}`
+        }
 
         let problem_types = []
         if(this.props.problem_types){
@@ -123,7 +128,7 @@ class AddQuestion extends Component {
 
         return(
             <div className="padding-content">
-                <Header navbar={true} location={`/create-skill/${this.state.assessment_id}`} />
+                <Header navbar={true} location={urlBack} />
                 <div className="container">
                     <div className="margin-8">
                         <div className="content-block main-block">

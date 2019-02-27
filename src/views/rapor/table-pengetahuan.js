@@ -6,7 +6,7 @@ export default class TablePengetahuan extends Component {
     render() {
         return (
             <Table bordered striped hover responsive>
-                <thead>
+                <thead className='text-center'>
                     <tr>
                         <th className='align-top'>Nama Siswa</th>
                         {
@@ -20,11 +20,11 @@ export default class TablePengetahuan extends Component {
                         <th className='align-top'>Total Nilai (GPA)</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='text-center'>
                     {
                         this.props.tableKnowledge.map(function (data, i) {
                             return <tr key={i}>
-                                <td className='student-name' onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
+                                <td className='student-name text-left' onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
                                 {data.final_scores.subjects.map(function (x, i) {
                                     return <td key={i}>
                                         {x.score.score === null ? '-' : x.score.score}

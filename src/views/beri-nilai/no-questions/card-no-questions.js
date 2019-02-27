@@ -11,7 +11,7 @@ export default class CardNoQuestions extends Component {
                     <Passed
                         passed={this.props.passed}
                     />
-                    <div>Murid</div>
+                    <p>Murid</p>
                 </div>
                 <br />
                 <div className="card">
@@ -19,7 +19,7 @@ export default class CardNoQuestions extends Component {
                     <NotPassed
                         notPassed={this.props.notPassed}
                     />
-                    <div>Murid</div>
+                    <p>Murid</p>
                 </div>
             </div>
         )
