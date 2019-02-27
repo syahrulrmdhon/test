@@ -237,7 +237,15 @@ $nunito_bold: "NunitoBold";
   }
 
   .box-report {
-    height: 400px;
+    height: 390px;
+    position:relative;
+  }
+
+  .box-scroll {
+    position:absolute;
+    height:100%; 
+    background-color:#ffffff;
+    overflow-y:scroll;
   }
 
   .tab-predicate {

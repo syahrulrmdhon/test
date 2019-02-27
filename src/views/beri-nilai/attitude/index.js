@@ -6,7 +6,6 @@ import './../../../styles/attitude.scss'
 import { getDataScoreAttitude } from './../../../redux-modules/modules/attitude'
 import { bindActionCreators } from 'redux';
 
-const data = 'add0e9de-bf3a-4c6b-b611-6b5f6a6893dc'
 export class index extends Component {
     constructor(props){
         super(props)
