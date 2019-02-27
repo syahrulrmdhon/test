@@ -8,6 +8,7 @@ import { error, modal } from './../../global/modal'
 import moment from 'moment/moment.js'
 import { apiClient } from '../../../utils/apiClient'
 import { getDate } from './../../../utils/common'
+import  Page  from "./../../../components/Title";
 
 export default class Regist extends Component {
     constructor(props) {
@@ -67,6 +68,7 @@ export default class Regist extends Component {
     }
     render() {
         return (
+            <Page title="Registration"> 
             <div className='background'>
                 <div className='login'>
                     <div className='row box col-sm-12'>
@@ -125,6 +127,7 @@ export default class Regist extends Component {
                     </div>
                 </div>
             </div>
+            </Page>
         )
     }
 }
