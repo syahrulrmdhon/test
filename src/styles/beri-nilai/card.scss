@@ -103,3 +103,35 @@ $nunito_extra_bold: 'NunitoExtraBold';
     }
   }
 }
+@media only screen and (min-width: 1000px) {
+  .box-position {
+    .card-nilai {
+      .card {
+        &__label {
+          font-size: 14px;
+          color: #2d2d2d;
+          text-align: center;
+        }
+        &__value{
+          color: #1a9d7f;
+          font-size: 28px;
+          margin: 10px;
+          font-family: $nunito_bold;
+        }
+        &__error{
+          color: #eb373e;
+          font-size: 28px;
+          margin: 10px;
+          font-family: $nunito_bold;
+        }
+      }
+    }
+    .card h3 {
+      color: #199d7f;
+    }
+    .card p {
+      font-size: 12px;
+      color: #2d2d2d;
+    }
+  }
+}

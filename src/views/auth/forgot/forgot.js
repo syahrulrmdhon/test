@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { AuthClient } from '../../../utils/auth-client'
 import { error, modal } from './../../global/modal'
 
+
 export default class Forgot extends Component {
     constructor(props) {
         super(props)
@@ -92,8 +93,6 @@ export default class Forgot extends Component {
                                     </div>
                                 </form>
                             </div>
-                            <br /><br />
-                            <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                         </div>
                     </div>
                 </div>

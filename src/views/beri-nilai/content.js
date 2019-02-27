@@ -72,7 +72,7 @@ class Content extends Component {
                 <td><input
                     type="text"
                     className="align-center box-right"
-                    onChange={(e) => { this.props.handleScore(e, index, 'score') }}
+                    onChange={(e) => { this.props.handleScore(e.target.value, index, 'score') }}
                     defaultValue={exam[index]['score']}
                 /></td>
             )
@@ -93,9 +93,8 @@ class Content extends Component {
                     <td>{x.weight}</td>
                 </tr>)
             }
-
-
         }, this)
+
         return (
             <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">
                 <div className="row rounded-10">
