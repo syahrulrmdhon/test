@@ -9,7 +9,7 @@ import Profile from './ProfileDetail'
 import RightSide from '../RightSide/RightSide'
 import ScoreTable from './ScoreTable'
 import Tab from '../TabContent/TabContent'
-import { getData, getExtracurriculars, handleEvent, handleNumber } from './../../redux-modules/modules/teacherNote'
+import { getData, getExtracurriculars, handleDisabled, handleNumber } from './../../redux-modules/modules/teacherNote'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { apiClient } from '../../utils/apiClient'
@@ -78,7 +78,7 @@ class Content extends Component {
   homeroomTab(tab) {
     if (this.state.homeroomActiveTab !== tab) {
       this.setState({
-        homeroomActiveTab: 1
+        homeroomActiveTab: tab
       })
     }
   }
@@ -221,18 +221,18 @@ class Content extends Component {
     }
 
     apiClient('post', url, data).then(response => {
-        this.setState({disable: true})
-        modal({
-          message: 'Berhasil',
+      this.setState({disable: true})
+      modal({
+        message: 'Berhasil',
 
-          description: 'Catatan berhasil disimpan',
-          btns: [
-            {
-              label: 'Selesai',
-              className: 'btn green',
-            }
-          ]
-        })
+        description: 'Catatan berhasil disimpan',
+        btns: [
+          {
+            label: 'Selesai',
+            className: 'btn green',
+          }
+        ]
+      })
     })
   }
   
@@ -304,15 +304,6 @@ class Content extends Component {
       achievements: notes
     })
   }
-    // console.log(id)
-    // let achievements = this.state.achievements
-    // const achievement = achievements.find( achievement => achievement.id === id );
-    // // console.log(achievement)
-    // achievement.title = event.target.value
-    // achievement.description = event.target.value
-
-
-  // }
   
   handleBulkUpdate(type, note, data) {
     const url = `v1/students/${this.props.studentId}/bulk_update`
@@ -321,10 +312,21 @@ class Content extends Component {
       achievement_type: type,
       [note]: data
     }
-    console.log(request)
 
-    apiClient('post', url, request).then(response => {
-      console.log(response)
+    apiClient('post', url, request).then(() => {
+      this.props.handleDisabled()  
+
+      modal({
+        message: 'Berhasil',
+
+        description: 'Catatan berhasil disimpan',
+        btns: [
+          {
+            label: 'Selesai',
+            className: 'btn green',
+          }
+        ]
+      })
     })
   }
 
@@ -360,8 +362,6 @@ class Content extends Component {
       endDate: date
     });
   }
-
-
 
   render() {
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
@@ -511,6 +511,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getData,
     getExtracurriculars,
+    handleDisabled
   }, dispatch
 )
 
