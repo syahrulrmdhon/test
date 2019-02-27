@@ -59,15 +59,15 @@ export default class Forgot extends Component {
         return (
             <div className="background">
                 <div className="login">
-                    <div className="row box col-12">
-                        <div className="left-content col-lg-6">
+                    <div className="row box">
+                        <div className="left-content col-md-6">
                             <div className="main-left">
                                 <img src={Logo} alt=""></img>
                                 <br /><br />
                                 <h3>Web Teacher</h3>
                             </div>
                         </div>
-                        <div className="right-content-login col-lg-6">
+                        <div className="right-content-login col-md-6">
                             <div className="main-right col-12">
                                 <form onSubmit={this.handleSubmit.bind(this)}>
                                     <h5 className='header-auth'><strong>Lupa Kata Sandi</strong></h5>
@@ -88,7 +88,7 @@ export default class Forgot extends Component {
                                         Kirim
                                     </button>
                                     <div className='float-right margin-top-4'>
-                                        <p>Sudah ingat kata kunci?<Link to="/" className='normal-text-green'> Login Disini</Link></p>
+                                        <p>Sudah ingat kata kunci?<Link to="/" className='normal-text-green'> Masuk</Link></p>
                                     </div>
                                 </form>
                             </div>

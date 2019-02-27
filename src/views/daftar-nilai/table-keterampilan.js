@@ -15,8 +15,8 @@ export default class TableKeterampilan extends Component {
                 <tbody>
                     {
                         this.props.tableSkill.map(function (data, i) {
-                            return <tr key={i}>
-                                <td className="student-name" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
+                            return <tr key={i} className='text-center'>
+                                <td className="student-name text-left" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
                                 {data.subject_score_details.task.scores.map(function (x, i) {
                                     return <td key={i}>
                                         {x.result.score === null ? "-" : x.result.score}
