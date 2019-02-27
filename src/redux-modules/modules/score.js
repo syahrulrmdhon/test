@@ -22,7 +22,6 @@ export default function reducer(state = initialState, action) {
                 related_id: action.related_id,
                 score: action.value,
             }
-            console.log(state)
             return {
                 ...state,
                 loaded: true,
@@ -184,7 +183,7 @@ export function handlingSelect(e, idx, pick, max_score){
 }
 
 export function handleScore(value,index, field_name){
-    // console.log(e, index, field_name)
+    console.log(value, index, field_name,"here we go")
     return {
         type:HANDLING_SCORE,
         idx:index,

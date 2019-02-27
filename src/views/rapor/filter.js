@@ -11,7 +11,7 @@ export default class FilterRapor extends Component {
             isDisabled = "cursor"
         }
         return (
-            <div className="filter-rapor">
+            <div className="filter-nilai">
                 <h5 className="padding-top-1">
                     <strong className="large-text">Filter</strong>
                 </h5>

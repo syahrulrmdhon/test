@@ -4,6 +4,8 @@ import Avatar from 'react-avatar-edit'
 import { modal, error } from '../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
 import PasswordMask from 'react-password-mask'
+import  Page  from "./../../../components/Title";
+
 
 export default class NewPassword extends Component {
     constructor(props) {
@@ -102,68 +104,70 @@ export default class NewPassword extends Component {
 
     render() {
         return (
-            <div className='verification'>
-                <div className="header padding-2">
-                    <img className="logo margin-left-4" src={Logo} alt="" />
-                </div>
-                <div className="body-gredu">
-                    <form onSubmit={this.handleSubmit.bind(this)}>
-                        <div className="ava margin-bottom-4">
-                            <Avatar
-                                width={90}
-                                height={90}
-                                round={true}
-                                src={this.state.src}
-                                round={true}
-                                label='Pilih Photo'
-                                labelStyle={{ fontSize: '8px' }}
-                                onCrop={this.onCrop.bind(this)}
-                                onClose={this.onClose.bind(this)}
-                                ref={this.setEditorRef}
-                            />
+            <Page>
+                <div className='verification'>
+                    <div className="header padding-2">
+                        <img className="logo margin-left-4" src={Logo} alt="" />
+                    </div>
+                    <div className="body-gredu">
+                        <form onSubmit={this.handleSubmit.bind(this)}>
+                            <div className="ava margin-bottom-4">
+                                <Avatar
+                                    width={90}
+                                    height={90}
+                                    round={true}
+                                    src={this.state.src}
+                                    round={true}
+                                    label='Pilih Photo'
+                                    labelStyle={{ fontSize: '8px' }}
+                                    onCrop={this.onCrop.bind(this)}
+                                    onClose={this.onClose.bind(this)}
+                                    ref={this.setEditorRef}
+                                />
+                            </div>
+                            <br /><br /><br /><br />
+                            <div className="margin-top-6 align-center">
+                                <i className='fa fa-camera'></i>
+                                <span className='info'> Change Profile Photo</span>
+                            </div>
+                            <div className="direct align-center margin-top-6 margin-bottom-4">
+                                Buat Password Baru Kamu
                         </div>
-                        <br /><br /><br /><br />
-                        <div className="margin-top-6 align-center">
-                            <i className='fa fa-camera'></i>
-                            <span className='info'> Change Profile Photo</span>
-                        </div>
-                        <div className="direct align-center margin-top-6 margin-bottom-4">
-                            Buat Password Baru Kamu
-                        </div>
-                        <div className='regist'>
-                            <PasswordMask
-                                className='mask' id='password'
-                                inputClassName='password-mask-input'
-                                buttonClassName='fa fa-eye password-mask-button'
-                                name='password' placeholder='Kata Kunci'
-                                value={this.state.password}
-                                onChange={this.handleChange.bind(this)}
-                            />
-                        </div>
-                        <div className='regist margin-top-2'>
-                            <PasswordMask
-                                className='mask' id='repassword'
-                                inputClassName='password-mask-input'
-                                buttonClassName='fa fa-eye password-mask-button'
-                                name='repassword' placeholder='Ketik Kembali Kata Kunci'
-                                value={this.state.repassword}
-                                onChange={this.handleChange.bind(this)}
-                            />
-                        </div>
-                        <div className='margin-top-2'>
-                            <div className='col-sm-12'>
-                                <div className='row'>
-                                    <div className='col-sm-offset-3 col-sm-2'></div>
-                                    <div className='col-sm-2'>
-                                        <button type='submit' className='btn-young-green margin-top-4'>Selesai</button>
+                            <div className='regist'>
+                                <PasswordMask
+                                    className='mask' id='password'
+                                    inputClassName='password-mask-input'
+                                    buttonClassName='fa fa-eye password-mask-button'
+                                    name='password' placeholder='Kata Kunci'
+                                    value={this.state.password}
+                                    onChange={this.handleChange.bind(this)}
+                                />
+                            </div>
+                            <div className='regist margin-top-2'>
+                                <PasswordMask
+                                    className='mask' id='repassword'
+                                    inputClassName='password-mask-input'
+                                    buttonClassName='fa fa-eye password-mask-button'
+                                    name='repassword' placeholder='Ketik Kembali Kata Kunci'
+                                    value={this.state.repassword}
+                                    onChange={this.handleChange.bind(this)}
+                                />
+                            </div>
+                            <div className='margin-top-2'>
+                                <div className='col-sm-12'>
+                                    <div className='row'>
+                                        <div className='col-sm-offset-3 col-sm-2'></div>
+                                        <div className='col-sm-2'>
+                                            <button type='submit' className='btn-young-green margin-top-4'>Selesai</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                    <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
+                        </form>
+                        <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
+                    </div>
                 </div>
-            </div>
+            </Page>
         )
     }
 }

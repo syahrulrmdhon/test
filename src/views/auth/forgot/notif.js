@@ -56,15 +56,15 @@ export default class Notif extends Component {
         return (
             <div className="background">
                 <div className="login">
-                    <div className="row box col-12">
-                        <div className="left-content col-lg-6">
+                    <div className="row box">
+                        <div className="left-content col-md-6">
                             <div className="main-left">
                                 <img src={Logo} alt=""></img>
                                 <br /><br />
                                 <h3>Web Teacher</h3>
                             </div>
                         </div>
-                        <div className="right-content-login col-lg-6">
+                        <div className="right-content-login col-md-6">
                             <div className="main-right col-12">
                                 <form onSubmit={this.handleSubmit.bind(this)}>
                                     <h5 className='header-auth'><strong>Pengaturan Ulang Kata Sandi Telah Dikirim!</strong></h5>
@@ -81,7 +81,7 @@ export default class Notif extends Component {
                                     <div>
                                         <button type='submit' className='btn-young-green margin-top-4 col-sm-6 float-left'>Kirim Ulang</button>
                                         <br /><br />
-                                        <span className='margin-top-6'><Link to="/" className='normal-text-green'>&nbsp;Kembali ke Login</Link></span>
+                                        <span className='margin-top-6'><Link to="/" className='normal-text-green'>&nbsp;Halaman Utama</Link></span>
                                     </div>
                                 </form>
                             </div>

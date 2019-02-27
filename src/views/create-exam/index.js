@@ -12,6 +12,7 @@ import { checkProperties } from '../../utils/common'
 import { assessmentShow } from '../../utils/exam'
 import ErrorModal from '../global/error_modal'
 import { error } from './../global/modal'
+import Page from './../../components/Title'
 
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import '../../styles/create-exam.scss'
@@ -155,6 +156,7 @@ class Index extends Component {
     }
 
     return (
+      <Page title="Create Exam">
       <div className="padding-content create-exam">
         <Header navbar={true} location={path} />
         
@@ -202,6 +204,7 @@ class Index extends Component {
           </div>
         </div>
       </div>
+      </Page>
     )
   }
 }

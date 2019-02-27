@@ -828,35 +828,6 @@ table.table.beri-nilai tr.head {
   &__no {
     width: 3px;
   }
-
-  /* content-block */
-  // .content-block-evaluasi {
-  //   position: relative;
-  //   padding: 2rem;
-  //   width: 100%;
-  //   height: 100%;
-  //   background-color: #ffffff;
-  //   border: 1px solid #e9e9ef;
-  //   -moz-border-radius: 2px;
-  //   -webkit-border-radius: 2px;
-  //   border-radius: 2px;
-  //   -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
-  //   -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
-  //   box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
-  // }
-  // .content-block-evaluasi.main-block-evaluasi {
-  //   border: none;
-  //   box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
-  //   border-radius: 5px;
-  //   padding: 0;
-  // }
-  // .right-block-evaluasi {
-  //   overflow-y: scroll;
-  // }
-  // .content-block-evaluasi,
-  // .content-block-evaluasi.main-block-evaluasi .right-block-evaluasi {
-  //   height: 100%;
-  // }
 }
 
 .tr-row {
@@ -924,7 +895,6 @@ table.table.beri-nilai tr.head {
 
     .second-head {
       max-width: 100%;
-      height: 23.5px;
       background-color: rgba(178, 216, 216, 0.32);
     }
     .display-none {
@@ -1304,22 +1274,40 @@ table.table.beri-nilai tr.head {
     border: none;
     border-bottom: solid 0.5px #cccccc;
   }
-  .fa-eye { 
+  .fa-eye {
     font-size: 12px;
   }
   .password-mask-button {
     background: transparent !important;
   }
-
-  
 }
-
-.right-height{
-  height:40%;
+.right-height {
+  height: 40%;
+  overflow-x: scroll;
+}
+.right-height-kkm {
+  height: 559px;
   overflow-x: scroll;
 }
 
-.right-height-kkm{
-  height:559px;
-  overflow-x: scroll;
+@media only screen and (min-width: 800px) {
+  .verification {
+    .ava {
+      left: 45%;
+    }
+  }
+}
+@media only screen and (min-width:1000px) {
+  .verification {
+    .ava{
+      left: 46%;
+    }
+  }
+}
+@media only screen and (min-width:1200px) {
+  .verification {
+    .ava{
+      left: 47%;
+    }
+  }
 }
