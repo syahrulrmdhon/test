@@ -1768,3 +1768,53 @@ button,
 input, td {
   outline: none;
 }
+
+@media only screen and (min-width: 800px) {
+  .switch img.logo-account {
+    width: 250%;
+    text-align: center;
+    display: block;
+  }
+}
+@media only screen and (min-width: 830px) {
+  .switch img.logo-account {
+    width: 230%;
+    text-align: center;
+    display: block;
+  }
+}
+@media only screen and (min-width: 870px) {
+  .switch img.logo-account {
+    width: 210%;
+    text-align: center;
+    display: block;
+  }
+}
+@media only screen and (min-width: 900px) {
+  .switch img.logo-account {
+    width: 170%;
+    text-align: center;
+    display: block;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .switch img.logo-account {
+    width: 130%;
+    text-align: center;
+    display: block;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .switch img.logo-account {
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .switch img.logo-account {
+    width: 80%;
+    text-align: center;
+    display: block;
+  }
+}

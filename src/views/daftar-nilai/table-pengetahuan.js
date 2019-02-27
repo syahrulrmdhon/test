@@ -9,8 +9,8 @@ export default class TablePengetahuan extends Component {
       data.map((data) => {
         let score = data.subject_score_details
         content.push(
-          <tr key={Math.random()}>
-            <td className='student-name' onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
+          <tr key={Math.random()} className='text-center'>
+            <td className='student-name text-left' onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
             {
               score.daily_exam.scores.length > 0 ?
                 score.daily_exam.scores.map((daily) => {
@@ -56,7 +56,7 @@ export default class TablePengetahuan extends Component {
     }
     return (
       <Table bordered striped responsive hover>
-        <thead>
+        <thead className='text-center'>
           <tr>
             <th>Nama Siswa</th>
             <th colSpan={this.props.idxScores}>Ulangan Harian</th>
