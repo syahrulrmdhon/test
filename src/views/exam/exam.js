@@ -19,6 +19,28 @@ const exam = (props) => {
     }
   }
 
+  const {category} = props.assessment
+
+  let questionView = ''
+  switch(category){
+    case 'knowledge':
+      if(props.question){
+        questionView = <div className="exam__action">
+          <NavLink to={`/all-question/${props.exam.assessment_id}/assessment/${props.exam.id}/exam/`} className="exam__action" >
+            Lihat soal
+          </NavLink>
+        </div>
+      }
+    break;
+    case 'skill':
+      questionView = <div className="exam__action">
+        <NavLink to={`/edit-question-skill/${props.exam.assessment_id}/exam/${props.exam.id}`} className="exam__action" >
+          Ubah langkah kerja
+        </NavLink>
+      </div>
+    break;
+  }
+
   return (
     <div className="exam__panel">
       <div className="row h-100">
@@ -29,14 +51,7 @@ const exam = (props) => {
             <NavLink to= {`/pariticipant-class/${props.exam.assessment_id}/assessment/${props.exam.id}/exam`} className="exam__action" >
               Tambah Kelas
             </NavLink>
-              {
-              props.question &&
-              <div className="exam__action">
-                <NavLink to={`/all-question/${props.exam.assessment_id}/assessment/${props.exam.id}/exam/`} className="exam__action" >
-                  Lihat soal
-                </NavLink>
-              </div>
-            }
+            {questionView}
             <div className="exam__action" onClick={props.edit}>Ubah</div>
             <div className="exam__action" onClick={props.delete}>Hapus</div>
           </div>
