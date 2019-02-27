@@ -93,7 +93,7 @@ $nunito_bold: "NunitoBold";
     text-align: center;
     color: #eb373e;
   }
-  
+
   &__score-sb {
     font-family: $nunito_bold;
     font-size: 24px;
@@ -115,7 +115,6 @@ $nunito_bold: "NunitoBold";
     text-align: center;
     color: #f5a623;
   }
-
 
   &__desc-title {
     opacity: 0.5;
@@ -164,7 +163,7 @@ $nunito_bold: "NunitoBold";
     font-stretch: normal;
     line-height: 1.33;
     letter-spacing: normal;
-    color: #1a9d7f
+    color: #1a9d7f;
   }
 }
 
@@ -237,15 +236,15 @@ $nunito_bold: "NunitoBold";
   }
 
   .box-report {
-      height: 400px;
+    height: 400px;
   }
 
   .tab-predicate {
-      border-top:1px solid green;
+    border-top: 1px solid green;
     //   color: green
   }
   .border-top-score {
-      border-top: 1px solid #ecedf4;
+    border-top: 1px solid #ecedf4;
   }
 
   .tabs-score {
@@ -253,9 +252,9 @@ $nunito_bold: "NunitoBold";
     border-left: unset;
     border-right: unset;
     background-color: #ffffff !important;
-}
+  }
   .to-do-position {
-      align-items: bottom;
+    align-items: bottom;
   }
 
   .content-score {
@@ -269,10 +268,61 @@ $nunito_bold: "NunitoBold";
   .textarea-description {
     width: 700px;
     height: 150px;
+  }
 
-  }
-  
   .range-button {
-    margin-top: 40%
+    margin-top: 40%;
   }
+  ul.nav.toggle-score > li.nav-item {
+    width: 100px;
+    border: 0;
+  }
+
+  ul.nav.toggle-score > li.nav-item:first-child {
+    border: 0;
+  }
+
+  ul.nav.toggle-score > li.nav-item:last-child {
+    border: 0;
+  }
+
+  ul.toggle-score > li.nav-item a {
+    background-color: #ffffff;
+    padding: 8px;
+    color: #999999 !important;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border: 0;
+  }
+
+  ul.toggle-score > li.nav-item a.active {
+    color: #000000 !important;
+    background-color: #ffffff;
+    border: 0;
+    border-top: 1px solid green;
+  }
+
+  &__report-value {
+    font-family: $nunito_regular;
+    font-size: 9px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #727373;
+  }
+
+  &__report-title {
+    font-family: $nunito_bold;
+    font-size: 11px;
+    font-weight: bold;
+
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #636363;
+    
+  }
+
 }
