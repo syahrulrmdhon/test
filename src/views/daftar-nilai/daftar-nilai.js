@@ -194,7 +194,7 @@ export default class DaftarNilai extends Component {
                   </div>
                   <div className='col-sm-10'>
                     <span className='float-right margin-right-1'>
-                      <Nav tabs className='toggle border-0 pull-right'>
+                      <Nav tabs className='toggle border-0 pull-right tab-span'>
                         <NavItem className='tab-nilai'>
                           <NavLink className={classnames({ active: this.state.activeTab === '1' })} onClick={() => { this.toggle('1') }}>
                             Pengetahuan

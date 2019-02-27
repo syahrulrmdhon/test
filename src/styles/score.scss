@@ -33,6 +33,7 @@
 .arrow img {
   width: 10px;
   height: 20px;
+  vertical-align: middle;
 }
 .not-available {
   height: 80%;
@@ -53,6 +54,9 @@
       .large-text {
         vertical-align: middle;
         font-size: 13px;
+      }
+      .tab-span {
+        margin-right: 3px;
       }
     }
     .left-content {
@@ -79,6 +83,7 @@
       font-size: 10px;
     }
   }
+
   .table-bordered {
     thead th {
       vertical-align: top;
@@ -92,6 +97,16 @@
   }
 }
 @media only screen and (min-width: 890px) {
+  .row-score {
+    .right-content {
+      .tab-span {
+        margin-right: 4px;
+      }
+    }
+    .left-content {
+      height: 530px;
+    }
+  }
   .filter-nilai {
     .select__placeholder {
       font-size: 9px;
@@ -103,6 +118,16 @@
   .table-bordered {
     thead th {
       vertical-align: top;
+    }
+  }
+}
+@media only screen and (min-width: 1015px) {
+  .filter-nilai {
+    .select__placeholder {
+      font-size: 12px;
+    }
+    .select__single-value {
+      font-size: 12px;
     }
   }
 }

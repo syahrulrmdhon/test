@@ -56,7 +56,7 @@ export default class TablePengetahuan extends Component {
     }
     return (
       <Table bordered striped responsive hover>
-        <thead>
+        <thead className='text-center'>
           <tr>
             <th>Nama Siswa</th>
             <th colSpan={this.props.idxScores}>Ulangan Harian</th>

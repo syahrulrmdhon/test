@@ -5,7 +5,7 @@ export default class TableKeterampilan extends Component {
     render() {
         return (
             <Table bordered striped responsive hover>
-                <thead>
+                <thead className='text-center'>
                     <tr>
                         <th>Nama Siswa</th>
                         <th colSpan={this.props.idxScoresSkill}>Tugas</th>

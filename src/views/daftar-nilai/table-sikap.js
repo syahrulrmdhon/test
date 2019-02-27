@@ -5,7 +5,7 @@ export default class TableSikap extends Component {
     render() {
         return (
             <Table bordered striped responsive hover>
-                <thead>
+                <thead className='text-center'>
                     <tr>
                         <th>Nama Murid</th>
                         <th>Sangat Baik</th>
