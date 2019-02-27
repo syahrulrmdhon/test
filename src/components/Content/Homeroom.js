@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { TabContent, TabPane, Input, Button, Form } from 'reactstrap'
 import Select from 'react-select'
-import { getData, getExtracurriculars, handleEvent, addNote } from './../../redux-modules/modules/teacherNote'
+import { getExtracurriculars, handleEvent, addNote } from './../../redux-modules/modules/teacherNote'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -17,7 +17,6 @@ class Homeroom extends Component {
 
   render() {
     let inputHomeroomNote = this.props.inputHomeroomNote
-    let achievements = this.props.achievements
     let data = this.props.notes
     let extracurriculars = []
     let notes = []
@@ -25,43 +24,55 @@ class Homeroom extends Component {
 
     if (data) {
       if (data.notes) {
-        extracurriculars = data.extracurriculars
-        extracurriculars.map(extracurricular => {
-          extracurricular.isDisabled = false
-        })
-        data.notes.map((note, index) => {
-          
-          let selectedExtracuricular = extracurriculars.find(extracurricular => {return extracurricular.value === note.extracurricular_id}) || null
-          if (selectedExtracuricular) {
-            selectedExtracuricular.isDisabled = true
+        if (this.props.activeTab === 2) {
+          extracurriculars = data.extracurriculars
+          extracurriculars.map(extracurricular => {
+            extracurricular.isDisabled = false
+          })
+          data.notes.map((note, index) => {
+            
+            let selectedExtracuricular = extracurriculars.find(extracurricular => {return extracurricular.value === note.extracurricular_id}) || null
+            if (selectedExtracuricular) {
+              selectedExtracuricular.isDisabled = true
 
-          }
-          notes.push(
-            <div key={index} className="mb-4">
-              <Select key={Math.random()}
-                classNamePrefix="select"
-                value={selectedExtracuricular}
-                onChange={event => this.props.handleEvent(event.value, 'extracurricular_id', note.id)}
-                options={this.props.notes.extracurriculars}
-                placeholder='Pilih Tipe Ekstrakurikuler' />  
-              <Input value={note.description} onChange={event => this.props.handleEvent(event.target.value, 'description', note.id)} className="homeroom-teacher__input mt-3" rows="5" type="textarea" placeholder="Tulis Deskripsi Estrakurikuler disini ..."/>   
-            </div>
-
-          )
-
-          let noteId = {}
-
-          if (note.id) {
-            noteId = {
-              id: note.id
             }
-          }
+            notes.push(
+              <div key={index} className="mb-4">
+                <Select key={Math.random()}
+                  classNamePrefix="select"
+                  value={selectedExtracuricular}
+                  onChange={event => this.props.handleEvent(event.value, 'extracurricular_id', note.id)}
+                  options={this.props.notes.extracurriculars}
+                  placeholder='Pilih Tipe Ekstrakurikuler' />  
+                <Input value={note.description} onChange={event => this.props.handleEvent(event.target.value, 'description', note.id)} className="homeroom-teacher__input mt-3" rows="5" type="textarea" placeholder="Tulis Deskripsi Estrakurikuler disini ..."/>   
+              </div>
+            )
 
-          body.push({extracurricular_id: note.extracurricular_id, description: note.description, id: (note.id) ? note.id : null})
-        })
+            let noteId = {}
+
+            if (note.id) {
+              noteId = {
+                id: note.id
+              }
+            }
+
+            body.push({extracurricular_id: note.extracurricular_id, description: note.description, id: (note.id) ? note.id : null})
+          })
+        }
+        else if (this.props.activeTab === 3) {
+          data.notes.map((note, index) => {
+            notes.push(
+              <div key={index} className='margin-bottom-6'>
+                <Input onChange={event => this.props.handleEvent(event.target.value, 'title', note.id)} className="homeroom-teacher__input mt-0" type="text" placeholder="Tulis Judul Prestasi disini ..." value={note.title} />
+                <Input onChange={event => this.props.handleEvent(event.target.value, 'description', note.id)} className="homeroom-teacher__input mt-4" rows="5" type="textarea" placeholder="Tulis Deskripsi Prestasi disini ..." value={note.description} />
+              </div>
+            )
+            body.push({title: note.title, description: note.description, id: (note.id) ? note.id : null})
+          })
+        }
       }
     }
-
+    
     return (
       <div>
         <TabContent activeTab={this.props.activeTab}>
@@ -98,28 +109,16 @@ class Homeroom extends Component {
             </Button>
           </TabPane>
           <TabPane tabId={3}>
-          <Form className="homeroom-teacher__form mt-0">
-
-          {
-            achievements.length === 0 ?
-              <div>
-                <Input className="homeroom-teacher__input" type="text" placeholder="Tulis Judul Prestasi disini ..."></Input>
-                <Input className="homeroom-teacher__input mt-4" rows="5" type="textarea" placeholder="Tulis Deskripsi Prestasi disini ..."/> 
-              </div>
-            :
-              achievements.map(achievement => {
-                return (
-                  <div key={achievement.id} className='margin-bottom-6'>
-                    <Input onChange={(event) => this.props.changeAchievementNote(event, achievement.id, 'title')} className="homeroom-teacher__input mt-0" type="text" placeholder="Tulis Judul Prestasi disini ..." value={achievement.title} />
-                    <Input onChange={(event) => this.props.changeAchievementNote(event, achievement.id, 'description')} className="homeroom-teacher__input mt-4" rows="5" type="textarea" placeholder="Tulis Deskripsi Prestasi disini ..." value={achievement.description} />
-                  </div>
-                )
-              })
-            }
-            
-            <div className="homeroom-teacher__add-extracurricular">+ <span>Tambah Prestasi lainnya</span></div>
+            <Form className="homeroom-teacher__form">
+              {notes}
+              <div onClick={() => this.props.addNote('daily_result')} className="homeroom-teacher__add-extracurricular">+ <span>Tambah Prestasi lainnya</span></div> 
             </Form>
-            <Button onClick={() => this.props.saveAchievement('daily_result', 'achievements')} className="homeroom-teacher__save">Simpan</Button>
+            <Button 
+              onClick={() => this.props.saveAchievement('daily_result', 'user_achievements', body)} 
+              className="homeroom-teacher__save"
+              disabled={data.disabled}>
+              Simpan
+            </Button>
           </TabPane>
         </TabContent>
       </div>
@@ -133,7 +132,6 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
-    getData,
     getExtracurriculars,
     handleEvent,
     addNote
