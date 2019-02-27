@@ -126,7 +126,7 @@ export default class Header extends Component {
                 </ButtonToolbar>
             </NavItem>
         } else {
-            text = <button id="dropdown-profile" class="btn btn-info">{user_name}<span class="caret"></span></button>
+            text = <button id="dropdown-profile" className="btn btn-info">{user_name}<span className="caret"></span></button>
         }
 
         return (
