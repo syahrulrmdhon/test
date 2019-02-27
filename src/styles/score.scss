@@ -53,10 +53,10 @@
     .right-content {
       .large-text {
         vertical-align: middle;
-        font-size: 13px;
+        font-size: 12px;
       }
       .tab-span {
-        margin-right: 3px;
+        margin-right: 1px;
       }
     }
     .left-content {
@@ -67,7 +67,7 @@
   .filter-nilai {
     .large-text {
       vertical-align: middle;
-      font-size: 13px;
+      font-size: 12px;
     }
     .select__placeholder {
       font-size: 7px;
@@ -99,8 +99,12 @@
 @media only screen and (min-width: 890px) {
   .row-score {
     .right-content {
+      .large-text {
+        vertical-align: middle;
+        font-size: 14px;
+      }
       .tab-span {
-        margin-right: 4px;
+        margin-right: 2px;
       }
     }
     .left-content {
@@ -108,6 +112,10 @@
     }
   }
   .filter-nilai {
+    .large-text {
+      vertical-align: middle;
+      font-size: 14px;
+    }
     .select__placeholder {
       font-size: 9px;
     }
