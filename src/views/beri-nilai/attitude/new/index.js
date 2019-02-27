@@ -14,7 +14,6 @@ import './../../../../styles/attitude.scss'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
-
 const option = [
     { value: 2, label: 'Sangat Baik' },
     { value: 1, label: 'Baik' },
@@ -71,16 +70,17 @@ export class Index extends Component {
       }
 
     onSubmit() {
-        console.log(this.state.predicate, this.state.descrip)
         let dataWillSave = {}
         let dataArr = []
 
         dataArr.push({
-            "score": this.state.predicate.value, "description": this.state.descrip, "user_id": '"0eea9548-6397-4303-b980-e4b2bf34cc4a', "class_id": "1a5e496b-ffc4-445f-93b4-ef324e80e31c"
+            "score": this.state.predicate.value, "description": this.state.descrip, "user_id": this.props.match.params.user_id, "class_id": this.props.match.params.class_id
         });
         dataWillSave['user_attitudes'] = dataArr
+        let url = `/v1/assessments/${this.props.match.params.assessment_id}/classes/${this.props.match.params.class_id}/users/${this.props.match.params.user_id}`
 
-        let url = `/v1/assessments/add0e9de-bf3a-4c6b-b611-6b5f6a6893dc/classes/1a5e496b-ffc4-445f-93b4-ef324e80e31c/users/0eea9548-6397-4303-b980-e4b2bf34cc4a`
+        console.log(dataWillSave, url, "here url")
+
         apiClient('post', url, dataWillSave).then(res => {
             modal({
               message: 'Berhasil',
