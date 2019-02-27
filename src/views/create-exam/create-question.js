@@ -279,7 +279,7 @@ class Question extends Component {
             </div>
             <div className="create-exam__form-wrapper">
               <label className="create-exam__label">Nomor Soal</label>
-              <TabNumber class='create-exam__input' tab={numbers} toggle={this.toggle} activeTab={this.state.activeNumber}/>
+              <TabNumber className='create-exam__input' tab={numbers} toggle={this.toggle} activeTab={this.state.activeNumber}/>
               <label className="create-exam__label">Kompetensi Dasar</label>
               <Select
                 className="create-exam__input"

@@ -41,7 +41,7 @@ class BottomContent extends Component {
     this.generateNilai = this.generateNilai.bind(this)
   }
   componentDidMount() {
-    this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment)
+    this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment_id)
   }
   onClickToogle() {
     this.setState({
@@ -55,11 +55,47 @@ class BottomContent extends Component {
     let child = []
     let filtering = dataArray.filter(item => item.user.id === id)
     filtering.map((e) => {
-      child = e.scores.subject_averages
+      switch(this.props.category){
+        case 'knowledge':
+          child = e.scores.subject_averages
+        break;
+        case 'skill':
+          child = e.scores.problem_type_scores
+          let result = []
+
+          if(child.length > 0){
+            child.map((element, idx) => {
+              let details = element.details || []
+              let result_details = []
+              if(details.length > 0){
+                details.map((detail, key) => {
+                  result_details.push({
+                    average_score: {
+                      score: detail.score,
+                      predicate: detail.predicate,
+                      result_status: null,
+                    },
+                    basic_comp: {
+                      content: detail.question,
+                    },
+                  })
+                })
+              }
+
+              result.push({
+                average_score: {
+                  score: element.average_score,
+                  result_status: null,
+                },
+                competency_averages: result_details,
+                subject_name: element.problem_type
+              })
+            })
+          }
+          child = result
+        break;
+      }
     })
-    console.log(child, "data")
-
-
 
     this.setState({
       dataChild: child,
@@ -74,9 +110,8 @@ class BottomContent extends Component {
   }
 
   generateNilai(data) {
-    console.log(data.scores.total_average, "data atas")
     let scoresData = []
-    let status = data.scores.total_average.result_status
+    let status = data.scores.total_average.result_status || null
     if (status === 'very_good') {
       scoresData.push(<span className="label-green">{data.scores.total_average.score}</span>)
     } else if (status === 'good') {
@@ -147,9 +182,6 @@ class BottomContent extends Component {
     }
   }
 
-
-
-
   generateSubNilai(data, score) {
     if (data === 'very_good') {
       const render = (
@@ -179,6 +211,7 @@ class BottomContent extends Component {
 
   render() {
     const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
+
     return (
       <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-bottom-2">
         <div className='row padding-bottom-5'>
@@ -278,7 +311,7 @@ class BottomContent extends Component {
                           {
                             this.state.dataChild.map((data) => {
                               return <div>
-                                <div className="second-head padding-1 " key={Math.random()}>
+                                <div className="second-head padding-2 " key={Math.random()}>
                                   <div className="row">
                                     <div className="col-sm-12">
                                       <div className="col-sm-4">
@@ -294,7 +327,7 @@ class BottomContent extends Component {
                                 </div>
                                 {
                                   data.competency_averages.map((datax) => {
-                                    return <div className="padding-1" key={Math.random()}>
+                                    return <div className="padding-2" key={Math.random()}>
                                       <div className="row">
                                         <div className="col-sm-12">
                                           <div className="col-sm-6">
@@ -319,7 +352,6 @@ class BottomContent extends Component {
                               </div>
                             })
                           }
-
                         </div>
                       </div>
                     </div>
@@ -340,7 +372,7 @@ class BottomContent extends Component {
 
 
 const mapStateToProps = state => ({
-  user: state.score
+  user: state.score,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ getParticipant }, dispatch);
