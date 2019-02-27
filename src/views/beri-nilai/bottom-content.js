@@ -76,6 +76,7 @@ class BottomContent extends Component {
                       result_status: null,
                     },
                     basic_comp: {
+                      competency_number: '',
                       content: detail.question,
                     },
                   })
