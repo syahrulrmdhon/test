@@ -135,6 +135,7 @@ class New extends Component {
       dataWillSave.push({ ans: data.ans, exam_question_id: data.exam_question_id, score: data.score })
     })
     data['user_problem_answers'] = dataWillSave
+    console.log(data,"here date")
     let url = `v1/assessments/${this.props.match.params.assessment_id}/exams/${this.props.match.params.exam_id}/exam_scores/${this.props.match.params.student_id}/bulk_fill_answers`
     apiClient('post', url, data).then(res => {
       modal({

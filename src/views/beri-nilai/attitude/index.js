@@ -8,13 +8,20 @@ import { bindActionCreators } from 'redux';
 
 const data = 'add0e9de-bf3a-4c6b-b611-6b5f6a6893dc'
 export class index extends Component {
-    // constructor(props){
-    //     super(props)
+    constructor(props){
+        super(props)
         
-        
-    // }
+        this.onChange = this.onChange.bind(this)       
+    }
     componentDidMount(){
-        this.props.getDataScoreAttitude(data)
+        this.props.getDataScoreAttitude(this.props.match.params.id)
+    }
+
+    onChange(class_id, user_id){
+        console.log("hit here", class_id, user_id)
+        this.props.history.push({
+            pathname:`/score/attitude/new/assessment/${this.props.match.params.id}/class/${class_id}/user/${user_id}`
+        })
     }
 
     render() {
@@ -35,7 +42,9 @@ export class index extends Component {
                                 </div>
                             </div>
                             <div className="padding-top-2">
-                                    <Panel />
+                                    <Panel 
+                                        onChange={this.onChange}
+                                    />
                             </div>
                         </div>
                     </div>

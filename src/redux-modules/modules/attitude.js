@@ -16,6 +16,7 @@ export default function reducer(state = initialState, action) {
             }
         case LOAD_SUCCESS:
             delete state.error;
+            console.log(action,"my result")
             if (state.result !== action.result) {
                 return {
                     ...state,
@@ -50,7 +51,6 @@ export function getDataScoreAttitude(assessment_id) {
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
     const url = `${process.env.API_URL}v1/assessments/${assessment_id}/user_attitudes/participants`
-    console.log(url, "here url")
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
         promise: client => client.get( url, {
@@ -62,6 +62,25 @@ export function getDataScoreAttitude(assessment_id) {
         })
     }
 }
+
+
+export function getDataScoreDetail(assessment_id, class_id, user_id) {
+    const token = localStorage.getItem('token')
+    const schoolId = localStorage.getItem("school_id")
+    const url = `${process.env.API_URL}v1/assessments/${assessment_id}/classes/${class_id}/users/${user_id}`
+    return {
+        types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+        promise: client => client.get( url, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer ' + token,
+                'School-ID': schoolId
+            }
+        })
+    }
+}
+
+
 
 
 

@@ -164,6 +164,7 @@ $nunito_bold: "NunitoBold";
     line-height: 1.33;
     letter-spacing: normal;
     color: #1a9d7f;
+    cursor: pointer;
   }
 }
 
@@ -266,7 +267,7 @@ $nunito_bold: "NunitoBold";
   }
 
   .textarea-description {
-    width: 700px;
+    width: 100%;
     height: 150px;
   }
 

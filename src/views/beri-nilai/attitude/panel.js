@@ -6,14 +6,14 @@ import { getDataScoreAttitude } from './../../../redux-modules/modules/attitude'
 import { bindActionCreators } from 'redux';
 import Todo from './../../../assets/images/to-do.svg';
 
-var FontAwesome = require('react-fontawesome');
 
 
 export class Panel extends Component {
     render() {
         let data_panel_classes = this.props.data_panel && this.props.data_panel && this.props.data_panel.attitude && this.props.data_panel.attitude.data && this.props.data_panel.attitude.data.classes
-        let content = []
+        let content = []    
         data_panel_classes && data_panel_classes.map((x) => {
+            console.log(x.id," x data")
             x.users.map((data) => {
                 let merge = []
                 if (data.score === 2) {
@@ -33,7 +33,7 @@ export class Panel extends Component {
                         <span className="score-attitude__score ">N/A</span>
                     )
                 }
-
+                
                 content.push(<div className="row margin-top-4">
                     <div className="panel margin-side-3">
                         <div className="col-sm-12">
@@ -95,7 +95,7 @@ export class Panel extends Component {
                             <div className="col-sm-1">
                                 <div className="row padding-top-3 padding-bottom-3">
                                     <div className="col-sm-12">
-                                        <div className="score-attitude__add-score padding-top-6">
+                                        <div className="score-attitude__add-score padding-top-6" onClick={(e) => {this.props.onChange(x.id, data.id) }} >
                                             <img src={Todo} alt="" width="15" className="margin-top-1" />
                                             <span className="padding-left-1" >Beri Nilai</span>
                                         </div>

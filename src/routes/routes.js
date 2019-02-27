@@ -202,12 +202,12 @@ export const MainRoutes = [
         component: NoQuestions
     },
     {
-        path:'/score/attitude/',
+        path:'/score/attitude/:id',
         exact:true,
         component:DetailScoreAttitude
     },
     {
-        path:'/score/attitude/new',
+        path:'/score/attitude/new/assessment/:assessment_id/class/:class_id/user/:user_id',
         component:NewAttitudeScore
     },
     {

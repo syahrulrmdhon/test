@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import classnames from 'classnames';
-
+import { getDataScoreAttitude } from './../../../../redux-modules/modules/attitude'
+import { bindActionCreators } from 'redux';
 import Avatar from 'react-avatar';
 import Ava from './../../../../assets/images/img_avatar.png'
 
@@ -25,6 +26,7 @@ export class Report extends Component {
         }
     }
     render() {
+        console.log(this.props.data_user,"here to")
         return (
             <div>
                 <div className="padding-4">
@@ -95,7 +97,7 @@ export class Report extends Component {
                         
                     </div>
                 </div>
-                <div className="row ">
+                <div className="row border-top ">
                     <div className="border-top-score">
                         <div className="margin-top-0 margin-left-3 ">
                             <Nav tabs className="toggle-score">
@@ -123,7 +125,7 @@ export class Report extends Component {
                                         Baik
                                     </NavLink>
                                 </NavItem>
-                                <NavItem>
+                                <NavItem >
                                     <NavLink
                                         className={classnames({ active: this.state.activeTab === 'bp' })}
                                         onClick={() => { this.toggle('bp'); }}
@@ -141,12 +143,9 @@ export class Report extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Report)
+const mapStateToProps = state => ({
+    data_user: state.attitude
+  })
+  
+const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreAttitude }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(Report);

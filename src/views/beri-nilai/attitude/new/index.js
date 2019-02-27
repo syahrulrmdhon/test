@@ -6,6 +6,8 @@ import Report from './report-list'
 import Select from 'react-select'
 import { apiClient } from '../../../../utils/apiClient'
 import { error, modal } from './../../../global/modal'
+import { getDataScoreDetail } from './../../../../redux-modules/modules/attitude'
+import { bindActionCreators } from 'redux';
 
 //css
 import './../../../../styles/attitude.scss'
@@ -19,7 +21,7 @@ const option = [
     { value: 0, label: 'Butuh Perhatian' }
 ]
 
-export class componentName extends Component {
+export class Index extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -30,6 +32,9 @@ export class componentName extends Component {
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.handleSave = this.handleSave.bind(this)
+    }
+    componentDidMount(){
+        this.props.getDataScoreDetail(this.props.match.params.assessment_id, this.props.match.params.class_id, this.props.match.params.user_id)
     }
 
     onChangeSelect(predicate) {
@@ -75,7 +80,7 @@ export class componentName extends Component {
         });
         dataWillSave['user_attitudes'] = dataArr
 
-        let url = `/v1/assessments/add0e9de-bf3a-4c6b-b611-6b5f6a6893dc/user_attitudes`
+        let url = `/v1/assessments/add0e9de-bf3a-4c6b-b611-6b5f6a6893dc/classes/1a5e496b-ffc4-445f-93b4-ef324e80e31c/users/0eea9548-6397-4303-b980-e4b2bf34cc4a`
         apiClient('post', url, dataWillSave).then(res => {
             modal({
               message: 'Berhasil',
@@ -117,12 +122,12 @@ export class componentName extends Component {
                         <Header navbar={false} location="/score/attitude/" />
                         <div className="margin-side-4 margin-top-7">
                             <div className="col-sm-12">
-                                <div className="col-sm-4" >
+                                <div className="col-sm-5" >
                                     <div className="content-block  content-score  ">
                                         <Report />
                                     </div>
                                 </div>
-                                <div className="col-sm-8" >
+                                <div className="col-sm-7" >
                                     <div className="content-block  content-score  ">
                                         <div className="padding-3">
                                             <div className="score-attitude-new__predicate-title">
@@ -174,12 +179,9 @@ export class componentName extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(componentName)
+const mapStateToProps = state => ({
+    user: state.score
+  })
+  
+  const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreDetail }, dispatch);
+  export default connect(mapStateToProps, mapDispatchToProps)(Index);
