@@ -19,8 +19,8 @@ import {error, modal} from './../global/modal'
 
 const category_types = [
     { value: 'knowledge', label: 'Pengetahuan' },
-    // { value: 'skill', label: 'Keterampilan' },
-    // { value: 'attitude', label: 'Sikap' },
+    { value: 'skill', label: 'Keterampilan' },
+    { value: 'attitude', label: 'Sikap' },
 ]
 
 class Add extends Component {

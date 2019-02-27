@@ -152,7 +152,7 @@ class Content extends Component {
   }
 
   getFilterSubject() {
-    const url = `v1/filters/subjects`
+    const url = `v1/filters/subjects?user_id=${this.props.studentId}`
 
     apiClient('get', url).then(response => {
       this.setState({subjects: response.data.data.subjects})
