@@ -71,9 +71,10 @@ class BottomContent extends Component {
                 details.map((detail, key) => {
                   result_details.push({
                     average_score: {
+                      improvement_status: detail.improvement_status,
                       score: detail.score,
                       predicate: detail.predicate,
-                      result_status: null,
+                      result_status: detail.result_status,
                     },
                     basic_comp: {
                       competency_number: '',
@@ -82,11 +83,12 @@ class BottomContent extends Component {
                   })
                 })
               }
-
+              
               result.push({
                 average_score: {
+                  predicate: element.predicate,
                   score: element.average_score,
-                  result_status: null,
+                  result_status: element.result_status,
                 },
                 competency_averages: result_details,
                 subject_name: element.problem_type

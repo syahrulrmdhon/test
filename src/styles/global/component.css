@@ -1456,7 +1456,7 @@ tbody tr:nth-child(even) {
 
 .switch {
   background-color: #FFF;
-  height: 100%;
+  height: -webkit-fill-available;
 }
 
 .switch .header {
@@ -1485,9 +1485,11 @@ tbody tr:nth-child(even) {
 }
 
 .switch .trigger-account {
-  position: absolute;
-  left: 340px;
-  top: 10px;
+  /* position: absolute; */
+  float: right;
+  margin-top: 10px;
+  /* left: 340px; */
+  /* top: 10px; */
 }
 
 .switch .account-list {
