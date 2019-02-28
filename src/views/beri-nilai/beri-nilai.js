@@ -10,7 +10,9 @@ import BottomContentEvaluasi from './evaluasi/bottom-content-evaluasi'
 import { apiClient } from '../../utils/apiClient'
 import RightContent from './right-content'
 import SubjectEvaluasi from './evaluasi/subject-evaluasi';
-import { getParticipant } from './../../redux-modules/modules/score'
+import { 
+  getParticipant
+} from './../../redux-modules/modules/score'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Page from './../../components/Title'
@@ -54,7 +56,6 @@ class Nilai extends Component {
     this.getQuestionsResults()
     this.getQuestions()
     this.fetchData()
-
   }
   toggleMenu(menu) {
     if (this.state.activeMenu !== menu) {
@@ -133,7 +134,6 @@ class Nilai extends Component {
     }
   }
   render() {
-    console.log(this.props.location, "my path")
     const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
     let path = `/exam/${this.state.assessment_id}`
     
@@ -172,7 +172,8 @@ class Nilai extends Component {
                       <BottomContent
                         exam={this.state.exam_id}
                         class={this.state.class_id}
-                        asssessment={this.state.assessment_id}
+                        asssessment_id={this.state.assessment_id}
+                        category={this.props.location.state.assessment_category}
                         handleNewScoreParent={this.handleNewScore}
                         search={this.state.search}
                         onChange={this.onChangeSelect}
@@ -232,9 +233,12 @@ class Nilai extends Component {
 
 
 const mapStateToProps = state => ({
-  user: state.score
+  user: state.score,
+  assessment: state.assessment,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getParticipant }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ 
+  getParticipant ,
+}, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Nilai);
 

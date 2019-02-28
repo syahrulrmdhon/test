@@ -42,18 +42,20 @@ class Add extends Component{
         let msg = 'tambah'
         let action = 'post'
         let route = `/question-skill/${this.state.assessment_id}`
+        let addText = ', selanjutnya masuk ke form beri soal'
 
         if(this.state.exam_id){
             url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}`
             msg = 'ubah'
             action = 'put'
-            route = `/edit-question-skill/${this.state.assessment_id}/exam/${this.state.exam_id}`
+            route = `/exam/${this.state.assessment_id}`
+            addText = ''
         }
 
         apiClient(action, url, data).then(response => {
             modal({
                 message: 'Berhasil',
-                description: `Selamat berhasil ${msg} tugas keterampilan, selanjutnya masuk ke form beri soal`,
+                description: `Selamat berhasil ${msg} tugas keterampilan${addText}`,
                 btns: [
                     {
                         label: 'Selanjutnya',
