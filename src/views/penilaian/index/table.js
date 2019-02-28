@@ -108,11 +108,13 @@ export default class Table extends Component {
                         <td>{totalExam}</td>
                         <td>{value.created_date}</td>
                         <td className="align-right padding-right-6">
-                            <NavLink to={url} className="btn default margin-right-4">Lihat</NavLink>
-                            <FontAwesome name="trash" className="margin-left-2 margin-right-2 cgreen" onClick={this.delete.bind(this, value)} />
-                            <NavLink to={`/penilaian/edit/${value.id}`}>
-                                <FontAwesome name="edit" className="margin-left-2 cgreen" />
-                            </NavLink>
+                            <div className="action-wrapper">
+                                <NavLink to={url} className="btn default margin-right-4">Lihat</NavLink>
+                                <FontAwesome name="trash" className="margin-left-2 margin-right-2 cgreen" onClick={this.delete.bind(this, value)} />
+                                <NavLink to={`/penilaian/edit/${value.id}`}>
+                                    <FontAwesome name="edit" className="margin-left-2 cgreen" />
+                                </NavLink>
+                            </div>
                         </td>
                     </tr>
                 )
