@@ -41,6 +41,7 @@ class AddClass extends Component {
             this.props.assessment_classes.map((assessment_class, idx) => {
                 let remove;
                 let class_id = assessment_class.class_id || null
+                console.log("my scalss", this.props.assessment_classeset)
 
                 if(idx > 0){
                     remove = <div className="col-sm-1">
@@ -100,6 +101,7 @@ class AddClass extends Component {
 const mapStateToProps = (state, props) => ({
     assessment: state.assessment,
     assessment_classes: state.assessment ? state.assessment.assessment_classes_attributes : [{}],
+    assessment_classeset: state.assessment ,
 })
 const mapDispatchToProps = dispatch => bindActionCreators({ 
     addClass,

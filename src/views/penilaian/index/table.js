@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-var FontAwesome = require('react-fontawesome');
 import classnames from 'classnames'
 import {combineNameSubject, assessmentLabel} from './../../../utils/exam'
 import {apiClient} from './../../../utils/apiClient'
@@ -11,6 +10,7 @@ import { modal } from './../../global/modal'
 import { assessmentGetData } from './../../../utils/exam' // getdata
 import { NavLink } from 'react-router-dom'
 
+var FontAwesome = require('react-fontawesome');
 export default class Table extends Component {
     constructor(props){
         super(props)
@@ -74,7 +74,7 @@ export default class Table extends Component {
         let content = []
         if(this.state.data.length > 0){
             this.state.data.map((value, idx) => {
-                const { category } = value
+                const { category, assessment_type } = value
                 
                 let url = ''
                 let totalExam = ''
@@ -83,7 +83,17 @@ export default class Table extends Component {
 
                 if(category == 'attitude'){
                     totalExam = combineNameSubject(value.school_attitudes)
-                    url = `attitude/${value.id}/${category}`
+                    console.log(assessment_type,"assesment")
+                    switch(assessment_type){
+                        case 'daily':
+                        url = `attitude/${value.id}/${category}`
+                        break;
+                        case 'final_aspect':
+                        case 'final_subject':
+                        url = `/score/attitude/${value.id}`
+                        break;
+                    }
+                    
                 } else {
                     url = 'exam/'+value.id
                     let label = assessmentLabel(value.assessment_type)

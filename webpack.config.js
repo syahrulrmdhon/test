@@ -10,7 +10,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const API_URL = {
     production: JSON.stringify('https://api.core.gredu.co/'),
     development: JSON.stringify('https://dev.api.core.gredu.co/'),
-    uat:JSON.stringify('https://aut.api.core.gredu.co/'),
+    uat:JSON.stringify('https://uat.api.core.gredu.co/'),
     qa: JSON.stringify('https://qa.api.core.gredu.co/')
 }
 
