@@ -5,7 +5,7 @@ export default class TableSikap extends Component {
     render() {
         return (
             <Table bordered striped responsive hover>
-                <thead>
+                <thead className='text-center'>
                     <tr>
                         <th>Nama Murid</th>
                         <th>Sangat Baik</th>
@@ -16,8 +16,8 @@ export default class TableSikap extends Component {
                 <tbody>
                     {
                         this.props.tableAttitude.map(function (data, i) {
-                            return <tr key={i}>
-                                <td className="student-name" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
+                            return <tr key={i} className='text-center'>
+                                <td className="student-name text-left" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
                                 <td>
                                     {data.subject_score_details.sb === null ? "-" : data.subject_score_details.sb}
                                 </td>

@@ -11,7 +11,7 @@
   -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
   box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
   .left-content {
-    height: 100%;
+    height: 530px;
     width: 90%;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -25,14 +25,15 @@
   .tab-content-score {
     max-height: 450px;
     overflow-y: scroll;
+    .tab-pane {
+      height: 100%;
+    }
   }
 }
 .arrow img {
   width: 10px;
   height: 20px;
-}
-.tab-pane {
-  height: 100%;
+  vertical-align: middle;
 }
 .not-available {
   height: 80%;
@@ -46,4 +47,95 @@
 .cursor:hover {
   cursor: default;
   background-color: #4b635d;
+}
+@media only screen and (min-width: 800px) and (max-width: 889px) {
+  .row-score {
+    .right-content {
+      .large-text {
+        vertical-align: middle;
+        font-size: 12px;
+      }
+      .tab-span {
+        margin-right: 1px;
+      }
+    }
+    .left-content {
+      height: 530px;
+    }
+  }
+
+  .filter-nilai {
+    .large-text {
+      vertical-align: middle;
+      font-size: 12px;
+    }
+    .select__placeholder {
+      font-size: 7px;
+    }
+    .select__input {
+      font-size: 7px;
+    }
+    .select__single-value {
+      font-size: 9px;
+    }
+    .btn-green {
+      height: 35px;
+      font-size: 10px;
+    }
+  }
+
+  .table-bordered {
+    thead th {
+      vertical-align: top;
+      font-size: 10px;
+    }
+    tbody tr {
+      td {
+        font-size: 10px;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 890px) {
+  .row-score {
+    .right-content {
+      .large-text {
+        vertical-align: middle;
+        font-size: 14px;
+      }
+      .tab-span {
+        margin-right: 2px;
+      }
+    }
+    .left-content {
+      height: 530px;
+    }
+  }
+  .filter-nilai {
+    .large-text {
+      vertical-align: middle;
+      font-size: 14px;
+    }
+    .select__placeholder {
+      font-size: 9px;
+    }
+    .select__single-value {
+      font-size: 9px;
+    }
+  }
+  .table-bordered {
+    thead th {
+      vertical-align: top;
+    }
+  }
+}
+@media only screen and (min-width: 1015px) {
+  .filter-nilai {
+    .select__placeholder {
+      font-size: 12px;
+    }
+    .select__single-value {
+      font-size: 12px;
+    }
+  }
 }

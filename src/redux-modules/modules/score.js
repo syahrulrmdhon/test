@@ -22,7 +22,6 @@ export default function reducer(state = initialState, action) {
                 related_id: action.related_id,
                 score: action.value,
             }
-            console.log(state)
             return {
                 ...state,
                 loaded: true,

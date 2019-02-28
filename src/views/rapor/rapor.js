@@ -196,7 +196,7 @@ export default class Rapor extends Component {
         <Header />
         <div className='content'>
           <div className='row row-score'>
-            <div className='left-content col-2'>
+            <div className='left-content col-sm-2 col-lg-2'>
               <FilterRapor
                 listSemester={this.state.listSemester}
                 selectedSemester={this.state.selectedSemester}
@@ -208,18 +208,18 @@ export default class Rapor extends Component {
                 handlePrint={this.handlePrint}
               />
             </div>
-            <div className='right-content col-10'>
+            <div className='right-content col-sm-10 col-lg-10'>
               <div className='row margin-bottom-4'>
-                <div className='col-4'>
+                <div className='col-sm-3 col-lg-4'>
                   <h5 className='float-left margin-left-1 padding-top-1'>
                     <strong className='large-text'>
                       Rapor Kelas {this.state.nameClass}
                     </strong>
                   </h5>
                 </div>
-                <div className='col-8'>
+                <div className='col-sm-9 col-lg-8'>
                   <span className='float-right margin-right-1'>
-                    <Nav tabs className='toggle border-0 pull-right'>
+                    <Nav tabs className='toggle border-0 pull-right tab-span'>
                       <NavItem className='tab-nilai'>
                         <NavLink className={classnames({active: this.state.activeTab === '1'})} onClick={() => {this.toggle('1')}}>
                           Pengetahuan

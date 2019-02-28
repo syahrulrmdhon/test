@@ -24,7 +24,7 @@ export class NotPassed extends Component {
         let notPassed = this.props.notPassed
 
         if(notPassed > 0){
-            classname = 'card__value'
+            classname = 'card__error'
         }else {
             classname = 'card__error'
         }

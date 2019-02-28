@@ -25,14 +25,18 @@ export class Index extends Component {
         super(props)
         this.state = {
             predicate: '',
+            activeTab: 'semua',
             descrip: ''
         }
         this.onChangeSelect = this.onChangeSelect.bind(this)
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.handleSave = this.handleSave.bind(this)
+        this.toggle = this.toggle.bind(this);
+        
     }
     componentDidMount(){
+        console.log(this.state.activeTab,"my active")
         this.props.getDataScoreDetail(this.props.match.params.assessment_id, this.props.match.params.class_id, this.props.match.params.user_id)
     }
 
@@ -43,6 +47,15 @@ export class Index extends Component {
         this.setState({
             descrip: e.target.value
         })
+    }
+    
+    toggle(tab) {
+        console.log(tab)
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
     }
 
     handleSave(e) {
@@ -81,34 +94,36 @@ export class Index extends Component {
         let url = `v1/assessments/${this.props.match.params.assessment_id}/classes/${this.props.match.params.class_id}/users/${this.props.match.params.user_id}`
 
         apiClient('post', url, dataWillSave).then(res => {
-            modal({
-              message: 'Berhasil',
-              description: 'Data yang Anda masukkan benar',
-              btns: [
-                {
-                  label: 'Lanjut',
-                  className: 'btn green',
-                  event: this.props.history.push({
-                    pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam + '/category/' +  this.props.location.state.conditon + '/class/' + this.state.class_id,
-                    state: { assessment_category: this.props.location.state.conditon }
-                  })
-                }
-              ]
-            })
+            console.log("here", res.data.data)
+            // modal({
+            //   message: 'Berhasil',
+            //   description: 'Data yang Anda masukkan benar',
+            //   btns: [
+            //     {
+            //       label: 'Lanjut',
+            //       className: 'btn green',
+            //       event: this.props.history.push({
+            //         pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam + '/category/' +  this.props.location.state.conditon + '/class/' + this.state.class_id,
+            //         state: { assessment_category: this.props.location.state.conditon }
+            //       })
+            //     }
+            //   ]
+            // })
           })
             .catch(err => {
+                console.log("or here", err)
               let response = err.response
               let data = response.data.status_code
               if(data === 400) {
-                error({
-                  message: 'Gagal semua form harus diisi',
-                  btns: [
-                      {
-                          label: 'Ulangi',
-                          className: 'btn bcred cwhite'
-                      }
-                  ]
-              })
+            //     error({
+            //       message: 'Gagal semua form harus diisi',
+            //       btns: [
+            //           {
+            //               label: 'Ulangi',
+            //               className: 'btn bcred cwhite'
+            //           }
+            //       ]
+            //   })
               }
             })
     }
@@ -123,7 +138,10 @@ export class Index extends Component {
                             <div className="col-sm-12">
                                 <div className="col-sm-5" >
                                     <div className="content-block  content-score  ">
-                                        <Report />
+                                        <Report 
+                                            toggle={this.toggle}
+                                            activeTab={this.state.activeTab}
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-sm-7" >
