@@ -22,11 +22,11 @@ export class Panel extends Component {
                     )
                 } else if (data.score === 1) {
                     merge.push(
-                        <span className="score-attitude__score-b ">{data.score}</span>
+                        <span className="score-attitude__score-b ">B</span>
                     )
                 } else if (data.score === 0) {
                     merge.push(
-                        <span className="score-attitude__score ">{data.score}</span>
+                        <span className="score-attitude__score ">BP</span>
                     )
                 } else {
                     merge.push(

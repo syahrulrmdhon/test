@@ -6,6 +6,7 @@ import { getDataScoreAttitude } from './../../../../redux-modules/modules/attitu
 import { bindActionCreators } from 'redux';
 import Avatar from 'react-avatar';
 import Ava from './../../../../assets/images/img_avatar.png'
+import BrokenHeart from './../../../../assets/images/BROKENHEARTFORHENGKYFROMHENGKY.svg'
 
 export class Report extends Component {
     constructor(props) {
@@ -41,43 +42,43 @@ export class Report extends Component {
         let report = []
         if (school_attitudes_length === 0) {
             subjects && subjects.map((data, index) => {
-                title.push(<span className="score-attitude-new__left-title">Daftar Laporan Sikap ({data.alias_name}) </span>)
+                title.push(<span key={Math.random()}  className="score-attitude-new__left-title">Daftar Laporan Sikap ({data.alias_name}) </span>)
                 switch (this.state.activeTab) {
                     case 'semua':
-                        subtitle.push(<span className="score-attitude-new__predicate-title">Semua sikap ({data_user_attitudes.entries.length}) </span>)
+                        subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Semua sikap ({data_user_attitudes.entries.length}) </span>)
                         break;
                     case 'sb':
-                        subtitle.push(<span className="score-attitude-new__predicate-title">Sangat Baik ({data_user_attitudes.entries.length}) </span>)
+                        subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Sangat Baik ({data_user_attitudes.entries.length}) </span>)
                         break;
                     case 'b':
-                        subtitle.push(<span className="score-attitude-new__predicate-title">Baik ({data_user_attitudes.entries.length}) </span>)
+                        subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Baik ({data_user_attitudes.entries.length}) </span>)
                         break;
                     case 'bp':
-                        subtitle.push(<span className="score-attitude-new__predicate-title">Butuh Perhatian ({data_user_attitudes.entries.length}) </span>)
+                        subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Butuh Perhatian ({data_user_attitudes.entries.length}) </span>)
                         break;
                     default:
-                        subtitle.push(<span className="score-attitude-new__predicate-title">Semua sikap ({data_user_attitudes.entries.length}) </span>)
+                        subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Semua sikap ({data_user_attitudes.entries.length}) </span>)
 
                 }
             })
         } else {
-            school_attitudes && school_attitudes.map((data, index) => {
-                title.push(<span className="score-attitude-new__left-title">Daftar Laporan Sikap ({data.alias_name}) </span>)
+            school_attitudes && school_attitudes.map((data) => {
+                title.push(<span key={Math.random()} className="score-attitude-new__left-title">Daftar Laporan Sikap ({data.alias_name}) </span>)
                 switch (this.state.activeTab) {
                     case 'semua':
-                        subtitle.push(<span className="score-attitude-new__predicate-title">Semua sikap ({data_user_attitudes.entries.length}) </span>)
+                        subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Semua sikap ({data_user_attitudes.entries.length}) </span>)
                         break;
                     case 'sb':
-                        subtitle.push(<span className="score-attitude-new__predicate-title">Sangat Baik ({data_user_attitudes.entries.length}) </span>)
+                        subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Sangat Baik ({data_user_attitudes.entries.length}) </span>)
                         break;
                     case 'b':
-                        subtitle.push(<span className="score-attitude-new__predicate-title">Baik ({data_user_attitudes.entries.length}) </span>)
+                        subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Baik ({data_user_attitudes.entries.length}) </span>)
                         break;
                     case 'bp':
-                        subtitle.push(<span className="score-attitude-new__predicate-title">Butuh Perhatian ({data_user_attitudes.entries.length}) </span>)
+                        subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Butuh Perhatian ({data_user_attitudes.entries.length}) </span>)
                         break;
                     default:
-                        subtitle.push(<span className="score-attitude-new__predicate-title">Semua sikap ({data_user_attitudes.entries.length}) </span>)
+                        subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Semua sikap ({data_user_attitudes.entries.length}) </span>)
 
                 }
             })
@@ -98,7 +99,7 @@ export class Report extends Component {
                                 <span >Mengajari teman-teman sekelasnya agar paham materi persamaan linear dalam kompleksitas aljabar.</span>
                             </div>
                             <div className="margin-top-1">
-                                <i class=" fa fas fa-heart cgreen"></i> <span className="cgreen">SB</span>
+                                <i className=" fa fas fa-heart cgreen"></i> <span className="cgreen">SB</span>
                             </div>
 
                         </div>
@@ -117,7 +118,7 @@ export class Report extends Component {
                                 <span >Mengajari teman-teman sekelasnya agar paham materi persamaan linear dalam kompleksitas aljabar.</span>
                             </div>
                             <div className="margin-top-1">
-                                <i class=" fa fas fa-heart cgreen"></i> <span className="cgreen">SB</span>
+                                <i className=" fa fas fa-heart cgreen"></i> <span className="cgreen">SB</span>
                             </div>
 
                         </div>
@@ -136,7 +137,7 @@ export class Report extends Component {
                                 <span >Mengajari teman-teman sekelasnya agar paham materi persamaan linear dalam kompleksitas aljabar.</span>
                             </div>
                             <div className="margin-top-1">
-                                <i class=" fa fas fa-heart cred"></i> <span className="cred">BP</span>
+                                <i className=" fa fas fa-heart cred"></i> <span className="cred">BP</span>
                             </div>
 
                         </div>
@@ -155,7 +156,7 @@ export class Report extends Component {
                                 <span >Mengajari teman-teman sekelasnya agar paham materi persamaan linear dalam kompleksitas aljabar.</span>
                             </div>
                             <div className="margin-top-1">
-                                <i class=" fa fas fa-heart cgreen"></i> <span className="cgreen">SB</span>
+                                <i className=" fa fas fa-heart cgreen"></i> <span className="cgreen">SB</span>
                             </div>
 
                         </div>
@@ -174,9 +175,8 @@ export class Report extends Component {
                                 <span >Mengajari teman-teman sekelasnya agar paham materi persamaan linear dalam kompleksitas aljabar.</span>
                             </div>
                             <div className="margin-top-1">
-                                <i class=" fa fas fa-heart cred"></i> <span className="cred">BP</span>
+                                <img className="cred" src={BrokenHeart} alt="" /> <span className="cred">BP</span>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -198,13 +198,13 @@ export class Report extends Component {
                                 {report}
                             </TabPane>
                             <TabPane tabId="sb">
-                                sangat baik
+                            {report}
                         </TabPane>
                             <TabPane tabId="b">
-                                baik
+                            {report}
                         </TabPane>
                             <TabPane tabId="bp">
-                                butuh perhatian
+                            {report}
                         </TabPane>
                         </TabContent>
                     </div>

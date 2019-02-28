@@ -341,7 +341,7 @@ class BottomContent extends Component {
                                           </div>
                                           <div className="col-sm-4 align-center">
                                             <div className="align-center">
-                                              {this.generateSubNilai(datax.average_score.result_status, data.average_score.score)}
+                                              {this.generateSubNilai(datax.average_score.result_status, datax.average_score.score)}
                                             </div>
                                           </div>
                                         </div>
