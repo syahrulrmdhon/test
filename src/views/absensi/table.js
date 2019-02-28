@@ -31,6 +31,7 @@ export default class TableAttendance extends Component {
         }
         return (
             <div className="attendance-table">
+                <div className="line"></div>
                 <div className="table-content">
                     <Table responsive hover>
                         <thead>

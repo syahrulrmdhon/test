@@ -365,7 +365,7 @@ class Content extends Component {
 
   render() {
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
-    const tabHomeRoom = ['Catatan Wali Kelas', 'Estrakurikuler', 'Prestasi']
+    const tabHomeRoom = ['Catatan Wali Kelas', 'Ekstrakurikuler', 'Prestasi']
     
     const attendances = this.state.attendanceDetail.attendances
 

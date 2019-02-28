@@ -4,15 +4,15 @@ const LOAD = "modules/teacherNote/LOAD"
 const LOAD_SUCCESS = "modules/teacherNote/LOAD_SUCCESS"
 const LOAD_FAIL = "modules/teacherNote/LOAD_FAIL"
 const GET_DATA = "modules/teacherNote/GET_DATA"
-const GET_EXTRACURRICULARS = "module/teacherNote/GET_EXTRACURRICULARS"
-const HANDLE_EVENT = "module/teacherNote/HANDLE_EVENT"
-const HANDLE_ADD = "module/teacherNote/HANDLE_ADD"
-const HANDLE_DISABLED = "module/teacherNote/HANDLE_DISABLED"
-
+const GET_EXTRACURRICULARS = "modules/teacherNote/GET_EXTRACURRICULARS"
+const HANDLE_EVENT = "modules/teacherNote/HANDLE_EVENT"
+const HANDLE_ADD = "modules/teacherNote/HANDLE_ADD"
+const HANDLE_DISABLED = "modules/teacherNote/HANDLE_DISABLED"
 
 const initialState = {
   disabled: true
 };
+
 const initialNote = {
   extracurricular_id: '', description: ''
 }
@@ -43,22 +43,22 @@ export default function reducer(state = initialState, action) {
         loading: false
       };
     case HANDLE_EVENT:
-      state.notes.map(note => {
-        if (note.id === action.id) {
-          if (note[action.field] !== action.value) {
-            state.disabled = false
-          }
-          note[action.field] = action.value
-        }
-      })
+      const {field, value, data} = action
+      state.notes[data.order][field] = value
+      
+      if(data.id != undefined){
+        state.notes[data.order]['id'] = data.id
+      }
+
       return {
         ...state,
+        disabled: false,
         loaded: true,
         loading: false
       };
     case HANDLE_ADD:
       if (action.content === 'extracurricular') {
-        state.notes = [...state.notes, initialNote]
+        state.notes = [...state.notes, {initialNote}]
       }
 
       return {
@@ -128,13 +128,12 @@ export function getExtracurriculars() {
   }
 }
 
-export function handleEvent(value, field, id) {
-
+export function handleEvent(value, field, params) {
   return {
     type: HANDLE_EVENT,
     value: value,
     field: field,
-    id: id
+    data: params
   }
 }
 
