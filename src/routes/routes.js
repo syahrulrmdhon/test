@@ -69,6 +69,10 @@ export const MainRoutes = [
         component: NotifRegist
     },
     {
+        path: '/notif-regist/:code',
+        component: NewPassword
+    },
+    {
         path: '/verification/:code',
         component: NewPassword
     },
@@ -194,7 +198,7 @@ export const MainRoutes = [
     },
     {
         path: '/questions/:id',
-        component: Questions
+        component: Questions //beri nilai tidak buat soal
     },
     {
         path: '/beri-nilai/:assessment_id/exam/:exam_id/class/:class_id',

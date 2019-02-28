@@ -31,10 +31,11 @@ export default class NotifRegist extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
-        const url = `${process.env.API_URL}`
-        const endpoint = `authentication/verification_email?url=${url}/:code&token_type=base64`
+        // const url = `${process.env.API_URL}`
+        const url = window.location.href + '/:code&token_type=base64'
+        const endpoint = `authentication/verification_email?url=${url}`
         const data = {
-                email: this.state.email
+            email: this.state.email
         }
 
         apiClient('post', endpoint, data).then(res => {
