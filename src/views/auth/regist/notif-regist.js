@@ -31,7 +31,6 @@ export default class NotifRegist extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
-        // const url = `${process.env.API_URL}`
         const url = window.location.href + '/:code&token_type=base64'
         const endpoint = `authentication/verification_email?url=${url}`
         const data = {
@@ -100,7 +99,6 @@ export default class NotifRegist extends Component {
                             <a href="mailto:help@gredu.asia">&nbsp;Hubungi Gredu</a>
                         </span>
                     </div>
-                    {/* <p className="contact">Ada kendala di akun ini?</p> */}
                     <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                 </div>
             </div>

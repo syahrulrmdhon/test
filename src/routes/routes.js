@@ -69,10 +69,12 @@ export const MainRoutes = [
         component: NotifRegist
     },
     {
+        // for resend email verification
         path: '/notif-regist/:code',
         component: NewPassword
     },
     {
+        // for send email verification
         path: '/verification/:code',
         component: NewPassword
     },

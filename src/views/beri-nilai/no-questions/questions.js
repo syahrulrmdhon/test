@@ -15,9 +15,6 @@ class Questions extends Component {
         super(props)
 
         this.state = ({
-            // assessment_id: props.match.params.assessment_id,
-            // exam_id: props.match.params.exam_id,
-            // student_id: props.match.params.student_id,
             alias: '',
             examScore: {},
             exam_scores: [],
@@ -25,7 +22,6 @@ class Questions extends Component {
             dataPost: [],
             idSubject: '',
             fullname: props.location.state.fullname,
-            // class_id: props.match.params.class_id,
             nilai: '',
             flag: false
         })
@@ -118,31 +114,6 @@ class Questions extends Component {
             )
         })
 
-        // if (this.state.dataScores.length > 0) {
-        //     let scores = this.state.dataScores
-        //     scores.map((value, i) => {
-        //         data.push(
-        //             <div className='row' key={i}>
-        //                 <div className='col-sm-6'>
-        //                     <label className='disblock padding-bottom-2 subject-title'>Mata Pelajaran</label>
-        //                     <input className='input-question' type='text' placeholder={value.alias_name} readOnly></input>
-        //                 </div>
-        //                 <div className='col-sm-6 margin-bottom-4'>
-        //                     <label className='disblock padding-bottom-2 subject-title'>Nilai</label>
-
-        //                     <input
-        //                         className='input-question'
-        //                         name='nilai'
-        //                         value={this.state.nilai}
-        //                         type='number'
-        //                         onChange={(e) => this.handleChange(e)}
-        //                         placeholder='Masukkan Nilai...'
-        //                     />
-        //                 </div>
-        //             </div>
-        //         )
-        //     })
-        // }
         return (
             <div className='padding-content' >
                 <Header navbar={false} location={path} />
