@@ -116,7 +116,7 @@ class Login extends Component {
                                         <br /><br />
                                         <button type="submit" className="btn btn-young-green col-12">Masuk</button>
                                         <div className='float-right margin-top-4'>
-                                            <p>Lupa kata sandi?<Link to="/forgot" className='normal-text-green'> Klik Disini</Link></p>
+                                            <p>Lupa kata sandi?<Link to="/forgot" className='normal-text-green'> Klik Di sini</Link></p>
                                         </div>
                                         <br /><br />
                                         <br />

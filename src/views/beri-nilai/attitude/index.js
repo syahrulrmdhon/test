@@ -3,8 +3,25 @@ import { connect } from 'react-redux'
 import Panel from './panel'
 import Header from './../../global/header'
 import './../../../styles/attitude.scss'
+import { getDataScoreAttitude } from './../../../redux-modules/modules/attitude'
+import { bindActionCreators } from 'redux';
 
 export class index extends Component {
+    constructor(props){
+        super(props)
+        
+        this.onChange = this.onChange.bind(this)       
+    }
+    componentDidMount(){
+        this.props.getDataScoreAttitude(this.props.match.params.id)
+    }
+
+    onChange(class_id, user_id){
+        console.log("hit here", class_id, user_id)
+        this.props.history.push({
+            pathname:`/score/attitude/new/assessment/${this.props.match.params.id}/class/${class_id}/user/${user_id}`
+        })
+    }
 
     render() {
         return (
@@ -13,7 +30,7 @@ export class index extends Component {
                     <Header navbar={false} />
                 </div>
                 <div className="padding-content">
-                    <div className="margin-side bg-white">
+                    <div className="margin-side bg-white margin-top-7">
                         <div className="margin-side-5">
                             <div className="padding-top-3">
                                 <div className="block">
@@ -24,7 +41,9 @@ export class index extends Component {
                                 </div>
                             </div>
                             <div className="padding-top-2">
-                                    <Panel />
+                                    <Panel 
+                                        onChange={this.onChange}
+                                    />
                             </div>
                         </div>
                     </div>
@@ -34,12 +53,9 @@ export class index extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(index)
+const mapStateToProps = state => ({
+    // user: state.score
+  })
+  
+  const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreAttitude }, dispatch);
+  export default connect(mapStateToProps, mapDispatchToProps)(index);

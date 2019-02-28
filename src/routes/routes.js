@@ -37,6 +37,7 @@ import NotifRegist from '../views/auth/regist/notif-regist';
 import NewPassword from '../views/auth/password/new-password';
 import ExamDetail from './../views/exam/detail/index'
 import DetailScoreAttitude from './../views/beri-nilai/attitude/'
+import NewAttitudeScore from './../views/beri-nilai/attitude/new'
 
 
 
@@ -69,6 +70,12 @@ export const MainRoutes = [
         component: NotifRegist
     },
     {
+        // for resend email verification
+        path: '/notif-regist/:code',
+        component: NewPassword
+    },
+    {
+        // for send email verification
         path: '/verification/:code',
         component: NewPassword
     },
@@ -194,15 +201,20 @@ export const MainRoutes = [
     },
     {
         path: '/questions/:id',
-        component: Questions
+        component: Questions //beri nilai tidak buat soal
     },
     {
         path: '/beri-nilai/:assessment_id/exam/:exam_id/class/:class_id',
         component: NoQuestions
     },
     {
-        path:'/score/attitude/',
+        path:'/score/attitude/:id',
+        exact:true,
         component:DetailScoreAttitude
+    },
+    {
+        path:'/score/attitude/new/assessment/:assessment_id/class/:class_id/user/:user_id',
+        component:NewAttitudeScore
     },
     {
         path: '*',

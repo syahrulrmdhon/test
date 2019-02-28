@@ -3,138 +3,335 @@ $nunito_regular: "NunitoRegular";
 $nunito_semi_bold: "NunitoSemiBold";
 $nunito_bold: "NunitoBold";
 
-
 .score-attitude {
-    .margin-side {
-        margin-left: 100px;
-        margin-right: 100px;
-    }
+  .margin-side {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
 
-    &__title {
-        font-family: $nunito_bold;
-        font-size: 11px;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.73;
-        letter-spacing: normal;
-        color: #2d2d2d;
-    }
+  &__title {
+    font-family: $nunito_bold;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.73;
+    letter-spacing: normal;
+    color: #2d2d2d;
+  }
 
-    &__subject {
-        font-family: $nunito_regular;
-        font-size: 11px;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.73;
-        letter-spacing: normal;
-        color: #2d2d2d;
+  &__subject {
+    font-family: $nunito_regular;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.73;
+    letter-spacing: normal;
+    color: #2d2d2d;
+  }
+
+  &__name {
+    font-family: $nunito_bold;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #333333;
+  }
+
+  &__predicate {
+    opacity: 0.5;
+    font-family: $nunito_semi_bold;
+    font-size: 9px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #333333;
+  }
+
+  &__count-predicate-good {
+    font-family: $nunito_bold;
+    font-size: 9px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #1a9d7f;
+  }
+
+  &__count-predicate-enough {
+    font-family: $nunito_bold;
+    font-size: 9px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #f5a623;
+  }
+
+  &__count-predicate-need-attention {
+    font-family: $nunito_bold;
+    font-size: 9px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #eb373e;
+  }
+
+  &__score {
+    font-family: $nunito_bold;
+    font-size: 24px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #eb373e;
+  }
+
+  &__score-sb {
+    font-family: $nunito_bold;
+    font-size: 24px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #1a9d7f;
+  }
+
+  &__score-b {
+    font-family: $nunito_bold;
+    font-size: 24px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #f5a623;
+  }
+
+  &__desc-title {
+    opacity: 0.5;
+    font-family: $nunito_semi_bold;
+    font-size: 10px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #121212;
+  }
+
+  &__desc-body {
+    opacity: 0.5;
+    font-family: $nunito_semi_bold;
+    font-size: 9px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #121212;
+  }
+  .score-box {
+    width: 85px;
+    height: 50px;
+  }
+  .panel {
+    box-shadow: 0 2px 8px 0 rgba(30, 30, 30, 0.05);
+    background-color: #ffffff;
+    width: 100%;
+    height: 85px;
+  }
+
+  .line-desc {
+    border-left: 3px solid #e8e8e8;
+    height: 100%;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+  }
+
+  &__add-score {
+    font-family: $nunito_semi_bold;
+    font-size: 7.5px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #1a9d7f;
+    cursor: pointer;
+  }
+}
+
+.score-attitude-new {
+  &__left-title {
+    font-family: $nunito_bold;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2d2d2d;
+  }
+
+  &__predicate-title {
+    font-family: $nunito_semi_bold;
+    font-size: 9px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #6d6d6d;
+  }
+
+  &__right-title-name {
+    font-family: $nunito_bold;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2d2d2d;
+  }
+
+  &__label-form {
+    font-family: $nunito_semi_bold;
+    font-size: 11px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 0.65;
+    letter-spacing: -0.2px;
+    color: #6d6d6d;
+  }
+
+  &__teacher-name {
+    width: 221.9px;
+    height: 37.5px;
+    font-family: $nunito_semi_bold;
+    font-size: 7.5px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    color: #727373;
+  }
+
+  &__teacher-value {
+    width: 221.9px;
+    height: 37.5px;
+    font-family: NunitoSans;
+    font-size: 7.5px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    color: #727373;
+  }
+
+  .box-report {
+    height: 390px;
+    position:relative;
+  }
+
+  .box-scroll {
+    position:absolute;
+    height:100%; 
+    background-color:#ffffff;
+    overflow-y:scroll;
+  }
+
+  .tab-predicate {
+    border-top: 1px solid green;
+    //   color: green
+  }
+  .border-top-score {
+    border-top: 1px solid #ecedf4;
+  }
+
+  .tabs-score {
+    border-top: 1px solid #ecedf4 !important;
+    border-left: unset;
+    border-right: unset;
+    background-color: #ffffff !important;
+  }
+  .to-do-position {
+    align-items: bottom;
+  }
+
+  .content-score {
+    height: 540px;
+  }
+
+  .select-box {
+    width: 40%;
+  }
+
+  .textarea-description {
+    width: 100%;
+    height: 150px;
+  }
+
+  .range-button {
+    margin-top: 40%;
+  }
+  ul.nav.toggle-score > li.nav-item {
+    width: 100px;
+    border: 0;
+  }
+
+  ul.nav.toggle-score > li.nav-item:first-child {
+    border: 0;
+  }
+
+  ul.nav.toggle-score > li.nav-item:last-child {
+    border: 0;
+  }
+
+  ul.toggle-score > li.nav-item a {
+    background-color: #ffffff;
+    padding: 8px;
+    color: #999999 !important;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border: 0;
+  }
+
+  ul.toggle-score > li.nav-item a.active {
+    color: #000000 !important;
+    background-color: #ffffff;
+    border: 0;
+    border-top: 1px solid green;
+  }
+
+  &__report-value {
+    font-family: $nunito_regular;
+    font-size: 9px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #727373;
+  }
+
+  &__report-title {
+    font-family: $nunito_bold;
+    font-size: 11px;
+    font-weight: bold;
+
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #636363;
     
-    }
-
-    &__name {
-        font-family: $nunito_bold;
-        font-size: 11px;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #333333;
-    }
-
-    &__predicate {
-        opacity: 0.5;
-        font-family: $nunito_semi_bold;
-        font-size: 7px;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #333333;
-    }
-
-    &__count-predicate-good {
-        font-family: $nunito_bold;
-        font-size: 7px;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #1a9d7f;
-    }
-    
-    &__count-predicate-enough {
-        font-family: $nunito_bold;
-        font-size: 7px;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #f5a623;
-    }
-
-    &__count-predicate-need-attention {
-        font-family: $nunito_bold;
-        font-size: 7px;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #eb373e;
-    }
-
-    &__score {
-        font-family: $nunito_bold;
-        font-size: 24px;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #eb373e;
-    }
-
-    &__desc-title {
-        opacity: 0.5;
-        font-family: $nunito_semi_bold;
-        font-size: 7.5px;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #121212;
-    }
-
-    &__desc-body {
-        opacity: 0.5;
-        font-family: $nunito_semi_bold;
-        font-size: 6.5px;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #121212;
-    }
-    .score-box {
-        width: 85px;
-        height: 50px
-    }
-    .panel {
-        box-shadow: 0 2px 8px 0 rgba(30, 30, 30, 0.05);
-        background-color: #ffffff;
-        width: 100%;
-        height: 85px;
-    }
-    
-    .line-desc {
-        border-left: 3px solid #e8e8e8;
-        height: 100%;
-        left: 50%;
-        margin-left: -3px;
-        top: 0;
-    }
-    
+  }
 
 }

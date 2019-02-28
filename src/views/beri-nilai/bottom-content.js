@@ -212,7 +212,6 @@ class BottomContent extends Component {
 
   render() {
     const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
-
     return (
       <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-bottom-2">
         <div className='row padding-bottom-5'>
@@ -342,7 +341,7 @@ class BottomContent extends Component {
                                           </div>
                                           <div className="col-sm-4 align-center">
                                             <div className="align-center">
-                                              {this.generateSubNilai(datax.average_score.result_status, data.average_score.score)}
+                                              {this.generateSubNilai(datax.average_score.result_status, datax.average_score.score)}
                                             </div>
                                           </div>
                                         </div>

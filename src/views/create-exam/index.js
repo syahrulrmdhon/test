@@ -12,7 +12,6 @@ import { checkProperties } from '../../utils/common'
 import { assessmentShow } from '../../utils/exam'
 import ErrorModal from '../global/error_modal'
 import { error } from './../global/modal'
-import Page from './../../components/Title'
 
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import '../../styles/create-exam.scss'
@@ -156,7 +155,6 @@ class Index extends Component {
     }
 
     return (
-      <Page title="Create Exam">
       <div className="padding-content create-exam">
         <Header navbar={true} location={path} />
         
@@ -194,17 +192,19 @@ class Index extends Component {
                 onChange={event => this.props.handleEvent(event.value, 'exam_type', this.state.step)}
                 options={this.state.examTypes} 
                 placeholder='Pilih Tipe Tugas' />
-              <div className={!this.props.exam.switch ? "d-none" : ""}>
-                <label className="create-exam__label">Jumlah Soal Tugas</label>
-                <input type="text" className="form-control create-exam__input create-exam__input-amount mt-0" placeholder="Masukkan Jumlah Soal Tugas" 
-                value={question_count} onChange={event => this.props.handleEvent(event.target.value, "question_count", this.state.step)} disabled={this.state.examId ? true : false}/>
-              </div>
+              {
+                this.props.exam.switch &&
+                <div>
+                  <label className="create-exam__label">Jumlah Soal Tugas</label>
+                  <input type="text" className="form-control create-exam__input create-exam__input-amount" placeholder="Masukkan Jumlah Soal Tugas" 
+                  value={question_count} onChange={event => this.props.handleEvent(event.target.value, "question_count", this.state.step)} disabled={this.state.examId ? true : false}/>
+                </div>
+              }
             </div>
             <button onClick={this.onSubmit} className="create-exam__button" disabled={this.state.examId ? false : disable}>{this.state.examId ? "Simpan" : "Lanjut"}</button>
           </div>
         </div>
       </div>
-      </Page>
     )
   }
 }

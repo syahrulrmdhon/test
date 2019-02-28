@@ -10,7 +10,7 @@ export default class Title extends Component {
         return (
             <div>
                 <Helmet
-                    title={title ? title:defaultTitle}
+                    title={title ? title + ' | Gredu Indonesia':defaultTitle}
                     link={[
                         {
                             rel: 'icon',

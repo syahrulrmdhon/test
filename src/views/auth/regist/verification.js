@@ -58,6 +58,7 @@ export default class Verification extends Component {
     handleSubmit(e) {
         e.preventDefault()
         const url = window.location.href + '/:code&token_type=base64'
+        console.log('url', url)
         const endpoint = `authentication/verification_email?url=${url}`
         const verification = {
             email: this.state.email
