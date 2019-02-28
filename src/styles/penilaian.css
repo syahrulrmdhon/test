@@ -37,3 +37,13 @@
   border-top: 1px solid #eaeaea;
   width: 143px;
 }
+
+.table.assessment span.fa-edit {
+  padding-top: 3px;
+}
+
+.action-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

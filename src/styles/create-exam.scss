@@ -78,9 +78,13 @@ $nunito_bold: 'NunitoBold';
     height: 38px;
 
     &-symbol {
-      width: auto;
+      width: 100%;
       height: 38px;
       margin: 10px 0px 18px;
+    }
+  
+    &__input-option-answer {
+      width: 100%;
     }
   }
   
@@ -236,9 +240,17 @@ $nunito_bold: 'NunitoBold';
     }
   }
 
+  .tab-wrapper {
+    margin: 10px 0px 20px;
+  }
+  
   @media screen and (max-width: 992px) {
     .content-wrapper {
       width: 94%;
+    }
+
+    &__input-symbol, &__input-option-answer {
+      width: 100%;
     }
   }
 }
