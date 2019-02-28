@@ -31,20 +31,28 @@ class Homeroom extends Component {
         })
         data.notes.map((note, index) => {
           
-          let selectedExtracuricular = extracurriculars.find(extracurricular => {return extracurricular.value === note.extracurricular_id}) || null
-          if (selectedExtracuricular) {
-            selectedExtracuricular.isDisabled = true
+          let selectedExtracurricular = extracurriculars.find(extracurricular => {return extracurricular.value === note.extracurricular_id}) || null
+          if (selectedExtracurricular) {
+            selectedExtracurricular.isDisabled = true
 
           }
           notes.push(
             <div key={index} className="mb-4">
-              <Select key={Math.random()}
+              <Select 
+                key={Math.random()}
                 classNamePrefix="select"
-                value={selectedExtracuricular}
-                onChange={event => this.props.handleEvent(event.value, 'extracurricular_id', note.id)}
+                value={selectedExtracurricular}
+                onChange={event => this.props.handleEvent(event.value, 'extracurricular_id', {id: note.id, order: index})}
                 options={this.props.notes.extracurriculars}
                 placeholder='Pilih Tipe Ekstrakurikuler' />  
-              <Input value={note.description} onChange={event => this.props.handleEvent(event.target.value, 'description', note.id)} className="homeroom-teacher__input mt-3" rows="5" type="textarea" placeholder="Tulis Deskripsi Estrakurikuler disini ..."/>   
+              <Input 
+                onChange={(event) => this.props.handleEvent(event.target.value, 'description', {id: note.id, order: index})} 
+                value={note.description} 
+                className="homeroom-teacher__input mt-3" 
+                rows="5" 
+                type="textarea" 
+                placeholder="Tulis Deskripsi Estrakurikuler disini ..."
+              />   
             </div>
 
           )
@@ -57,7 +65,7 @@ class Homeroom extends Component {
             }
           }
 
-          body.push({extracurricular_id: note.extracurricular_id, description: note.description, id: (note.id) ? note.id : null})
+          body.push({extracurricular_id: note.extracurricular_id, description: note.description, id: (note.id) ? note.id : null, order: index})
         })
       }
     }
