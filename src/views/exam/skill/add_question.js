@@ -61,7 +61,7 @@ class AddQuestion extends Component {
             action = 'post'
             url = `v1/assessments/${this.state.assessment_id}/exams/validate?step=QuestionForm&category=skill`
         }
-
+        console.log(data, "data")
         apiClient(action, url, data).then(response => {
             if(!this.state.exam_id){
                 apiClient('post', `/v1/assessments/${this.state.assessment_id}/exams`, data).then(response => {

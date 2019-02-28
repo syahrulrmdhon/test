@@ -117,11 +117,11 @@ class Content extends Component {
       }
     }
     if (nextState.homeroomActiveTab !== this.state.homeroomActiveTab) {
-      if (this.state.homeroomActiveTab === 2 && !this.state.extracurriculars.length) {
+      if (this.state.homeroomActiveTab === 2) {
         this.getFilterExtracurricular()
         this.getExtracurricularNote()
       }
-      else if (this.state.homeroomActiveTab === 3 && !this.state.achievements.length) {
+      else if (this.state.homeroomActiveTab === 3) {
         this.getAchievementNote()
       }
     }
@@ -191,22 +191,13 @@ class Content extends Component {
   }
   
   getExtracurricularNote() {
-    // const url = `v1/students/${this.props.studentId}/teacher_notes?achievement_type=extracurricular`
     this.props.getExtracurriculars()    
     this.props.getData(this.props.studentId, 'extracurricular')
-
-
-    // apiClient('get', url).then(response => {
-    //   this.setState({extracurricularNotes: response.data.data.notes})
-    // })
   }
 
   getAchievementNote() {
     const url = `v1/students/${this.props.studentId}/teacher_notes?achievement_type=daily_result`
-
-    apiClient('get', url).then(response => {
-      this.setState({achievements: response.data.data.notes})
-    })
+    this.props.getData(this.props.studentId, 'daily_result')
   }
 
   handleCreateHomeroomNote() {
@@ -313,7 +304,7 @@ class Content extends Component {
       [note]: data
     }
 
-    apiClient('post', url, request).then(() => {
+    apiClient('post', url, request).then((response) => {
       this.props.handleDisabled()  
 
       modal({
@@ -365,7 +356,7 @@ class Content extends Component {
 
   render() {
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
-    const tabHomeRoom = ['Catatan Wali Kelas', 'Estrakurikuler', 'Prestasi']
+    const tabHomeRoom = ['Catatan Wali Kelas', 'Ekstrakurikuler', 'Prestasi']
     
     const attendances = this.state.attendanceDetail.attendances
 

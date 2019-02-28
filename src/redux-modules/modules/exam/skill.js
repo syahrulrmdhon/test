@@ -255,6 +255,7 @@ export function removeIndicator(key_value, idx){
 }
 
 export function handleProblemSet(value, fieldName, keyValue, idx){
+    console.log(value,"value")
     return {
         type: HANDLE_PROBLEM_SET,
         value: value,

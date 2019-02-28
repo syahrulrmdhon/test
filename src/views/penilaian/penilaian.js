@@ -44,7 +44,7 @@ class Penilaian extends Component {
 
     tabToggle(category = false){
         this.state.activeTab = category
-
+        console.log(category,"my catergory")
         assessmentGetData.call(this)
         assessmentType.call(this, {category: category})
     }

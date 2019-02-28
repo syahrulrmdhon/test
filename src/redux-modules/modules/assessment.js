@@ -141,6 +141,7 @@ export default function reducer(state = initialState, action = {}) {
             }
         return false
         case HANDLE_EVENT_CLASS:
+        console.log(action)
             state.assessment_classes_attributes[action.idx][action.fieldName] = action.value
             return {
                 ...state,
