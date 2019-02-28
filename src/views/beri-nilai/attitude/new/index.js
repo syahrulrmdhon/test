@@ -74,12 +74,11 @@ export class Index extends Component {
         let dataArr = []
 
         dataArr.push({
-            "score": this.state.predicate.value, "description": this.state.descrip, "user_id": this.props.match.params.user_id, "class_id": this.props.match.params.class_id
+            "score": this.state.predicate.value, 
+            "description": this.state.descrip
         });
         dataWillSave['user_attitudes'] = dataArr
-        let url = `/v1/assessments/${this.props.match.params.assessment_id}/classes/${this.props.match.params.class_id}/users/${this.props.match.params.user_id}`
-
-        console.log(dataWillSave, url, "here url")
+        let url = `v1/assessments/${this.props.match.params.assessment_id}/classes/${this.props.match.params.class_id}/users/${this.props.match.params.user_id}`
 
         apiClient('post', url, dataWillSave).then(res => {
             modal({
