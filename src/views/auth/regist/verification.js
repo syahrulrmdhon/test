@@ -4,6 +4,7 @@ import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
 import { error, modal } from './../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
 import  Page  from "./../../../components/Title";
+import './../../../styles/auth.scss'
 // import { loadReCaptcha } from 'react-recaptcha-google'
 // import { ReCaptcha } from 'react-recaptcha-google'
 
