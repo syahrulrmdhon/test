@@ -172,7 +172,7 @@ $nunito_bold: "NunitoBold";
 
    &__title {
      font-family: $nunito_bold;
-     font-size: 13px;
+     font-size: 16px;
      font-style: normal;
      font-stretch: normal;
      line-height: normal;
@@ -183,7 +183,7 @@ $nunito_bold: "NunitoBold";
    &__subject {
      padding:16px;
      font-family: $nunito_bold;
-     font-size: 11px;
+     font-size: 15px;
      font-style: normal;
      font-stretch: normal;
      line-height: normal;
@@ -194,7 +194,7 @@ $nunito_bold: "NunitoBold";
    &__topic {
      padding:16px;
      font-family: $nunito_light;
-     font-size: 11px;
+     font-size: 14px;
      font-weight: 300;
      font-style: normal;
      font-stretch: normal;
@@ -208,17 +208,21 @@ $nunito_bold: "NunitoBold";
      text-align: right;
      float: right;
      font-family: $nunito_bold;
-     font-size: 11px;
+     font-size: 14px;
      font-style: normal;
      font-stretch: normal;
      line-height: normal;
      letter-spacing: normal;
      color: #1a9d7f;
    }
+
+   &__update:hover {
+     text-decoration: underline;
+   }
    
    &__correct_ans {
      font-family: $nunito_light;
-     font-size: 8px;
+     font-size: 10px;
      font-weight: 300;
      font-style: normal;
      font-stretch: normal;
@@ -237,11 +241,17 @@ $nunito_bold: "NunitoBold";
 
    .answer {
      margin-left: 8.33333%;
+     font-size: 14px;
+     font-family: $nunito_regular;
+
+     .cgreen {
+      color: #1a9d7f;
+     }
    }
 
    &__question_label {
      font-family: $nunito_semi_bold;
-     font-size: 11px;
+     font-size: 14px;
      font-weight: 600;
      font-style: normal;
      font-stretch: normal;
@@ -251,7 +261,7 @@ $nunito_bold: "NunitoBold";
 
    &__answer_label {
      font-family: $nunito_regular;
-     font-size: 11px;
+     font-size: 14px;
      font-style: normal;
      font-stretch: normal;
      line-height: 2.36;
@@ -261,7 +271,7 @@ $nunito_bold: "NunitoBold";
 
    &__bascop {
      font-family: $nunito_bold;
-     font-size: 11px;
+     font-size: 14px;
      font-style: normal;
      font-stretch: normal;
      line-height: normal;
@@ -273,4 +283,15 @@ $nunito_bold: "NunitoBold";
      
    }
 
+   &__basic-competences {
+     font-size: 14px;
+     color: #6d6d6d;
+
+   }
+
+   .bullet.bcgreen {
+     background-color: #1a9d7f;
+     position: relative;
+     bottom: 2px;
+   }
 }

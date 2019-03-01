@@ -65,10 +65,10 @@ export class question extends Component {
         })
 
         return (
-            <div className="bg-white">
+            <div className="bg-white padding-1 box-top">
                 <div className="position-bullet" >
-                    <span className=" bullet bcgreen"></span>
-                    <span className="padding-left-2 question____correct_ans">Warna jawaban yang benar</span>
+                    <span className="bullet bcgreen"></span>
+                    <span className="padding-left-2 question__correct_ans">Warna jawaban yang benar</span>
                     <span className="question__update" onClick={() => this.props.redirect('question')}>Ubah</span>
                 </div>
                 {content}
