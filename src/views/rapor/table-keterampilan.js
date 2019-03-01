@@ -32,13 +32,14 @@ export default class TableKeterampilan extends Component {
                                 })}
                                 <td>{data.final_scores.attendance_report.percentage === null ? '-' : data.final_scores.attendance_report.percentage + '%'}</td>
                                 <td>
-                                    <ArrowKeterampilan
-                                        arrow={data.final_scores.total_average.improvement_status}
-                                    />
-                                    &nbsp;
-                                        <span>
-                                        {data.final_scores.total_average.score === null ? '-' : data.final_scores.total_average.score}
-                                    </span>
+                                    <div className='d-flex'>
+                                        <ArrowKeterampilan
+                                            arrow={data.final_scores.total_average.improvement_status}
+                                        />
+                                        <span className='padding-left-1'>
+                                            {data.final_scores.total_average.score === null ? '-' : data.final_scores.total_average.score}
+                                        </span>
+                                    </div>
                                 </td>
                             </tr>
                         }, this)

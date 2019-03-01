@@ -91,7 +91,7 @@ class BottomContent extends Component {
             }
         })
         return (
-            <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-top-4 margin-bottom-2">
+            <div className="margin-side-5 bg-white padding-top-4 margin-top-4 margin-bottom-2">
                 <div className="content-bottom">
                     <div className='margin-bottom-4'>
                         <div className='row'>
