@@ -58,7 +58,7 @@ export default function reducer(state = initialState, action) {
         // break;
 
         case HANDLE_QUESTION_ONCHANGE:
-            console.log(action, "my state")
+            console.log(action.e.value, "my state")
             state.data.exam_question[action.idx]['ans'] = action.e.value
             state.data.exam_question[action.idx]['score'] = (action.e.value === action.pick) ? action.max_score : 0
             console.log(state.data.exam_question[action.idx]['score'] = (action.e.value === action.pick) ? action.max_score : 0, "here now e")

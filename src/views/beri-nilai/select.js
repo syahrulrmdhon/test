@@ -15,7 +15,7 @@ class SelectData extends Component {
         }
         choices.push({value:data.symbol, label:data.symbol})
     })
-    console.log(this.props.max_score,"answer")
+    console.log( this.props.exam.ans,"answer",choices)
     return (
       <td>
           <Select
