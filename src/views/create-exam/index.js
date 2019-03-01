@@ -154,6 +154,9 @@ class Index extends Component {
         path = `/all-question/${this.state.assessmentId}/assessment/${this.state.examId}/exam/`
       }
     }
+    else {
+      path = `/exam/${this.state.assessmentId}`
+    }
 
     return (
       <Page title="Buat Tugas">
