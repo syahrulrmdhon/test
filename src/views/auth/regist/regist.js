@@ -119,7 +119,7 @@ export default class Regist extends Component {
                                     <i className='float-right fa fa-calendar calendar-auth' aria-hidden='true' />
                                     <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
                                     <div className='float-right margin-top-4'>
-                                        <p>Sudah punya akun?<Link to='/' className='normal-text-green'> Masuk Disini</Link></p>
+                                        <p>Sudah punya akun?<Link to='/' className='normal-text-green'> Masuk Di sini</Link></p>
                                     </div>
                                 </form>
                             </div>

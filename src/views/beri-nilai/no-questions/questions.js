@@ -6,62 +6,46 @@ import { apiClient } from './../../../utils/apiClient'
 import { setError } from './../../../utils/common'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
+import { connect } from 'react-redux'
+import { bindActionCreators, compose } from 'redux'
+import { getNoQuestions, handleChange } from './../../../redux-modules/modules/no-question'
 
-export default class Questions extends Component {
+class Questions extends Component {
     constructor(props) {
         super(props)
 
         this.state = ({
-            assessment_id: props.match.params.assessment_id,
-            exam_id: props.match.params.exam_id,
-            student_id: props.match.params.student_id,
             alias: '',
             examScore: {},
             exam_scores: [],
             dataScores: [],
             dataPost: [],
             idSubject: '',
-            fullname: props.location.fullname,
-            class_id: props.match.params.class_id,
+            fullname: props.location.state.fullname,
             nilai: '',
             flag: false
         })
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     componentDidMount() {
-        this.getDataScores()
+        this.props.getNoQuestions(this.props.location.state.assessment, this.props.location.state.exam, this.props.location.state.student) //method in redux modules
     }
-    getDataScores() {
-        const url = `v1/assessments/${this.props.location.state.assessment}/exams/${this.props.location.state.exam}/exam_scores/${this.props.location.state.student}`
 
-        apiClient('get', url).then(res => {
-            res.data.data.collections.map((value) => {
-                this.setState({
-                    dataScores: res.data.data.collections,
-                    idSubject: value.id
-                })
-            })
-
-        })
-    }
-    handleChange(e) {
-        let score = e.target.value
-        this.setState({ nilai: score })
-    }
     handleSubmit(e) {
         e.preventDefault()
         const url = `v1/assessments/${this.props.location.state.assessment}/exams/${this.props.location.state.exam}/exam_scores/${this.props.location.state.student}/bulk_fill_exam_scores`
-        const data = {
-            exam_scores: [
-                {
-                    score_type: 'subject_average',
-                    related_id: this.state.idSubject,
-                    score: this.state.nilai
-                }
-            ]
-        }
+        let dataSubmit = []
+        let objectSubmit = {}
+        this.props.dataNoQuestions.data.no_questions.map((data, idx) => {
+            dataSubmit.push({
+                score_type: 'subject_average',
+                related_id: data.related_id,
+                score: data.score
+            })
+        })
+        objectSubmit['exam_scores'] = dataSubmit
 
-        apiClient('post', url, data).then(res => {
+        apiClient('post', url, objectSubmit).then(res => {
             event.preventDefault();
 
             confirmAlert({
@@ -103,35 +87,36 @@ export default class Questions extends Component {
     }
     render() {
         const path = `/beri-nilai/${this.props.location.state.assessment}/exam/${this.props.location.state.exam}/class/${this.props.location.state.class_id}/flag/${this.state.flag}`
-        let data = []
-        if (this.state.dataScores.length > 0) {
-            let scores = this.state.dataScores
-            scores.map((value, i) => {
-                data.push(
-                    <div className='row' key={i}>
-                        <div className='col-sm-6'>
-                            <label className='disblock padding-bottom-2 subject-title'>Mata Pelajaran</label>
-                            <input className='input-question' type='text' placeholder={value.alias_name} readOnly></input>
-                        </div>
-                        <div className='col-sm-6 margin-bottom-4'>
-                            <label className='disblock padding-bottom-2 subject-title'>Nilai</label>
-                            
-                            <input
-                                className='input-question'
-                                name='nilai'
-                                value={this.state.nilai}
-                                type='number'
-                                onChange={(e) => this.handleChange(e)}
-                                placeholder='Masukkan Nilai...'
-                            />
-                        </div>
+        const data = []
+
+        let collections = this.props.dataNoQuestions && this.props.dataNoQuestions.data && this.props.dataNoQuestions.data.no_questions || []
+        collections.map((x, i) => {
+            data.push(
+                <div className='row' key={i} >
+                    <div className='col-sm-6'>
+                        <label className='disblock padding-bottom-2 subject-title'>Mata Pelajaran</label>
+                        <input className='input-question' type='text' placeholder={x.aliasName} readOnly></input>
                     </div>
-                )
-            })
-        }
+                    <div className='col-sm-6 margin-bottom-4'>
+                        <label className='disblock padding-bottom-2 subject-title'>Nilai</label>
+
+                        <input
+                            key={Math.random()}
+                            className='input-question'
+                            name='nilai'
+                            defaultValue={x.score ? x.score : 0}
+                            type='number'
+                            onChange={(e) => this.props.handleChange(e.target.value, i, 'score')}
+                            placeholder='Masukkan Nilai...'
+                        />
+                    </div>
+                </div>
+            )
+        })
+
         return (
-            <div className='padding-content'>
-                <Header navbar={false} location={path}/>
+            <div className='padding-content' >
+                <Header navbar={false} location={path} />
                 <div className='box-question margin-top-4 box-shadow'>
                     <div className='form-question'>
                         <div className='title-content-evaluasi padding-top-6'>
@@ -154,3 +139,13 @@ export default class Questions extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    dataNoQuestions: state.noQuestion //noQuestion dari reducer
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    getNoQuestions, handleChange
+}, dispatch
+)
+export default connect(mapStateToProps, mapDispatchToProps)(Questions)

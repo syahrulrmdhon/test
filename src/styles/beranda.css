@@ -74,6 +74,13 @@
 .schedule .dayname.current{
     border-bottom: 3px solid #1a9d7f;
 }
+.schedule .dayname.holiday{
+    border-bottom: 3px solid #ff6d4a;
+}
+.schedule .dayname.holiday,
+.schedule span.holiday{
+    color: #ff6d4a;
+}
 .schedule .list{
     margin-top: 40px;
 }
@@ -85,6 +92,16 @@
     border: 2px solid #1a9d7f !important;
     background-color: #1a9d7f;
 }
+.schedule .border-full.holiday{
+    border: 2px solid #ff9393 !important;
+    background-color: rgba(255, 109, 74, 0.05);
+}
+
+.schedule .border-full.academic{
+    border: 2px solid #4da1ff !important;
+    background-color: rgba(77, 161, 255, 0.05);
+}
+
 .schedule .time{
     font-size: 11px;
 }
@@ -92,6 +109,12 @@
     margin-top:5px;
     margin-bottom:5px; 
     font-weight: 700;  
+}
+.schedule .holiday .description{
+    color: #ff7777;
+}
+.schedule .academic .description{
+    color: #4da1ff;
 }
 .schedule .classes{
     padding: 5px;

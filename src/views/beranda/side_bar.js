@@ -21,7 +21,15 @@ export default class SideBar extends Component{
             this.props.classes.map((classs, idx) => {
                 textClass.push(
                     <div className="col-sm-6" key={idx}>
-                        <input type="checkbox" name={classs.value} value={classs.value} id={idx} onChange={this.props.onChangeClass} /><label htmlFor={idx} className="title">{classs.label}</label>
+                        <div className="disblock margin-top-2">
+                            <div className="checkbox-wrapper">
+                                <div className="checkbox-button">
+                                    <input type="checkbox" name={classs.value} value={classs.value} id={idx} onChange={this.props.onChangeClass} />
+                                    <label htmlFor={idx} className="title"></label>
+                                </div>
+                                <label htmlFor={idx} className="checkbox-label">{classs.label}</label>
+                            </div>
+                        </div>                        
                     </div>
                 )
             })

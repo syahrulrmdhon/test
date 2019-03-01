@@ -52,7 +52,7 @@ class New extends Component {
   componentDidMount() {
     this.getStudent()
     this.getGenerateForm()
-    this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id)
+    this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id,this.props.location.state.conditon  )
     this.props.getStudent(this.state.student_id)
   }
 
