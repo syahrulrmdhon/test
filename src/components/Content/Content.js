@@ -86,7 +86,7 @@ class Content extends Component {
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
-        activeTab: 1
+        activeTab: tab
       })
     }
   }
