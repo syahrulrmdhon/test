@@ -19,6 +19,8 @@ class Content extends Component {
     render() {
         const question_exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.collections || []
         const exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.exam_question || []
+        console.log(question_exam,"my quest")
+        console.log(exam,"my quest")
         let main_content = []
         const type = this.props.type
         let content = []
