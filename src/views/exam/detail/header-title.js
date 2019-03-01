@@ -22,7 +22,7 @@ export class HeaderTitle extends Component {
       </div>)
     })
     return (
-      <div className="bg-white box-top">
+      <div className="bg-white box-top padding-top-3 padding-bottom-3">
         <div className="padding-2">
           <div className="row">
             <div className="col-sm-12">

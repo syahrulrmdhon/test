@@ -17,12 +17,14 @@ export class Right extends Component {
             content.push(<div key={Math.random()}>
                 <div className="padding-5">
                     <span className="question__bascop">Kompetensi Dasar - {data.subject_name} </span>
-                    {content_value}
+                    <div className="padding-left-4">
+                        {content_value}
+                    </div>
                 </div>
             </div>)
         })
         return (
-            <div className="bg-white">
+            <div className="bg-white question__basic-competences box-top">
                 {content}
             </div>
         )
