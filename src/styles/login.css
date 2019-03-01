@@ -105,4 +105,8 @@
   .main-right {
     margin-top: 20px;
   }
+
+  .box .left-content, .box .right-content-login {
+    height: 400px;
+  }
 }

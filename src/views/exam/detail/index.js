@@ -51,24 +51,18 @@ import Right from './right'
                   <Head redirect={this.redirect}/>
                 </div>
                 <div className="col-sm-12">
-                  <div className="margin-top-3">
+                  <div className="margin-top-3 margin-bottom-3">
                     <Question redirect={this.redirect}/>
                   </div>
                 </div>
               </div>
             </div>
-          <div className="col-sm-4">
+            <div className="col-sm-4 pl-0">
               <div className="padding-top-4">
-                <div className="">
-                  <div className="col-sm-12">
-                    <Right />
-                  </div>
-                </div>
+                <Right />
               </div>
-          
+            </div>
           </div>
-          </div>
-
         </div>
       </div>
     )
