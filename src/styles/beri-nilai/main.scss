@@ -1042,8 +1042,6 @@ table.table.beri-nilai tr.head {
 }
 
 .title-kkm {
-  width: 96.5px;
-  height: 15px;
   font-family: $nunito_bold;
   font-size: 11px;
   font-style: normal;
@@ -1096,6 +1094,8 @@ table.table.beri-nilai tr.head {
   letter-spacing: normal;
   text-align: right;
   color: #eb373e;
+  position: absolute;
+  right: 0px;
 }
 
 .header-auth {
@@ -1292,29 +1292,34 @@ table.table.beri-nilai tr.head {
   height: 40%;
   overflow-x: scroll;
 }
-.right-height-kkm {
+.content-block.main-block.right-height-kkm {
   height: 559px;
   overflow-x: scroll;
+  padding: 25px;
 }
 
-@media only screen and (min-width: 800px) {
-  .verification {
-    .ava {
-      left: 45%;
-    }
+.name-wrapper {
+  margin-left: 10px;
+  word-break: break-word;
+}
+
+@media screen and (max-width: 1120px) {
+  .content-block.main-block.right-height-kkm {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
-@media only screen and (min-width:1000px) {
-  .verification {
-    .ava{
-      left: 46%;
-    }
+
+@media screen and (max-width: 1024px) {
+  .name-wrapper {
+    width: 55%;
+
   }
 }
-@media only screen and (min-width:1200px) {
-  .verification {
-    .ava{
-      left: 47%;
-    }
+
+@media screen and (max-width: 960px) {
+  .name-wrapper {
+    width: 50%;
+
   }
 }
