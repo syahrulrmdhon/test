@@ -74,7 +74,17 @@ export default class Detail extends Component {
   }
 
   render() {
-    const tabMenu = ['Rincian Nilai', 'Rincian Absensi', 'Catatan Wali Kelas'];
+    const tabMenu = [
+      {
+        label: 'Rincian Nilai'
+      },
+      {
+        label: 'Rincian Absensi'
+      },
+      {
+        label: 'Catatan Wali Kelas'
+      },
+    ];
     const menu = this.props.location.state.status
     let path = ''
     if (menu === 'absensi') {

@@ -20,7 +20,14 @@ export default class TabDetail extends Component {
             let categories = item.categories
             let tab = key + 1
             let view = []
-            if(categories.includes(this.props.assessment_category)){
+            let flag = true
+            if(this.props.assessment_category){
+              if(!categories.includes(this.props.assessment_category)){
+                flag = false
+              }
+            }
+
+            if(flag){
               view.push(
                 <NavItem key={key} className={classnames({ active: this.props.activeMenu === tab })}>
                   <NavLink
@@ -33,7 +40,7 @@ export default class TabDetail extends Component {
               )
             }
               return (  
-                <div>
+                <div key={key}>
                   {view}
                 </div>
               )

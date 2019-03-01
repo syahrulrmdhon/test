@@ -139,7 +139,7 @@ class Nilai extends Component {
         label: 'Perolehan Nilai',
         categories: ['knowledge', 'skill'],
       }, 
-      {
+      { 
         label: 'Evaluasi Soal',
         categories: ['knowledge'],
       }, 
@@ -147,7 +147,7 @@ class Nilai extends Component {
     let path = `/exam/${this.state.assessment_id}`
     let show_tab_2 = ''
 
-    if(this.props.location.state.assessment_category == 'knowledge'){
+    if(this.props.match.params.category_id === 'knowledge'){
       show_tab_2 = <TabPane tabId={2}>
         <div className="row">
           <div className="col-sm-12">
@@ -189,7 +189,7 @@ class Nilai extends Component {
               <div className="offset-2 col-sm-10 tab-menu tab-position">
                 <TabMenu
                   menu={tabMenu}
-                  assessment_category={this.props.location.state.assessment_category}
+                  assessment_category={this.props.match.params.category_id}
                   activeMenu={this.state.activeMenu}
                   toggle={this.toggleMenu}
                 />
@@ -217,7 +217,7 @@ class Nilai extends Component {
                         exam={this.state.exam_id}
                         class={this.state.class_id}
                         asssessment_id={this.state.assessment_id}
-                        category={this.props.location.state.assessment_category}
+                        category={this.props.match.params.category_id}
                         handleNewScoreParent={this.handleNewScore}
                         search={this.state.search}
                         onChange={this.onChangeSelect}
