@@ -46,30 +46,26 @@ class Content extends Component {
 
 
         if (type === 'skill') {
-            question_exam.map((data) => {
-                data.questions.map((x, index) =>{
+            question_exam.map((data, index) => {
+                data.questions.map((x) =>{
                     console.log(x,"my xxx")
                 let merge_content = []
-                if (x.problem_type === 'multiple_choice') {
-                    merge_content.push(<SelectData choices={x.exam_question_choices} max_score={x.max_score} index={index} exam={exam[index]} />)
-                    merge_content.push(<td className="align-center">{exam[index]['score']}</td>)
-                } else {
-                    merge_content.push(
+                   merge_content.push(
                         <td> <input
                             type="text"
                             onChange={(e) => { this.props.handleScore(e.target.value, index, 'ans') }}
                             className="padding-1 fullwidth"
-                            defaultValue={exam[index]['ans']}
+                            defaultValue={x.user_problem_answer.ans}
                         /> </td>
                     )
                     merge_content.push(
                         <td><input
                             type="text"
                             onChange={(e) => { this.props.handleScore(e.target.value, index, 'score') }}
-                            defaultValue={exam[index]['score']}
+                            defaultValue={x.user_problem_answer.score}
                         /></td>
                     )
-                }
+                
     
                 let merge_content_skill = []
                 merge_content_skill.push(
@@ -80,8 +76,6 @@ class Content extends Component {
                         defaultValue={x.user_problem_answer.score}
                     /></td>
                 )
-    
-    
                     content.push(<tr key={index}>
                         <td className="align-left text-center">{x.qn_number}</td>
                         <td className="align-left text-left" key={x.problem_type}>{x.problem_type}</td>
