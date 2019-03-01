@@ -162,14 +162,14 @@ class Nilai extends Component {
           </div>
         </div>
         <div className="row margin-top-2">
-          <div className="col-sm-9">
+          <div className="col-md-9">
             <div className="content-block-evaluasi main-block-evaluasi">
               <BottomContentEvaluasi
                 questionEvaluations={this.state.questionEvaluations}
               />
             </div>
           </div>
-          <div className="col-sm-3">
+          <div className="col-md-3">
             <div className="content-block-card main-block-card">
               <SubjectEvaluasi
                 competencySubjects={this.state.competencySubjects}
@@ -228,7 +228,7 @@ class Nilai extends Component {
                     </div>
                   </div>
                   <div className="col-sm-3 ">
-                    <div className="content-block main-block padding-5 right-height-kkm">
+                    <div className="content-block main-block right-height-kkm">
                       <RightContent
                         participant_not_passed={this.state.participant_not_passed}
                       />
