@@ -9,7 +9,7 @@ import { error, modal } from './../../global/modal'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getNoQuestions, handleChange } from './../../../redux-modules/modules/no-question'
+import { getNoQuestions } from './../../../redux-modules/modules/no-question'
 import GiveScore from './give-score'
 
 class Questions extends Component {
@@ -71,16 +71,6 @@ class Questions extends Component {
             })
         })
             .catch(err => {
-                // let errMsg = err.response.data.errors[0].desc
-                // error({
-                //     message: errMsg,
-                //     btns: [
-                //         {
-                //             label: 'Tutup',
-                //             className: 'btn bcred cwhite'
-                //         }
-                //     ]
-                // })
                 let response = err.response
                 let data = response.data
                 let errMsg = data.errors[0].exam_score[0].description[0]
@@ -93,14 +83,6 @@ class Questions extends Component {
                         }
                     ]
                 })
-                // console.log(errMsg)
-                // if (this.state.nilai === '') {
-                //     this.setState({
-                //         errors: setError(data),
-                //     })
-                // } else {
-                //     this.onShowAlert(data)
-                // }
             })
     }
     onConfirm() {
@@ -111,16 +93,12 @@ class Questions extends Component {
                 {
                     label: 'Lanjut',
                     className: 'btn green',
-                    // event: this.props.history.push('/verification')
                     event: this.props.history.push({
                         pathname: '/beri-nilai/' + this.props.location.state.assessment + '/exam/' + this.props.location.state.exam + '/class/' + this.props.location.state.class_id + '/flag' + this.state.flag,
                     })
                 }
             ]
         })
-        // this.props.history.push({
-        //     pathname: '/beri-nilai/' + this.props.location.state.assessment + '/exam/' + this.props.location.state.exam + '/class/' + this.props.location.state.class_id + '/flag' + this.state.flag,
-        // })
     }
     render() {
         const path = `/beri-nilai/${this.props.location.state.assessment}/exam/${this.props.location.state.exam}/class/${this.props.location.state.class_id}/flag/${this.state.flag}`
@@ -163,7 +141,7 @@ class Questions extends Component {
     }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
     dataNoQuestions: state.noQuestion //noQuestion dari reducer
 })
 
