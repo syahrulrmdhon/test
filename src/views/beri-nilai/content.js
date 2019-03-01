@@ -73,7 +73,7 @@ class Content extends Component {
     
                 let merge_content_skill = []
                 merge_content_skill.push(
-                    <td><input
+                    <td className="skill-socre-td"><input
                         type="text"
                         className="align-center box-right"
                         onChange={(e) => { this.props.handleScore(e.target.value, index, 'score') }}
@@ -124,9 +124,6 @@ class Content extends Component {
                         defaultValue={exam[index]['score']}
                     /></td>
                 )
-    
-    
-             
                     content.push(<tr key={index}>
                         <td className="align-left text-center">{x.qn_number}</td>
                         <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
