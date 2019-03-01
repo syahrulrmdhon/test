@@ -67,7 +67,7 @@ export function getDataScoreAttitude(assessment_id) {
 export function getDataScoreDetail(assessment_id, class_id, user_id) {
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
-    const url = `${process.env.API_URL}v1/assessments/${assessment_id}/classes/${class_id}/users/${user_id}?attitudes_scores=sb`
+    const url = `${process.env.API_URL}v1/assessments/${assessment_id}/classes/${class_id}/users/${user_id}?attitudes_scores?page=2`
     console.log(url,"my url")
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
