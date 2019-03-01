@@ -17,18 +17,10 @@ export default class NoQuestions extends Component {
             dataChart: [],
             dataPassed: [],
             dataNotPassed: [],
-            users: {},
-            scores: {},
-            score: [],
             exam: {},
             participant_passed: {},
             participant_not_passed: [],
             data: [],
-            selectIndex: -1,
-            hidden: true,
-            key: '',
-            dataChildSubject: [],
-            dataChildCompentency: [],
             assessment_id: props.match.params.assessment_id,
             exam_id: props.match.params.exam_id,
             class_id: props.match.params.class_id,
@@ -71,8 +63,7 @@ export default class NoQuestions extends Component {
         let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/participant_results`
         apiClient('get', url).then(res => {
             this.setState({
-                score: res.data.data.participants,
-                exam: res.data.data.exam,
+                kkm: res.data.data.kkm,
                 participant_passed: res.data.data.participants.passed,
                 participant_not_passed: res.data.data.participants.not_passed,
             })
@@ -91,6 +82,7 @@ export default class NoQuestions extends Component {
             <Page title='Beri Nilai Tidak Buat Soal'>
                 <div className="details-nilai bg-grey">
                     <Header navbar={false} location={path} />
+                    <br />
                     <div className="content-wrapper content-wrap-custom-size">
                         <div className="row">
                             <div className="detail-menu">
@@ -128,7 +120,10 @@ export default class NoQuestions extends Component {
                                     </div>
                                     <div className="col-sm-3">
                                         <div className="content-block-card main-block-card">
-                                            <KkmNoQuestions notPassed={this.state.dataNotPassed} />
+                                            <KkmNoQuestions
+                                                notPassed={this.state.dataNotPassed}
+                                                kkm={this.state.kkm}
+                                            />
                                         </div>
                                     </div>
                                 </div>

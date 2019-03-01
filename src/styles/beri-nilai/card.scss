@@ -71,6 +71,28 @@ $nunito_extra_bold: 'NunitoExtraBold';
     color: #2d2d2d;
   }
 }
+
+.score-result {
+  .content-chart {
+    padding-left: 29px;
+  }
+
+  .box-postition {
+    padding-top: 0px;
+    position: relative;
+    bottom: 52px;
+    right: 10px;
+  }
+
+  @media screen and (max-width: 1140px) {
+    .box-postition {
+      padding-left: 0px;
+      width: 160px;
+      float: right;
+    }
+  }
+}
+
 // @media only screen and (min-width: 800px) {
 //   .box-position {
 //     .card-nilai {
