@@ -58,10 +58,10 @@ export default function reducer(state = initialState, action) {
         // break;
 
         case HANDLE_QUESTION_ONCHANGE:
-            console.log(action, "my state")
+            console.log(state.data.exam_question, "my state")
             state.data.exam_question[action.idx]['ans'] = action.e.value
             state.data.exam_question[action.idx]['score'] = (action.e.value === action.pick) ? action.max_score : 0
-            console.log(state.data.exam_question[action.idx]['score'] = (action.e.value === action.pick) ? action.max_score : 0, "here now e")
+            console.log(state.data.exam_question[action.idx], "here now e")
             return {
                 ...state,
                 loaded: true,
@@ -110,8 +110,9 @@ export default function reducer(state = initialState, action) {
                 if (action.result.data.collections) {
                     action.result.data['exam_question'] = []
                     action.result.data.collections.map((collection) => {
+                        console.log(collection,"my col")
                         collection.questions.map((collections) => {
-                            console.log(collections.problem_type ? collections.problem_type : null, "my col col col skil")
+                            console.log(collections ,"my col 2")
                             action.result.data['exam_question'].push({
                                 ans: collections.problem_type ? collections.problem_type : null,
                                 score: collections.user_problem_answer ? collections.user_problem_answer.score : null,
@@ -127,6 +128,7 @@ export default function reducer(state = initialState, action) {
                                 max_score: collections.max_score
                             })
                         })
+                        console.log( action.result.data['exam_question'],"my col 3")
                     })
                 }
 
