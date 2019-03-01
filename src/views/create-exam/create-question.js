@@ -13,6 +13,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'
 import Choices from "./choices"
 import ErrorModal from '../global/error_modal'
 import { error, modal } from './../global/modal'
+import Page from './../../components/Title'
 
 var FontAwesome = require('react-fontawesome')
 
@@ -268,8 +269,10 @@ class Question extends Component {
     }
 
     return (
+      <Page title="Buat Tugas">
+              <Header navbar={true} location={path} />
+
       <div className="padding-content create-exam question-wrapper">
-        <Header navbar={true} location={path} />
         {error}
         <div className="margin-8">
           <div className="content-wrapper">
@@ -325,6 +328,7 @@ class Question extends Component {
           </div>
         </div>
       </div>
+      </Page>
     )
   }
 }

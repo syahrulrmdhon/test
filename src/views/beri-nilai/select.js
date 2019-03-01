@@ -15,13 +15,13 @@ class SelectData extends Component {
         }
         choices.push({value:data.symbol, label:data.symbol})
     })
-    console.log( this.props.exam.ans,"answer",choices)
+    console.log(this.props.exam,"here")
     return (
       <td>
           <Select
             classNamePrefix="select"
             options={choices}
-            value={choices.find((element) => {return element.value === this.props.exam.ans} )}
+            value={choices.find((element) => {return element.value === this.props.exam} )}
             onChange={(e) =>{this.props.handlingSelect(e, this.props.index, pick, this.props.max_score)}}
            />
       </td>
