@@ -221,7 +221,7 @@ export function handlingSelect(e, idx, pick, max_score) {
 }
 
 export function handleScore(value, index, field_name) {
-    // console.log(e, index, field_name)
+    console.log(value, index, field_name,"value")
     return {
         type: HANDLING_SCORE,
         idx: index,
