@@ -28,6 +28,7 @@ class Questions extends Component {
             flag: false
         })
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.onConfirm = this.onConfirm.bind(this)
     }
     componentDidMount() {
         this.props.getNoQuestions(this.props.location.state.assessment, this.props.location.state.exam, this.props.location.state.student) //method in redux modules
@@ -48,7 +49,7 @@ class Questions extends Component {
         objectSubmit['exam_scores'] = dataSubmit
 
         apiClient('post', url, objectSubmit).then(res => {
-            event.preventDefault();
+            e.preventDefault();
 
             confirmAlert({
                 customUI: ({ onClose, onConfirm }) => {
@@ -71,6 +72,7 @@ class Questions extends Component {
             })
         })
             .catch(err => {
+                console.log(err,"err")
                 let response = err.response
                 let data = response.data
                 let errMsg = data.errors[0].exam_score[0].description[0]
