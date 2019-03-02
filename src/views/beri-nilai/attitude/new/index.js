@@ -6,8 +6,9 @@ import Report from './report-list'
 import Select from 'react-select'
 import { apiClient } from '../../../../utils/apiClient'
 import { error, modal } from './../../../global/modal'
-import { getDataScoreDetail } from './../../../../redux-modules/modules/attitude'
+import { getDataScoreDetail, handlingInputText,handlingInputSelect } from './../../../../redux-modules/modules/attitude'
 import { bindActionCreators } from 'redux';
+import Page from './../../../../components/Title'
 
 //css
 import './../../../../styles/attitude.scss'
@@ -39,8 +40,25 @@ export class Index extends Component {
 
     }
     componentDidMount() {
-        console.log(this.state.activeTab, "my active")
-        this.props.getDataScoreDetail(this.props.match.params.assessment_id, this.props.match.params.class_id, this.props.match.params.user_id)
+        let score = ''
+        switch(this.state.activeTa){
+            case 'semua':
+                score = ''
+            break;
+            case 'sb':
+                score = 2
+            break;
+            case 'b':
+                score = 1
+            break;
+            case 'bp':
+                score = 0
+            break;
+            default:
+                score = ''
+            
+        }
+        this.props.getDataScoreDetail(this.props.match.params.assessment_id, this.props.match.params.class_id, this.props.match.params.user_id, score)
     }
 
     onChangeSelect(predicate) {
@@ -87,13 +105,8 @@ export class Index extends Component {
 
     onSubmit() {
         let dataWillSave = {}
-        let dataArr = {}
 
-        dataArr = {
-            "score": this.state.predicate.value,
-            "description": this.state.descrip
-        };
-        dataWillSave['user_attitude'] = dataArr
+        dataWillSave['user_attitude'] = this.props.data_form
         let url = `v1/assessments/${this.props.match.params.assessment_id}/classes/${this.props.match.params.class_id}/users/${this.props.match.params.user_id}`
 
         apiClient('post', url, dataWillSave).then(res => {
@@ -147,7 +160,17 @@ export class Index extends Component {
                 )
             })
         }
-
+        let select = []
+        let score = this.props.data_form && this.props.data_form.score
+            select.push(  <Select
+                className="select-box"
+                classNamePrefix="select"
+                placeholder="Pilih Nilai Ahkir"
+                options={option}
+                onChange={(e) => {this.props.handlingInputSelect(e,'score')}}
+                value={option.filter((element) => {return element.value === score })}
+            />)
+            console.log(this.props.data_form,"form data")
         return (
             <Title title="Nilai Sikap">
                 <div className="padding-content">
@@ -175,14 +198,7 @@ export class Index extends Component {
                                                     <div className="col-sm-12">
                                                         <label className="score-attitude-new__label-form">Nilai Ahkir</label>
                                                         <div className="padding-top-1">
-                                                            <Select
-                                                                className="select-box"
-                                                                classNamePrefix="select"
-                                                                placeholder="Pilih Nilai Ahkir"
-                                                                options={option}
-                                                                onChange={this.onChangeSelect}
-                                                                value={this.state.predicate}
-                                                            />
+                                                          {select}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -190,7 +206,7 @@ export class Index extends Component {
                                                     <div className="col-sm-12">
                                                         <label className="score-attitude-new__label-form">Deskripsi Sikap</label>
                                                         <div className="padding-top-1">
-                                                            <textarea className="textarea-description form-control" value={this.state.descrip} onChange={this.onChange} />
+                                                            <textarea className="textarea-description form-control" value={this.props.data_form && this.props.data_form.description}  onChange={(e) => {this.props.handlingInputText(e,'description')}} />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -216,8 +232,10 @@ export class Index extends Component {
 }
 
 const mapStateToProps = state => ({
-    data_header: state.attitude && state.attitude.data
+    data_header: state.attitude && state.attitude.data,
+    data_form: state.attitude && state.attitude.data && state.attitude.data.data_form,
+    test:state
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreDetail }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreDetail,handlingInputText,handlingInputSelect }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

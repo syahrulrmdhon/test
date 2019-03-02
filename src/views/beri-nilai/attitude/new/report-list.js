@@ -35,14 +35,17 @@ export class Report extends Component {
         const school_attitudes = this.props.data_header && this.props.data_header.school_attitudes
         const data_user_attitudes = this.props.data_user_attitudes
         const data_report_list = this.props.data_user_attitudes && this.props.data_user_attitudes.entries
+        
+        console.log(this.props.data_user_attitudes_data,"user")
 
 
         let title = []
         let subtitle = []
         let report = []
+        console.log(data_report_list,"here ")
         if (school_attitudes_length === 0) {
-            subjects && subjects.map((data, index) => {
-                title.push(<span key={Math.random()}  className="score-attitude-new__left-title">Daftar Laporan Sikap ({data.alias_name}) </span>)
+            subjects && subjects.map((data) => {
+                title.push(<span key={Math.random()} className="score-attitude-new__left-title">Daftar Laporan Sikap ({data.alias_name}) </span>)
                 switch (this.state.activeTab) {
                     case 'semua':
                         subtitle.push(<span key={Math.random()} className="score-attitude-new__predicate-title">Semua sikap ({data_user_attitudes.entries.length}) </span>)
@@ -84,104 +87,51 @@ export class Report extends Component {
             })
         }
 
-        // data_report_list && data_report_list.map((data) => {
-            report.push(<div className="box-scroll" key={Math.random()}>
-                <div className="col-sm-12">
+        data_report_list && data_report_list.map((data) => {
+            let predicate = []
+
+            switch (data.score) {
+                case 0:
+                    predicate.push(<div className="margin-top-1">
+                        <img src={BrokenHeart} alt=""  /> <span className="cred">BP</span>
+                    </div>)
+                    break;
+                case 1:
+                    predicate.push(<div className="margin-top-1">
+                        <i className=" fa fas fa-heart cyellow"></i> <span className="cyellow">B</span>
+                    </div>)
+                    break;
+                case 2:
+                    predicate.push(<div className="margin-top-1">
+                        <i className=" fa fas fa-heart cgreen"></i> <span className="cgreen">SB</span>
+                    </div>)
+                    break;
+                default:
+                    predicate.push(<span></span>)
+
+            }
+            console.log(data, "here data")
+            report.push(
+                <div className="col-sm-12" key={Math.random()}>
                     <div className="margin-top-5">
                         <div className="col-sm-1">
                             <Avatar src={Ava} size={20} round={true} />
                         </div>
                         <div className="col-sm-10">
                             <div className="score-attitude-new__report-title">
-                                <span>Ritika Singh (Guru Matematika)</span>
+                                <div>{data.evaluator.full_name} ({data.subject_name ? data.subject_name : 'N/A'})</div>
                             </div>
                             <div className="margin-top-1 attitude-score-new__report-value">
-                                <span >Mengajari teman-teman sekelasnya agar paham materi persamaan linear dalam kompleksitas aljabar.</span>
+                                <div >{data.description}</div>
                             </div>
-                            <div className="margin-top-1">
-                                <i className=" fa fas fa-heart cgreen"></i> <span className="cgreen">SB</span>
-                            </div>
+                            {predicate}
 
                         </div>
                     </div>
-                </div>
-                <div className="col-sm-12">
-                    <div className="margin-top-5">
-                        <div className="col-sm-1">
-                            <Avatar src={Ava} size={20} round={true} />
-                        </div>
-                        <div className="col-sm-10">
-                            <div className="score-attitude-new__report-title">
-                                <span>Ritika Singh (Guru Matematika)</span>
-                            </div>
-                            <div className="margin-top-1 attitude-score-new__report-value">
-                                <span >Mengajari teman-teman sekelasnya agar paham materi persamaan linear dalam kompleksitas aljabar.</span>
-                            </div>
-                            <div className="margin-top-1">
-                                <i className=" fa fas fa-heart cgreen"></i> <span className="cgreen">SB</span>
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-12">
-                    <div className="margin-top-5">
-                        <div className="col-sm-1">
-                            <Avatar src={Ava} size={20} round={true} />
-                        </div>
-                        <div className="col-sm-10">
-                            <div className="score-attitude-new__report-title">
-                                <span>Ritika Singh (Guru Matematika)</span>
-                            </div>
-                            <div className="margin-top-1 attitude-score-new__report-value">
-                                <span >Mengajari teman-teman sekelasnya agar paham materi persamaan linear dalam kompleksitas aljabar.</span>
-                            </div>
-                            <div className="margin-top-1">
-                                <i className=" fa fas fa-heart cred"></i> <span className="cred">BP</span>
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-12">
-                    <div className="margin-top-5">
-                        <div className="col-sm-1">
-                            <Avatar src={Ava} size={20} round={true} />
-                        </div>
-                        <div className="col-sm-10">
-                            <div className="score-attitude-new__report-title">
-                                <span>Ritika Singh (Guru Matematika)</span>
-                            </div>
-                            <div className="margin-top-1 attitude-score-new__report-value">
-                                <span >Mengajari teman-teman sekelasnya agar paham materi persamaan linear dalam kompleksitas aljabar.</span>
-                            </div>
-                            <div className="margin-top-1">
-                                <i className=" fa fas fa-heart cgreen"></i> <span className="cgreen">SB</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-12">
-                    <div className="margin-top-5">
-                        <div className="col-sm-1">
-                            <Avatar src={Ava} size={20} round={true} />
-                        </div>
-                        <div className="col-sm-10">
-                            <div className="score-attitude-new__report-title">
-                                <span>Ritika Singh (Guru Matematika)</span>
-                            </div>
-                            <div className="margin-top-1 attitude-score-new__report-value">
-                                <span >Mengajari teman-teman sekelasnya agar paham materi persamaan linear dalam kompleksitas aljabar.</span>
-                            </div>
-                            <div className="margin-top-1">
-                                <img className="cred" src={BrokenHeart} alt="" /> <span className="cred">BP</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>)
-        // })
+                </div>)
+        })
         return (
             <div>
                 <div className="padding-4">
@@ -192,21 +142,23 @@ export class Report extends Component {
                         {subtitle}
                     </div>
                     <div className="box-report margin-top-7">
+                        <div className="box-scroll" >
 
-                        <TabContent activeTab={this.props.activeTab}>
-                            <TabPane tabId="semua">
-                                {report}
-                            </TabPane>
-                            <TabPane tabId="sb">
-                            {report}
-                        </TabPane>
-                            <TabPane tabId="b">
-                            {report}
-                        </TabPane>
-                            <TabPane tabId="bp">
-                            {report}
-                        </TabPane>
-                        </TabContent>
+                            <TabContent activeTab={this.props.activeTab}>
+                                <TabPane tabId="semua">
+                                    {report}
+                                </TabPane>
+                                <TabPane tabId="sb">
+                                    {report}
+                                </TabPane>
+                                <TabPane tabId="b">
+                                    {report}
+                                </TabPane>
+                                <TabPane tabId="bp">
+                                    {report}
+                                </TabPane>
+                            </TabContent>
+                        </div>
                     </div>
                 </div>
                 <div className="row border-top ">
@@ -259,6 +211,7 @@ const mapStateToProps = state => ({
     data_header: state.attitude && state.attitude.data && state.attitude.data.assessment,
     data_user: state.attitude && state.attitude.data,
     data_user_attitudes: state.attitude && state.attitude.data && state.attitude.data.user_attitudes,
+    data_user_attitudes_data: state.attitude && state.attitude.data && state.attitude.data,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreAttitude }, dispatch);
