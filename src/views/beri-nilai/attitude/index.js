@@ -5,6 +5,7 @@ import Header from './../../global/header'
 import './../../../styles/attitude.scss'
 import { getDataScoreAttitude } from './../../../redux-modules/modules/attitude'
 import { bindActionCreators } from 'redux';
+import Page from './../../../components/Title'
 
 export class index extends Component {
     constructor(props){
@@ -24,10 +25,12 @@ export class index extends Component {
     }
 
     render() {
+        let path = '/penilaian'
         return (
+        <Page title= "Nilai Sikap">
             <div className="score-attitude">
                 <div>
-                    <Header navbar={false} />
+                    <Header navbar={false} location={path}/>
                 </div>
                 <div className="padding-content">
                     <div className="margin-side bg-white margin-top-7">
@@ -49,6 +52,7 @@ export class index extends Component {
                     </div>
                 </div>
             </div>
+            </Page>
         )
     }
 }

@@ -55,7 +55,7 @@ export default function reducer(state = initialState, action) {
                 loaded: true,
                 loading: false,
             }
-        // break;
+        
 
         case HANDLE_QUESTION_ONCHANGE:
             console.log(state.data.exam_question, "my state")
@@ -68,7 +68,6 @@ export default function reducer(state = initialState, action) {
                 loading: false,
                 result: true,
             }
-
         case LOAD_SCORE_QUESTION:
             delete state.error
             if (state.result !== action.result) {
@@ -194,8 +193,12 @@ export default function reducer(state = initialState, action) {
             return { ...state, loaded: true, loading: false, result: true, data: { ...state.data, ...action.payload } }
         case RESET:
             return { ...initialState }
-        default:
-            return state
+        default: {
+            return {
+                ...state
+            }
+        }
+            
     }
 }
 
