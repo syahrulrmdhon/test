@@ -14,6 +14,7 @@ export default class Schedule extends Component{
             edit: this.props.edit,
             date: this.props.date,
             classes: this.props.classes,
+            holiday: this.props.holiday,
             data: this.props.items,
         }
         this.callBack = this.callBack.bind(this)
@@ -46,11 +47,16 @@ export default class Schedule extends Component{
         }
 
         // check current day
-        let current = (this.state.current == true) ? 'current' : ''
+        let today = ''
+        if(this.state.holiday){
+            today = 'holiday'
+        } else if(this.state.current){
+            today = 'current'
+        }
 
         return(
             <div className="content-block disinblock margin-right-4">
-                <span className={classnames("bold dayname", current)}>{this.state.dayname}, </span><span>{this.state.datename}</span>
+                <span className={classnames("bold dayname", today)}>{this.state.dayname}, </span><span className={today}>{this.state.datename}</span>
                 <div className="list">
                     {items}
                 </div>

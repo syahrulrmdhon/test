@@ -4,6 +4,7 @@ import LogoFull from './../../../assets/images/ic-logo-gredu.svg'
 import { error, modal } from './../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
 import  Page  from "./../../../components/Title";
+import './../../../styles/auth.scss'
 // import { loadReCaptcha } from 'react-recaptcha-google'
 // import { ReCaptcha } from 'react-recaptcha-google'
 
@@ -58,6 +59,7 @@ export default class Verification extends Component {
     handleSubmit(e) {
         e.preventDefault()
         const url = window.location.href + '/:code&token_type=base64'
+        console.log('url', url)
         const endpoint = `authentication/verification_email?url=${url}`
         const verification = {
             email: this.state.email

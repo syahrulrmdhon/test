@@ -12,6 +12,7 @@ import { checkProperties } from '../../utils/common'
 import { assessmentShow } from '../../utils/exam'
 import ErrorModal from '../global/error_modal'
 import { error } from './../global/modal'
+import Page from './../../components/Title'
 
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import '../../styles/create-exam.scss'
@@ -25,7 +26,7 @@ class Index extends Component {
       step: 'BasicForm',
       category: 'knowledge',
       examTypes: [],
-      
+
     }
     this.onSubmit = this.onSubmit.bind(this)
 
@@ -36,9 +37,9 @@ class Index extends Component {
       this.props.getData(this.state.assessmentId, this.state.step, false, this.state.examId)
     }
     else {
-      this.props.getData(this.state.assessmentId, this.state.step)      
+      this.props.getData(this.state.assessmentId, this.state.step)
     }
-    examTypes.call(this, {category: this.state.category})
+    examTypes.call(this, { category: this.state.category })
   }
 
   onSubmit() {
@@ -57,7 +58,7 @@ class Index extends Component {
         }
       }
       apiClient('put', path, request).then(() => {
-        this.props.history.push({pathname: `/exam/${assessmentId}`})
+        this.props.history.push({ pathname: `/exam/${assessmentId}` })
       })
       return
     }
@@ -65,9 +66,9 @@ class Index extends Component {
     if (data.exam.include_question === false) {
       const path = `v1/assessments/${assessmentId}/exams`
       data.exam.question_count = 0
-      
+
       apiClient('post', path, data).then(response => {
-        this.props.history.push({pathname: `/exam/${assessmentId}`})
+        this.props.history.push({ pathname: `/exam/${assessmentId}` })
       }).catch(err => {
         error({
           message: `Gagal membuat soal, silahkan periksa kembali data yang dibutuhkan`,
@@ -85,7 +86,7 @@ class Index extends Component {
       apiClient('post', path, data).then(response => {
         this.props.history.push({
           pathname: `/question/${assessmentId}`, data: data,
-          state: {status: 'create-exam'}          
+          state: { status: 'create-exam' }
         })
       }).catch(err => {
         if (err.response.data.errors.exam.question_count[0].case === 'check_question_count') {
@@ -109,7 +110,7 @@ class Index extends Component {
               }
             ]
           })
-        }        
+        }
       })
     }
   }
@@ -117,7 +118,7 @@ class Index extends Component {
 
   render() {
     let disable = false
-  
+
     if (this.props.exam.switch) {
       if (checkProperties(this.props.exam.basicForm)) {
         disable = true
@@ -153,11 +154,14 @@ class Index extends Component {
         path = `/all-question/${this.state.assessmentId}/assessment/${this.state.examId}/exam/`
       }
     }
+    else {
+      path = `/exam/${this.state.assessmentId}`
+    }
 
     return (
+      <Page title="Buat Tugas">
       <div className="padding-content create-exam">
         <Header navbar={true} location={path} />
-        
         <div className="margin-8">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
@@ -183,21 +187,21 @@ class Index extends Component {
                 </div>
               }
               <label className="create-exam__label">Judul Tugas</label>
-              <input type="text" className="form-control create-exam__input" placeholder="Masukkan Judul Tugas" onChange={event => this.props.handleEvent(event.target.value, "name", this.state.step)} value={name}/>
+              <input type="text" className="form-control create-exam__input" placeholder="Masukkan Judul Tugas" onChange={event => this.props.handleEvent(event.target.value, "name", this.state.step)} value={name} />
               <label className="create-exam__label">Tipe Tugas</label>
               <Select
                 className="create-exam__input"
                 classNamePrefix="select"
-                value={this.state.examTypes.find(type => {return type.value === examType})}
+                value={this.state.examTypes.find(type => { return type.value === examType })}
                 onChange={event => this.props.handleEvent(event.value, 'exam_type', this.state.step)}
-                options={this.state.examTypes} 
+                options={this.state.examTypes}
                 placeholder='Pilih Tipe Tugas' />
               {
                 this.props.exam.switch &&
                 <div>
                   <label className="create-exam__label">Jumlah Soal Tugas</label>
-                  <input type="text" className="form-control create-exam__input create-exam__input-amount" placeholder="Masukkan Jumlah Soal Tugas" 
-                  value={question_count} onChange={event => this.props.handleEvent(event.target.value, "question_count", this.state.step)} disabled={this.state.examId ? true : false}/>
+                  <input type="text" className="form-control create-exam__input create-exam__input-amount" placeholder="Masukkan Jumlah Soal Tugas"
+                    value={question_count} onChange={event => this.props.handleEvent(event.target.value, "question_count", this.state.step)} disabled={this.state.examId ? true : false} />
                 </div>
               }
             </div>
@@ -205,6 +209,7 @@ class Index extends Component {
           </div>
         </div>
       </div>
+      </Page>
     )
   }
 }

@@ -39,11 +39,24 @@ export default class ScheduleItem extends Component{
             callBack: this.seeMore
         })
 
+        let title = ''
+        switch(this.props.data.source){
+            case 'holiday':
+                title = 'Libur Nasional'
+            break;
+            case 'academic':
+                title = 'Kalendar Akademik'
+            break;
+            default:
+                title = this.props.data.time
+            break;
+        }
+
         return(
             <div className={classnames("border-full margin-bottom-2", this.props.data.source)}>
                 {action}
                 <div className="padding-3">
-                    <div className="time cgray2">{this.props.data.time}</div>
+                    <div className="time cgray2">{title}</div>
                     <div className="description">{description}</div>
                     {textClass}
                 </div>

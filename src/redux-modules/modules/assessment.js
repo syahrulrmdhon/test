@@ -86,7 +86,7 @@ export default function reducer(state = initialState, action = {}) {
             state.assessment_subjects_attributes[action.idx]['school_subject_id'] = action.value
             if(state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes']){
                 state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes'].map((assessment_basic_comps, idx) => {
-                    state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes'][idx][basic_comp_id] = null
+                    state.assessment_subjects_attributes[action.idx]['assessment_basic_comps_attributes'][idx][assessment_basic_comps] = null
                 })
             }
 

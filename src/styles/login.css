@@ -100,3 +100,13 @@
   text-decoration: none;
   color: #45c4a6;
 }
+
+@media screen and (max-height: 576px) {
+  .main-right {
+    margin-top: 20px;
+  }
+
+  .box .left-content, .box .right-content-login {
+    height: 400px;
+  }
+}

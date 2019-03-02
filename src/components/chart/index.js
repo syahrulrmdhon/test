@@ -8,7 +8,7 @@ export default class SingleBarChat extends Component {
     return (
       <div style={{ display: 'flex' }}>
       <Chart
-        width={'770px'}
+        width={'100%'}
         height={'220px'}
         chartType="Bar"
         color="red"

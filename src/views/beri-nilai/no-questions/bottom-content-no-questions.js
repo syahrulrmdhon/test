@@ -91,7 +91,7 @@ class BottomContent extends Component {
             }
         })
         return (
-            <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-top-4 margin-bottom-2">
+            <div className="margin-side-5 bg-white padding-top-4 margin-top-4 margin-bottom-2">
                 <div className="content-bottom">
                     <div className='margin-bottom-4'>
                         <div className='row'>
@@ -168,7 +168,7 @@ class BottomContent extends Component {
                                                     data={data}
                                                 />
                                                 <div className="col-sm-2 align-left padding-2 ">
-                                                    <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.page(e, data.user.id, this.props.class) }} />
+                                                    <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.page(e, data.user.id, this.props.class, data.user.full_name) }} />
                                                 </div>
                                                 <div className="col-sm-1 align-left padding-2 ">
                                                     <i className="fa fa-ellipsis-h icon-table-pencil cred" onClick={(e) => { this.handleClick(e, data.user.id, index) }} ></i>

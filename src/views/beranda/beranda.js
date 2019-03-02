@@ -90,12 +90,14 @@ class Beranda extends Component {
         if(this.state.data.length > 0){
             this.state.scheduleList = []
             {this.state.data.map((result, key) => {
+                console.log(result)
                 this.state.scheduleList.push(<Schedule 
                     dayname={result.dayname} 
                     datename={result.datename} 
                     current={result.current} 
                     date={result.date}
-                    items={result.items} 
+                    items={result.items}
+                    holiday={result.holiday}
                     classes={this.state.classes}
                     key={Math.random()}
                 />)

@@ -13,16 +13,25 @@ const initialState = {
   disabled: true
 };
 
-const initialNote = {
+const initialExtracurriculars = {
   extracurricular_id: '', description: ''
+};
+
+const initialAchievement = {
+  title: '', description: ''
 }
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_DATA:
       let notes = action.result.data.notes
+      if (action.content === 'extracurricular') {
+        notes = notes.length ? notes : [initialExtracurriculars]
+      }
+      else if (action.content === 'daily_result') {
+        notes = notes.length ? notes : [initialAchievement]
+      }
 
-      notes = notes.length ? notes : [initialNote]
       state.notes = notes
 
       return {
@@ -49,18 +58,19 @@ export default function reducer(state = initialState, action) {
       if(data.id != undefined){
         state.notes[data.order]['id'] = data.id
       }
-
+      state.disabled = false
       return {
         ...state,
-        disabled: false,
         loaded: true,
         loading: false
       };
     case HANDLE_ADD:
       if (action.content === 'extracurricular') {
-        state.notes = [...state.notes, {initialNote}]
+        state.notes = [...state.notes, {initialExtracurriculars}]
       }
-
+      else if (action.content === 'daily_result') {
+        state.notes = [...state.notes, {initialAchievement}]
+      }
       return {
         ...state,
         loaded: true,
@@ -114,6 +124,7 @@ export function getData(id, type) {
 
   return {
     types: [LOAD, GET_DATA, LOAD_FAIL],
+    content: type,
     id: id,
     promise: client => client.get(process.env.API_URL + url, headers)
   }

@@ -19,6 +19,8 @@ class Content extends Component {
     render() {
         const question_exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.collections || []
         const exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.exam_question || []
+        console.log(question_exam,"my quest QUESTION EXAM")
+        console.log(exam,"my quest QUESTION EXAM")
         let main_content = []
         const type = this.props.type
         let content = []
@@ -42,56 +44,85 @@ class Content extends Component {
             </thead>)
         }
 
-        question_exam.map((x, index) => {
-            let merge_content = []
-            if (x.problem_type === 'multiple_choice') {
-                merge_content.push(<SelectData choices={x.exam_question_choices} max_score={x.max_score} index={index} exam={exam[index]} />)
-                merge_content.push(<td className="align-center">{exam[index]['score']}</td>)
-            } else {
-                merge_content.push(
-                    <td> <input
+
+        if (type === 'skill') {
+            question_exam.map((data, index) => {
+                data.questions.map((x) =>{
+                    console.log(x,"my xxx")
+                let merge_content = []
+                   merge_content.push(
+                        <td> <input
+                            type="text"
+                            onChange={(e) => { this.props.handleScore(e.target.value, index, 'ans') }}
+                            className="padding-1 fullwidth"
+                            defaultValue={x.user_problem_answer.ans}
+                        /> </td>
+                    )
+                    merge_content.push(
+                        <td><input
+                            type="text"
+                            onChange={(e) => { this.props.handleScore(e.target.value, index, 'score') }}
+                            defaultValue={x.user_problem_answer.score}
+                        /></td>
+                    )
+                
+    
+                let merge_content_skill = []
+                merge_content_skill.push(
+                    <td className="skill-socre-td"><input
                         type="text"
-                        onChange={(e) => { this.props.handleScore(e.target.value, index, 'ans') }}
-                        className="padding-1 fullwidth"
-                        defaultValue={exam[index]['ans']}
-                    /> </td>
-                )
-                merge_content.push(
-                    <td><input
-                        type="text"
+                        className="align-center box-right"
                         onChange={(e) => { this.props.handleScore(e.target.value, index, 'score') }}
-                        defaultValue={exam[index]['score']}
+                        defaultValue={x.user_problem_answer.score}
                     /></td>
                 )
-            }
+                    content.push(<tr key={index}>
+                        <td className="align-left text-center">{x.qn_number}</td>
+                        <td className="align-left text-left" key={x.problem_type}>{x.problem_type}</td>
+                        {merge_content_skill}
+                        <td>{x.weight}</td>
+                    </tr>)
+               },this)
+            }, this)
+        
+        }else{
+            exam.map((x, index) => {
+                let merge_content = []
+                if (x.problem_type === 'multiple_choice') {
+                    console.log("here hit event lala",x.ans)
+                    merge_content.push(<SelectData choices={x.exam_question_choices} max_score={x.max_score} index={index} exam={x.ans} />)
+                    merge_content.push(<td className="align-center">{exam[index]['score']}</td>)
+                } else {
+                    merge_content.push(
+                        <td> <input
+                            type="text"
+                            onChange={(e) => { this.props.handleScore(e.target.value, index, 'ans') }}
+                            className="padding-1 fullwidth"
+                            defaultValue={exam[index]['ans']}
+                        /> </td>
+                    )
+                    merge_content.push(
+                        <td><input
+                            type="text"
+                            onChange={(e) => { this.props.handleScore(e.target.value, index, 'score') }}
+                            defaultValue={exam[index]['score']}
+                        /></td>
+                    )
+                }
+    
+              
+                    content.push(<tr key={index}>
+                        <td className="align-left text-center">{x.qn_number}</td>
+                        <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
+                        {merge_content}
+                        <td>{x.weight}</td>
+                    </tr>)
+                
+            }, this)
+        }
 
-            let merge_content_skill = []
-            merge_content_skill.push(
-                <td><input
-                    type="text"
-                    className="align-center box-right"
-                    onChange={(e) => { this.props.handleScore(e.target.value, index, 'score') }}
-                    defaultValue={exam[index]['score']}
-                /></td>
-            )
 
-
-            if (type === 'skill') {
-                content.push(<tr key={index}>
-                    <td className="align-left text-center">{x.qn_number}</td>
-                    <td className="align-left text-left" key={x.problem_type}>{x.question}</td>
-                    {merge_content_skill}
-                    <td>{x.weight}</td>
-                </tr>)
-            } else {
-                content.push(<tr key={index}>
-                    <td className="align-left text-center">{x.qn_number}</td>
-                    <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
-                    {merge_content}
-                    <td>{x.weight}</td>
-                </tr>)
-            }
-        }, this)
+    
 
         return (
             <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">

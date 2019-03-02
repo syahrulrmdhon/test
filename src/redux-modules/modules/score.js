@@ -9,7 +9,8 @@ const LOGOUT = 'modules/score/LOGOUT';
 const LOAD_SCORE = 'modules/score/LOAD_SCORE';
 const HANDLE_QUESTION = 'modules/score/HANDLE_QUESTION';
 const LOAD_SCORE_QUESTION = 'module/score/LOAD_SCORE_QUESTION'
-const HANDLE_QUESTION_ONCHANGE  = 'module/score/HANDLE_QUESTION_ONCHANGE'
+const LOAD_SCORE_QUESTION_SKILL = 'module/score/LOAD_SCORE_QUESTION_SKILL'
+const HANDLE_QUESTION_ONCHANGE = 'module/score/HANDLE_QUESTION_ONCHANGE'
 const LOAD_SCORE_QUESTION_INPUT = 'module/score/LOAD_SCORE_QUESTION_INPUT'
 const HANDLING_SCORE = 'module/score/HANDLING_SCORE'
 const initialState = null;
@@ -53,14 +54,14 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 loaded: true,
                 loading: false,
-            } 
+            }
         // break;
-           
+
         case HANDLE_QUESTION_ONCHANGE:
-            console.log(action, "my state")
+            console.log(state.data.exam_question, "my state")
             state.data.exam_question[action.idx]['ans'] = action.e.value
             state.data.exam_question[action.idx]['score'] = (action.e.value === action.pick) ? action.max_score : 0
-            console.log(state.data.exam_question[action.idx]['score'] = (action.e.value === action.pick) ? action.max_score : 0,"here now e")
+            console.log(state.data.exam_question[action.idx], "here now e")
             return {
                 ...state,
                 loaded: true,
@@ -74,21 +75,60 @@ export default function reducer(state = initialState, action) {
                 if (action.result.data.collections) {
                     action.result.data['exam_question'] = []
                     action.result.data.collections.map((collection) => {
+                        console.log(collection, "my col col col")
+                        action.result.data['exam_question'].push({
+                            ans: collection.user_problem_answer ? collection.user_problem_answer.ans : null,
+                            score: collection.user_problem_answer ? collection.user_problem_answer.score : null,
+                            exam_question_id: collection.id,
+                            user_id: action.data.student,
+                            exam_id: action.data.exam,
+                            class_id: action.data.classess,
+                            problem_type: collection.problem_type,
+                            user_problem_answer: collection.user_problem_answer,
+                            exam_question_choices: collection.exam_question_choices,
+                            qn_number: collection.qn_number,
+                            weight: collection.weight,
+                            max_score: collection.max_score
+                        })
+
+                    })
+                }
+
+                return {
+                    ...state,
+                    loaded: true,
+                    loading: false,
+                    result: true,
+                    ...action.result
+                }
+            }
+            break;
+
+        case LOAD_SCORE_QUESTION_SKILL:
+            delete state.error
+            if (state.result !== action.result) {
+                if (action.result.data.collections) {
+                    action.result.data['exam_question'] = []
+                    action.result.data.collections.map((collection) => {
+                        console.log(collection,"my col")
+                        collection.questions.map((collections) => {
+                            console.log(collections ,"my col 2")
                             action.result.data['exam_question'].push({
-                                ans: collection.user_problem_answer ? collection.user_problem_answer.ans:null ,
-                                score: collection.user_problem_answer ? collection.user_problem_answer.score:null,
-                                exam_question_id: collection.id,
-                                user_id: action.data.student ,
+                                ans: collections.problem_type ? collections.problem_type : null,
+                                score: collections.user_problem_answer ? collections.user_problem_answer.score : null,
+                                exam_question_id: collections.id,
+                                user_id: action.data.student,
                                 exam_id: action.data.exam,
                                 class_id: action.data.classess,
-                                problem_type:collection.problem_type,
-                                user_problem_answer:collection.user_problem_answer,
-                                exam_question_choices: collection.exam_question_choices,
-                                qn_number: collection.qn_number,
-                                weight:collection.weight,
-                                max_score: collection.max_score
+                                problem_type: collections.problem_type,
+                                user_problem_answer: collections.user_problem_answer,
+                                exam_question_choices: collections.exam_question_choices,
+                                qn_number: collections.qn_number,
+                                weight: collections.weight,
+                                max_score: collections.max_score
                             })
-                        
+                        })
+                        console.log( action.result.data['exam_question'],"my col 3")
                     })
                 }
 
@@ -102,25 +142,25 @@ export default function reducer(state = initialState, action) {
             }
             break;
         case LOAD_SCORE_QUESTION_INPUT:
-        delete state.error
-        if(state.result !== action.result){
-            if (action.result.data.collections) {
-                action.result.data['exam_question'] = []
-                action.result.data.collections.map((collection) => {
+            delete state.error
+            if (state.result !== action.result) {
+                if (action.result.data.collections) {
+                    action.result.data['exam_question'] = []
+                    action.result.data.collections.map((collection) => {
                         action.result.data['exam_question'].push({
                             ans: collection.user_problem_answer.ans,
                             score: collection.user_problem_answer.score,
                             exam_question_id: collection.id,
-                            user_id: action.data.student ,
+                            user_id: action.data.student,
                             exam_id: action.data.exam,
                             class_id: action.data.classess
 
                         })
-                    
-                })
+
+                    })
+                }
             }
-        }   
-        break;
+            break;
         case LOAD:
             return {
                 ...state,
@@ -128,7 +168,7 @@ export default function reducer(state = initialState, action) {
                 loading: true,
             }
         case LOAD_SUCCESS:
-        console.log(action,"action")
+            console.log(action, "action")
             delete state.error;
             if (state.result !== action.result) {
                 return {
@@ -171,24 +211,24 @@ export function setScoreNoQuestion(event, index, related_id) {
     }
 }
 
-export function handlingSelect(e, idx, pick, max_score){
-    console.log("hit",e, idx, pick, max_score)
+export function handlingSelect(e, idx, pick, max_score) {
+    console.log("hit", e, idx, pick, max_score)
     return {
-        type:HANDLE_QUESTION_ONCHANGE,
-        e:e,
+        type: HANDLE_QUESTION_ONCHANGE,
+        e: e,
         idx: idx,
         pick: pick,
         max_score: max_score,
-    }   
+    }
 }
 
-export function handleScore(value,index, field_name){
-    // console.log(e, index, field_name)
+export function handleScore(value, index, field_name) {
+    console.log(value, index, field_name,"value")
     return {
-        type:HANDLING_SCORE,
-        idx:index,
-        field_name: field_name,        
-        value:value
+        type: HANDLING_SCORE,
+        idx: index,
+        field_name: field_name,
+        value: value
     }
 }
 
@@ -212,14 +252,26 @@ export function getDataScores(assessment_id, exam_id, exam_scores_id) {
 
 }
 
-export function getDataScoreQuestion(assessment, exam, student, classess) {
+export function getDataScoreQuestion(assessment, exam, student, classess, category_id) {
     const url = `v1/assessments/${assessment}/exams/${exam}/exam_scores/${student}`
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
+    console.log("category", category_id)
+    let case_load = ''
+    switch (category_id) {
+        case 'skill':
+            case_load = [LOAD, LOAD_SCORE_QUESTION_SKILL, LOAD_FAIL]
+            break;
+        case 'knowledge':
+            case_load = [LOAD, LOAD_SCORE_QUESTION, LOAD_FAIL]
+            break
+        default:
+            case_load = ''
+    }
 
     return {
-        types: [LOAD, LOAD_SCORE_QUESTION, LOAD_FAIL],
-        data:{assessment, exam, student,classess},
+        types: case_load,
+        data: { assessment, exam, student, classess },
         promise: client => client.get(process.env.API_URL + url, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -236,14 +288,14 @@ export function getDataScoreQuestion(assessment, exam, student, classess) {
 export function getParticipant(exam, classess, assess, name, sort) {
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
-    let full_name = name === undefined?'':name
+    let full_name = name === undefined ? '' : name
     // return false
     let sort_by_exam_score = ''
-    if(sort === undefined){
+    if (sort === undefined) {
         sort_by_exam_score = ''
-    }else if(sort === null) {
+    } else if (sort === null) {
         sort_by_exam_score = ''
-    }else{
+    } else {
         sort_by_exam_score = sort.value
     }
 

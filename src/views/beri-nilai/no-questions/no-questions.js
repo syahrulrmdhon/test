@@ -19,23 +19,23 @@ export default class NoQuestions extends Component {
             dataNotPassed: [],
             users: {},
             scores: {},
-            score: [],
+            score:[],
             exam: {},
             participant_passed: {},
             participant_not_passed: [],
             data: [],
-            selectIndex: -1,
+            selectedIndex: -1,
             hidden: true,
             key: '',
             dataChildSubject: [],
-            dataChildCompentency: [],
+            dataChildCompetency: [],
             assessment_id: props.match.params.assessment_id,
             exam_id: props.match.params.exam_id,
             class_id: props.match.params.class_id,
-            score_id: ''
+            score_id: '',
+            fullname: ''
         }
 
-        this.handleClickQuestion = this.handleClickQuestion.bind(this)
         this.handleNewScore = this.handleNewScore.bind(this)
         this.onChangePage = this.onChangePage.bind(this)
     }
@@ -43,22 +43,16 @@ export default class NoQuestions extends Component {
         this.getDataResults()
         this.fetchData()
     }
-    handleClickQuestion(e, id, name) {
-        e.preventDefault()
-        this.props.history.push({
-            pathname: /questions/ + id, state: { fullname: name }
-        })
-    }
     handleNewScore(e, student) {
         this.props.history.push({
             pathname: '/questions/' + this.state.assessment_id + '/exam/' + this.state.exam_id + '/class/' + this.state.class_id + '/student/' + student,
-            state: { data: this.state.score, assesment_id: this.state.assesment_id, exam_id: this.state.exam_id, class_id: this.state.class_id, student_id: student }
+            state: { data: this.state.score, assesment_id: this.state.assesment_id, exam_id: this.state.exam_id, class_id: this.state.class_id, student_id: student, fullname: full_name }
         })
     }
-    onChangePage(e, student, class_id) {
+    onChangePage(e, student, class_id, full_name) {
         this.props.history.push({
             pathname: '/questions/' + this.state.assessment_id + '/exams/' + this.state.exam_id + '/student/' + student + '/' + class_id,
-            state: { assessment: this.state.assessment_id, exam: this.state.exam_id, student: student, class_id: class_id }
+            state: { assessment: this.state.assessment_id, exam: this.state.exam_id, student: student, class_id: class_id, fullname: full_name }
         })
     }
     getDataResults() {
@@ -79,6 +73,7 @@ export default class NoQuestions extends Component {
             this.setState({
                 score: res.data.data.participants,
                 exam: res.data.data.exam,
+                kkm: res.data.data.kkm,
                 participant_passed: res.data.data.participants.passed,
                 participant_not_passed: res.data.data.participants.not_passed,
             })
@@ -97,6 +92,7 @@ export default class NoQuestions extends Component {
             <Page title='Beri Nilai Tidak Buat Soal'>
                 <div className="details-nilai bg-grey">
                     <Header navbar={false} location={path} />
+                    <br />
                     <div className="content-wrapper content-wrap-custom-size">
                         <div className="row">
                             <div className="detail-menu">
@@ -134,7 +130,10 @@ export default class NoQuestions extends Component {
                                     </div>
                                     <div className="col-sm-3">
                                         <div className="content-block-card main-block-card">
-                                            <KkmNoQuestions notPassed={this.state.dataNotPassed} />
+                                            <KkmNoQuestions
+                                                notPassed={this.state.dataNotPassed}
+                                                kkm={this.state.kkm}
+                                            />
                                         </div>
                                     </div>
                                 </div>

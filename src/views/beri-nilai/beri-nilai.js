@@ -134,8 +134,51 @@ class Nilai extends Component {
     }
   }
   render() {
-    const tabMenu = ['Perolehan Nilai', 'Evaluasi Soal'];
+    const tabMenu = [
+      {
+        label: 'Perolehan Nilai',
+        categories: ['knowledge', 'skill'],
+      }, 
+      { 
+        label: 'Evaluasi Soal',
+        categories: ['knowledge'],
+      }, 
+    ];
     let path = `/exam/${this.state.assessment_id}`
+    let show_tab_2 = ''
+
+    if(this.props.match.params.category_id === 'knowledge'){
+      show_tab_2 = <TabPane tabId={2}>
+        <div className="row">
+          <div className="col-sm-12">
+            <div className="content-block-evaluasi main-block-evaluasi">
+              <div className="padding-4">
+                <TopContentEvaluasi
+                  questionResults={this.state.questionResults}
+                  examChart={this.state.examChart}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row margin-top-2">
+          <div className="col-md-9">
+            <div className="content-block-evaluasi main-block-evaluasi">
+              <BottomContentEvaluasi
+                questionEvaluations={this.state.questionEvaluations}
+              />
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="content-block-card main-block-card">
+              <SubjectEvaluasi
+                competencySubjects={this.state.competencySubjects}
+              />
+            </div>
+          </div>
+        </div>
+      </TabPane>;
+    }
     
     return (
       <Page title="Detail Score">
@@ -146,6 +189,7 @@ class Nilai extends Component {
               <div className="offset-2 col-sm-10 tab-menu tab-position">
                 <TabMenu
                   menu={tabMenu}
+                  assessment_category={this.props.match.params.category_id}
                   activeMenu={this.state.activeMenu}
                   toggle={this.toggleMenu}
                 />
@@ -173,7 +217,7 @@ class Nilai extends Component {
                         exam={this.state.exam_id}
                         class={this.state.class_id}
                         asssessment_id={this.state.assessment_id}
-                        category={this.props.location.state.assessment_category}
+                        category={this.props.match.params.category_id}
                         handleNewScoreParent={this.handleNewScore}
                         search={this.state.search}
                         onChange={this.onChangeSelect}
@@ -184,7 +228,7 @@ class Nilai extends Component {
                     </div>
                   </div>
                   <div className="col-sm-3 ">
-                    <div className="content-block main-block padding-5 right-height-kkm">
+                    <div className="content-block main-block right-height-kkm">
                       <RightContent
                         participant_not_passed={this.state.participant_not_passed}
                       />
@@ -192,37 +236,7 @@ class Nilai extends Component {
                   </div>
                 </div>
               </TabPane>
-
-              <TabPane tabId={2}>
-                <div className="row">
-                  <div className="col-sm-12">
-                    <div className="content-block-evaluasi main-block-evaluasi">
-                      <div className="padding-4">
-                        <TopContentEvaluasi
-                          questionResults={this.state.questionResults}
-                          examChart={this.state.examChart}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="row margin-top-2">
-                  <div className="col-sm-9">
-                    <div className="content-block-evaluasi main-block-evaluasi">
-                      <BottomContentEvaluasi
-                        questionEvaluations={this.state.questionEvaluations}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-sm-3">
-                    <div className="content-block-card main-block-card">
-                      <SubjectEvaluasi
-                        competencySubjects={this.state.competencySubjects}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </TabPane>
+              {show_tab_2}
             </TabContent>
           </div>
         </div>
