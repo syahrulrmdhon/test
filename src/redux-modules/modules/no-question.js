@@ -24,7 +24,7 @@ export default function reducer(state = initialState, action) {
                         action.result.data['no_questions'].push({
                             aliasName: res.alias_name,
                             related_id: res.id,
-                            score: res.exam_score.score
+                            score: res.exam_score.score ? res.exam_score.score:null
                         })
                     })
                 }

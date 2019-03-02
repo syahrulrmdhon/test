@@ -261,21 +261,21 @@ class BottomContent extends Component {
           <div className="header">
             <div className="row">
               <div className="col-sm-12">
-                <div className="col-sm-3 padding-1">
-                  <span className="padding-3">Nama Murid</span>
-                </div>
-                <div className="col-sm-3 padding-1 align-left">
-                  <span>Email</span>
-                </div>
-                <div className="col-sm-3 align-center padding-1">
-                  <span>Nilai</span>
-                </div>
-                <div className="col-sm-2 padding-1">
-                  <span>Beri Nilai</span>
-                </div>
-                <div className="col-sm-1 padding-1">
-                  <span>Rincian</span>
-                </div>
+                  <div className="col-sm-3 padding-1">
+                    <span className="padding-3">Nama Murid</span>
+                  </div>
+                  <div className="col-sm-3 padding-1 align-left">
+                    <span>Email</span>
+                  </div>
+                  <div className="col-sm-3 align-center padding-1">
+                    <span>Nilai</span>
+                  </div>
+                  <div className="col-sm-2 padding-1">
+                    <span>Beri Nilai</span>
+                  </div>
+                  <div className="col-sm-1 padding-1">
+                    <span>Rincian</span>
+                  </div>
               </div>
 
             </div>
@@ -287,20 +287,20 @@ class BottomContent extends Component {
                   <div className={classnames('border-full border-right', data.scores.total_average.result_status === null || data.scores.total_average.result_status === 'need_attention' ? 'border-left-col-red' : data.scores.total_average.result_status === 'good' || data.scores.total_average.result_status === 'very_good' ? 'border-left-col-green' : 'border-left-col-yellow')}>
                     <div className="row">
                       <div className="col-sm-12 ">
-                        <div className="col-sm-3  padding-1">
-                          <Avatar src={Ava} size="30" round={true} />
-                          <span className="padding-left-2  label-content ">{data.user.full_name}</span>
+                        <div className="col-sm-3 padding-left-4 padding-top-2 padding-bottom-2 d-table">
+                          <Avatar src={Ava} size="30" round={true} className="d-table-cell"/>
+                          <span className="padding-left-2 label-content d-table-cell">{data.user.full_name}</span>
                         </div>
-                        <div className="col-sm-3 align-left padding-2 ">
-                          <span className="label-content">{data.user.email}</span>
+                        <div className="col-sm-3 align-left padding-1 d-flex align-items-center word-break h-100">
+                          <span className="label-content spacing-line-1">{data.user.email}</span>
                         </div>
-                        <div className="col-sm-3 align-center padding-2 ">
+                        <div className="col-sm-3 align-center padding-2">
                           {this.generateNilai(data)}
                         </div>
-                        <div className="col-sm-2 align-left padding-2 ">
+                        <div className="col-sm-2 align-left padding-2">
                           <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.handleNewScoreParent(e, data.user.id) }} />
                         </div>
-                        <div className="col-sm-1 align-left padding-2 ">
+                        <div className="col-sm-1 align-left padding-2">
                           <i className={classnames("fa fas fa-ellipsis-h icon-table-pencil", data.scores.total_average.result_status === null || data.scores.total_average.result_status === 'need_attention' ? 'cred' : data.scores.total_average.result_status === 'very_good' ? 'cgreen' : 'cyellow')} onClick={(e) => { this.handleClick(e, data.user.id, index) }} ></i>
                         </div>
                       </div>

@@ -7,8 +7,9 @@ import { setError } from './../../../utils/common'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { connect } from 'react-redux'
-import { bindActionCreators, compose } from 'redux'
+import { bindActionCreators } from 'redux'
 import { getNoQuestions, handleChange } from './../../../redux-modules/modules/no-question'
+import GiveScore from './give-score'
 
 class Questions extends Component {
     constructor(props) {
@@ -92,24 +93,10 @@ class Questions extends Component {
         let collections = this.props.dataNoQuestions && this.props.dataNoQuestions.data && this.props.dataNoQuestions.data.no_questions || []
         collections.map((x, i) => {
             data.push(
-                <div className='row' key={i} >
-                    <div className='col-sm-6'>
-                        <label className='disblock padding-bottom-2 subject-title'>Mata Pelajaran</label>
-                        <input className='input-question' type='text' placeholder={x.aliasName} readOnly></input>
-                    </div>
-                    <div className='col-sm-6 margin-bottom-4'>
-                        <label className='disblock padding-bottom-2 subject-title'>Nilai</label>
-
-                        <input
-                            key={Math.random()}
-                            className='input-question'
-                            name='nilai'
-                            defaultValue={x.score ? x.score : 0}
-                            type='number'
-                            onChange={(e) => this.props.handleChange(e.target.value, i, 'score')}
-                            placeholder='Masukkan Nilai...'
-                        />
-                    </div>
+                <div className='row' key={i}>
+                    <GiveScore
+                        i={i}
+                    />
                 </div>
             )
         })
@@ -140,12 +127,12 @@ class Questions extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, props) => ({
     dataNoQuestions: state.noQuestion //noQuestion dari reducer
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    getNoQuestions, handleChange
+    getNoQuestions
 }, dispatch
 )
 export default connect(mapStateToProps, mapDispatchToProps)(Questions)
