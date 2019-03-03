@@ -21,11 +21,11 @@ class WorkStepIndicator extends Component {
         let items = []
 
         const basic_comps = basic_comp_lists(this.props.assessment_basic_comps)
-
+        console.log("here render")
         if(this.props.problem_type_sets){
             this.props.problem_type_sets.map((problem_type_set, idx) => {
                 let action;
-
+                console.log(problem_type_set,"here go")
                 if(idx > 0){
                     action = <td className="align-center valign-center">
                         <a href="javascript:void(0);" onClick={() => {this.props.removeIndicator(this.props.key_value, idx)}}>

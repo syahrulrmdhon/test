@@ -65,7 +65,9 @@ export default function reducer(state = initialState, action) {
                 loading: false,
             }
         case REMOVE_INDICATOR:
+            console.log(state.problem_type_sets,"here consol")
             state.problem_type_sets[action.key_value] = removeField(state.problem_type_sets[action.key_value], action.idx)
+            console.log(state.problem_type_sets,"here consol")
             return{
                 ...state,
                 loaded: true,
@@ -247,6 +249,7 @@ export function addIndicator(key_value){
 }
 
 export function removeIndicator(key_value, idx){
+    console.log(key_value, idx)
     return {
         type: REMOVE_INDICATOR,
         key_value: key_value,
