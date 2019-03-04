@@ -5,7 +5,7 @@ import App from './components/App/App';
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import './styles/style.css';
-
+import ReactGA from 'react-ga';
 // to use bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -20,6 +20,9 @@ var initialState = "Gredu Indonesia"
 initialState = window.DATA;
 const client = new ApiHost();
 const store = configureStore(client, initialState);
+
+ReactGA.initialize('UA-135468885-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 ReactDOM.render(
     <Provider store={store}>
