@@ -231,6 +231,7 @@ class Nilai extends Component {
                     <div className="content-block main-block right-height-kkm">
                       <RightContent
                         participant_not_passed={this.state.participant_not_passed}
+                        data={this.state.data}
                       />
                     </div>
                   </div>
