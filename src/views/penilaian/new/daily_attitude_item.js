@@ -101,6 +101,7 @@ class DailyAttitudeItem extends Component {
                 </a>
             </div>
         }
+        console.log(score,"here data")
 
         return(
             <div>
