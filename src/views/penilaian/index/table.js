@@ -121,7 +121,7 @@ export default class Table extends Component {
             })
         }
 
-        let add_field_category = (this.props.category == 'attitude') ? 'Aspek Sikap' : 'Total Nilai'
+        let add_field_category = (this.props.category == 'attitude') ? 'Aspek Sikap' : 'Total Penilaian'
 
         return(
             <div className="table-responsive">
