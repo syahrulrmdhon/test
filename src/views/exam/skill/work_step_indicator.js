@@ -5,6 +5,7 @@ import Select from 'react-select';
 import {
     addIndicator,
     handleProblemSet,
+    removeIndicator,
 } from './../../../redux-modules/modules/exam/skill'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,6 +16,11 @@ var FontAwesome = require('react-fontawesome')
 class WorkStepIndicator extends Component {
     constructor(props){
         super(props)
+    }
+
+    componentDidUpdate(prevProps){
+        console.log(prevProps.problem_type_sets)
+        console.log(this.props.problem_type_sets)
     }
 
     render(){
@@ -37,7 +43,7 @@ class WorkStepIndicator extends Component {
                 }
                 
                 items.push(
-                    <tr key={Math.random()}>
+                    <tr key={idx}>
                         <td className="align-center valign-center">
                             <label className="header-title">{idx + 1}</label>
                         </td>
@@ -130,5 +136,6 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = dispatch => bindActionCreators({ 
     addIndicator,
     handleProblemSet,
+    removeIndicator,
 }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(WorkStepIndicator)

@@ -8,7 +8,6 @@ import { modal } from './../../global/modal'
 // redux
 import {
     getComponent,
-    removeIndicator,
 } from './../../../redux-modules/modules/exam/skill'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -120,7 +119,7 @@ class AddQuestion extends Component {
                         index={idx}
                         key_value={problem_type}
                         key={Math.random()}
-                        removeIndicator={this.props.removeIndicator}
+                        // removeIndicator={this.props.removeIndicator}
                     />
                 )
             })
@@ -160,6 +159,6 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 
     getComponent,
-    removeIndicator,
+    // removeIndicator,
 }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(AddQuestion)
