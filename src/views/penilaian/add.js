@@ -62,11 +62,11 @@ class Add extends Component {
         let data = this.props.assessment
         const assessment_id = this.state.assessment_id
         let url = 'v1/assessments/validate'
-        let msg = 'tambah'
+        let msg = 'dibuat'
 
         if(assessment_id){
             url = `v1/assessments/${assessment_id}/validate_update`
-            msg = 'ubah'
+            msg = 'diubah'
         }
 
         if(data.category == 'attitude'){
@@ -94,7 +94,8 @@ class Add extends Component {
         apiClient('post', url, data, { category: data.category }).then(response => {
             modal({
                 message: 'Berhasil',
-                description: 'Anda sudah menyimpan data topik, selanjutnya anda masukkan data komponen topik',
+                // description: 'Anda sudah menyimpan data topik, selanjutnya anda masukkan data komponen topik',
+                description: 'Topik berhasil disimpan. Silakan lanjutkan langkah penilaian.',
                 btns: [
                     {
                         label: 'Selanjutnya',
@@ -114,7 +115,8 @@ class Add extends Component {
             }
         }).catch(err => {
             error({
-                message: `Gagal ${msg} Topik, periksa kembali data yang dibutuhkan`,
+                // message: `Gagal ${msg} Topik, periksa kembali data yang dibutuhkan`,
+                message: `Topik gagal ${msg}. Silahkan periksa ulang.`,
                 btns: [
                     {
                         label: 'Ulangi',

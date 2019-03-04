@@ -36,7 +36,7 @@ export default class Table extends Component {
         apiClient('delete', url).then(response => {
             modal({
                 message: 'Berhasil',
-                description: `Anda telah berhasil menghapus topik ${value.name}`,
+                description: 'Topik berhasil dihapus.',
                 btns: [
                     {
                         label: 'Selesai',
@@ -55,12 +55,12 @@ export default class Table extends Component {
                     <div className="react-confirm-alert modal-alert">
                         <div className="react-confirm-alert-body">
                             <div className="header align-center">
-                                <h1>Apakah anda yakin ingin menghapus topik ini? </h1>
+                                <h1>Topik ini akan dihapus.</h1>
                             </div>
                             <div className="react-confirm-alert-button-group toggle">
                                 <div className="align-center fullwidth">
-                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Tidak</a>
-                                    <a href="javascript:void(0);" className="btn green" onClick={() => { this.onDelete(value); onClose(); }}>Ya</a>
+                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Kembali</a>
+                                    <a href="javascript:void(0);" className="btn green" onClick={() => { this.onDelete(value); onClose(); }}>Lanjut</a>
                                 </div>
                             </div>
                         </div>

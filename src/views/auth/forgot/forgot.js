@@ -34,7 +34,7 @@ export default class Forgot extends Component {
             localStorage.setItem('email', res.data.data.user.email)
             modal({
                 message: 'Berhasil',
-                description: 'Permintaan Anda sudah dikirim',
+                description: 'Silakan periksa email Anda untuk mengubah password.',
                 btns: [
                     {
                         label: 'Lanjut',

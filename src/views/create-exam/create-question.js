@@ -202,7 +202,7 @@ class Question extends Component {
                         <FontAwesome name="times-circle" className="close" onClick={onClose}/>
                     </div>
                     <div className="alert-body">
-                      Apakah anda ingin lanjut mengisi form untuk memilih Kelas dan Peserta Didik?
+                      Soal telah disimpan. Pilih Kelas dan Peserta Didik?
                     </div>
                     <div className="react-confirm-alert-button-group toggle">
                         <div className="align-center fullwidth">
