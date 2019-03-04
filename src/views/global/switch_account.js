@@ -47,14 +47,14 @@ export default class SwitchAccount extends Component {
 
         modal({
             message: 'Beralih',
-            description: `Apakah anda yakin ingin beralih ke sekolah ${school_name}?`,
+            description: `Apakah akan beralih ke ${school_name}?`,
             btns: [
                 {
-                    label: 'Tidak',
+                    label: 'Kembali',
                     className: 'btn default',
                 },
                 {
-                    label: 'Ya',
+                    label: 'Lanjut',
                     className: 'btn green',
                     event: () => {this.onConfirm(school.id); onClose();},
                 },

@@ -73,7 +73,8 @@ export default class ScheduleModal extends Component{
 
                         modal({
                             message: 'Selamat',
-                            description: `Berhasil hapus jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))} di jam ${activity_schedule.start_time} sampai ${activity_schedule.end_time}`,
+                            // description: `Berhasil hapus jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))} di jam ${activity_schedule.start_time} sampai ${activity_schedule.end_time}`,
+                            description: `Jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))} berhasil dihapus.`,
                             btns: [
                                 {
                                     label: 'Selesai',
@@ -145,7 +146,8 @@ export default class ScheduleModal extends Component{
                 
                 modal({
                     message: 'Selamat',
-                    description: `Berhasil ubah jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))} di jam ${start_time} sampai ${end_time}`,
+                    // description: `Berhasil ubah jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))} di jam ${start_time} sampai ${end_time}`,
+                    description: `Perubahan jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))} berhasil diubah.`,                    
                     btns: [
                         {
                             label: 'Selesai',
@@ -174,7 +176,9 @@ export default class ScheduleModal extends Component{
 
                 modal({
                     message: 'Selamat',
-                    description: `Berhasil tambah jadwal pada tanggal ${getDate('case-1', new Date(this.state.setDate))}  di jam ${start_time} sampai ${end_time}`,
+                    // description: `Jadwal berhasil ditambah pada ${getDate('case-1', new Date(this.state.setDate))}  di jam ${start_time} sampai ${end_time}`,
+                    description: `Jadwal berhasil ditambah pada ${getDate('case-1', new Date(this.state.setDate))}.`,
+                    
                     btns: [
                         {
                             label: 'Selesai',

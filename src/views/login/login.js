@@ -53,7 +53,7 @@ class Login extends Component {
 
                 modal({
                     message: 'Gagal Login',
-                    description: 'Gagal melakukan login, username atau password Anda tidak valid'
+                    description: 'Akun tidak terdaftar.'
                 })
             })
     }

@@ -16,6 +16,8 @@ import { seeMore, getUser } from '../../utils/common'
 import { DropdownButton, ButtonToolbar, MenuItem } from 'react-bootstrap'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+import { modal, confirm} from './../global/modal'
+
 var FontAwesome = require('react-fontawesome');
 
 export default class Header extends Component {
@@ -39,8 +41,13 @@ export default class Header extends Component {
     }
 
     logout(){
-        localStorage.clear()
-        window.location.href = "/";
+        confirm({
+            message: 'Anda yakin ingin keluar?',
+            func: function() {
+                localStorage.clear()
+                window.location.href = "/";
+            }
+        })
     }
 
     onConfirm(school_id){
@@ -57,12 +64,12 @@ export default class Header extends Component {
                     <div className="react-confirm-alert modal-alert">
                         <div className="react-confirm-alert-body">
                             <div className="header align-center">
-                                <h1>Apakah anda yakin ingin beralih ke sekolah {school_name}? </h1>
+                                <h1>Apakah akan beralih ke {school_name}? </h1>
                             </div>
                             <div className="react-confirm-alert-button-group toggle">
                                 <div className="align-center fullwidth">
-                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Tidak</a>
-                                    <a href="javascript:void(0);" className="btn green" onClick={() => { this.onConfirm(school.id); onClose(); }}>Ya</a>
+                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Kembali</a>
+                                    <a href="javascript:void(0);" className="btn green" onClick={() => { this.onConfirm(school.id); onClose(); }}>Lanjut</a>
                                 </div>
                             </div>
                         </div>
