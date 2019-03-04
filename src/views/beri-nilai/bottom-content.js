@@ -12,10 +12,10 @@ import Pencil from './../../assets/images/beri_nilai.svg';
 
 
 const data_option = [
-  {value:'score_asc', label:'Urutkan Berdasarkan Nilai Terendah'},
-  {value:'score_desc', label:'Urutkan Berdasarkan Nilai Tinggi'},
-  {value:'name_desc', label:'Urutkan Berdasarkan Nama Z-A'},
-  {value:'name_asc', label:'urutkan Berdasarkan Nama A-Z'},
+  {value:'score_asc', label:'Nilai Terendah'},
+  {value:'score_desc', label:'Nilai Tertinggi'},
+  {value:'name_asc', label:'Nama A-Z'},
+  {value:'name_desc', label:'Nama Z-A'}
 ]
 
 class BottomContent extends Component {
