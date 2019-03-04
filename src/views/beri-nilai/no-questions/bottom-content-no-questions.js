@@ -100,10 +100,11 @@ class BottomContent extends Component {
                                 <div className='row'>
                                     <div className='col-sm-4'>
                                         <Select
+                                            isClearable
                                             options={list}
                                             value={this.state.valueOpt}
                                             onChange={this.handleChange.bind(this)}
-                                            placeholder='Urut Berdasarkan'
+                                            placeholder='Urut Berdasarkan..'
                                             classNamePrefix='select'
                                         />
                                     </div>
