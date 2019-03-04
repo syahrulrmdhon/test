@@ -69,14 +69,10 @@ class BottomContent extends Component {
     }
     render() {
         let list = [
-            {
-                value: 'highest',
-                label: 'Tertinggi'
-            },
-            {
-                value: 'lowest',
-                label: 'Terendah'
-            }
+            { value: 'score_asc', label: 'Nilai Terendah' },
+            { value: 'score_desc', label: 'Nilai Tertinggi' },
+            { value: 'name_desc', label: 'Nama Z-A' },
+            { value: 'name_asc', label: 'Nama A-Z' },
         ]
         const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants
         let border = 'border-left-col-green'
@@ -103,13 +99,13 @@ class BottomContent extends Component {
                             <div className='col-sm-8'>
                                 <div className='row'>
                                     <div className='col-sm-4'>
-                                        {/* <Select
+                                        <Select
                                             options={list}
                                             value={this.state.valueOpt}
                                             onChange={this.handleChange.bind(this)}
                                             placeholder='Urut Berdasarkan'
                                             classNamePrefix='select'
-                                        /> */}
+                                        />
                                     </div>
                                     <div className='col-sm-8'>
                                         <div className='search'>
