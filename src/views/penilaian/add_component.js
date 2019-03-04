@@ -88,7 +88,8 @@ class AddComponent extends Component {
                 apiClient('post', url, data).then(response => {
                     modal({
                         message: 'Selamat',
-                        description: 'Anda berhasil menyimpan topik, silakan klik tombol lihat untuk membuat tugas.',
+                        // description: 'Anda berhasil menyimpan topik, silakan klik tombol lihat untuk membuat tugas.',
+                        description: "Topik selesai dibuat. Klik tombol 'Lihat' untuk buat Tugas",
                         btns: [
                             {
                                 label: 'Selesai',

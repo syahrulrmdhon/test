@@ -73,8 +73,12 @@ class DailyAttitudeItem extends Component {
             const user_id = data_arr[0]
             const full_name = data_arr[1]
 
+
             if(this.props.user_attitude.data.length > 0){
-                let user = this.props.user_attitude.data.find((element) => { return element.id == user_id })
+                let user = this.props.user_attitude.data.find((element) => { 
+                        console.log(element.id, user_id, "element")
+                        return element.id == user_id 
+                })
 
                 this.props.handleAttitudeItem(full_name, idx, 'name')
                 this.props.handleAttitudeItem(user_id, idx, 'user_id')
@@ -87,10 +91,8 @@ class DailyAttitudeItem extends Component {
 
     render(){
         let remove;
-        const user_id = this.props.user_attitude ? this.props.user_attitude.user_id : null
-        const class_id = this.props.user_attitude ? this.props.user_attitude.class_id : null
         const description = this.props.user_attitude ? this.props.user_attitude.description : null
-        const full_name = this.props.user_attitude == null ? '' : (this.props.user_attitude.full_name == null ? '' : this.props.user_attitude.full_name)
+        const name = this.props.user_attitude == null ? '' : (this.props.user_attitude.name == null ? '' : this.props.user_attitude.name)
         const options = this.props.user_attitude == null ? [] : (this.props.user_attitude.options == null ? [] : this.props.user_attitude.options)
         const score = this.props.user_attitude == null ? null : (this.props.user_attitude.score == null ? null : this.props.user_attitude.score)
 
@@ -110,16 +112,12 @@ class DailyAttitudeItem extends Component {
                             <div className="col-sm-6">
                                 <div className="content-input margin-top-5">
                                     <label className="content-label">Nama Peserta Didik</label>
-                                    {/* <input 
-                                        placeholder="Masukkan nama peserta didik"
-                                        className= "disblock fullwidth"
-                                    /> */}
                                     <Autocomplete
                                         getItemValue={this.getItemValue}
                                         items={options}
                                         renderItem={this.renderItem}
-                                        value={full_name}
-                                        onChange={(event) => {this.onChange(event, this.props.index, 'full_name')}}
+                                        value={name}
+                                        onChange={(event) => {this.onChange(event, this.props.index, 'name')}}
                                         onSelect={(event) => {this.onSelect(event, this.props.index)}}
                                     />
                                 </div>

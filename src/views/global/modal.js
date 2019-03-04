@@ -113,3 +113,25 @@ export function disable(params) {
         },
     })
 }
+
+export function confirm(params) {
+    confirmAlert({
+        customUI: ({ onClose }) => {
+            return (
+                <div className="react-confirm-alert modal-alert">
+                    <div className="react-confirm-alert-body">
+                        <div className="header align-center">
+                            <h1>{params.message} </h1>
+                        </div>
+                        <div className="react-confirm-alert-button-group toggle">
+                            <div className="align-center fullwidth">
+                                <a href="javascript:void(0);" className="btn default" onClick={onClose}>Tidak</a>
+                                <a href="javascript:void(0);" className="btn green" onClick={() => { params.func(); onClose(); }}>Ya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        },
+    })
+}
