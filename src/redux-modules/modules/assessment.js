@@ -47,6 +47,7 @@ export default function reducer(state = initialState, action = {}) {
                 loading: true,
             }
         case HANDLE_ATTITUDE_ITEM:
+            console.log(state, "here data handle")
             state.user_attitudes_attributes[action.idx][action.fieldName] = action.value
             return{
                 ...state,
@@ -187,6 +188,8 @@ export default function reducer(state = initialState, action = {}) {
                 }
             }
 
+            console.log( action.result.data.assessment ,"here assetss")
+
             if(assessment.assessment_subjects_attributes && assessment.assessment_subjects_attributes.length == 0){
                 assessment.assessment_subjects_attributes = [{
                     school_subject_id: null,
@@ -201,15 +204,18 @@ export default function reducer(state = initialState, action = {}) {
                     school_attitude_id: null,
                 }]
             }
-
+            console.log(assessment.category,"here new assessment")
             if(assessment.category == 'attitude'){
                 if(assessment.assessment_subjects_attributes && assessment.assessment_subjects_attributes.length > 0){
                     assessment.assessment_subjects_attributes.map((value, idx) => {
                         delete assessment.assessment_subjects_attributes[idx]['assessment_basic_comps_attributes']
                     })
                 }
+                console.log(assessment,"length")
 
-                if(assessment.user_attitudes_attributes && assessment.user_attitudes_attributes.length == 0){
+                if(assessment.user_attitudes_attributes === undefined){
+                    assessment['user_attitudes_attributes'] = []
+                    console.log("here enter",assessment)
                     assessment.user_attitudes_attributes.push({
                         class_id: null,
                         user_id: null,
@@ -220,6 +226,7 @@ export default function reducer(state = initialState, action = {}) {
                     })
                 }
             }
+
 
             return {
                 loaded: true,
@@ -380,6 +387,7 @@ export function removeClass(idx){
 
 export function getNew(assessment_id = false){
     let url = 'v1/assessments/new'
+
 
     if(assessment_id){
         url = `v1/assessments/${assessment_id}/edit`
