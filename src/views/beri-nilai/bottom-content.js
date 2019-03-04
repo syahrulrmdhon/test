@@ -51,7 +51,7 @@ class BottomContent extends Component {
     })
   }
 
-  handleClick(e, id, idx) {
+    handleClick(e, id, idx) {
     let subject = []
     let dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     let child = []
