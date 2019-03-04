@@ -139,9 +139,7 @@ export default function reducer(state = initialState, action = {}) {
                 loaded: false,
                 loading: true,
             }
-        return false
         case HANDLE_EVENT_CLASS:
-        console.log(action)
             state.assessment_classes_attributes[action.idx][action.fieldName] = action.value
             return {
                 ...state,
@@ -150,7 +148,6 @@ export default function reducer(state = initialState, action = {}) {
             }
         case HANDLE_EVENT:
             state[action.fieldName] = action.value
-
             if(action.relates.length > 0){
                 action.relates.map((key, idx) => {
                     state[key] = ''
