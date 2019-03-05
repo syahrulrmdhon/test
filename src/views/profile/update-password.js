@@ -84,6 +84,7 @@ export class componentName extends Component {
         }else{
             let url = `/v1/users/change_password`
             apiClient('put', url, userObj).then(res => {
+                localStorage.clear()
               modal({
                 message: 'Berhasil',
                 description: 'Password Berhasil diubah',
@@ -92,7 +93,7 @@ export class componentName extends Component {
                     label: 'Lanjut',
                     className: 'btn green',
                     event: this.props.history.push({
-                     pathname:'/profile/update-password'
+                     pathname:'/'
                     })
                   }
                 ]

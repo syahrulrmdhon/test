@@ -19,7 +19,7 @@ export default function reducer(state = initialState, action) {
         loading: true,
       }
     case LOAD_SUCCESS:
-      delete state.error;
+    delete state.error;
       if (state.result !== action.result) {
         if (action.result.data.profile) {
           action.result.data['user'] = {}
@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action) {
             phone_number: action.result.data.profile.phone_number ? action.result.data.profile.phone_number : '',
             email: action.result.data.profile.email ? action.result.data.profile.email : '',
             full_name: action.result.data.profile.full_name ? action.result.data.profile.full_name : '',
-            pob: action.result.data.profile.pob ? action.result.data.profile.pob : '',
+            pob: action.result.data.profile.pob ?  action.result.data.profile.pob : '',
             dob: action.result.data.profile.dob ? action.result.data.profile.dob : '',
             address_attributes: {
               id: action.result.data.profile.address.id ? action.result.data.profile.address.id : '',
@@ -39,6 +39,8 @@ export default function reducer(state = initialState, action) {
             }
           }
         }
+
+        console.log(action.result.data.user,"user")
         return {
           ...state,
           loaded: true,
@@ -58,14 +60,14 @@ export default function reducer(state = initialState, action) {
           state.data.user.address_attributes[action.field] = action.value.target.value
           break;
         case 'region_id':
-          state.data.user.address_attributes[action.field] = action.value.target.value
+          state.data.user.address_attributes[action.field] = action.value
+          
           break;
         case 'city_id':
-          state.data.user.address_attributes[action.field] = action.value.target.value
+        state.data.user.address_attributes[action.field] = action.value
           break;
         case 'dob':
-        console.log(action.value)
-          state.data.user.address_attributes[action.field] = action.value
+         
           break;
         default:
           state.data.user[action.field] = action.value.target.value
@@ -114,7 +116,7 @@ export function handlingInputText(e, field_name) {
   }
 }
 
-export function handlingInputSelect(e, field_name) {
+export function handlingInputSelectRegion(e, field_name) {
   console.log(e.value, "value")
   return {
     type: HANDLE_FORM_TEXT,
@@ -140,6 +142,8 @@ export function getUSer() {
     })
   }
 }
+
+
 
 export function getRegion() {
   const token = localStorage.getItem('token')

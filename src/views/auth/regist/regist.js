@@ -70,6 +70,7 @@ export default class Regist extends Component {
         })
     }
     render() {
+        console.log(this.state.selectedDate,"date")
         return (
             <Page title="Registration"> 
             <div className='background'>

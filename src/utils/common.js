@@ -97,6 +97,8 @@ export function getUser(redirect = false) {
 export function getDate(format = 'case-1', date = new Date) {
     let result = ''
 
+    console.log()
+
     if (!!(date)) {
         let dt = date.getDate()
         let month = date.getMonth()
@@ -407,6 +409,56 @@ export function attitudeScores(params = {}, options = {}){
 
         this.setState({
             attitude_scores: attitudeScores,
+        })
+    })
+}
+
+
+export function region(params = {}, options = {}){
+    let regionOptions = options.regionOptions || false
+
+    apiClient('get', '/v1/filters/regions', false, params).then(response => {
+        let regions = response.data.data.regions || []
+
+        if((regions.length > 0) && regionOptions){
+            const temps = regions
+            regions = []
+            
+            temps.map((temp, idx) => {
+                regions.push({
+                    value: temp.id,
+                    label: temp.name,
+                })
+            })
+        }
+
+        this.setState({
+            regionOptions: regions,
+        })
+    })
+}
+
+export function cities(params = {}, options = {}){
+    let cityOpt = options.cityDefaultOpt || false
+
+    apiClient('get', '/v1/filters/cities', false, params).then(response => {
+        let city = response.data.data.cities || []
+
+        if((city.length > 0) && cityOpt){
+            const temps = city
+            city = []
+            
+            temps.map((temp, idx) => {
+                city.push({
+                    value: temp.id,
+                    label: temp.name,
+                })
+            })
+        }
+
+        console.log(city,"list")
+        this.setState({
+            cityDefaultOpt: city,
         })
     })
 }
