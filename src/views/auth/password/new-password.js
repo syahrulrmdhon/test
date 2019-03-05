@@ -104,7 +104,7 @@ export default class NewPassword extends Component {
 
     render() {
         return (
-            <Page>
+            <Page title='New Password'>
                 <div className='verification'>
                     <div className="header padding-2">
                         <img className="logo margin-left-4" src={Logo} alt="" />
@@ -128,7 +128,7 @@ export default class NewPassword extends Component {
                             <br /><br /><br /><br />
                             <div className="margin-top-6 align-center">
                                 <i className='fa fa-camera'></i>
-                                <span className='info'> Change Profile Photo</span>
+                                <span className='info'> Ubah Foto Profil</span>
                             </div>
                             <div className="direct align-center margin-top-6 margin-bottom-4">
                                 Buat Password Baru Kamu
