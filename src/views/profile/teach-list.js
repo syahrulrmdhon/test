@@ -4,12 +4,14 @@ import Header from './../global/header'
 import Page from './../../components/Title'
 import Sidebar from './index/sidebar'
 import Avatar from 'react-avatar';
-import Logo from './../../assets/images/logo.svg'
 import { apiClient } from './../../utils/apiClient'
+import { Table } from 'reactstrap'
+import  User from './../../assets/images/img_avatar.png'
+
+
 
 // scss
 import './../../styles/profile.scss'
-
 export class componentName extends Component {
     constructor(props) {
         super(props)
@@ -40,29 +42,46 @@ export class componentName extends Component {
             })
     }
 
+    convertDay(day){
+        let day_in_indo = ''
+        if(day === 'monday'){
+            day_in_indo = 'Senin'
+        }else if(day === 'tuesday'){
+            day_in_indo = 'Selasa'
+        }else if(day === 'wednesday'){
+            day_in_indo = 'Rabu'
+        }else if(day === 'thursday'){
+            day_in_indo = 'Kamis'
+        }else if(day === 'friyay'){
+            day_in_indo = 'Jumat'
+        }
+
+        return day_in_indo;
+    }
+
     render() {
         let school = JSON.parse(window.localStorage.getItem('school'))
         const school_name = school.name
         const aws_img = school.doc_aws_url
         let content = []
         const { data } = this.state
-        console.log(data)
-        
+        let join_data = []
+        let join = []
         data && data.map((data) => {
-            console.log(data)
-            content.push(
-                <tbody key={Math.random()}>
-                    <tr >
-                        <td className="padding-2">{data.class_name}</td>
-                        <td className="padding-2">{data.subject_name}</td>
-                        <td className="padding-2">{data.class_name}</td>
+            data.subject_schedules.map((x) => {
+                join_data.push(this.convertDay(x.dayname))
 
-                    </tr>
-                </tbody>
+            })
+            join = join_data.join(",")
+
+            content.push(
+                <tr key={Math.random()}>
+                    <td className="padding-2 text-left">{data.class_name}</td>
+                    <td className="padding-2 text-left">{data.subject_name}</td>
+                    <td className="padding-2 text-left">{join}</td>
+                </tr>
             )
         })
-
-
 
         return (
             <Page title="Informasi Mengajar">
@@ -70,9 +89,9 @@ export class componentName extends Component {
                 <div className="teacher">
                     <div className="padding-content">
                         <div className="margin-8">
-                            <div className="content-block main-block fit-screen">
+                            <div className="content-block main-block">
                                 <div className="row">
-                                    <div className="col-sm-2 left-block fit-screen">
+                                    <div className="col-sm-2 left-block">
                                         <Sidebar />
                                     </div>
                                     <div className="col-sm-10 right-block">
@@ -81,22 +100,25 @@ export class componentName extends Component {
                                                 Daftar Menagajar
                                             </div>
                                             <div className="margin-top-5">
-                                                <Avatar src={aws_img} round={true} size={60} />
+                                                <Avatar src={User} round={true} size={60} />
                                                 <span className="school-name margin-left-1">{school_name}</span>
                                             </div>
                                             <div className="row">
                                                 <div className="col-md-12">
-                                                    {/* <div className="table-responsive"> */}
-                                                        <table  className="teacher__list-table full-border  table-striped">
-                                                            <thead >
-                                                                <th className="padding-2">Kelas</th>
-                                                                <th>Nama Pelajaran</th>
-                                                                <th>Hari Mengajar</th>
+                                                    <div className="table-content-list fullwdith">
+                                                        <Table bordered responsive>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th className="text-left">Kelas</th>
+                                                                    <th className="text-left">Mata Pelajaran</th>
+                                                                    <th className="text-left">Hari Mengajar</th>
+                                                                </tr>
                                                             </thead>
+                                                            <tbody>
                                                                 {content}
-                                                        </table>
-
-                                                    {/* </div> */}
+                                                            </tbody>
+                                                        </Table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

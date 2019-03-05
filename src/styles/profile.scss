@@ -4,10 +4,28 @@ $nunito_semi_bold: "NunitoSemiBold";
 $nunito_bold: "NunitoBold";
 
 .basic {
-  .fit-screen {
-    min-height: 590px !important;
+
+
+  label {
+    font-family: $nunito_semi_bold;
+    font-size: 10px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #51647a;
   }
 
+  .form-position {
+    margin-right: 50px;
+  }
+  .icon-calender {
+    position: relative;
+    bottom: 25px;
+    color: #1a9d7f;
+    margin-right: 20px;
+  }
   .label-profile {
     font-family: $nunito_bold;
     font-size: 14.5px;
@@ -97,10 +115,150 @@ $nunito_bold: "NunitoBold";
   }
 }
 
-  .teacher {
+.teacher {
+  .fit-screen {
+      height: 100% !important;
+      min-height: 520px !important;
+      border-radius: 5px;
+      padding: 10px;
+      border-right: 1px solid #f7f7f7;
+
+    }
+  
+    .table-content-list {
+      margin-top: 20px;
+      width: 95%;
+      border-color: 0.5px solid #cccccc;
+
+  }
+  
+
+  .label-menu {
+    font-family: $nunito_semi_bold;
+    font-size: 13px;
+    font-weight: 600;
+    min-width: 165px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #7f92a1;
+  }
+
+  .label-menu-active {
+    font-family: $nunito_semi_bold;
+    font-size: 13px;
+    font-weight: 600;
+    font-style: normal;
+    vertical-align: middle;
+    color: #199d7f;
+    border-right: 2px solid #199d7f;
+  }
+
+  thead {
+      background-color: #ecf2f8;
+      font-family: $nunito_light;
+      color: #000000;
+  }
+
+  tr {
+      font-family: $nunito_light;
+  }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+      background-color: #F9F9F9;
+  }
+
+  .table thead th {
+      padding: 8px 10px;
+      vertical-align: middle;
+      border-color: #cccccc;
+      // border-bottom: none;
+      text-align: center;
+      font-family: $nunito_light;
+  }
+
+  .table td {
+      vertical-align: middle;
+      border-color: #cccccc;
+      border-top: none;
+      border-bottom: none;
+      padding: 12px 10px;
+      color: #333333;
+      text-align: center;
+      font-family: $nunito_semi_bold;
+
+      &:last-child {
+      border-color: #cccccc;
+      // border-color: 
+      }
+  }
+
+  .table td a{
+      font-family: $nunito_bold;
+  }
+
+  tr:last-child {
+      border-bottom: 1px solid #cccccc;
+
+  }
+
+  td:first-child {
+      width: 23.5%;
+  }
+
+  .border-hidden {
+      width: 4px;
+      height: 1px;
+      background-color: white;
+      position: relative;
+      float: right;
+      bottom: 1px;
+  }
+  
+
+
+.total-score, .average-score {
+  background-color: #f5faf2 !important;
+  border: 1px solid #b0d8d8;
+
+  td:first-child {
+      width: 52%;
+      text-align: center;
+  }
+
+  td {
+      padding: 6px 10px !important;
+  }
+}
+
+.status {
+  display: flex;
+  text-align: left;
+  align-items: center;
+}
+
+.indicator {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.red-indicator {
+  background-color: #ff6d4a;
+}
+
+.blue-indicator {
+  background-color: #4da1ff;
+}
+
+
+
+
     .title {
         font-family: $nunito_bold;
-        font-size: 11px;
+        font-size: 14px;
         font-weight: bold;
         font-style: normal;
         font-stretch: normal;
@@ -142,7 +300,7 @@ $nunito_bold: "NunitoBold";
       }
 
       .school-name {
-        font-family: NunitoSans;
+        font-family: $nunito_bold;
         font-size: 14px;
         font-weight: bold;
         font-style: normal;
@@ -153,7 +311,7 @@ $nunito_bold: "NunitoBold";
       }
 
       &__list-table {
-        min-width: 95% !important;
+        min-width: 80% !important;
         margin-top: 30px;
        
       }
