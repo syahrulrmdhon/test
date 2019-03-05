@@ -8,7 +8,7 @@ export default class Title extends Component {
     render() {
         const { title } = this.props
         return (
-            <div>
+            <div className="h-100">
                 <Helmet
                     title={title ? title + ' | Gredu Indonesia':defaultTitle}
                     link={[

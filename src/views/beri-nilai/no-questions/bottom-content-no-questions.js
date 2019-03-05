@@ -85,103 +85,107 @@ class BottomContent extends Component {
             }
         })
         return (
-            <div className="margin-side-5 bg-white padding-top-4 margin-top-4 margin-bottom-2">
-                <div className="content-bottom">
-                    <div className='margin-bottom-4'>
-                        <div className='row'>
-                            <div className='col-sm-4'>
-                                <div className='margin-top-2'>
-                                    <span>Hasil Perolehan Nilai</span>
-                                </div>
-                            </div>
-                            <div className='col-sm-8'>
-                                <div className='row'>
-                                    <div className='col-sm-4'>
-                                        <Select
-                                            isClearable
-                                            options={filterList}
-                                            value={this.state.valueOpt}
-                                            onChange={this.handleChange.bind(this)}
-                                            placeholder='Urut Berdasarkan..'
-                                            classNamePrefix='select'
-                                        />
+            <div className='margin-side-5 bg-white padding-top-4 margin-bottom-2'>
+                <div className='row padding-bottom-5'>
+                    <div className='col-sm-12'>
+                        <div className='margin-top-4 padding-side-0 margin-bottom-4'>
+                            <div className='row'>
+                                <div className='col-sm-4'>
+                                    <div className='margin-top-2'>
+                                        <span>Hasil Perolehan Nilai</span>
                                     </div>
-                                    <div className='col-sm-8'>
-                                        <div className='search'>
-                                            <input
-                                                autoComplete="off"
-                                                className="input-field"
-                                                type="text"
-                                                placeholder="Cari murid disini..."
-                                                name="search"
-                                                onChange={this.onSubmit}
-                                                value={this.state.search}
+                                </div>
+                                <div className='col-sm-8'>
+                                    <div className='row'>
+                                        <div className='col-sm-6'>
+                                            <Select
+                                                isClearable
+                                                options={filterList}
+                                                value={this.state.valueOpt}
+                                                onChange={this.handleChange.bind(this)}
+                                                placeholder='Urut Berdasarkan'
+                                                classNamePrefix='select'
                                             />
-                                            <i className="fa fa-search icon"></i>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="header">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="col-sm-3 padding-1">
-                                    <span className="padding-3">Nama Murid</span>
-                                </div>
-                                <div className="col-sm-3 padding-1 align-left">
-                                    <span>Email</span>
-                                </div>
-                                <div className="col-sm-3 align-center padding-1">
-                                    <span>Nilai</span>
-                                </div>
-                                <div className="col-sm-2 padding-1">
-                                    <span>Beri Nilai</span>
-                                </div>
-                                <div className="col-sm-1 padding-1">
-                                    <span>Rincian</span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="content-student">
-                        {
-                            dataArray && dataArray.map(function (data, index) {
-                                return <div className="box-student margin-top-3 " key={Math.random()} >
-                                    <div className={classnames('border-full border-right', this.state.border)}>
-                                        <div className="row">
-                                            <div className="col-sm-12 ">
-                                                <Users
-                                                    data={data}
+                                        <div className='col-sm-6'>
+                                            <div className='search'>
+                                                <input
+                                                    autoComplete='off'
+                                                    className='input-field'
+                                                    type='text'
+                                                    placeholder='Cari murid disini'
+                                                    name='search'
+                                                    onChange={this.onSubmit}
+                                                    value={this.state.search}
                                                 />
-                                                <div className="col-sm-3 align-left padding-2 ">
-                                                    <span className="label-content">{data.user.email}</span>
-                                                </div>
-                                                <Averages
-                                                    data={data}
-                                                />
-                                                <div className="col-sm-2 align-left padding-2 ">
-                                                    <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => { this.props.page(e, data.user.id, this.props.class, data.user.full_name) }} />
-                                                </div>
-                                                <div className="col-sm-1 align-left padding-2 ">
-                                                    <i className="fa fa-ellipsis-h icon-table-pencil cred" onClick={(e) => { this.handleClick(e, data.user.id, index) }} ></i>
-                                                </div>
+                                                <i className='fa fa-search icon'></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <Subjects
-                                        indx={this.state.selectIndex}
-                                        ix={index}
-                                        data={data}
-                                        index={this.state.selectIndex}
-                                        competencies={this.state.dataChildCompentency}
-                                        subjects={this.state.dataChildSubject}
-                                    />
                                 </div>
-                            }, this)
-                        }
+                            </div>
+                        </div>
+                        <div className='content-bottom'>
+                            <div className='header'>
+                                <div className='row'>
+                                    <div className='col-sm-12'>
+                                        <div className='col-sm-3 padding-1'>
+                                            <span className='padding-3'>Nama Murid</span>
+                                        </div>
+                                        <div className='col-sm-3 padding-1 slign-left'>
+                                            <span>Email</span>
+                                        </div>
+                                        <div className='col-sm-3 align-center padding-1'>
+                                            <span>Nilai</span>
+                                        </div>
+                                        <div className='col-sm-2 padding-1'>
+                                            <span>Beri Nilai</span>
+                                        </div>
+                                        <div className='col-sm-1 padding-1'>
+                                            <span>Rincian</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className='content-student'>
+                                {
+                                    dataArray && dataArray.map(function (data, index) {
+                                        return <div className='box-student margin-top-3 ' key={Math.random()} >
+                                            <div className={classnames('border-full border-right', this.state.border)}>
+                                                <div className='row'>
+                                                    <div className='col-sm-12'>
+                                                        <Users
+                                                            data={data}
+                                                        />
+                                                        <div className='col-sm-3 align-left padding-1 d-flex align-items-center word-break h-100'>
+                                                            <span className='padding-left-2 label-content d-table-cell'>{data.user.email}</span>
+                                                        </div>
+                                                        <Averages
+                                                            data={data}
+                                                        />
+                                                        <div className='col-sm-2 align-left padding-2 '>
+                                                            <img src={Pencil} alt='pencil' width='20px' className='icon-pencil' onClick={(e) => { this.props.page(e, data.user.id, this.props.class, data.user.full_name) }} />
+                                                        </div>
+                                                        <div className='col-sm-1 align-left padding-2 '>
+                                                            <i className='fa fa-ellipsis-h icon-table-pencil cred' onClick={(e) => { this.handleClick(e, data.user.id, index) }} ></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <Subjects
+                                                indx={this.state.selectIndex}
+                                                ix={index}
+                                                data={data}
+                                                index={this.state.selectIndex}
+                                                competencies={this.state.dataChildCompentency}
+                                                subjects={this.state.dataChildSubject}
+                                            />
+                                        </div>
+                                    }, this)
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -99,7 +99,7 @@ export default class NotifRegist extends Component {
                             <a href="mailto:help@gredu.asia">&nbsp;Hubungi Gredu</a>
                         </span>
                     </div>
-                    <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
+                    
                 </div>
             </div>
         )
