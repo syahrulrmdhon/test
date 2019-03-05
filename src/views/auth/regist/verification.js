@@ -94,7 +94,7 @@ export default class Verification extends Component {
     render() {
         return (
             <Page title="Verification">
-                <div className="verification">
+                <div className="verification body-verification">
                     <div className="header padding-2">
                         <img className="logo margin-left-4" src={Logo} alt="" />
                     </div>
@@ -107,13 +107,13 @@ export default class Verification extends Component {
                         </div>
                         <div className="info align-center margin-top-6">
                             Berikut informasi Akun kamu yang terdaftar di data kami. Informasi ini
-                    </div>
+                        </div>
                         <div className="info align-center">
                             digunakan untuk keperluan Login. Mohon cek kembali!
-                    </div>
+                        </div>
                         <div className="direct align-center margin-top-6">
                             Masukkan email baru
-                    </div>
+                        </div>
                         <form onSubmit={this.handleSubmit.bind(this)}>
                             <div className="margin-top-6">
                                 <input
@@ -141,7 +141,7 @@ export default class Verification extends Component {
                         <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                     </div>
                 </div>
-            </Page>
+            </Page >
         )
     }
 }

@@ -93,6 +93,7 @@ export default class Forgot extends Component {
                                     </div>
                                 </form>
                             </div>
+                            <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                         </div>
                     </div>
                 </div>
