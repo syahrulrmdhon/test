@@ -23,7 +23,6 @@ class BottomContent extends Component {
             border: 'border-bottom',
             hidden: true,
             element: 'hidden',
-            token: localStorage.getItem('token'),
             search: '',
             valueOpt: ''
         }
@@ -63,8 +62,6 @@ class BottomContent extends Component {
         this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment, search)
     }
     handleChange(valueOpt) {
-        console.log('hit changed', valueOpt)
-        // let data = valueOpt.value ? valueOpt.value : ''
         this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment, '', valueOpt)
         this.setState({ valueOpt })
     }
