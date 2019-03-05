@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
-import {combineNameSubject, assessmentLabel} from './../../../utils/exam'
-import {apiClient} from './../../../utils/apiClient'
+import { combineNameSubject, assessmentLabel } from './../../../utils/exam'
+import { apiClient } from './../../../utils/apiClient'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
@@ -12,7 +12,7 @@ import { NavLink } from 'react-router-dom'
 
 var FontAwesome = require('react-fontawesome');
 export default class Table extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.state = {
@@ -23,20 +23,20 @@ export default class Table extends Component {
         this.onDelete = this.onDelete.bind(this)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
             data: this.props.data
         })
     }
 
-    onDelete(value){
+    onDelete(value) {
         let assessment_id = value.id
         let url = 'v1/assessments/' + assessment_id
-        
+
         apiClient('delete', url).then(response => {
             modal({
                 message: 'Berhasil',
-                description: `Anda telah berhasil menghapus topik ${value.name}`,
+                description: 'Topik berhasil dihapus.',
                 btns: [
                     {
                         label: 'Selesai',
@@ -48,19 +48,19 @@ export default class Table extends Component {
         })
     }
 
-    delete(value){
+    delete(value) {
         confirmAlert({
             customUI: ({ onClose, onConfirm }) => {
                 return (
                     <div className="react-confirm-alert modal-alert">
                         <div className="react-confirm-alert-body">
                             <div className="header align-center">
-                                <h1>Apakah anda yakin ingin menghapus topik ini? </h1>
+                                <h1>Topik ini akan dihapus.</h1>
                             </div>
                             <div className="react-confirm-alert-button-group toggle">
                                 <div className="align-center fullwidth">
-                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Tidak</a>
-                                    <a href="javascript:void(0);" className="btn green" onClick={() => { this.onDelete(value); onClose(); }}>Ya</a>
+                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Kembali</a>
+                                    <a href="javascript:void(0);" className="btn green" onClick={() => { this.onDelete(value); onClose(); }}>Lanjut</a>
                                 </div>
                             </div>
                         </div>
@@ -70,36 +70,38 @@ export default class Table extends Component {
         })
     }
 
-    render(){
+    render() {
         let content = []
-        if(this.state.data.length > 0){
+        if (this.state.data.length > 0) {
             this.state.data.map((value, idx) => {
                 const { category, assessment_type } = value
-                
+
                 let url = ''
                 let totalExam = ''
                 let subjectName = combineNameSubject(value.school_subjects)
                 let color = assessmentLabel(value.assessment_type, true)
 
-                if(category == 'attitude'){
+                if (category == 'attitude') {
                     totalExam = combineNameSubject(value.school_attitudes)
-                    console.log(assessment_type,"assesment")
-                    switch(assessment_type){
+                    console.log(assessment_type, "assesment")
+                    switch (assessment_type) {
                         case 'daily':
-                        url = `attitude/${value.id}/${category}`
-                        break;
+                            url = `attitude/${value.id}/${category}`
+                            break;
                         case 'final_aspect':
                         case 'final_subject':
-                        url = `/score/attitude/${value.id}`
-                        break;
+                            url = `/score/attitude/${value.id}`
+                            break;
+                        default:
+                            url = ''
                     }
-                    
+
                 } else {
-                    url = 'exam/'+value.id
+                    url = 'exam/' + value.id
                     let label = assessmentLabel(value.assessment_type)
                     totalExam = value.exam_count + ' (' + label + ')'
                 }
-                
+
                 content.push(
                     <tr key={idx} >
                         <td className="align-center"><span className={classnames("bullet", color)}></span></td>
@@ -121,9 +123,9 @@ export default class Table extends Component {
             })
         }
 
-        let add_field_category = (this.props.category == 'attitude') ? 'Aspek Sikap' : 'Total Exam'
+        let add_field_category = (this.props.category === 'attitude') ? 'Aspek Sikap' : 'Total Penilaian'
 
-        return(
+        return (
             <div className="table-responsive">
                 <table className="table assessment">
                     <thead>

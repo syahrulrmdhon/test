@@ -44,17 +44,18 @@ export default class Regist extends Component {
 
         apiClient('post', url, regist).then(res => {
             localStorage.setItem('regist_token', res.data.data.auth_token)
-            modal({
-                message: 'Berhasil',
-                description: 'Data yang Anda masukkan benar',
-                btns: [
-                    {
-                        label: 'Lanjut',
-                        className: 'btn green',
-                        event: this.props.history.push('/verification')
-                    }
-                ]
-            })
+            this.props.history.push('/verification')
+            // modal({
+            //     message: 'Berhasil',
+            //     description: 'Data yang Anda masukkan benar',
+            //     btns: [
+            //         {
+            //             label: 'Lanjut',
+            //             className: 'btn green',
+            //             event: this.props.history.push('/verification')
+            //         }
+            //     ]
+            // })
         }).catch(err => {
             let errMsg = err.response.data.errors[0].desc
             error({

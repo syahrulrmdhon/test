@@ -34,6 +34,7 @@ class AddSubject extends Component {
         this.setSubject = this.setSubject.bind(this)
         this.changeKD = this.changeKD.bind(this)
         this.setKD = this.setKD.bind(this)
+        this.removeKD = this.removeKD.bind(this)
     }
 
     componentDidMount(){
@@ -62,6 +63,14 @@ class AddSubject extends Component {
         const category = this.props.assessment.category
 
         this.props.handleKD(value, subject_index, index)
+        this.setKD(school_subject_id, category, subject_index, this.props.assessment_subjects[subject_index]['assessment_basic_comps_attributes'])
+    }
+
+    removeKD(subject_index, idx){
+        const school_subject_id = this.props.assessment_subjects[subject_index]['school_subject_id']
+        const category = this.props.assessment.category
+
+        this.props.removeKD(subject_index, idx)
         this.setKD(school_subject_id, category, subject_index, this.props.assessment_subjects[subject_index]['assessment_basic_comps_attributes'])
     }
 
@@ -137,7 +146,7 @@ class AddSubject extends Component {
                         <AddKD 
                             index_subject={idx}
                             basic_comps= {this.state[parameter] || basic_comps}
-                            removeKD={this.props.removeKD}
+                            removeKD={this.removeKD}
                             changeKD={this.changeKD}
                         />
                         <div className="border-top margin-top-5"></div>

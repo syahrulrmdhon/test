@@ -12,8 +12,10 @@ import Pencil from './../../assets/images/beri_nilai.svg';
 
 
 const data_option = [
-  {value:'highest', label:'Nilai Tertinggi'},
-  {value:'lowest', label:'Nilai Terendah'},
+  {value:'score_asc', label:'Nilai Terendah'},
+  {value:'score_desc', label:'Nilai Tertinggi'},
+  {value:'name_asc', label:'Nama A-Z'},
+  {value:'name_desc', label:'Nama Z-A'}
 ]
 
 class BottomContent extends Component {
@@ -49,7 +51,7 @@ class BottomContent extends Component {
     })
   }
 
-  handleClick(e, id, idx) {
+    handleClick(e, id, idx) {
     let subject = []
     let dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
     let child = []
@@ -97,6 +99,8 @@ class BottomContent extends Component {
           }
           child = result
         break;
+        default:
+        result.push('')
       }
     })
 
@@ -227,17 +231,17 @@ class BottomContent extends Component {
                 </div>
                 <div className='col-sm-8'>
                   <div className='row'>
-                    <div className='col-sm-4'>
-                      {/* <Select
+                    <div className='col-sm-6'>
+                      <Select
                         isClearable
                         placeholder='Urut Berdasarkan'
                         classNamePrefix='select'
                         options={data_option}
                         value={this.props.valueOpt}
                         onChange={this.props.onChangeScore}
-                      /> */}
+                      />
                     </div>
-                    <div className='col-sm-8'>
+                    <div className='col-sm-6'>
                       <div className='search'>
                         <input
                           autoComplete="off"

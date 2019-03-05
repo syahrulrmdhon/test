@@ -91,7 +91,7 @@ class Index extends Component {
       }).catch(err => {
         if (err.response.data.errors.exam.question_count[0].case === 'check_question_count') {
           error({
-            message: 'Jumlah soal tidak boleh lebih kecil dari jumlah kompetensi dasar yang terdapat di topik.',
+            message: 'Jumlah soal lebih kecil dari kompetensi dasar.',
             btns: [
               {
                 label: 'Ulangi',

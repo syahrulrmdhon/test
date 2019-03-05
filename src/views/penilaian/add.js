@@ -57,22 +57,24 @@ class Add extends Component {
         this.props.handleEvent(event.value, 'category', ['assessment_type'])
     }
 
-    onSubmit(){
+    onSubmit(event){
         event.preventDefault(); 
         let data = this.props.assessment
         const assessment_id = this.state.assessment_id
         let url = 'v1/assessments/validate'
-        let msg = 'tambah'
+        let data_date = ''
+        let msg = 'dibuat'
 
         if(assessment_id){
             url = `v1/assessments/${assessment_id}/validate_update`
-            msg = 'ubah'
+            msg = 'diubah'
         }
 
-        if(data.category == 'attitude'){
+        if(data.category === 'attitude'){
             switch(data.assessment_type){
                 case 'daily':
-                    data.event_date = getDate('case-4', new Date(data.event_date))
+                    data_date = data.event_date ? data.event_date : new Date()
+                    data.event_date = getDate('case-4', new Date(data_date))
                     delete data.assessment_classes_attributes
                     delete data.user_attitudes_attributes
                 break;
@@ -85,6 +87,8 @@ class Add extends Component {
                 delete data.assessment_attitudes_attributes
                 delete data.assessment_subjects_attributes
                 break;
+                default:
+                
             }
         } else {
             delete data.assessment_subjects_attributes
@@ -94,7 +98,8 @@ class Add extends Component {
         apiClient('post', url, data, { category: data.category }).then(response => {
             modal({
                 message: 'Berhasil',
-                description: 'Anda sudah menyimpan data topik, selanjutnya anda masukkan data komponen topik',
+                // description: 'Anda sudah menyimpan data topik, selanjutnya anda masukkan data komponen topik',
+                description: 'Topik berhasil disimpan. Silakan lanjutkan langkah penilaian.',
                 btns: [
                     {
                         label: 'Selanjutnya',
@@ -102,7 +107,6 @@ class Add extends Component {
                     }
                 ]
             })
-
             if(assessment_id){
                 apiClient('put', `v1/assessments/${assessment_id}`, data).then(response => {
                     this.props.history.push(`/penilaian/edit-component/${assessment_id}`)
@@ -113,9 +117,9 @@ class Add extends Component {
                 this.props.history.push('/penilaian/tambah-component')
             }
         }).catch(err => {
-            console.log(err.response)
             error({
-                message: `Gagal ${msg} Topik, periksa kembali data yang dibutuhkan`,
+                // message: `Gagal ${msg} Topik, periksa kembali data yang dibutuhkan`,
+                message: `Topik gagal ${msg}. Silahkan periksa ulang.`,
                 btns: [
                     {
                         label: 'Ulangi',
