@@ -63,12 +63,13 @@ class BottomContent extends Component {
         this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment, search)
     }
     handleChange(valueOpt) {
+        console.log('hit changed', valueOpt)
+        // let data = valueOpt.value ? valueOpt.value : ''
+        this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment, '', valueOpt)
         this.setState({ valueOpt })
-        let data = valueOpt.value ? valueOpt.value : ''
-        this.props.getParticipant(this.props.exam, this.props.class, this.props.asssessment, '', data)
     }
     render() {
-        let list = [
+        let filterList = [
             { value: 'score_asc', label: 'Nilai Terendah' },
             { value: 'score_desc', label: 'Nilai Tertinggi' },
             { value: 'name_desc', label: 'Nama Z-A' },
@@ -101,7 +102,7 @@ class BottomContent extends Component {
                                     <div className='col-sm-4'>
                                         <Select
                                             isClearable
-                                            options={list}
+                                            options={filterList}
                                             value={this.state.valueOpt}
                                             onChange={this.handleChange.bind(this)}
                                             placeholder='Urut Berdasarkan..'
