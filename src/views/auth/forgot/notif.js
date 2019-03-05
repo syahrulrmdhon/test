@@ -4,7 +4,8 @@ import './../../../styles/beri-nilai/main.scss'
 import Logo from './../../../assets/images/gredu-complete.svg'
 import { Link } from 'react-router-dom'
 import { error, modal } from './../../global/modal'
-import { apiClient } from '../../../utils/apiClient';
+import { apiClient } from '../../../utils/apiClient'
+import Page from './../../../components/Title'
 
 export default class Notif extends Component {
     constructor(props) {
@@ -54,43 +55,45 @@ export default class Notif extends Component {
     }
     render() {
         return (
-            <div className="background">
-                <div className="login">
-                    <div className="row box">
-                        <div className="left-content col-md-6">
-                            <div className="main-left">
-                                <img src={Logo} alt=""></img>
-                                <br /><br />
-                                <h3>Web Teacher</h3>
+            <Page title='Reset Password'>
+                <div className="background">
+                    <div className="login">
+                        <div className="row box">
+                            <div className="left-content col-md-6">
+                                <div className="main-left">
+                                    <img src={Logo} alt=""></img>
+                                    <br /><br />
+                                    <h3>Web Teacher</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div className="right-content-login col-md-6">
-                            <div className="main-right col-12">
-                                <form onSubmit={this.handleSubmit.bind(this)}>
-                                    <h5 className='header-auth'><strong>Pengaturan Ulang Kata Sandi Telah Dikirim!</strong></h5>
-                                    <br />
-                                    <p className='text-left'>
-                                        Kami telah mengirim pengaturan ulang kata sandi kamu ke email
+                            <div className="right-content-login col-md-6">
+                                <div className="main-right col-12">
+                                    <form onSubmit={this.handleSubmit.bind(this)}>
+                                        <h5 className='header-auth'><strong>Pengaturan Ulang Kata Sandi Telah Dikirim!</strong></h5>
+                                        <br />
+                                        <p className='text-left'>
+                                            Kami telah mengirim pengaturan ulang kata sandi kamu ke email
                                         <span className='normal-text-green'> {this.state.email}</span>
+                                        </p>
+                                        <br /><br /><br /><br />
+                                        <p className='float-left'>
+                                            Tidak menerima email masuk?
                                     </p>
-                                    <br /><br /><br /><br />
-                                    <p className='float-left'>
-                                        Tidak menerima email masuk?
-                                    </p>
-                                    <br />
-                                    <div>
-                                        <button type='submit' className='btn-young-green margin-top-4 col-sm-6 float-left'>Kirim Ulang</button>
-                                        <br /><br />
-                                        <span className='margin-top-6'><Link to="/" className='normal-text-green'>&nbsp;Halaman Utama</Link></span>
-                                    </div>
-                                </form>
+                                        <br />
+                                        <div>
+                                            <button type='submit' className='btn-young-green margin-top-4 col-sm-6 float-left'>Kirim Ulang</button>
+                                            <br /><br />
+                                            <span className='margin-top-6'><Link to="/" className='normal-text-green'>&nbsp;Halaman Utama</Link></span>
+                                        </div>
+                                    </form>
+                                </div>
+                                <br /><br />
+                                <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                             </div>
-                            <br /><br />
-                            <p className="copyright">Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Page>
         )
     }
 }

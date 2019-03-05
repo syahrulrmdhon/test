@@ -104,7 +104,7 @@ export default class NewPassword extends Component {
 
     render() {
         return (
-            <Page>
+            <Page title='New Password'>
                 <div className='verification'>
                     <div className="header padding-2">
                         <img className="logo margin-left-4" src={Logo} alt="" />

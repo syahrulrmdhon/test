@@ -93,7 +93,7 @@ export default class Verification extends Component {
     }
     render() {
         return (
-            <Page title="Verification">
+            <Page title="New Email">
                 <div className="verification body-verification">
                     <div className="header padding-2">
                         <img className="logo margin-left-4" src={Logo} alt="" />
