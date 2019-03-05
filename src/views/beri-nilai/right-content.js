@@ -16,7 +16,7 @@ export class RightComponent extends Component {
               <div className="title-kkm">Nilai di Bawah KKM</div>
             </div>
             <div className="col-md-5">
-            <div className="kkm">KKM : {this.props.data.kkm}</div> 
+              <div className="kkm">KKM : {this.props.data.kkm}</div>
             </div>
           </div>
         </div>

@@ -9,23 +9,25 @@ export default class TopContentNoQuestions extends Component {
     }
     render() {
         return (
-            <div className="row">
-                <div className="col-sm-10">
-                    <div className="title-content-evaluasi margin-top-4 margin-bottom-2">
+            <div className="col-md-12 score-result">
+                <div className="row">
+                    <div className="col-md-9 title-content">
                         <span>Hasil Perolehan Nilai</span>
                     </div>
-                    <div className="content-chart margin-top-8">
+                </div>
+                <div className="row">
+                    <div className="content-chart col-md-9">
                         <ChartNoQuestions
                             chart={this.props.chart}
                         />
                     </div>
-                </div>
-                <div className="col-sm-2">
-                    <div className="box-position">
-                        <CardNoQuestions
-                            passed={this.props.passed}
-                            notPassed={this.props.notPassed}
-                        />
+                    <div className="col-md-3" >
+                        <div className="box-postition">
+                            <CardNoQuestions
+                                passed={this.props.passed}
+                                notPassed={this.props.notPassed}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

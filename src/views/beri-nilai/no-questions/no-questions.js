@@ -19,7 +19,7 @@ export default class NoQuestions extends Component {
             dataNotPassed: [],
             users: {},
             scores: {},
-            score:[],
+            score: [],
             exam: {},
             participant_passed: {},
             participant_not_passed: [],
@@ -105,20 +105,18 @@ export default class NoQuestions extends Component {
                             <TabPane tabId={1}>
                                 <div className="row">
                                     <div className="col-sm-12">
-                                        <div className="content-block-evaluasi main-block-evaluasi">
-                                            <div className="padding-4">
-                                                <TopContentNoQuestions
-                                                    chart={this.state.dataChart}
-                                                    passed={this.state.dataPassed.length}
-                                                    notPassed={this.state.dataNotPassed.length}
-                                                />
-                                            </div>
+                                        <div className="content-block main-block main-height">
+                                            <TopContentNoQuestions
+                                                chart={this.state.dataChart}
+                                                passed={this.state.dataPassed.length}
+                                                notPassed={this.state.dataNotPassed.length}
+                                            />
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row margin-top-2">
+                                <div className="row margin-top-4 right-height padding-bottom-6">
                                     <div className="col-sm-9">
-                                        <div className="content-block-evaluasi main-block-evaluasi">
+                                        <div className="content-block main-block">
                                             <BottomContentNoQuestions
                                                 exam={this.state.exam_id}
                                                 class={this.state.class_id}
@@ -129,7 +127,7 @@ export default class NoQuestions extends Component {
                                         </div>
                                     </div>
                                     <div className="col-sm-3">
-                                        <div className="content-block-card main-block-card">
+                                        <div className="content-block main-block right-height-kkm">
                                             <KkmNoQuestions
                                                 notPassed={this.state.dataNotPassed}
                                                 kkm={this.state.kkm}

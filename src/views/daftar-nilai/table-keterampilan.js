@@ -3,6 +3,36 @@ import { Table } from 'reactstrap'
 
 export default class TableKeterampilan extends Component {
     render() {
+        let content = []
+        if (this.props.tableSkill.length > 0) {
+            let data = this.props.tableSkill
+            data.map((data) => {
+                content.push(
+                    <tr key={Math.random()} className='text-center'>
+                        <td className='student-name text-left' onClick={(e) => (this.props.nameClicked(e, data.id))}>
+                            {data.full_name}
+                        </td>
+                        {
+                            data.subject_score_details.task.scores.length > 0 ?
+                                data.subject_score_details.task.scores.map((x) => {
+                                    return (
+                                        <td key={Math.random()}>
+                                            {x.result.score === null ? '-' : x.result.score}
+                                        </td>
+                                    )
+                                })
+                                :
+                                <td>-</td>
+                        }
+                        <td>
+                            {
+                                data.subject_score_details.task.average.score === null ? '-' : data.subject_score_details.task.average.score
+                            }
+                        </td>
+                    </tr>
+                )
+            })
+        }
         return (
             <Table bordered striped responsive hover>
                 <thead className='text-center'>
@@ -13,21 +43,7 @@ export default class TableKeterampilan extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        this.props.tableSkill.map(function (data, i) {
-                            return <tr key={i} className='text-center'>
-                                <td className="student-name text-left" onClick={(e) => (this.props.nameClicked(e, data.id))}>{data.full_name}</td>
-                                {data.subject_score_details.task.scores.map(function (x, i) {
-                                    return <td key={i}>
-                                        {x.result.score === null ? "-" : x.result.score}
-                                    </td>
-                                })}
-                                <td>
-                                    {data.subject_score_details.task.average.score === null ? "-" : data.subject_score_details.task.average.score}
-                                </td>
-                            </tr>
-                        }, this)
-                    }
+                    {content}
                 </tbody>
             </Table>
         )
