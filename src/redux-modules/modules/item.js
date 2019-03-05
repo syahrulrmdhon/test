@@ -1,4 +1,6 @@
-  const SET = 'modules/Item/SET';
+import headers from './../../utils/header'
+
+ const SET = 'modules/Item/SET';
 const RESET = 'modules/Item/RESET';
 const LOAD = 'modules/Item/LOAD';
 const LOAD_SUCCESS = 'modules/Item/LOAD_SUCCESS';

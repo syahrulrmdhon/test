@@ -1,3 +1,5 @@
+import headers from './../../utils/header'
+
 const SET = 'modules/student/SET';
 const RESET = 'modules/student/RESET';
 const LOAD = 'modules/student/LOAD';
@@ -45,13 +47,7 @@ export function getStudent(student_id= '') {
 
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-        promise: client => client.get(url, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-            }
-        })
+        promise: client => client.get(url,headers)
     }
 }
 

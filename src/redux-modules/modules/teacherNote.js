@@ -1,3 +1,6 @@
+import headers from './../../utils/header'
+
+
 const SET = "modules/teacherNote/SET"
 const RESET = "modules/teacherNote/RESET"
 const LOAD = "modules/teacherNote/LOAD"
@@ -111,13 +114,6 @@ export default function reducer(state = initialState, action) {
 }
 
 const school_id = localStorage.getItem("school_id");
-const headers = {
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-    Authorization: "Bearer " + localStorage.getItem("token"),
-    "School-ID": school_id
-  }
-}
 
 export function getData(id, type) {
   let url = `v1/students/${id}/teacher_notes?achievement_type=${type}`;

@@ -11,14 +11,21 @@ export const apiClient = (method, url, request, params = {}) => {
     }
     if (token) {
         headers['Authorization'] = 'Bearer ' + token
+        headers['App-ID'] = 'wt'
+        headers['Device-ID'] = Math.random()
+        headers['Device-Type'] = 'browser'
     } else if (regist_token) {
         headers['Authorization'] = 'Bearer ' + regist_token
+        headers['App-ID'] = 'wt'
+        headers['Device-ID'] = Math.random()
+        headers['Device-Type'] = 'browse'
+
     }
 
     if (schoolId) {
         headers['School-ID'] = schoolId
     }
-
+    console.log(headers,"my header")
     switch (method) {
         case 'get':
             return Axios.get(baseUrl + url, { headers: headers, params: params })
