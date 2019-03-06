@@ -56,7 +56,7 @@ export default class NewPassword extends Component {
         let data = {}
         data['user'] = user
         apiClient('post', url, data).then(res => {
-            localStorage.clear()
+            localStorage.removeItem('regist_token')
             modal({
                 message: 'Berhasil',
                 description: 'Password berhasil dibuat',
