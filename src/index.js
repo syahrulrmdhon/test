@@ -31,7 +31,7 @@ let check_device_id = localStorage.getItem('Device-ID')
 if (!check_device_id) {
   console.log("hit new")
   math_random = Math.random()
-  localStorage.setItem('Device-ID', math_random)
+  localStorage.setItem('Device-ID', 'browser_' + math_random)
 
 }
 
