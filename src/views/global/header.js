@@ -98,7 +98,6 @@ export default class Header extends Component {
     }
     
     render() {
-        console.log('user', localStorage.getItem('user'))
         const l_school = !!(localStorage.getItem('school')) ? localStorage.getItem('school') : ''
         let school = null
         if (l_school) {
@@ -154,8 +153,7 @@ export default class Header extends Component {
         } else {
             text = <button id="dropdown-profile" className="btn btn-info">{user_name}<span className="caret"></span></button>
         }
-        console.log('user logo', user_logo)
-        console.log('school logo', school_logo)
+        
         return (
             <div className="fix-nav">
                 <div className="header-bar">
