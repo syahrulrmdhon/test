@@ -4,8 +4,7 @@ import Avatar from 'react-avatar-edit'
 import { modal, error } from '../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
 import PasswordMask from 'react-password-mask'
-import  Page  from "./../../../components/Title";
-
+import Page from './../../../components/Title'
 
 export default class NewPassword extends Component {
     constructor(props) {
@@ -104,7 +103,7 @@ export default class NewPassword extends Component {
 
     render() {
         return (
-            <Page>
+            <Page title='New Password'>
                 <div className='verification'>
                     <div className="header padding-2">
                         <img className="logo margin-left-4" src={Logo} alt="" />
@@ -128,7 +127,7 @@ export default class NewPassword extends Component {
                             <br /><br /><br /><br />
                             <div className="margin-top-6 align-center">
                                 <i className='fa fa-camera'></i>
-                                <span className='info'> Change Profile Photo</span>
+                                <span className='info'> Ubah Foto Profil</span>
                             </div>
                             <div className="direct align-center margin-top-6 margin-bottom-4">
                                 Buat Password Baru Kamu
@@ -137,10 +136,12 @@ export default class NewPassword extends Component {
                                 <PasswordMask
                                     className='mask' id='password'
                                     inputClassName='password-mask-input'
-                                    buttonClassName='fa fa-eye password-mask-button'
                                     name='password' placeholder='Kata Kunci'
                                     value={this.state.password}
                                     onChange={this.handleChange.bind(this)}
+                                    userVendorStyles={false}
+                                    buttonStyles={true}
+                                    buttonClassName='fa fa-eye password-mask-button'
                                 />
                             </div>
                             <div className='regist margin-top-2'>

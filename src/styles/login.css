@@ -100,6 +100,9 @@
   text-decoration: none;
   color: #45c4a6;
 }
+.button {
+  width: 300px;
+}
 
 @media screen and (max-height: 576px) {
   .main-right {

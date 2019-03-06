@@ -121,17 +121,17 @@ export class Users extends Component {
         let fullname = data.user.full_name
 
         if (status === 'very_good' || status === 'good') {
-            classname = 'border-left-col-green col-sm-3 padding-1'
+            classname = 'border-left-col-green col-sm-3 padding-left-4 padding-top-2 padding-bottom-2 d-table'
         } else if (status === 'enough') {
-            classname = 'border-left-col-yellow col-sm-3 padding-1'
+            classname = 'border-left-col-yellow col-sm-3 padding-left-4 padding-top-2 padding-bottom-2 d-table'
         } else if (status === 'need_attention') {
-            classname = 'border-left-col-red col-sm-3 padding-1'
+            classname = 'border-left-col-red col-sm-3 padding-left-4 padding-top-2 padding-bottom-2 d-table'
         }
 
 
         return < div className={classname} >
-            <Avatar src={Ava} size="30" round={true} />
-            <span className="padding-left-2  label-content ">{fullname}</span>
+            <Avatar src={Ava} size="30" round={true} className='d-table-cell'/>
+            <span className="padding-left-2 label-content d-table-cell">{fullname}</span>
         </div >
     }
 }
@@ -279,11 +279,21 @@ export class SubjectScore extends Component {
 export class UserNotPassed extends Component {
     render() {
         return (
-            <div className='margin-top-4 padding-4'>
+            <div>
                 {
                     this.props.notPassed.map((x, i) => {
                         return <div key={i}>
-                            <div className='row'>
+                            <div className='margin-top-5 padding-bottom-4 d-flex align-items-center'>
+                                <Avatar src={Ava} size='30' round={true} />
+                                <div className="name-wrapper">
+                                    <div className="under-kkm">{x.user.full_name}</div>
+                                    <div className="email-under-kkm">{x.user.email}</div>
+                                </div>
+                                <span className="under-kkm-score padding-right-3 pull-right">
+                                    {x.total_average.score === null ? 'N/A' : x.total_average.score}
+                                </span>
+                            </div>
+                            {/* <div className='row'>
                                 <div className='col-sm-12'>
                                     <div className='row'>
                                         <div className='col-sm-10'>
@@ -306,7 +316,7 @@ export class UserNotPassed extends Component {
                                     </div>
                                 </div>
                                 <br />
-                            </div>
+                            </div> */}
                         </div>
                     })
                 }

@@ -1457,6 +1457,7 @@ tbody tr:nth-child(even) {
 .switch {
   background-color: #FFF;
   height: -webkit-fill-available;
+  overflow-x: hidden;
 }
 
 .switch .header {
