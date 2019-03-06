@@ -134,13 +134,7 @@ export function getUSer() {
 
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: client => client.get(process.env.API_URL + `/v1/users/profile`, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer ' + token,
-        'School-ID': schoolId
-      }
-    })
+    promise: client => client.get(process.env.API_URL + `v1/users/profile`, headers)
   }
 }
 

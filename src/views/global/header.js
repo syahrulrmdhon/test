@@ -17,6 +17,7 @@ import { DropdownButton, ButtonToolbar, MenuItem } from 'react-bootstrap'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import { modal, confirm } from './../global/modal'
+import { apiClient } from '../../utils/apiClient'
 
 import Avatar from 'react-avatar'
 import Ava from './../../assets/images/avatar_def.png'
@@ -46,21 +47,45 @@ export default class Header extends Component {
     }
 
     logout() {
-        confirm({
-            message: 'Anda yakin ingin keluar?',
-            func: function () {
-                localStorage.removeItem('current_period');
-                localStorage.removeItem('homeroom_class');
-                localStorage.removeItem('school');
-                localStorage.removeItem('school_id');
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                localStorage.removeItem('user_id');
-                localStorage.removeItem('class_id');
-                localStorage.removeItem('react-avatar/failing');
+    
 
-                window.location.href = "/";
-            }
+        apiClient('delete', '/authentication/destroy_token').then(response => {
+            confirm({
+                message: 'Anda yakin ingin keluar?',
+                func: function () {
+                    localStorage.removeItem('current_period');
+                    localStorage.removeItem('homeroom_class');
+                    localStorage.removeItem('school');
+                    localStorage.removeItem('school_id');
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('user_id');
+                    localStorage.removeItem('class_id');
+                    localStorage.removeItem('react-avatar/failing');
+                    // localStorage.removeItem('Device-ID');
+    
+    
+                    localStorage.removeItem('current_period');
+                    localStorage.removeItem('homeroom_class');
+                    localStorage.removeItem('school');
+                    localStorage.removeItem('school_id');
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('user_id');
+                    localStorage.removeItem('class_id');
+                    localStorage.removeItem('react-avatar/failing');
+                    localStorage.removeItem('school_list')
+                    window.location.href = "/";
+                    
+                }
+            })
+
+        })
+        .catch(err => {
+            console.log("here, error")
+            // let description = data.error.user_authentication.join(', ')
+            // // this.setSchoolList()
+            
         })
     }
 
@@ -142,7 +167,6 @@ export default class Header extends Component {
                         title={user_name}
                         id='dropdown-profile'
                     >
-                        {/* <MenuItem eventKey="1"><FontAwesome name="user" />  */}
                         <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user"/>
                             <span className="profile padding-left-1">Profil</span>
                         </MenuItem>
@@ -151,7 +175,20 @@ export default class Header extends Component {
                 </ButtonToolbar>
             </NavItem>
         } else {
-            text = <button id="dropdown-profile" className="btn btn-info">{user_name}<span className="caret"></span></button>
+            text = <NavItem>
+            <ButtonToolbar>
+                <DropdownButton
+                    // disabled={true}
+                    bsStyle='info'
+                    title={user_name}
+                    id='dropdown-profile'
+                >
+                    <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user"/>
+                        <span className="profile padding-left-1">Profil</span>
+                    </MenuItem>
+                </DropdownButton>
+            </ButtonToolbar>
+        </NavItem>
         }
 
         return (

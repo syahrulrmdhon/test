@@ -23,6 +23,10 @@ export const apiClient = (method, url, request, params = {}) => {
         headers['Device-ID'] = localStorage.getItem('Device-ID')
         headers['Device-Type'] = 'browser'
 
+    }else{
+        headers['App-ID'] = 'wt'
+        headers['Device-ID'] = localStorage.getItem('Device-ID')
+        headers['Device-Type'] = 'browser'
     }
 
     if (schoolId) {
