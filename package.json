@@ -41,7 +41,6 @@
     "react-input-calendar": "^0.5.4",
     "react-modal": "^3.8.1",
     "react-paginate": "^6.2.1",
-    "react-password-mask": "^3.3.1",
     "react-recaptcha-google": "^1.1.1",
     "react-redux": "^6.0.0",
     "react-responsive-modal": "^3.5.1",
