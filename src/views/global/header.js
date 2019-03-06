@@ -170,9 +170,9 @@ export default class Header extends Component {
                                     <NavItem className='padding-right-2'>
                                         {
                                             user_logo !== null ?
-                                                <img src={user_logo} size="40" round={true} />
+                                                <img src={user_logo} className='user-logo' round={true} />
                                                 :
-                                                <img src={Ava} size="40" round={true} />
+                                                <img src={Ava} className='user-logo' round={true} />
 
                                         }
                                     </NavItem>
