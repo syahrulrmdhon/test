@@ -586,11 +586,9 @@ table.table.beri-nilai tr.head {
 .right-content-score {
   margin: 0px;
 
-
   .skill-socre-td {
-    margin-left:145px;
+    margin-left: 145px;
     display: inline-grid;
-
   }
 
   &__title {
@@ -1134,8 +1132,7 @@ table.table.beri-nilai tr.head {
   color: #7f92a1;
   font-size: 9px;
   float: right;
-  font-family: $nunito_regular
-
+  font-family: $nunito_regular;
 }
 
 /* Safari */
@@ -1172,6 +1169,9 @@ table.table.beri-nilai tr.head {
   .password-mask-button {
     background: transparent !important;
   }
+  .password-mask-button::after {
+    display: none;
+  }
 }
 .right-height {
   height: 40%;
@@ -1200,13 +1200,11 @@ table.table.beri-nilai tr.head {
 @media screen and (max-width: 1024px) {
   .name-wrapper {
     width: 55%;
-
   }
 }
 
 @media screen and (max-width: 960px) {
   .name-wrapper {
     width: 50%;
-
   }
 }

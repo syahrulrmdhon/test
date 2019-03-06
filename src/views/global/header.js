@@ -16,7 +16,10 @@ import { seeMore, getUser } from '../../utils/common'
 import { DropdownButton, ButtonToolbar, MenuItem } from 'react-bootstrap'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
-import { modal, confirm} from './../global/modal'
+import { modal, confirm } from './../global/modal'
+
+import Avatar from 'react-avatar'
+import Ava from './../../assets/images/avatar_def.png'
 
 var FontAwesome = require('react-fontawesome');
 
@@ -29,6 +32,7 @@ export default class Header extends Component {
             isOpen: false,
             navbar: props.navbar || true,
             schoolList: !!(localStorage.getItem("school_list")) ? JSON.parse(localStorage.getItem("school_list")) : []
+
         };
         this.logout = this.logout.bind(this)
         this.onChangeSchool = this.onChangeSchool.bind(this)
@@ -40,22 +44,22 @@ export default class Header extends Component {
         });
     }
 
-    logout(){
+    logout() {
         confirm({
             message: 'Anda yakin ingin keluar?',
-            func: function() {
+            func: function () {
                 localStorage.clear()
                 window.location.href = "/";
             }
         })
     }
 
-    onConfirm(school_id){
+    onConfirm(school_id) {
         localStorage.setItem("school_id", school_id)
         getUser(true)
     }
 
-    onChangeSchool(school){
+    onChangeSchool(school) {
         const school_name = !!(school) ? school.name : 'N/A'
 
         confirmAlert({
@@ -80,16 +84,15 @@ export default class Header extends Component {
     }
 
     render() {
-
         const l_school = !!(localStorage.getItem('school')) ? localStorage.getItem('school') : ''
         let school = null
-        if(l_school){
+        if (l_school) {
             school = JSON.parse(l_school);
         }
 
         const l_user = !!(localStorage.getItem('user')) ? localStorage.getItem('user') : ''
         let user = null
-        if(l_user){
+        if (l_user) {
             user = JSON.parse(l_user);
         }
 
@@ -98,25 +101,26 @@ export default class Header extends Component {
         let school_logo = !!(school) ? school.asset.doc_aws_url : Logo
 
         let user_name = !!(user) ? user.full_name : ''
-        // let user_logo = !!(user) ? user.asset.doc_aws_url : ' '
+        let user_logo = !!(user) ? user.asset.doc_aws_url : ''
+        console.log('user logo', user_logo)
         let school_account = []
-        if(this.state.schoolList.length > 1){
+        if (this.state.schoolList.length > 1) {
             const school_id = localStorage.getItem("school_id")
             school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()}><FontAwesome name="graduation-cap" /> <span className="profile">Pilih Sekolah</span><FontAwesome className="float-right" name="caret-down" /></MenuItem>)
             school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()} divider ></MenuItem>)
-            
+
             this.state.schoolList.map((school, idx) => {
                 let actived = (school_id == school.id) ? 'active' : 'in_active'
                 let icon = (school_id == school.id) ? 'check' : 'times'
 
-                school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()} className={actived} onClick={() => {this.onChangeSchool(school)}} value={school.id} ><FontAwesome className="check-school" name= {icon} /> {seeMore(school.name, 20)} </MenuItem>)
+                school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()} className={actived} onClick={() => { this.onChangeSchool(school) }} value={school.id} ><FontAwesome className="check-school" name={icon} /> {seeMore(school.name, 20)} </MenuItem>)
             })
         }
         const { navbar, location } = this.props
-        let navbarOpt = navbar === undefined?true:false
+        let navbarOpt = navbar === undefined ? true : false
         let path = location === undefined ? '/murid' : location
         let text = ''
-        if(this.state.schoolList.length > 1){
+        if (this.state.schoolList.length > 1) {
             text = <NavItem>
                 <ButtonToolbar>
                     <DropdownButton
@@ -125,9 +129,9 @@ export default class Header extends Component {
                         title={user_name}
                         id='dropdown-profile'
                     >
-                        {/* <MenuItem eventKey="1"><FontAwesome name="user" /> 
-                        <span className="profile">Profil</span>
-                        </MenuItem> */}
+                        <MenuItem eventKey="1"><FontAwesome name="user" />
+                            <span className="profile padding-left-1">Profil</span>
+                        </MenuItem>
                         {school_account}
                     </DropdownButton>
                 </ButtonToolbar>
@@ -143,23 +147,31 @@ export default class Header extends Component {
                         <Navbar expand="md" className="font-white">
                             <NavbarBrand>
                                 <img className="logo" src={school_logo} alt="" />
-                                    <span className="font-white header-title margin-left-4">{school_name}</span>
-                                    </NavbarBrand>
-                                    <NavbarToggler onClick={this.toggle} />
-                                    <Collapse isOpen={this.state.isOpen} navbar>
-                                        <Nav className="ml-auto" navbar>
-                                            {text}
-                                            <NavItem>
-                                                <NavLink className="font-white logout margin-left-2" href="javascript:void(0);" onClick={this.logout}>
-                                                    <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
-                                                </NavLink>
-                                            </NavItem>
-                                        </Nav>
+                                <span className="font-white header-title margin-left-4">{school_name}</span>
+                            </NavbarBrand>
+                            <NavbarToggler onClick={this.toggle} />
+                            <Collapse isOpen={this.state.isOpen} navbar>
+                                <Nav className="ml-auto" navbar>
+                                    <NavItem className='padding-right-2'>
+                                        {
+                                            user_logo === null ?
+                                                <Avatar src={Ava} size="40" round={true} />
+                                                :
+                                                <Avatar src={user_logo} size="40" round={true} />
+                                        }
+                                    </NavItem>
+                                    {text}
+                                    <NavItem>
+                                        <NavLink className="font-white logout margin-left-2" href="javascript:void(0);" onClick={this.logout}>
+                                            <img src={Shutdown} alt="" style={{ width: '20px', height: '20px' }}></img>
+                                        </NavLink>
+                                    </NavItem>
+                                </Nav>
                             </Collapse>
                         </Navbar>
                     </div>
                 </div>
-                <Menu  navbar={navbarOpt} location={path} />
+                <Menu navbar={navbarOpt} location={path} />
             </div>
         )
     }
