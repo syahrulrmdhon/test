@@ -134,7 +134,7 @@ export default class Header extends Component {
                         title={user_name}
                         id='dropdown-profile'
                     >
-                        {/* <MenuItem eventKey="1"><FontAwesome name="user" />  */} //yang lama nih
+                        {/* <MenuItem eventKey="1"><FontAwesome name="user" />  */}
                         <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
                             <span className="profile">Profil</span>
                         </MenuItem>
