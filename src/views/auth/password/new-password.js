@@ -3,7 +3,6 @@ import Logo from './../../../assets/images/logo.svg'
 import Avatar from 'react-avatar-edit'
 import { modal, error } from '../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
-// import PasswordMask from 'react-password-mask'
 import Page from './../../../components/Title'
 
 export default class NewPassword extends Component {
@@ -38,11 +37,6 @@ export default class NewPassword extends Component {
     onCrop(preview) {
         this.setState({ preview })
     }
-    // handleChange(e) {
-    //     let regist = {}
-    //     regist[e.target.name] = e.target.value
-    //     this.setState(regist)
-    // }
     onShow(e, props) {
         e.preventDefault();
         e.stopPropagation();

@@ -21,7 +21,7 @@ import { modal, confirm } from './../global/modal'
 import Avatar from 'react-avatar'
 import Ava from './../../assets/images/avatar_def.png'
 
-var FontAwesome = require('react-fontawesome');  
+var FontAwesome = require('react-fontawesome');
 
 export default class Header extends Component {
     constructor(props) {
@@ -135,7 +135,7 @@ export default class Header extends Component {
                         id='dropdown-profile'
                     >
                         {/* <MenuItem eventKey="1"><FontAwesome name="user" />  */}
-                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user"/>
+                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
                             <span className="profile padding-left-1">Profil</span>
                         </MenuItem>
                         {school_account}
@@ -145,7 +145,7 @@ export default class Header extends Component {
         } else {
             text = <button id="dropdown-profile" className="btn btn-info">{user_name}<span className="caret"></span></button>
         }
-
+        console.log()
         return (
             <div className="fix-nav">
                 <div className="header-bar">
@@ -160,10 +160,11 @@ export default class Header extends Component {
                                 <Nav className="ml-auto" navbar>
                                     <NavItem className='padding-right-2'>
                                         {
-                                            user_logo === null ?
-                                                <Avatar src={Ava} size="40" round={true} />
+                                            user.asset.doc_aws_url !== null ?
+                                                <Avatar src={user.asset.doc_aws_url} size="40" round={true} />
                                                 :
-                                                <Avatar src={user_logo} size="40" round={true} />
+                                                <Avatar src={Ava} size="40" round={true} />
+
                                         }
                                     </NavItem>
                                     {text}
