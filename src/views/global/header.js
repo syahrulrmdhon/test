@@ -19,7 +19,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import { modal, confirm } from './../global/modal'
 
 import Avatar from 'react-avatar'
-import Ava from './../../assets/images/avatar_def.png'
+import Ava from './../../assets/images/avatar_def.svg'
 
 var FontAwesome = require('react-fontawesome');
 
@@ -96,8 +96,9 @@ export default class Header extends Component {
             },
         })
     }
-
+    
     render() {
+        console.log('user', localStorage.getItem('user'))
         const l_school = !!(localStorage.getItem('school')) ? localStorage.getItem('school') : ''
         let school = null
         if (l_school) {
