@@ -3,7 +3,7 @@ import Logo from './../../../assets/images/logo.svg'
 import Avatar from 'react-avatar-edit'
 import { modal, error } from '../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
-import PasswordMask from 'react-password-mask'
+// import PasswordMask from 'react-password-mask'
 import Page from './../../../components/Title'
 
 export default class NewPassword extends Component {
@@ -18,10 +18,19 @@ export default class NewPassword extends Component {
             user: {},
             contentType: 'image/png',
             editor: '',
-            token: this.props.match.params.code
+            token: this.props.match.params.code,
+            type: {
+                pass: 'password',
+                re_pass: 'password',
+            },
+            value: {
+                pass_value: '',
+                re_pass_value: ''
+            }
         }
         this.setEditorRef = this.setEditorRef.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
     onClose() {
         this.setState({ preview: null })
@@ -29,13 +38,33 @@ export default class NewPassword extends Component {
     onCrop(preview) {
         this.setState({ preview })
     }
-    handleChange(e) {
-        let regist = {}
-        regist[e.target.name] = e.target.value
-        this.setState(regist)
+    // handleChange(e) {
+    //     let regist = {}
+    //     regist[e.target.name] = e.target.value
+    //     this.setState(regist)
+    // }
+    onShow(e, props) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        let type = this.state.type
+        type[props] = type[props] === 'input' ? 'password' : 'input'
+        this.setState({
+            type: type
+        })
+    }
+    onChange(e, props) {
+        e.preventDefault()
+
+        let value = this.state.value
+        value[props] = e.target.value
+        this.setState({
+            value: value
+        })
     }
     handleSubmit(e) {
         e.preventDefault()
+        const { value } = this.state
         var base = []
         if (this.state.editor.state.image) {
             var currentSrc = this.state.editor.state.image.currentSrc
@@ -45,11 +74,10 @@ export default class NewPassword extends Component {
 
         const url = `authentication/activate`
         const user = {
-            password: this.state.password,
-            password_confirmation: this.state.repassword,
+            password: value.pass_value,
+            password_confirmation: value.re_pass_value,
             user_picture: {
                 src: base[1],
-                // src: encodedString,
                 content_type: this.state.contentType
             }
         }
@@ -102,6 +130,7 @@ export default class NewPassword extends Component {
 
 
     render() {
+        const { type, value } = this.state
         return (
             <Page title='New Password'>
                 <div className='verification'>
@@ -131,28 +160,30 @@ export default class NewPassword extends Component {
                             </div>
                             <div className="direct align-center margin-top-6 margin-bottom-4">
                                 Buat Password Baru Kamu
-                        </div>
+                            </div>
                             <div className='regist'>
-                                <PasswordMask
-                                    className='mask' id='password'
-                                    inputClassName='password-mask-input'
-                                    name='password' placeholder='Kata Kunci'
-                                    value={this.state.password}
-                                    onChange={this.handleChange.bind(this)}
-                                    userVendorStyles={false}
-                                    buttonStyles={true}
-                                    buttonClassName='fa fa-eye password-mask-button'
+                                <input
+                                    type={type.pass}
+                                    className='password-mask-input'
+                                    value={value.pass_value}
+                                    onChange={(e) => { this.onChange(e, 'pass_value') }}
+                                    placeholder='Kata Kunci'
                                 />
+                                <span className="input-group-text password-mask-button" onClick={(e) => { this.onShow(e, 'pass') }} >
+                                    <i className="fa far fa-eye"></i>
+                                </span>
                             </div>
                             <div className='regist margin-top-2'>
-                                <PasswordMask
-                                    className='mask' id='repassword'
-                                    inputClassName='password-mask-input'
-                                    buttonClassName='fa fa-eye password-mask-button'
-                                    name='repassword' placeholder='Ketik Kembali Kata Kunci'
-                                    value={this.state.repassword}
-                                    onChange={this.handleChange.bind(this)}
+                                <input
+                                    type={type.re_pass}
+                                    className='password-mask-input'
+                                    value={value.re_pass_value}
+                                    onChange={(e) => { this.onChange(e, 're_pass_value') }}
+                                    placeholder='Ketik Kembali Kata Kunci'
                                 />
+                                <span className="input-group-text password-mask-button" onClick={(e) => { this.onShow(e, 're_pass') }} >
+                                    <i className="fa far fa-eye"></i>
+                                </span>
                             </div>
                             <div className='margin-top-2'>
                                 <div className='col-sm-12'>
