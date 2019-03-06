@@ -56,6 +56,8 @@ export default class Header extends Component {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
                 localStorage.removeItem('user_id');
+                localStorage.removeItem('class_id');
+                localStorage.removeItem('react-avatar/failing');
 
                 window.location.href = "/";
             }
