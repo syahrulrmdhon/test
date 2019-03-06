@@ -417,7 +417,7 @@ export function attitudeScores(params = {}, options = {}){
 export function region(params = {}, options = {}){
     let regionOptions = options.regionOptions || false
 
-    apiClient('get', '/v1/filters/regions', false, params).then(response => {
+    apiClient('get', 'v1/filters/regions', false, params).then(response => {
         let regions = response.data.data.regions || []
 
         if((regions.length > 0) && regionOptions){
@@ -441,7 +441,7 @@ export function region(params = {}, options = {}){
 export function cities(params = {}, options = {}){
     let cityOpt = options.cityDefaultOpt || false
 
-    apiClient('get', '/v1/filters/cities', false, params).then(response => {
+    apiClient('get', 'v1/filters/cities', false, params).then(response => {
         let city = response.data.data.cities || []
 
         if((city.length > 0) && cityOpt){
