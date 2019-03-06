@@ -18,7 +18,10 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import { modal, confirm } from './../global/modal'
 
-var FontAwesome = require('react-fontawesome');
+import Avatar from 'react-avatar'
+import Ava from './../../assets/images/avatar_def.png'
+
+var FontAwesome = require('react-fontawesome');  
 
 export default class Header extends Component {
     constructor(props) {
@@ -29,6 +32,7 @@ export default class Header extends Component {
             isOpen: false,
             navbar: props.navbar || true,
             schoolList: !!(localStorage.getItem("school_list")) ? JSON.parse(localStorage.getItem("school_list")) : []
+
         };
         this.logout = this.logout.bind(this)
         this.onChangeSchool = this.onChangeSchool.bind(this)
@@ -86,7 +90,6 @@ export default class Header extends Component {
     }
 
     render() {
-
         const l_school = !!(localStorage.getItem('school')) ? localStorage.getItem('school') : ''
         let school = null
         if (l_school) {
@@ -104,7 +107,7 @@ export default class Header extends Component {
         let school_logo = !!(school) ? school.asset.doc_aws_url : Logo
 
         let user_name = !!(user) ? user.full_name : ''
-        // let user_logo = !!(user) ? user.asset.doc_aws_url : ' '
+        let user_logo = !!(user) ? user.asset.doc_aws_url : ''
         let school_account = []
         if (this.state.schoolList.length > 1) {
             const school_id = localStorage.getItem("school_id")
@@ -131,8 +134,9 @@ export default class Header extends Component {
                         title={user_name}
                         id='dropdown-profile'
                     >
-                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
-                            <span className="profile">Profil</span>
+                        {/* <MenuItem eventKey="1"><FontAwesome name="user" />  */}
+                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user"/>
+                            <span className="profile padding-left-1">Profil</span>
                         </MenuItem>
                         {school_account}
                     </DropdownButton>
@@ -154,6 +158,14 @@ export default class Header extends Component {
                             <NavbarToggler onClick={this.toggle} />
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
+                                    <NavItem className='padding-right-2'>
+                                        {
+                                            user_logo === null ?
+                                                <Avatar src={Ava} size="40" round={true} />
+                                                :
+                                                <Avatar src={user_logo} size="40" round={true} />
+                                        }
+                                    </NavItem>
                                     {text}
                                     <NavItem>
                                         <NavLink className="font-white logout margin-left-2" href="javascript:void(0);" onClick={this.logout}>

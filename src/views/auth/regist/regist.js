@@ -8,7 +8,7 @@ import { error, modal } from './../../global/modal'
 import moment from 'moment/moment.js'
 import { apiClient } from '../../../utils/apiClient'
 import { getDate } from './../../../utils/common'
-import  Page  from "./../../../components/Title";
+import Page from "./../../../components/Title";
 import './../../../styles/login.css'
 
 export default class Regist extends Component {
@@ -73,34 +73,34 @@ export default class Regist extends Component {
     render() {
         console.log(this.state.selectedDate,"date")
         return (
-            <Page title="Registration"> 
-            <div className='background'>
-                <div className='login'>
-                    <div className='row box'>
-                        <div className='left-content col-md-6'>
-                            <div className='main-left'>
-                                <img src={Logo} alt=''></img>
-                                <br /><br />
-                                <h3>Web Teacher</h3>
+            <Page title="Registration">
+                <div className='background'>
+                    <div className='login'>
+                        <div className='row box'>
+                            <div className='left-content col-md-6'>
+                                <div className='main-left'>
+                                    <img src={Logo} alt=''></img>
+                                    <br /><br />
+                                    <h3>Web Teacher</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div className='right-content-login col-md-6'>
-                            <div className='main-right col-12'>
-                                <form onSubmit={this.handleSubmit.bind(this)}>
-                                    <h5 className='header-auth'><strong>Daftarkan akun Gredu kamu</strong></h5>
-                                    <br />
-                                    <p className='text-left desc'>
-                                        Jika kamu belum mengetahui Kode Unik untuk mendaftarkan akun, silahkan kontak email kami <span className='normal-text-green'>help@gredu.asia</span>
-                                    </p>
-                                    <br />
-                                    <input
-                                        value={this.state.uniqueCode}
-                                        onChange={this.handleChange.bind(this)}
-                                        type='text' name='uniqueCode'
-                                        className='w-100 margin-bottom-2 d-block'
-                                        placeholder='Kode Unik'
+                            <div className='right-content-login col-md-6'>
+                                <div className='main-right col-12'>
+                                    <form onSubmit={this.handleSubmit.bind(this)}>
+                                        <h5 className='header-auth'><strong>Daftarkan akun Gredu kamu</strong></h5>
+                                        <br />
+                                        <p className='text-left desc'>
+                                            Jika kamu belum mengetahui Kode Unik untuk mendaftarkan akun, silahkan kontak email kami <span className='normal-text-green'>help@gredu.asia</span>
+                                        </p>
+                                        <br />
+                                        <input
+                                            value={this.state.uniqueCode}
+                                            onChange={this.handleChange.bind(this)}
+                                            type='text' name='uniqueCode'
+                                            className='w-100 margin-bottom-2 d-block'
+                                            placeholder='Kode Unik'
 
-                                    />
+                                        />
                                         <DatePicker
                                             className='col-sm-12 d-block'
                                             selected={this.state.selectedDate}
@@ -111,21 +111,22 @@ export default class Regist extends Component {
                                             dateFormat='yyyy-MM-dd'
                                             value={getDate('case-1', this.state.selectedDate)}
                                             placeholderText='Tanggal Lahir'
+                                            withPortal
                                         >
                                         </DatePicker>
-                                    <i className='float-right fa fa-calendar calendar-auth' aria-hidden='true' />
-                                    <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
-                                    <div className='float-right margin-top-4'>
-                                        <p>Sudah punya akun?<Link to='/' className='normal-text-green'> Masuk Di sini</Link></p>
-                                    </div>
-                                </form>
+                                        <i className='float-right fa fa-calendar calendar-auth' aria-hidden='true' />
+                                        <button type='submit' className='btn-young-green margin-top-4'>Daftar</button>
+                                        <div className='float-right margin-top-4'>
+                                            <p>Sudah punya akun?<Link to='/' className='normal-text-green'> Masuk Di sini</Link></p>
+                                        </div>
+                                    </form>
+                                </div>
+                                <br /><br />
+                                <p className='copyright'>Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                             </div>
-                            <br /><br />
-                            <p className='copyright'>Copyright © (2019) Gredu Asia. All rights reserved. - GREDU PT. Sumber Kreatif Indonesia.</p>
                         </div>
                     </div>
                 </div>
-            </div>
             </Page>
         )
     }

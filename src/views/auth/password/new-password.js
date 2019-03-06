@@ -4,8 +4,7 @@ import Avatar from 'react-avatar-edit'
 import { modal, error } from '../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
 import PasswordMask from 'react-password-mask'
-import  Page  from "./../../../components/Title";
-
+import Page from './../../../components/Title'
 
 export default class NewPassword extends Component {
     constructor(props) {
@@ -137,10 +136,12 @@ export default class NewPassword extends Component {
                                 <PasswordMask
                                     className='mask' id='password'
                                     inputClassName='password-mask-input'
-                                    buttonClassName='fa fa-eye password-mask-button'
                                     name='password' placeholder='Kata Kunci'
                                     value={this.state.password}
                                     onChange={this.handleChange.bind(this)}
+                                    userVendorStyles={false}
+                                    buttonStyles={true}
+                                    buttonClassName='fa fa-eye password-mask-button'
                                 />
                             </div>
                             <div className='regist margin-top-2'>
