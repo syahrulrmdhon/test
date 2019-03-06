@@ -153,7 +153,7 @@ export default class Header extends Component {
         } else {
             text = <button id="dropdown-profile" className="btn btn-info">{user_name}<span className="caret"></span></button>
         }
-        console.log()
+        console.log('user logo', user_logo)
         return (
             <div className="fix-nav">
                 <div className="header-bar">
@@ -168,8 +168,8 @@ export default class Header extends Component {
                                 <Nav className="ml-auto" navbar>
                                     <NavItem className='padding-right-2'>
                                         {
-                                            user.asset.doc_aws_url !== null ?
-                                                <Avatar src={user.asset.doc_aws_url} size="40" round={true} />
+                                            user_logo !== null ?
+                                                <Avatar src={user_logo} size="40" round={true} />
                                                 :
                                                 <Avatar src={Ava} size="40" round={true} />
 
