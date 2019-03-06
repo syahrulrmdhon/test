@@ -1,3 +1,5 @@
+import headers from './../../utils/header'
+
 const SET = 'modules/user/SET';
 const RESET = 'modules/user/RESET';
 const LOAD = 'modules/user/LOAD';
