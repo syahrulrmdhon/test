@@ -90,7 +90,9 @@ export default class Header extends Component {
     }
 
     profile() {
-        this.props.history.push("/profile/basic-information")
+        // this.props.history.push(")
+        window.location.href = "/profile/basic-information";
+
     }
 
     onConfirm(school_id) {
