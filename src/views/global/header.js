@@ -21,7 +21,7 @@ import { modal, confirm } from './../global/modal'
 import Avatar from 'react-avatar'
 import Ava from './../../assets/images/avatar_def.png'
 
-var FontAwesome = require('react-fontawesome');
+var FontAwesome = require('react-fontawesome');  
 
 export default class Header extends Component {
     constructor(props) {
@@ -37,6 +37,7 @@ export default class Header extends Component {
         this.logout = this.logout.bind(this)
         this.onChangeSchool = this.onChangeSchool.bind(this)
         this.onConfirm = this.onConfirm.bind(this)
+        this.profile = this.profile.bind(this)
     }
     toggle() {
         this.setState({
@@ -52,6 +53,11 @@ export default class Header extends Component {
                 window.location.href = "/";
             }
         })
+    }
+
+    profile() {
+        // window.location.href = "/profile/basic-information";
+        this.props.history.push("/profile/basic-information")
     }
 
     onConfirm(school_id) {
@@ -102,7 +108,6 @@ export default class Header extends Component {
 
         let user_name = !!(user) ? user.full_name : ''
         let user_logo = !!(user) ? user.asset.doc_aws_url : ''
-        console.log('user logo', user_logo)
         let school_account = []
         if (this.state.schoolList.length > 1) {
             const school_id = localStorage.getItem("school_id")
@@ -129,8 +134,9 @@ export default class Header extends Component {
                         title={user_name}
                         id='dropdown-profile'
                     >
-                        <MenuItem eventKey="1"><FontAwesome name="user" />
-                            <span className="profile padding-left-1">Profil</span>
+                        {/* <MenuItem eventKey="1"><FontAwesome name="user" />  */} //yang lama nih
+                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
+                            <span className="profile">Profil</span>
                         </MenuItem>
                         {school_account}
                     </DropdownButton>

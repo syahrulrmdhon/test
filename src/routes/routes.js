@@ -39,7 +39,10 @@ import ExamDetail from './../views/exam/detail/index'
 import DetailScoreAttitude from './../views/beri-nilai/attitude/'
 import NewAttitudeScore from './../views/beri-nilai/attitude/new'
 
-
+//profile
+import BasicInformation from './../views/profile/basic'
+import UpdatePassword from './../views/profile/update-password'
+import TeachList from './../views/profile/teach-list'
 
 export const MainRoutes = [
     {
@@ -215,6 +218,18 @@ export const MainRoutes = [
     {
         path:'/score/attitude/new/assessment/:assessment_id/class/:class_id/user/:user_id',
         component:NewAttitudeScore
+    },
+    {
+        path: '/profile/basic-information',
+        component:BasicInformation
+    },
+    {
+        path: '/profile/update-password',
+        component:UpdatePassword
+    },
+    {
+        path: '/profile/teach-list',
+        component:TeachList
     },
     {
         path: '*',

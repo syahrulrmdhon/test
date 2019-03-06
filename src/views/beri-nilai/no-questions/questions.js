@@ -28,6 +28,7 @@ class Questions extends Component {
             flag: false
         })
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.onConfirm = this.onConfirm.bind(this)
     }
     componentDidMount() {
         this.props.getNoQuestions(this.props.location.state.assessment, this.props.location.state.exam, this.props.location.state.student) //method in redux modules

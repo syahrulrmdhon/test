@@ -162,6 +162,7 @@ export class Index extends Component {
         }
         let select = []
         let score = this.props.data_form && this.props.data_form.score
+        console.log(score,"score")
             select.push(  <Select
                 className="select-box"
                 classNamePrefix="select"
