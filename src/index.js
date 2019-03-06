@@ -24,12 +24,28 @@ const store = configureStore(client, initialState);
 ReactGA.initialize('UA-135468885-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
 
+let math_random = ''
+
+// let check_device_id = localStorage.getItem('Device-ID')
+
+// if (!check_device_id) {
+//   console.log("hit new")
+//   math_random = Math.random()
+//   localStorage.setItem('Device-ID', math_random)
+
+// }
+math_random = Math.random()
+localStorage.setItem('Device-ID', '0.017212910209778')
+
+localStorage.setItem('App-ID', 'wt')
+localStorage.setItem('Device-Type', 'browser')
+
 ReactDOM.render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <App initialData={window.DATA} />
-      </BrowserRouter>
-    </Provider>, document.getElementById('root')
+  <Provider store={store}>
+    <BrowserRouter>
+      <App initialData={window.DATA} />
+    </BrowserRouter>
+  </Provider>, document.getElementById('root')
 );
   // registerServiceWorker();
 

@@ -1,3 +1,6 @@
+import headers from './../../utils/header'
+
+
 const SET = 'modules/menu/SETDATA';
 const RESET = 'modules/menu/RESET';
 const LOAD = 'modules/menu/LOAD';
@@ -50,13 +53,7 @@ export function getMenu() {
     const schoolId = localStorage.getItem("school_id")
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + `v1/menu`, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-            }
-        })
+        promise: client => client.get(process.env.API_URL + `v1/menu`,headers)
     }
 }
 

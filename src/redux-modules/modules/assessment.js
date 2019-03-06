@@ -1,5 +1,5 @@
 import {removeField} from './../../utils/common'
-
+import headers from './../../utils/header'
 const LOAD = 'modules/assessment/LOAD';
 const LOAD_SUCCESS = 'modules/assessment/LOAD_SUCCESS';
 const LOAD_FAIL = 'modules/assessment/LOAD_FAIL';
@@ -28,13 +28,6 @@ const initialState = {
 };
 
 const school_id = localStorage.getItem("school_id")
-const headers = {
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
-        'School-ID': school_id
-    }
-}
 
 export default function reducer(state = initialState, action = {}) {
     switch(action.type){

@@ -1,4 +1,5 @@
 import { classes } from "../../utils/common";
+import headers from './../../utils/header'
 
 const SET = 'modules/score/SET';
 const RESET = 'modules/score/RESET';
@@ -242,14 +243,7 @@ export function getDataScores(assessment_id, exam_id, exam_scores_id) {
 
     return {
         types: [LOAD, LOAD_SCORE, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + url, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-
-            }
-        })
+        promise: client => client.get(process.env.API_URL + url,headers)
     }
 
 
@@ -275,13 +269,7 @@ export function getDataScoreQuestion(assessment, exam, student, classess, catego
     return {
         types: case_load,
         data: { assessment, exam, student, classess },
-        promise: client => client.get(process.env.API_URL + url, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-            }
-        })
+        promise: client => client.get(process.env.API_URL + url,headers)
     }
 
 
@@ -304,13 +292,7 @@ export function getParticipant(exam, classess, assess, name, sort) {
 
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + `/v1/assessments/${assess}/exams/${exam}/exam_classes/${classess}/participants?full_name=${full_name}&sort_by=${sort_by_exam_score}`, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-            }
-        })
+        promise: client => client.get(process.env.API_URL + `/v1/assessments/${assess}/exams/${exam}/exam_classes/${classess}/participants?full_name=${full_name}&sort_by=${sort_by_exam_score}`,headers)
     }
 }
 

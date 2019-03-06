@@ -1,3 +1,6 @@
+import headers from './../../utils/header'
+
+
 const SET = 'modules/attitude/SET';
 const RESET = 'modules/attitude/RESET';
 const LOAD = 'modules/attitude/LOAD';
@@ -104,13 +107,7 @@ export function getDataScoreAttitude(assessment_id) {
     const url = `${process.env.API_URL}v1/assessments/${assessment_id}/user_attitudes/participants`
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-        promise: client => client.get(url, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-            }
-        })
+        promise: client => client.get(url,headers)
     }
 }
 
@@ -122,13 +119,7 @@ export function getDataScoreDetail(assessment_id, class_id, user_id,tipe) {
     console.log(url, "my url")
     return {
         types: [LOAD, LOAD_FORM_DATA, LOAD_FAIL],
-        promise: client => client.get(url, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-            }
-        })
+        promise: client => client.get(url,headers)
     }
 }
 
