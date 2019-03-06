@@ -1,3 +1,6 @@
+import headers from './../../utils/header'
+
+
 const SET = 'modules/no-question/SET';
 const RESET = 'modules/no-question/RESET';
 const LOAD_NO_QUESTIONS = 'modules/no-question/LOAD';
@@ -60,13 +63,7 @@ export default function reducer(state = initialState, action) {
 }
 const schoolId = localStorage.getItem('school_id')
 const token = localStorage.getItem('token')
-const headers = {
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer ' + token,
-        'School-ID': schoolId
-    }
-}
+
 export function getNoQuestions(assessment_id, exam_id, student_id) {
     const url = `v1/assessments/${assessment_id}/exams/${exam_id}/exam_scores/${student_id}`
 

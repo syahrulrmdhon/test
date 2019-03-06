@@ -1,4 +1,5 @@
 import moment from 'moment/moment.js'
+import headers from './../../utils/header'
 
 
 const SET = 'modules/user/SET';
@@ -152,13 +153,7 @@ export function getRegion() {
 
   return {
     types: [LOAD, LOAD_SUCCESS_REGION, LOAD_FAIL],
-    promise: client => client.get(process.env.API_URL + `/v1/filters/regions`, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer ' + token,
-        'School-ID': schoolId
-      }
-    })
+    promise: client => client.get(process.env.API_URL + `/v1/filters/regions`, headers)
   }
 }
 

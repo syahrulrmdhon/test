@@ -1,4 +1,6 @@
 import {apiClient} from './../../utils/apiClient'
+import headers from './../../utils/header'
+
 const SET = 'modules/exam/SET';
 const RESET = 'modules/exam/RESET';
 const LOAD = 'modules/exam/LOAD';
@@ -241,12 +243,6 @@ export function getParticipant(step, assessment_id, exam_id){
 
     return{
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + url, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-            }
-        })
+        promise: client => client.get(process.env.API_URL + url,headers)
     }
 }

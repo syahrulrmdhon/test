@@ -1,4 +1,5 @@
 
+import headers from './../../utils/header'
 
 const SET = 'modules/profile/SET';
 const RESET = 'modules/profile/RESET';
@@ -131,13 +132,7 @@ export function getUSer() {
 
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + `/v1/users/profile`, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-            }
-        })
+        promise: client => client.get(process.env.API_URL + `/v1/users/profile`,headers)
     }
 }
 
@@ -147,13 +142,7 @@ export function city() {
     const schoolId = localStorage.getItem("school_id")
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + `/v1/users/profile`, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-            }
-        })
+        promise: client => client.get(process.env.API_URL + `/v1/users/profile`, headers)
     }
 }
 
@@ -164,13 +153,7 @@ export function getRegion() {
 
     return {
         types: [LOAD, LOAD_SUCCESS_REGION, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + `/v1/filters/regions`, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Bearer ' + token,
-                'School-ID': schoolId
-            }
-        })
+        promise: client => client.get(process.env.API_URL + `/v1/filters/regions`, headers)
     }
 }
 

@@ -49,14 +49,22 @@ export default class Header extends Component {
         confirm({
             message: 'Anda yakin ingin keluar?',
             func: function () {
-                localStorage.clear()
+                localStorage.removeItem('current_period');
+                localStorage.removeItem('homeroom_class');
+                localStorage.removeItem('school');
+                localStorage.removeItem('school_id');
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('user_id');
+                localStorage.removeItem('class_id');
+                localStorage.removeItem('react-avatar/failing');
+
                 window.location.href = "/";
             }
         })
     }
 
     profile() {
-        // window.location.href = "/profile/basic-information";
         this.props.history.push("/profile/basic-information")
     }
 
