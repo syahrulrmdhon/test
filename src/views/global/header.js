@@ -154,6 +154,7 @@ export default class Header extends Component {
             text = <button id="dropdown-profile" className="btn btn-info">{user_name}<span className="caret"></span></button>
         }
         console.log('user logo', user_logo)
+        console.log('school logo', school_logo)
         return (
             <div className="fix-nav">
                 <div className="header-bar">
@@ -169,9 +170,9 @@ export default class Header extends Component {
                                     <NavItem className='padding-right-2'>
                                         {
                                             user_logo !== null ?
-                                                <Avatar src={user_logo} size="40" round={true} />
+                                                <img src={user_logo} size="40" round={true} />
                                                 :
-                                                <Avatar src={Ava} size="40" round={true} />
+                                                <img src={Ava} size="40" round={true} />
 
                                         }
                                     </NavItem>
