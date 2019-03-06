@@ -42,6 +42,8 @@ class Login extends Component {
 
         apiClient('post', url, user).then(res => {
             localStorage.setItem("token", res.data.data.auth_token)
+            console.log(localStorage.getItem('token'),"school")
+
             this.setSchoolList()
 
         })
@@ -67,6 +69,7 @@ class Login extends Component {
     }
 
     setSchoolList() {
+        console.log(localStorage.getItem('token'),"school")
         apiClient('get', 'v1/schools/list').then(response => {
             let schools = response.data.data.schools
             let school_length = schools.length
