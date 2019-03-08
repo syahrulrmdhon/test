@@ -126,7 +126,7 @@ class ParticipantClass extends Component {
                         location={`/exam/${this.state.assessment_id}`}
                     />
                     <div className="container">
-                        <div className="margin-8">
+                        <div className="margin-content">
                             <div className="content-block main-block">
                                 <div className="margin-side-10 padding-10">
                                     <form>

@@ -204,7 +204,7 @@ export class componentName extends Component {
         <Header />
         <div className="basic">
           <div className="padding-content">
-            <div className="margin-8">
+            <div className="margin-content">
               <div className="content-block main-block fit-screen">
                 <div className="row">
                   <div className="col-sm-2 left-block fit-screen">

@@ -103,7 +103,7 @@ class New extends Component {
             <div className="padding-content">
                 <Header />
                 <div className="container">
-                    <div className="margin-8">
+                    <div className="margin-content">
                         <div className="content-block main-block">
                             <div className="margin-side-10 padding-10">
                                 <form>

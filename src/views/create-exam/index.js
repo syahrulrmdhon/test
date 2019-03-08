@@ -164,7 +164,7 @@ class Index extends Component {
       <Page title="Buat Tugas">
       <div className="padding-content create-exam">
         <Header navbar={true} location={path} />
-        <div className="margin-8">
+        <div className="margin-content">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
               <div className="create-exam__form-title">{this.state.examId ? "Ubah Tugas" : "Tambah Tugas"}</div>
