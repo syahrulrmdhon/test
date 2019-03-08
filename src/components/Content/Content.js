@@ -345,7 +345,7 @@ class Content extends Component {
     }
 
     return (
-      <div className="bg-white container-fluid container-fluid-custom rounded-corners">
+      <div className="bg-white container-fluid container-fluid-custom main-block">
         <TabContent activeTab={this.props.activeTab}>
           <TabPane tabId={1}>
             <div className="row rounded-10">
