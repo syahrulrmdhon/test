@@ -41,7 +41,15 @@ $nunito_regular: 'NunitoRegular';
   .user-logo {
     width: 30px;
   }
+  
+  ul.dropdown-menu li.active span.profile {
+    color: #474f58;
+  }
 
+  span.fa {
+    width: 18px;
+    text-align: center;
+  }
 }
 
 .fix-nav {

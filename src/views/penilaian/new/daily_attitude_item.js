@@ -40,8 +40,8 @@ class DailyAttitudeItem extends Component {
 
     renderItem(item, isHighlighted){
         return (
-            <div style={{ background: isHighlighted ? 'bcyellow' : 'white' }}>
-                {item.label}
+            <div className="fullwidth" style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+            {item.label}
             </div>   
         ); 
     }
@@ -110,9 +110,10 @@ class DailyAttitudeItem extends Component {
                     <div className="col-sm-11">
                         <div className="row">
                             <div className="col-sm-6">
-                                <div className="content-input margin-top-5">
+                                <div className="content-input margin-top-5 fullwidth">
                                     <label className="content-label">Nama Peserta Didik</label>
                                     <Autocomplete
+                                        className=""
                                         getItemValue={this.getItemValue}
                                         items={options}
                                         renderItem={this.renderItem}

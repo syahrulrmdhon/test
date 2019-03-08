@@ -59,6 +59,12 @@ $nunito_bold: 'NunitoBold';
     height: 100%;
     margin-top: 20px;
   }
+
+  .attendance-detail {
+    &__filter {
+      width: 200px;
+    }
+  }
 }
 
 .detail-menu {
@@ -188,6 +194,11 @@ $nunito_bold: 'NunitoBold';
   &__form-group {
     margin-bottom: 20px;
     display: block;
+
+    .calendar-icon {
+      position: absolute;
+      bottom: 12px;
+    }
   }
 
   &__angle-down{
