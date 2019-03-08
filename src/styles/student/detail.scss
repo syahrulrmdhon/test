@@ -50,9 +50,8 @@ $nunito_bold: 'NunitoBold';
 
   .content-wrapper {
     position: relative;
-    top: 97px;
-    width: 90%;
-    margin: 0px auto;
+    top: 141px;
+    margin: 0px 40px 20px;
   }
 
   .is-empty {
@@ -65,11 +64,16 @@ $nunito_bold: 'NunitoBold';
       width: 200px;
     }
   }
+
+  .menu-bar .bg-white {
+    background: transparent !important;
+  }
 }
 
 .detail-menu {
   background-color: #f7f7f7;
   font-size: 14px;
+  margin: 0px;
 
   ul {
     list-style-type: none;
@@ -95,6 +99,10 @@ $nunito_bold: 'NunitoBold';
   .nav-link {
     padding: 0px;
     font-family: $nunito_bold;
+  }
+
+  .tab-menu {
+    padding-left: 0px;
   }
 }
 
