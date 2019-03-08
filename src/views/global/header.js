@@ -20,9 +20,9 @@ import { modal, confirm } from './../global/modal'
 import { apiClient } from '../../utils/apiClient'
 
 import Avatar from 'react-avatar'
-import Ava from './../../assets/images/avatar_def.png'
+import Ava from './../../assets/images/avatar_def.svg'
 
-var FontAwesome = require('react-fontawesome');  
+var FontAwesome = require('react-fontawesome');
 
 export default class Header extends Component {
     constructor(props) {
@@ -90,7 +90,9 @@ export default class Header extends Component {
     }
 
     profile() {
-        this.props.history.push("/profile/basic-information")
+        // this.props.history.push(")
+        window.location.href = "/profile/basic-information";
+
     }
 
     onConfirm(school_id) {
@@ -121,7 +123,7 @@ export default class Header extends Component {
             },
         })
     }
-
+    
     render() {
         const l_school = !!(localStorage.getItem('school')) ? localStorage.getItem('school') : ''
         let school = null
@@ -167,7 +169,8 @@ export default class Header extends Component {
                         title={user_name}
                         id='dropdown-profile'
                     >
-                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user"/>
+                        {/* <MenuItem eventKey="1"><FontAwesome name="user" />  */}
+                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
                             <span className="profile padding-left-1">Profil</span>
                         </MenuItem>
                         {school_account}
@@ -190,7 +193,7 @@ export default class Header extends Component {
             </ButtonToolbar>
         </NavItem>
         }
-
+        
         return (
             <div className="fix-nav">
                 <div className="header-bar">
@@ -205,10 +208,11 @@ export default class Header extends Component {
                                 <Nav className="ml-auto" navbar>
                                     <NavItem className='padding-right-2'>
                                         {
-                                            user_logo === null ?
-                                                <Avatar src={Ava} size="40" round={true} />
+                                            user_logo !== null ?
+                                                <img src={user_logo} className='user-logo' round={true} />
                                                 :
-                                                <Avatar src={user_logo} size="40" round={true} />
+                                                <img src={Ava} className='user-logo' round={true} />
+
                                         }
                                     </NavItem>
                                     {text}
