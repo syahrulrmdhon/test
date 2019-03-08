@@ -1238,14 +1238,16 @@ strong, .bold {
 }
 
 .content-block.main-block .empty-data, .content .empty-data {
-  height: 440px;
+  height: 90%;
   border: 1px solid #cccccc;
   border-radius: 2px;
-  line-height: 440px;
   text-align: center;
   font-weight: bold;
   color: #6d6d6d;
   font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 label.header-title {
