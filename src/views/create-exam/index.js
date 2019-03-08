@@ -68,6 +68,7 @@ class Index extends Component {
       data.exam.question_count = 0
 
       apiClient('post', path, data).then(response => {
+        console.log("ya")
         this.props.history.push({ pathname: `/exam/${assessmentId}` })
       }).catch(err => {
         error({
@@ -82,6 +83,7 @@ class Index extends Component {
       })
     }
     else if (data.exam.include_question === true) {
+      console.log("tidak")
       const path = `v1/assessments/${assessmentId}/exams/validate?step=${this.state.step}`
       apiClient('post', path, data).then(response => {
         this.props.history.push({
@@ -205,7 +207,7 @@ class Index extends Component {
                 </div>
               }
             </div>
-            <button onClick={this.onSubmit} className="create-exam__button" disabled={this.state.examId ? false : disable}>{this.state.examId ? "Simpan" : "Lanjut"}</button>
+            <button onClick={this.onSubmit} className="create-exam__button" disabled={this.state.examId ? false : disable}>{this.state.examId ? "Simpans" : "Lanjut"}</button>
           </div>
         </div>
       </div>

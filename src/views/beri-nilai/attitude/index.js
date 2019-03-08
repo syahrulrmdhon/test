@@ -37,7 +37,7 @@ export class index extends Component {
                         <div className="margin-side-5">
                             <div className="padding-top-3">
                                 <div className="block">
-                                    <span className="score-attitude__title">Daftar Sikap Ahkir Mata Pelajaran</span>
+                                    <span className="score-attitude__title">Daftar Sikap Akhir Mata Pelajaran</span>
                                 </div>
                                 <div>
                                     <span className="score-attitude__subject">Matematika</span>
