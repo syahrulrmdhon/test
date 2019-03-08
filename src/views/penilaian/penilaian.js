@@ -59,9 +59,9 @@ class Penilaian extends Component {
             <Page title="Penilaian">
                 <div className="padding-content">
                     <Header />
-                    <div className="margin-8">
+                    <div className="margin-content">
                         <div className="content-block main-block">
-                            <div className="row">
+                            <div className="row margin-0">
                                 <div className="col-sm-3 left-block">
                                     <Filter
                                         assessment_types={this.state.assessment_types}
