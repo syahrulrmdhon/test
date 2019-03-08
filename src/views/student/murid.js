@@ -80,8 +80,8 @@ class DaftarMurid extends Component {
             <Page title='Daftar Murid'>
             <div className="padding-content student-list">
                 <Header></Header>
-                <div className="margin-8">
-                    <div className="content-block">
+                <div className="margin-content">
+                    <div className="content-block border-0">
                         <div className="row">
                             <div className="col-12 text-center">
                                 <div className="table-title">{homeroomClass}</div>

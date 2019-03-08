@@ -36,7 +36,7 @@ export default class IndexAssessment extends Component {
         }
 
         return(
-            <div>
+            <div className="empty-wrapper">
                 {content}
             </div>
         )

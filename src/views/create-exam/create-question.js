@@ -199,7 +199,6 @@ class Question extends Component {
                 <div className="react-confirm-alert-body">
                     <div className="header align-center">
                         <h1>Tugas Berhasil Disimpan</h1>
-                        <FontAwesome name="times-circle" className="close" onClick={onClose}/>
                     </div>
                     <div className="alert-body">
                       Soal telah disimpan. Pilih Kelas dan Peserta Didik?
