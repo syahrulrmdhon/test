@@ -146,12 +146,12 @@ export default class Header extends Component {
         let school_account = []
         if (this.state.schoolList.length > 1) {
             const school_id = localStorage.getItem("school_id")
-            school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()}><FontAwesome name="graduation-cap" /> <span className="profile">Pilih Sekolah</span><FontAwesome className="float-right" name="caret-down" /></MenuItem>)
+            school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()}><FontAwesome name="graduation-cap" /> <span className="profile">Pilih Sekolah</span><FontAwesome className="float-right" name="caret-down" /> <hr style={{marginTop: '10px', marginBottom: '0px'}}></hr></MenuItem>)
             school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()} divider ></MenuItem>)
-
+            // <div></div>
             this.state.schoolList.map((school, idx) => {
                 let actived = (school_id == school.id) ? 'active' : 'in_active'
-                let icon = (school_id == school.id) ? 'check' : 'times'
+                let icon = (school_id == school.id) ? 'check' : ''
 
                 school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()} className={actived} onClick={() => { this.onChangeSchool(school) }} value={school.id} ><FontAwesome className="check-school" name={icon} /> {seeMore(school.name, 20)} </MenuItem>)
             })
