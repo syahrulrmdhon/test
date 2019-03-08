@@ -162,7 +162,7 @@ class Index extends Component {
       <Page title="Tugas">
       <div className="padding-content exam">
         <Header navbar={true} location='/penilaian' />
-        <div className="margin-8">
+        <div className="margin-content">
           <div className="content-block main-block">
             <div className="row">
               <div className="col-sm-2 col-sm-2-custom left-block">

@@ -259,9 +259,9 @@ export default class Attendance extends Component {
       <Page title='Absensi'>
         <div className="absensi padding-content">
           <Header />
-          <div className="content margin-8">
+          <div className="content margin-content">
             <div className="row margin-0">
-              <div className="col-sm-10 bg-white rounded-10 normal-box-shadow">
+              <div className="col-sm-10 bg-white main-block">
                 <div className="row">
                   <div className="col-sm-3 left-content">
                     <FilterAbsensi
