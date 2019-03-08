@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { TabContent, TabPane, Input, Button, Form } from 'reactstrap'
 import Select from 'react-select'
-import { getExtracurriculars, handleEvent, addNote } from './../../redux-modules/modules/teacherNote'
+import { getExtracurriculars, handleEvent, addNote } from '../../redux-modules/modules/studentDetail'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -131,7 +131,7 @@ class Homeroom extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  notes: state.teacherNote,
+  notes: state.studentDetail,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(

@@ -59,6 +59,12 @@ $nunito_bold: 'NunitoBold';
     height: 100%;
     margin-top: 20px;
   }
+
+  .attendance-detail {
+    &__filter {
+      width: 200px;
+    }
+  }
 }
 
 .detail-menu {

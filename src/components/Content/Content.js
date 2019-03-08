@@ -8,12 +8,14 @@ import LeftSide from '../LeftSide/LeftSide'
 import Profile from './ProfileDetail'
 import RightSide from '../RightSide/RightSide'
 import ScoreTable from './ScoreTable'
+import AttendanceDetail from './AttendanceDetail'
 import Tab from '../TabContent/TabContent'
-import { getData, getExtracurriculars, handleDisabled, handleNumber } from './../../redux-modules/modules/teacherNote'
+import { getData, getExtracurriculars, handleDisabled, getAttendances, getSubjects, getStatus } from '../../redux-modules/modules/studentDetail'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { apiClient } from '../../utils/apiClient'
 import { modal } from './../../views/global/modal'
+// import Select from 'react-select'
 
 class Content extends Component {
   constructor(props, context) {
@@ -102,13 +104,14 @@ class Content extends Component {
     }
 
     if (prevProps.activeTab !== this.props.activeTab) {
-      if (this.props.activeTab === 2 && !this.state.subjects && !this.state.attendanceStatus) {
+      if (this.props.activeTab === 2) {
         this.getFilterSubject()
         this.getFilterAttendanceStatus()
+        this.getAttendanceDetail()      
 
-        if (nextState.attendanceDetail === this.state.attendanceDetail) {
-          this.getAttendanceDetail()      
-        }
+        // if (nextState.attendanceDetail === this.state.attendanceDetail) {
+          // this.getAttendanceDetail()      
+        // }
       }
       else if (this.props.activeTab === 3) {
         if (!this.state.inputHomeroomNote.length) {
@@ -152,19 +155,17 @@ class Content extends Component {
   }
 
   getFilterSubject() {
-    const url = `v1/filters/subjects?user_id=${this.props.studentId}`
-
-    apiClient('get', url).then(response => {
-      this.setState({subjects: response.data.data.subjects})
-    })
+    this.props.getSubjects(this.props.studentId)
   }
 
   getFilterAttendanceStatus() {
-    const url = `v1/filters/attendance_status`
+    this.props.getStatus()
     
-    apiClient('get', url).then(response => {
-      this.setState({attendanceStatus: response.data.data.attendance_status})
-    })
+    // const url = `v1/filters/attendance_status`
+    
+    // apiClient('get', url).then(response => {
+    //   this.setState({attendanceStatus: response.data.data.attendance_status})
+    // })
   }
 
   getFilterExtracurricular() {
@@ -176,11 +177,12 @@ class Content extends Component {
   }
 
   getAttendanceDetail() {
-    const url = `v1/students/${this.props.studentId}/attendance_recap/`
+    this.props.getAttendances(this.props.studentId)
+    // const url = `v1/students/${this.props.studentId}/attendance_recap/`
     
-    apiClient('get', url).then(response => {
-      this.setState({attendanceDetail: response.data.data})
-    })
+    // apiClient('get', url).then(response => {
+    //   this.setState({attendanceDetail: response.data.data})
+    // })
   }
 
   getHomeroomNote() {
@@ -426,7 +428,9 @@ class Content extends Component {
                 </div>
               </LeftSide>
               <RightSide>
-                <Form inline className="absences-detail__form-date">
+                <AttendanceDetail
+                  studentId={this.props.studentId} activeTab={this.props.activeTab} />
+                {/* <Form inline className="absences-detail__form-date">
                   <FormGroup className="absences-detail__form-group">
                     <Label className="absences-detail__filter-label" for="exampleSelect">Status</Label>
                     <Input className="absences-detail__select" type="select">
@@ -456,7 +460,7 @@ class Content extends Component {
                     <i className="absences-detail__angle-down fa fa-angle-down"></i>
                   </FormGroup>
                 </Form>
-                  <AbsenceTable attendances={this.state.attendanceDetail}/>
+                  <AbsenceTable attendances={this.state.attendanceDetail}/> */}
               </RightSide>
             </div>
           </TabPane>
@@ -495,14 +499,17 @@ class Content extends Component {
 
 
 const mapStateToProps = (state, props) => ({
-  notes: state.teacherNote,
+  notes: state.studentDetail,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getData,
     getExtracurriculars,
-    handleDisabled
+    handleDisabled,
+    getStatus,
+    getSubjects,
+    getAttendances
   }, dispatch
 )
 
