@@ -348,9 +348,9 @@ export class componentName extends Component {
                                   <input
                                     type="text"
                                     className="col-sm-12  form-outine"
-                                    placeholder="Masukan Nama Kode Pos"
-                                    value={pob ? pob : ''}
-                                    onChange={(e) => { this.onChange(e, 'old_pass_value') }}
+                                    placeholder="Masukan Nama Tempat Lahir"
+                                    defaultValue={pob ? pob : ''}
+                                    onChange={(e) => { this.props.handlingInputText(e, 'pob') }}
                                   />
                                 </div>
                               </div>
