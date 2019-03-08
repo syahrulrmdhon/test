@@ -10,8 +10,9 @@ import question from './modules/question'
 import student from './modules/student'
 import noQuestion from './modules/no-question'
 import attitude from './modules/attitude'
-import teacherNote from './modules/teacherNote'
 import profile from './modules/profile'
+import studentDetail from './modules/studentDetail'
+import attendanceDetail from './modules/attendanceDetail'
 
 export default combineReducers({
   user,
@@ -25,7 +26,8 @@ export default combineReducers({
   student,
   noQuestion,
   attitude,
-  teacherNote,
+  studentDetail,
+  attendanceDetail,
   profile
 })
 
