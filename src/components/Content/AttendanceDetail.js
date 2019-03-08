@@ -22,6 +22,7 @@ class AttendanceDetail extends Component {
   }
 
   render() {
+    let homeroomId = JSON.parse(localStorage.getItem("homeroom_class")).id
     let data = this.props.attendanceDetail
     let attendances = []
     if (data.attendances) {
@@ -62,9 +63,9 @@ class AttendanceDetail extends Component {
                 }
 
                 return <tr key={index}>
-                  <td className={(date === '-') ? 'text-center' : ''}>{date}</td>
-                  <td className={!attendance.time_range ? 'text-center' : '-'}>{attendance.time_range ? attendance.time_range : '-'}</td>
-                  <td>-</td>
+                  <td>{date}</td>
+                  <td>{attendance.time_range ? attendance.time_range : '-'}</td>
+                  <td>{(attendance.related_id === homeroomId) ? '-' : attendance.relation_name ? attendance.relation_name : '-' }</td>
                   <td className={(status === '-' ? 'text-center' : '')}>{status}</td>
                 </tr>
               })
@@ -92,8 +93,6 @@ class AttendanceDetail extends Component {
           <label className="absences-detail__filter-label">Status</label>
           <Select 
                 classNamePrefix="select"
-                // value={selectedExtracurricular}
-                // onChange={event => this.props.handleFilter(event.value, 'attendance_status')}
                 onChange={event => { this.filterAttendances(event.value, 'status') }}
                 options={data.status}
                 placeholder='Pilih Status Kehadiran' />
@@ -108,6 +107,7 @@ class AttendanceDetail extends Component {
           <Select
                 classNamePrefix="select"
                 placeholder='Pilih Mata Pelajaran'
+                onChange={event => { this.filterAttendances(event.value, 'school_subject_id') }}
                 options={data.subjects}
                 >
           </Select>
@@ -115,7 +115,6 @@ class AttendanceDetail extends Component {
           
         </div>
           {attendances}
-        {/* <AbsenceTable attendances={this.state.attendanceDetail} /> */}
       </div>
     );
   }

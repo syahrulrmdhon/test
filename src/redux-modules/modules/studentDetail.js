@@ -18,12 +18,7 @@ const HANDLE_FILTER= "modules/studentDetail/HANDLE_FILTER"
 
 const initialState = {
   disabled: true,
-  filter: {
-    'school_subject_id': '',
-    'date_start': '',
-    'date_end': '',
-    'status': '',
-  } 
+  filter: {} 
 };
 
 const initialExtracurriculars = {
@@ -133,7 +128,6 @@ export default function reducer(state = initialState, action) {
         loading: false
       };
     case GET_ATTENDANCES:
-    console.log(action.result.data)
       state.attendances = action.result.data
       return {
         ...state,
@@ -141,11 +135,14 @@ export default function reducer(state = initialState, action) {
         loading: false
       };
     case HANDLE_FILTER:
-      console.log(action.field)
-      console.log(action.value)
       switch (action.field) {
         case 'school_subject_id':
-          state.filter[action.field] = action.value
+          if (action.value === 'all') {
+            delete state.filter[action.field]
+          }
+          else {
+            state.filter[action.field] = action.value
+          }
           break;
         case 'date_start':
           state.filter[action.field] = action.value
@@ -154,11 +151,16 @@ export default function reducer(state = initialState, action) {
           state.filter[action.field] = action.value
           break;
         case 'status':
-          state.filter[action.field] = action.value
+          if (action.value === 'all') {
+            delete state.filter[action.field]
+          }
+          else {
+            state.filter[action.field] = action.value
+          }
           break;
         default:
-          break;
-      }
+          state.filter = {}
+        }
         return {
           ...state,
           loaded: true,
@@ -238,10 +240,6 @@ export function handleDisabled() {
 export function getAttendances(studentId, params) {
   const url = `v1/students/${studentId}/attendance_recap`
   student = studentId
-  // console.log(typeof(filter))
-  // let params = filter || {}
-  // console.log(headers)
-  console.log(params)
   return {
     types: [LOAD, GET_ATTENDANCES, LOAD_FAIL],
     promise: client => client.get(process.env.API_URL + url, headers, params)
@@ -267,7 +265,6 @@ export function getSubjects(studentId) {
 }
 
 export function handleFilter(value, field) {
-  // console.log(value)
   return {
     type: HANDLE_FILTER,
     value: value,    

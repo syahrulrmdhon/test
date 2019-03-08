@@ -194,6 +194,11 @@ $nunito_bold: 'NunitoBold';
   &__form-group {
     margin-bottom: 20px;
     display: block;
+
+    .calendar-icon {
+      position: absolute;
+      bottom: 12px;
+    }
   }
 
   &__angle-down{
