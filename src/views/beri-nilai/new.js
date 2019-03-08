@@ -13,6 +13,7 @@ import { getDataScoreQuestion } from './../../redux-modules/modules/score'
 import { getStudent } from './../../redux-modules/modules/student'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+import Page from './../../components/Title'
 
 class New extends Component {
   constructor(props, context) {
@@ -52,7 +53,7 @@ class New extends Component {
   componentDidMount() {
     this.getStudent()
     this.getGenerateForm()
-    this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id,this.props.location.state.conditon  )
+    this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id, this.props.location.state.conditon)
     this.props.getStudent(this.state.student_id)
   }
 
@@ -135,7 +136,7 @@ class New extends Component {
       dataWillSave.push({ ans: data.ans, exam_question_id: data.exam_question_id, score: data.score })
     })
     data['user_problem_answers'] = dataWillSave
-    console.log(data,"here date")
+    console.log(data, "here date")
     let url = `v1/assessments/${this.props.match.params.assessment_id}/exams/${this.props.match.params.exam_id}/exam_scores/${this.props.match.params.student_id}/bulk_fill_answers`
     apiClient('post', url, data).then(res => {
       modal({
@@ -146,7 +147,7 @@ class New extends Component {
             label: 'Lanjut',
             className: 'btn green',
             event: this.props.history.push({
-              pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam + '/category/' +  this.props.location.state.conditon + '/class/' + this.state.class_id,
+              pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam + '/category/' + this.props.location.state.conditon + '/class/' + this.state.class_id,
               state: { assessment_category: this.props.location.state.conditon }
             })
           }
@@ -156,16 +157,16 @@ class New extends Component {
       .catch(err => {
         let response = err.response
         let data = response.data.status_code
-        if(data === 400) {
+        if (data === 400) {
           error({
             message: 'Gagal semua form harus diisi',
             btns: [
-                {
-                    label: 'Ulangi',
-                    className: 'btn bcred cwhite'
-                }
+              {
+                label: 'Ulangi',
+                className: 'btn bcred cwhite'
+              }
             ]
-        })
+          })
         }
       })
   }
@@ -201,26 +202,29 @@ class New extends Component {
   render() {
     const path = `/assessment/${this.state.assessment_id}/exam/${this.state.exam}/category/${this.props.location.state.conditon}/class/${this.state.class_id}/flag/true`
     return (
-      <div className="detail bg-grey">
+      <Page title="Memberi Nilai">
         <Header navbar={false} location={path} />
-        <div className="content-wrapper content-wrap-custom-size ">
-          <Content
-            dataProfile={this.state.profile}
-            subjects={this.state.subjects}
-            studentId={this.state.studentId}
-            form={this.state.question}
-            // student={this.state.student}
-            handleSave={this.handleSave}
-            onChangeEssay={this.onChangeEssay}
-            essay={this.state.essay}
-            onChangeSelect={this.onChangeSelect}
-            valueData={this.state.valueData}
-            score_choice={this.state.score_choice}
-            choice={this.state.choice}
-            type={this.props.location.state.conditon}
-          />
+
+        <div className="detail bg-grey">
+          <div className="content-wrapper content-wrap-custom-size ">
+            <Content
+              dataProfile={this.state.profile}
+              subjects={this.state.subjects}
+              studentId={this.state.studentId}
+              form={this.state.question}
+              // student={this.state.student}
+              handleSave={this.handleSave}
+              onChangeEssay={this.onChangeEssay}
+              essay={this.state.essay}
+              onChangeSelect={this.onChangeSelect}
+              valueData={this.state.valueData}
+              score_choice={this.state.score_choice}
+              choice={this.state.choice}
+              type={this.props.location.state.conditon}
+            />
+          </div>
         </div>
-      </div>
+      </Page>
     )
   }
 }
