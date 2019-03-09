@@ -147,7 +147,7 @@ class Add extends Component {
             <div className="padding-content">
                 <Header navbar={true} location='/penilaian' />
                 <div className="container">
-                    <div className="margin-8">
+                    <div className="margin-content">
                         <div className="content-block main-block">
                             <div className="margin-side-10 padding-10">
                                 <form>
