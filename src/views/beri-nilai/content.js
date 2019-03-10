@@ -102,10 +102,10 @@ class Content extends Component {
 
         if (type === 'skill') {
             question_exam.map((data, index) => {
-                data.questions.map((x) => {
+                // data.questions.map((x) => {
                     main_content.push(
                         <div className="range-table">
-                            <div className="title-indicator padding-bottom-3">{x.problem_type}</div>
+                            <div className="title-indicator padding-bottom-3">{data.problem_type}</div>
                             <table id="table-score" className="right-content-score____table">
                                 <thead className="right-content-score__table-head">
                                     <th className="right-content-score__no align-left text-center">No</th>
@@ -114,22 +114,27 @@ class Content extends Component {
                                     <th>Bobot</th>
                                 </thead>
                                 <tbody>
-                                    <tr key={index}>
-                                        <td className="align-left text-center">{x.qn_number}</td>
-                                        <td className="align-left text-left" key={x.problem_type}>{x.question}</td>
-                                        <td className="skill-socre-td"><input
-                                            type="text"
-                                            className="align-center box-right"
-                                            onChange={(e) => { this.props.handleScore(e.target.value, index, 'score') }}
-                                            defaultValue={x.user_problem_answer.score}
-                                        /></td>
-                                        <td>{x.weight}</td>
-                                    </tr>
+                                    {
+                                        data.questions.map((x, idx) =>{
+                                            return   <tr key={idx}>
+                                            <td className="align-left text-center">{x.qn_number}</td>
+                                            <td className="align-left text-left" key={x.problem_type}>{x.question}</td>
+                                            <td className="skill-socre-td"><input
+                                                type="text"
+                                                className="align-center box-right"
+                                                onChange={(e) => { this.props.handleScore(e.target.value, idx, 'score') }}
+                                                defaultValue={x.user_problem_answer.score}
+                                            /></td>
+                                            <td>{x.weight}</td>
+                                        </tr>
+    
+                                        })
+                                    }
                                 </tbody>
                             </table>
                         </div>
                     )
-                })
+                // })
             })
         } else {
             main_content.push(
