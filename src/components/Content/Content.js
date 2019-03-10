@@ -8,8 +8,10 @@ import LeftSide from '../LeftSide/LeftSide'
 import Profile from './ProfileDetail'
 import RightSide from '../RightSide/RightSide'
 import ScoreTable from './ScoreTable'
+import AttendanceDetail from './AttendanceDetail'
 import Tab from '../TabContent/TabContent'
-import { getData, getExtracurriculars, handleDisabled, handleNumber } from './../../redux-modules/modules/teacherNote'
+import { getDate } from '../../utils/common'
+import { getData, getExtracurriculars, handleDisabled, getAttendances, getSubjects, getStatus, handleFilter} from '../../redux-modules/modules/studentDetail'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { apiClient } from '../../utils/apiClient'
@@ -102,13 +104,10 @@ class Content extends Component {
     }
 
     if (prevProps.activeTab !== this.props.activeTab) {
-      if (this.props.activeTab === 2 && !this.state.subjects && !this.state.attendanceStatus) {
+      if (this.props.activeTab === 2) {
         this.getFilterSubject()
         this.getFilterAttendanceStatus()
-
-        if (nextState.attendanceDetail === this.state.attendanceDetail) {
-          this.getAttendanceDetail()      
-        }
+        this.getAttendanceDetail()
       }
       else if (this.props.activeTab === 3) {
         if (!this.state.inputHomeroomNote.length) {
@@ -152,19 +151,11 @@ class Content extends Component {
   }
 
   getFilterSubject() {
-    const url = `v1/filters/subjects?user_id=${this.props.studentId}`
-
-    apiClient('get', url).then(response => {
-      this.setState({subjects: response.data.data.subjects})
-    })
+    this.props.getSubjects(this.props.studentId)
   }
 
   getFilterAttendanceStatus() {
-    const url = `v1/filters/attendance_status`
-    
-    apiClient('get', url).then(response => {
-      this.setState({attendanceStatus: response.data.data.attendance_status})
-    })
+    this.props.getStatus()
   }
 
   getFilterExtracurricular() {
@@ -176,11 +167,7 @@ class Content extends Component {
   }
 
   getAttendanceDetail() {
-    const url = `v1/students/${this.props.studentId}/attendance_recap/`
-    
-    apiClient('get', url).then(response => {
-      this.setState({attendanceDetail: response.data.data})
-    })
+    this.props.getAttendances(this.props.studentId)
   }
 
   getHomeroomNote() {
@@ -330,16 +317,10 @@ class Content extends Component {
     this.setState({extracurricularNotes:this.state.extracurricularNotes})
   }
 
-  handleDateFilter(event, filter) {
-    let data = this.state.dateFilter
-    data[filter] = date
-    this.setState({dateFilter: data})
-    let dateFilter = this.state.date
-    if (dateFilter.startDate && dateFilter.endDate) {
-      
-      const path = `v1/students/${this.props.studentId}/attendance_recap?date_start=${dateFilter.startDate}&date_end=${dateFilter.endDate}`
-      apiClient('get', )
-    }
+  handleDateFilter(value, filter) {
+    this.props.handleFilter(getDate('case-4', value), filter)
+    const params = this.props.data.filter
+    this.props.getAttendances(this.props.studentId, params) 
   }
 
   handleChangeStartDate(date) {
@@ -358,10 +339,13 @@ class Content extends Component {
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
     const tabHomeRoom = ['Catatan Wali Kelas', 'Ekstrakurikuler', 'Prestasi']
     
-    const attendances = this.state.attendanceDetail.attendances
+    let recap = []
+    if (this.props.data.attendances) {
+      recap = this.props.data.attendances.attendances
+    }
 
     return (
-      <div className="bg-white container-fluid container-fluid-custom rounded-corners">
+      <div className="bg-white container-fluid container-fluid-custom main-block">
         <TabContent activeTab={this.props.activeTab}>
           <TabPane tabId={1}>
             <div className="row rounded-10">
@@ -392,71 +376,41 @@ class Content extends Component {
                   <FormGroup className="absences-detail__form-group">
                     <Label className="absences-detail__filter-label" for="exampleSelect">Dari Tanggal</Label>
                     <DatePicker
-                      selected={this.state.dateFilter.startDate}
-                      // onChange={this.handleChangeStartDate}
-                      onChange={(event) => this.handleDateFilter(event, 'startDate')}
+                      selected={this.props.data.filter.date_start}
+                      onChange={this.handleChangeStartDate}
+                      onChange={event => { this.handleDateFilter(event, 'date_start') }}
                       className="absences-detail__input" />
-                    <i className="absences-detail__angle-down-date fa fa-angle-down"></i>
+                    <i className="fa fa-calendar calendar-icon" aria-hidden="true" />
                   </FormGroup>
                   <FormGroup className="absences-detail__form-group">
                     <Label className="absences-detail__filter-label" for="exampleSelect">Sampai Tanggal</Label>
                     <DatePicker
-                      selected={this.state.dateFilter.endDate}
-                      onChange={(event) => this.handleDateFilter(event, 'endDate')}
-                      // onChange={this.handleChangeEndDate}
+                      selected={this.props.data.filter.date_end}
+                      onChange={event => { this.handleDateFilter(event, 'date_end') }}
                       className="absences-detail__input" />
-                    <i className="absences-detail__angle-down-date fa fa-angle-down"></i>
+                    <i className="fa fa-calendar calendar-icon" aria-hidden="true" />
                   </FormGroup>
                 </Form>
                 <div className="absences-detail__total-wrapper">
                   <div className="absences-detail__label">Hadir</div>
-                  <div className="absences-detail__amount">{attendances.present !== null ? attendances.present : 0}</div>
+                  <div className="absences-detail__amount">{recap.present !== null ? recap.present : 0}</div>
                 </div>
                 <div className="absences-detail__total-wrapper">
                   <div className="absences-detail__label">Sakit</div>
-                  <div className="absences-detail__amount">{attendances.sick !== null ? attendances.sick : 0}</div>
+                  <div className="absences-detail__amount">{recap.sick !== null ? recap.sick : 0}</div>
                 </div>
                 <div className="absences-detail__total-wrapper">
                   <div className="absences-detail__label">Izin</div>
-                  <div className="absences-detail__amount">{attendances.permission ? attendances.permission : 0}</div>
+                  <div className="absences-detail__amount">{recap.permission ? recap.permission : 0}</div>
                 </div>
                 <div className="absences-detail__total-wrapper">
                   <div className="absences-detail__label">Alpha</div>
-                  <div className="absences-detail__amount">{attendances.abstain ? attendances.abstain : 0}</div>
+                  <div className="absences-detail__amount">{recap.abstain ? recap.abstain : 0}</div>
                 </div>
               </LeftSide>
               <RightSide>
-                <Form inline className="absences-detail__form-date">
-                  <FormGroup className="absences-detail__form-group">
-                    <Label className="absences-detail__filter-label" for="exampleSelect">Status</Label>
-                    <Input className="absences-detail__select" type="select">
-                      <option>Semua Status</option>
-                      {
-                        this.state.attendanceStatus &&
-                        this.state.attendanceStatus.map((status, index) => {
-                          if (status.key !== 'present' && status.key !== 'late'){    
-                            return <option key={index}>{status.value}</option>
-                          }
-                        })
-                      }
-                    </Input>
-                    <i className="absences-detail__angle-down fa fa-angle-down"></i>
-                  </FormGroup>
-                  <FormGroup className="absences-detail__form-group">
-                    <Label className="absences-detail__filter-label" for="exampleSelect">Mata Pelajaran</Label>
-                    <Input className="absences-detail__select" type="select">
-                      <option>Pilih Mata Pelajaran</option>
-                      {
-                        this.state.subjects &&
-                        this.state.subjects.map((subject, index) => {
-                          return <option key={index}>{subject.subject_name}</option>
-                        })
-                      }
-                    </Input>
-                    <i className="absences-detail__angle-down fa fa-angle-down"></i>
-                  </FormGroup>
-                </Form>
-                  <AbsenceTable attendances={this.state.attendanceDetail}/>
+                <AttendanceDetail
+                  studentId={this.props.studentId} activeTab={this.props.activeTab} />
               </RightSide>
             </div>
           </TabPane>
@@ -495,14 +449,18 @@ class Content extends Component {
 
 
 const mapStateToProps = (state, props) => ({
-  notes: state.teacherNote,
+  data: state.studentDetail,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getData,
     getExtracurriculars,
-    handleDisabled
+    handleDisabled,
+    getStatus,
+    getSubjects,
+    getAttendances,
+    handleFilter,
   }, dispatch
 )
 

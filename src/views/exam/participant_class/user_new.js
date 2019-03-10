@@ -143,7 +143,7 @@ class ParticipantUser extends Component {
                         location={`/pariticipant-class/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`}
                 />
                 <div className="container">
-                        <div className="margin-8">
+                        <div className="margin-content">
                             <div className="content-block main-block">
                                 <div className="margin-side-10 padding-10">
                                     <form>

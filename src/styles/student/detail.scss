@@ -50,20 +50,30 @@ $nunito_bold: 'NunitoBold';
 
   .content-wrapper {
     position: relative;
-    top: 97px;
-    width: 90%;
-    margin: 0px auto;
+    top: 141px;
+    margin: 0px 40px 20px;
   }
 
   .is-empty {
     height: 100%;
     margin-top: 20px;
   }
+
+  .attendance-detail {
+    &__filter {
+      width: 200px;
+    }
+  }
+
+  .menu-bar .bg-white {
+    background: transparent !important;
+  }
 }
 
 .detail-menu {
   background-color: #f7f7f7;
   font-size: 14px;
+  margin: 0px;
 
   ul {
     list-style-type: none;
@@ -89,6 +99,10 @@ $nunito_bold: 'NunitoBold';
   .nav-link {
     padding: 0px;
     font-family: $nunito_bold;
+  }
+
+  .tab-menu {
+    padding-left: 0px;
   }
 }
 
@@ -188,6 +202,11 @@ $nunito_bold: 'NunitoBold';
   &__form-group {
     margin-bottom: 20px;
     display: block;
+
+    .calendar-icon {
+      position: absolute;
+      bottom: 12px;
+    }
   }
 
   &__angle-down{

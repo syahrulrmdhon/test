@@ -204,7 +204,7 @@ export class componentName extends Component {
         <Header />
         <div className="basic">
           <div className="padding-content">
-            <div className="margin-8">
+            <div className="margin-content">
               <div className="content-block main-block fit-screen">
                 <div className="row">
                   <div className="col-sm-2 left-block fit-screen">
@@ -348,9 +348,9 @@ export class componentName extends Component {
                                   <input
                                     type="text"
                                     className="col-sm-12  form-outine"
-                                    placeholder="Masukan Nama Kode Pos"
-                                    value={pob ? pob : ''}
-                                    onChange={(e) => { this.onChange(e, 'old_pass_value') }}
+                                    placeholder="Masukan Nama Tempat Lahir"
+                                    defaultValue={pob ? pob : ''}
+                                    onChange={(e) => { this.props.handlingInputText(e, 'pob') }}
                                   />
                                 </div>
                               </div>

@@ -199,7 +199,6 @@ class Question extends Component {
                 <div className="react-confirm-alert-body">
                     <div className="header align-center">
                         <h1>Tugas Berhasil Disimpan</h1>
-                        <FontAwesome name="times-circle" className="close" onClick={onClose}/>
                     </div>
                     <div className="alert-body">
                       Soal telah disimpan. Pilih Kelas dan Peserta Didik?
@@ -274,7 +273,7 @@ class Question extends Component {
 
       <div className="padding-content create-exam question-wrapper">
         {error}
-        <div className="margin-8">
+        <div className="margin-content">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
               <div className="create-exam__form-title">{this.state.examId ? "Ubah Soal" : "Buat Soal"}</div>

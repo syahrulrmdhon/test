@@ -87,7 +87,7 @@ export class Panel extends Component {
                                             <span className="score-attitude__desc-title">Diskripsi Sikap</span>
                                         </div>
                                         <div className="col-sm-12">
-                                            <span className="score-attitude__desc-body">{data.description}</span>
+                                            <span className="score-attitude__desc-body">{data.description ? data.description.substring(0,70)+'...':'N/A'}</span>
                                         </div>
                                     </div>
                                 </div>

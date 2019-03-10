@@ -515,6 +515,9 @@ thead {
   margin-left: 50px !important;
 }
 
+.margin-content {
+  margin: 20px 40px !important;
+}
 /* Padding Top Reset */
 
 .padding-top-0 {
@@ -1208,35 +1211,43 @@ strong, .bold {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
-  -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
-  box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
+  -moz-box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+  -webkit-box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+  box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+
 }
 
 .content-block.main-block {
   border: none;
   box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 0;
 }
 
+.main-block {
+  box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+  border-radius: 10px;
+}
+
 .content-block.main-block, .content-block.main-block .left-block, .content-block.main-block .right-block {
-  min-height: 590px;
+  min-height: 530px;
 }
 
 .content-block.main-block .left-block {
-  border-right: 1px solid #f7f7f7;
+  border-right: 1px solid #eeeeee;
 }
 
 .content-block.main-block .empty-data, .content .empty-data {
-  height: 440px;
+  height: 90%;
   border: 1px solid #cccccc;
   border-radius: 2px;
-  line-height: 440px;
   text-align: center;
   font-weight: bold;
   color: #6d6d6d;
   font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 label.header-title {
@@ -1774,6 +1785,46 @@ input, td {
 
 .word-break {
   word-break: break-word;
+}
+
+.col-sm-3.left-block {
+  /* width: 23% !important; */
+  padding: 20px 15px;
+  flex: 0 0 20.083%;
+  max-width: 20.083%;
+}
+/* 
+.col-sm-3.left-block {
+  flex: 0 0 20.083%;
+  max-width: 20.083%;
+} */
+
+.col-sm-9.right-block {
+  flex: 0 0 79.917%;
+  max-width: 79.917%;
+}
+
+.select__control {
+  height: 40px;;
+}
+
+.filter .title {
+  margin: 10px 0px 30px;
+  font-family: "NunitoBold";
+  font-size: 14px;
+  color: #505050;
+  letter-spacing: 0.3px;
+}
+
+.filter label {
+  font-size: 10px;
+  margin-bottom: 5px;
+  font-family: "NunitoRegular";
+  color: #6d6d6d;
+}
+
+.field-filter {
+  margin-bottom: 32px;
 }
 
 @media only screen and (min-width: 800px) {
