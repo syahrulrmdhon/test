@@ -43,21 +43,43 @@ class Login extends Component {
         apiClient('post', url, user).then(res => {
             localStorage.setItem("token", res.data.data.auth_token)
             console.log(localStorage.getItem('token'),"school")
+            apiClient('get', 'v1/schools/list').then(response => {
+                let schools = response.data.data.schools
+                let school_length = schools.length
+                
+                console.log("here no")
+                this.setSchoolList()
+                console.log("here after")
 
-            this.setSchoolList()
+                if (school_length > 1) {
+                    
+                    localStorage.setItem("school_list", JSON.stringify(schools))
+                    this.props.history.push('/switch')
+                } else { // case school only 1
+                    let school_id = schools[0].id || null
+    
+                    localStorage.setItem("school_id", school_id)
+                    getUser(true)
+                    // this.props.history.push('/home')
+                }
+                
+                
+            })
 
         })
             .catch(err => {
                 let response = err.response
                 let data = response.data
-
+                console.log("here, error")
                 let description = data.error.user_authentication.join(', ')
+                // this.setSchoolList()
 
                 modal({
                     message: 'Gagal Login',
                     description: 'Akun tidak terdaftar.'
                 })
             })
+
     }
 
     onShowAlert(data) {
@@ -73,7 +95,7 @@ class Login extends Component {
         apiClient('get', 'v1/schools/list').then(response => {
             let schools = response.data.data.schools
             let school_length = schools.length
-
+            
             if (school_length > 1) {
                 localStorage.setItem("school_list", JSON.stringify(schools))
                 this.props.history.push('/switch')
@@ -82,9 +104,15 @@ class Login extends Component {
 
                 localStorage.setItem("school_id", school_id)
                 getUser(true)
-                // this.props.history.push('/home')
+                this.props.history.push('/home')
             }
 
+        })
+        .catch(err => {
+            console.log("here, error")
+            // let description = data.error.user_authentication.join(', ')
+            // // this.setSchoolList()
+            
         })
     }
 
