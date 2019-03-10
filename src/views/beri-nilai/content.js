@@ -5,6 +5,7 @@ import RightContent from './../../components/RightSide/RightSide'
 import SelectData from './select';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
+import { Table } from 'reactstrap'
 import { getDataScoreQuestion, handleScore } from './../../redux-modules/modules/score'
 
 class Content extends Component {
@@ -19,12 +20,12 @@ class Content extends Component {
     render() {
         const question_exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.collections || []
         const exam = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.exam_question || []
+        const question_skill = this.props && this.props.data_exam && this.props.data_exam.data && this.props.data_exam.data.question_skill || []
         let main_content = []
         const type = this.props.type
         let content = []
 
         if (type === 'skill') {
-            console.log("question", question_exam)
             question_exam.map((data, index) => {
                 data.questions.map((x) => {
                     let merge_content = []
@@ -67,33 +68,47 @@ class Content extends Component {
             exam.map((x, index) => {
                 let merge_content = []
                 if (x.problem_type === 'multiple_choice') {
-                    console.log("here hit event lala", x.ans)
                     merge_content.push(<SelectData choices={x.exam_question_choices} max_score={x.max_score} index={index} exam={x.ans} />)
                     merge_content.push(<td className="align-center">{exam[index]['score']}</td>)
                 } else {
                     merge_content.push(
-                        <td> <input
-                            type="text"
-                            onChange={(e) => { this.props.handleScore(e.target.value, index, 'ans') }}
-                            className="padding-1 fullwidth"
-                            defaultValue={exam[index]['ans']}
-                        /> </td>
+                        <td>
+                            <div className="content-input">
+                                <input
+                                    placeholder="Masukkan skor anda"
+                                    onChange={(e) => { this.props.handleScore(e.target.value, index, x, index, 'ans', 'knowledge') }}
+                                    className="fullwidth"
+                                    defaultValue={exam[index]['ans']}
+                                />
+                            </div>
+                        </td>
                     )
                     merge_content.push(
-                        <td><input
-                            type="text"
-                            onChange={(e) => { this.props.handleScore(e.target.value, index, 'score') }}
-                            defaultValue={exam[index]['score']}
-                        /></td>
+                        <td>
+                            <div className="content-input form-position">
+                                <input
+                                    placeholder="Masukkan skor anda"
+                                    onChange={(e) => { this.props.handleScore(e.target.value, index, x, index, 'score', 'knowledge') }}
+                                    className=" align-center"
+                                    defaultValue={exam[index]['score']}
+                                    />
+                            </div>
+                        </td>
                     )
                 }
 
 
                 content.push(<tr key={index}>
-                    <td className="align-left text-center">{x.qn_number}</td>
-                    <td className="align-left text-left" key={x.problem_type}>{x.problem_type === 'essay' ? 'Essay' : 'Multiple Choice'}</td>
+                    <td className="align-center valign-center">
+                        <label className="header-title">{x.qn_number}</label>
+                    </td>
+                    <td className="align-left valign-center">
+                        <label className="header-title">{x.problem_type === 'essay' ? 'Uraian' : 'Pilihan Ganda'}</label>
+                    </td>
                     {merge_content}
-                    <td>{x.weight}</td>
+                    <td className="align-left valign-center">
+                        <label className="header-title">{x.weight}</label>
+                    </td>
                 </tr>)
 
             }, this)
@@ -101,50 +116,82 @@ class Content extends Component {
 
 
         if (type === 'skill') {
-            question_exam.map((data, index) => {
-                // data.questions.map((x) => {
-                    main_content.push(
-                        <div className="range-table">
-                            <div className="title-indicator padding-bottom-3">{data.problem_type}</div>
-                            <table id="table-score" className="right-content-score____table">
-                                <thead className="right-content-score__table-head">
-                                    <th className="right-content-score__no align-left text-center">No</th>
-                                    <th>Indikator</th>
-                                    <th className="align-center">Skor</th>
-                                    <th>Bobot</th>
-                                </thead>
-                                <tbody>
-                                    {
-                                        data.questions.map((x, idx) =>{
-                                            return   <tr key={idx}>
-                                            <td className="align-left text-center">{x.qn_number}</td>
-                                            <td className="align-left text-left" key={x.problem_type}>{x.question}</td>
-                                            <td className="skill-socre-td"><input
-                                                type="text"
-                                                className="align-center box-right"
-                                                onChange={(e) => { this.props.handleScore(e.target.value, idx, 'score') }}
-                                                defaultValue={x.user_problem_answer.score}
-                                            /></td>
-                                            <td>{x.weight}</td>
+            question_skill.map((data, index) => {
+                console.log(data,"my data will")
+                main_content.push(
+                    <div className="range-table">
+                        <div className="title-indicator padding-bottom-3">{data.data}</div>
+                        <table className="table">
+                            <thead className="right-content-score__table-head">
+                                <tr>
+                                    <td className="align-center" width="10%">
+                                        <label className="header-title">No</label>
+                                    </td>
+                                    <td className="align-left" width="30%">
+                                        <label className="header-title">Indikator</label>
+                                    </td>
+                                    <td className="align-center" width="35%">
+                                        <label className="header-title">Skor</label>
+                                    </td>
+                                    <td className="align-center" width="20%">
+                                        <label className="header-title">Bobot</label>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    data.question_score.map((x, idx) => {
+                                        return <tr key={idx}>
+                                            <td className="align-center valign-center">
+                                                <label className="header-title">{x.qn_number}</label>
+                                            </td>
+                                            <td className="align-left valign-center">
+                                                <label className="header-title">{x.question}</label>
+                                            </td>
+                                            <td>
+                                                <div className="content-input form-position">
+                                                    <input
+                                                        className="disblock align-center "
+                                                        placeholder="Masukkan skor anda"
+                                                        onChange={(e) => { this.props.handleScore(e.target.value, index, data, idx, 'score', 'skill') }}
+                                                        defaultValue={x.user_problem_answer.score}
+                                                    />
+                                                </div>
+                                            </td>
+                                            <td className="align-center valign-center">
+                                                <label className="header-title">{x.weight}</label>
+                                            </td>
+
                                         </tr>
-    
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    )
-                // })
+
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                )
             })
         } else {
             main_content.push(
-                <table id="table-score" className="right-content-score____table">
+                <table className="table">
                     <thead className="right-content-score__table-head">
-                        <th className="right-content-score__no align-left text-center">No</th>
-                        <th>Tipe Soal</th>
-                        <th className="align-center">Jawaban Soal</th>
-                        <th className="align-center">Skor</th>
-                        <th>Bobot</th>
+                        <tr>
+                            <td className="align-center" width="10%">
+                                <label className="header-title">No</label>
+                            </td>
+                            <td className="align-left" width="20%">
+                                <label className="header-title">Tipe Soal</label>
+                            </td>
+                            <td className="align-center" width="30%">
+                                <label className="header-title">Jawaban Soal</label>
+                            </td>
+                            <td className="align-center" width="35%">
+                                <label className="header-title">Skor</label>
+                            </td>
+                            <td className="align-center" width="20%">
+                                <label className="header-title">Bobot</label>
+                            </td>
+                        </tr>
                     </thead>
                     <tbody>
                         {content}
@@ -170,7 +217,7 @@ class Content extends Component {
                                     <div className="padding-top-4">
                                         {main_content}
                                     </div>
-                                    <div className="margin-top-3 align-right">
+                                    <div className="margin-top-3 align-right padding-bottom-3">
                                         <button className="submit-btn" onClick={(e) => { this.handlSave(e) }}>Submit </button>
                                     </div>
                                 </div>
