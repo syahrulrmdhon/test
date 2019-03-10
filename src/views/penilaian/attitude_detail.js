@@ -90,7 +90,7 @@ class AttitudeDetail extends Component {
         return(
             <div className="padding-content">
                 <Header navbar={true} location="/penilaian" />
-                <div className="margin-8">
+                <div className="margin-content">
                     <div className="row">
                         <div className="col-sm-10 col-sm-offset-1">
                         <div className="content-block main-block">

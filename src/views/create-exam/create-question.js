@@ -273,7 +273,7 @@ class Question extends Component {
 
       <div className="padding-content create-exam question-wrapper">
         {error}
-        <div className="margin-8">
+        <div className="margin-content">
           <div className="content-wrapper">
             <div className="create-exam__title-wrapper">
               <div className="create-exam__form-title">{this.state.examId ? "Ubah Soal" : "Buat Soal"}</div>
