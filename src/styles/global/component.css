@@ -20,7 +20,7 @@ button:focus, input[type=submit]:focus {
 
 .content {
   background: #f7f7f7;
-  width: 90%;
+  width: 92%;
   margin: auto;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -156,12 +156,6 @@ body {
 thead {
   background: #E8F7F7;
   color: #000000;
-}
-
-.student-name {
-  font-weight: bold;
-  color: #3d74b4;
-  cursor: pointer;
 }
 
 /* clear */

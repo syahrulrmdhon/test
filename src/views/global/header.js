@@ -47,7 +47,7 @@ export default class Header extends Component {
     }
 
     logout() {
-    
+
 
         apiClient('delete', '/authentication/destroy_token').then(response => {
             confirm({
@@ -63,8 +63,8 @@ export default class Header extends Component {
                     localStorage.removeItem('class_id');
                     localStorage.removeItem('react-avatar/failing');
                     // localStorage.removeItem('Device-ID');
-    
-    
+
+
                     localStorage.removeItem('current_period');
                     localStorage.removeItem('homeroom_class');
                     localStorage.removeItem('school');
@@ -76,17 +76,17 @@ export default class Header extends Component {
                     localStorage.removeItem('react-avatar/failing');
                     localStorage.removeItem('school_list')
                     window.location.href = "/";
-                    
+
                 }
             })
 
         })
-        .catch(err => {
-            console.log("here, error")
-            // let description = data.error.user_authentication.join(', ')
-            // // this.setSchoolList()
-            
-        })
+            .catch(err => {
+                console.log("here, error")
+                // let description = data.error.user_authentication.join(', ')
+                // // this.setSchoolList()
+
+            })
     }
 
     profile() {
@@ -123,7 +123,7 @@ export default class Header extends Component {
             },
         })
     }
-    
+
     render() {
         const l_school = !!(localStorage.getItem('school')) ? localStorage.getItem('school') : ''
         let school = null
@@ -146,7 +146,7 @@ export default class Header extends Component {
         let school_account = []
         if (this.state.schoolList.length > 1) {
             const school_id = localStorage.getItem("school_id")
-            school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()}><FontAwesome name="graduation-cap" /> <span className="profile">Pilih Sekolah</span><FontAwesome className="float-right" name="caret-down" /> <hr style={{marginTop: '10px', marginBottom: '0px'}}></hr></MenuItem>)
+            school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()}><FontAwesome name="graduation-cap" /> <span className="profile">Pilih Sekolah</span><FontAwesome className="float-right" name="caret-down" /> <hr style={{ marginTop: '10px', marginBottom: '0px' }}></hr></MenuItem>)
             school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()} divider ></MenuItem>)
             // <div></div>
             this.state.schoolList.map((school, idx) => {
@@ -164,12 +164,10 @@ export default class Header extends Component {
             text = <NavItem>
                 <ButtonToolbar>
                     <DropdownButton
-                        // disabled={true}
                         bsStyle='info'
                         title={user_name}
                         id='dropdown-profile'
                     >
-                        {/* <MenuItem eventKey="1"><FontAwesome name="user" />  */}
                         <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
                             <span className="profile padding-left-1">Profil</span>
                         </MenuItem>
@@ -179,21 +177,20 @@ export default class Header extends Component {
             </NavItem>
         } else {
             text = <NavItem>
-            <ButtonToolbar>
-                <DropdownButton
-                    // disabled={true}
-                    bsStyle='info'
-                    title={user_name}
-                    id='dropdown-profile'
-                >
-                    <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user"/>
-                        <span className="profile padding-left-1">Profil</span>
-                    </MenuItem>
-                </DropdownButton>
-            </ButtonToolbar>
-        </NavItem>
+                <ButtonToolbar>
+                    <DropdownButton
+                        bsStyle='info'
+                        title={user_name}
+                        id='dropdown-profile'
+                    >
+                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
+                            <span className="profile padding-left-1">Profil</span>
+                        </MenuItem>
+                    </DropdownButton>
+                </ButtonToolbar>
+            </NavItem>
         }
-        
+
         return (
             <div className="fix-nav">
                 <div className="header-bar">
@@ -209,9 +206,9 @@ export default class Header extends Component {
                                     <NavItem className='padding-right-2'>
                                         {
                                             user_logo !== null ?
-                                                <img src={user_logo} className='user-logo' round={true} />
+                                                <Avatar src={user_logo} size='40' round={true} />
                                                 :
-                                                <img src={Ava} className='user-logo' round={true} />
+                                                <Avatar src={Ava} size='40' round={true} />
 
                                         }
                                     </NavItem>

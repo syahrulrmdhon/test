@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
 import './../../styles/score.scss'
 import './../../styles/global/component.css'
-
-import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
-import classnames from 'classnames'
-
 import Header from '../global/header'
 import FilterRapor from './filter'
-import TablePengetahuan from './table-pengetahuan'
-import TableKeterampilan from './table-keterampilan'
-import TableSikap from './table-sikap'
 import { apiClient } from '../../utils/apiClient'
-import { NotAvailable } from '../../views/global/notAvailable'
 import Page from './../../components/Title'
+import NavToggle from './nav-toggle'
+import NavTab from './nav-tab'
 
 export default class Rapor extends Component {
   constructor(props) {
@@ -27,8 +21,7 @@ export default class Rapor extends Component {
       tableKnowledge: [],
       tableSkill: [],
       tableAttitude: [],
-      idxScoreK: 0,
-      subjectName: '',
+      // subjectName: '',
       nameClass: '',
       dTableKnowledge: [],
       dTableSkill: [],
@@ -192,97 +185,52 @@ export default class Rapor extends Component {
   render() {
     return (
       <Page title="Rapor">
-      <div className='padding-content h-100'>
-        <Header />
-        <div className='content'>
-          <div className='row row-score'>
-            <div className='left-content col-sm-2 col-lg-2'>
-              <FilterRapor
-                listSemester={this.state.listSemester}
-                selectedSemester={this.state.selectedSemester}
-                onChangeSemester={this.onChangeSemester}
-                listStatus={this.state.listStatus}
-                selectedStatus={this.state.selectedStatus}
-                onChangeStatus={this.onChangeStatus}
-                handleSubmit={this.handleSubmit}
-                handlePrint={this.handlePrint}
-              />
-            </div>
-            <div className='right-content col-sm-10 col-lg-10'>
-              <div className='row margin-bottom-4'>
-                <div className='col-sm-3 col-lg-4'>
-                  <h5 className='float-left margin-left-1 padding-top-1'>
-                    <strong className='large-text'>
-                      Rapor Kelas {this.state.nameClass}
-                    </strong>
-                  </h5>
-                </div>
-                <div className='col-sm-9 col-lg-8'>
-                  <span className='float-right margin-right-1'>
-                    <Nav tabs className='toggle border-0 pull-right tab-span'>
-                      <NavItem className='tab-nilai'>
-                        <NavLink className={classnames({active: this.state.activeTab === '1'})} onClick={() => {this.toggle('1')}}>
-                          Pengetahuan
-                        </NavLink>
-                      </NavItem>
-                      <NavItem className='tab-nilai'>
-                        <NavLink className={classnames({active: this.state.activeTab === '2'})} onClick={() => {this.toggle('2')}}>
-                          Keterampilan
-                        </NavLink>
-                      </NavItem>
-                      <NavItem className='tab-nilai'>
-                        <NavLink className={classnames({active: this.state.activeTab === '3'})} onClick={() => {this.toggle('3')}}>
-                          Sikap
-                        </NavLink>
-                      </NavItem>
-                    </Nav>
-                  </span>
-                </div>
+        <div className='padding-content'>
+          <Header />
+          <div className='content'>
+            <div className='row row-score'>
+              <div className='left-content col-sm-2 col-lg-2'>
+                <FilterRapor
+                  listSemester={this.state.listSemester}
+                  selectedSemester={this.state.selectedSemester}
+                  onChangeSemester={this.onChangeSemester}
+                  listStatus={this.state.listStatus}
+                  selectedStatus={this.state.selectedStatus}
+                  onChangeStatus={this.onChangeStatus}
+                  handleSubmit={this.handleSubmit}
+                  handlePrint={this.handlePrint}
+                />
               </div>
-              <TabContent activeTab={this.state.activeTab} className='tab-content-score margin-left-1 margin-right-1'>
-                <TabPane tabId='1'>
-                  {!this.state.tableKnowledge || this.state.tableKnowledge.length === 0 ? (
-                    <NotAvailable>Data belum tersedia.</NotAvailable>
-                  ) : (
-                      <TablePengetahuan
-                        tableKnowledge={this.state.tableKnowledge}
-                        dTableKnowledge={this.state.dTableKnowledge}
-                        nameClicked={this.nameClicked}
-                      />
-                    )
-                  }
-                </TabPane>
-                <TabPane tabId='2'>
-                  {
-                    !this.state.tableSkill || this.state.tableSkill.length === 0 ? (
-                      <NotAvailable>Data belum tersedia.</NotAvailable>
-                    ) : (
-                        <TableKeterampilan
-                          tableSkill={this.state.tableSkill}
-                          dTableSkill={this.state.dTableSkill}
-                          nameClicked={this.nameClicked}
-                        />
-                      )
-                  }
-                </TabPane>
-                <TabPane tabId='3'>
-                  {
-                    !this.state.tableAttitude || this.state.tableAttitude.length === 0 ? (
-                      <NotAvailable>Data belum tersedia.</NotAvailable>
-                    ) : (
-                        <TableSikap
-                          tableAttitude={this.state.tableAttitude}
-                          dTableAttitude={this.state.dTableAttitude}
-                          nameClicked={this.nameClicked}
-                        />
-                      )
-                  }
-                </TabPane>
-              </TabContent>
+              <div className='right-content col-sm-10 col-lg-10'>
+                <div className='row margin-bottom-4'>
+                  <div className='col-sm-3 col-lg-4'>
+                    <h5 className='float-left margin-left-1 padding-top-1'>
+                      <strong className='large-text'>
+                        Rapor Kelas {this.state.nameClass}
+                      </strong>
+                    </h5>
+                  </div>
+                  <div className='col-sm-9 col-lg-8'>
+                    <NavToggle
+                      activeTab={this.state.activeTab}
+                      toggle={this.toggle}
+                    />
+                  </div>
+                </div>
+                <NavTab
+                  activeTab={this.state.activeTab}
+                  tableKnowledge={this.state.tableKnowledge}
+                  dTableKnowledge={this.state.dTableKnowledge}
+                  nameClicked={this.nameClicked}
+                  tableSkill={this.state.tableSkill}
+                  dTableSkill={this.state.dTableSkill}
+                  tableAttitude={this.state.tableAttitude}
+                  dTableAttitude={this.state.dTableAttitude}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </Page>
     )
   }
