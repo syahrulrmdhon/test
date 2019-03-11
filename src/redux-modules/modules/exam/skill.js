@@ -60,6 +60,7 @@ export default function reducer(state = initialState, action) {
             }
         case REMOVE_INDICATOR:
             state.problem_type_sets[action.key_value] = removeField(state.problem_type_sets[action.key_value], action.idx)
+            console.log("here",  state.problem_type_sets)
             return{
                 ...state,
                 loaded: true,

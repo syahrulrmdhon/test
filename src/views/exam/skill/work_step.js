@@ -27,7 +27,7 @@ class WorkStep extends Component{
                 }
 
                 workSteps.push(
-                   <div className="row" key={Math.random()}>
+                   <div className="row" key={idx}>
                         <div className="col-sm-11">
                             <div className="content-input margin-top-2">
                                 <input 
@@ -63,7 +63,8 @@ class WorkStep extends Component{
 }
 
 const mapStateToProps = (state, props) => ({
-    problem_types: state.skill ? state.skill.problem_types : ['']
+    problem_types: state.skill ? state.skill.problem_types : [''],
+    data_work:state
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 
