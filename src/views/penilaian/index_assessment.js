@@ -44,31 +44,36 @@ export default class IndexAssessment extends Component {
                 data={this.state.data} 
                 category={this.props.category}
             />)            
-        } else {
-            content.push(
-                <div className="margin-top-4 empty-data" key={1} >
-                    Data belum tersedia.
-                </div>
-            )
         }
 
         return(
             <div className="empty-wrapper">
-                {content}
-                <div className="align-center">
-                    <ReactPaginate
-                        previousLabel={<img src={previous} alt="" className="arrow-left"/>}      
-                        nextLabel={<img src={next} alt="" className="arrow-right" />}          
-                        breakLabel={'...'}
-                        breakClassName={'break-me disinblock'}
-                        pageCount={this.props.paginate.total_pages}
-                        onPageChange={this.handlePageClick}
-                        containerClassName={'pagination disblock'}
-                        pageClassName={'disinblock'}
-                        previousClassName={'disinblock'}
-                        nextClassName={'disinblock'}
-                        activeClassName={'active'} />
-                </div>
+                { content.length ?
+                    <div>
+                        {content}
+                        {this.props.paginate.total_pages > 1 && 
+                            <div className="align-center">
+                                <ReactPaginate
+                                    previousLabel={<img src={previous} alt="" className="arrow-left"/>}      
+                                    nextLabel={<img src={next} alt="" className="arrow-right" />}          
+                                    breakLabel={'...'}
+                                    breakClassName={'break-me disinblock'}
+                                    pageCount={this.props.paginate.total_pages}
+                                    onPageChange={this.handlePageClick}
+                                    containerClassName={'pagination disblock'}
+                                    pageClassName={'disinblock'}
+                                    previousClassName={'disinblock'}
+                                    nextClassName={'disinblock'}
+                                    activeClassName={'active'} />
+                            </div>
+
+                        }
+                    </div>
+                    :
+                    <div className="margin-top-4 empty-data" key={1} >
+                        Data belum tersedia.
+                    </div>
+                }
             </div>
         )
     }
