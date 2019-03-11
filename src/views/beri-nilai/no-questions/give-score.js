@@ -6,7 +6,7 @@ import { getNoQuestions, handleChange } from './../../../redux-modules/modules/n
 
 class GiveScore extends Component {
     render() {
-        const {score, aliasName} = this.props.questionItem
+        const { score, aliasName } = this.props.questionItem
         return (
             <div>
                 <div className='col-sm-6'>
