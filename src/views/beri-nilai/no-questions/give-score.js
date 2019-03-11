@@ -21,7 +21,7 @@ class GiveScore extends Component {
                         name='nilai'
                         defaultValue={score ? score : ''}
                         type='number'
-                        onChange={(e) => this.props.handleChange(e.target.value.replace(/\D/,''), this.props.i, 'score')}
+                        onChange={(e) => this.props.handleChange(e.target.value, this.props.i, 'score')}
                         placeholder='Masukkan Nilai...'
                     />
                 </div>
