@@ -5,7 +5,6 @@ import Filter from './filter'
 import Index from './index_assessment'
 import { assessmentGetData } from '../../utils/exam'
 import { assessmentType } from '../../utils/common'
-
 import Page from './../../components/Title'
 
 import Tab from './index/tab'
@@ -73,7 +72,7 @@ class Penilaian extends Component {
                                     />
                                 </div>
                                 <div className="col-sm-9 right-block">
-                                    <div className="padding-top-6 margin-left-3 margin-right-6 h-100">
+                                    <div className="padding-top-6 h-100">
                                         <div className="row">
                                             <div className="col-sm-6">
                                                 <label className="header-title">Daftar Topik Penilaian</label>
@@ -88,7 +87,10 @@ class Penilaian extends Component {
                                             activeTab={this.state.activeTab}
                                             tabToggle={this.tabToggle} 
                                         />
-                                        <Index  data={this.state.data} category={this.state.activeTab} />
+                                        <Index 
+                                            data={this.state.data} 
+                                            category={this.state.activeTab} 
+                                            paginate={this.state.paginate} />
                                     </div>
                                 </div>
                             </div>

@@ -56,7 +56,7 @@ $nunito_bold: 'NunitoBold';
 
   .is-empty {
     height: 100%;
-    margin-top: 20px;
+    padding-top: 20px;
   }
 
   .attendance-detail {
@@ -67,6 +67,10 @@ $nunito_bold: 'NunitoBold';
 
   .menu-bar .bg-white {
     background: transparent !important;
+  }
+
+  .tab-pane {
+    height: 100%;
   }
 }
 
@@ -314,6 +318,12 @@ $nunito_bold: 'NunitoBold';
     filter: brightness(90%);
   }
 
+  &__save:disabled:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    filter: unset;
+  }
+
   ::placeholder {
     color: #b3b3b3;
   }
@@ -373,5 +383,13 @@ $nunito_bold: 'NunitoBold';
     span {
         font-family: $nunito_semi_bold;
     }
+  }
+
+  .select__control--is-disabled {
+    background-color: #e9ecef;
+  }
+
+  input:disabled, textarea:disabled {
+    color: #b3b3b3;
   }
 }
