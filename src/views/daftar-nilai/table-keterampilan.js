@@ -15,7 +15,6 @@ export default class TableKeterampilan extends Component {
                         {
                             data.subject_score_details.task.scores.length > 0 ?
                                 data.subject_score_details.task.scores.map((x) => {
-                                    console.log('x', x)
                                     return (
                                         <td key={Math.random()}>
                                             {x.result.score === null ? '-' : x.result.score}

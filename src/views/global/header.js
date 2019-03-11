@@ -146,7 +146,7 @@ export default class Header extends Component {
         let school_account = []
         if (this.state.schoolList.length > 1) {
             const school_id = localStorage.getItem("school_id")
-            school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()}><FontAwesome name="graduation-cap" /> <span className="profile">Pilih Sekolah</span><FontAwesome className="float-right" name="caret-down" /> <hr style={{marginTop: '10px', marginBottom: '0px'}}></hr></MenuItem>)
+            school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()}><FontAwesome name="graduation-cap" /> <span className="profile">Pilih Sekolah</span><FontAwesome className="float-right" name="caret-down" /> <hr style={{ marginTop: '10px', marginBottom: '0px' }}></hr></MenuItem>)
             school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()} divider ></MenuItem>)
             // <div></div>
             this.state.schoolList.map((school, idx) => {
@@ -164,12 +164,10 @@ export default class Header extends Component {
             text = <NavItem>
                 <ButtonToolbar>
                     <DropdownButton
-                        // disabled={true}
                         bsStyle='info'
                         title={user_name}
                         id='dropdown-profile'
                     >
-                        {/* <MenuItem eventKey="1"><FontAwesome name="user" />  */}
                         <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
                             <span className="profile padding-left-1">Profil</span>
                         </MenuItem>
@@ -181,7 +179,6 @@ export default class Header extends Component {
             text = <NavItem>
                 <ButtonToolbar>
                     <DropdownButton
-                        // disabled={true}
                         bsStyle='info'
                         title={user_name}
                         id='dropdown-profile'
