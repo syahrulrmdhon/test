@@ -5,7 +5,6 @@ import Filter from './filter'
 import Index from './index_assessment'
 import { assessmentGetData } from '../../utils/exam'
 import { assessmentType } from '../../utils/common'
-
 import Page from './../../components/Title'
 
 import Tab from './index/tab'
@@ -88,7 +87,10 @@ class Penilaian extends Component {
                                             activeTab={this.state.activeTab}
                                             tabToggle={this.tabToggle} 
                                         />
-                                        <Index  data={this.state.data} category={this.state.activeTab} />
+                                        <Index 
+                                            data={this.state.data} 
+                                            category={this.state.activeTab} 
+                                            paginate={this.state.paginate} />
                                     </div>
                                 </div>
                             </div>

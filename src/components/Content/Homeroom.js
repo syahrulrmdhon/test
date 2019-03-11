@@ -16,6 +16,7 @@ class Homeroom extends Component {
   }
 
   render() {
+    let homeroomId = JSON.parse(localStorage.getItem("homeroom_class")) && JSON.parse(localStorage.getItem("homeroom_class")).id
     let inputHomeroomNote = this.props.inputHomeroomNote
     let data = this.props.notes
     let extracurriculars = []
@@ -42,7 +43,8 @@ class Homeroom extends Component {
                   value={selectedExtracurricular}
                   onChange={event => this.props.handleEvent(event.value, 'extracurricular_id', {id: note.id, order: index})}
                   options={this.props.notes.extracurriculars}
-                  placeholder='Pilih Tipe Ekstrakurikuler' />  
+                  placeholder='Pilih Tipe Ekstrakurikuler'
+                  isDisabled={!homeroomId} />  
                 <Input 
                   onChange={(event) => this.props.handleEvent(event.target.value, 'description', {id: note.id, order: index})} 
                   value={note.description} 
@@ -50,7 +52,7 @@ class Homeroom extends Component {
                   rows="5" 
                   type="textarea" 
                   placeholder="Tulis Deskripsi Estrakurikuler disini ..."
-                />   
+                  disabled={!homeroomId} />
               </div>
             )
             let noteId = {}
@@ -67,8 +69,8 @@ class Homeroom extends Component {
           data.notes.map((note, index) => {
             notes.push(
               <div key={index} className='margin-bottom-6'>
-                <Input onChange={event => this.props.handleEvent(event.target.value, 'title', {id: note.id, order: index})} className="homeroom-teacher__input mt-0" type="text" placeholder="Tulis Judul Prestasi disini ..." value={note.title} />
-                <Input onChange={event => this.props.handleEvent(event.target.value, 'description', {id: note.id, order: index})} className="homeroom-teacher__input mt-4" rows="5" type="textarea" placeholder="Tulis Deskripsi Prestasi disini ..." value={note.description} />
+                <Input disabled={!homeroomId} onChange={event => this.props.handleEvent(event.target.value, 'title', {id: note.id, order: index})} className="homeroom-teacher__input mt-0" type="text" placeholder="Tulis Judul Prestasi disini ..." value={note.title} />
+                <Input disabled={!homeroomId} onChange={event => this.props.handleEvent(event.target.value, 'description', {id: note.id, order: index})} className="homeroom-teacher__input mt-4" rows="5" type="textarea" placeholder="Tulis Deskripsi Prestasi disini ..." value={note.description} />
               </div>
             )
             body.push({title: note.title, description: note.description, id: (note.id) ? note.id : null})
@@ -88,7 +90,8 @@ class Homeroom extends Component {
                 type="textarea"
                 placeholder="Tulis Catatan Wali Kelas disini ..."
                 onChange={this.props.changed}
-                value={inputHomeroomNote.length !== 0 ? inputHomeroomNote[0].description : ''} />           
+                value={inputHomeroomNote.length !== 0 ? inputHomeroomNote[0].description : ''} 
+                disabled={!homeroomId}/>           
             </Form>
             <Button 
               className="homeroom-teacher__save"
