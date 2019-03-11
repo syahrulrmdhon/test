@@ -41,7 +41,6 @@ class New extends Component {
       is_correct: ''
     }
 
-    this.getGenerateForm = this.getGenerateForm.bind(this)
     this.getStudent = this.getStudent.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.onChangeEssay = this.onChangeEssay.bind(this)
@@ -52,7 +51,6 @@ class New extends Component {
 
   componentDidMount() {
     this.getStudent()
-    this.getGenerateForm()
     this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id, this.props.location.state.conditon)
     this.props.getStudent(this.state.student_id)
   }
@@ -64,33 +62,6 @@ class New extends Component {
     })
   }
 
-  getGenerateForm() {
-    const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam}/exam_scores/${this.state.student_id}`
-    console.log(url, "my url")
-    apiClient('get', url).then(response => {
-      let array = response.data.data.collections[0];
-      let choicePG = [];
-      array.exam_question_choices.map((x, i) => {
-        choicePG.push({ value: x.symbol, label: x.symbol })
-      })
-      response.data.data.collections.map((dt, i) => {
-        dt.exam_question_choices.map((cx, i) => {
-          if (cx.is_correct_ans === true) {
-            console.log('here', cx.symbol)
-          }
-        })
-      })
-
-
-
-      this.setState({
-
-        choice: choicePG,
-        data: response.data.data,
-        question: response.data.data.collections
-      })
-    })
-  }
 
   getStudent() {
     const url = `/v1/students/${this.state.student_id}`
@@ -105,7 +76,6 @@ class New extends Component {
 
   handleSave(e) {
     e.preventDefault()
-
     confirmAlert({
       customUI: ({ onClose, onConfirm }) => {
         return (
@@ -129,14 +99,26 @@ class New extends Component {
 
   handleSaveDate() {
     let arrayData = this.props.data_score && this.props.data_score.score && this.props.data_score.score.data && this.props.data_score.score.data.exam_question;
-
+    let arrayDataSkill = this.props.data_score && this.props.data_score.score && this.props.data_score.score.data && this.props.data_score.score.data.question_skill;
+    let type = this.props.location.state.conditon
     let data = {}
     let dataWillSave = []
-    arrayData.map((data, index) => {
-      dataWillSave.push({ ans: data.ans, exam_question_id: data.exam_question_id, score: data.score })
-    })
+    console.log(type)
+    if (type === 'skill') {
+      console.log(arrayDataSkill, "array skill")
+      arrayDataSkill.map((x, index) => {
+        x.question_score.map((data) => {
+          dataWillSave.push({ ans: data.user_problem_answer.ans, exam_question_id: data.id, score: data.user_problem_answer.score })
+        })
+      })
+
+    } else {
+      arrayData.map((data) => {
+        dataWillSave.push({ ans: data.ans, exam_question_id: data.exam_question_id, score: data.score })
+      })
+    }
+
     data['user_problem_answers'] = dataWillSave
-    console.log(data, "here date")
     let url = `v1/assessments/${this.props.match.params.assessment_id}/exams/${this.props.match.params.exam_id}/exam_scores/${this.props.match.params.student_id}/bulk_fill_answers`
     apiClient('post', url, data).then(res => {
       modal({
@@ -204,24 +186,27 @@ class New extends Component {
     return (
       <Page title="Memberi Nilai">
         <Header navbar={false} location={path} />
-
-        <div className="detail bg-grey">
-          <div className="content-wrapper content-wrap-custom-size ">
-            <Content
-              dataProfile={this.state.profile}
-              subjects={this.state.subjects}
-              studentId={this.state.studentId}
-              form={this.state.question}
-              // student={this.state.student}
-              handleSave={this.handleSave}
-              onChangeEssay={this.onChangeEssay}
-              essay={this.state.essay}
-              onChangeSelect={this.onChangeSelect}
-              valueData={this.state.valueData}
-              score_choice={this.state.score_choice}
-              choice={this.state.choice}
-              type={this.props.location.state.conditon}
-            />
+        <div className="padding-content ">
+          <div className="margin-content">
+            <div className="content-block main-block bg-grey">
+              <div className="content-wrapper content-wrap-custom-size ">
+                <Content
+                  dataProfile={this.state.profile}
+                  subjects={this.state.subjects}
+                  studentId={this.state.studentId}
+                  form={this.state.question}
+                  // student={this.state.student}
+                  handleSave={this.handleSave}
+                  onChangeEssay={this.onChangeEssay}
+                  essay={this.state.essay}
+                  onChangeSelect={this.onChangeSelect}
+                  valueData={this.state.valueData}
+                  score_choice={this.state.score_choice}
+                  choice={this.state.choice}
+                  type={this.props.location.state.conditon}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </Page>

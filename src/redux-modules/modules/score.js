@@ -50,13 +50,26 @@ export default function reducer(state = initialState, action) {
             }
             break;
         case HANDLING_SCORE:
-            state.data.exam_question[action.idx][action.field_name] = action.value
+            if (action.type_score === 'skill') {
+                let data = state.data.question_skill[action.index]
+                let question_score = []
+
+                data.question_score.map((x) => {
+                    question_score = data.question_score[action.idx]
+                    question_score.user_problem_answer.score = action.value
+                })
+
+            } else {
+                state.data.exam_question[action.index][action.field_name] = action.value
+            }
+
             return {
                 ...state,
                 loaded: true,
                 loading: false,
             }
-        
+
+
 
         case HANDLE_QUESTION_ONCHANGE:
             console.log(state.data.exam_question, "my state")
@@ -109,13 +122,19 @@ export default function reducer(state = initialState, action) {
             if (state.result !== action.result) {
                 if (action.result.data.collections) {
                     action.result.data['exam_question'] = []
+                    action.result.data['question_skill'] = []
                     action.result.data.collections.map((collection) => {
-                        console.log(collection,"my col")
+                        action.result.data['question_skill'].push({
+                            data: collection.problem_type,
+                            question_score: collection.questions
+                        })
+
+
+                        console.log(action.result.data.question_skill, "my question")
                         collection.questions.map((collections) => {
-                            console.log(collections ,"my col 2")
                             action.result.data['exam_question'].push({
                                 ans: collections.problem_type ? collections.problem_type : null,
-                                score: collections.user_problem_answer ? collections.user_problem_answer.score : null,
+                                score: collections.user_problem_answer.score === null ? 0 : collections.user_problem_answer.score,
                                 exam_question_id: collections.id,
                                 user_id: action.data.student,
                                 exam_id: action.data.exam,
@@ -125,10 +144,12 @@ export default function reducer(state = initialState, action) {
                                 exam_question_choices: collections.exam_question_choices,
                                 qn_number: collections.qn_number,
                                 weight: collections.weight,
-                                max_score: collections.max_score
+                                max_score: collections.max_score,
+                                data_score: [
+                                    { score: collections.user_problem_answer ? collections.user_problem_answer.score : 0 }
+                                ]
                             })
                         })
-                        console.log( action.result.data['exam_question'],"my col 3")
                     })
                 }
 
@@ -199,7 +220,7 @@ export default function reducer(state = initialState, action) {
                 ...state
             }
         }
-            
+
     }
 }
 
@@ -226,13 +247,14 @@ export function handlingSelect(e, idx, pick, max_score) {
     }
 }
 
-export function handleScore(value, index, field_name) {
-    console.log(value, index, field_name,"value")
+export function handleScore(value, index, data, idx, field_name, type_data) {
     return {
         type: HANDLING_SCORE,
-        idx: index,
+        idx: idx,
+        index: index,
         field_name: field_name,
-        value: value
+        value: value,
+        type_score: type_data
     }
 }
 
@@ -243,7 +265,7 @@ export function getDataScores(assessment_id, exam_id, exam_scores_id) {
 
     return {
         types: [LOAD, LOAD_SCORE, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + url,headers)
+        promise: client => client.get(process.env.API_URL + url, headers)
     }
 
 
@@ -269,7 +291,7 @@ export function getDataScoreQuestion(assessment, exam, student, classess, catego
     return {
         types: case_load,
         data: { assessment, exam, student, classess },
-        promise: client => client.get(process.env.API_URL + url,headers)
+        promise: client => client.get(process.env.API_URL + url, headers)
     }
 
 
@@ -292,7 +314,7 @@ export function getParticipant(exam, classess, assess, name, sort) {
 
     return {
         types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-        promise: client => client.get(process.env.API_URL + `/v1/assessments/${assess}/exams/${exam}/exam_classes/${classess}/participants?full_name=${full_name}&sort_by=${sort_by_exam_score}`,headers)
+        promise: client => client.get(process.env.API_URL + `/v1/assessments/${assess}/exams/${exam}/exam_classes/${classess}/participants?full_name=${full_name}&sort_by=${sort_by_exam_score}`, headers)
     }
 }
 
