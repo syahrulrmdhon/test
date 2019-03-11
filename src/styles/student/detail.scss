@@ -314,6 +314,12 @@ $nunito_bold: 'NunitoBold';
     filter: brightness(90%);
   }
 
+  &__save:disabled:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    filter: unset;
+  }
+
   ::placeholder {
     color: #b3b3b3;
   }
