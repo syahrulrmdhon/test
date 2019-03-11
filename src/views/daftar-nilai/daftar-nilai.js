@@ -142,7 +142,7 @@ export default class DaftarNilai extends Component {
       this.getAttitude().then(attitudes => {
         tableAttitude = attitudes.data.data.users
         this.getSkill().then(skills => {
-          dataSkill = res.data.data
+          dataSkill = skills.data.data
           tableSkill = skills.data.data.users
           this.setState({
             tableKnowledge: tableKnowledge,
