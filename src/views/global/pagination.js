@@ -14,10 +14,7 @@ export default class Pagination extends Component{
           nextLabel={<img src={next} alt="" className="arrow-right" />}          
           breakLabel={'...'}
           breakClassName={'break-me disinblock'}
-          // pageCount={props.pageCount}
-          // marginPagesDisplayed={props.marginPagesDisplayed}
-          // pageRangeDisplayed={props.pageRangeDisplayed}
-          // onPageChange={this.handlePageClick}
+          pageCount={this.props.pageCount}
           containerClassName={'pagination disblock'}
           pageClassName={'disinblock'}
           previousClassName={'disinblock'}
