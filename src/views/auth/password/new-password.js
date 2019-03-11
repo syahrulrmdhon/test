@@ -153,7 +153,7 @@ export default class NewPassword extends Component {
                                 <span className='info'> Ubah Foto Profil</span>
                             </div>
                             <div className="direct align-center margin-top-6 margin-bottom-4">
-                                Buat Password Baru Kamu
+                                Buat Kata Sandi Baru Kamu
                             </div>
                             <div className='regist'>
                                 <input
@@ -161,7 +161,7 @@ export default class NewPassword extends Component {
                                     className='password-mask-input'
                                     value={value.pass_value}
                                     onChange={(e) => { this.onChange(e, 'pass_value') }}
-                                    placeholder='Kata Kunci'
+                                    placeholder='Kata Sandi'
                                 />
                                 <span className="input-group-text password-mask-button" onClick={(e) => { this.onShow(e, 'pass') }} >
                                     <i className="fa far fa-eye"></i>
@@ -173,7 +173,7 @@ export default class NewPassword extends Component {
                                     className='password-mask-input'
                                     value={value.re_pass_value}
                                     onChange={(e) => { this.onChange(e, 're_pass_value') }}
-                                    placeholder='Ketik Kembali Kata Kunci'
+                                    placeholder='Ketik Kembali Kata Sandi'
                                 />
                                 <span className="input-group-text password-mask-button" onClick={(e) => { this.onShow(e, 're_pass') }} >
                                     <i className="fa far fa-eye"></i>

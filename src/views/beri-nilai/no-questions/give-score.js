@@ -6,7 +6,7 @@ import { getNoQuestions, handleChange } from './../../../redux-modules/modules/n
 
 class GiveScore extends Component {
     render() {
-        const {score, aliasName} = this.props.questionItem
+        const { score, aliasName } = this.props.questionItem
         return (
             <div>
                 <div className='col-sm-6'>
@@ -21,7 +21,7 @@ class GiveScore extends Component {
                         name='nilai'
                         defaultValue={score ? score : ''}
                         type='number'
-                        onChange={(e) => this.props.handleChange(e.target.value, this.props.i, 'score')}
+                        onChange={(e) => this.props.handleChange(e.target.value.replace(/\D/,''), this.props.i, 'score')}
                         placeholder='Masukkan Nilai...'
                     />
                 </div>
