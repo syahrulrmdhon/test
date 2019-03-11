@@ -17,22 +17,16 @@ class WorkStepIndicator extends Component {
     constructor(props){
         super(props)
     }
-
-    componentDidUpdate(prevProps){
-        console.log(prevProps.problem_type_sets)
-        console.log(this.props.problem_type_sets)
-    }
-
+    
     render(){
         let items = []
 
         const basic_comps = basic_comp_lists(this.props.assessment_basic_comps)
-        console.log("here render")
         if(this.props.problem_type_sets){
             this.props.problem_type_sets.map((problem_type_set, idx) => {
                 let action;
-                console.log(problem_type_set,"here go")
                 if(idx > 0){
+                    console.log(problem_type_set,"here go")
                     action = <td className="align-center valign-center">
                         <a href="javascript:void(0);" onClick={() => {this.props.removeIndicator(this.props.key_value, idx)}}>
                             <FontAwesome name="trash" />
@@ -130,7 +124,8 @@ class WorkStepIndicator extends Component {
 
 const mapStateToProps = (state, props) => ({
     problem_type_sets: state.skill.problem_type_sets[props.key_value] || [{}],
-    assessment_basic_comps: state.skill.assessment_basic_comps || []
+    assessment_basic_comps: state.skill.assessment_basic_comps || [],
+    data:state
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 
