@@ -40,8 +40,9 @@ export default function reducer(state = initialState, action = {}) {
                 loading: true,
             }
         case HANDLE_ATTITUDE_ITEM:
-            console.log(state, "here data handle")
             state.user_attitudes_attributes[action.idx][action.fieldName] = action.value
+            console.log(state.user_attitudes_attributes, "here data handle")
+
             return{
                 ...state,
                 loaded: false,
