@@ -2,7 +2,7 @@
   position: relative;
   .row-score {
     background-color: white;
-    border-radius: 2px;
+    border-radius: 10px;
     -moz-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
     -webkit-box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
     box-shadow: 0 0 20px rgba(36, 36, 47, 0.1);
@@ -10,11 +10,21 @@
       height: 530px;
       padding-top: 20px;
       padding-bottom: 20px;
+      .filter-nilai {
+        .large-text {
+          font-family: "NunitoBold";
+          color: #505050;
+        }
+      }
     }
     .right-content {
       height: 530px;
       padding-top: 20px;
       padding-bottom: 20px;
+      .large-text {
+        font-family: "NunitoBold";
+        color: #505050;
+      }
     }
     .tab-content-score {
       max-height: 90%;
@@ -29,11 +39,51 @@
       }
       .not-available {
         height: 430px;
-      }     
+      }
     }
   }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 799px) {
+  .row-score {
+    .right-content {
+      .large-text {
+        vertical-align: middle;
+        font-size: 12px;
+      }
+      .tab-span {
+        float: right;
+        margin-right: 3px;
+        .tab-nilai {
+          width: 120px;
+          a {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    .filter-nilai {
+      .large-text {
+        vertical-align: middle;
+        font-size: 12px;
+      }
+      .select__placeholder {
+        font-size: 9px;
+      }
+      .select__input {
+        font-size: 9px;
+      }
+      .select__single-value {
+        font-size: 9px;
+      }
+      .btn-green {
+        height: 35px;
+        font-size: 10px;
+      }
+    }
+  }
+}
 @media only screen and (min-width: 800px) and (max-width: 889px) {
   .row-score {
     .right-content {
@@ -43,6 +93,13 @@
       }
       .tab-span {
         margin-right: 1px;
+        margin-right: 3px;
+        .tab-nilai {
+          width: 120px;
+          a {
+            font-size: 12px;
+          }
+        }
       }
     }
     .left-content {
@@ -56,10 +113,10 @@
       font-size: 12px;
     }
     .select__placeholder {
-      font-size: 7px;
+      font-size: 9px;
     }
     .select__input {
-      font-size: 7px;
+      font-size: 9px;
     }
     .select__single-value {
       font-size: 9px;
@@ -82,7 +139,7 @@
     }
   }
 }
-@media only screen and (min-width: 890px) {
+@media only screen and (min-width: 890px) and (max-width: 1014px) {
   .row-score {
     .right-content {
       .large-text {
@@ -112,16 +169,6 @@
   .table-bordered {
     thead th {
       vertical-align: top;
-    }
-  }
-}
-@media only screen and (min-width: 1015px) {
-  .filter-nilai {
-    .select__placeholder {
-      font-size: 12px;
-    }
-    .select__single-value {
-      font-size: 12px;
     }
   }
 }
