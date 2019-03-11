@@ -81,7 +81,7 @@ class Add extends Component{
 
     render(){
         const { exam_type, name, is_remedial } = this.props.exam ? this.props.exam : [] 
-
+        console.log(this.props,"this props")
         return(
             <div className="padding-content">
                 <Header navbar={true} location={`/exam/${this.state.assessment_id}`} />
