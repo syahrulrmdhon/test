@@ -5,7 +5,7 @@ import { NotAvailable } from '../../views/global/notAvailable'
 const content = (props) => {
   const exams = props.exams
   return (
-    <div className="margin-top-6 margin-left-3 margin-right-6">
+    <div className="padding-top-6 margin-left-3 margin-right-6 h-100">
       <div className="row align-items-center">
         <div className="col-sm-6 exam__wrapper-title">
           <label className="header-title">Daftar Tugas</label>
