@@ -4,6 +4,7 @@ import ArrowPengetahuan from './arrow-pengetahuan';
 
 export default class TablePengetahuan extends Component {
     render() {
+        console.log('data', this.props.dTableKnowledge)
         return (
             <Table bordered striped hover responsive>
                 <thead className='text-center'>
