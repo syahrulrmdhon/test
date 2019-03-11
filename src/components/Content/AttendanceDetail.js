@@ -22,7 +22,7 @@ class AttendanceDetail extends Component {
   }
 
   render() {
-    let homeroomId = JSON.parse(localStorage.getItem("homeroom_class")).id
+    let homeroomId = JSON.parse(localStorage.getItem("homeroom_class")) && JSON.parse(localStorage.getItem("homeroom_class")).id
     let data = this.props.attendanceDetail
     let attendances = []
     if (data.attendances) {
@@ -101,7 +101,7 @@ class AttendanceDetail extends Component {
           <div className="attendance-detail__filter ml-3">
           <label
             className="absences-detail__filter-label"
-            for="exampleSelect">
+            htmlFor="exampleSelect">
             Mata Pelajaran
           </label>
           <Select
