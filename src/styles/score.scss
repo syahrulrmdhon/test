@@ -40,6 +40,12 @@
       .not-available {
         height: 430px;
       }
+      tbody tr:nth-of-type(even) {
+        background-color: #ffffff;
+      }
+      tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+      }
     }
   }
 }
@@ -144,7 +150,6 @@
     .right-content {
       .large-text {
         vertical-align: middle;
-        // margin: 10px 0px 30px;
         font-family: "NunitoBold";
         font-size: 14px;
         color: #505050;

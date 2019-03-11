@@ -159,8 +159,8 @@ thead {
 }
 
 .student-name {
-  font-weight: bold;
-  color: #3d74b4;
+  font-family: "NunitoBold"
+  color: #2099e8;
   cursor: pointer;
 }
 
