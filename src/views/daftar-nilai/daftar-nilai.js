@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
 import './../../styles/score.scss'
-
 import Header from '../global/header'
-
-import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap'
-import classnames from 'classnames'
 import FilterNilai from './filter'
-import TablePengetahuan from './table-pengetahuan'
-import TableKeterampilan from './table-keterampilan'
-import TableSikap from './table-sikap'
 import { apiClient } from '../../utils/apiClient'
-import { NotAvailable } from '../../views/global/notAvailable'
 import Page from './../../components/Title'
+import Tab from './tab'
+import NavToggle from './nav-toggle'
 
 export default class DaftarNilai extends Component {
   constructor(props) {
@@ -142,7 +136,7 @@ export default class DaftarNilai extends Component {
       this.getAttitude().then(attitudes => {
         tableAttitude = attitudes.data.data.users
         this.getSkill().then(skills => {
-          dataSkill = res.data.data
+          dataSkill = skills.data.data
           tableSkill = skills.data.data.users
           this.setState({
             tableKnowledge: tableKnowledge,
@@ -172,7 +166,6 @@ export default class DaftarNilai extends Component {
             <div className='row row-score'>
               <div className='left-content col-sm-2 col-lg-2'>
                 <FilterNilai
-                  id='mySelect'
                   listClass={this.state.listClass}
                   selectedClass={this.state.selectedClass}
                   listSemester={this.state.listSemester}
@@ -193,66 +186,22 @@ export default class DaftarNilai extends Component {
                     </h5>
                   </div>
                   <div className='col-sm-9 col-lg-10'>
-                    <span className='float-right margin-right-1'>
-                      <Nav tabs className='toggle border-0 pull-right tab-span'>
-                        <NavItem className='tab-nilai'>
-                          <NavLink className={classnames({ active: this.state.activeTab === '1' })} onClick={() => { this.toggle('1') }}>
-                            Pengetahuan
-                        </NavLink>
-                        </NavItem>
-                        <NavItem className='tab-nilai'>
-                          <NavLink className={classnames({ active: this.state.activeTab === '2' })} onClick={() => { this.toggle('2') }}>
-                            Keterampilan
-                        </NavLink>
-                        </NavItem>
-                        <NavItem className='tab-nilai'>
-                          <NavLink className={classnames({ active: this.state.activeTab === '3' })} onClick={() => { this.toggle('3') }}>
-                            Sikap
-                        </NavLink>
-                        </NavItem>
-                      </Nav>
-                    </span>
+                  <NavToggle
+                    activeTab={this.state.activeTab}
+                    toggle={this.toggle}
+                  />
                   </div>
                 </div>
-
-                <TabContent className='tab-content-score margin-left-1 margin-right-1' activeTab={this.state.activeTab}>
-                  <TabPane tabId='1'>
-                    {!this.state.tableKnowledge ||
-                      this.state.tableKnowledge.length === 0 ? (
-                        <NotAvailable>Mohon pilih semua filter untuk menampilkan data.</NotAvailable>
-                      ) : (
-                        <TablePengetahuan
-                          tableKnowledge={this.state.tableKnowledge}
-                          idxScores={this.state.idxScores}
-                          idxTugas={this.state.idxTugas}
-                          nameClicked={this.nameClicked}
-                        />
-                      )}
-                  </TabPane>
-                  <TabPane tabId='2'>
-                    {!this.state.tableSkill ||
-                      this.state.tableSkill.length === 0 ? (
-                        <NotAvailable>Mohon pilih semua filter untuk menampilkan data.</NotAvailable>
-                      ) : (
-                        <TableKeterampilan
-                          tableSkill={this.state.tableSkill}
-                          idxScoresSkill={this.state.idxScoresSkill}
-                          nameClicked={this.nameClicked}
-                        />
-                      )}
-                  </TabPane>
-                  <TabPane tabId='3'>
-                    {!this.state.tableAttitude ||
-                      this.state.tableAttitude.length === 0 ? (
-                        <NotAvailable>Mohon pilih semua filter untuk menampilkan data.</NotAvailable>
-                      ) : (
-                        <TableSikap
-                          tableAttitude={this.state.tableAttitude}
-                          nameClicked={this.nameClicked}
-                        />
-                      )}
-                  </TabPane>
-                </TabContent>
+                <Tab
+                  tableKnowledge={this.state.tableKnowledge}
+                  idxScores={this.state.idxScores}
+                  idxTugas={this.state.idxTugas}
+                  nameClicked={this.nameClicked}
+                  tableSkill={this.state.tableSkill}
+                  idxScoresSkill={this.state.idxScoresSkill}
+                  tableAttitude={this.state.tableAttitude}
+                  activeTab={this.state.activeTab}
+                />
               </div>
             </div>
           </div>

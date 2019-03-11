@@ -14,7 +14,7 @@ const GET_ATTENDANCES= "modules/studentDetail/GET_ATTENDANCES"
 const GET_STATUS= "modules/studentDetail/GET_STATUS"
 const GET_SUBJECTS= "modules/studentDetail/GET_SUBJECTS"
 const HANDLE_FILTER= "modules/studentDetail/HANDLE_FILTER"
-
+const RESET_NOTES= "modules/studentDetail/RESET_NOTES"
 
 const initialState = {
   disabled: true,
@@ -38,12 +38,13 @@ export default function reducer(state = initialState, action) {
     case GET_DATA:
       let notes = action.result.data.notes
       if (action.content === 'extracurricular') {
-        notes = notes.length ? notes : [initialExtracurriculars]
+        notes = notes.length ? notes : [{extracurricular_id: '', description: ''}]
       }
       else if (action.content === 'daily_result') {
-        notes = notes.length ? notes : [initialAchievement]
+        notes = notes.length ? notes : [{  title: '', description: ''}]
       }
 
+      state.disabled = true
       state.notes = notes
 
       return {
@@ -78,10 +79,10 @@ export default function reducer(state = initialState, action) {
       };
     case HANDLE_ADD:
       if (action.content === 'extracurricular') {
-        state.notes = [...state.notes, {initialExtracurriculars}]
+        state.notes = [...state.notes, {extracurricular_id: '', description: ''}]
       }
       else if (action.content === 'daily_result') {
-        state.notes = [...state.notes, {initialAchievement}]
+        state.notes = [...state.notes, {title: '', description: ''}]
       }
       return {
         ...state,
@@ -161,12 +162,22 @@ export default function reducer(state = initialState, action) {
         default:
           state.filter = {}
         }
-        return {
-          ...state,
-          loaded: true,
-          loading: false
-        }
+      return {
+        ...state,
+        loaded: true,
+        loading: false
+      }
     case LOAD:
+      if (state.notes) {
+        if (state.notes.length === 1 && (state.notes.extracurricular_id === '' || state.notes.description === '') ) {
+          state.notes[0].extracurricular_id = ''
+          state.notes[0].description = ''
+        }
+        else {
+          state.notes[0].title = ''
+          state.notes[0].description = ''
+        }
+      }
       return {
         ...state,
         loading: true

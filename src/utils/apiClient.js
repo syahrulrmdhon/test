@@ -11,13 +11,11 @@ export const apiClient = (method, url, request, params = {}) => {
     }
 
     if (token) {
-        console.log("token ada", token )
         headers['Authorization'] =  token
         headers['App-ID'] = 'wt'
         headers['Device-ID'] = localStorage.getItem('Device-ID')
         headers['Device-Type'] = 'browser'
     } else if (regist_token) {
-        console.log("here")
         headers['Authorization'] = 'Bearer ' + regist_token
         headers['App-ID'] = 'wt'
         headers['Device-ID'] = localStorage.getItem('Device-ID')
@@ -32,8 +30,6 @@ export const apiClient = (method, url, request, params = {}) => {
     if (schoolId) {
         headers['School-ID'] = schoolId
     }
-
-    console.log(headers,"my header")
 
     switch (method) {
         case 'get':
