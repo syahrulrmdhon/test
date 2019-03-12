@@ -8,7 +8,7 @@ import { TabContent, TabPane } from 'reactstrap'
 export default class NavTab extends Component {
     render() {
         return (
-            <TabContent activeTab={this.props.activeTab} className='tab-content-score margin-left-1 margin-right-1'>
+            <TabContent activeTab={this.props.activeTab} className='tab-content-score margin-top-4 w-100'>
                 <TabPane tabId='1'>
                     {!this.props.tableKnowledge || this.props.tableKnowledge.length === 0 ? (
                         <NotAvailable>Data belum tersedia.</NotAvailable>

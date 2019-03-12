@@ -5,7 +5,7 @@ import classnames from 'classnames'
 export default class NavToggle extends Component {
     render() {
         return (
-            <span className='float-right margin-right-1'>
+            <span className='float-right'>
                 <Nav tabs className='toggle border-0 pull-right tab-span'>
                     <NavItem className='tab-nilai'>
                         <NavLink className={classnames({ active: this.props.activeTab === '1' })} onClick={() => { this.props.toggle('1') }}>
