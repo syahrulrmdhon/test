@@ -87,19 +87,19 @@ class WorkStepIndicator extends Component {
                         <thead>
                             <tr>
                                 <td className="align-center" width="10%">
-                                    <label className="header-title">No</label>
+                                    <label className="head-table">No</label>
                                 </td>
                                 <td className="align-center" width="30%">
-                                    <label className="header-title">Kompetensi Dasar</label>
+                                    <label className="head-table">Kompetensi Dasar</label>
                                 </td>
                                 <td className="align-center" width="20%">
-                                    <label className="header-title">Bobot</label>
+                                    <label className="head-table">Bobot</label>
                                 </td>
                                 <td className="align-center" width="35%">
-                                    <label className="header-title">Indikator</label>
+                                    <label className="head-table">Indikator</label>
                                 </td>
                                 <td className="align-center" width="5%">
-                                    <label className="header-title">Action</label>
+                                    <label className="head-table"></label>
                                 </td>
                             </tr>
                         </thead>
