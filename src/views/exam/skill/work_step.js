@@ -14,7 +14,9 @@ var FontAwesome = require('react-fontawesome')
 class WorkStep extends Component{
     render(){
         let workSteps = []
+        console.log(this.props,"msuk")
         if(this.props.problem_types){
+            console.log(this.props.problem_types,"msuk")
             this.props.problem_types.map((problem_type, idx) => {
                 let remove;
 

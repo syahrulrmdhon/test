@@ -32,7 +32,8 @@ class Add extends Component{
         examTypes.call(this, {category: 'skill'})
     }
 
-    onSubmit(){
+
+    onSubmit(event){
         event.preventDefault(); 
         let data = {}
         data['exam'] = this.props.exam
@@ -81,7 +82,6 @@ class Add extends Component{
 
     render(){
         const { exam_type, name, is_remedial } = this.props.exam ? this.props.exam : [] 
-
         return(
             <div className="padding-content">
                 <Header navbar={true} location={`/exam/${this.state.assessment_id}`} />
