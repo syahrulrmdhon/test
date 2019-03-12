@@ -39,6 +39,6 @@ export const apiClient = (method, url, request, params = {}) => {
         case 'put':
             return Axios({ url: baseUrl + url, headers: headers, method: 'PUT', data: request })
         case 'delete':
-            return Axios({ url: baseUrl + url, headers: headers, method: 'DELETE' })
+            return Axios({ url: baseUrl + url, headers: headers, method: 'DELETE', data: request})
     }
 }
