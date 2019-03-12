@@ -189,17 +189,6 @@ class DailyAttitudeItem extends Component {
                             <div className="col-sm-7">
                                 <div className="content-input margin-top-5 fullwidth">
                                     <label className="content-label">Nama Peserta Didik</label>
-                                    {/* <Autocomplete
-                                        className="display-autocomplete"
-                                        getItemValue={this.getItemValue}
-                                        items={options}
-                                        renderItem={this.renderItem}
-                                        value={name}
-                                        menuStyle={style}
-                                        onChange={(event) => { this.onChange(event, this.props.index, 'name') }}
-                                        onSelect={(event) => { this.onSelect(
-                                            , this.props.index) }}
-                                    /> */}
                                     <Autosuggest
                                         suggestions={suggestions}
                                         onSuggestionsFetchRequested={(e) => { this.retrieveUsers(e, this.props.index, 'name') }}
@@ -207,7 +196,7 @@ class DailyAttitudeItem extends Component {
                                         getSuggestionValue={getSuggestionValue}
                                         renderSuggestion={renderSuggestion}
                                         inputProps={{
-                                            placeholder: 'Type a programming language',
+                                            placeholder: 'Tulis nama siswa',
                                             value,
                                             onChange:(e, {newValue}) => this.onChangeDate(newValue,this.props.index, 'name') 
                                         }}
