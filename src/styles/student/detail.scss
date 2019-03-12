@@ -100,6 +100,21 @@ $nunito_bold: 'NunitoBold';
       }
     }
   }
+
+  .note-wrapper {
+    width: 95%;
+  }
+
+  .remove {
+    color: #eb373e;
+    font-size: 14px;
+    margin: 0px;
+    display: block;
+    float: right;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+  }
 }
 
 .detail-menu {
@@ -229,6 +244,13 @@ $nunito_bold: 'NunitoBold';
     height: 35px;
     border-radius: 3px;
     border-color: #cccccc;
+
+    &::placeholder {
+      color: #7f92a1;
+      font-family: $nunito_light;
+      font-weight: unset;
+      // font-size: 11px;
+    }
   }
 
   &__form-group {
