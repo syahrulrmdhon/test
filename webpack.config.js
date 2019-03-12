@@ -59,7 +59,7 @@ module.exports = (env) => ({
                 }]
             },
             {
-                test: /\.(ttf|woff|ico|eot|png|svg|pdf|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+                test: /\.(ttf|jpg|jpeg|woff|ico|eot|png|svg|pdf|woff(2)?)(\?[a-z0-9=&.]+)?$/,
                 loader: "file-loader"
             }
 
