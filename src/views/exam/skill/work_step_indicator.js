@@ -20,7 +20,7 @@ class WorkStepIndicator extends Component {
     
     render(){
         let items = []
-
+        console.log("here prosp", this.props)
         const basic_comps = basic_comp_lists(this.props.assessment_basic_comps)
         if(this.props.problem_type_sets){
             this.props.problem_type_sets.map((problem_type_set, idx) => {
