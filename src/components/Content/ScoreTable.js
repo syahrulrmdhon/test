@@ -146,19 +146,24 @@ export default class ScoreTable extends Component {
                           <td className={!subject.note ? 'text-center' : ''}>{subject.note ? subject.note : '-'}</td>
                           <td>
                           {
-                            subject.status === "sb" ? 
+                            subject.score === 2 ? 
+                            (<div className="status">
+                              <div className="indicator green-indicator" />{subject.status_text}
+                            </div> )
+                            :
+                            subject.score === 1 ?
+                            (<div className="status">
+                              <div className="indicator yellow-indicator" />{subject.status_text}
+                            </div>)
+                            :
                             <div className="status">
-                              <div className="indicator blue-indicator" />Sangat Baik
-                            </div> : 
-                            <div className="status">
-                              <div className="indicator red-indicator" />Butuh Perhatian
+                              <div className="indicator red-indicator" />{subject.status_text} 
                             </div>
                           } 
                           </td> 
                         </tr>
                       })
                     }
-
                   </tbody>
                 </Table>
               </div>
@@ -170,7 +175,7 @@ export default class ScoreTable extends Component {
                     <br />
                     Total Sikap Sangat Baik
                   </div>
-                  <div style={{width: "260px"}}>
+                  <div style={{width: "270px"}}>
                     {attitudeScore.recap.subjects.bp} <div className="pull-right">Sikap</div>
                     <br />
                     {attitudeScore.recap.subjects.sb} <div className="pull-right">Sikap</div>
