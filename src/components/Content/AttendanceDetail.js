@@ -5,6 +5,7 @@ import { getSubjects, getStatus, handleFilter, getAttendances } from './../../re
 import { Table } from 'reactstrap'
 import { getDate } from '../../utils/common'
 import { NotAvailable } from '../../views/global/notAvailable'
+import DatePicker from 'react-datepicker'
 
 import Select from 'react-select'
 
@@ -90,29 +91,47 @@ class AttendanceDetail extends Component {
       <div className="attendance-detail h-100">
         <div className="attendance-detail__filter-wrapper d-flex">
           <div className="attendance-detail__filter">
-          <label className="absences-detail__filter-label">Status</label>
-          <Select 
-                classNamePrefix="select"
-                onChange={event => { this.filterAttendances(event.value, 'status') }}
-                options={data.status}
-                placeholder='Pilih Status Kehadiran' />
+            <label className="absences-detail__filter-label">Status</label>
+            <Select 
+              classNamePrefix="select"
+              onChange={event => { this.filterAttendances(event.value, 'status') }}
+              options={data.status}
+              placeholder='Pilih Status Kehadiran' />
           </div>
 
           <div className="attendance-detail__filter ml-3">
-          <label
-            className="absences-detail__filter-label"
-            htmlFor="exampleSelect">
-            Mata Pelajaran
-          </label>
-          <Select
-                classNamePrefix="select"
-                placeholder='Pilih Mata Pelajaran'
-                onChange={event => { this.filterAttendances(event.value, 'school_subject_id') }}
-                options={data.subjects}
-                >
-          </Select>
+            <label
+              className="absences-detail__filter-label"
+              htmlFor="exampleSelect">
+              Mata Pelajaran
+            </label>
+            <Select
+              classNamePrefix="select"
+              placeholder='Pilih Mata Pelajaran'
+              onChange={event => { this.filterAttendances(event.value, 'school_subject_id') }}
+              options={data.subjects} />
           </div>
-          
+          <div className="attendance-detail__container-date">
+            <div className="attendance-detail__filter">
+              <label className="absences-detail__filter-label">Dari Tanggal</label>
+              <DatePicker
+                selected={this.props.attendanceDetail.filter.date_start}
+                onChange={this.handleChangeStartDate}
+                onChange={event => { this.props.handleDateFilter(event, 'date_start') }}
+                className="absences-detail__input"
+                placeholderText="Masukkan Tanggal" />
+              <i className="fa fa-calendar calendar-icon" aria-hidden="true" />
+            </div>
+            <div className="attendance-detail__filter ml-3">
+              <label className="absences-detail__filter-label">Sampai Tanggal</label>
+              <DatePicker
+                selected={this.props.attendanceDetail.filter.date_end}
+                onChange={event => { this.props.handleDateFilter(event, 'date_end') }}
+                className="absences-detail__input"
+                placeholderText="Masukkan Tanggal" />
+              <i className="fa fa-calendar calendar-icon" aria-hidden="true" />
+            </div>
+          </div>
         </div>
           {attendances}
       </div>
