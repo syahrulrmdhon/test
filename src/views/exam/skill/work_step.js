@@ -54,7 +54,7 @@ class WorkStep extends Component{
                     <div className="col-sm-6">
                         <div className="margin-top-2">
                             <a href="javascript:void(0);" onClick={this.props.addWorkStep}>
-                                <FontAwesome name="plus-circle" /> Tambah Kategori
+                                <FontAwesome name="plus-circle" /> Tambah Langkah Kerja
                             </a>
                         </div>
                     </div>
@@ -65,7 +65,8 @@ class WorkStep extends Component{
 }
 
 const mapStateToProps = (state, props) => ({
-    problem_types: state.skill ? state.skill.problem_types : ['']
+    problem_types: state.skill ? state.skill.problem_types : [''],
+    data:state
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 

@@ -12,9 +12,9 @@ export default class ProfileDetail extends Component {
         <div className="mt-3 detail-name">
           {response && response.user && response.user.full_name}
         </div>
-        <div className="ranking">
+        {/* <div className="ranking">
           Peringkat { response && response.class_rank && response.class_rank.rank ? response && response.class_rank && response.class_rank.rank : '-' }
-        </div>
+        </div> */}
         <div className="profile text-left">
           <div className="field">
             <div className="label">NIS:</div>
