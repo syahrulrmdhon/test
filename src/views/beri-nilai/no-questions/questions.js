@@ -72,19 +72,42 @@ class Questions extends Component {
             })
         })
             .catch(err => {
-                console.log(err,"err")
-                let response = err.response
-                let data = response.data
-                let errMsg = data.errors[0].exam_score[0].description[0]
-                error({
-                    message: errMsg,
-                    btns: [
-                        {
-                            label: 'Tutup',
-                            className: 'btn bcred cwhite'
-                        }
-                    ]
+                console.log(err.response.data, "err")
+                let errData = err.response.data.errors
+
+                Object.keys(errData).forEach(function (key) {
+                    let value = errData[key]
+                    let errMsg = value.score[0]
+                    if (errMsg === "can't be blank") {
+                        errMsg = 'Nlai harus di isi'
+                    } else if (errMsg === "greater_than_100") {
+                        errMsg = 'Nilai tidak boleh lebih dari 100'
+                    } else if (errMsg === 'less_than_0') {
+                        errMsg = 'Nilai tidak boleh kurang dari 0'
+                    }
+
+                    error({
+                        message: errMsg,
+                        btns: [
+                            {
+                                label: 'Tutup',
+                                className: 'btn bcred cwhite'
+                            }
+                        ]
+                    })
                 })
+                // let response = err.response
+                // let data = response.data
+                // let errMsg = data.errors[0].exam_score[0].description[0]
+                // error({
+                //     message: errMsg,
+                //     btns: [
+                //         {
+                //             label: 'Tutup',
+                //             className: 'btn bcred cwhite'
+                //         }
+                //     ]
+                // })
             })
     }
     onConfirm() {
