@@ -84,7 +84,7 @@ export class Panel extends Component {
                                 <div className="row padding-top-3 padding-bottom-3">
                                     <div className="padding-2 line-desc ">
                                         <div className="col-sm-12">
-                                            <span className="score-attitude__desc-title">Diskripsi Sikap</span>
+                                            <span className="score-attitude__desc-title">Deskripsi Sikap</span>
                                         </div>
                                         <div className="col-sm-12">
                                             <span className="score-attitude__desc-body">{data.description ? data.description.substring(0,70)+'...':'N/A'}</span>

@@ -28,7 +28,7 @@ class AddQuestion extends Component {
         this.props.getComponent(this.state.assessment_id, this.state.exam_id)
     }
 
-    onSubmit(){
+    onSubmit(event){
         event.preventDefault(); 
         const problem_types = this.props.problem_types
         const problem_type_sets = this.props.problem_type_sets
@@ -124,6 +124,12 @@ class AddQuestion extends Component {
                 )
             })
         }
+        let msg = ''
+        if(this.state.exam_id){
+            msg = 'Ubah'
+        }else{
+            msg = 'Tambah'
+        }
 
         return(
             <div className="padding-content">
@@ -133,7 +139,7 @@ class AddQuestion extends Component {
                         <div className="content-block main-block">
                             <div className="margin-side-10 padding-10">
                                 <form>
-                                    <label className="header-title form disblock">{`Tambah Tugas`}</label> 
+                                    <label className="header-title form disblock">{msg}  Detil Langkah Kerja</label> 
                                     {problem_types}
                                     <div className="margin-top-4 padding-top-4">
                                         <NavLink to={urlBack}>
