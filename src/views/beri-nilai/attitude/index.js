@@ -8,58 +8,73 @@ import { bindActionCreators } from 'redux';
 import Page from './../../../components/Title'
 
 export class index extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        
-        this.onChange = this.onChange.bind(this)       
+
+        this.onChange = this.onChange.bind(this)
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.getDataScoreAttitude(this.props.match.params.id)
     }
 
-    onChange(class_id, user_id){
+    onChange(class_id, user_id) {
         console.log("hit here", class_id, user_id)
         this.props.history.push({
-            pathname:`/score/attitude/new/assessment/${this.props.match.params.id}/class/${class_id}/user/${user_id}`
+            pathname: `/score/attitude/new/assessment/${this.props.match.params.id}/class/${class_id}/user/${user_id}`
         })
     }
 
     render() {
         let path = '/penilaian'
-        return (
-        <Page title= "Nilai Sikap">
-            <div className="score-attitude">
-                <div>
-                    <Header navbar={false} location={path}/>
+        let data_title = this.props.data_panel && this.props.data_panel && this.props.data_panel.attitude && this.props.data_panel.attitude.data && this.props.data_panel.attitude.data
+        console.log(data_title, "here ")
+        let title = []
+        if (data_title && data_title.assessment_type === 'final_aspect') {
+            title.push(
+                <div className="block">
+                    Daftar Sikap Akhir Mata Pelajaran
                 </div>
-                <div className="padding-content">
-                    <div className="margin-side bg-white margin-top-7">
-                        <div className="margin-side-5">
-                            <div className="padding-top-3">
-                                <div className="block">
-                                    <span className="score-attitude__title">Daftar Sikap Akhir Mata Pelajaran</span>
+            )
+        } else {
+            title.push(
+                <div className="block">
+                    Daftar Penilaian Akhir Aspek Sikap
+                </div>
+            )
+        }
+        return (
+            <Page title="Nilai Sikap">
+                <div className="score-attitude">
+                    <div>
+                        <Header navbar={false} location={path} />
+                    </div>
+                    <div className="padding-content">
+                        <div className="margin-side bg-white margin-top-7">
+                            <div className="margin-side-5">
+                                <div className="padding-top-3">
+                                    {title}
+                                    <div>
+                                        <span className="score-attitude__subject">{data_title ? data_title.subject_name : 'N/A'}</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span className="score-attitude__subject">Matematika</span>
-                                </div>
-                            </div>
-                            <div className="padding-top-2">
-                                    <Panel 
+                                <div className="padding-top-2">
+                                    <Panel
                                         onChange={this.onChange}
                                     />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </Page>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    // user: state.score
-  })
-  
-  const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreAttitude }, dispatch);
-  export default connect(mapStateToProps, mapDispatchToProps)(index);
+    data_panel: state
+
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreAttitude }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(index);

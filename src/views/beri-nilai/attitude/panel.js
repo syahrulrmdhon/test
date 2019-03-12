@@ -13,28 +13,27 @@ export class Panel extends Component {
         let data_panel_classes = this.props.data_panel && this.props.data_panel && this.props.data_panel.attitude && this.props.data_panel.attitude.data && this.props.data_panel.attitude.data.classes
         let content = []    
         data_panel_classes && data_panel_classes.map((x) => {
-            console.log(x.id," x data")
             x.users.map((data) => {
                 let merge = []
                 if (data.score === 2) {
                     merge.push(
-                        <span className="score-attitude__score-sb margin-left-1 ">SB</span>
+                        <span className="score-attitude__score-sb margin-left-1 " key={Math.random()}>SB</span>
                     )
                 } else if (data.score === 1) {
                     merge.push(
-                        <span className="score-attitude__score-b ">B</span>
+                        <span className="score-attitude__score-b " key={Math.random()}>B</span>
                     )
                 } else if (data.score === 0) {
                     merge.push(
-                        <span className="score-attitude__score ">BP</span>
+                        <span className="score-attitude__score " key={Math.random()}>BP</span>
                     )
                 } else {
                     merge.push(
-                        <span className="score-attitude__score ">N/A</span>
+                        <span className="score-attitude__score " key={Math.random()} >N/A</span>
                     )
                 }
                 
-                content.push(<div className="row margin-top-4">
+                content.push(<div className="row margin-top-4" key={Math.random()}>
                     <div className="panel margin-side-3">
                         <div className="col-sm-12">
                             <div className="col-sm-1 padding-4">

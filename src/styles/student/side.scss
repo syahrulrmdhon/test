@@ -22,7 +22,10 @@ $nunito_bold: 'NunitoBold';
 .detail-name {
     font-family: $nunito_bold;
     color: #2d2d2d;
-    font-size: 14px;
+    font-size: 16px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #b2d8d8;
+
 }
 
 .ranking {
@@ -41,7 +44,7 @@ $nunito_bold: 'NunitoBold';
     margin-bottom: 15px;
     color: #333333;
     font-family: $nunito_bold;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .label {

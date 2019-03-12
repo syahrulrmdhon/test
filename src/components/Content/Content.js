@@ -10,6 +10,7 @@ import RightSide from '../RightSide/RightSide'
 import ScoreTable from './ScoreTable'
 import AttendanceDetail from './AttendanceDetail'
 import Tab from '../TabContent/TabContent'
+import Avatar from './../../assets/images/img_avatar.png'
 import { getDate } from '../../utils/common'
 import { getData, getExtracurriculars, handleDisabled, getAttendances, getSubjects, getStatus, handleFilter} from '../../redux-modules/modules/studentDetail'
 import { connect } from 'react-redux'
@@ -369,28 +370,17 @@ class Content extends Component {
           <TabPane tabId={2}>
             <div className="row rounded-10 absences-detail">
               <LeftSide>
+              <div>
+                <div className="avatar-wrapper">
+                  <img className="avatar" src={Avatar} alt="" />
+                </div>
+                <div className="mt-3 detail-name">
+                  {this.props.dataProfile && this.props.dataProfile.user && this.props.dataProfile.user.full_name}
+                </div>
+              </div>
                 <div className="absences-detail__title">
                   Rekapitulasi Absensi
-                  </div>
-                <Form className="absences-detail__form-date">
-                  <FormGroup className="absences-detail__form-group">
-                    <Label className="absences-detail__filter-label" for="exampleSelect">Dari Tanggal</Label>
-                    <DatePicker
-                      selected={this.props.data.filter.date_start}
-                      onChange={this.handleChangeStartDate}
-                      onChange={event => { this.handleDateFilter(event, 'date_start') }}
-                      className="absences-detail__input" />
-                    <i className="fa fa-calendar calendar-icon" aria-hidden="true" />
-                  </FormGroup>
-                  <FormGroup className="absences-detail__form-group">
-                    <Label className="absences-detail__filter-label" for="exampleSelect">Sampai Tanggal</Label>
-                    <DatePicker
-                      selected={this.props.data.filter.date_end}
-                      onChange={event => { this.handleDateFilter(event, 'date_end') }}
-                      className="absences-detail__input" />
-                    <i className="fa fa-calendar calendar-icon" aria-hidden="true" />
-                  </FormGroup>
-                </Form>
+                </div>
                 <div className="absences-detail__total-wrapper">
                   <div className="absences-detail__label">Hadir</div>
                   <div className="absences-detail__amount">{recap.present !== null ? recap.present : 0}</div>
@@ -410,7 +400,7 @@ class Content extends Component {
               </LeftSide>
               <RightSide>
                 <AttendanceDetail
-                  studentId={this.props.studentId} activeTab={this.props.activeTab} />
+                  studentId={this.props.studentId} activeTab={this.props.activeTab} handleDateFilter={this.handleDateFilter}/>
               </RightSide>
             </div>
           </TabPane>
