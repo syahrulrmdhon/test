@@ -39,7 +39,7 @@ class WorkStep extends Component{
                                     defaultValue={problem_type}
                                 />
                             </div>
-                        </div>
+                        </div>  
                         {remove}
                    </div> 
                 )
