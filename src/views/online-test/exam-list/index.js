@@ -34,7 +34,7 @@ export default class OnlineExamList extends Component {
                                                         <label className='padding-top-2 info margin-bottom-3'>Ujian Tengah Semester [Periode]</label>
                                                     </div>
                                                     <div className='col-sm-4 right-block__panel-part'>
-                                                        <Progress value={75} color="success" animated />
+                                                        <Progress value={75} color="success" />
                                                     </div>
                                                 </div>
                                             </div>
