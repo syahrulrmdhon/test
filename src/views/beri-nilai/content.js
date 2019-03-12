@@ -91,7 +91,7 @@ class Content extends Component {
                                     onChange={(e) => { this.props.handleScore(e.target.value, index, x, index, 'score', 'knowledge') }}
                                     className=" align-center"
                                     defaultValue={exam[index]['score']}
-                                    />
+                                />
                             </div>
                         </td>
                     )
@@ -100,14 +100,14 @@ class Content extends Component {
 
                 content.push(<tr key={index}>
                     <td className="align-center valign-center">
-                        <label className="header-title">{x.qn_number}</label>
+                        <label className="body-table">{x.qn_number}</label>
                     </td>
                     <td className="align-left valign-center">
-                        <label className="header-title">{x.problem_type === 'essay' ? 'Uraian' : 'Pilihan Ganda'}</label>
+                        <label className="body-table">{x.problem_type === 'essay' ? 'Uraian' : 'Pilihan Ganda'}</label>
                     </td>
                     {merge_content}
                     <td className="align-left valign-center">
-                        <label className="header-title">{x.weight}</label>
+                        <label className="body-table">{x.weight}</label>
                     </td>
                 </tr>)
 
@@ -117,24 +117,24 @@ class Content extends Component {
 
         if (type === 'skill') {
             question_skill.map((data, index) => {
-                console.log(data,"my data will")
+                console.log(data, "my data will")
                 main_content.push(
                     <div className="range-table">
-                        <div className="title-indicator padding-bottom-3">{data.data}</div>
+                        <div className="title-indicator  padding-bottom-3">{data.data}</div>
                         <table className="table">
-                            <thead className="right-content-score__table-head">
-                                <tr>
+                            <thead className=" head-table ">
+                                <tr className="head-table">
                                     <td className="align-center" width="10%">
-                                        <label className="header-title">No</label>
+                                        <label className="head-table">No</label>
                                     </td>
                                     <td className="align-left" width="30%">
-                                        <label className="header-title">Indikator</label>
+                                        <label className="head-table">Indikator</label>
                                     </td>
                                     <td className="align-center" width="35%">
-                                        <label className="header-title">Skor</label>
+                                        <label className="head-table">Skor</label>
                                     </td>
                                     <td className="align-center" width="20%">
-                                        <label className="header-title">Bobot</label>
+                                        <label className="head-table">Bobot</label>
                                     </td>
                                 </tr>
                             </thead>
@@ -143,15 +143,15 @@ class Content extends Component {
                                     data.question_score.map((x, idx) => {
                                         return <tr key={idx}>
                                             <td className="align-center valign-center">
-                                                <label className="header-title">{x.qn_number}</label>
+                                                <label className="body-table ">{x.qn_number}</label>
                                             </td>
                                             <td className="align-left valign-center">
-                                                <label className="header-title">{x.question}</label>
+                                                <label className="body-table">{x.question}</label>
                                             </td>
                                             <td>
                                                 <div className="content-input form-position">
                                                     <input
-                                                        className="disblock align-center "
+                                                        className="disblock align-center body-table  "
                                                         placeholder="Masukkan skor anda"
                                                         onChange={(e) => { this.props.handleScore(e.target.value, index, data, idx, 'score', 'skill') }}
                                                         defaultValue={x.user_problem_answer.score}
@@ -159,7 +159,7 @@ class Content extends Component {
                                                 </div>
                                             </td>
                                             <td className="align-center valign-center">
-                                                <label className="header-title">{x.weight}</label>
+                                                <label className="body-table">{x.weight}</label>
                                             </td>
 
                                         </tr>
@@ -174,22 +174,22 @@ class Content extends Component {
         } else {
             main_content.push(
                 <table className="table">
-                    <thead className="right-content-score__table-head">
+                    <thead className="right-content-score__table-head head-table ">
                         <tr>
                             <td className="align-center" width="10%">
-                                <label className="header-title">No</label>
+                                <label className="head-table">No</label>
                             </td>
                             <td className="align-left" width="20%">
-                                <label className="header-title">Tipe Soal</label>
+                                <label className="head-table">Tipe Soal</label>
                             </td>
                             <td className="align-center" width="30%">
-                                <label className="header-title">Jawaban Soal</label>
+                                <label className="head-table">Jawaban Soal</label>
                             </td>
                             <td className="align-center" width="35%">
-                                <label className="header-title">Skor</label>
+                                <label className="head-table">Skor</label>
                             </td>
                             <td className="align-center" width="20%">
-                                <label className="header-title">Bobot</label>
+                                <label className="head-table">Bobot</label>
                             </td>
                         </tr>
                     </thead>
@@ -199,7 +199,20 @@ class Content extends Component {
                 </table>
             )
         }
-
+        let title = []
+        if (type === 'skill') {
+            title.push(
+                <div className="title-page">
+                    Masukan Nilai Ketrampilan
+               </div>
+            )
+        }else if(type === 'knowledge'){
+            title.push(
+                <div className="title-page">
+                    Masukan Nilai Pengetahuan
+               </div>
+            )
+        }
 
         return (
             <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">
@@ -209,9 +222,7 @@ class Content extends Component {
                     </LeftSide>
                     <RightContent>
                         <div className="right-content-score">
-                            <div className="right-content-score__title">
-                                Masukan Nilai
-                        </div>
+                            {title}
                             <div>
                                 <div className="table-responsive">
                                     <div className="padding-top-4">

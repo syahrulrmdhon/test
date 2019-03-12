@@ -56,14 +56,14 @@ export default function reducer(state = initialState, action) {
             return{
                 ...state,
                 loaded: true,
-                loading: false,
+                loading: false
             }
         case REMOVE_INDICATOR:
             state.problem_type_sets[action.key_value] = removeField(state.problem_type_sets[action.key_value], action.idx)
             return{
                 ...state,
-                loaded: true,
-                loading: false,
+                loaded: false,
+                loading: true
             }
         case LOAD_COMPONENT: 
             delete state.error;
@@ -110,6 +110,7 @@ export default function reducer(state = initialState, action) {
             }
         case REMOVE_WORK_STEP:
             state.problem_types = removeField(state.problem_types, action.idx)
+            console.log(state.problem_types,"problem")
             return{
                 ...state,
                 loaded: true,
@@ -194,6 +195,7 @@ export function addWorkStep(){
 }
 
 export function removeWorkStep(idx){
+    console.log(idx,"index")
     return{
         type: REMOVE_WORK_STEP,
         idx: idx,
