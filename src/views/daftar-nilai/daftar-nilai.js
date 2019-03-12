@@ -160,101 +160,55 @@ export default class DaftarNilai extends Component {
   render() {
     return (
       <Page title="Daftar Nilai">
-      <div className='row-score'>
-        <div className='padding-content'>
-          <Header />
-          <div className='margin-content'>
-            <div className='content-block main-block'>
-              <div className='margin-0'>
-                <div className='col-sm-3 left-block'>
-                  <FilterNilai
-                    listClass={this.state.listClass}
-                    selectedClass={this.state.selectedClass}
-                    listSemester={this.state.listSemester}
-                    selectedSemester={this.state.selectedSemester}
-                    listSubject={this.state.listSubject}
-                    selectedSubject={this.state.selectedSubject}
-                    onChangeClass={this.onChangeClass}
-                    onChangeSemester={this.onChangeSemester}
-                    onChangeSubject={this.onChangeSubject}
-                    handleSubmit={this.handleSubmit}
-                  />
-                </div>
-                <div className='col-sm-9 right-block w-100'>
-                  <div className='padding-top-6 h-100'>
-                    <div className='row'>
-                      <div className='col-sm-3'>
-                        <label className='header-title'>Daftar Nilai</label>
-                      </div>
-                      <div className='col-sm-9'>
-                        <NavToggle
-                          activeTab={this.state.activeTab}
-                          toggle={this.toggle}
-                        />
-                      </div>
-                    </div>
-                    <Tab
-                      tableKnowledge={this.state.tableKnowledge}
-                      idxScores={this.state.idxScores}
-                      idxTugas={this.state.idxTugas}
-                      nameClicked={this.nameClicked}
-                      tableSkill={this.state.tableSkill}
-                      idxScoresSkill={this.state.idxScoresSkill}
-                      tableAttitude={this.state.tableAttitude}
-                      activeTab={this.state.activeTab}
+        <div className='row-score'>
+          <div className='padding-content'>
+            <Header />
+            <div className='margin-content'>
+              <div className='content-block main-block'>
+                <div className='margin-0'>
+                  <div className='col-sm-3 left-block'>
+                    <FilterNilai
+                      listClass={this.state.listClass}
+                      selectedClass={this.state.selectedClass}
+                      listSemester={this.state.listSemester}
+                      selectedSemester={this.state.selectedSemester}
+                      listSubject={this.state.listSubject}
+                      selectedSubject={this.state.selectedSubject}
+                      onChangeClass={this.onChangeClass}
+                      onChangeSemester={this.onChangeSemester}
+                      onChangeSubject={this.onChangeSubject}
+                      handleSubmit={this.handleSubmit}
                     />
                   </div>
+                  <div className='col-sm-9 right-block w-100'>
+                    <div className='padding-top-6 h-100'>
+                      <div className='row'>
+                        <div className='col-sm-3'>
+                          <label className='header-title'>Daftar Nilai</label>
+                        </div>
+                        <div className='col-sm-9'>
+                          <NavToggle
+                            activeTab={this.state.activeTab}
+                            toggle={this.toggle}
+                          />
+                        </div>
+                      </div>
+                      <Tab
+                        tableKnowledge={this.state.tableKnowledge}
+                        idxScores={this.state.idxScores}
+                        idxTugas={this.state.idxTugas}
+                        nameClicked={this.nameClicked}
+                        tableSkill={this.state.tableSkill}
+                        idxScoresSkill={this.state.idxScoresSkill}
+                        tableAttitude={this.state.tableAttitude}
+                        activeTab={this.state.activeTab}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        {/* <div className='padding-content h-100'>
-          <Header />
-          <div className='content'>
-            <div className='row row-score'>
-              <div className='left-content col-sm-2 col-lg-2'>
-                <FilterNilai
-                  listClass={this.state.listClass}
-                  selectedClass={this.state.selectedClass}
-                  listSemester={this.state.listSemester}
-                  selectedSemester={this.state.selectedSemester}
-                  listSubject={this.state.listSubject}
-                  selectedSubject={this.state.selectedSubject}
-                  onChangeClass={this.onChangeClass}
-                  onChangeSemester={this.onChangeSemester}
-                  onChangeSubject={this.onChangeSubject}
-                  handleSubmit={this.handleSubmit}
-                />
-              </div>
-              <div className='right-content col-sm-10 col-lg-10'>
-                <div className='row margin-bottom-4'>
-                  <div className='col-sm-3 col-lg-2'>
-                    <h5 className='float-left margin-left-1 padding-top-1'>
-                      <strong className='large-text'>Daftar Nilai</strong>
-                    </h5>
-                  </div>
-                  <div className='col-sm-9 col-lg-10'>
-                  <NavToggle
-                    activeTab={this.state.activeTab}
-                    toggle={this.toggle}
-                  />
-                  </div>
-                </div>
-                <Tab
-                  tableKnowledge={this.state.tableKnowledge}
-                  idxScores={this.state.idxScores}
-                  idxTugas={this.state.idxTugas}
-                  nameClicked={this.nameClicked}
-                  tableSkill={this.state.tableSkill}
-                  idxScoresSkill={this.state.idxScoresSkill}
-                  tableAttitude={this.state.tableAttitude}
-                  activeTab={this.state.activeTab}
-                />
-              </div>
-            </div>
-          </div>
-        </div> */}
         </div>
       </Page>
     )
