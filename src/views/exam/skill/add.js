@@ -32,7 +32,8 @@ class Add extends Component{
         examTypes.call(this, {category: 'skill'})
     }
 
-    onSubmit(){
+
+    onSubmit(event){
         event.preventDefault(); 
         let data = {}
         data['exam'] = this.props.exam
@@ -78,10 +79,15 @@ class Add extends Component{
             })
         })
     }
-
+ 
     render(){
         const { exam_type, name, is_remedial } = this.props.exam ? this.props.exam : [] 
-        console.log(this.props,"this props")
+        let msg = ''
+        if(this.state.exam_id){
+            msg = 'Ubah'
+        }else{
+            msg = 'Tambah'
+        }
         return(
             <div className="padding-content">
                 <Header navbar={true} location={`/exam/${this.state.assessment_id}`} />
@@ -90,7 +96,7 @@ class Add extends Component{
                         <div className="content-block main-block">
                             <div className="margin-side-10 padding-10">
                                 <form>
-                                    <label className="header-title form disblock">{`Tambah Tugas`}</label>   
+                                    <label className="header-title form disblock">{msg} Tugas</label>   
                                     <div className="row">
                                         <div className="col-sm-12 margin-top-10">
                                             <div className="content-input">

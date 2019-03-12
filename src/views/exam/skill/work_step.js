@@ -14,7 +14,9 @@ var FontAwesome = require('react-fontawesome')
 class WorkStep extends Component{
     render(){
         let workSteps = []
+        console.log(this.props,"msuk")
         if(this.props.problem_types){
+            console.log(this.props.problem_types,"msuk")
             this.props.problem_types.map((problem_type, idx) => {
                 let remove;
 
@@ -27,7 +29,7 @@ class WorkStep extends Component{
                 }
 
                 workSteps.push(
-                   <div className="row" key={idx}>
+                   <div className="row" key={Math.random()}>
                         <div className="col-sm-11">
                             <div className="content-input margin-top-2">
                                 <input 
@@ -37,7 +39,7 @@ class WorkStep extends Component{
                                     defaultValue={problem_type}
                                 />
                             </div>
-                        </div>
+                        </div>  
                         {remove}
                    </div> 
                 )
@@ -52,7 +54,7 @@ class WorkStep extends Component{
                     <div className="col-sm-6">
                         <div className="margin-top-2">
                             <a href="javascript:void(0);" onClick={this.props.addWorkStep}>
-                                <FontAwesome name="plus-circle" /> Tambah Kategori
+                                <FontAwesome name="plus-circle" /> Tambah Langkah Kerja
                             </a>
                         </div>
                     </div>
@@ -64,7 +66,7 @@ class WorkStep extends Component{
 
 const mapStateToProps = (state, props) => ({
     problem_types: state.skill ? state.skill.problem_types : [''],
-    data_work:state
+    data:state
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 

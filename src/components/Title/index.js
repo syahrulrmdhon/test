@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet';
-import Favicon from './../../assets/images/logo.ico'
+import Favicon from './../../assets/images/gredu_logo_icon_7W5_icon.ico'
 const defaultTitle = "GREDU INDONESIA"
 
 
