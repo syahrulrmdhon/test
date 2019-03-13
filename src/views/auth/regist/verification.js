@@ -68,10 +68,10 @@ export default class Verification extends Component {
         apiClient('post', endpoint, verification).then(res => {
             modal({
                 message: 'Berhasil',
-                description: 'Periksa kotak masuk email Anda',
+                description: 'Periksa email Anda',
                 btns: [
                     {
-                        label: 'Lanjut',
+                        label: 'Selesai',
                         className: 'btn green',
                         event: this.props.history.push('/notif-regist')
                     }
