@@ -16,6 +16,7 @@ import DaftarNilai from '../views/daftar-nilai/daftar-nilai'
 import Rapor from '../views/rapor/rapor'
 import DaftarMurid from '../views/student/murid'
 import StudentDetail from '../views/student/detail'
+import Description from '../views/student/description'
 import SwitchAccount from '../views/global/switch_account'
 import DetailNilai from './../views/beri-nilai/beri-nilai'
 import Exam from '../views/exam/index'
@@ -156,7 +157,12 @@ export const MainRoutes = [
     },
     {
         path: '/detail/:id',
+        exact: true,
         component: StudentDetail
+    },
+    {
+        path: '/detail/:id/description/:subject',
+        component: Description
     },
     {
         path: '/nilai/',

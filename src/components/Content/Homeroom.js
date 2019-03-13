@@ -100,7 +100,7 @@ class Homeroom extends Component {
                     className="homeroom-teacher__input mt-3" 
                     rows="5" 
                     type="textarea" 
-                    placeholder="Tulis Deskripsi Estrakurikuler disini ..."
+                    placeholder="Tulis Deskripsi Ekstrakurikuler disini ..."
                     disabled={!homeroomId} />
                   </div>
                   <FontAwesome name="trash" className="remove" onClick={() => {this.delete(index, note.id, 'extracurricular')}}/>
@@ -159,7 +159,7 @@ class Homeroom extends Component {
               {notes}
               {
                 body.length < extracurriculars.length &&
-                <div onClick={() => this.props.addNote('extracurricular')} className="homeroom-teacher__add-extracurricular">+ <span>Tambah Estrakurikuler lainnya</span></div>
+                <div onClick={() => this.props.addNote('extracurricular')} className="homeroom-teacher__add-extracurricular">+ <span>Tambah Ektrakurikuler lainnya</span></div>
               }
             </Form>
             <Button 
