@@ -4,21 +4,46 @@ $nunito_semi_bold: "NunitoSemiBold";
 $nunito_bold: "NunitoBold";
 
 .online-exam {
-  //   .left-block {
-  //   }
-
   .right-block {
+      max-height: 500px;
+      overflow-y: scroll;
+      overflow-x: hidden;
     .header-content {
       border-bottom: solid 0.5px #d3d9dd;
-      .info {
-        font-family: $nunito_regular;
-        color: #a1a1a1;
-        font-size: 10px;
-      }
+    }
+    .info {
+      font-family: $nunito_regular;
+      color: #a1a1a1;
+      font-size: 10px;
+    }
+    .p {
+      font-family: $nunito_regular;
+      color: #4a4a4a;
+      font-size: 10px;
+    }
+    .p-bold {
+      font-family: $nunito_bold;
+      color: #4a4a4a;
+      font-size: 10px;
+    }
+    .p-green {
+      font-family: $nunito_regular;
+      color: #1a9d7f;
+      font-size: 10px;
+    }
+    .p-green-link {
+      font-family: $nunito_bold;
+      color: #1a9d7f;
+      font-size: 10px;
+      cursor: pointer;
+    }
+    .icon-green {
+      color: #1a9d7f;
+      font-size: 12px;
+      text-decoration: underline;
     }
     &__panel-wrapper {
-      padding-top: 24px;
-      height: 95%;
+      height: 90%;
       .not-available {
         height: 400px;
       }
@@ -29,11 +54,14 @@ $nunito_bold: "NunitoBold";
       margin-bottom: 20px;
       padding: 18px 13.5px;
       border: 1px solid rgba(204, 204, 204, 0.5);
-      height: 120px;
+      height: 100%;
     }
     &__panel-part {
-        border-right: solid 0.5px #e8e8e8;
-        height: 95%;
+      border-right: solid 0.5px #e8e8e8;
+      height: 95%;
+    }
+    .s-line {
+      border-right: solid 1px #d3d9dd;
     }
   }
 }

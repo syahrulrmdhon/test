@@ -1,0 +1,152 @@
+import React, { Component } from 'react'
+import { Progress } from 'reactstrap'
+import { NotAvailable } from '../../global/notAvailable';
+import { DetailOnlineExam } from './helper-online'
+
+export default class ContentOnlineExam extends Component {
+    render() {
+        let data = {
+            header: {
+                period: '2018/2019',
+                type: 'Ujian Tengah Semester'
+            },
+            list: [
+                {
+                    info: {
+                        name: 'Aqidah Akhlaq',
+                        date: '20 Feb 2019',
+                        type: 'UTS',
+                        time: '45 Menit',
+                        class: 'X IPS'
+                    },
+                    progress: {
+                        percentage: 10,
+                        count: 10,
+                        total: 100
+                    },
+                    detail: {
+                        choices: 90,
+                        essay: 10,
+                        desc: 'Pelajari Kitab Ushul Tsalatsah Bab 1 - Bab 6'
+                    }
+                },
+                {
+                    info: {
+                        name: 'al-Lughotul Arabiyyah',
+                        date: '20 Feb 2019',
+                        type: 'UTS',
+                        time: '45 Menit',
+                        class: 'X IPS'
+                    },
+                    progress: {
+                        percentage: 70,
+                        count: 70,
+                        total: 100
+                    },
+                    detail: {
+                        choices: 70,
+                        essay: 30,
+                        desc: 'Pelajari Kitab Durusul Lughoh Jilid 1 & Pelajari Kitab Baina Yadaik serta Kitab al-Muyassar'
+                    }
+                },
+                {
+                    info: {
+                        name: 'Fiqh',
+                        date: '20 Feb 2019',
+                        type: 'UTS',
+                        time: '45 Menit',
+                        class: 'X IPS'
+                    },
+                    progress: {
+                        percentage: 100,
+                        count: 100,
+                        total: 100
+                    },
+                    detail: {
+                        choices: 60,
+                        essay: 40,
+                        desc: 'Pelajari Kitab Al Umm dan Al Muhaddzab karya Asy Syairozi atau Syarh Al Muhaddzab karya Imam Nawawi yang dilanjutkan As Subkiy dan Syaikh Muhammad Al Bakhit'
+                    }
+                }
+            ]
+
+        }
+
+        let content = []
+        let detail = []
+        if (data && data.list) {
+            let list = data.list
+            list.map((x) => {
+                content.push(
+                    <div className='disblock right-block__panel-wrapper' key={Math.random()}>
+                        <div className='right-block__panel'>
+                            <div className='row'>
+                                <div className='col-sm-4 right-block__panel-part'>
+                                    <label className='header-title disblock padding-bottom-1'>{x.info.name}</label>
+                                    <div>
+                                        <i className='fa fa-calendar-o'></i>
+                                        <label className='info s-line padding-side-2'>
+                                            {x.info.date}
+                                        </label>
+                                        <label className='padding-side-2 info s-line'>
+                                            {x.info.type}
+                                        </label>
+                                        <label className='padding-side-2 info'>
+                                            {x.info.time}
+                                        </label>
+                                    </div>
+                                    <div className='padding-top-1'>
+                                        <label className='p'>{x.info.class}</label>
+                                    </div>
+                                    <div className='padding-top-2'>
+                                        <label className='p-green-link padding-right-2 s-line'>Lihat</label>
+                                        <label className='p-green-link padding-side-2 s-line'>Ubah Soal</label>
+                                        <label className='p-green-link padding-side-2'>Hapus Soal</label>
+                                    </div>
+                                </div>
+                                <div className='col-sm-4 right-block__panel-part padding-top-4'>
+                                    <div className='padding-bottom-1'>
+                                        <label className='p'>Progress</label>
+                                        <span className='pull-right p-green'>{x.progress.percentage === null ? '0' : x.progress.percentage}%</span>
+                                    </div>
+                                    <Progress value={x.progress.percentage} color='success' />
+                                    <label className='info padding-top-1'>{x.progress.count === null ? '0' : x.progress.count}/{x.progress.total === null ? '0' : x.progress.total} Terbuat</label>
+                                </div>
+                                <div className='col-sm-4'>
+                                    <div className='padding-bottom-2'>
+                                        <label className='p-bold padding-right-2'>Detil Soal</label>
+                                        <i className='fa fa-pencil icon-green'></i>
+                                    </div>
+                                    <DetailOnlineExam
+                                        detail={x.detail}
+                                    />
+                                    {/* <div>
+                                            <label className='info padding-bottom-2'>
+                                                {x.detail.choices} Pilihan Ganda & {x.detail.essay} Essay
+                                            </label>
+                                            <label className='info text-justify'>{x.detail.desc}</label>
+                                        </div> */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+        } else {
+            content.push(
+                <div className='padding-top-4 disblock right-block__panel-wrapper' key={Math.random()}>
+                    <NotAvailable>Data Belum Tersedia</NotAvailable>
+                </div>
+            )
+        }
+        return (
+            <div className='col-sm-9 right-block w-100'>
+                <div className='header-content margin-bottom-4'>
+                    <label className='header-title disblock padding-top-6'>Daftar Ujian</label>
+                    <label className='padding-top-2 info margin-bottom-3'>Ujian Tengah Semester [Periode]</label>
+                </div>
+                {content}
+            </div>
+        )
+    }
+}
