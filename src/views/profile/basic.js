@@ -131,11 +131,11 @@ export class componentName extends Component {
     }
     userObj['user'] =  data
 
-
+    // attribute full
+    localStorage.removeItem("user")
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
-      // localStorage.removeItem('user')
-      getUser(false)
+      getUser(true)
       modal({
         message: 'Berhasil',
         description: 'Informasi dasar telah di perbaharui',
@@ -143,7 +143,7 @@ export class componentName extends Component {
           {
             label: 'Lanjut',
             className: 'btn green',
-            event: window.location.href="/profile/basic-information"
+            // event: window.location.href="/profile/basic-information"
           }
         ]
       })
