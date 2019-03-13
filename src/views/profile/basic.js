@@ -21,8 +21,10 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import { error, modal } from './../global/modal'
 import {
   region,
-  cities
+  cities,
+  getUser
 } from './../../utils/common'
+
 
 // scss
 import './../../styles/profile.scss'
@@ -124,12 +126,16 @@ export class componentName extends Component {
       pob:this.props.user && this.props.user.user && this.props.user.user.pob,
       email:this.props.user && this.props.user.user && this.props.user.user.email,
       phone_number:this.props.user && this.props.user.user && this.props.user.user.phone_number,
-      profile_url:this.state.base64.split(",")[1]
+      profile_url:this.state.base64.split(",")[1],
+      full_name:this.props.user && this.props.user.user && this.props.user.user.full_name,
     }
     userObj['user'] =  data
 
+
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
+      // localStorage.removeItem('user')
+      getUser(false)
       modal({
         message: 'Berhasil',
         description: 'Informasi dasar telah di perbaharui',
