@@ -30,6 +30,7 @@ export default function reducer(state = initialState, action) {
             full_name: action.result.data.profile.full_name ? action.result.data.profile.full_name : '',
             pob: action.result.data.profile.pob ?  action.result.data.profile.pob : '',
             dob: action.result.data.profile.dob ? action.result.data.profile.dob : '',
+            url: action.result.data.profile.photo_url ? action.result.data.profile.photo_url : '',
             address_attributes: {
               id: action.result.data.profile.address.id ? action.result.data.profile.address.id : '',
               street: action.result.data.profile.address.street ? action.result.data.profile.address.street : '',

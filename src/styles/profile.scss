@@ -5,6 +5,47 @@ $nunito_bold: "NunitoBold";
 
 .basic {
 
+  .button-upload {
+    display: none
+  }
+  .label-upload {
+    width: 150px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+    background-color: #199d7f;
+    border-radius: 5px;
+    
+  }
+  .label-text{
+    font-family: $nunito_bold;
+    font-size: 9px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #ffffff;
+  }
+  .notice {
+    font-family: $nunito_semi_bold;
+    font-size: 9.5px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #7f92a1;
+  }
+  .hapus-foto {
+    width: 82px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+    background-color: #aaaaaa;
+    border-radius: 5px;
+  }
+
+  .profile-photo {
+    border-radius: 50%;
+    width: 88px;
+    height: 87px;
+  }
 
   label {
     font-family: $nunito_semi_bold;
