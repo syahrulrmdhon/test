@@ -15,6 +15,8 @@ const GET_STATUS= "modules/studentDetail/GET_STATUS"
 const GET_SUBJECTS= "modules/studentDetail/GET_SUBJECTS"
 const HANDLE_FILTER= "modules/studentDetail/HANDLE_FILTER"
 const RESET_NOTES= "modules/studentDetail/RESET_NOTES"
+const HANDLE_REMOVE_NOTE= "modules/studentDetail/HANDLE_REMOVE_NOTE"
+
 
 const initialState = {
   disabled: true,
@@ -167,6 +169,13 @@ export default function reducer(state = initialState, action) {
         loaded: true,
         loading: false
       }
+    case HANDLE_REMOVE_NOTE:
+      state.notes.splice(action.index, 1)
+    return {
+      ...state,
+      loaded: true,
+      loading: false
+    }
     case LOAD:
       if (state.notes) {
         if (state.notes.length === 1 && (state.notes.extracurricular_id === '' || state.notes.description === '') ) {
@@ -280,6 +289,15 @@ export function handleFilter(value, field) {
     type: HANDLE_FILTER,
     value: value,    
     field: field,
+  }
+}
+
+export function handleRemoveNote(index, value, field) {
+  return {
+    type: HANDLE_REMOVE_NOTE,
+    index: index,
+    value: value,
+    field: field
   }
 }
 
