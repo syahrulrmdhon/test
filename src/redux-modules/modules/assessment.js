@@ -41,8 +41,6 @@ export default function reducer(state = initialState, action = {}) {
             }
         case HANDLE_ATTITUDE_ITEM:
             state.user_attitudes_attributes[action.idx][action.fieldName] = action.value
-            console.log(state.user_attitudes_attributes, "here data handle")
-
             return{
                 ...state,
                 loaded: false,
@@ -182,7 +180,6 @@ export default function reducer(state = initialState, action = {}) {
                 }
             }
 
-            console.log( action.result.data.assessment ,"here assetss")
 
             if(assessment.assessment_subjects_attributes && assessment.assessment_subjects_attributes.length == 0){
                 assessment.assessment_subjects_attributes = [{
@@ -198,14 +195,13 @@ export default function reducer(state = initialState, action = {}) {
                     school_attitude_id: null,
                 }]
             }
-            console.log(assessment.category,"here new assessment")
+
             if(assessment.category == 'attitude'){
                 if(assessment.assessment_subjects_attributes && assessment.assessment_subjects_attributes.length > 0){
                     assessment.assessment_subjects_attributes.map((value, idx) => {
                         delete assessment.assessment_subjects_attributes[idx]['assessment_basic_comps_attributes']
                     })
                 }
-                console.log(assessment,"length")
 
                 if(assessment.user_attitudes_attributes === undefined){
                     assessment['user_attitudes_attributes'] = []
@@ -221,6 +217,7 @@ export default function reducer(state = initialState, action = {}) {
                 }
             }
 
+            console.log(assessment ,"here assetss")
 
             return {
                 loaded: true,

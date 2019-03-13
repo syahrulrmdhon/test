@@ -95,7 +95,17 @@ class Add extends Component {
             delete data.assessment_attitudes_attributes
         }
 
-        apiClient('post', url, data, { category: data.category }).then(response => {
+        console.log(data,"data")
+
+        let data_assessment = {
+            assessment_classes_attributes: data.assessment_classes_attributes,
+            assessment_type: data.assessment_type,
+            category:data.category,
+            name:data.name,
+            school_id:data.school_id
+        }
+
+        apiClient('post', url, data_assessment, { category: data.category }).then(response => {
             modal({
                 message: 'Berhasil',
                 // description: 'Anda sudah menyimpan data topik, selanjutnya anda masukkan data komponen topik',

@@ -226,6 +226,8 @@ export class componentName extends Component {
             Unggah Foto Baru
           <i class="margin-left-2 fa fas fa-upload"></i>
           </label>
+          <input type="file" className="button-upload" onChange={this.onPreviewPhoto} id="1" />
+
         </div>
       )
     }else{
