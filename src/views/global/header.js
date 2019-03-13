@@ -161,35 +161,25 @@ export default class Header extends Component {
         let path = location === undefined ? '/murid' : location
         let text = ''
         if (this.state.schoolList.length > 1) {
-            text = <NavItem>
-                <ButtonToolbar>
-                    <DropdownButton
-                        bsStyle='info'
-                        title={user_name}
-                        id='dropdown-profile'
-                    >
-                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
-                            <span className="profile padding-left-1">Profil</span>
-                        </MenuItem>
-                        {school_account}
-                    </DropdownButton>
-                </ButtonToolbar>
-            </NavItem>
+            text = <button id="dropdown-profile"  onClick={this.profile}  className="btn btn-info">{user_name}<span className="caret"></span></button>
         } else {
-            text = <NavItem>
-                <ButtonToolbar>
-                    <DropdownButton
-                        bsStyle='info'
-                        title={user_name}
-                        id='dropdown-profile'
-                    >
-                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
-                            <span className="profile padding-left-1">Profil</span>
-                        </MenuItem>
-                    </DropdownButton>
-                </ButtonToolbar>
-            </NavItem>
+            text = <button id="dropdown-profile"  onClick={this.profile}  className="btn btn-info">{user_name}<span className="caret"></span></button>
+            // text = <NavItem>
+            //     <ButtonToolbar>
+            //         <DropdownButton
+            //             bsStyle='info'
+            //             title={user_name}
+            //             id='dropdown-profile'
+            //         >
+            //             <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
+            //                 <span className="profile padding-left-1">Profil</span>
+            //             </MenuItem>
+            //         </DropdownButton>
+            //     </ButtonToolbar>
+            // </NavItem>
         }
+
+        console.log(user_logo,"user logo")
 
         return (
             <div className="fix-nav">
@@ -204,13 +194,7 @@ export default class Header extends Component {
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
                                     <NavItem className='padding-right-2'>
-                                        {
-                                            user_logo !== null ?
-                                                <Avatar src={user_logo} size='40' round={true} />
-                                                :
-                                                <Avatar src={Ava} size='40' round={true} />
-
-                                        }
+                                        <img src={user_logo?user_logo:Ava} height="40" width="40" className="profile-photo" alt="/" />
                                     </NavItem>
                                     {text}
                                     <NavItem>

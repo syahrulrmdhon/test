@@ -80,6 +80,7 @@ class AttitudeDetail extends Component {
             this.props.assessment.entries.map((user_attitude, idx) => {
                 users.push(
                     <AttitudeDetailItem
+                            // key={user_attitude.payload || idx}
                         key={user_attitude.payload || idx}
                         index={idx}
                     />

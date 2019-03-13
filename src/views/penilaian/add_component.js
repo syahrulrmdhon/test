@@ -89,7 +89,7 @@ class AddComponent extends Component {
                     modal({
                         message: 'Selamat',
                         // description: 'Anda berhasil menyimpan topik, silakan klik tombol lihat untuk membuat tugas.',
-                        description: "Topik selesai dibusat. Klik tombol 'Lihat' untuk buat Tugas",
+                        description: `Topik selesai ${msg}. Klik tombol 'Lihat' untuk buat Tugas`,
                         btns: [
                             {
                                 label: 'Selesai',
