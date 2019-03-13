@@ -65,8 +65,8 @@ class AddQuestion extends Component {
             if(!this.state.exam_id){
                 apiClient('post', `/v1/assessments/${this.state.assessment_id}/exams`, data).then(response => {
                     modal({
-                        // message: 'Berhasil',
-                        description: `Selamat berhasil ${msg} komponen beri soal keterampilan`,
+                        message: 'Selamat',
+                        description: `Tugas keterampilan sudah ${msg}`,
                         btns: [
                             {
                                 label: 'Selesai',
