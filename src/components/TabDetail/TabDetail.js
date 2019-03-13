@@ -27,6 +27,8 @@ export default class TabDetail extends Component {
               }
             }
 
+            console.log(this.props.assessment_category,"her assess")
+
             if(flag){
               view.push(
                 <NavItem key={key} className={classnames({ active: this.props.activeMenu === tab })}>
