@@ -35,7 +35,8 @@ export class componentName extends Component {
       startDate: null,
       regionOptions: [],
       citiesOptions: [],
-      cityDefaultOpt: []
+      cityDefaultOpt: [],
+      base64:''
     }
     this.submit = this.submit.bind(this)
     this.onCofirm = this.onCofirm.bind(this)
@@ -93,7 +94,6 @@ export class componentName extends Component {
   }
   onCofirm(e) {
     e.preventDefault()
-
     confirmAlert({
       customUI: ({ onClose, onConfirm }) => {
         return (
@@ -116,9 +116,19 @@ export class componentName extends Component {
   }
 
   submit() {
-    const { value } = this.state
     let userObj = {}
-    userObj['user'] = this.props.user && this.props.user.user
+    let data_attitbutes = this.props.user && this.props.user.user && this.props.user.user.address_attributes
+    console.log(this.state.base64)
+    let data = {
+      address_attributes:data_attitbutes,
+      dob:this.props.user && this.props.user.user && this.props.user.user.dob,
+      pob:this.props.user && this.props.user.user && this.props.user.user.pob,
+      email:this.props.user && this.props.user.user && this.props.user.user.email,
+      phone_number:this.props.user && this.props.user.user && this.props.user.user.phone_number,
+      photo_url:this.state.base64
+    }
+    userObj['user'] =  data
+    console.log(userObj)
 
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
@@ -157,19 +167,16 @@ export class componentName extends Component {
 
   onPreviewPhoto(evt) {
     var files = evt.target.files;
-    var data = new FormData();
-    data.append("image_data", files);
-
-    // console.log(toDataURL(files),"data")
     for (var i = 0, len = files.length; i < len; i++) {
       var file = files[i];
-
       var reader = new FileReader();
-      reader.onload = function (event) {
-        console.log(event.target.result,"result")
+      reader.onload = ((event) => { 
+        console.log(event.target.result)
+        this.setState({
+          base64:event.target.result
+        })
         document.getElementById("image").src = event.target.result
-      };
-
+      })
       reader.readAsDataURL(file);
     }
   }
@@ -241,6 +248,7 @@ export class componentName extends Component {
     }
 
     let data_photo = photo_url ? photo_url:User
+    console.log(data_photo)
     
     return (
       <Page title="Basic Information">
@@ -260,7 +268,7 @@ export class componentName extends Component {
                         <div className="row">
                           <div className="col-sm-12">
                             <div className="col-sm-1">
-                              <img id="image" src={data_photo} className="profile-photo" alt="/" />
+                              <img id="image" src="https://s3-ap-southeast-1.amazonaws.com/internal.gredu.co/dev/profile_picture/ca75fb16-1aa9-4d98-9f2c-38ed89cb3083.jpg" className="profile-photo" alt="/" />
                             </div>
                             <div className="col-sm-6 margin-left-6 margin-top-2">
                                 {action}
