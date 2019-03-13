@@ -118,14 +118,14 @@ export class componentName extends Component {
   submit() {
     let userObj = {}
     let data_attitbutes = this.props.user && this.props.user.user && this.props.user.user.address_attributes
-    console.log(this.state.base64)
+    console.log(this.state.base64.split(",")[1])
     let data = {
       address_attributes:data_attitbutes,
       dob:this.props.user && this.props.user.user && this.props.user.user.dob,
       pob:this.props.user && this.props.user.user && this.props.user.user.pob,
       email:this.props.user && this.props.user.user && this.props.user.user.email,
       phone_number:this.props.user && this.props.user.user && this.props.user.user.phone_number,
-      photo_url:this.state.base64
+      photo_url:this.state.base64.split(",")[1]
     }
     userObj['user'] =  data
     console.log(userObj)
@@ -268,7 +268,7 @@ export class componentName extends Component {
                         <div className="row">
                           <div className="col-sm-12">
                             <div className="col-sm-1">
-                              <img id="image" src="https://s3-ap-southeast-1.amazonaws.com/internal.gredu.co/dev/profile_picture/ca75fb16-1aa9-4d98-9f2c-38ed89cb3083.jpg" className="profile-photo" alt="/" />
+                              <img id="image" src={data_photo} className="profile-photo" alt="/" />
                             </div>
                             <div className="col-sm-6 margin-left-6 margin-top-2">
                                 {action}
