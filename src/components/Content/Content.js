@@ -427,7 +427,8 @@ class Content extends Component {
                   addExtracurricularNote={(event) => this.addExtracurricularNote(event)}
                   achievements={this.state.achievements}
                   changeAchievementNote={this.achievementChangeHandler}
-                  saveAchievement={this.handleBulkUpdate} />
+                  saveAchievement={this.handleBulkUpdate}
+                  studentId={this.props.studentId}/>
               </RightSide>
             </div>
           </TabPane>
