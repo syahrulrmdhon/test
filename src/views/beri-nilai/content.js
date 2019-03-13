@@ -203,7 +203,7 @@ class Content extends Component {
         if (type === 'skill') {
             title.push(
                 <div className="title-page">
-                    Masukan Nilai Ketrampilan
+                    Masukan Nilai Keterampilan
                </div>
             )
         }else if(type === 'knowledge'){
@@ -229,7 +229,7 @@ class Content extends Component {
                                         {main_content}
                                     </div>
                                     <div className="margin-top-3 align-right padding-bottom-3">
-                                        <button className="submit-btn" onClick={(e) => { this.handlSave(e) }}>Submit </button>
+                                        <button className="submit-btn" onClick={(e) => { this.handlSave(e) }}>Simpan </button>
                                     </div>
                                 </div>
                             </div>

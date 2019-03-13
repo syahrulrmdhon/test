@@ -83,11 +83,11 @@ class ParticipantUser extends Component {
                     <div className="react-confirm-alert modal-alert">
                         <div className="react-confirm-alert-body">
                             <div className="header align-center">
-                                <h1>Pastikan anda sudah centang partisipan siswa yang akan mengikuti tugas ini ? </h1>
+                                <h1>Pastikan anda sudah pilih partisipan siswa yang sesuai ? </h1>
                             </div>
                             <div className="react-confirm-alert-button-group toggle">
                                 <div className="align-center fullwidth">
-                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
+                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Periksa ulang</a>
                                     <a href="javascript:void(0);" className="btn green" onClick={() => {this.onConfirm(); onClose();}}>Yakin</a>
                                 </div>
                             </div>

@@ -1821,6 +1821,10 @@ input, td {
   margin-bottom: 32px;
 }
 
+.icon-pencil {
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 800px) {
   .switch img.logo-account {
     width: 250%;

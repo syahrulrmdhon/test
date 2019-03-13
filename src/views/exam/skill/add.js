@@ -40,7 +40,7 @@ class Add extends Component{
         data['problem_types'] = this.props.problem_types
         data.include_question = false
         let url = `/v1/assessments/${this.state.assessment_id}/exams/validate?step=BasicForm&category=skill`
-        let msg = 'tambah'
+        let msg = 'dibuat'
         let action = 'post'
         let route = `/question-skill/${this.state.assessment_id}`
         let addText = ', selanjutnya masuk ke form beri soal'
@@ -55,11 +55,11 @@ class Add extends Component{
 
         apiClient(action, url, data).then(response => {
             modal({
-                message: 'Berhasil',
-                description: `Selamat berhasil ${msg} tugas keterampilan${addText}`,
+                message: 'Selamat',
+                description: `Tugas keterampilan berhasil  ${msg}`,
                 btns: [
                     {
-                        label: 'Selanjutnya',
+                        label: 'Lanjut',
                         className: 'btn green',
                         event: this.props.history.push(route)
                     }
@@ -69,7 +69,7 @@ class Add extends Component{
             console.log(err.response)
             modal({
                 message: 'Gagal',
-                description: `Gagal ${msg} tugas keterampilan, periksa kembali data yang dibutuhkan`,
+                description: `Tugas keterampilan gagal ${msg}. Silakan periksa ulang.`,
                 btns: [
                     {
                         label: 'Ulangi',

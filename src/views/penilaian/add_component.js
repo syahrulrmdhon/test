@@ -31,7 +31,7 @@ class AddComponent extends Component {
         this.props.getNew(this.state.assessment_id)
     }
 
-    onSubmit(){
+    onSubmit(event){
         event.preventDefault(); 
         let data = this.props.assessment
         const assessment_id = this.state.assessment_id
@@ -89,7 +89,7 @@ class AddComponent extends Component {
                     modal({
                         message: 'Selamat',
                         // description: 'Anda berhasil menyimpan topik, silakan klik tombol lihat untuk membuat tugas.',
-                        description: "Topik selesai dibuat. Klik tombol 'Lihat' untuk buat Tugas",
+                        description: "Topik selesai dibusat. Klik tombol 'Lihat' untuk buat Tugas",
                         btns: [
                             {
                                 label: 'Selesai',
