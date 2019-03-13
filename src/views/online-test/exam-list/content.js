@@ -135,7 +135,7 @@ export default class ContentOnlineExam extends Component {
         }
         return (
             <div className='col-sm-9 right-block w-100'>
-                <div className="padding-top-6 margin-left-3 margin-right-6 h-100">
+                <div className="margin-left-3 margin-right-3 h-100">
                     <div className='header-content margin-bottom-4'>
                         <label className='header-title disblock padding-top-6'>Daftar Ujian</label>
                         <label className='padding-top-2 info margin-bottom-3'>{data.header.type} {data.header.period}</label>
