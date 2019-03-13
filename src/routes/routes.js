@@ -38,6 +38,7 @@ import NewPassword from '../views/auth/password/new-password';
 import ExamDetail from './../views/exam/detail/index'
 import DetailScoreAttitude from './../views/beri-nilai/attitude/'
 import NewAttitudeScore from './../views/beri-nilai/attitude/new'
+import OnlineExamList from './../views/online-test/exam-list/index'
 
 //profile
 import BasicInformation from './../views/profile/basic'
@@ -230,6 +231,10 @@ export const MainRoutes = [
     {
         path: '/profile/teach-list',
         component:TeachList
+    },
+    {
+        path: '/online-exam/list',
+        component: OnlineExamList
     },
     {
         path: '*',

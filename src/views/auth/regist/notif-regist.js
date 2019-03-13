@@ -44,7 +44,7 @@ export default class NotifRegist extends Component {
                 description: 'Email sudah terkirim, cek kembali email Anda',
                 btns: [
                     {
-                        label: 'Lanjut',
+                        label: 'Selesai',
                         className: 'btn green',
                         event: this.props.history.push('/notif-regist')
                     }
@@ -90,7 +90,7 @@ export default class NotifRegist extends Component {
                         </span>
                         </div>
                         <div className="confirm margin-top-2">
-                            Email kamu salah?
+                            Kirim email verifikasi ke email lain?
                         <span className='normal-text-green'>
                                 <Link to='/verification'>&nbsp;Ubah Email</Link>
                             </span>

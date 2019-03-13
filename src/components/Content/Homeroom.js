@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 
 import { TabContent, TabPane, Input, Button, Form } from 'reactstrap'
 import Select from 'react-select'
-import { getExtracurriculars, handleEvent, addNote } from '../../redux-modules/modules/studentDetail'
+import { getExtracurriculars, handleEvent, addNote, handleRemoveNote } from '../../redux-modules/modules/studentDetail'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { apiClient } from '../../utils/apiClient'
+var FontAwesome = require('react-fontawesome')
 
 class Homeroom extends Component {
   constructor () {
@@ -13,6 +15,18 @@ class Homeroom extends Component {
       extracurriculars: [],
       notes: []
     }
+    this.handleRemove = this.handleRemove.bind(this)
+  }
+
+  handleRemove(index, noteId, field) {
+    this.props.handleRemoveNote(index, noteId, field)
+    const url = `v1/students/${this.props.studentId}/destroy_note`
+    const data = {
+      "achievement_type": field,
+      "achievement_id": noteId
+    }
+
+    apiClient('delete', url, data)
   }
 
   render() {
@@ -36,23 +50,26 @@ class Homeroom extends Component {
               selectedExtracurricular.isDisabled = true
             }
             notes.push(
-              <div key={index} className="mb-4">
-                <Select 
-                  key={Math.random()}
-                  classNamePrefix="select"
-                  value={selectedExtracurricular}
-                  onChange={event => this.props.handleEvent(event.value, 'extracurricular_id', {id: note.id, order: index})}
-                  options={this.props.notes.extracurriculars}
-                  placeholder='Pilih Tipe Ekstrakurikuler'
-                  isDisabled={!homeroomId} />  
-                <Input 
-                  onChange={(event) => this.props.handleEvent(event.target.value, 'description', {id: note.id, order: index})} 
-                  value={note.description} 
-                  className="homeroom-teacher__input mt-3" 
-                  rows="5" 
-                  type="textarea" 
-                  placeholder="Tulis Deskripsi Estrakurikuler disini ..."
-                  disabled={!homeroomId} />
+              <div key={index} className="mb-4 position-relative">
+                <div className="note-wrapper">
+                  <Select 
+                    key={Math.random()}
+                    classNamePrefix="select"
+                    value={selectedExtracurricular}
+                    onChange={event => this.props.handleEvent(event.value, 'extracurricular_id', {id: note.id, order: index})}
+                    options={this.props.notes.extracurriculars}
+                    placeholder='Pilih Tipe Ekstrakurikuler'
+                    isDisabled={!homeroomId} />  
+                  <Input 
+                    onChange={(event) => this.props.handleEvent(event.target.value, 'description', {id: note.id, order: index})} 
+                    value={note.description} 
+                    className="homeroom-teacher__input mt-3" 
+                    rows="5" 
+                    type="textarea" 
+                    placeholder="Tulis Deskripsi Estrakurikuler disini ..."
+                    disabled={!homeroomId} />
+                  </div>
+                  <FontAwesome name="trash" className="remove" onClick={() => {this.handleRemove(index, note.id, 'extracurricular')}}/>
               </div>
             )
             let noteId = {}
@@ -78,7 +95,7 @@ class Homeroom extends Component {
         }
       }
     }
-    
+
     return (
       <div>
         <TabContent activeTab={this.props.activeTab}>
@@ -141,7 +158,8 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getExtracurriculars,
     handleEvent,
-    addNote
+    addNote,
+    handleRemoveNote
   }, dispatch
 )
 

@@ -1,0 +1,39 @@
+$nunito_light: "NunitoLight";
+$nunito_regular: "NunitoRegular";
+$nunito_semi_bold: "NunitoSemiBold";
+$nunito_bold: "NunitoBold";
+
+.online-exam {
+  //   .left-block {
+  //   }
+
+  .right-block {
+    .header-content {
+      border-bottom: solid 0.5px #d3d9dd;
+      .info {
+        font-family: $nunito_regular;
+        color: #a1a1a1;
+        font-size: 10px;
+      }
+    }
+    &__panel-wrapper {
+      padding-top: 24px;
+      height: 95%;
+      .not-available {
+        height: 400px;
+      }
+    }
+    &__panel {
+      background-color: #ffffff;
+      box-shadow: 0 2px 8px 0 rgba(30, 30, 30, 0.05);
+      margin-bottom: 20px;
+      padding: 18px 13.5px;
+      border: 1px solid rgba(204, 204, 204, 0.5);
+      height: 120px;
+    }
+    &__panel-part {
+        border-right: solid 0.5px #e8e8e8;
+        height: 95%;
+    }
+  }
+}
