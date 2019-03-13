@@ -35,14 +35,15 @@ export class componentName extends Component {
       startDate: null,
       regionOptions: [],
       citiesOptions: [],
-      cityDefaultOpt:[]
+      cityDefaultOpt: [],
+      base64:''
     }
     this.submit = this.submit.bind(this)
     this.onCofirm = this.onCofirm.bind(this)
     this.handleChange = this.handleChange.bind(this);
     this.handleRegion = this.handleRegion.bind(this)
     this.handleCity = this.handleCity.bind(this)
-
+    this.onPreviewPhoto = this.onPreviewPhoto.bind(this)
   }
 
   componentDidMount() {
@@ -65,7 +66,7 @@ export class componentName extends Component {
 
 
   handleCity(region) {
-    console.log(region,",")
+    console.log(region, ",")
     apiClient('get', `/v1/filters/cities?region_id=${region}`).then(response => {
       let city = response.data.data.cities || []
       const temps = city
@@ -93,7 +94,6 @@ export class componentName extends Component {
   }
   onCofirm(e) {
     e.preventDefault()
-
     confirmAlert({
       customUI: ({ onClose, onConfirm }) => {
         return (
@@ -116,9 +116,19 @@ export class componentName extends Component {
   }
 
   submit() {
-    const { value } = this.state
     let userObj = {}
-    userObj['user'] = this.props.user && this.props.user.user
+    let data_attitbutes = this.props.user && this.props.user.user && this.props.user.user.address_attributes
+    console.log(this.state.base64)
+    let data = {
+      address_attributes:data_attitbutes,
+      dob:this.props.user && this.props.user.user && this.props.user.user.dob,
+      pob:this.props.user && this.props.user.user && this.props.user.user.pob,
+      email:this.props.user && this.props.user.user && this.props.user.user.email,
+      phone_number:this.props.user && this.props.user.user && this.props.user.user.phone_number,
+      photo_url:this.state.base64
+    }
+    userObj['user'] =  data
+    console.log(userObj)
 
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
@@ -155,24 +165,40 @@ export class componentName extends Component {
 
   }
 
+  onPreviewPhoto(evt) {
+    var files = evt.target.files;
+    for (var i = 0, len = files.length; i < len; i++) {
+      var file = files[i];
+      var reader = new FileReader();
+      reader.onload = ((event) => { 
+        console.log(event.target.result)
+        this.setState({
+          base64:event.target.result
+        })
+        document.getElementById("image").src = event.target.result
+      })
+      reader.readAsDataURL(file);
+    }
+  }
 
 
   render() {
     let full_name = this.props.user && this.props.user.user && this.props.user && this.props.user.user.full_name
     let address = this.props.user && this.props.user.user && this.props.user && this.props.user.user.address_attributes && this.props.user.user.address_attributes.street
     let region = this.props.region && this.props.region.user && this.props.region.user.data && this.props.region.user.data.user && this.props.region.user.data.user.address_attributes && this.props.region.user.data.user.address_attributes.region_id
-    let city =this.props.region && this.props.region.user && this.props.region.user.data && this.props.region.user.data.user && this.props.region.user.data.user.address_attributes && this.props.region.user.data.user.address_attributes.city_id
+    let city = this.props.region && this.props.region.user && this.props.region.user.data && this.props.region.user.data.user && this.props.region.user.data.user.address_attributes && this.props.region.user.data.user.address_attributes.city_id
     let postal_code = this.props.user && this.props.user.user && this.props.user && this.props.user.user.address_attributes && this.props.user.user.address_attributes.postal_code
     let phone = this.props.user && this.props.user.user && this.props.user && this.props.user.user.phone_number
     let email = this.props.user && this.props.user.user && this.props.user && this.props.user.user.email
     let dob = this.props.user && this.props.user.user && this.props.user && this.props.user.user.dob
     let pob = this.props.user && this.props.user.user && this.props.user && this.props.user.user.pob
+    let photo_url = this.props.user && this.props.user.user && this.props.user && this.props.user.user.url
 
     let check_dob = dob ? dob : null
 
     let select_region = []
     let select_city = []
-    let data_cities = this.state.citiesOptions.length === 0 ? this.state.cityDefaultOpt:this.state.citiesOptions 
+    let data_cities = this.state.citiesOptions.length === 0 ? this.state.cityDefaultOpt : this.state.citiesOptions
     select_region.push(
       <Select
         classNamePrefix="select"
@@ -191,14 +217,39 @@ export class componentName extends Component {
         placeholder="Masukan Nama Kota Kecamatan"
         value={data_cities.find((element) => { return element.value === city })}
         options={data_cities}
-        onChange={(e) => {  this.props.handlingInputSelectRegion(e, 'city_id') }}
+        onChange={(e) => { this.props.handlingInputSelectRegion(e, 'city_id') }}
       />
     )
 
-    console.log(this.state.citiesOptions, "citys")
-    
-    
     dob = dob ? dob : new Date()
+    let action = []
+    if(photo_url === '' || photo_url === null ){
+      action.push(
+        <div className="col-sm-12">
+          <label htmlFor="1" className="pointer padding-2 border-full label-upload label-text">
+            Unggah Foto Baru
+          <i class="margin-left-2 fa fas fa-upload"></i>
+          </label>
+        </div>
+      )
+    }else{
+      action.push(
+        <div className="col-sm-12">
+          <label htmlFor="1" className="pointer padding-2 border-full label-upload label-text">
+            Unggah Foto Baru
+          <i class="margin-left-2 fa fas fa-upload"></i>
+          </label>
+          <label htmlFor="1" className="pointer margin-left-2 padding-2 border-full hapus-foto label-text">
+            Hapus Foto
+          </label>
+          <input type="file" className="button-upload" onChange={this.onPreviewPhoto} id="1" />
+        </div>
+      )
+    }
+
+    let data_photo = photo_url ? photo_url:User
+    console.log(data_photo)
+    
     return (
       <Page title="Basic Information">
         <Header />
@@ -212,9 +263,29 @@ export class componentName extends Component {
                   </div>
                   <div className="col-sm-10 right-block">
                     <div className="padding-top-3 padding-left-4 ">
+                      <form name="form" id="form">
                       <div className="margin-top-5">
-                        <Avatar src={User} round={true} size={50} />
-                        {/* <span className="school-name margin-left-3">{full_name}</span> */}
+                        <div className="row">
+                          <div className="col-sm-12">
+                            <div className="col-sm-1">
+                              <img id="image" src="https://s3-ap-southeast-1.amazonaws.com/internal.gredu.co/dev/profile_picture/ca75fb16-1aa9-4d98-9f2c-38ed89cb3083.jpg" className="profile-photo" alt="/" />
+                            </div>
+                            <div className="col-sm-6 margin-left-6 margin-top-2">
+                                {action}
+                              <div className="col-sm-12">
+                                <div className="notice margin-top-2">
+                                  Besar file maksimum: 1 Mb
+                                </div>
+                                <div className="notice margin-top-1">
+                                  Ekstensi file yang diperbolehkan: .PNG, jpg, dan jpeg.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                        </div>
                       </div>
                       <div className="form-position padding-top-4">
                         <div className="row">
@@ -358,6 +429,7 @@ export class componentName extends Component {
                           </div>
                         </div>
                       </div>
+                      </form>
                       <div className="form-position padding-top-4">
                         <div className="row">
                           <div className="col-sm-12">
