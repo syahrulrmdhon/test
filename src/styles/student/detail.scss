@@ -86,7 +86,7 @@ $nunito_bold: 'NunitoBold';
   }
 
   .main-block {
-    height: 485px;
+    min-height: 485px;
   }
 
   .tab-content {
@@ -97,6 +97,7 @@ $nunito_bold: 'NunitoBold';
 
       .left-content {
         height: 100%;
+        padding-bottom: 0px;
       }
     }
   }
