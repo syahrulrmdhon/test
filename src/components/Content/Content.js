@@ -363,7 +363,9 @@ class Content extends Component {
                   activeTab={this.state.activeTab}
                   knowledgeScore={this.state.knowledgeScore}
                   skillScore={this.state.skillScore}
-                  attitudeScore={this.state.attitudeScore} />
+                  attitudeScore={this.state.attitudeScore}
+                  studentId={this.props.studentId}
+                  redirect={this.props.redirect}/>
               </RightSide>
             </div>
           </TabPane>
