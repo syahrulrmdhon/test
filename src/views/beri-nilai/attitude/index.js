@@ -29,17 +29,24 @@ export class index extends Component {
         let data_title = this.props.data_panel && this.props.data_panel && this.props.data_panel.attitude && this.props.data_panel.attitude.data && this.props.data_panel.attitude.data
         console.log(data_title, "here ")
         let title = []
-        if (data_title && data_title.assessment_type === 'final_aspect') {
+        let aspect= []
+        if (data_title && data_title.assessment_type === 'final_subject') {
             title.push(
-                <div className="block">
+                <div className="block bold score-attitude-title">
                     Daftar Sikap Akhir Mata Pelajaran
                 </div>
             )
+            aspect.push(
+                <span className="score-attitude-aspect">{data_title ? data_title.subject_name : 'N/A'}</span>
+            )
         } else {
             title.push(
-                <div className="block">
+                <div className="block score-attitude-title " >
                     Daftar Penilaian Akhir Aspek Sikap
                 </div>
+            )
+            aspect.push(
+                <span className="score-attitude-aspect ">{data_title ? data_title.aspect_name : 'N/A'}</span>
             )
         }
         return (
@@ -54,7 +61,7 @@ export class index extends Component {
                                 <div className="padding-top-3">
                                     {title}
                                     <div>
-                                        <span className="score-attitude__subject">{data_title ? data_title.subject_name : 'N/A'}</span>
+                                       {aspect}
                                     </div>
                                 </div>
                                 <div className="padding-top-2">

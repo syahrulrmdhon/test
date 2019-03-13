@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Header from '../../global/header'
-var FontAwesome = require('react-fontawesome')
 import Classes from './classes'
 // import {getDataExamClass} from './../../../utils/exam_class'
 import { getParticipant, addClass, removeClass } from './../../../redux-modules/modules/exam'
@@ -12,6 +11,7 @@ import Page from './../../../components/Title'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {modal} from './../../global/modal'
+var FontAwesome = require('react-fontawesome')
 
 class ParticipantClass extends Component {
     constructor(props){
@@ -67,28 +67,19 @@ class ParticipantClass extends Component {
                 exam_classes_attribute.deadline_date = getDate('case-5', deadline_date)
 
                 this.props.exam.data.exam.exam_classes_attributes[idx] = exam_classes_attribute
+              
+
             })
         }
 
         if(data){
             let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/validate?step=ClassForm`
-
             apiClient('post', url, this.props.exam.data).then(response => {
-                modal({
-                    message: 'Berhasil',
-                    description: 'Anda telah berhasil menyimpan partisipan kelas, selanjutnya anda masukkan user dari setiap kelas tersebut.',
-                    btns: [
-                        {
-                            label: 'Selanjutnya',
-                            className: 'btn green',
-                            event: this.props.history.push(`/pariticipant-user/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`)
-                        }
-                    ]
-                })
+                this.props.history.push(`/pariticipant-user/${this.state.assessment_id}/assessment/${this.state.exam_id}/exam`)
             }).catch(error => {
                 modal({
                     message: 'Gagal',
-                    description: 'Anda gagal menyimpan partisipan kelas, periksa kembali data yang dibutuhkan.',
+                    description: 'Mohon periksa kembali data yang Anda masukkan.',
                     btns: [
                         {
                             label: 'Ulangi',

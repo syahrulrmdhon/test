@@ -33,7 +33,7 @@ class AddQuestion extends Component {
         const problem_types = this.props.problem_types
         const problem_type_sets = this.props.problem_type_sets
         const data = this.props.exam
-        let msg = 'tambah'
+        let msg = 'dibuat'
         let url;
         let action;
 
@@ -53,7 +53,7 @@ class AddQuestion extends Component {
         }
 
         if(this.state.exam_id){
-            msg = 'ubah'
+            msg = 'diubah'
             action = 'put'
             url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}`
         } else {
@@ -65,7 +65,7 @@ class AddQuestion extends Component {
             if(!this.state.exam_id){
                 apiClient('post', `/v1/assessments/${this.state.assessment_id}/exams`, data).then(response => {
                     modal({
-                        message: 'Berhasil',
+                        // message: 'Berhasil',
                         description: `Selamat berhasil ${msg} komponen beri soal keterampilan`,
                         btns: [
                             {
@@ -78,8 +78,8 @@ class AddQuestion extends Component {
                 })
             } else {
                 modal({
-                    message: 'Berhasil',
-                    description: `Selamat berhasil ${msg} komponen beri soal keterampilan`,
+                    message: 'Selamat',
+                    description: `Langkah kerja tugas berhasil ${msg}.`,
                     btns: [
                         {
                             label: 'Selesai',
@@ -92,7 +92,7 @@ class AddQuestion extends Component {
         }).catch(err => {
             modal({
                 message: 'Gagal',
-                description: `Gagal ${msg} komponen beri soal keterampilan, periksa kembali data yang dibutuhkan`,
+                description: `Detil langkah kerja gagal ${msg}. Silakan periksa ulang.`,
                 btns: [
                     {
                         label: 'Ulangi',

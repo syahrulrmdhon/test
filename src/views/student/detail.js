@@ -39,6 +39,7 @@ export default class Detail extends Component {
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
     this.getStudentDetail = this.getStudentDetail.bind(this)
+    this.redirect = this.redirect.bind(this)
   }
 
   componentDidMount() {
@@ -71,6 +72,13 @@ export default class Detail extends Component {
     this.setState({
       endDate: date
     });
+  }
+
+  redirect(id) {
+    this.props.history.push({
+      pathname: `/detail/${this.state.studentId}/description/${id}`,
+      state: { prev: 'studentDetail' }
+    })
   }
 
   render() {
@@ -114,7 +122,8 @@ export default class Detail extends Component {
               activeTab={this.state.activeMenu}
               dataProfile={this.state.profile}
               subjects={this.state.subjects}
-              studentId={this.state.studentId} />
+              studentId={this.state.studentId} 
+              redirect={this.redirect}/>
           </div>
         </div>
       </Page>
