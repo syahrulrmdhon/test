@@ -4,10 +4,12 @@ $nunito_semi_bold: "NunitoSemiBold";
 $nunito_bold: "NunitoBold";
 
 .online-exam {
+  .content-block.main-block,
+  .content-block.main-block .left-block,
+  .content-block.main-block .right-block {
+    min-height: 530px;
+  }
   .right-block {
-      max-height: 500px;
-      overflow-y: scroll;
-      overflow-x: hidden;
     .header-content {
       border-bottom: solid 0.5px #d3d9dd;
     }
@@ -43,7 +45,6 @@ $nunito_bold: "NunitoBold";
       text-decoration: underline;
     }
     &__panel-wrapper {
-      height: 90%;
       .not-available {
         height: 400px;
       }
@@ -54,11 +55,10 @@ $nunito_bold: "NunitoBold";
       margin-bottom: 20px;
       padding: 18px 13.5px;
       border: 1px solid rgba(204, 204, 204, 0.5);
-      height: 130px;
+      height: 120px;
     }
     &__panel-part {
       border-right: solid 0.5px #e8e8e8;
-      height: 90px;
     }
     .s-line {
       border-right: solid 1px #d3d9dd;

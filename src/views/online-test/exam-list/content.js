@@ -65,7 +65,7 @@ export default class ContentOnlineExam extends Component {
                     detail: {
                         choices: 60,
                         essay: 40,
-                        desc: 'Pelajari Kitab Al Umm dan Al Muhaddzab karya Asy Syairozi atau Syarh Al Muhaddzab karya Imam Nawawi yang dilanjutkan As Subkiy dan Syaikh Muhammad Al Bakhit'
+                        desc: 'Pelajari Kitab Al Umm dan Al Muhaddzab karya Asy Syairozi atau Syarh Al Muhaddzab karya Imam Nawawi'
                     }
                 }
             ]
@@ -78,9 +78,9 @@ export default class ContentOnlineExam extends Component {
             let list = data.list
             list.map((x) => {
                 content.push(
-                    <div className='disblock right-block__panel-wrapper' key={Math.random()}>
+                    <div className='disblock' key={Math.random()}>
                         <div className='right-block__panel'>
-                            <div className='row'>
+                            <div className='row h-100'>
                                 <div className='col-sm-4 right-block__panel-part'>
                                     <label className='header-title disblock padding-bottom-1'>{x.info.name}</label>
                                     <div>
@@ -120,12 +120,6 @@ export default class ContentOnlineExam extends Component {
                                     <DetailOnlineExam
                                         detail={x.detail}
                                     />
-                                    {/* <div>
-                                            <label className='info padding-bottom-2'>
-                                                {x.detail.choices} Pilihan Ganda & {x.detail.essay} Essay
-                                            </label>
-                                            <label className='info text-justify'>{x.detail.desc}</label>
-                                        </div> */}
                                 </div>
                             </div>
                         </div>
@@ -141,11 +135,15 @@ export default class ContentOnlineExam extends Component {
         }
         return (
             <div className='col-sm-9 right-block w-100'>
-                <div className='header-content margin-bottom-4'>
-                    <label className='header-title disblock padding-top-6'>Daftar Ujian</label>
-                    <label className='padding-top-2 info margin-bottom-3'>Ujian Tengah Semester [Periode]</label>
+                <div className="padding-top-6 margin-left-3 margin-right-6 h-100">
+                    <div className='header-content margin-bottom-4'>
+                        <label className='header-title disblock padding-top-6'>Daftar Ujian</label>
+                        <label className='padding-top-2 info margin-bottom-3'>{data.header.type} {data.header.period}</label>
+                    </div>
+                    <div className='right-block__panel-wrapper margin-bottom-4'>
+                        {content}
+                    </div>
                 </div>
-                {content}
             </div>
         )
     }
