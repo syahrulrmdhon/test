@@ -28,19 +28,19 @@ class AddFinalAttitude extends Component {
     componentDidMount(){
         const {assessment_type, assessment_classes_attributes} = this.props.assessment
 
-        // let assessment_class = this.props.assessment.assessment_classes_attributes
-        // let class_id = ''
+        let assessment_class = this.props.assessment.assessment_classes_attributes
+        let class_id = ''
 
-        // assessment_class.map((x) =>{
-        //     class_id = x.class_id
-        // })
+        assessment_class.map((x) =>{
+            class_id = x.class_id
+        })
 
         // console.log(class_id,"here here")
 
         switch(assessment_type){
             case 'final_subject':
                 subjects.call(this, false, {
-                    listOptions: true
+                    listOptions: class_id
                 })
             break;
             case 'final_aspect':
