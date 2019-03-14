@@ -61,23 +61,21 @@ export default class NewPassword extends Component {
         const { value } = this.state
         var base = []
 
-        // HIDE UPLOAD PHOTO
-        // if (this.state.editor.state.image) {
-        //     var currentSrc = this.state.editor.state.image.currentSrc
-        //     var result = currentSrc.split(';')
-        //     base = result[1].split(',')
-        // }
+        if (this.state.editor.state.image) {
+            var currentSrc = this.state.editor.state.image.currentSrc
+            var result = currentSrc.split(';')
+            base = result[1].split(',')
+        }
 
         const url = `authentication/activate`
         const user = {
             password: value.pass_value,
             password_confirmation: value.re_pass_value,
 
-            // HIDE UPLOAD PHOTO
-            // user_picture: {
-            //     src: base[1],
-            //     content_type: this.state.contentType
-            // }
+            user_picture: {
+                src: base[1],
+                content_type: this.state.contentType
+            }
         }
         let data = {}
         data['user'] = user
@@ -97,40 +95,28 @@ export default class NewPassword extends Component {
         }).catch(err => {
             let errMsg = err.response.data.errors[0].description[0]
 
-            // SEMENTARA TANPA UPLOAD PHOTO REQUEST BY RENO 14 MARET 2019
-            error({
-                message: errMsg,
-                btns: [
-                    {
-                        label: 'Ulangi',
-                        className: 'btn bcred cwhite'
-                    }
-                ]
-            })
-
-            // HIDE UPLOAD PHOTO
-            // if (base.length > 0) {
-            //     error({
-            //         message: errMsg,
-            //         btns: [
-            //             {
-            //                 label: 'Ulangi',
-            //                 className: 'btn bcred cwhite'
-            //             }
-            //         ]
-            //     })
-            // }
-            // else {
-            //     error({
-            //         message: 'Photo harus di unggah',
-            //         btns: [
-            //             {
-            //                 label: 'Ulangi',
-            //                 className: 'btn bcred cwhite'
-            //             }
-            //         ]
-            //     })
-            // }
+            if (base.length > 0) {
+                error({
+                    message: errMsg,
+                    btns: [
+                        {
+                            label: 'Ulangi',
+                            className: 'btn bcred cwhite'
+                        }
+                    ]
+                })
+            }
+            else {
+                error({
+                    message: 'Photo harus di unggah',
+                    btns: [
+                        {
+                            label: 'Ulangi',
+                            className: 'btn bcred cwhite'
+                        }
+                    ]
+                })
+            }
         })
     }
     setEditorRef(editor) {
@@ -151,7 +137,6 @@ export default class NewPassword extends Component {
                     <div className="body-gredu">
                         <form onSubmit={this.handleSubmit.bind(this)}>
                             
-                            {/* HIDE UPLOAD PHOTO
                             <div className="ava margin-bottom-4">
                                 <Avatar
                                     width={90}
@@ -170,7 +155,7 @@ export default class NewPassword extends Component {
                             <div className="margin-top-6 align-center">
                                 <i className='fa fa-camera'></i>
                                 <span className='info'> Ubah Foto Profil</span>
-                            </div> */}
+                            </div>
                             <div className="direct align-center margin-top-6 margin-bottom-4">
                                 Buat Kata Sandi Baru Kamu
                             </div>
