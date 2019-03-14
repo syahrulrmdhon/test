@@ -73,7 +73,6 @@ export default class ContentOnlineExam extends Component {
         }
 
         let content = []
-        let detail = []
         if (data && data.list) {
             let list = data.list
             list.map((x) => {
@@ -94,25 +93,12 @@ export default class ContentOnlineExam extends Component {
                                         <div className='right-block__basic-info'>
                                             {x.info.time}
                                         </div>
-                                        {/* <i className='fa fa-calendar-o'></i>
-                                        <label className='info s-line padding-side-2'>
-                                            {x.info.date}
-                                        </label>
-                                        <label className='padding-side-2 info s-line'>
-                                            {x.info.type}
-                                        </label>
-                                        <label className='padding-side-2 info'>
-                                            {x.info.time}
-                                        </label> */}
                                     </div>
                                     <label className='p'>{x.info.class}</label>
                                     <div className='padding-top-2 right-block__action-wrapper'>
                                         <div className='right-block__action'>Lihat</div>
                                         <div className='right-block__action'>Ubah Soal</div>
                                         <div className='right-block__action'>Hapus Soal</div>
-                                        {/* <label className='p-green-link padding-right-2 s-line'>Lihat</label>
-                                        <label className='p-green-link padding-side-2 s-line'>Ubah Soal</label>
-                                        <label className='p-green-link padding-side-2'>Hapus Soal</label> */}
                                     </div>
                                 </div>
                                 <div className='col-sm-4 right-block__panel-part padding-top-4'>
