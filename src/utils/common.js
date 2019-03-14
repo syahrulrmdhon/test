@@ -354,9 +354,9 @@ export function basicComps(params = {}, options = {}) {
         this.setState(obj)
     })
 }
-export function subjects(params ={} , options) {
-    let listOptions = options.class_id || false
-    apiClient('get', 'v1/filters/subjects', false, options).then(response => response.data).then(data => {
+export function subjects(params ={} , options={}) {
+    let listOptions = options.listOptions || false
+    apiClient('get', 'v1/filters/subjects', false, params).then(response => response.data).then(data => {
         let subjects = data.data.subjects || []
 
         if ((subjects.length > 0) && listOptions) {
