@@ -58,6 +58,11 @@ export class componentName extends Component {
     cities.call(this, false, {
       cityDefaultOpt: true,
     })
+    const url = 'v1/users'
+      apiClient('get', url).then(res => {
+          localStorage.setItem("user", JSON.stringify(res.data.data.user))
+          
+      })
 
   }
 
@@ -137,8 +142,10 @@ export class componentName extends Component {
       full_name: this.props.user && this.props.user.user && this.props.user.user.full_name,
     }
     userObj['user'] = data
+    localStorage.removeItem('user')
 
 
+    // attribute full
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
       modal({
@@ -148,12 +155,14 @@ export class componentName extends Component {
           {
             label: 'Lanjut',
             className: 'btn green',
+            // event:getUser(false)
           }
         ]
       })
       this.onRedirect()
       getUser(false)
       // window.location.href="/profile/basic-information"
+
       window.location.reload(true)
 
     })
@@ -189,6 +198,7 @@ export class componentName extends Component {
         document.getElementById("image").src = event.target.result
       })
       reader.readAsDataURL(file);
+    
     }
   }
 

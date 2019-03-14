@@ -86,19 +86,19 @@ export default class NotifRegist extends Component {
                         <div className="confirm align-center margin-top-6">
                             Tidak menerima email verifikasi?
                         <span className='normal-text-green' onClick={this.handleSubmit.bind(this)}>
-                                &nbsp;Kirim Ulang
+                                Kirim Ulang
                         </span>
                         </div>
                         <div className="confirm margin-top-2">
                             Kirim email verifikasi ke email lain?
                         <span className='normal-text-green'>
-                                <Link to='/verification'>&nbsp;Ubah Email</Link>
+                                <Link to='/verification'>Ubah Email</Link>
                             </span>
                         </div>
                         <div className='contact margin-top-2'>
                             Ada kendala di akun ini?
                         <span className='normal-text-green'>
-                                <a href="mailto:help@gredu.asia">&nbsp;Hubungi Gredu</a>
+                                <a href="mailto:help@gredu.asia">Hubungi Gredu</a>
                             </span>
                         </div>
 
