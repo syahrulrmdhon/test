@@ -87,9 +87,16 @@ class Content extends Component {
   }
 
   toggle(tab) {
+    let tabmenu = 1
+    if(tab === 1){
+      tabmenu = 1
+    }else if(tab === 2) {
+      tabmenu = 2
+    }
+    console.log(tabmenu,"menu")
     if (this.state.activeTab !== tab) {
       this.setState({
-        activeTab: tab
+        activeTab: tabmenu
       })
     }
   }

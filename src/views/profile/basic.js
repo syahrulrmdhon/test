@@ -21,8 +21,10 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import { error, modal } from './../global/modal'
 import {
   region,
-  cities
+  cities,
+  getUser
 } from './../../utils/common'
+
 
 // scss
 import './../../styles/profile.scss'
@@ -36,7 +38,7 @@ export class componentName extends Component {
       regionOptions: [],
       citiesOptions: [],
       cityDefaultOpt: [],
-      base64:''
+      base64: ''
     }
     this.submit = this.submit.bind(this)
     this.onCofirm = this.onCofirm.bind(this)
@@ -44,6 +46,7 @@ export class componentName extends Component {
     this.handleRegion = this.handleRegion.bind(this)
     this.handleCity = this.handleCity.bind(this)
     this.onPreviewPhoto = this.onPreviewPhoto.bind(this)
+    this.onRedirect = this.onRedirect.bind(this)
   }
 
   componentDidMount() {
@@ -115,18 +118,26 @@ export class componentName extends Component {
     })
   }
 
+  onRedirect() {
+    // localStorage.removeItem('user')
+    getUser(false)
+
+  }
+
   submit() {
     let userObj = {}
     let data_attitbutes = this.props.user && this.props.user.user && this.props.user.user.address_attributes
     let data = {
-      address_attributes:data_attitbutes,
-      dob:this.props.user && this.props.user.user && this.props.user.user.dob,
-      pob:this.props.user && this.props.user.user && this.props.user.user.pob,
-      email:this.props.user && this.props.user.user && this.props.user.user.email,
-      phone_number:this.props.user && this.props.user.user && this.props.user.user.phone_number,
-      profile_url:this.state.base64.split(",")[1]
+      address_attributes: data_attitbutes,
+      dob: this.props.user && this.props.user.user && this.props.user.user.dob,
+      pob: this.props.user && this.props.user.user && this.props.user.user.pob,
+      email: this.props.user && this.props.user.user && this.props.user.user.email,
+      phone_number: this.props.user && this.props.user.user && this.props.user.user.phone_number,
+      profile_url: this.state.base64.split(",")[1],
+      full_name: this.props.user && this.props.user.user && this.props.user.user.full_name,
     }
-    userObj['user'] =  data
+    userObj['user'] = data
+
 
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
@@ -137,10 +148,13 @@ export class componentName extends Component {
           {
             label: 'Lanjut',
             className: 'btn green',
-            event: window.location.href="/profile/basic-information"
           }
         ]
       })
+      // this.onRedirect()
+      getUser(false)
+      window.location.href="/profile/basic-information"
+
     })
       .catch(err => {
         let response = err.response
@@ -166,10 +180,10 @@ export class componentName extends Component {
     for (var i = 0, len = files.length; i < len; i++) {
       var file = files[i];
       var reader = new FileReader();
-      reader.onload = ((event) => { 
+      reader.onload = ((event) => {
         console.log(event.target.result)
         this.setState({
-          base64:event.target.result
+          base64: event.target.result
         })
         document.getElementById("image").src = event.target.result
       })
@@ -219,33 +233,35 @@ export class componentName extends Component {
 
     dob = dob ? dob : new Date()
     let action = []
-    if(photo_url === '' || photo_url === null ){
+    if (photo_url === '' || photo_url === null) {
       action.push(
         <div className="col-sm-12">
           <label htmlFor="1" className="pointer padding-2 border-full label-upload label-text">
             Unggah Foto Baru
           <i class="margin-left-2 fa fas fa-upload"></i>
           </label>
+          <input type="file" className="button-upload" onChange={this.onPreviewPhoto} id="1" />
+
         </div>
       )
-    }else{
+    } else {
       action.push(
         <div className="col-sm-12">
           <label htmlFor="1" className="pointer padding-2 border-full label-upload label-text">
             Unggah Foto Baru
           <i class="margin-left-2 fa fas fa-upload"></i>
           </label>
-          <label htmlFor="1" className="pointer margin-left-2 padding-2 border-full hapus-foto label-text">
+          {/* <label htmlFor="1" className="pointer margin-left-2 padding-2 border-full hapus-foto label-text">
             Hapus Foto
-          </label>
+          </label> */}
           <input type="file" className="button-upload" onChange={this.onPreviewPhoto} id="1" />
         </div>
       )
     }
 
-    let data_photo = photo_url ? photo_url:User
+    let data_photo = photo_url ? photo_url : User
     console.log(data_photo)
-    
+
     return (
       <Page title="Basic Information">
         <Header />
@@ -260,171 +276,171 @@ export class componentName extends Component {
                   <div className="col-sm-10 right-block">
                     <div className="padding-top-3 padding-left-4 ">
                       <form name="form" id="form">
-                      <div className="margin-top-5">
-                        <div className="row">
-                          <div className="col-sm-12">
-                            <div className="col-sm-1">
-                              <img id="image" src={data_photo} className="profile-photo" alt="/" />
-                            </div>
-                            <div className="col-sm-6 margin-left-6 margin-top-2">
+                        <div className="margin-top-5">
+                          <div className="row">
+                            <div className="col-sm-12">
+                              <div className="col-sm-1">
+                                <img id="image" src={data_photo} className="profile-photo" alt="/" />
+                              </div>
+                              <div className="col-sm-6 margin-left-6 margin-top-2">
                                 {action}
-                              <div className="col-sm-12">
-                                <div className="notice margin-top-2">
-                                  Besar file maksimum: 1 Mb
+                                <div className="col-sm-12">
+                                  <div className="notice margin-top-2">
+                                    Besar file maksimum: 1 Mb
                                 </div>
-                                <div className="notice margin-top-1">
-                                  Ekstensi file yang diperbolehkan: .PNG, jpg, dan jpeg.
+                                  <div className="notice margin-top-1">
+                                    Ekstensi file yang diperbolehkan: .PNG, jpg, dan jpeg.
+                                </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
 
-                        <div>
-                        </div>
-                      </div>
-                      <div className="form-position padding-top-4">
-                        <div className="row">
-                          <div className="col-sm-12">
-                            <div className="padding-top-3">
-                              <label>Nama Lengkap</label>
-                              <div className="padding-top-1 input-group ">
-                                <input
-                                  type="text"
-                                  className="col-sm-12  form-outine"
-                                  placeholder="Masukan Nama Lengkap"
-                                  defaultValue={full_name ? full_name : ''}
-                                  onChange={(e) => { this.props.handlingInputText(e, 'full_name') }}
-                                />
-                              </div>
-                            </div>
+                          <div>
                           </div>
                         </div>
-                      </div>
-                      <div className="form-position padding-top-2">
-                        <div className="row">
-                          <div className="col-sm-12">
-                            <div className="padding-top-3">
-                              <label>Alamat</label>
-                              <div className="padding-top-1 input-group ">
-                                <input
-                                  type="text"
-                                  className="col-sm-12  form-outine"
-                                  placeholder="Masukan Alamat"
-                                  defaultValue={address ? address : ''}
-                                  onChange={(e) => { this.props.handlingInputText(e, 'street') }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-position padding-top-2">
-                        <div className="row">
-                          <div className="fullwidth">
-                            <div className="padding-top-3">
-                              <div className="col-sm-4">
-                                <label>Provinsi</label>
-                                <div className="padding-top-1 input-group ">
-                                  {select_region}
-                                </div>
-                              </div>
-                              <div className="col-sm-4">
-                                <label>Kota Kecamatan</label>
-                                <div className="padding-top-1 input-group ">
-                                  {select_city}
-                                </div>
-                              </div>
-                              <div className="col-sm-4">
-                                <label>Kode Pos</label>
+                        <div className="form-position padding-top-4">
+                          <div className="row">
+                            <div className="col-sm-12">
+                              <div className="padding-top-3">
+                                <label>Nama Lengkap</label>
                                 <div className="padding-top-1 input-group ">
                                   <input
                                     type="text"
                                     className="col-sm-12  form-outine"
-                                    placeholder="Masukan Nama Kode Pos"
-                                    defaultValue={postal_code ? postal_code : ''}
-                                    onChange={(e) => { this.props.handlingInputText(e, 'postal_code') }}
+                                    placeholder="Masukan Nama Lengkap"
+                                    defaultValue={full_name ? full_name : ''}
+                                    onChange={(e) => { this.props.handlingInputText(e, 'full_name') }}
                                   />
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="form-position padding-top-2">
-                        <div className="row">
-                          <div className="fullwidth">
-                            <div className="padding-top-3">
-                              <div className="col-sm-4">
-                                <label>No. Telp</label>
-                                <div className="padding-top-1 input-group ">
-                                  <input
-
-                                    className="fullwidth"
-                                    placeholder="Masukan Nama Provinsi"
-                                    defaultValue={phone ? phone : ''}
-                                    onChange={(e) => { this.props.handlingInputText(e, 'phone_number') }}
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-sm-8">
-                                <label>Email</label>
+                        <div className="form-position padding-top-2">
+                          <div className="row">
+                            <div className="col-sm-12">
+                              <div className="padding-top-3">
+                                <label>Alamat</label>
                                 <div className="padding-top-1 input-group ">
                                   <input
                                     type="text"
                                     className="col-sm-12  form-outine"
-                                    placeholder="Masukan Nama Kode Pos"
-                                    defaultValue={email ? email : ''}
-                                    onChange={(e) => { this.props.handlingInputText(e, 'email') }}
+                                    placeholder="Masukan Alamat"
+                                    defaultValue={address ? address : ''}
+                                    onChange={(e) => { this.props.handlingInputText(e, 'street') }}
                                   />
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="form-position padding-top-2">
-                        <div className="row">
-                          <div className="fullwidth">
-                            <div className="padding-top-3">
-                              <div className="col-sm-4">
-                                <label>Tanggal Lahir</label>
-                                <div className="padding-top-1">
-                                  <DatePicker
-                                    className='fullwidth'
-                                    selected={this.state.startDate ? this.state.startDate : check_dob}
-                                    onChange={this.handleChange}
-                                    showMonthDropdown
-                                    showYearDropdown
-                                    dropdownMode='select'
-                                    dateFormat='yyyy-MM-dd'
-                                    // defaultValue={dob ? getDate('case-1', new Date(dob)) : new Date()}
-                                    placeholderText='Tanggal Lahir'
-                                  >
-                                    <div style={{ color: '#4a4a4a', fontSize: '12px', textAlign: 'center' }}>
-                                      Pilih Tanggal Lahir Anda
+                        <div className="form-position padding-top-2">
+                          <div className="row">
+                            <div className="fullwidth">
+                              <div className="padding-top-3">
+                                <div className="col-sm-4">
+                                  <label>Provinsi</label>
+                                  <div className="padding-top-1 input-group ">
+                                    {select_region}
+                                  </div>
+                                </div>
+                                <div className="col-sm-4">
+                                  <label>Kota Kecamatan</label>
+                                  <div className="padding-top-1 input-group ">
+                                    {select_city}
+                                  </div>
+                                </div>
+                                <div className="col-sm-4">
+                                  <label>Kode Pos</label>
+                                  <div className="padding-top-1 input-group ">
+                                    <input
+                                      type="text"
+                                      className="col-sm-12  form-outine"
+                                      placeholder="Masukan Nama Kode Pos"
+                                      defaultValue={postal_code ? postal_code : ''}
+                                      onChange={(e) => { this.props.handlingInputText(e, 'postal_code') }}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-position padding-top-2">
+                          <div className="row">
+                            <div className="fullwidth">
+                              <div className="padding-top-3">
+                                <div className="col-sm-4">
+                                  <label>No. Telp</label>
+                                  <div className="padding-top-1 input-group ">
+                                    <input
+
+                                      className="fullwidth"
+                                      placeholder="Masukan Nama Provinsi"
+                                      defaultValue={phone ? phone : ''}
+                                      onChange={(e) => { this.props.handlingInputText(e, 'phone_number') }}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-sm-8">
+                                  <label>Email</label>
+                                  <div className="padding-top-1 input-group ">
+                                    <input
+                                      type="text"
+                                      className="col-sm-12  form-outine"
+                                      placeholder="Masukan Nama Kode Pos"
+                                      defaultValue={email ? email : ''}
+                                      onChange={(e) => { this.props.handlingInputText(e, 'email') }}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-position padding-top-2">
+                          <div className="row">
+                            <div className="fullwidth">
+                              <div className="padding-top-3">
+                                <div className="col-sm-4">
+                                  <label>Tanggal Lahir</label>
+                                  <div className="padding-top-1">
+                                    <DatePicker
+                                      className='fullwidth'
+                                      selected={this.state.startDate ? this.state.startDate : check_dob}
+                                      onChange={this.handleChange}
+                                      showMonthDropdown
+                                      showYearDropdown
+                                      dropdownMode='select'
+                                      dateFormat='yyyy-MM-dd'
+                                      // defaultValue={dob ? getDate('case-1', new Date(dob)) : new Date()}
+                                      placeholderText='Tanggal Lahir'
+                                    >
+                                      <div style={{ color: '#4a4a4a', fontSize: '12px', textAlign: 'center' }}>
+                                        Pilih Tanggal Lahir Anda
                                     </div>
-                                  </DatePicker>
-                                  <i className='float-right fa fa-calendar icon-calender' aria-hidden='true' />
+                                    </DatePicker>
+                                    <i className='float-right fa fa-calendar icon-calender' aria-hidden='true' />
 
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-sm-8">
-                                <label>Tempat Lahir</label>
-                                <div className="padding-top-1 input-group ">
-                                  <input
-                                    type="text"
-                                    className="col-sm-12  form-outine"
-                                    placeholder="Masukan Nama Tempat Lahir"
-                                    defaultValue={pob ? pob : ''}
-                                    onChange={(e) => { this.props.handlingInputText(e, 'pob') }}
-                                  />
+                                <div className="col-sm-8">
+                                  <label>Tempat Lahir</label>
+                                  <div className="padding-top-1 input-group ">
+                                    <input
+                                      type="text"
+                                      className="col-sm-12  form-outine"
+                                      placeholder="Masukan Nama Tempat Lahir"
+                                      defaultValue={pob ? pob : ''}
+                                      onChange={(e) => { this.props.handlingInputText(e, 'pob') }}
+                                    />
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
                       </form>
                       <div className="form-position padding-top-4">
                         <div className="row">
