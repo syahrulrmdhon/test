@@ -121,19 +121,9 @@ class New extends Component {
     data['user_problem_answers'] = dataWillSave
     let url = `v1/assessments/${this.props.match.params.assessment_id}/exams/${this.props.match.params.exam_id}/exam_scores/${this.props.match.params.student_id}/bulk_fill_answers`
     apiClient('post', url, data).then(res => {
-      modal({
-        message: 'Berhasil',
-        description: 'Data yang Anda masukkan benar',
-        btns: [
-          {
-            label: 'Selesai',
-            className: 'btn green',
-            event: this.props.history.push({
-              pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam + '/category/' + this.props.location.state.conditon + '/class/' + this.state.class_id,
-              state: { assessment_category: this.props.location.state.conditon }
-            })
-          }
-        ]
+      this.props.history.push({
+        pathname: '/assessment/' + this.state.assessment_id + '/exam/' + this.state.exam + '/category/' + this.props.location.state.conditon + '/class/' + this.state.class_id,
+        state: { assessment_category: this.props.location.state.conditon }
       })
     })
       .catch(err => {
