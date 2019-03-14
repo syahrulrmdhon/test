@@ -207,7 +207,7 @@ class Index extends Component {
                 </div>
               }
             </div>
-            <button onClick={this.onSubmit} className="create-exam__button" disabled={this.state.examId ? false : disable}>{this.state.examId ? "Simpans" : "Lanjut"}</button>
+            <button onClick={this.onSubmit} className="create-exam__button" disabled={this.state.examId ? false : disable}>{this.state.examId ? "Simpan" : "Lanjut"}</button>
           </div>
         </div>
       </div>
