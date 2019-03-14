@@ -18,7 +18,7 @@ class GiveScore extends Component {
             <div className='w-100'>
                 <div className='col-sm-6'>
                     <label className='disblock padding-bottom-2 subject-title'>Mata Pelajaran</label>
-                    <input className='input-question' type='text' placeholder={aliasName} readOnly></input>
+                    <input className='input-question-disabled' type='text' placeholder={aliasName} disabled></input>
                 </div>
                 <div className='col-sm-6 margin-bottom-4'>
                     <label className='disblock padding-bottom-2 subject-title'>Nilai</label>
