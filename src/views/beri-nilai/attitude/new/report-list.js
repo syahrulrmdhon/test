@@ -42,7 +42,6 @@ export class Report extends Component {
         let title = []
         let subtitle = []
         let report = []
-        console.log(data_report_list,"here ")
         if (school_attitudes_length === 0) {
             subjects && subjects.map((data) => {
                 title.push(<span key={Math.random()} className="score-attitude-new__left-title">Daftar Laporan Sikap ({data.alias_name}) </span>)

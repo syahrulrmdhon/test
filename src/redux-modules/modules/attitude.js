@@ -92,7 +92,6 @@ export function handlingInputText(e, field_name) {
 }
 
 export function handlingInputSelect(e, field_name) {
-    console.log(e.value, "value")
     return {
         type: HANDLE_FORM_TEXT,
         value: e.value,
@@ -113,6 +112,7 @@ export function getDataScoreAttitude(assessment_id) {
 
 
 export function getDataScoreDetail(assessment_id, class_id, user_id,tipe) {
+    console.log(tipe,"hehe")
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
     const url = `${process.env.API_URL}v1/assessments/${assessment_id}/classes/${class_id}/users/${user_id}?page=1&score=${tipe}`
