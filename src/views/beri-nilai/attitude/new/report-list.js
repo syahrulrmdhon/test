@@ -118,7 +118,7 @@ export class Report extends Component {
                         </div>
                         <div className="col-sm-10">
                             <div className="score-attitude-new__report-title">
-                                <div>{data.evaluator.full_name} ({data.subject_name ? data.subject_name : 'N/A'})</div>
+                                <div>{data.evaluator.full_name} ({data.evaluator.teached_subject ? data.evaluator.teached_subject.subject_name : 'N/A'})</div>
                             </div>
                             <div className="margin-top-1 attitude-score-new__report-value">
                                 <div >{data.description}</div>
