@@ -42,6 +42,10 @@
   padding-top: 3px;
 }
 
+.table.assessment {
+  position: relative;
+}
+
 .action-wrapper {
   display: flex;
   justify-content: center;
@@ -117,4 +121,34 @@ body {
 
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
+}
+
+.table.assessment .main-head th {
+  vertical-align: top;
+  border: 1px solid #f3fcff;
+  /* text-align: center; */
+}
+
+.table.assessment thead{
+  background-color: unset;
+}
+
+.content-topic {
+  max-height: 530px;
+  overflow-y: auto;
+}
+
+.fixed-header {
+  position: fixed;
+  width: 70.55%;
+
+  top: 128px;
+}
+
+.pagination.disblock li:first-child {
+  margin-right: 10%;
+}
+
+.pagination.disblock li:last-child {
+  margin-left: 10%;
 }

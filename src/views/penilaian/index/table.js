@@ -104,12 +104,12 @@ export default class Table extends Component {
 
                 content.push(
                     <tr key={idx} >
-                        <td className="align-center"><span className={classnames("bullet", color)}></span></td>
-                        <td>{value.name}</td>
-                        <td>{subjectName}</td>
-                        <td>{totalExam}</td>
-                        <td>{value.created_date}</td>
-                        <td className="align-right padding-right-6">
+                        <td width="5%" className="align-center"><span className={classnames("bullet", color)}></span></td>
+                        <td width="25%" >{value.name}</td>
+                        <td width="20%" >{subjectName}</td>
+                        <td width="15%" >{totalExam}</td>
+                        <td width="10%" >{value.created_date}</td>
+                        <td width="25%"  className="align-right padding-right-6">
                             <div className="action-wrapper">
                                 <NavLink to={url} className="btn default margin-right-4">Lihat</NavLink>
                                 <FontAwesome name="trash" className="margin-left-2 margin-right-2 cgreen" onClick={this.delete.bind(this, value)} />
@@ -130,15 +130,15 @@ export default class Table extends Component {
                 <table className="table assessment">
                     <thead>
                         <tr className="main-head">
-                            <th></th>
+                            <th width="5%"></th>
                             <th width="25%">Judul Topik</th>
-                            <th>Mata Pelajaran</th>
+                            <th width="20%">Mata Pelajaran</th>
                             <th width="15%">{add_field_category}</th>
                             <th width="10%">Tanggal Dibuat</th>
                             <th width="25%" className="align-right padding-right-6">Tindakan</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="topics">
                         {content}
                     </tbody>
                 </table>
