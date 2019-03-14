@@ -159,7 +159,7 @@ class Content extends Component {
   }
 
   getFilterSubject() {
-    this.props.getSubjects(this.props.studentId)
+    this.props.getSubjects(this.props.dataProfile.user.homeroom_class.id, 'homeroom')
   }
 
   getFilterAttendanceStatus() {
