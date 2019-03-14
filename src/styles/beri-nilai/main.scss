@@ -828,6 +828,11 @@ table.table.beri-nilai tr.head {
   width: 100%;
   font-family: $nunito_regular;
 }
+.input-question-disabled {
+  width: 100%;
+  font-family: $nunito_regular;
+  background-color: #f2f2f2;
+}
 .btn-save-question {
   background-color: #1a9d7f;
   color: #ffffff;
