@@ -73,7 +73,6 @@ export default class ContentOnlineExam extends Component {
         }
 
         let content = []
-        let detail = []
         if (data && data.list) {
             let list = data.list
             list.map((x) => {
@@ -83,25 +82,23 @@ export default class ContentOnlineExam extends Component {
                             <div className='row h-100'>
                                 <div className='col-sm-4 right-block__panel-part'>
                                     <label className='header-title disblock padding-bottom-1'>{x.info.name}</label>
-                                    <div>
-                                        <i className='fa fa-calendar-o'></i>
-                                        <label className='info s-line padding-side-2'>
-                                            {x.info.date}
-                                        </label>
-                                        <label className='padding-side-2 info s-line'>
+                                    <div className='right-block__basic-info-wrapper'>
+                                        <div className='right-block__basic-info'>
+                                            <i className='fa fa-calendar-o padding-right-1'></i>
+                                            <label className='info'>{x.info.date}</label>
+                                        </div>
+                                        <div className='right-block__basic-info'>
                                             {x.info.type}
-                                        </label>
-                                        <label className='padding-side-2 info'>
+                                        </div>
+                                        <div className='right-block__basic-info'>
                                             {x.info.time}
-                                        </label>
+                                        </div>
                                     </div>
-                                    <div className='padding-top-1'>
-                                        <label className='p'>{x.info.class}</label>
-                                    </div>
-                                    <div className='padding-top-2'>
-                                        <label className='p-green-link padding-right-2 s-line'>Lihat</label>
-                                        <label className='p-green-link padding-side-2 s-line'>Ubah Soal</label>
-                                        <label className='p-green-link padding-side-2'>Hapus Soal</label>
+                                    <label className='p'>{x.info.class}</label>
+                                    <div className='padding-top-2 right-block__action-wrapper'>
+                                        <div className='right-block__action'>Lihat</div>
+                                        <div className='right-block__action'>Ubah Soal</div>
+                                        <div className='right-block__action'>Hapus Soal</div>
                                     </div>
                                 </div>
                                 <div className='col-sm-4 right-block__panel-part padding-top-4'>
@@ -109,7 +106,7 @@ export default class ContentOnlineExam extends Component {
                                         <label className='p'>Progress</label>
                                         <span className='pull-right p-green'>{x.progress.percentage === null ? '0' : x.progress.percentage}%</span>
                                     </div>
-                                    <Progress value={x.progress.percentage} color='success' />
+                                    <Progress value={x.progress.percentage}/>
                                     <label className='info padding-top-1'>{x.progress.count === null ? '0' : x.progress.count}/{x.progress.total === null ? '0' : x.progress.total} Terbuat</label>
                                 </div>
                                 <div className='col-sm-4'>
@@ -135,7 +132,7 @@ export default class ContentOnlineExam extends Component {
         }
         return (
             <div className='col-sm-9 right-block w-100'>
-                <div className="margin-left-3 margin-right-3 h-100">
+                <div className="h-100">
                     <div className='header-content margin-bottom-4'>
                         <label className='header-title disblock padding-top-6'>Daftar Ujian</label>
                         <label className='padding-top-2 info margin-bottom-3'>{data.header.type} {data.header.period}</label>

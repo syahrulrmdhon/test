@@ -15,15 +15,17 @@ export default class OnlineExamList extends Component {
                     <div className='padding-content'>
                         <Header />
                         <div className='margin-content'>
-                            <div className='content-block main-block h-100 row'>
-                                <div className='col-sm-3 left-block'>
-                                    <FilterOnlineExam
+                            <div className='content-block main-block h-100'>
+                                <div className='margin-0 row'>
+                                        <div className='col-sm-3 left-block'>
+                                            <FilterOnlineExam
 
-                                    />
-                                </div>
-                                <ContentOnlineExam
+                                            />
+                                        </div>
+                                        <ContentOnlineExam
 
-                                />
+                                        />
+                                    </div>
                             </div>
                         </div>
                     </div>

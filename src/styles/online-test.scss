@@ -22,6 +22,7 @@ $nunito_bold: "NunitoBold";
       font-family: $nunito_regular;
       color: #4a4a4a;
       font-size: 10px;
+      padding-top: 3px;
     }
     .p-bold {
       font-family: $nunito_bold;
@@ -52,13 +53,74 @@ $nunito_bold: "NunitoBold";
     &__panel {
       background-color: #ffffff;
       box-shadow: 0 2px 8px 0 rgba(30, 30, 30, 0.05);
-      margin-bottom: 20px;
-      padding: 18px 13.5px;
+      margin-bottom: 30px;
+      padding: 10px 10px;
       border: 1px solid rgba(204, 204, 204, 0.5);
-      height: 120px;
+      min-height: 120px;
     }
     &__panel-part {
       border-right: solid 0.5px #e8e8e8;
+      .progress-bar {
+        background-color: #1a9d7f;
+      }
+    }
+    &__basic-info-wrapper {
+      font-size: 10px;
+      color: #1a9d7f;
+    }
+    &__basic-info {
+      display: inline;
+      font-family: $nunito_regular;
+      color: #a1a1a1;
+      cursor: pointer;
+    }
+    &__basic-info {
+      padding: 1px 5px;
+      border-right: 1px solid #ededed;
+      &:first-child {
+        padding-left: 0px;
+        padding-right: 5px;
+      }
+
+      &:last-child {
+        padding-left: 5px;
+        padding-right: 0px;
+        border-right: none;
+      }
+
+      &:hover {
+        color: #1a9d7f;
+      }
+    }
+    &__action-wrapper {
+      position: relative;
+      bottom: 0px;
+      font-size: 10px;
+      color: #1a9d7f;
+    }
+    &__action {
+      display: inline;
+      font-family: $nunito_bold;
+      color: #1a9d7f;
+      cursor: pointer;
+    }
+    &__action {
+      padding: 1px 5px;
+      border-right: 1px solid #ededed;
+      &:first-child {
+        padding-left: 0px;
+        padding-right: 5px;
+      }
+
+      &:last-child {
+        padding-left: 5px;
+        padding-right: 0px;
+        border-right: none;
+      }
+
+      &:hover {
+        color: #1a9d7f;
+      }
     }
     .s-line {
       border-right: solid 1px #d3d9dd;

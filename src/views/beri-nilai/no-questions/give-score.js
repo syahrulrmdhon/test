@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getNoQuestions, handleChange } from './../../../redux-modules/modules/no-question'
-
+import { handleChange } from './../../../redux-modules/modules/no-question'
 
 class GiveScore extends Component {
-    // onlyNumber(e) {
-    //     let charCode = (e.which) ? e.which : event.keyCode
-    //     if (charCode > 31 && (charCode < 48 || charCode > 57))
-
-    //         return false;
-    //     return true;
-    // }
     render() {
         const { score, aliasName } = this.props.questionItem
         return (
@@ -30,7 +22,6 @@ class GiveScore extends Component {
                         type='number'
                         onChange={(e) => this.props.handleChange(e.target.value, this.props.i, 'score')}
                         placeholder='Masukkan Nilai...'
-                        // onKeyPress={()=>this.onlyNumber(event)}
                     />
                 </div>
             </div>
