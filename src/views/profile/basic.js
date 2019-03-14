@@ -151,9 +151,10 @@ export class componentName extends Component {
           }
         ]
       })
-      // this.onRedirect()
+      this.onRedirect()
       getUser(false)
-      window.location.href="/profile/basic-information"
+      // window.location.href="/profile/basic-information"
+      window.location.reload(true)
 
     })
       .catch(err => {
