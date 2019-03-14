@@ -91,6 +91,7 @@ class Content extends Component {
                                     onChange={(e) => { this.props.handleScore(e.target.value, index, x, index, 'score', 'knowledge') }}
                                     className=" align-center"
                                     defaultValue={exam[index]['score']}
+                                    type="number"
                                 />
                             </div>
                         </td>
@@ -117,7 +118,6 @@ class Content extends Component {
 
         if (type === 'skill') {
             question_skill.map((data, index) => {
-                console.log(data, "my data will")
                 main_content.push(
                     <div className="range-table">
                         <div className="title-indicator  padding-bottom-3">{data.data}</div>
@@ -151,6 +151,7 @@ class Content extends Component {
                                             <td>
                                                 <div className="content-input form-position">
                                                     <input
+                                                        type="number"
                                                         className="disblock align-center body-table  "
                                                         placeholder="Masukkan skor anda"
                                                         onChange={(e) => { this.props.handleScore(e.target.value, index, data, idx, 'score', 'skill') }}
