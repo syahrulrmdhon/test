@@ -97,7 +97,8 @@
     background-color: rgba(255, 109, 74, 0.05);
 }
 
-.schedule .border-full.academic{
+.schedule .border-full.academic,
+.schedule .border-full.exam_period{
     border: 2px solid #4da1ff !important;
     background-color: rgba(77, 161, 255, 0.05);
 }

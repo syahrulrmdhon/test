@@ -39,16 +39,18 @@ export default class ScheduleItem extends Component{
             callBack: this.seeMore
         })
 
-        let title = ''
+        let {title, time} =  ''
         switch(this.props.data.source){
             case 'holiday':
                 title = 'Libur Nasional'
             break;
             case 'academic':
+            case 'exam_period':
                 title = 'Kalendar Akademik'
+                time = (this.props.data.source == 'academic') ? this.props.data.time : ''
             break;
             default:
-                title = this.props.data.time
+                time = this.props.data.time
             break;
         }
 
@@ -57,6 +59,7 @@ export default class ScheduleItem extends Component{
                 {action}
                 <div className="padding-3">
                     <div className="time cgray2">{title}</div>
+                    <div className="time cgray2">{time}</div>
                     <div className="description">{description}</div>
                     {textClass}
                 </div>
