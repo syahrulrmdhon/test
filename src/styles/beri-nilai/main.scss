@@ -1063,6 +1063,16 @@ table.table.beri-nilai tr.head {
   margin-top: 70px;
 }
 
+// remove arrow on input type number
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+// media query
 @media screen and (max-width: 1120px) {
   .content-block.main-block.right-height-kkm {
     padding-left: 10px;
