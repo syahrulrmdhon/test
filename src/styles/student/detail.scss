@@ -116,6 +116,151 @@ $nunito_bold: 'NunitoBold';
     top: 10px;
     right: 5px;
   }
+
+
+  .absences-detail {
+    &.row {
+      height: 483px;
+    }
+
+    &__title {
+      font-family: $nunito_bold;
+      color: #2d2d2d;
+      font-size: 13px;
+      text-align: left;
+      margin-top: 30px;
+    }
+
+    &__total-wrapper {
+      display: flex;
+      width: 100%;
+      border-bottom: 1px solid #eeeeee;
+      padding: 18px 0px 8px;
+      align-items: center;
+    }
+
+    &__total-wrapper:last-child {
+      border: none;
+    }
+
+    &__label {
+      color: #6d6d6d;
+      font-family: $nunito_regular;
+      width: 50%;
+      text-align: left;
+    }
+
+    &__filter-label {
+      font-size: 10px;
+      text-align: left;
+      margin-bottom: 5px;
+      font-family: $nunito_semi_bold;
+      font-size: #6d6d6d;
+      display: block;
+    }
+
+    &__amount {
+      text-align: right;
+      color: #1a9d7f;
+      font-size: 18px;
+      font-family: $nunito_bold;
+      width: 50%;
+    }
+
+    &__input {
+      width: 100%;
+      height: 35px;
+      border-radius: 3px;
+      border-color: #cccccc;
+
+      &::placeholder {
+        color: #7f92a1;
+        font-family: $nunito_light;
+        font-weight: unset;
+        // font-size: 11px;
+      }
+    }
+
+    &__form-group {
+      margin-bottom: 20px;
+      display: block;
+
+      .calendar-icon {
+        position: absolute;
+        bottom: 12px;
+      }
+    }
+
+    &__angle-down{
+      position: relative;
+      right: 17px;
+      top: 1px;
+      color: #1a9d7f;
+    }
+
+    &__angle-down-date {
+      position: relative;
+      bottom: 23px;
+      float: right;
+      right: 10px;
+      color: #1a9d7f;
+    }
+    
+    &__select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: transparent;
+      color: #7f92a1;
+      font-size: 11px;
+      font-family: $nunito_semi_bold;
+      margin-right: 0px;
+
+      &.form-control:not([size]):not([multiple]) {
+        width: 204.5px;
+        height: 35px;
+      }
+    }
+
+    &__table {
+      // margin-top: 20px;
+
+      &.table tbody td {
+        text-align: left;
+        border-color: #cccccc;
+      }
+
+      tr:last-child{
+        border-bottom: 1px solid #cccccc;
+      }
+    }
+
+    .react-datepicker__input-container {
+      display: block;
+
+      .absences-detail__input {
+        height: 40px;
+        width: 160px;
+      }
+    }
+
+    .react-datepicker-wrapper {
+      display: block;
+    }
+
+    .form-group {
+      display: block;
+    }
+
+    .form-inline label{
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    &__form-date {
+      margin-bottom: 20px;
+    }
+  }
 }
 
 .detail-menu {
@@ -193,146 +338,6 @@ $nunito_bold: 'NunitoBold';
   // .tab-content {
   //   margin-top: 0px;
   // }
-}
-
-.absences-detail {
-  &__title {
-    font-family: $nunito_bold;
-    color: #2d2d2d;
-    font-size: 13px;
-    text-align: left;
-    margin-top: 30px;
-  }
-
-  &__total-wrapper {
-    display: flex;
-    width: 100%;
-    border-bottom: 1px solid #eeeeee;
-    padding: 18px 0px 8px;
-    align-items: center;
-  }
-
-  &__total-wrapper:last-child {
-    border: none;
-  }
-
-  &__label {
-    color: #6d6d6d;
-    font-family: $nunito_regular;
-    width: 50%;
-    text-align: left;
-  }
-
-  &__filter-label {
-    font-size: 10px;
-    text-align: left;
-    margin-bottom: 5px;
-    font-family: $nunito_semi_bold;
-    font-size: #6d6d6d;
-    display: block;
-  }
-
-  &__amount {
-    text-align: right;
-    color: #1a9d7f;
-    font-size: 18px;
-    font-family: $nunito_bold;
-    width: 50%;
-  }
-
-  &__input {
-    width: 100%;
-    height: 35px;
-    border-radius: 3px;
-    border-color: #cccccc;
-
-    &::placeholder {
-      color: #7f92a1;
-      font-family: $nunito_light;
-      font-weight: unset;
-      // font-size: 11px;
-    }
-  }
-
-  &__form-group {
-    margin-bottom: 20px;
-    display: block;
-
-    .calendar-icon {
-      position: absolute;
-      bottom: 12px;
-    }
-  }
-
-  &__angle-down{
-    position: relative;
-    right: 17px;
-    top: 1px;
-    color: #1a9d7f;
-  }
-
-  &__angle-down-date {
-    position: relative;
-    bottom: 23px;
-    float: right;
-    right: 10px;
-    color: #1a9d7f;
-  }
-  
-  &__select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: transparent;
-    color: #7f92a1;
-    font-size: 11px;
-    font-family: $nunito_semi_bold;
-    margin-right: 0px;
-
-    &.form-control:not([size]):not([multiple]) {
-      width: 204.5px;
-      height: 35px;
-    }
-  }
-
-  &__table {
-    // margin-top: 20px;
-
-    &.table tbody td {
-      text-align: left;
-      border-color: #cccccc;
-    }
-
-    tr:last-child{
-      border-bottom: 1px solid #cccccc;
-    }
-  }
-
-  .react-datepicker__input-container {
-    display: block;
-
-    .absences-detail__input {
-      height: 40px;
-      width: 160px;
-    }
-  }
-
-  .react-datepicker-wrapper {
-    display: block;
-  }
-
-  .form-group {
-    display: block;
-  }
-
-  .form-inline label{
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  &__form-date {
-    margin-bottom: 20px;
-  }
 }
 
 .homeroom-teacher {
