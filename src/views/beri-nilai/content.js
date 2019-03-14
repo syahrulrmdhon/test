@@ -75,7 +75,7 @@ class Content extends Component {
                         <td>
                             <div className="content-input">
                                 <input
-                                    placeholder="Masukkan skor anda"
+                                    placeholder="Masukkan jawaban anda"
                                     onChange={(e) => { this.props.handleScore(e.target.value, index, x, index, 'ans', 'knowledge') }}
                                     className="fullwidth"
                                     defaultValue={exam[index]['ans']}
