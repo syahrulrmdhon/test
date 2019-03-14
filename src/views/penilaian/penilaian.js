@@ -70,7 +70,7 @@ class Penilaian extends Component {
                                         school_subject_id={this.state.school_subject_id}
                                     />
                                 </div>
-                                <div className="col-sm-9 right-block">
+                                <div className="col-sm-9 right-block content-topic" id="topic-wrapper" ref = "cpDev1">
                                     <div className="padding-top-6 h-100">
                                         <div className="row">
                                             <div className="col-sm-6">
