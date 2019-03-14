@@ -41,7 +41,8 @@ export class Index extends Component {
     }
     componentDidMount() {
         let score = ''
-        switch(this.state.activeTa){
+        console.log(this.state.activeTab,"tab active")
+        switch(this.state.activeTab){
             case 'semua':
                 score = ''
             break;
@@ -73,9 +74,29 @@ export class Index extends Component {
     toggle(tab) {
         console.log(tab)
         if (this.state.activeTab !== tab) {
+            let  score= ''
+            switch(tab){
+                case 'semua':
+                    score = ''
+                break;
+                case 'sb':
+                    score = 2
+                break;
+                case 'b':
+                    score = 1
+                break;
+                case 'bp':
+                    score = 0
+                break;
+                default:
+                    score = ''
+                
+            }
             this.setState({
                 activeTab: tab
             });
+            this.props.getDataScoreDetail(this.props.match.params.assessment_id, this.props.match.params.class_id, this.props.match.params.user_id, score)
+
         }
     }
 
