@@ -356,9 +356,10 @@ export function basicComps(params = {}, options = {}) {
 }
 export function subjects(params ={} , options={}) {
     let listOptions = options.listOptions || false
+    console.log(params,"here")
     apiClient('get', 'v1/filters/subjects', false, params).then(response => response.data).then(data => {
         let subjects = data.data.subjects || []
-
+        console.log(subjects,"subjects")
         if ((subjects.length > 0) && listOptions) {
             const temps = subjects
             subjects = []
@@ -366,7 +367,7 @@ export function subjects(params ={} , options={}) {
             temps.map((temp, idx) => {
                 subjects.push({
                     value: temp.id,
-                    label: temp.subject_name,
+                    label: temp.subject_name + ' ('+temp.class_year+')',
                 })
             })
         }
