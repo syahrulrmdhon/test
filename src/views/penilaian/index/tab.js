@@ -29,8 +29,8 @@ export default class Tab extends Component {
                     </NavItem>
                     <NavItem>
                         <NavLink
-                        // className={classnames({ active: this.props.activeTab === 'attitude' })}
-                        // onClick={() => { this.props.tabToggle('attitude'); }}
+                        className={classnames({ active: this.props.activeTab === 'attitude' })}
+                        onClick={() => { this.props.tabToggle('attitude'); }}
                         >
                         Sikap
                         </NavLink>

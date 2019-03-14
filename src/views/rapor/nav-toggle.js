@@ -20,7 +20,7 @@ export default class NavToggle extends Component {
                     <NavItem className='tab-nilai'>
                         <NavLink
                              className={classnames({ active: this.props.activeTab === '3' })} 
-                            //  onClick={() => { this.props.toggle('3') }}
+                             onClick={() => { this.props.toggle('3') }}
                         >
                             Sikap
                         </NavLink>

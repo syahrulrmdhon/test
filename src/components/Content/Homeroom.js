@@ -21,21 +21,27 @@ class Homeroom extends Component {
   }
 
   handleDelete(index, noteId, field) {
-    this.props.handleRemoveNote(index, noteId, field)
-    const url = `v1/students/${this.props.studentId}/destroy_note`
-    const data = {
-      "achievement_id": noteId
-    }
+    if ((this.props.notes.notes[index].extracurricular_id || this.props.notes.notes[index].title) && this.props.notes.notes[index].description) {
+      this.props.handleRemoveNote(index, noteId, field) 
+    
+      const url = `v1/students/${this.props.studentId}/destroy_note`
+      const data = {
+        "achievement_id": noteId
+      }
 
-    if (field === 'extracurricular') {
-      data.achievement_type = field
-    }
+      if (field === 'extracurricular') {
+        data.achievement_type = field
+      }
 
-    apiClient('delete', url, data)
+      apiClient('delete', url, data)
+    }
+    else {
+      this.props.handleRemoveNote(index, noteId, field) 
+    }
   }
 
   delete(index, noteId, field) {
-    if (this.props.notes.notes.length === 1 && !this.props.notes.notes[0].extracurricular_id && !this.props.notes.notes[0].title && !this.props.notes.notes[0].description) {
+    if (!this.props.notes.notes[index].extracurricular_id && !this.props.notes.notes[index].title && !this.props.notes.notes[index].description) {
       this.handleDelete(index, noteId, field)
     }
     else {
@@ -74,7 +80,8 @@ class Homeroom extends Component {
     if (data) {
       if (data.notes) {
         if (this.props.activeTab === 2) {
-          extracurriculars = data.extracurriculars
+          extracurriculars = data.extracurriculars || []
+          console.log(extracurriculars)
           extracurriculars.map(extracurricular => {
             extracurricular.isDisabled = false
           })

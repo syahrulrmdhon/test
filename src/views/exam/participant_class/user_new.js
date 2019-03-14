@@ -74,7 +74,7 @@ class ParticipantUser extends Component {
         }
     }
 
-    onSubmit(){
+    onSubmit(event){
         event.preventDefault();
 
         confirmAlert({
