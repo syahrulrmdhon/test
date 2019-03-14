@@ -643,7 +643,7 @@ table.table.beri-nilai tr.head {
   }
 
   .form-position {
-    margin-left:100px;
+    margin-left:90px;
   }
 
   .select-list {
@@ -827,6 +827,11 @@ table.table.beri-nilai tr.head {
 .input-question {
   width: 100%;
   font-family: $nunito_regular;
+}
+.input-question-disabled {
+  width: 100%;
+  font-family: $nunito_regular;
+  background-color: #f2f2f2;
 }
 .btn-save-question {
   background-color: #1a9d7f;
@@ -1058,6 +1063,16 @@ table.table.beri-nilai tr.head {
   margin-top: 70px;
 }
 
+// remove arrow on input type number
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+// media query
 @media screen and (max-width: 1120px) {
   .content-block.main-block.right-height-kkm {
     padding-left: 10px;

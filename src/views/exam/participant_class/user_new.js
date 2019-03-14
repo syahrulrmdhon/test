@@ -39,7 +39,7 @@ class ParticipantUser extends Component {
         })
     }
 
-    onConfirm(){
+    onConfirm(event){
         event.preventDefault();
         let participant_users = []
         if(this.props.exam.data.classes){
@@ -74,7 +74,7 @@ class ParticipantUser extends Component {
         }
     }
 
-    onSubmit(){
+    onSubmit(event){
         event.preventDefault();
 
         confirmAlert({

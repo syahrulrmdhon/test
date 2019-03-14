@@ -54,7 +54,7 @@ class ParticipantClass extends Component {
         this.props.removeClass(index)
     }
 
-    onSubmit(){
+    onSubmit(event){
         event.preventDefault();
         let data = []
         
