@@ -84,10 +84,10 @@ export default class ScoreTable extends Component {
                   <thead>
                     <tr>
                       <th className="text-left">Mata Pelajaran</th>
-                      <th className="text-left">Deskripsi</th>
                       <th>Nilai Rapor</th>
                       <th>Predikat</th>
-                      <th>Deskripsi Lainnya</th>
+                      <th className="text-left">Deskripsi</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -96,10 +96,12 @@ export default class ScoreTable extends Component {
                       const description = subject.score.description
                       return <tr key={index}>
                           <td>{subject.name ? subject.name : '-'}</td>
-                          <td className={!description ? 'text-center' : ''}>{description ? description : '-'}</td>
-                          <td>{subject.score.score ? subject.score.score : '-'}</td>
-                          <td>{subject.score.predicate ? subject.score.predicate : '-'}</td>
-                          <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>-</td>
+                          <td style={{width: '100px'}} className="text-center">{subject.score.score ? subject.score.score : '-'}</td>
+                          <td style={{width: '100px'}} className="text-center">{subject.score.predicate ? subject.score.predicate : '-'}</td>
+                          <td className="text-left">{description ? description : '-'}</td>
+                          <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>
+                            <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" />
+                          </td>
                         </tr>
                       })
                     }
