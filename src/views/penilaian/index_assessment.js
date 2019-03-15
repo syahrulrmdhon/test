@@ -36,7 +36,6 @@ export default class IndexAssessment extends Component {
     }
     
     render() {
-
         let content = []
         if(this.state.data.length > 0){
             content.push(<Table 
@@ -45,6 +44,46 @@ export default class IndexAssessment extends Component {
                 category={this.props.category}
             />)            
         }
+
+        var element = document.getElementById("topic-wrapper")
+        if (element) {
+            let body = document.getElementById('topics')
+            let bodyWidth = ''
+            if (body) {
+                bodyWidth = body.clientWidth
+            }
+            
+            window.addEventListener("load", function() {
+                let head = document.querySelector('thead')
+
+                let body = document.querySelector('tbody')
+                bodyWidth = body.clientWidth
+                head.style = `width: ${bodyWidth}px`
+            })
+
+            window.addEventListener("resize", function() {
+                let head = document.querySelector('thead')
+                let body = document.querySelector('tbody')
+                bodyWidth = body.clientWidth
+                head.style = `width: ${bodyWidth}px`
+
+            })
+
+            element.addEventListener("scroll", function () {
+                var scrollTop = element.scrollTop;
+                let head = document.querySelector('thead')
+                let body = document.querySelector('tbody')
+                head.style = `width: ${bodyWidth}px`
+
+                if (scrollTop > 113) {
+                    head.className = 'fixed-header'
+                }
+                else if (scrollTop <= 62) {
+                    head.className = ''
+                }
+            });
+        }
+
 
         return(
             <div className="empty-wrapper">

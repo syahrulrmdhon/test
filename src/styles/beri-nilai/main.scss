@@ -607,16 +607,6 @@ table.table.beri-nilai tr.head {
     color: #2d2d2d;
   }
 
-  .title-indicator{
-    font-family: $nunito_bold;
-    font-size: 11px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 0.55;
-    letter-spacing: -0.2px;
-    color: #333333;
-  }
-
   .head-table {
     font-family: $nunito_bold;
     font-size: 12px;
@@ -643,7 +633,7 @@ table.table.beri-nilai tr.head {
   }
 
   .form-position {
-    margin-left:100px;
+    margin-left:90px;
   }
 
   .select-list {
@@ -999,11 +989,11 @@ table.table.beri-nilai tr.head {
 }
 
 .title-indicator {
-  font-family: $nunito_bold;
-  font-size: 13px;
+  font-family: $nunito_semi_bold;
+  font-size: 11px;
   font-style: normal;
   font-stretch: normal;
-  line-height: 0.55;
+  line-height: 1.5;
   letter-spacing: -0.2px;
   color: #333333;
 }
