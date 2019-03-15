@@ -72,10 +72,8 @@ export default function reducer(state = initialState, action) {
 
 
         case HANDLE_QUESTION_ONCHANGE:
-            console.log(state.data.exam_question, "my state")
             state.data.exam_question[action.idx]['ans'] = action.e.value
             state.data.exam_question[action.idx]['score'] = (action.e.value === action.pick) ? action.max_score : 0
-            console.log(state.data.exam_question[action.idx], "here now e")
             return {
                 ...state,
                 loaded: true,
@@ -88,7 +86,6 @@ export default function reducer(state = initialState, action) {
                 if (action.result.data.collections) {
                     action.result.data['exam_question'] = []
                     action.result.data.collections.map((collection) => {
-                        console.log(collection, "my col col col")
                         action.result.data['exam_question'].push({
                             ans: collection.user_problem_answer ? collection.user_problem_answer.ans : null,
                             score: collection.user_problem_answer ? collection.user_problem_answer.score : null,
@@ -129,8 +126,6 @@ export default function reducer(state = initialState, action) {
                             question_score: collection.questions
                         })
 
-
-                        console.log(action.result.data.question_skill, "my question")
                         collection.questions.map((collections) => {
                             action.result.data['exam_question'].push({
                                 ans: collections.problem_type ? collections.problem_type : null,
@@ -189,7 +184,6 @@ export default function reducer(state = initialState, action) {
                 loading: true,
             }
         case LOAD_SUCCESS:
-            console.log(action, "action")
             delete state.error;
             if (state.result !== action.result) {
                 return {
@@ -237,7 +231,6 @@ export function setScoreNoQuestion(event, index, related_id) {
 }
 
 export function handlingSelect(e, idx, pick, max_score) {
-    console.log("hit", e, idx, pick, max_score)
     return {
         type: HANDLE_QUESTION_ONCHANGE,
         e: e,
@@ -321,7 +314,6 @@ export function getParticipant(exam, classess, assess, name, sort) {
 
 
 export function setSavedata(payload) {
-    console.log(payload, "here payload")
     return {
         type: SET,
         payload

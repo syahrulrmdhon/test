@@ -96,7 +96,6 @@ class Nilai extends Component {
   getQuestions() {
     const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/questions`
     apiClient('get', url).then(res => {
-      console.log('fandiiii', res.data.data)
       this.setState({
         competencySubjects: res.data.data.subject_competencies,
         questionEvaluations: res.data.data.exam_questions
@@ -111,7 +110,6 @@ class Nilai extends Component {
   }
 
   onChangeScore(valueOpt){
-    console.log("here hitted",valueOpt)
     this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.assessment_id, '', valueOpt)
     this.setState({ valueOpt })
   }

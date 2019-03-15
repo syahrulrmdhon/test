@@ -26,7 +26,6 @@ export class Percentage extends Component {
     render() {
         let classname = ''
         let dataPercentages = this.props.evaluations
-        console.log('percent', dataPercentages)
         let percentage = dataPercentages.correct_percentage
         let predicate = dataPercentages.predicate
 
@@ -51,7 +50,6 @@ export class Predicate extends Component {
     render() {
         let p = ''
         let dataPredicates = this.props.evaluations
-        console.log('predicate', dataPredicates)
         let predicate = dataPredicates.predicate
 
         if (dataPredicates.length === 0) {
