@@ -115,6 +115,7 @@ export default function reducer(state = initialState, action) {
         loading: false
       };
     case GET_SUBJECTS:
+    console.log(action.result)
       let subjects = [{label: 'Semua Mata Pelajaran', value: 'all'}]
       action.result.data.subjects.map(item => {
         subjects.push(
@@ -284,8 +285,8 @@ export function getStatus() {
   }
 }
 
-export function getSubjects(studentId) {
-  let url = `v1/filters/subjects?user_id=${studentId}`
+export function getSubjects(classId, type) {
+  let url = `v1/filters/subjects?class_id=${classId}&attendance_type=${type}`
 
   return {
     types: [LOAD, GET_SUBJECTS, LOAD_FAIL],
