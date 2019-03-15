@@ -16,12 +16,13 @@ import './styles/fonts.css'
 import ApiHost from './routes/api_host'
 import configureStore from './redux-modules/create'
 
+
 var initialState = "Gredu Indonesia"
 initialState = window.DATA;
 const client = new ApiHost();
 const store = configureStore(client, initialState);
 
-ReactGA.initialize('UA-135468885-1');
+ReactGA.initialize(process.env.ANALYTIC_CODE);
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 let math_random = ''
@@ -34,6 +35,8 @@ if (!check_device_id) {
   localStorage.setItem('Device-ID', 'browser_' + math_random)
 
 }
+console.log(process.env.ANALYTIC_CODE,"url")
+
 
 localStorage.setItem('App-ID', 'wt')
 localStorage.setItem('Device-Type', 'browser')

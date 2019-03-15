@@ -172,12 +172,12 @@ export class Index extends Component {
         let title_render = []
         if (data_school_subjects_length === 1) {
             data_school_subjects && data_school_subjects.map((data) => {
-                title_render.push(<span className="score-attitude-new__right-title-name ">Nilai Ahkir ( {data.alias_name} )</span>
+                title_render.push(<span className="score-attitude-new__right-title-name ">Nilai Akhir ( {data.alias_name} )</span>
                 )
             })
         } else {
             data_school_attitudes && data_school_attitudes.map((data) => {
-                title_render.push(<span className="score-attitude-new__right-title-name ">Nilai Ahkir ( {data.alias_name} )</span>
+                title_render.push(<span className="score-attitude-new__right-title-name ">Nilai Akhir ( {data.alias_name} )</span>
                 )
             })
         }
@@ -192,7 +192,6 @@ export class Index extends Component {
                 onChange={(e) => {this.props.handlingInputSelect(e,'score')}}
                 value={option.filter((element) => {return element.value === score })}
             />)
-            console.log(this.props.data_form,"form data")
         return (
             <Title title="Nilai Sikap">
                 <div className="padding-content">
@@ -218,7 +217,7 @@ export class Index extends Component {
                                             <div className="form margin-top-5">
                                                 <div className="row">
                                                     <div className="col-sm-12">
-                                                        <label className="score-attitude-new__label-form">Nilai Ahkir</label>
+                                                        <label className="score-attitude-new__label-form">Nilai Akhir</label>
                                                         <div className="padding-top-1">
                                                           {select}
                                                         </div>
