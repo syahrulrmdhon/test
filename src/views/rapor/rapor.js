@@ -53,7 +53,7 @@ export default class Rapor extends Component {
   getActiveSemester() {
     const periodObject = localStorage.getItem('current_period')
     const periodParse = JSON.parse(periodObject)
-    const activeSemester = periodParse.period_name
+    const activeSemester = periodParse.id
     this.state.semesterActive = activeSemester
     this.getMountData()
   }
@@ -102,27 +102,27 @@ export default class Rapor extends Component {
     this.setState({ selectedStatus })
   }
   getKnowledge() {
-    let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${localStorage.getItem('class_id')}&risk_status=${this.state.selectedStatus.value}`
+    let url = `v1/scores/report?school_period_id=${this.state.selectedSemester.value}&category=knowledge&class_id=${localStorage.getItem('class_id')}&risk_status=${this.state.selectedStatus.value}`
     return apiClient('get', url)
   }
   getMountKnowledge() {
-    let url = `v1/scores/report?semester=${this.state.semesterActive}&category=knowledge&class_id=${localStorage.getItem('class_id')}&risk_status=all`
+    let url = `v1/scores/report?school_period_id=${this.state.semesterActive}&category=knowledge&class_id=${localStorage.getItem('class_id')}&risk_status=all`
     return apiClient('get', url)
   }
   getSkill() {
-    let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=skill&class_id=${localStorage.getItem('class_id')}&risk_status=${this.state.selectedStatus.value}`
+    let url = `v1/scores/report?school_period_id=${this.state.selectedSemester.value}&category=skill&class_id=${localStorage.getItem('class_id')}&risk_status=${this.state.selectedStatus.value}`
     return apiClient('get', url)
   }
   getMountSkill() {
-    let url = `v1/scores/report?semester=${this.state.semesterActive}&category=skill&class_id=${localStorage.getItem('class_id')}&risk_status=all`
+    let url = `v1/scores/report?school_period_id=${this.state.semesterActive}&category=skill&class_id=${localStorage.getItem('class_id')}&risk_status=all`
     return apiClient('get', url)
   }
   getAttitude() {
-    let url = `v1/scores/report?semester=${this.state.selectedSemester.label}&category=attitude&class_id=${localStorage.getItem('class_id')}&risk_status=${this.state.selectedStatus.value}`
+    let url = `v1/scores/report?school_period_id=${this.state.selectedSemester.value}&category=attitude&class_id=${localStorage.getItem('class_id')}&risk_status=${this.state.selectedStatus.value}`
     return apiClient('get', url)
   }
   getMountAttitude() {
-    let url = `v1/scores/report?semester=${this.state.semesterActive}&category=attitude&class_id=${localStorage.getItem('class_id')}&risk_status=all`
+    let url = `v1/scores/report?school_period_id=${this.state.semesterActive}&category=attitude&class_id=${localStorage.getItem('class_id')}&risk_status=all`
     return apiClient('get', url)
   }
   getMountData() {

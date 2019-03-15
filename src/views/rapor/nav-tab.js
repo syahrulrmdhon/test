@@ -11,7 +11,9 @@ export default class NavTab extends Component {
             <TabContent activeTab={this.props.activeTab} className='tab-content-score margin-top-4 w-100'>
                 <TabPane tabId='1'>
                     {!this.props.tableKnowledge || this.props.tableKnowledge.length === 0 ? (
-                        <NotAvailable>Data belum tersedia.</NotAvailable>
+                        <NotAvailable>
+                            <div className='loader'></div>
+                        </NotAvailable>
                     ) : (
                             <TablePengetahuan
                                 tableKnowledge={this.props.tableKnowledge}

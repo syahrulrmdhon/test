@@ -3,9 +3,9 @@ import headers from './../../utils/header'
 
 const SET = 'modules/no-question/SET';
 const RESET = 'modules/no-question/RESET';
-const LOAD_NO_QUESTIONS = 'modules/no-question/LOAD';
-const LOAD_NO_QUESTIONS_SUCCESS = 'modules/no-question/LOAD_SUCCESS';
-const LOAD_NO_QUESTIONS_FAIL = 'modules/no-question/LOAD_FAIL';
+const LOAD_NO_QUESTIONS = 'modules/no-question/LOAD_NO_QUESTIONS';
+const LOAD_NO_QUESTIONS_SUCCESS = 'modules/no-question/LOAD_NO_QUESTIONS_SUCCESS';
+const LOAD_NO_QUESTIONS_FAIL = 'modules/no-question/LOAD_NO_QUESTIONS_FAIL';
 const HANDLE_CHANGE = 'modules/no-question/HANDLE_CHANGE';
 
 const initialState = null;

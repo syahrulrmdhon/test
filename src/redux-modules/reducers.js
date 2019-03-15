@@ -13,6 +13,8 @@ import attitude from './modules/attitude'
 import profile from './modules/profile'
 import studentDetail from './modules/studentDetail'
 import attendanceDetail from './modules/attendanceDetail'
+import scoreList from './modules/scoreList'
+import rapor from './modules/rapor'
 
 export default combineReducers({
   user,
@@ -28,6 +30,8 @@ export default combineReducers({
   attitude,
   studentDetail,
   attendanceDetail,
-  profile
+  profile,
+  scoreList,
+  rapor
 })
 
