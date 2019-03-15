@@ -27,18 +27,18 @@ export function setLabelSelect(lists, values = {}) {
 
 export function seeMore(value, s_count = 50, options = {}) {
     const count = value.length
-    const {expanded, see_more, callBack} = options
+    const { expanded, see_more, callBack } = options
     let seeMore;
 
     if (s_count < count) {
-        if(expanded){
+        if (expanded) {
             value += '...'
             seeMore = 'ciutkan'
         } else {
             value = value.substring(0, s_count);
             value += '...'
 
-            if(see_more){
+            if (see_more) {
                 seeMore = 'lihat lebih lanjut'
             }
         }
@@ -207,7 +207,7 @@ export function getMonthIndo(month = false) {
     return result
 }
 
-export function changeFormatOptions(values = [], params = {key: 'key', value: 'value'}){
+export function changeFormatOptions(values = [], params = { key: 'key', value: 'value' }) {
     let result = []
     if (values) {
         if (values.length > 0) {
@@ -326,7 +326,7 @@ export function basicComps(params = {}, options = {}) {
         let basic_comps = data.data.basic_comps || []
         let obj = {}
         let disableds = {}
-        if(disabled_data.length > 0){
+        if (disabled_data.length > 0) {
             disabled_data.map((disabled, idx) => {
                 disableds[disabled.basic_comp_id] = disabled.basic_comp_id
             })
@@ -339,7 +339,7 @@ export function basicComps(params = {}, options = {}) {
             temps.map((temp, idx) => {
                 let check_disabled = false
 
-                if(disableds[temp.id] !== undefined){
+                if (disableds[temp.id] !== undefined) {
                     check_disabled = true
                 }
 
@@ -377,16 +377,16 @@ export function subjects(params = {}, options = {}) {
     })
 }
 
-export function attitudeAspects(params = {}, options = {}){
+export function attitudeAspects(params = {}, options = {}) {
     let listOptions = options.listOptions || false
 
     apiClient('get', '/v1/filters/attitude_aspects', false, params).then(response => {
         let attitudeAspects = response.data.data.attitude_aspects || []
 
-        if((attitudeAspects.length > 0) && listOptions){
+        if ((attitudeAspects.length > 0) && listOptions) {
             const temps = attitudeAspects
             attitudeAspects = []
-            
+
             temps.map((temp, idx) => {
                 attitudeAspects.push({
                     value: temp.id,
@@ -401,7 +401,7 @@ export function attitudeAspects(params = {}, options = {}){
     })
 }
 
-export function attitudeScores(params = {}, options = {}){
+export function attitudeScores(params = {}, options = {}) {
     let listOptions = options.listOptions || false
 
     apiClient('get', '/v1/filters/attitude_scores', false, params).then(response => {
@@ -414,16 +414,16 @@ export function attitudeScores(params = {}, options = {}){
 }
 
 
-export function region(params = {}, options = {}){
+export function region(params = {}, options = {}) {
     let regionOptions = options.regionOptions || false
 
     apiClient('get', 'v1/filters/regions', false, params).then(response => {
         let regions = response.data.data.regions || []
 
-        if((regions.length > 0) && regionOptions){
+        if ((regions.length > 0) && regionOptions) {
             const temps = regions
             regions = []
-            
+
             temps.map((temp, idx) => {
                 regions.push({
                     value: temp.id,
@@ -438,16 +438,16 @@ export function region(params = {}, options = {}){
     })
 }
 
-export function cities(params = {}, options = {}){
+export function cities(params = {}, options = {}) {
     let cityOpt = options.cityDefaultOpt || false
 
     apiClient('get', 'v1/filters/cities', false, params).then(response => {
         let city = response.data.data.cities || []
 
-        if((city.length > 0) && cityOpt){
+        if ((city.length > 0) && cityOpt) {
             const temps = city
             city = []
-            
+
             temps.map((temp, idx) => {
                 city.push({
                     value: temp.id,
@@ -456,9 +456,29 @@ export function cities(params = {}, options = {}){
             })
         }
 
-        console.log(city,"list")
+        console.log(city, "list")
         this.setState({
             cityDefaultOpt: city,
+        })
+    })
+}
+
+export function getSemesterList(params = {}, options = {}) {
+
+    apiClient('get', 'v1/filters/semesters?', false, false).then(res => {
+        let data = res.data.data.semesters || []
+        let result = []
+        if (data.length > 0) {
+
+            data.map((x)=>{
+                result.push({
+                    value: x.id,
+                    label: x.period_name
+                })
+            })
+        }
+        this.setState({
+            listSemester: result
         })
     })
 }
