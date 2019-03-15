@@ -34,16 +34,16 @@ class DaftarNilai extends Component {
     this.nameClicked = this.nameClicked.bind(this)
     this.getData = this.getData.bind(this)
   }
-  
+
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
-      }, () => {this.getData()})
+      }, () => { this.getData() })
     }
   }
 
-  getData(){
+  getData() {
     let activeTab = this.state.activeTab
 
     let scoreList = _.get(this.props, 'scoreList', {})
@@ -54,7 +54,7 @@ class DaftarNilai extends Component {
     let params = {}
 
     let category = 'knowledge'
-    switch(activeTab){
+    switch (activeTab) {
       case '2':
         category = 'skill'
         break;
@@ -63,43 +63,43 @@ class DaftarNilai extends Component {
         break;
     }
 
-    if(category != ''){
+    if (category != '') {
       params['category'] = category
     }
-    if(selectedSemester != ''){
+    if (selectedSemester != '') {
       params['semester'] = selectedSemester
     }
-    if(selectedClass != ''){
+    if (selectedClass != '') {
       params['class_id'] = selectedClass
     }
-    if(selectedSubject != ''){
+    if (selectedSubject != '') {
       params['school_subject_id'] = selectedSubject
     }
-    
+
     apiClient('get', 'v1/scores/index', false, params).then(response => {
       const data = _.get(response, 'data.data', {})
       const { users, count } = data || []
       const { daily_exam, task } = count
 
-      switch(category){
+      switch (category) {
         case 'knowledge':
           this.setState({
             tableKnowledge: users,
             idxScores: daily_exam,
             idxTugas: task,
           })
-        break;
+          break;
         case 'skill':
           this.setState({
             tableSkill: users,
             idxScoresSkill: task,
           })
-        break;
+          break;
         case 'attitude':
           this.setState({
             tableAttitude: users,
           })
-        break;
+          break;
       }
 
     })
@@ -131,32 +131,6 @@ class DaftarNilai extends Component {
       })
     }
   }
-  // handleSubmit() {
-  //   let dataKnowledge = []
-  //   let dataSkill = []
-  //   let tableKnowledge = []
-  //   let tableAttitude = []
-  //   let tableSkill = []
-  //   this.getKnowledge().then(res => {
-  //     dataKnowledge = res.data.data
-  //     tableKnowledge = res.data.data.users
-  //     this.getAttitude().then(attitudes => {
-  //       tableAttitude = attitudes.data.data.users
-  //       this.getSkill().then(skills => {
-  //         dataSkill = skills.data.data
-  //         tableSkill = skills.data.data.users
-  //         this.setState({
-  //           tableKnowledge: tableKnowledge,
-  //           tableAttitude: tableAttitude,
-  //           tableSkill: tableSkill,
-  //           idxScores: dataKnowledge.count.daily_exam,
-  //           idxTugas: dataKnowledge.count.task,
-  //           idxScoresSkill: dataSkill.count.task
-  //         })
-  //       })
-  //     })
-  //   })
-  // }
   nameClicked(e, id) {
     e.preventDefault()
     this.props.history.push({
