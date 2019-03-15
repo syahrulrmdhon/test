@@ -29,7 +29,6 @@ export function assessmentGetData(p_category = false, page){
     apiClient('get', url, false, params).then(response => {
         let assessments = response.data.data.assessments
         let data = assessments.entries
-        // console.log(response)
 
         let paginate = {
             size: assessments.size,
@@ -78,7 +77,6 @@ export function multipleQuestion(value = false) {
 
     if (value.length > 0) {
         value.map((question, key) => {
-            console.log('question', question)
             let isCorrect = question.is_correct_ans
             if (isCorrect === null || isCorrect === false) {
                 classname = 'bold'

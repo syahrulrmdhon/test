@@ -110,7 +110,6 @@ class Nilai extends Component {
   }
 
   onChangeScore(valueOpt){
-    console.log("here hitted",valueOpt)
     this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.assessment_id, '', valueOpt)
     this.setState({ valueOpt })
   }

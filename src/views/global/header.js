@@ -82,7 +82,6 @@ export default class Header extends Component {
 
         })
             .catch(err => {
-                console.log("here, error")
                 // let description = data.error.user_authentication.join(', ')
                 // // this.setSchoolList()
 
@@ -178,8 +177,6 @@ export default class Header extends Component {
             //     </ButtonToolbar>
             // </NavItem>
         }
-
-        console.log(user_logo,"user logo")
 
         return (
             <div className="fix-nav">
