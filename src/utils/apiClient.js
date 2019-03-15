@@ -1,6 +1,7 @@
 import Axios from 'axios'
 
 export const apiClient = (method, url, request, params = {}) => {
+    console.log(process.env.API_URL,"url")
     const baseUrl = `${process.env.API_URL}`
     const token = localStorage.getItem('token')
     const regist_token = localStorage.getItem('regist_token')

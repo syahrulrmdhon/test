@@ -14,6 +14,11 @@ const API_URL = {
     qa: JSON.stringify('https://qa.api.core.gredu.co/')
 }
 
+const CODE_ANALYTIC = {
+    development: JSON.stringify('UA-134459105-5'),
+    production: JSON.stringify('UA-134459105-4')
+}
+
 module.exports = (env) => ({
     devServer: {
         historyApiFallback: true,
@@ -77,7 +82,8 @@ module.exports = (env) => ({
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                'API_URL': API_URL[env.TARGET_ENV]
+                'API_URL': API_URL[env.TARGET_ENV],
+                'ANALYTIC_CODE':CODE_ANALYTIC[env.TARGET_ENV]
             }
         }),
         new CopyPlugin([
