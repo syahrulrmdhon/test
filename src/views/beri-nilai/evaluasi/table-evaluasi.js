@@ -16,6 +16,7 @@ export default class TableEvaluasi extends Component {
     let content = []
     if (this.props.questionEvaluations.length > 0) {
       this.props.questionEvaluations.map((value, key) => {
+        console.log('value', value)
         let question = evaluatQuestion(value)
         content.push(
           <tr key={key}>

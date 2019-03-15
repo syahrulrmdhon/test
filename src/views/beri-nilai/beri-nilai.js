@@ -96,6 +96,7 @@ class Nilai extends Component {
   getQuestions() {
     const url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/${this.state.class_id}/questions`
     apiClient('get', url).then(res => {
+      console.log('fandiiii', res.data.data)
       this.setState({
         competencySubjects: res.data.data.subject_competencies,
         questionEvaluations: res.data.data.exam_questions
