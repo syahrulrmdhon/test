@@ -354,7 +354,7 @@ export function basicComps(params = {}, options = {}) {
         this.setState(obj)
     })
 }
-export function subjects(params ={} , options={}) {
+export function subjects(params = {}, options = {}) {
     let listOptions = options.listOptions || false
     apiClient('get', 'v1/filters/subjects', false, params).then(response => response.data).then(data => {
         let subjects = data.data.subjects || []
@@ -365,7 +365,7 @@ export function subjects(params ={} , options={}) {
             temps.map((temp, idx) => {
                 subjects.push({
                     value: temp.id,
-                    label: temp.subject_name + ' ('+temp.class_year+')',
+                    label: temp.subject_name + ' (' + temp.class_year + ')',
                 })
             })
         }
@@ -463,12 +463,12 @@ export function cities(params = {}, options = {}) {
 
 export function getSemesterList(params = {}, options = {}) {
 
-    apiClient('get', 'v1/filters/semesters?', false, false).then(res => {
+    apiClient('get', 'v1/filters/semesters', false, false).then(res => {
         let data = res.data.data.semesters || []
         let result = []
         if (data.length > 0) {
 
-            data.map((x)=>{
+            data.map((x) => {
                 result.push({
                     value: x.id,
                     label: x.period_name
@@ -477,6 +477,22 @@ export function getSemesterList(params = {}, options = {}) {
         }
         this.setState({
             listSemester: result
+        })
+    })
+}
+
+export function getStatusList(params = {}, options = {}) {
+
+    apiClient('get', 'v1/filters/risk_status', false, false).then(res => {
+        let status = []
+        for (var i in res.data.data) {
+            const datum = res.data.data[i]
+            datum.map(function (data, i) {
+                status.push({ value: data.key, label: data.value })
+            })
+        }
+        this.setState({
+            listStatus: status
         })
     })
 }

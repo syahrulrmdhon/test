@@ -16,7 +16,6 @@ class DaftarNilai extends Component {
 
     this.state = {
       activeTab: '1',
-      idClass: undefined,
       tableKnowledge: [],
       tableSkill: [],
       tableAttitude: [],
@@ -67,7 +66,7 @@ class DaftarNilai extends Component {
       params['category'] = category
     }
     if (selectedSemester != '') {
-      params['semester'] = selectedSemester
+      params['school_period_id'] = selectedSemester
     }
     if (selectedClass != '') {
       params['class_id'] = selectedClass
@@ -109,28 +108,6 @@ class DaftarNilai extends Component {
     this.getData()
   }
 
-  activeTabLoadData() {
-    if (this.activeTab === '2') {
-      let dataSkill = []
-      let tableSkill = []
-      this.getSkill().then(res => {
-        dataSkill = res.data.data
-        tableSkill = dataSkill.users
-        this.setState({
-          tableSkill: tableSkill,
-          idxScoresSkill: dataSkill.count.task
-        })
-      })
-    } else if (this.activeTab === '3') {
-      let tableAttitude = []
-      this.getAttitude().then(res => {
-        tableAttitude = attitudes.data.data.users
-        this.setState({
-          tableAttitude: tableAttitude
-        })
-      })
-    }
-  }
   nameClicked(e, id) {
     e.preventDefault()
     this.props.history.push({

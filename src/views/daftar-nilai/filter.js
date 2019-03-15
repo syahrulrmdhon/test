@@ -52,10 +52,10 @@ class FilterNilai extends Component {
                     <div className='field-filter'>
                         <label>Semester</label>
                         <Select
-                            onChange={(e) => { this.props.handleChange(e.label, 'selectedSemester') }}
+                            onChange={(e) => { this.props.handleChange(e.value, 'selectedSemester') }}
                             options={this.state.listSemester ? this.state.listSemester : []}
                             className='select'
-                            value={this.state.listSemester.find((element) => { return element.label == selectedSemester })}
+                            value={this.state.listSemester.find((element) => { return element.value == selectedSemester })}
                             classNamePrefix='select'
                             placeholder='Pilih Semester...'
                         />
@@ -93,7 +93,7 @@ class FilterNilai extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    scoreList: state.scoreList, //noQuestion dari reducer
+    scoreList: state.scoreList, //scoreList dari reducer
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
