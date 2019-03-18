@@ -25,6 +25,8 @@ class Rapor extends Component {
       dTableKnowledge: [],
       dTableSkill: [],
       dTableAttitude: [],
+      semesterActive: '',
+      loader: true
     }
     this.toggle = this.toggle.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -39,7 +41,8 @@ class Rapor extends Component {
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
-        activeTab: tab
+        activeTab: tab,
+        loader: true
       }, () => { this.getData() })
     }
   }
@@ -101,10 +104,12 @@ class Rapor extends Component {
           })
           break
       }
+      this.setState({loader: false})
     })
   }
 
   handleSubmit() {
+    this.setState({loader: true})
     this.getData()
   }
 
@@ -153,6 +158,7 @@ class Rapor extends Component {
                         dTableSkill={this.state.dTableSkill}
                         tableAttitude={this.state.tableAttitude}
                         dTableAttitude={this.state.dTableAttitude}
+                        loader={this.state.loader}
                       />
                     </div>
                   </div>

@@ -37,7 +37,8 @@ export function assessmentGetData(p_category = false, page){
         }      
         this.setState({
             data: data,
-            paginate: paginate,         
+            paginate: paginate,  
+            loader: false
         })
     })
 }
