@@ -26,7 +26,9 @@ export default class NavTab extends Component {
                 <TabPane tabId='2'>
                     {
                         !this.props.tableSkill || this.props.tableSkill.length === 0 ? (
-                            <NotAvailable>Data belum tersedia.</NotAvailable>
+                            <NotAvailable>
+                                <div className='loader'></div>
+                            </NotAvailable>
                         ) : (
                                 <TableKeterampilan
                                     tableSkill={this.props.tableSkill}
@@ -39,7 +41,9 @@ export default class NavTab extends Component {
                 <TabPane tabId='3'>
                     {
                         !this.props.tableAttitude || this.props.tableAttitude.length === 0 ? (
-                            <NotAvailable>Data belum tersedia.</NotAvailable>
+                            <NotAvailable>
+                                <div className='loader'></div>
+                            </NotAvailable>
                         ) : (
                                 <TableSikap
                                     tableAttitude={this.props.tableAttitude}

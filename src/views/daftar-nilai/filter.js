@@ -4,12 +4,8 @@ import classnames from 'classnames'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-// import { getSemesterList, getClassList, getSubjectList, handleChange } from './../../redux-modules/modules/scoreList'
 import { getSemesterList, classes, subjects } from './../../utils/common'
-import {
-    handleChange,
-    initial,
-} from './../../redux-modules/modules/scoreList'
+import { handleChange, initial } from './../../redux-modules/modules/scoreList'
 
 
 class FilterNilai extends Component {
@@ -29,9 +25,9 @@ class FilterNilai extends Component {
         classes.call(this)
     }
 
-    changeClass(e){
+    changeClass(e) {
         const value = e.value
-        subjects.call(this, { class_id: value }, {listOptions: true})
+        subjects.call(this, { class_id: value }, { listOptions: true })
         this.props.handleChange(e.value, 'selectedClass')
     }
 
@@ -75,7 +71,7 @@ class FilterNilai extends Component {
                         <label>Mata Pelajaran</label>
                         <Select
                             onChange={(e) => { this.props.handleChange(e.value, 'selectedSubject') }}
-                            options={this.state.subjects ? this.state.subjects: []}
+                            options={this.state.subjects ? this.state.subjects : []}
                             value={this.state.subjects.find((element) => { return element.value == selectedSubject })}
                             className='select'
                             classNamePrefix='select'

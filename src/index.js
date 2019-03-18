@@ -30,12 +30,10 @@ let math_random = ''
 let check_device_id = localStorage.getItem('Device-ID')
 
 if (!check_device_id) {
-  console.log("hit new")
   math_random = Math.random()
   localStorage.setItem('Device-ID', 'browser_' + math_random)
 
 }
-console.log(process.env.ANALYTIC_CODE,"url")
 
 
 localStorage.setItem('App-ID', 'wt')
