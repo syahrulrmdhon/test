@@ -48,7 +48,6 @@ class Rapor extends Component {
     let activeTab = this.state.activeTab
 
     let rapor = _.get(this.props, 'rapor', {})
-    console.log('getData', rapor)
     let selectedStatus = rapor ? rapor.selectedStatus : ''
     let selectedSemester = rapor ? rapor.selectedSemester : ''
 
