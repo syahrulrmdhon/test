@@ -496,3 +496,12 @@ export function getStatusList(params = {}, options = {}) {
         })
     })
 }
+
+export function getClassName() {
+    const classList = localStorage.getItem('homeroom_class')
+    const classes = JSON.parse(classList)
+    const nameClass = classes.name
+    this.setState({
+        nameClass: nameClass
+    })
+}

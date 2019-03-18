@@ -7,174 +7,109 @@ import { apiClient } from '../../utils/apiClient'
 import Page from './../../components/Title'
 import NavToggle from './nav-toggle'
 import NavTab from './nav-tab'
+import { getClassName } from './../../utils/common'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import _ from 'lodash'
 
-export default class Rapor extends Component {
+class Rapor extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       activeTab: '1',
-      listStatus: [],
-      selectedStatus: '',
-      listSemester: [],
-      selectedSemester: '',
       tableKnowledge: [],
       tableSkill: [],
       tableAttitude: [],
-      // subjectName: '',
       nameClass: '',
       dTableKnowledge: [],
       dTableSkill: [],
       dTableAttitude: [],
-      semesterActive: ''
     }
     this.toggle = this.toggle.bind(this)
-    this.getSemesterList = this.getSemesterList.bind(this)
-    this.onChangeSemester = this.onChangeSemester.bind(this)
-    this.getStatusList = this.getStatusList.bind(this)
-    this.onChangeStatus = this.onChangeStatus.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.nameClicked = this.nameClicked.bind(this)
-    this.getActiveSemester = this.getActiveSemester.bind(this)
   }
+
   componentDidMount() {
-    this.getSemesterList()
-    this.getStatusList()
-    this.getClassName()
-    this.getActiveSemester()
+    getClassName.call(this)
+    this.getData()
   }
+
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
-      })
+      }, () => { this.getData() })
     }
   }
-  getActiveSemester() {
-    const periodObject = localStorage.getItem('current_period')
-    const periodParse = JSON.parse(periodObject)
-    const activeSemester = periodParse.id
-    this.state.semesterActive = activeSemester
-    this.getMountData()
-  }
-  getClassName() {
-    const classList = localStorage.getItem('homeroom_class')
-    const classes = JSON.parse(classList)
-    const nameClass = classes.name
-    this.setState({
-      nameClass: nameClass
-    })
-  }
-  getSemesterList() {
-    const url = `v1/filters/semesters`
-    apiClient('get', url).then(res => {
-      let semester = []
-      for (var i in res.data.data) {
-        const datum = res.data.data[i]
-        datum.map(function (data, i) {
-          semester.push({ value: data.id, label: data.period_name })
-        })
-      }
-      this.setState({
-        listSemester: semester
-      })
-    })
-  }
-  onChangeSemester(selectedSemester) {
-    this.setState({ selectedSemester })
-  }
-  getStatusList() {
-    const url = `v1/filters/risk_status`
-    apiClient('get', url).then(res => {
-      let status = []
-      for (var i in res.data.data) {
-        const datum = res.data.data[i]
-        datum.map(function (data, i) {
-          status.push({ value: data.key, label: data.value })
-        })
-      }
-      this.setState({
-        listStatus: status
-      })
-    })
-  }
-  onChangeStatus(selectedStatus) {
-    this.setState({ selectedStatus })
-  }
-  getKnowledge() {
-    let url = `v1/scores/report?school_period_id=${this.state.selectedSemester.value}&category=knowledge&class_id=${localStorage.getItem('class_id')}&risk_status=${this.state.selectedStatus.value}`
-    return apiClient('get', url)
-  }
-  getMountKnowledge() {
-    let url = `v1/scores/report?school_period_id=${this.state.semesterActive}&category=knowledge&class_id=${localStorage.getItem('class_id')}&risk_status=all`
-    return apiClient('get', url)
-  }
-  getSkill() {
-    let url = `v1/scores/report?school_period_id=${this.state.selectedSemester.value}&category=skill&class_id=${localStorage.getItem('class_id')}&risk_status=${this.state.selectedStatus.value}`
-    return apiClient('get', url)
-  }
-  getMountSkill() {
-    let url = `v1/scores/report?school_period_id=${this.state.semesterActive}&category=skill&class_id=${localStorage.getItem('class_id')}&risk_status=all`
-    return apiClient('get', url)
-  }
-  getAttitude() {
-    let url = `v1/scores/report?school_period_id=${this.state.selectedSemester.value}&category=attitude&class_id=${localStorage.getItem('class_id')}&risk_status=${this.state.selectedStatus.value}`
-    return apiClient('get', url)
-  }
-  getMountAttitude() {
-    let url = `v1/scores/report?school_period_id=${this.state.semesterActive}&category=attitude&class_id=${localStorage.getItem('class_id')}&risk_status=all`
-    return apiClient('get', url)
-  }
-  getMountData() {
-    let tableKnowledge = []
-    let tableAttitude = []
-    let tableSkill = []
-    this.getMountKnowledge().then(res => {
-      tableKnowledge = res.data.data.users
-      const iTableKnowledge = tableKnowledge[0]
-      this.getMountAttitude().then(attitudes => {
-        tableAttitude = attitudes.data.data.users
-        const iTableAttitude = tableAttitude[0]
-        this.getMountSkill().then(skills => {
-          tableSkill = skills.data.data.users
-          const iTableSkill = tableSkill[0]
+
+  getData() {
+    let activeTab = this.state.activeTab
+
+    let rapor = _.get(this.props, 'rapor', {})
+    console.log('getData', rapor)
+    let selectedStatus = rapor ? rapor.selectedStatus : ''
+    let selectedSemester = rapor ? rapor.selectedSemester : ''
+
+    let class_id = ''
+    let params = {}
+
+    let category = 'knowledge'
+    switch (activeTab) {
+      case '2':
+        category = 'skill'
+        break
+      case '3':
+        category = 'attitude'
+        break
+    }
+
+    if (selectedSemester != '') {
+      params['school_period_id'] = selectedSemester
+    }
+    if (category != '') {
+      params['category'] = category
+    }
+    if (class_id == '') {
+      params['class_id'] = localStorage.getItem('class_id')
+    }
+    if (selectedStatus != '') {
+      params['risk_status'] = selectedStatus
+    }
+
+    apiClient('get', 'v1/scores/report', false, params).then(res => {
+      const data = _.get(res, 'data.data', {})
+      console.log('data', data)
+      const { users } = data || []
+
+      switch (category) {
+        case 'knowledge':
           this.setState({
-            tableKnowledge: tableKnowledge,
-            tableAttitude: tableAttitude,
-            tableSkill: tableSkill,
-            dTableKnowledge: iTableKnowledge,
-            dTableAttitude: iTableAttitude,
-            dTableSkill: iTableSkill
+            tableKnowledge: users,
+            dTableKnowledge: users[0] //take data header table
           })
-        })
-      })
+          break
+        case 'skill':
+          this.setState({
+            tableSkill: users,
+            dTableSkill: users[0] //take data header table
+          })
+          break
+        case 'attitude':
+          this.setState({
+            tableAttitude: users,
+            dTableAttitude: users[0] //take data header table
+          })
+          break
+      }
     })
   }
+
   handleSubmit() {
-    let tableKnowledge = []
-    let tableAttitude = []
-    let tableSkill = []
-    this.getKnowledge().then(res => {
-      tableKnowledge = res.data.data.users
-      const iTableKnowledge = tableKnowledge[0]
-      this.getAttitude().then(attitudes => {
-        tableAttitude = attitudes.data.data.users
-        const iTableAttitude = tableAttitude[0]
-        this.getSkill().then(skills => {
-          tableSkill = skills.data.data.users
-          const iTableSkill = tableSkill[0]
-          this.setState({
-            tableKnowledge: tableKnowledge,
-            tableAttitude: tableAttitude,
-            tableSkill: tableSkill,
-            dTableKnowledge: iTableKnowledge,
-            dTableAttitude: iTableAttitude,
-            dTableSkill: iTableSkill
-          })
-        })
-      })
-    })
+    this.getData()
   }
+
   nameClicked(e, id) {
     e.preventDefault()
     this.props.history.push({
@@ -182,7 +117,10 @@ export default class Rapor extends Component {
       state: { status: 'rapor' }
     })
   }
+
   render() {
+    console.log('table', this.state.tableKnowledge)
+    console.log('dtable', this.state.dTableKnowledge)
     return (
       <Page title="Rapor">
         <div className='row-score'>
@@ -193,12 +131,6 @@ export default class Rapor extends Component {
                 <div className='margin-0'>
                   <div className='col-sm-3 left-block'>
                     <FilterRapor
-                      listSemester={this.state.listSemester}
-                      selectedSemester={this.state.selectedSemester}
-                      onChangeSemester={this.onChangeSemester}
-                      listStatus={this.state.listStatus}
-                      selectedStatus={this.state.selectedStatus}
-                      onChangeStatus={this.onChangeStatus}
                       handleSubmit={this.handleSubmit}
                       handlePrint={this.handlePrint}
                     />
@@ -237,3 +169,12 @@ export default class Rapor extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  rapor: state.rapor //rapor dari reducer
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+}, dispatch
+)
+export default connect(mapStateToProps, mapDispatchToProps)(Rapor)
