@@ -6,6 +6,8 @@ import Pagination from '../global/pagination'
 import ReactPaginate from 'react-paginate'
 import previous from '../../assets/images/previous.svg'
 import next from '../../assets/images/next.svg'
+import Loader from './../global/loader'
+
 export default class IndexAssessment extends Component {
     constructor(props){
         super(props)
@@ -87,7 +89,12 @@ export default class IndexAssessment extends Component {
 
         return(
             <div className="empty-wrapper">
-                { content.length ?
+
+                {
+                    this.props.loader ?
+                        <Loader />
+                    :
+                    content.length ?
                     <div>
                         {content}
                         {this.props.paginate.total_pages > 1 && 

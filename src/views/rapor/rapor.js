@@ -26,7 +26,8 @@ export default class Rapor extends Component {
       dTableKnowledge: [],
       dTableSkill: [],
       dTableAttitude: [],
-      semesterActive: ''
+      semesterActive: '',
+      loader: true
     }
     this.toggle = this.toggle.bind(this)
     this.getSemesterList = this.getSemesterList.bind(this)
@@ -144,7 +145,8 @@ export default class Rapor extends Component {
             tableSkill: tableSkill,
             dTableKnowledge: iTableKnowledge,
             dTableAttitude: iTableAttitude,
-            dTableSkill: iTableSkill
+            dTableSkill: iTableSkill,
+            loader: false
           })
         })
       })
@@ -160,6 +162,7 @@ export default class Rapor extends Component {
       this.getAttitude().then(attitudes => {
         tableAttitude = attitudes.data.data.users
         const iTableAttitude = tableAttitude[0]
+        this.setState({loader: true})
         this.getSkill().then(skills => {
           tableSkill = skills.data.data.users
           const iTableSkill = tableSkill[0]
@@ -169,7 +172,8 @@ export default class Rapor extends Component {
             tableSkill: tableSkill,
             dTableKnowledge: iTableKnowledge,
             dTableAttitude: iTableAttitude,
-            dTableSkill: iTableSkill
+            dTableSkill: iTableSkill,
+            loader: false
           })
         })
       })
@@ -225,6 +229,7 @@ export default class Rapor extends Component {
                         dTableSkill={this.state.dTableSkill}
                         tableAttitude={this.state.tableAttitude}
                         dTableAttitude={this.state.dTableAttitude}
+                        loader={this.state.loader}
                       />
                     </div>
                   </div>

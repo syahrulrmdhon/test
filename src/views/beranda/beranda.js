@@ -8,7 +8,7 @@ import Schedule from './schedule'
 import classnames from 'classnames'
 import { apiClient } from '../../utils/apiClient'
 import { classes } from '../../utils/common'
-
+import Loader from './../global/loader'
 import Page from './../../components/Title'
 
 var FontAwesome = require('react-fontawesome');
@@ -26,6 +26,7 @@ class Beranda extends Component {
             scheduleList: [],
             checkedItems: {},
             class_id: '',
+            loader: true
         }
 
         this.clickSideBar = this.clickSideBar.bind(this)
@@ -50,7 +51,8 @@ class Beranda extends Component {
         
         apiClient('get', 'v1/home/index', false, params).then(response => {
             this.setState({
-                data: response.data.data.activity_schedules
+                data: response.data.data.activity_schedules,
+                loader: false
             })
         })
     }
@@ -120,7 +122,12 @@ class Beranda extends Component {
                         <div className="col-sm-12">
                             <div className="margin-2">
                                 <div className={classnames("schedule padding-4", this.state.isSideBar)}>
-                                {this.state.scheduleList}
+                                {
+                                    this.state.loader ?
+                                        <Loader />
+                                    :
+                                    this.state.scheduleList
+                                }
                                 </div>
                             </div>
                         </div>

@@ -11,6 +11,7 @@ import { getDate } from '../../utils/common'
 import { LabelInfo } from '../../views/global/labelInfo'
 import Page from './../../components/Title'
 import axios from 'axios'
+import Loader from './../global/loader'
 
 export default class Attendance extends Component {
   constructor(props) {
@@ -291,12 +292,7 @@ export default class Attendance extends Component {
                     </div>
                     { 
                       this.state.loader ?
-                      <div style={{height: '90%', alignItems: 'center', justifyContent: 'center', display: 'flex'}}>
-                        <div class="sk-double-bounce">
-                          <div class="sk-child sk-double-bounce1"></div>
-                          <div class="sk-child sk-double-bounce2"></div>
-                        </div>  
-                        </div>
+                        <Loader />
                       :  
                         (!this.state.attendances || this.state.attendances.length === 0 || this.state.searchAttendances === null) ?
                           <NotAvailable>{this.notStudent()}</NotAvailable>

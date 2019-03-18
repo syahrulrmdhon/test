@@ -6,6 +6,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import Header from '../global/header'
 import { apiClient } from '../../utils/apiClient'
 import Page from  './../../components/Title'
+import Loader from './../global/loader'
 
 class DaftarMurid extends Component {
     constructor(props) {
@@ -76,6 +77,8 @@ class DaftarMurid extends Component {
         const options = {
             onRowClick: this.onRowClick
         };
+        console.log(this.state.data)
+
         return (
             <Page title='Daftar Murid'>
             <div className="padding-content student-list">
@@ -86,44 +89,49 @@ class DaftarMurid extends Component {
                             <div className="col-12 text-center">
                                 <div className="table-title">{homeroomClass}</div>
                                 <div className="school-year">Tahun Ajaran {this.state.schoolYear}</div>
-                                <BootstrapTable bordered={false} hover data={this.state.data} options={options} className="table-content">
-                                    <TableHeaderColumn row="0" rowSpan="2" dataField="id" isKey hidden></TableHeaderColumn>
-                                    <TableHeaderColumn row="0" rowSpan="2" columnClassName="student-detail__name" dataField="full_name" dataSort>
-                                        Nama Murid
-                                    <i className="fa fa-sort"></i>
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn row="0" rowSpan="2" columnClassName="nis" dataField="nis" dataSort>
-                                        NIS
-                                    <i className="fa fa-sort"></i>
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn row="0" rowSpan="2" columnClassName="nis" dataField="nisn" dataSort>
-                                        NISN
-                                    <i className="fa fa-sort"></i>
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn row="0" rowSpan="2" columnClassName="score" className="text-center" dataField="percentage" dataFormat={this.getAttendancePrecentage} dataSort>
-                                        Kehadiran Rata-Rata
-                                    <i className="fa fa-sort"></i>
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn row="0" colSpan="3"columnClassName="score text-center" className="text-center">
-                                        Nilai Rata-Rata
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center" dataField="score" dataSort>
-                                        Pengetahuan
-                                    <i className="fa fa-sort"></i>
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center" dataField="score" dataSort>
-                                        Keterampilan
-                                    <i className="fa fa-sort"></i>
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center cell-border-right" dataField="score" dataSort>
-                                        Sikap
-                                    <i className="fa fa-sort"></i>
-                                    </TableHeaderColumn>
-                                    <TableHeaderColumn row="0" rowSpan="2" columnClassName="score text-center" className="text-center border-right-0" dataField="rank" dataSort>
-                                        Peringkat
-                                    <i className="fa fa-sort"></i>
-                                    </TableHeaderColumn>
-                                </BootstrapTable>
+                                {
+                                    this.state.data.length ?
+                                    <BootstrapTable bordered={false} hover data={this.state.data} options={options} className="table-content">
+                                        <TableHeaderColumn row="0" rowSpan="2" dataField="id" isKey hidden></TableHeaderColumn>
+                                        <TableHeaderColumn row="0" rowSpan="2" columnClassName="student-detail__name" dataField="full_name" dataSort>
+                                            Nama Murid
+                                        <i className="fa fa-sort"></i>
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn row="0" rowSpan="2" columnClassName="nis" dataField="nis" dataSort>
+                                            NIS
+                                        <i className="fa fa-sort"></i>
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn row="0" rowSpan="2" columnClassName="nis" dataField="nisn" dataSort>
+                                            NISN
+                                        <i className="fa fa-sort"></i>
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn row="0" rowSpan="2" columnClassName="score" className="text-center" dataField="percentage" dataFormat={this.getAttendancePrecentage} dataSort>
+                                            Kehadiran Rata-Rata
+                                        <i className="fa fa-sort"></i>
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn row="0" colSpan="3"columnClassName="score text-center" className="text-center">
+                                            Nilai Rata-Rata
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center" dataField="score" dataSort>
+                                            Pengetahuan
+                                        <i className="fa fa-sort"></i>
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center" dataField="score" dataSort>
+                                            Keterampilan
+                                        <i className="fa fa-sort"></i>
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center cell-border-right" dataField="score" dataSort>
+                                            Sikap
+                                        <i className="fa fa-sort"></i>
+                                        </TableHeaderColumn>
+                                        <TableHeaderColumn row="0" rowSpan="2" columnClassName="score text-center" className="text-center border-right-0" dataField="rank" dataSort>
+                                            Peringkat
+                                        <i className="fa fa-sort"></i>
+                                        </TableHeaderColumn>
+                                    </BootstrapTable>
+                                : 
+                                    <Loader />
+                            }
                             </div>
                         </div>
                     </div>
