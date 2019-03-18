@@ -56,7 +56,9 @@ export default class Schedule extends Component{
 
         return(
             <div className="content-block disinblock margin-right-4">
-                <span className={classnames("bold dayname", today)}>{this.state.dayname}, </span><span className={today}>{this.state.datename}</span>
+                <div className="day-wrapper">
+                    <span className={classnames("bold dayname", today)}>{this.state.dayname}, </span><span className={today}>{this.state.datename}</span>
+                </div>
                 <div className="list">
                     {items}
                 </div>
