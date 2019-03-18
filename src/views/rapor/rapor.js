@@ -80,7 +80,6 @@ class Rapor extends Component {
 
     apiClient('get', 'v1/scores/report', false, params).then(res => {
       const data = _.get(res, 'data.data', {})
-      console.log('data', data)
       const { users } = data || []
 
       switch (category) {
