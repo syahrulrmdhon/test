@@ -13,11 +13,11 @@ export default class OnlineExamList extends Component {
             <Page title='Daftar Ujian'>
                 <div className='online-exam'>
                     <div className='padding-content'>
-                        <Header />
-                        <div className='margin-content'>
-                            <div className='content-block main-block h-100'>
-                                <div className='margin-0 row'>
-                                        <div className='col-sm-3 left-block'>
+                            <Header />
+                            <div className='margin-content'>
+                                <div className='content-block main-block'>
+                                    <div className='margin-box row h-100'>
+                                        <div className='col-sm-3 left-block padding-top-4'>
                                             <FilterOnlineExam
 
                                             />
@@ -26,10 +26,10 @@ export default class OnlineExamList extends Component {
 
                                         />
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </Page>
         )
     }

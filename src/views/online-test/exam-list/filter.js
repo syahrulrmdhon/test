@@ -4,7 +4,7 @@ import Select from 'react-select'
 export default class FilterOnlineExam extends Component {
     render() {
         return (
-            <div className='filter'>
+            <div className='filter h-100'>
                 <div className='title'>Filter</div>
                 <form>
                     <div className='field-filter'>
