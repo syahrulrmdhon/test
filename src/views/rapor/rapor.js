@@ -119,8 +119,6 @@ class Rapor extends Component {
   }
 
   render() {
-    console.log('table', this.state.tableKnowledge)
-    console.log('dtable', this.state.dTableKnowledge)
     return (
       <Page title="Rapor">
         <div className='row-score'>
