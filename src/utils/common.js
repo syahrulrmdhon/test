@@ -77,7 +77,7 @@ export function getUser(redirect = false) {
     const url = 'v1/users'
     apiClient('get', url).then(res => {
         localStorage.setItem("user_id", res.data.data.user.id)
-
+        console.log(res.data.data,"data")
         if (res.data.data.homeroom_class != null) {
             localStorage.setItem("class_id", res.data.data.homeroom_class.id)
         }
@@ -88,6 +88,7 @@ export function getUser(redirect = false) {
         localStorage.setItem("current_period", JSON.stringify(res.data.data.current_period))
         localStorage.setItem("homeroom_class", JSON.stringify(res.data.data.homeroom_class))
 
+        // return false
         if (redirect) {
             window.location.href = "/home";
         }
