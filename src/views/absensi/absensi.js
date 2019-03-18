@@ -290,10 +290,10 @@ export default class Attendance extends Component {
                         <i className="fa fa-search icon"></i>
                       </div>
                     </div>
-                    { 
-                      this.state.loader ?
-                        <Loader />
-                      :  
+                      {
+                        this.state.loader ?
+                        <Loader loader={this.state.loader}/>
+                        :
                         (!this.state.attendances || this.state.attendances.length === 0 || this.state.searchAttendances === null) ?
                           <NotAvailable>{this.notStudent()}</NotAvailable>
                         :

@@ -92,7 +92,7 @@ export default class IndexAssessment extends Component {
 
                 {
                     this.props.loader ?
-                        <Loader />
+                        <Loader loader={this.props.loader}/>
                     :
                     content.length ?
                     <div>

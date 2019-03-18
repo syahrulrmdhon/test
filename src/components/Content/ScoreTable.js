@@ -12,7 +12,7 @@ export default class ScoreTable extends Component {
     const knowledgeScore = this.props.knowledgeScore
     const skillScore = this.props.skillScore
     const attitudeScore = this.props.attitudeScore
-    console.log(this.props.loader)
+
     return (
       <div className="h-100">
         <TabContent activeTab={this.props.activeTab} className="h-100">
@@ -20,7 +20,7 @@ export default class ScoreTable extends Component {
             {
               this.props.loader ?
                 <div className="is-empty">
-                  <Loader />
+                  <Loader loader={this.props.loader}/>
                 </div>
               :
               knowledgeScore ?
@@ -84,7 +84,7 @@ export default class ScoreTable extends Component {
             {
               this.props.loader ?
                 <div className="is-empty">
-                  <Loader />
+                  <Loader loader={this.props.loader} />
                 </div>
               :
               skillScore ?
@@ -146,7 +146,7 @@ export default class ScoreTable extends Component {
             {
               this.props.loader ?
                 <div className="is-empty">
-                  <Loader />
+                  <Loader loader={this.props.loader} />
                 </div>
               :
               attitudeScore ? 

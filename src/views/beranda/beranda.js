@@ -122,12 +122,8 @@ class Beranda extends Component {
                         <div className="col-sm-12">
                             <div className="margin-2">
                                 <div className={classnames("schedule padding-4", this.state.isSideBar)}>
-                                {
-                                    this.state.loader ?
-                                        <Loader />
-                                    :
-                                    this.state.scheduleList
-                                }
+                                <Loader loader={this.state.loader}/>
+                                {this.state.scheduleList}
                                 </div>
                             </div>
                         </div>

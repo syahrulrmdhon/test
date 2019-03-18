@@ -77,7 +77,6 @@ class DaftarMurid extends Component {
         const options = {
             onRowClick: this.onRowClick
         };
-        console.log(this.state.data)
 
         return (
             <Page title='Daftar Murid'>
@@ -130,7 +129,7 @@ class DaftarMurid extends Component {
                                         </TableHeaderColumn>
                                     </BootstrapTable>
                                 : 
-                                    <Loader />
+                                    <Loader loader={true} />
                             }
                             </div>
                         </div>

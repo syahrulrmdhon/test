@@ -8,13 +8,12 @@ import Loader from './../global/loader'
 
 export default class Tab extends Component {
     render() {
-        console.log(this.props.loader)
         return (
             <TabContent className='tab-content-score margin-top-4 w-100' activeTab={this.props.activeTab}>
                 <TabPane tabId='1'>
                     { 
                         this.props.loader ?
-                            <Loader />
+                            <Loader loader={this.props.loader}/>
                         :
                             !this.props.tableKnowledge ||
                             this.props.tableKnowledge.length === 0 ? (
@@ -30,7 +29,7 @@ export default class Tab extends Component {
                 <TabPane tabId='2'>
                     { 
                         this.props.loader ?
-                            <Loader />
+                        <Loader loader={this.props.loader}/>
                         : 
                             !this.props.tableSkill ||
                             this.props.tableSkill.length === 0 ? (
@@ -47,7 +46,7 @@ export default class Tab extends Component {
                 <TabPane tabId='3'>
                     {
                         this.props.loader ?
-                            <Loader />
+                        <Loader loader={this.props.loader}/>
                         : !this.props.tableAttitude ||
                             this.props.tableAttitude.length === 0 ? (
                                 <NotAvailable>

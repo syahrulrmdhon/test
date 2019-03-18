@@ -12,8 +12,8 @@ export default class NavTab extends Component {
             <TabContent activeTab={this.props.activeTab} className='tab-content-score margin-top-4 w-100'>
                 <TabPane tabId='1'>
                     { this.props.loader ? 
-                            <Loader />
-                        :  
+                            <Loader loader={this.props.loader}/>
+                            :  
                         !this.props.tableKnowledge || this.props.tableKnowledge.length === 0 ? (
                             <NotAvailable>
                                 Data belum tersedia.
@@ -30,8 +30,8 @@ export default class NavTab extends Component {
                 </TabPane>
                 <TabPane tabId='2'>
                     { this.props.loader ? 
-                        <Loader />
-                    :  
+                            <Loader loader={this.props.loader}/>
+                            :  
                     !this.props.tableSkill || this.props.tableSkill.length === 0 ? (
                         <NotAvailable>Data belum tersedia.</NotAvailable>
                     ) : (
@@ -45,8 +45,8 @@ export default class NavTab extends Component {
                 </TabPane>
                 <TabPane tabId='3'>
                     { this.props.loader ? 
-                        <Loader />
-                    :  
+                            <Loader loader={this.props.loader}/>
+                            :  
                     !this.props.tableAttitude || this.props.tableAttitude.length === 0 ? (
                         <NotAvailable>Data belum tersedia.</NotAvailable>
                     ) : (
