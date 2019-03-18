@@ -191,13 +191,13 @@ export default class ScoreTable extends Component {
               </div>
               <div className="border-hidden"></div>
               <div className="total-status">
-              <div>
-                  <div className="pull-left">
+              <div style={{width: '240px'}}>
+                  <div className="pull-left" style={{width: '180px'}}>
                     Total Sikap Butuh Perhatian
                     <br />
                     Total Sikap Sangat Baik
                   </div>
-                  <div style={{width: "270px"}}>
+                  <div>
                     {attitudeScore.recap.subjects.bp} <div className="pull-right">Sikap</div>
                     <br />
                     {attitudeScore.recap.subjects.sb} <div className="pull-right">Sikap</div>
