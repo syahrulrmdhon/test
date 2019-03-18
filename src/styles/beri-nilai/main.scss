@@ -57,7 +57,7 @@ $nunito_bold: "NunitoBold";
 }
 
 .container-score {
-  margin-right: 50px
+  margin-right: 50px;
 }
 
 .detail-menu {
@@ -587,8 +587,6 @@ table.table.beri-nilai tr.head {
   vertical-align: top !important;
 }
 
-
-
 .tr-row {
   width: 100%;
   display: contents !important;
@@ -624,16 +622,15 @@ table.table.beri-nilai tr.head {
     font-stretch: normal;
     line-height: normal;
     letter-spacing: -0.1px;
-    color: #333333
+    color: #333333;
   }
 
-
-  thead{
+  thead {
     background-color: #f3f3f6;
   }
 
   .form-position {
-    margin-left:90px;
+    margin-left: 90px;
   }
 
   .select-list {
@@ -674,7 +671,7 @@ table.table.beri-nilai tr.head {
     width: 3px;
   }
 
-  .unset-border-right{
+  .unset-border-right {
     border-right: unset;
   }
 }
@@ -966,16 +963,63 @@ table.table.beri-nilai tr.head {
   bottom: 25px;
   color: #4a4a4a;
 }
-.loader {
-  margin: auto;
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #199d7f;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+
+.loader-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+
+  .sk-double-bounce {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 40px auto;
+  }
+  
+  .sk-double-bounce .sk-child {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #229c80;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-animation: sk-doubleBounce 2s infinite ease-in-out;
+    animation: sk-doubleBounce 2s infinite ease-in-out;
+  }
+  
+  .sk-double-bounce .sk-double-bounce2 {
+    -webkit-animation-delay: -1s;
+    animation-delay: -1s;
+  }
+  
+  @-webkit-keyframes sk-doubleBounce {
+    0%,
+    100% {
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    }
+    50% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes sk-doubleBounce {
+    0%,
+    100% {
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    }
+    50% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  }
 }
+
 
 .kkm {
   color: #7f92a1;
@@ -985,7 +1029,7 @@ table.table.beri-nilai tr.head {
 }
 
 .range-table {
-  margin-bottom:40px;
+  margin-bottom: 40px;
 }
 
 .title-indicator {
@@ -1054,7 +1098,8 @@ table.table.beri-nilai tr.head {
 }
 
 // remove arrow on input type number
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

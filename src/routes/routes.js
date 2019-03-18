@@ -39,12 +39,18 @@ import NewPassword from '../views/auth/password/new-password';
 import ExamDetail from './../views/exam/detail/index'
 import DetailScoreAttitude from './../views/beri-nilai/attitude/'
 import NewAttitudeScore from './../views/beri-nilai/attitude/new'
-import OnlineExamList from './../views/online-test/exam-list/index'
 
 //profile
 import BasicInformation from './../views/profile/basic'
 import UpdatePassword from './../views/profile/update-password'
 import TeachList from './../views/profile/teach-list'
+
+
+//online exams
+import OnlineExamList from './../views/online-test/exam-list/index'
+import CreateList from './../views/online-test/create-exam/index'
+
+
 
 export const MainRoutes = [
     {
@@ -238,10 +244,18 @@ export const MainRoutes = [
         path: '/profile/teach-list',
         component:TeachList
     },
+
+    //online exams
     {
-        path: '/online-exam/list',
+        path: '/online-exam/',
+        exact:true,
         component: OnlineExamList
     },
+    {
+        path: '/online-exam/create',
+        component: CreateList
+    },
+
     {
         path: '*',
         component: NotFound
