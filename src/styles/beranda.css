@@ -15,6 +15,11 @@
     margin-left: 60px;
 }
 
+.row-class {
+    max-height: 20vh;
+    overflow-y: scroll;
+}
+
 .mainbar{
     position: relative;
     background-color: #FFF;
@@ -82,7 +87,17 @@
     color: #ff6d4a;
 }
 .schedule .list{
+    padding: 0 1rem 0 2rem;
+    margin-right: 1rem;
     margin-top: 40px;
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+.disinblock {
+    padding: 0 !important;
+}
+.day-wrapper{
+    padding: 2rem;
 }
 .schedule .border-full{
     border-radius: 5px;
