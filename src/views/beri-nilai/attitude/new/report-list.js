@@ -106,7 +106,6 @@ export class Report extends Component {
                     predicate.push(<span></span>)
 
             }
-            console.log(data, "here data")
             report.push(
                 <div className="col-sm-12" key={Math.random()}>
                     <div className="margin-top-5">
