@@ -24,7 +24,9 @@ export default function reducer(state=initialState, action) {
             loading: false,
             ...{
                 selectedYear: null,
-                selectedSemester: null
+                selectedSemester: null,
+                selectedType: null,
+                selectedGrade: null
             }
         }
         break
