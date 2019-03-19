@@ -4,29 +4,38 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { handleChange, initial } from './../../../redux-modules/modules/listOnlineExam'
-import { schoolYears, getSemesterList } from './../../../utils/common'
+import { schoolYears, getSemesterList, assessmentType, grades } from './../../../utils/common'
 
 class FilterOnlineExam extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            school_years: []
+            school_years: [],
+            listSemester: [],
+            assessment_types: [],
+            grades: []
         }
+        this.changePeriod = this.changePeriod.bind(this)
     }
-    // componentDidMount() {
-    //     this.props.initial()
-    //     schoolYears.call(this, false, { listOptions: true })
-    //     handleChangeSemester()
-    // }
-    // handleChangeSemester(e) {
-    //     const value = e.value
-    //     console.log('value', value)
-    //     // getSemesterList.call(this, )
-    // }
+    componentDidMount() {
+        this.props.initial()
+        schoolYears.call(this, false, { listOptions: true })
+        getSemesterList.call(this)
+        assessmentType.call(this, {category: 'knowledge'})
+        grades.call(this)
+    }
+    changePeriod(e) {
+        const value = e.value
+        getSemesterList.call(this, {school_year_id: value}, false)
+        this.props.handleChange(e.value, 'selectedYear')
+    }
     render() {
         let listOnlineExam = _.get(this, 'props.listOnlineExam', {})
         let selectedYear = listOnlineExam ? listOnlineExam.selectedYear : ''
+        let selectedSemester = listOnlineExam ? listOnlineExam.selectedSemester : ''
+        let selectedType = listOnlineExam ? listOnlineExam.selectedType : ''
+        let selectedGrade = listOnlineExam ? listOnlineExam.selectedGrade: ''
         return (
             <div className='filter h-100'>
                 <div className='title'>Filter</div>
@@ -34,12 +43,9 @@ class FilterOnlineExam extends Component {
                     <div className='field-filter'>
                         <label>Periode</label>
                         <Select
-                            // value={this.props.selectedSemester}
-                            // onChange={(e) => { this.props.onChangeSemester(e) }}
-                            // options={this.props.listSemester}
-                            // onChange={(e) => { this.props.handleChange(e.value, 'selectedYear') }}
-                            // options={this.state.school_years ? this.state.school_years : []}
-                            // value={this.state.school_years.find((element) => { return element.value == selectedYear })}
+                            onChange={(e) => { this.changePeriod(e) }}
+                            options={this.state.school_years ? this.state.school_years : []}
+                            value={this.state.school_years.find((e) => { return e.value == selectedYear })}
                             className='select'
                             classNamePrefix='select'
                             placeholder='Pilih Periode...'
@@ -48,9 +54,9 @@ class FilterOnlineExam extends Component {
                     <div className='field-filter'>
                         <label>Semester</label>
                         <Select
-                            // value={this.props.selectedSemester}
-                            // onChange={(e) => { this.props.onChangeSemester(e) }}
-                            // options={this.props.listSemester}
+                            onChange={(e) => { this.props.handleChange(e.value, 'selectedSemester') }}
+                            options={this.state.listSemester ? this.state.listSemester : []}
+                            value={this.state.listSemester.find((e) => { return e.value == selectedSemester })}
                             className='select'
                             classNamePrefix='select'
                             placeholder='Pilih Semester...'
@@ -59,9 +65,9 @@ class FilterOnlineExam extends Component {
                     <div className='field-filter'>
                         <label>Tipe Ujian</label>
                         <Select
-                            // value={this.props.selectedSemester}
-                            // onChange={(e) => { this.props.onChangeSemester(e) }}
-                            // options={this.props.listSemester}
+                            onChange={(e) => { this.props.handleChange(e.value, 'selectedType') }}
+                            options={this.state.assessment_types ? this.state.assessment_types : []}
+                            value={this.state.assessment_types.find((e) => { return e.value == selectedType })}
                             className='select'
                             classNamePrefix='select'
                             placeholder='Pilih Tipe Ujian...'
@@ -70,16 +76,18 @@ class FilterOnlineExam extends Component {
                     <div className='field-filter'>
                         <label>Pilih Kelas</label>
                         <Select
-                            // value={this.props.selectedSemester}
-                            // onChange={(e) => { this.props.onChangeSemester(e) }}
-                            // options={this.props.listSemester}
+                            onChange={(e) => { this.props.handleChange(e.value, 'selectedGrade') }}
+                            options={this.state.grades ? this.state.grades : []}
+                            value={this.state.grades.find((e) => { return e.value == selectedGrade })}
                             className='select'
                             classNamePrefix='select'
                             placeholder='Pilih Kelas...'
                         />
                     </div>
                 </form>
-                <button type="submit" className="btn-green">Filter</button>
+                <button type="submit" onClick={this.props.handleSubmit} className="btn-green">
+                    Filter
+                </button>
             </div>
         )
     }
