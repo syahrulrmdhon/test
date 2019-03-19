@@ -3,30 +3,35 @@ import Header from './../../global/header'
 import Page from './../../../components/Title'
 import FilterOnlineExam from './filter'
 import './../../../styles/online-test.scss'
-import { NotAvailable } from '../../global/notAvailable'
-import { Progress } from 'reactstrap'
 import ContentOnlineExam from './content'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import _ from 'lodash'
 
-export default class OnlineExamList extends Component {
+class OnlineExamList extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+
+        }
+    }
     render() {
         return (
             <Page title='Daftar Ujian'>
+                <Header />
                 <div className='online-exam'>
-                    <div className='padding-content'>
-                        <Header />
-                        <div className='margin-content'>
-                            <div className='content-block main-block h-100'>
-                                <div className='margin-0 row'>
-                                        <div className='col-sm-3 left-block'>
-                                            <FilterOnlineExam
 
-                                            />
-                                        </div>
-                                        <ContentOnlineExam
+                    <div className='content-block main-block'>
+                        <div className='margin-box row h-100'>
+                            <div className='col-sm-3 left-block padding-top-4'>
+                                <FilterOnlineExam
 
-                                        />
-                                    </div>
+                                />
                             </div>
+                            <ContentOnlineExam
+
+                            />
                         </div>
                     </div>
                 </div>
@@ -34,3 +39,11 @@ export default class OnlineExamList extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    listOnlineExam: state.listOnlineExam //listOnlineExam dari reducer
+  })
+  const mapDispatchToProps = dispatch => bindActionCreators({
+  }, dispatch
+  )
+  export default connect(mapStateToProps, mapDispatchToProps)(OnlineExamList)
