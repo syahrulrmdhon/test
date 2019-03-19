@@ -12,6 +12,7 @@ const menus = [
     { name: "Beranda", link: "/home", role: 'all' },
     { name: "Absensi", link: "/absen", role: 'all' },
     { name: "Penilaian", link: "/penilaian", role: 'all' },
+    // { name: "Ujian Sekolah", link: "/online-exam/", role: 'all' },
     { name: "Daftar Nilai", link: "/daftar-nilai", role: 'all' },
     { name: "Rapor Kelas", link: "/rapor", role: 'homeroom' },
     { name: "Daftar Murid", link: "/murid", role: 'homeroom' },

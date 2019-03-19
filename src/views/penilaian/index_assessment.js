@@ -6,6 +6,8 @@ import Pagination from '../global/pagination'
 import ReactPaginate from 'react-paginate'
 import previous from '../../assets/images/previous.svg'
 import next from '../../assets/images/next.svg'
+import Loader from './../global/loader'
+
 export default class IndexAssessment extends Component {
     constructor(props){
         super(props)
@@ -45,49 +47,14 @@ export default class IndexAssessment extends Component {
             />)            
         }
 
-        var element = document.getElementById("topic-wrapper")
-        if (element) {
-            let body = document.getElementById('topics')
-            let bodyWidth = ''
-            if (body) {
-                bodyWidth = body.clientWidth
-            }
-            
-            window.addEventListener("load", function() {
-                let head = document.querySelector('thead')
-
-                let body = document.querySelector('tbody')
-                bodyWidth = body.clientWidth
-                head.style = `width: ${bodyWidth}px`
-            })
-
-            window.addEventListener("resize", function() {
-                let head = document.querySelector('thead')
-                let body = document.querySelector('tbody')
-                bodyWidth = body.clientWidth
-                head.style = `width: ${bodyWidth}px`
-
-            })
-
-            element.addEventListener("scroll", function () {
-                var scrollTop = element.scrollTop;
-                let head = document.querySelector('thead')
-                let body = document.querySelector('tbody')
-                head.style = `width: ${bodyWidth}px`
-
-                if (scrollTop > 113) {
-                    head.className = 'fixed-header'
-                }
-                else if (scrollTop <= 62) {
-                    head.className = ''
-                }
-            });
-        }
-
-
         return(
             <div className="empty-wrapper">
-                { content.length ?
+
+                {
+                    this.props.loader ?
+                        <Loader loader={this.props.loader}/>
+                    :
+                    content.length ?
                     <div>
                         {content}
                         {this.props.paginate.total_pages > 1 && 

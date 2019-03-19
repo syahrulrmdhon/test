@@ -79,6 +79,7 @@ class DaftarNilai extends Component {
       const data = _.get(response, 'data.data', {})
       const { users, count } = data || []
       const { daily_exam, task } = count
+      this.setState({loader: false})
 
       switch (category) {
         case 'knowledge':
@@ -101,10 +102,13 @@ class DaftarNilai extends Component {
           break;
       }
 
+    }).catch(() =>{
+      this.setState({loader: false})
     })
   }
 
   handleSubmit() {
+    this.setState({loader: true})
     this.getData()
   }
 
@@ -151,6 +155,7 @@ class DaftarNilai extends Component {
                         tableAttitude={this.state.tableAttitude}
                         nameClicked={this.nameClicked}
                         activeTab={this.state.activeTab}
+                        loader={this.state.loader}
                       />
                     </div>
                   </div>

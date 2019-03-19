@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { Table, TabContent, TabPane } from 'reactstrap'
 import { NotAvailable } from '../../views/global/notAvailable'
 import Pencil from './../../assets/images/edit.svg';
-
 import '../../styles/student/table.scss'
+import Loader from './../../views/global/loader'
 
 export default class ScoreTable extends Component {
 
@@ -12,12 +12,17 @@ export default class ScoreTable extends Component {
     const knowledgeScore = this.props.knowledgeScore
     const skillScore = this.props.skillScore
     const attitudeScore = this.props.attitudeScore
-    
+
     return (
       <div className="h-100">
         <TabContent activeTab={this.props.activeTab} className="h-100">
           <TabPane className="knowledge" tabId={1}>
             {
+              this.props.loader ?
+                <div className="is-empty">
+                  <Loader loader={this.props.loader}/>
+                </div>
+              :
               knowledgeScore ?
               <div>
                 <div className="table-content">
@@ -77,6 +82,11 @@ export default class ScoreTable extends Component {
           </TabPane>
           <TabPane className="knowledge" tabId={2}>
             {
+              this.props.loader ?
+                <div className="is-empty">
+                  <Loader loader={this.props.loader} />
+                </div>
+              :
               skillScore ?
               <div>
                 <div className="table-content">
@@ -134,7 +144,12 @@ export default class ScoreTable extends Component {
           </TabPane>
           <TabPane className="attitude" tabId={3}>
             {
-              attitudeScore && 
+              this.props.loader ?
+                <div className="is-empty">
+                  <Loader loader={this.props.loader} />
+                </div>
+              :
+              attitudeScore ? 
               <div>
                 <div className="table-content">
                 <Table bordered striped responsive>
@@ -176,19 +191,23 @@ export default class ScoreTable extends Component {
               </div>
               <div className="border-hidden"></div>
               <div className="total-status">
-              <div>
-                  <div className="pull-left">
+              <div style={{width: '240px'}}>
+                  <div className="pull-left" style={{width: '180px'}}>
                     Total Sikap Butuh Perhatian
                     <br />
                     Total Sikap Sangat Baik
                   </div>
-                  <div style={{width: "270px"}}>
+                  <div>
                     {attitudeScore.recap.subjects.bp} <div className="pull-right">Sikap</div>
                     <br />
                     {attitudeScore.recap.subjects.sb} <div className="pull-right">Sikap</div>
                   </div>
                   </div>
                 </div>
+              </div>
+              :
+              <div className="is-empty">
+                <NotAvailable>Data tidak tersedia</NotAvailable>
               </div>
             }
           </TabPane>

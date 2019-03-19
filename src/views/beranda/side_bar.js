@@ -58,7 +58,7 @@ export default class SideBar extends Component{
                     <div className="padding-4">
                         <div className="header-title bold">Filter Kelas</div>
                         <div className="margin-top-2">
-                            <div className="row">
+                            <div className="row row-class">
                                 {textClass}
                             </div>
                         </div>

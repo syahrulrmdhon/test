@@ -112,10 +112,10 @@ export default class Table extends Component {
                         <td width="25%"  className="align-right padding-right-6">
                             <div className="action-wrapper">
                                 <NavLink to={url} className="btn default margin-right-4">Lihat</NavLink>
-                                <FontAwesome name="trash" className="margin-left-2 margin-right-2 cgreen" onClick={this.delete.bind(this, value)} />
                                 <NavLink to={`/penilaian/edit/${value.id}`}>
                                     <FontAwesome name="edit" className="margin-left-2 cgreen" />
                                 </NavLink>
+                                <FontAwesome name="trash" className="margin-left-2 margin-right-2 cgreen" onClick={this.delete.bind(this, value)} />
                             </div>
                         </td>
                     </tr>
@@ -135,7 +135,7 @@ export default class Table extends Component {
                             <th width="20%">Mata Pelajaran</th>
                             <th width="15%">{add_field_category}</th>
                             <th width="10%">Tanggal Dibuat</th>
-                            <th width="25%" className="align-right padding-right-6">Tindakan</th>
+                            <th width="25%" className="text-center padding-right-6">Tindakan</th>
                         </tr>
                     </thead>
                     <tbody id="topics">
