@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { 
+import {
     handleBC,
 } from './../../../redux-modules/modules/exam'
 
 class BasicComp extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="row margin-top-2">
                 <div className="col-sm-6">
                     <div className="bold">
@@ -20,12 +20,13 @@ class BasicComp extends Component {
                 </div>
                 <div className="col-sm-2">
                     <div className="filter">
-                        <input 
-                            className="disblock fullwidth" 
-                            placeholder="Masukkan KKM" 
+                        <input
+                            className="disblock fullwidth"
+                            placeholder="Masukkan KKM"
                             required={true}
-                            onChange={(event) => {this.props.handleBC(event, this.props.class_index, this.props.index)}}
+                            onChange={(event) => { this.props.handleBC(event, this.props.class_index, this.props.index) }}
                             defaultValue={this.props.basic_comp.kkm || ''}
+                            type='number'
                         />
                     </div>
                 </div>

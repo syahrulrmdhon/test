@@ -259,8 +259,21 @@ export function classes(params = {}) {
 
 export function grades() {
     apiClient('get', 'v1/filters/grades').then(response => response.data).then(data => {
+        let grades = data.data.grades || []
+        if(grades.length > 0) {
+            const temps = grades
+
+            grades = []
+
+            temps.map((temp, idx)=>{
+                grades.push({
+                    value: temp.id,
+                    label: temp.class_year
+                })
+            })
+        }
         this.setState({
-            grades: (data.data.grades.length > 0) ? data.data.grades : []
+            grades: grades
         })
     })
 }
@@ -282,7 +295,6 @@ export function schoolYears(params = {}, options = {}) {
             })
         }
         this.setState({
-            // school_years: (data.data.school_years.length > 0) ? data.data.school_years : []
             school_years: school_years
         })
     })
@@ -478,7 +490,7 @@ export function cities(params = {}, options = {}) {
 
 export function getSemesterList(params = {}, options = {}) {
 
-    apiClient('get', 'v1/filters/semesters', false, false).then(res => {
+    apiClient('get', 'v1/filters/semesters', false, params).then(res => {
         let data = res.data.data.semesters || []
         let result = []
         if (data.length > 0) {
