@@ -5,6 +5,10 @@ $nunito_bold: "NunitoBold";
 
 .basic {
 
+  .line {
+    min-height: 671px !important;
+  }
+
   .button-upload {
     display: none
   }
@@ -82,7 +86,7 @@ $nunito_bold: "NunitoBold";
     font-family: $nunito_semi_bold;
     font-size: 13px;
     font-weight: 600;
-    min-width: 165px;
+    // min-width: 200px;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;

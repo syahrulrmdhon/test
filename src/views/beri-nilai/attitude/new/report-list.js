@@ -36,9 +36,6 @@ export class Report extends Component {
         const data_user_attitudes = this.props.data_user_attitudes
         const data_report_list = this.props.data_user_attitudes && this.props.data_user_attitudes.entries
         
-        console.log(this.props.data_user_attitudes_data,"user")
-
-
         let title = []
         let subtitle = []
         let report = []
