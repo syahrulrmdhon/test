@@ -6,22 +6,16 @@ import { apiClient } from '../../utils/apiClient'
 import Page from './../../components/Title'
 import Tab from './tab'
 import NavToggle from './nav-toggle'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import _ from 'lodash'
 
-export default class DaftarNilai extends Component {
+class DaftarNilai extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       activeTab: '1',
-      idClass: undefined,
-
-      // filter
-      listClass: [],
-      selectedClass: '',
-      listSemester: [],
-      selectedSemester: '',
-      listSubject: [],
-      selectedSubject: '',
       tableKnowledge: [],
       tableSkill: [],
       tableAttitude: [],
@@ -35,121 +29,89 @@ export default class DaftarNilai extends Component {
       idxScoresSkill: 0
     }
     this.toggle = this.toggle.bind(this)
-    this.getClassList = this.getClassList.bind(this)
-    this.onChangeClass = this.onChangeClass.bind(this)
-    this.getSemesterList = this.getSemesterList.bind(this)
-    this.onChangeSemester = this.onChangeSemester.bind(this)
-    this.getSubjectList = this.getSubjectList.bind(this)
-    this.onChangeSubject = this.onChangeSubject.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.nameClicked = this.nameClicked.bind(this)
+    this.getData = this.getData.bind(this)
   }
-  componentDidMount() {
-    this.getSemesterList()
-    this.getClassList()
-  }
+
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
-      })
+      }, () => { this.getData() })
     }
   }
-  getSemesterList() {
-    const url = `v1/filters/semesters?`
 
-    apiClient('get', url).then(res => {
-      const data = res.data.data.semesters.map(({ period_name, id }) => ({
-        label: period_name,
-        value: id
-      }))
-      this.setState({
-        listSemester: data
-      })
-    })
-  }
-  getClassList() {
-    const url = `v1/filters/classes`
+  getData() {
+    let activeTab = this.state.activeTab
 
-    apiClient('get', url).then(res => {
-      const data = res.data.data.classes.map(({ id, name }) => ({
-        label: name,
-        value: id
-      }))
-      this.setState({
-        listClass: data
-      })
-    })
-  }
-  getSubjectList(idClass) {
-    let url = ''
-    if (idClass === undefined) {
-      url = `v1/filters/subjects?`
-    } else {
-      url = `v1/filters/subjects?class_id=${idClass}`
+    let scoreList = _.get(this.props, 'scoreList', {})
+    let selectedClass = scoreList ? scoreList.selectedClass : ''
+    let selectedSemester = scoreList ? scoreList.selectedSemester : ''
+    let selectedSubject = scoreList ? scoreList.selectedSubject : ''
+
+    let params = {}
+
+    let category = 'knowledge'
+    switch (activeTab) {
+      case '2':
+        category = 'skill'
+        break;
+      case '3':
+        category = 'attitude'
+        break;
     }
-    apiClient('get', url).then(res => {
-      let subject = []
-      for (var i in res.data.data) {
-        const datum = res.data.data[i]
-        datum.map(function (data, i) {
-          subject.push({ value: data.id, label: data.subject_name })
-        })
-      }
-      this.setState({
-        listSubject: subject
-      })
-    })
-  }
-  onChangeSemester(selectedSemester) {
-    this.setState({ selectedSemester })
-  }
-  onChangeClass(selectedClass) {
-    this.setState({ selectedClass })
-    const idClass = selectedClass.value
-    this.getSubjectList(idClass)
-  }
-  onChangeSubject(selectedSubject) {
-    this.setState({ selectedSubject })
-  }
-  getKnowledge() {
-    let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=knowledge&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-    return apiClient('get', url)
-  }
-  getSkill() {
-    let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=skill&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-    return apiClient('get', url)
-  }
-  getAttitude() {
-    let url = `v1/scores/index?semester=${this.state.selectedSemester.label}&category=attitude&class_id=${this.state.selectedClass.value}&school_subject_id=${this.state.selectedSubject.value}`
-    return apiClient('get', url)
-  }
-  handleSubmit() {
-    let dataKnowledge = []
-    let dataSkill = []
-    let tableKnowledge = []
-    let tableAttitude = []
-    let tableSkill = []
-    this.getKnowledge().then(res => {
-      dataKnowledge = res.data.data
-      tableKnowledge = res.data.data.users
-      this.getAttitude().then(attitudes => {
-        tableAttitude = attitudes.data.data.users
-        this.getSkill().then(skills => {
-          dataSkill = skills.data.data
-          tableSkill = skills.data.data.users
+
+    if (category != '') {
+      params['category'] = category
+    }
+    if (selectedSemester != '') {
+      params['school_period_id'] = selectedSemester
+    }
+    if (selectedClass != '') {
+      params['class_id'] = selectedClass
+    }
+    if (selectedSubject != '') {
+      params['school_subject_id'] = selectedSubject
+    }
+
+    apiClient('get', 'v1/scores/index', false, params).then(response => {
+      const data = _.get(response, 'data.data', {})
+      const { users, count } = data || []
+      const { daily_exam, task } = count
+      this.setState({loader: false})
+
+      switch (category) {
+        case 'knowledge':
           this.setState({
-            tableKnowledge: tableKnowledge,
-            tableAttitude: tableAttitude,
-            tableSkill: tableSkill,
-            idxScores: dataKnowledge.count.daily_exam,
-            idxTugas: dataKnowledge.count.task,
-            idxScoresSkill: dataSkill.count.task
+            tableKnowledge: users,
+            idxScores: daily_exam,
+            idxTugas: task,
           })
-        })
-      })
+          break;
+        case 'skill':
+          this.setState({
+            tableSkill: users,
+            idxScoresSkill: task,
+          })
+          break;
+        case 'attitude':
+          this.setState({
+            tableAttitude: users,
+          })
+          break;
+      }
+
+    }).catch(() =>{
+      this.setState({loader: false})
     })
   }
+
+  handleSubmit() {
+    this.setState({loader: true})
+    this.getData()
+  }
+
   nameClicked(e, id) {
     e.preventDefault()
     this.props.history.push({
@@ -168,15 +130,6 @@ export default class DaftarNilai extends Component {
                 <div className='margin-0'>
                   <div className='col-sm-3 left-block'>
                     <FilterNilai
-                      listClass={this.state.listClass}
-                      selectedClass={this.state.selectedClass}
-                      listSemester={this.state.listSemester}
-                      selectedSemester={this.state.selectedSemester}
-                      listSubject={this.state.listSubject}
-                      selectedSubject={this.state.selectedSubject}
-                      onChangeClass={this.onChangeClass}
-                      onChangeSemester={this.onChangeSemester}
-                      onChangeSubject={this.onChangeSubject}
                       handleSubmit={this.handleSubmit}
                     />
                   </div>
@@ -197,11 +150,12 @@ export default class DaftarNilai extends Component {
                         tableKnowledge={this.state.tableKnowledge}
                         idxScores={this.state.idxScores}
                         idxTugas={this.state.idxTugas}
-                        nameClicked={this.nameClicked}
                         tableSkill={this.state.tableSkill}
                         idxScoresSkill={this.state.idxScoresSkill}
                         tableAttitude={this.state.tableAttitude}
+                        nameClicked={this.nameClicked}
                         activeTab={this.state.activeTab}
+                        loader={this.state.loader}
                       />
                     </div>
                   </div>
@@ -214,3 +168,12 @@ export default class DaftarNilai extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  scoreList: state.scoreList //noQuestion dari reducer
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+}, dispatch
+)
+export default connect(mapStateToProps, mapDispatchToProps)(DaftarNilai)

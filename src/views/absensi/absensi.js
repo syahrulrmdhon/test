@@ -10,6 +10,8 @@ import { NotAvailable } from '../../views/global/notAvailable'
 import { getDate } from '../../utils/common'
 import { LabelInfo } from '../../views/global/labelInfo'
 import Page from './../../components/Title'
+import axios from 'axios'
+import Loader from './../global/loader'
 
 export default class Attendance extends Component {
   constructor(props) {
@@ -37,7 +39,8 @@ export default class Attendance extends Component {
       attendances: [],
       selectedDate: new Date(),
       searchName: '',
-      searchAttendances: []
+      searchAttendances: [],
+      loader: true
     };
 
     this.selectAttendanceType = this.selectAttendanceType.bind(this)
@@ -142,7 +145,8 @@ export default class Attendance extends Component {
         attendances: attendances,
         attended: data.data.attended,
         unattended: data.data.unattended,
-        percentage: data.data.percentage
+        percentage: data.data.percentage,
+        loader: false
       })
     })
   }
@@ -286,22 +290,25 @@ export default class Attendance extends Component {
                         <i className="fa fa-search icon"></i>
                       </div>
                     </div>
-                    {
-                      (!this.state.attendances || this.state.attendances.length === 0 || this.state.searchAttendances === null) ?
-                        <NotAvailable>{this.notStudent()}</NotAvailable>
+                      {
+                        this.state.loader ?
+                        <Loader loader={this.state.loader}/>
                         :
-                        <div>
-                          <TableAbsensi
-                            attendances={this.state.attendances}
-                            searchAttendances={this.state.searchAttendances}
-                            attendanceStatus={this.state.attendanceStatus}
-                            handleOptionChange={this.handleAttendanceStatusChange}
-                            nameClicked={this.nameClicked} />
-                          <div className="wrapper-save">
-                            <LabelInfo className="info">Tekan tombol <span>Simpan</span> untuk merubah data</LabelInfo>
-                            <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-sm-3 save">Simpan</button>
+                        (!this.state.attendances || this.state.attendances.length === 0 || this.state.searchAttendances === null) ?
+                          <NotAvailable>{this.notStudent()}</NotAvailable>
+                        :
+                          <div>
+                            <TableAbsensi
+                              attendances={this.state.attendances}
+                              searchAttendances={this.state.searchAttendances}
+                              attendanceStatus={this.state.attendanceStatus}
+                              handleOptionChange={this.handleAttendanceStatusChange}
+                              nameClicked={this.nameClicked} />
+                            <div className="wrapper-save">
+                              <LabelInfo className="info">Tekan tombol <span>Simpan</span> untuk merubah data</LabelInfo>
+                              <button type="submit" onClick={this.saveStudentAttendance} className="btn-green float-right col-sm-3 save">Simpan</button>
+                            </div>
                           </div>
-                        </div>
                     }
                   </div>
                 </div>

@@ -23,7 +23,6 @@ class Login extends Component {
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
-        // this.getUser = this.getUser.bind(this)
         this.setSchoolList = this.setSchoolList.bind(this)
         this.onShowAlert = this.onShowAlert.bind(this)
     }

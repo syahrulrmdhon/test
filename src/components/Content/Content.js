@@ -49,7 +49,8 @@ class Content extends Component {
       homeroomNote: '',
       extracurriculars: [],
       extracurricularNotes: [{description: ''}],
-      achievements: []
+      achievements: [],
+      loader: true
     }
 
     this.baseUrl = `${process.env.API_URL}v1/students/${this.props.studentId}`
@@ -138,7 +139,10 @@ class Content extends Component {
     const url = `v1/students/${this.props.studentId}/score_recap?category=knowledge`
     
     apiClient('get', url).then(response => {
-      this.setState({knowledgeScore: response.data.data})
+      this.setState({
+        knowledgeScore: response.data.data,
+        loader: false
+      })
     })
   }
 
@@ -372,7 +376,8 @@ class Content extends Component {
                   skillScore={this.state.skillScore}
                   attitudeScore={this.state.attitudeScore}
                   studentId={this.props.studentId}
-                  redirect={this.props.redirect}/>
+                  redirect={this.props.redirect}
+                  loader={this.state.loader}/>
               </RightSide>
             </div>
           </TabPane>

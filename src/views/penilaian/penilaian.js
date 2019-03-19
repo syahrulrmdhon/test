@@ -24,6 +24,7 @@ class Penilaian extends Component {
             data: [],
             paginate: {},
             assessment_types: [],
+            loader: true
         }
         this.tabToggle = this.tabToggle.bind(this)
         this.onChangeAttr = this.onChangeAttr.bind(this)
@@ -48,7 +49,8 @@ class Penilaian extends Component {
     }
 
     onFilter(event){
-        event.preventDefault(); 
+        event.preventDefault()
+        this.setState({loader: true})
         assessmentGetData.call(this)
     }
 
@@ -89,7 +91,8 @@ class Penilaian extends Component {
                                         <Index 
                                             data={this.state.data} 
                                             category={this.state.activeTab} 
-                                            paginate={this.state.paginate} />
+                                            paginate={this.state.paginate}
+                                            loader={this.state.loader} />
                                     </div>
                                 </div>
                             </div>

@@ -4,7 +4,6 @@ import { Chart } from "react-google-charts";
 
 export default class SingleBarChat extends Component {
   render() {
-    console.log(this.props.chart, "my data chart")
     let chart = []
     if (this.props.chart !==  undefined) {
       chart.push(
