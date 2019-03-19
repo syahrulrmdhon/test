@@ -7,7 +7,7 @@ import Avatar from 'react-avatar';
 import { apiClient } from './../../utils/apiClient'
 import { Table } from 'reactstrap'
 import  User from './../../assets/images/img_avatar.png'
-
+import Loader from './../global/loader'
 
 
 // scss
@@ -17,7 +17,8 @@ export class componentName extends Component {
         super(props)
 
         this.state = {
-            data: []
+            data: [],
+            loader:true
         }
         this.fetchData = this.fetchData.bind(this)
     }
@@ -67,6 +68,9 @@ export class componentName extends Component {
         const { data } = this.state
         let join_data = []
         let join = []
+        let length_data = data && data.length
+
+        
         data && data.map((data) => {
             data.subject_schedules.map((x) => {
                 join_data.push(this.convertDay(x.dayname))
@@ -91,7 +95,7 @@ export class componentName extends Component {
                         <div className="margin-content">
                             <div className="content-block main-block">
                                 <div className="row">
-                                    <div className="col-sm-2 left-block">
+                                    <div className="col-sm-2">
                                         <Sidebar />
                                     </div>
                                     <div className="col-sm-10 right-block">

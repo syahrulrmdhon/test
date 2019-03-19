@@ -67,6 +67,63 @@ export default class ContentOnlineExam extends Component {
                         essay: 40,
                         desc: 'Pelajari Kitab Al Umm dan Al Muhaddzab karya Asy Syairozi atau Syarh Al Muhaddzab karya Imam Nawawi'
                     }
+                },
+                {
+                    info: {
+                        name: 'Aqidah Akhlaq',
+                        date: '20 Feb 2019',
+                        type: 'UTS',
+                        time: '45 Menit',
+                        class: 'X IPS'
+                    },
+                    progress: {
+                        percentage: 10,
+                        count: 10,
+                        total: 100
+                    },
+                    detail: {
+                        choices: 90,
+                        essay: 10,
+                        desc: 'Pelajari Kitab Ushul Tsalatsah Bab 1 - Bab 6'
+                    }
+                },
+                {
+                    info: {
+                        name: 'al-Lughotul Arabiyyah',
+                        date: '20 Feb 2019',
+                        type: 'UTS',
+                        time: '45 Menit',
+                        class: 'X IPS'
+                    },
+                    progress: {
+                        percentage: 70,
+                        count: 70,
+                        total: 100
+                    },
+                    detail: {
+                        choices: 70,
+                        essay: 30,
+                        desc: 'Pelajari Kitab Durusul Lughoh Jilid 1 & Pelajari Kitab Baina Yadaik serta Kitab al-Muyassar'
+                    }
+                },
+                {
+                    info: {
+                        name: 'Fiqh',
+                        date: '20 Feb 2019',
+                        type: 'UTS',
+                        time: '45 Menit',
+                        class: 'X IPS'
+                    },
+                    progress: {
+                        percentage: 100,
+                        count: 100,
+                        total: 100
+                    },
+                    detail: {
+                        choices: 60,
+                        essay: 40,
+                        desc: 'Pelajari Kitab Al Umm dan Al Muhaddzab karya Asy Syairozi atau Syarh Al Muhaddzab karya Imam Nawawi'
+                    }
                 }
             ]
 
@@ -132,7 +189,7 @@ export default class ContentOnlineExam extends Component {
         }
         return (
             <div className='col-sm-9 right-block w-100'>
-                <div className="h-100">
+                <div className="min-height-100">
                     <div className='header-content margin-bottom-4'>
                         <label className='header-title disblock padding-top-6'>Daftar Ujian</label>
                         <label className='padding-top-2 info margin-bottom-3'>{data.header.type} {data.header.period}</label>

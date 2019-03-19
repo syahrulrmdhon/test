@@ -36,9 +36,6 @@ export class Report extends Component {
         const data_user_attitudes = this.props.data_user_attitudes
         const data_report_list = this.props.data_user_attitudes && this.props.data_user_attitudes.entries
         
-        console.log(this.props.data_user_attitudes_data,"user")
-
-
         let title = []
         let subtitle = []
         let report = []
@@ -109,7 +106,6 @@ export class Report extends Component {
                     predicate.push(<span></span>)
 
             }
-            console.log(data, "here data")
             report.push(
                 <div className="col-sm-12" key={Math.random()}>
                     <div className="margin-top-5">
