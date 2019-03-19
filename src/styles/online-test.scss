@@ -4,158 +4,299 @@ $nunito_semi_bold: "NunitoSemiBold";
 $nunito_bold: "NunitoBold";
 
 .online-exam {
-  background: #ffffff;
   min-height: 100%;
-  .content-block.main-block,
-  .content-block.main-block .left-block,
-  .content-block.main-block .right-block {
+  padding-top: 125px;
+  margin: 0 auto !important;
+  .content-block.main-block {
     min-height: 100%;
-  }
-  .padding-content {
-    padding-top: 125px;
-    min-height: 100%;
-    .margin-content {
+    border-radius: 0px;
+    .margin-box {
       min-height: 100%;
-      margin: 0px auto !important;
-      border-top: solid 1px #eeeeee;
-      .margin-box {
+      margin: 0 60px 0 30px;
+      .left-block {
+        position: fixed;
         min-height: 100%;
-         margin: 0 60px 0 30px;
+        border-right: none;
       }
-      .content-block.main-block {
-        box-shadow: none;
-      }
-      .content-block {
-        border-radius: 0px;
-        box-shadow: none;
-      }
-      .main-block {
-        border-radius: 0px;
-        box-shadow: none;
-      }
-    }
-    .left-block {
-      min-height: 100%;
-      border-right: none;
-    }
-    .right-block {
-      border-left: solid 1px #eeeeee;
-      min-height: 100%;
-      .header-content {
-        border-bottom: solid 0.5px #d3d9dd;
-      }
-      .info {
-        font-family: $nunito_regular;
-        color: #a1a1a1;
-        font-size: 10px;
-      }
-      .p {
-        font-family: $nunito_regular;
-        color: #4a4a4a;
-        font-size: 10px;
-        padding-top: 3px;
-      }
-      .p-bold {
-        font-family: $nunito_bold;
-        color: #4a4a4a;
-        font-size: 10px;
-      }
-      .p-green {
-        font-family: $nunito_regular;
-        color: #1a9d7f;
-        font-size: 10px;
-      }
-      .p-green-link {
-        font-family: $nunito_bold;
-        color: #1a9d7f;
-        font-size: 10px;
-        cursor: pointer;
-      }
-      .icon-green {
-        color: #1a9d7f;
-        font-size: 12px;
-        text-decoration: underline;
-      }
-      &__panel-wrapper {
-        .not-available {
-          height: 400px;
+      .right-block {
+        margin-left: 22%;
+        border-left: solid 1px #eeeeee;
+        min-height: 100%;
+        .header-content {
+          border-bottom: solid 0.5px #d3d9dd;
         }
-      }
-      &__panel {
-        background-color: #ffffff;
-        box-shadow: 0 2px 8px 0 rgba(30, 30, 30, 0.05);
-        margin-bottom: 30px;
-        padding: 10px 10px;
-        border: 1px solid rgba(204, 204, 204, 0.5);
-        min-height: 120px;
-      }
-      &__panel-part {
-        border-right: solid 0.5px #e8e8e8;
-        .progress-bar {
-          background-color: #1a9d7f;
+        .info {
+          font-family: $nunito_regular;
+          color: #a1a1a1;
+          font-size: 10px;
         }
-      }
-      &__basic-info-wrapper {
-        font-size: 10px;
-        color: #1a9d7f;
-      }
-      &__basic-info {
-        display: inline;
-        font-family: $nunito_regular;
-        color: #a1a1a1;
-        cursor: pointer;
-      }
-      &__basic-info {
-        padding: 1px 5px;
-        border-right: 1px solid #ededed;
-        &:first-child {
-          padding-left: 0px;
-          padding-right: 5px;
+        .p {
+          font-family: $nunito_regular;
+          color: #4a4a4a;
+          font-size: 10px;
+          padding-top: 3px;
         }
-
-        &:last-child {
-          padding-left: 5px;
-          padding-right: 0px;
-          border-right: none;
+        .p-bold {
+          font-family: $nunito_bold;
+          color: #4a4a4a;
+          font-size: 10px;
         }
-
-        &:hover {
+        .p-green {
+          font-family: $nunito_regular;
+          color: #1a9d7f;
+          font-size: 10px;
+        }
+        .p-green-link {
+          font-family: $nunito_bold;
+          color: #1a9d7f;
+          font-size: 10px;
+          cursor: pointer;
+        }
+        .icon-green {
+          color: #1a9d7f;
+          font-size: 12px;
+          text-decoration: underline;
+        }
+        &__panel-wrapper {
+          .not-available {
+            height: 400px;
+          }
+        }
+        &__panel {
+          background-color: #ffffff;
+          box-shadow: 0 2px 8px 0 rgba(30, 30, 30, 0.05);
+          margin-bottom: 30px;
+          padding: 10px 10px;
+          border: 1px solid rgba(204, 204, 204, 0.5);
+          min-height: 120px;
+        }
+        &__panel-part {
+          border-right: solid 0.5px #e8e8e8;
+          .progress {
+            height: 7px;
+            .progress-bar {
+              background-color: #1a9d7f;
+            }
+          }
+        }
+        &__basic-info-wrapper {
+          font-size: 10px;
           color: #1a9d7f;
         }
-      }
-      &__action-wrapper {
-        position: relative;
-        bottom: 0px;
-        font-size: 10px;
-        color: #1a9d7f;
-      }
-      &__action {
-        display: inline;
-        font-family: $nunito_bold;
-        color: #1a9d7f;
-        cursor: pointer;
-      }
-      &__action {
-        padding: 1px 5px;
-        border-right: 1px solid #ededed;
-        &:first-child {
-          padding-left: 0px;
-          padding-right: 5px;
+        &__basic-info {
+          display: inline;
+          font-family: $nunito_regular;
+          color: #a1a1a1;
+          cursor: pointer;
         }
+        &__basic-info {
+          padding: 1px 5px;
+          border-right: 1px solid #ededed;
+          &:first-child {
+            padding-left: 0px;
+            padding-right: 5px;
+          }
 
-        &:last-child {
-          padding-left: 5px;
-          padding-right: 0px;
-          border-right: none;
+          &:last-child {
+            padding-left: 5px;
+            padding-right: 0px;
+            border-right: none;
+          }
+
+          &:hover {
+            color: #1a9d7f;
+          }
         }
-
-        &:hover {
+        &__action-wrapper {
+          position: relative;
+          bottom: 0px;
+          font-size: 10px;
           color: #1a9d7f;
         }
-      }
-      .s-line {
-        border-right: solid 1px #d3d9dd;
+        &__action {
+          display: inline;
+          font-family: $nunito_bold;
+          color: #1a9d7f;
+          cursor: pointer;
+        }
+        &__action {
+          padding: 1px 5px;
+          border-right: 1px solid #ededed;
+          &:first-child {
+            padding-left: 0px;
+            padding-right: 5px;
+          }
+
+          &:last-child {
+            padding-left: 5px;
+            padding-right: 0px;
+            border-right: none;
+          }
+
+          &:hover {
+            color: #1a9d7f;
+          }
+        }
+        .s-line {
+          border-right: solid 1px #d3d9dd;
+        }
       }
     }
   }
 }
+// .online-exam {
+//   background: #ffffff;
+//   min-height: 100%;
+//   .content-block.main-block,
+//   .content-block.main-block .left-block,
+//   .content-block.main-block .right-block {
+//     min-height: 100%;
+//   }
+//   .padding-content {
+//     padding-top: 125px;
+//     min-height: 100%;
+//     .margin-content {
+//       min-height: 100%;
+//       margin: 0px auto !important;
+//       border-top: solid 1px #eeeeee;
+//       .margin-box {
+//         min-height: 100%;
+//          margin: 0 60px 0 30px;
+//       }
+//       .content-block.main-block {
+//         box-shadow: none;
+//       }
+//       .content-block {
+//         border-radius: 0px;
+//         box-shadow: none;
+//       }
+//       .main-block {
+//         border-radius: 0px;
+//         box-shadow: none;
+//       }
+//     }
+//     .left-block {
+//       min-height: 100%;
+//       border-right: none;
+//     }
+//     .right-block {
+//       border-left: solid 1px #eeeeee;
+//       min-height: 100%;
+//       .header-content {
+//         border-bottom: solid 0.5px #d3d9dd;
+//       }
+//       .info {
+//         font-family: $nunito_regular;
+//         color: #a1a1a1;
+//         font-size: 10px;
+//       }
+//       .p {
+//         font-family: $nunito_regular;
+//         color: #4a4a4a;
+//         font-size: 10px;
+//         padding-top: 3px;
+//       }
+//       .p-bold {
+//         font-family: $nunito_bold;
+//         color: #4a4a4a;
+//         font-size: 10px;
+//       }
+//       .p-green {
+//         font-family: $nunito_regular;
+//         color: #1a9d7f;
+//         font-size: 10px;
+//       }
+//       .p-green-link {
+//         font-family: $nunito_bold;
+//         color: #1a9d7f;
+//         font-size: 10px;
+//         cursor: pointer;
+//       }
+//       .icon-green {
+//         color: #1a9d7f;
+//         font-size: 12px;
+//         text-decoration: underline;
+//       }
+//       &__panel-wrapper {
+//         .not-available {
+//           height: 400px;
+//         }
+//       }
+//       &__panel {
+//         background-color: #ffffff;
+//         box-shadow: 0 2px 8px 0 rgba(30, 30, 30, 0.05);
+//         margin-bottom: 30px;
+//         padding: 10px 10px;
+//         border: 1px solid rgba(204, 204, 204, 0.5);
+//         min-height: 120px;
+//       }
+//       &__panel-part {
+//         border-right: solid 0.5px #e8e8e8;
+//         .progress-bar {
+//           background-color: #1a9d7f;
+//         }
+//       }
+//       &__basic-info-wrapper {
+//         font-size: 10px;
+//         color: #1a9d7f;
+//       }
+//       &__basic-info {
+//         display: inline;
+//         font-family: $nunito_regular;
+//         color: #a1a1a1;
+//         cursor: pointer;
+//       }
+//       &__basic-info {
+//         padding: 1px 5px;
+//         border-right: 1px solid #ededed;
+//         &:first-child {
+//           padding-left: 0px;
+//           padding-right: 5px;
+//         }
+
+//         &:last-child {
+//           padding-left: 5px;
+//           padding-right: 0px;
+//           border-right: none;
+//         }
+
+//         &:hover {
+//           color: #1a9d7f;
+//         }
+//       }
+//       &__action-wrapper {
+//         position: relative;
+//         bottom: 0px;
+//         font-size: 10px;
+//         color: #1a9d7f;
+//       }
+//       &__action {
+//         display: inline;
+//         font-family: $nunito_bold;
+//         color: #1a9d7f;
+//         cursor: pointer;
+//       }
+//       &__action {
+//         padding: 1px 5px;
+//         border-right: 1px solid #ededed;
+//         &:first-child {
+//           padding-left: 0px;
+//           padding-right: 5px;
+//         }
+
+//         &:last-child {
+//           padding-left: 5px;
+//           padding-right: 0px;
+//           border-right: none;
+//         }
+
+//         &:hover {
+//           color: #1a9d7f;
+//         }
+//       }
+//       .s-line {
+//         border-right: solid 1px #d3d9dd;
+//       }
+//     }
+//   }
+// }
