@@ -91,8 +91,7 @@ class Beranda extends Component {
     render() {
         if(this.state.data.length > 0){
             this.state.scheduleList = []
-            {this.state.data.map((result, key) => {
-                console.log(result)
+            {this.state.data.map((result) => {
                 this.state.scheduleList.push(<Schedule 
                     dayname={result.dayname} 
                     datename={result.datename} 

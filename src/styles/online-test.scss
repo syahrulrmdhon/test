@@ -3,6 +3,69 @@ $nunito_regular: "NunitoRegular";
 $nunito_semi_bold: "NunitoSemiBold";
 $nunito_bold: "NunitoBold";
 
+.new-exam-online {
+  .full-margin {
+    height: 100%;
+    bottom: 0px;
+  }
+
+  .content-wrapper {
+    position: relative;
+    box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 56%;
+    height: 100%;
+    min-height: 530px;
+    margin: 0px auto;
+    // padding: 38.5px 120px 27.5px 85px;
+  }
+
+  .title-page {
+    width: 10%;
+    font-family: $nunito_semi_bold;
+    font-size: 14px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #1a9d7f;
+  }
+
+  .subject-head {
+    width: 20%;
+    font-family: $nunito_bold;
+    font-size: 14px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #1a9d7f;
+  }
+
+  .form-position {
+    padding: 0px 50px;
+  }
+
+  label {
+    font-family: $nunito_semi_bold;
+    font-size: 12px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 0.79;
+    letter-spacing: -0.2px;
+    color: #6d6d6d;
+    margin-right: 3%;
+  }
+
+  textarea {
+    height: 100px;
+    resize: none;
+  }
+}
+
 .online-exam {
   min-height: 100%;
   padding-top: 125px;
@@ -132,7 +195,6 @@ $nunito_bold: "NunitoBold";
             padding-right: 0px;
             border-right: none;
           }
-
           &:hover {
             color: #1a9d7f;
           }
@@ -142,72 +204,5 @@ $nunito_bold: "NunitoBold";
         }
       }
     }
-  }
-}
-
-.new-exam-online {
-  .full-margin {
-    height: 100%;
-    bottom: 0px;
-  }
-
-  .content-wrapper {
-    position: relative;
-    box-shadow: -5px 5px 10px 0 rgba(30, 30, 30, 0.05);
-    border-radius: 10px;
-    background-color: #ffffff;
-    width: 56%;
-    height: 100%;
-    min-height: 530px;
-    margin: 0px auto;
-    // padding: 38.5px 120px 27.5px 85px;
-  }
-
-  .title-page {
-    width: 10%;
-    font-family: $nunito_semi_bold;
-    font-size: 14px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #1a9d7f;
-  }
-
-  .subject-head {
-    width: 20%;
-    font-family: $nunito_bold;
-    font-size: 14px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #1a9d7f;
-  }
-
-  .form-position {
-    padding: 0px 50px;
-  }
-
-  label {
-    font-family: $nunito_semi_bold;
-    font-size: 12px;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 0.79;
-    letter-spacing: -0.2px;
-    color: #6d6d6d;
-    margin-right: 3%;
-  }
-
-  textarea {
-    height: 100px;
-    resize: none;
-  }
-
-  input {
-    //  height: 40px;
   }
 }
