@@ -67,7 +67,7 @@ class MenuBar extends Component {
                             <div className="bg-white">
                                 <div className="menu">
                                     <div className="back">
-                                        <Link to={this.props.location}><i class="fa fas fa-chevron-left"></i> Kembali</Link>
+                                        <Link to={this.props.location}><i className="fa fas fa-chevron-left"></i> Kembali</Link>
                                     </div>
                                 </div>
                             </div>
