@@ -5,6 +5,7 @@ import './../../styles/beranda.css'
 import Header from '../global/header'
 import SideBar from './side_bar'
 import Schedule from './schedule'
+import { dragEvent } from './drag-event'
 import classnames from 'classnames'
 import { apiClient } from '../../utils/apiClient'
 import { classes } from '../../utils/common'
@@ -108,6 +109,7 @@ class Beranda extends Component {
 
         let icon = (this.state.isSideBar == 'expand') ? 'arrow-left' : 'calendar'
 
+        dragEvent()
         return (
             <Page title="Beranda">
                 <div className="body-content padding-content">
@@ -121,7 +123,7 @@ class Beranda extends Component {
                     <div className={classnames("row margin-right-0 schedule-range", this.state.isSideBar)}>
                         <div className="col-sm-12">
                             <div className="margin-2">
-                                <div className={classnames("schedule padding-4", this.state.isSideBar)}>
+                                <div className={classnames("schedule items padding-4", this.state.isSideBar)}>
                                 <Loader loader={this.state.loader}/>
                                 {this.state.scheduleList}
                                 </div>
