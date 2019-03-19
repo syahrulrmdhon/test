@@ -77,7 +77,7 @@ export function getUser(redirect = false) {
     const url = 'v1/users'
     apiClient('get', url).then(res => {
         localStorage.setItem("user_id", res.data.data.user.id)
-        console.log(res.data.data,"data")
+        console.log(res.data.data, "data")
         if (res.data.data.homeroom_class != null) {
             localStorage.setItem("class_id", res.data.data.homeroom_class.id)
         }
@@ -265,11 +265,25 @@ export function grades() {
     })
 }
 
-export function schoolYears() {
-    apiClient('get', 'v1/filters/school_years').then(response => response.data).then(data => {
+export function schoolYears(params = {}, options = {}) {
+    let listOptions = options.listOptions || false
+    apiClient('get', 'v1/filters/school_years', false, params).then(response => response.data).then(data => {
+        let school_years = data.data.school_years || []
+        if ((school_years.length > 0) && listOptions) {
+            const temps = school_years
 
+            school_years = []
+
+            temps.map((temp, idx) => {
+                school_years.push({
+                    value: temp.id,
+                    label: temp.period_name
+                })
+            })
+        }
         this.setState({
-            school_years: (data.data.school_years.length > 0) ? data.data.school_years : []
+            // school_years: (data.data.school_years.length > 0) ? data.data.school_years : []
+            school_years: school_years
         })
     })
 }
