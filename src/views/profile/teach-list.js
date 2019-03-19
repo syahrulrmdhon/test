@@ -6,7 +6,7 @@ import Sidebar from './index/sidebar'
 import Avatar from 'react-avatar';
 import { apiClient } from './../../utils/apiClient'
 import { Table } from 'reactstrap'
-import User from './../../assets/images/img_avatar.png'
+import  User from './../../assets/images/img_avatar.png'
 import Loader from './../global/loader'
 
 
@@ -18,7 +18,7 @@ export class componentName extends Component {
 
         this.state = {
             data: [],
-            loader: true
+            loader:true
         }
         this.fetchData = this.fetchData.bind(this)
     }
@@ -43,17 +43,17 @@ export class componentName extends Component {
             })
     }
 
-    convertDay(day) {
+    convertDay(day){
         let day_in_indo = ''
-        if (day === 'monday') {
+        if(day === 'monday'){
             day_in_indo = 'Senin'
-        } else if (day === 'tuesday') {
+        }else if(day === 'tuesday'){
             day_in_indo = 'Selasa'
-        } else if (day === 'wednesday') {
+        }else if(day === 'wednesday'){
             day_in_indo = 'Rabu'
-        } else if (day === 'thursday') {
+        }else if(day === 'thursday'){
             day_in_indo = 'Kamis'
-        } else if (day === 'friyay') {
+        }else if(day === 'friyay'){
             day_in_indo = 'Jumat'
         }
 
@@ -70,29 +70,22 @@ export class componentName extends Component {
         let join = []
         let length_data = data && data.length
 
-        if (length !== 0) {
-            data && data.map((data) => {
-                data.subject_schedules.map((x) => {
-                    join_data.push(this.convertDay(x.dayname))
+        
+        data && data.map((data) => {
+            data.subject_schedules.map((x) => {
+                join_data.push(this.convertDay(x.dayname))
 
-                })
-                join = join_data.join(",")
-
-                content.push(
-                    <tr key={Math.random()}>
-                        <td className="padding-2 text-left">{data.class_name}</td>
-                        <td className="padding-2 text-left">{data.subject_name}</td>
-                        <td className="padding-2 text-left">{join}</td>
-                    </tr>
-                )
             })
-        } else {
+            join = join_data.join(",")
+
             content.push(
-                <div className="full-border">
-                    Data belum tersedia.
-                </div>
+                <tr key={Math.random()}>
+                    <td className="padding-2 text-left">{data.class_name}</td>
+                    <td className="padding-2 text-left">{data.subject_name}</td>
+                    <td className="padding-2 text-left">{join}</td>
+                </tr>
             )
-        }
+        })
 
         return (
             <Page title="Informasi Mengajar">
