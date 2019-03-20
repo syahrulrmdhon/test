@@ -94,7 +94,7 @@ module.exports = (env) => ({
             fileName: 'asset-manifest.json',
         }),
         new CompressionPlugin({
-            test: /\.js(\?.*)?$/i,
+            test: /\.(jpg|jpeg|woff|ico|eot|png|pdf|woff(2)?)(\?[a-z0-9=&.]+)?$/,
             algorithm: 'gzip',
             compressionOptions: { level: 9 },
             threshold: 1024,
