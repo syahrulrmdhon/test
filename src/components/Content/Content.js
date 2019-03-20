@@ -137,7 +137,7 @@ class Content extends Component {
 
   getKnowledgeScore() {
     const url = `v1/students/${this.props.studentId}/score_recap?category=knowledge`
-    
+
     apiClient('get', url).then(response => {
       this.setState({
         knowledgeScore: response.data.data,
@@ -188,9 +188,9 @@ class Content extends Component {
       this.setState({inputHomeroomNote: response.data.data.notes})
     })
   }
-  
+
   getExtracurricularNote() {
-    this.props.getExtracurriculars()    
+    this.props.getExtracurriculars()
     this.props.getData(this.props.studentId, 'extracurricular')
   }
 
@@ -225,10 +225,10 @@ class Content extends Component {
       })
     })
   }
-  
+
   noteChangeHandler(event) {
     const inputUser = event.target.value
-    
+
     if (inputUser.length) {
       this.setState({disable: false})
     }
@@ -238,7 +238,7 @@ class Content extends Component {
 
     this.setState({inputHomeroomNote: inputUser})
   }
-  
+
 
   changeExtracurricularNote(event, id) {
     const noteIndex = this.state.extracurricularNotes.findIndex(note => {
@@ -294,7 +294,7 @@ class Content extends Component {
       achievements: notes
     })
   }
-  
+
   handleBulkUpdate(type, note, data) {
     const url = `v1/students/${this.props.studentId}/bulk_update`
     let request = {
@@ -304,7 +304,7 @@ class Content extends Component {
     }
 
     apiClient('post', url, request).then((response) => {
-      this.props.handleDisabled()  
+      this.props.handleDisabled()
 
       modal({
         message: 'Berhasil',
@@ -332,7 +332,7 @@ class Content extends Component {
   handleDateFilter(value, filter) {
     this.props.handleFilter(getDate('case-4', value), filter)
     const params = this.props.data.filter
-    this.props.getAttendances(this.props.studentId, params) 
+    this.props.getAttendances(this.props.studentId, params)
   }
 
   handleChangeStartDate(date) {
@@ -350,7 +350,7 @@ class Content extends Component {
   render() {
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
     const tabHomeRoom = ['Catatan Wali Kelas', 'Ekstrakurikuler', 'Prestasi']
-    
+
     let recap = []
     if (this.props.data.attendances) {
       recap = this.props.data.attendances.attendances
@@ -431,7 +431,7 @@ class Content extends Component {
                   activeTab={this.state.homeroomActiveTab} />
                 <Homeroom
                   activeTab={this.state.homeroomActiveTab}
-                  clicked={this.handleCreateHomeroomNote} 
+                  clicked={this.handleCreateHomeroomNote}
                   disabled={this.state.disable}
                   changed={(event) => this.noteChangeHandler(event)}
                   inputHomeroomNote={this.state.inputHomeroomNote}

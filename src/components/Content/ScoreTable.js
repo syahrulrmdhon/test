@@ -47,8 +47,7 @@ export default class ScoreTable extends Component {
                           <td style={{width: '100px'}} className="text-center">{subject.score.predicate ? subject.score.predicate : '-'}</td>
                           <td className="text-left">{description ? description : '-'}</td>
                           <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>
-                            {/* <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => {this.props.redirect(subject.id)}}/> */}
-                            <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" />                          
+                            <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => {this.props.redirect(subject.id, this.props.activeTab)}}/>
                           </td>
                         </tr>
                       })
@@ -110,7 +109,7 @@ export default class ScoreTable extends Component {
                           <td style={{width: '100px'}} className="text-center">{subject.score.predicate ? subject.score.predicate : '-'}</td>
                           <td className="text-left">{description ? description : '-'}</td>
                           <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>
-                            <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" />
+                            <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => {this.props.redirect(subject.id, this.props.activeTab)}}/>
                           </td>
                         </tr>
                       })
@@ -136,7 +135,7 @@ export default class ScoreTable extends Component {
                 </tbody>
               </Table>
               </div>
-              : 
+              :
               <div className="is-empty">
                 <NotAvailable>Data tidak tersedia</NotAvailable>
               </div>
@@ -149,7 +148,7 @@ export default class ScoreTable extends Component {
                   <Loader loader={this.props.loader} />
                 </div>
               :
-              attitudeScore ? 
+              attitudeScore ?
               <div>
                 <div className="table-content">
                 <Table bordered striped responsive>
@@ -168,7 +167,7 @@ export default class ScoreTable extends Component {
                           <td className={!subject.note ? 'text-center' : ''}>{subject.note ? subject.note : '-'}</td>
                           <td>
                           {
-                            subject.score === 2 ? 
+                            subject.score === 2 ?
                             (<div className="status">
                               <div className="indicator green-indicator" />{subject.status_text}
                             </div> )
@@ -179,10 +178,10 @@ export default class ScoreTable extends Component {
                             </div>)
                             :
                             <div className="status">
-                              <div className="indicator red-indicator" />{subject.status_text} 
+                              <div className="indicator red-indicator" />{subject.status_text}
                             </div>
-                          } 
-                          </td> 
+                          }
+                          </td>
                         </tr>
                       })
                     }
