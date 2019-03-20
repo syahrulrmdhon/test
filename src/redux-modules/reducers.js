@@ -16,6 +16,7 @@ import attendanceDetail from './modules/attendanceDetail'
 import scoreList from './modules/scoreList'
 import rapor from './modules/rapor'
 import listOnlineExam from './modules/listOnlineExam'
+import description from './modules/description'
 
 export default combineReducers({
   user,
@@ -34,6 +35,7 @@ export default combineReducers({
   profile,
   scoreList,
   rapor,
-  listOnlineExam
+  listOnlineExam,
+  description
 })
 
