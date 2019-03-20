@@ -6,11 +6,12 @@ const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const publicPath = "/"
 const ManifestPlugin = require('webpack-manifest-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const API_URL = {
     production: JSON.stringify('https://api.core.gredu.co/'),
     development: JSON.stringify('https://dev.api.core.gredu.co/'),
-    uat:JSON.stringify('https://uat.api.core.gredu.co/'),
+    uat: JSON.stringify('https://uat.api.core.gredu.co/'),
     qa: JSON.stringify('https://qa.api.core.gredu.co/')
 }
 
@@ -25,7 +26,7 @@ module.exports = (env) => ({
         contentBase: path.join(__dirname, 'build'),
         compress: true
     },
-    devtool: ( 'production' === env.TARGET_ENV ? 'source-map' : 'cheap-module-eval-source-map' ),
+    devtool: ('production' === env.TARGET_ENV ? 'source-map' : 'cheap-module-eval-source-map'),
     output: {
         path: path.resolve("build"),
         filename: '[name].[chunkhash].bundle.js',
@@ -83,29 +84,36 @@ module.exports = (env) => ({
         new webpack.DefinePlugin({
             'process.env': {
                 'API_URL': API_URL[env.TARGET_ENV],
-                'ANALYTIC_CODE':CODE_ANALYTIC[env.TARGET_ENV]
+                'ANALYTIC_CODE': CODE_ANALYTIC[env.TARGET_ENV]
             }
         }),
         new CopyPlugin([
             { from: './src/assets/images/logo.ico' },
-          ]),
-          new ManifestPlugin({
+        ]),
+        new ManifestPlugin({
             fileName: 'asset-manifest.json',
         }),
+        new CompressionPlugin({
+            test: /\.js(\?.*)?$/i,
+            algorithm: 'gzip',
+            compressionOptions: { level: 9 },
+            threshold: 1024,
+            deleteOriginalAssets: true
+        })
     ],
     optimization: {
         splitChunks: {
             cacheGroups: {
                 default: false,
                 vendors: false,
-    
+
                 vendor: {
                     name: 'vendor',
                     chunks: 'all',
                     test: /node_modules/,
                     priority: 20
                 },
-    
+
                 common: {
                     name: 'common',
                     minChunks: 2,
@@ -117,6 +125,6 @@ module.exports = (env) => ({
             }
         }
     }
-    
+
 
 });
