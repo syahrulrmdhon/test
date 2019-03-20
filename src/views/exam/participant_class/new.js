@@ -59,6 +59,7 @@ class ParticipantClass extends Component {
         let data = []
         
         if(this.props.exam.data.exam.exam_classes_attributes){
+            console.log(this.props.exam.data)
             this.props.exam.data.exam.exam_classes_attributes.map((exam_classes_attribute, idx) => {
                 const start_date = (exam_classes_attribute.start_date == null) ? new Date() : new Date(exam_classes_attribute.start_date)
                 const deadline_date = (exam_classes_attribute.deadline_date == null) ? new Date() : new Date(exam_classes_attribute.deadline_date)
@@ -71,6 +72,7 @@ class ParticipantClass extends Component {
 
             })
         }
+
 
         if(data){
             let url = `v1/assessments/${this.state.assessment_id}/exams/${this.state.exam_id}/exam_classes/validate?step=ClassForm`
@@ -99,6 +101,7 @@ class ParticipantClass extends Component {
         let class_view = []
         if(exam_classes){
             exam_classes.map((data, idx) => {
+                console.log(idx,"")
                 class_view.push(<Classes 
                     index={idx} 
                     key={idx}  

@@ -316,7 +316,7 @@ $nunito_bold: "NunitoBold";
 
   ul.toggle-score > li.nav-item a {
     background-color: #ffffff;
-    padding: 8px;
+    padding: 7px;
     color: #999999 !important;
     letter-spacing: 0.5px;
     cursor: pointer;
@@ -328,7 +328,17 @@ $nunito_bold: "NunitoBold";
     background-color: #ffffff;
     border: 0;
     border-top: 1px solid green;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+
   }
+
+  ul.toggle-score > li.nav-item a.active .nav-link{
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+
+
 
   &__report-value {
     font-family: $nunito_regular;
