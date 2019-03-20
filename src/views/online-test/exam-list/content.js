@@ -1,157 +1,43 @@
 import React, { Component } from 'react'
 import { Progress } from 'reactstrap'
 import { NotAvailable } from '../../global/notAvailable';
-import { DetailOnlineExam } from './helper-online'
+import { DetailOnlineExam, Classes } from './helper-online'
+import { getDate } from './../../../utils/common'
+import _ from 'lodash'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import Loader from './../../global/loader'
 
-export default class ContentOnlineExam extends Component {
+class ContentOnlineExam extends Component {
     render() {
-        let data = {
-            header: {
-                period: '2018/2019',
-                type: 'Ujian Tengah Semester'
-            },
-            list: [
-                {
-                    info: {
-                        name: 'Aqidah Akhlaq',
-                        date: '20 Feb 2019',
-                        type: 'UTS',
-                        time: '45 Menit',
-                        class: 'X IPS'
-                    },
-                    progress: {
-                        percentage: 10,
-                        count: 10,
-                        total: 100
-                    },
-                    detail: {
-                        choices: 90,
-                        essay: 10,
-                        desc: 'Pelajari Kitab Ushul Tsalatsah Bab 1 - Bab 6'
-                    }
-                },
-                {
-                    info: {
-                        name: 'al-Lughotul Arabiyyah',
-                        date: '20 Feb 2019',
-                        type: 'UTS',
-                        time: '45 Menit',
-                        class: 'X IPS'
-                    },
-                    progress: {
-                        percentage: 70,
-                        count: 70,
-                        total: 100
-                    },
-                    detail: {
-                        choices: 70,
-                        essay: 30,
-                        desc: 'Pelajari Kitab Durusul Lughoh Jilid 1 & Pelajari Kitab Baina Yadaik serta Kitab al-Muyassar'
-                    }
-                },
-                {
-                    info: {
-                        name: 'Fiqh',
-                        date: '20 Feb 2019',
-                        type: 'UTS',
-                        time: '45 Menit',
-                        class: 'X IPS'
-                    },
-                    progress: {
-                        percentage: 100,
-                        count: 100,
-                        total: 100
-                    },
-                    detail: {
-                        choices: 60,
-                        essay: 40,
-                        desc: 'Pelajari Kitab Al Umm dan Al Muhaddzab karya Asy Syairozi atau Syarh Al Muhaddzab karya Imam Nawawi'
-                    }
-                },
-                {
-                    info: {
-                        name: 'Aqidah Akhlaq',
-                        date: '20 Feb 2019',
-                        type: 'UTS',
-                        time: '45 Menit',
-                        class: 'X IPS'
-                    },
-                    progress: {
-                        percentage: 10,
-                        count: 10,
-                        total: 100
-                    },
-                    detail: {
-                        choices: 90,
-                        essay: 10,
-                        desc: 'Pelajari Kitab Ushul Tsalatsah Bab 1 - Bab 6'
-                    }
-                },
-                {
-                    info: {
-                        name: 'al-Lughotul Arabiyyah',
-                        date: '20 Feb 2019',
-                        type: 'UTS',
-                        time: '45 Menit',
-                        class: 'X IPS'
-                    },
-                    progress: {
-                        percentage: 70,
-                        count: 70,
-                        total: 100
-                    },
-                    detail: {
-                        choices: 70,
-                        essay: 30,
-                        desc: 'Pelajari Kitab Durusul Lughoh Jilid 1 & Pelajari Kitab Baina Yadaik serta Kitab al-Muyassar'
-                    }
-                },
-                {
-                    info: {
-                        name: 'Fiqh',
-                        date: '20 Feb 2019',
-                        type: 'UTS',
-                        time: '45 Menit',
-                        class: 'X IPS'
-                    },
-                    progress: {
-                        percentage: 100,
-                        count: 100,
-                        total: 100
-                    },
-                    detail: {
-                        choices: 60,
-                        essay: 40,
-                        desc: 'Pelajari Kitab Al Umm dan Al Muhaddzab karya Asy Syairozi atau Syarh Al Muhaddzab karya Imam Nawawi'
-                    }
-                }
-            ]
+        const period_name = _.get(this.props.listOnlineExam, 'schoolYear.period_name', null)
 
-        }
-
+        const data = this.props.data
+        const assessments = data.assessments
+        const entries = data && assessments && assessments.entries
         let content = []
-        if (data && data.list) {
-            let list = data.list
-            list.map((x) => {
+
+        if (entries) {
+            entries.map((x) => {
                 content.push(
                     <div className='disblock' key={Math.random()}>
                         <div className='right-block__panel'>
                             <div className='row h-100'>
                                 <div className='col-sm-4 right-block__panel-part'>
-                                    <label className='header-title disblock padding-bottom-1'>{x.info.name}</label>
+                                    <label className='header-title disblock padding-bottom-1'>{x.name}</label>
                                     <div className='right-block__basic-info-wrapper'>
                                         <div className='right-block__basic-info'>
                                             <i className='fa fa-calendar-o padding-right-1'></i>
-                                            <label className='info'>{x.info.date}</label>
+                                            <label className='info'>{x.created_date}</label>
                                         </div>
                                         <div className='right-block__basic-info'>
-                                            {x.info.type}
+                                            {x.assessment_type_text === null ? '' : x.assessment_type_text}
                                         </div>
                                         <div className='right-block__basic-info'>
-                                            {x.info.time}
-                                        </div>
+                                            {x.duration !== null ? '0' : x.duration} Menit
+                                         </div>
                                     </div>
-                                    <label className='p'>{x.info.class}</label>
+                                    <label className='p'>{x.grade_name === null ? 'Kelas Belum Dipilih' : x.grade_name}</label>
                                     <div className='padding-top-2 right-block__action-wrapper'>
                                         <div className='right-block__action'>Lihat</div>
                                         <div className='right-block__action'>Ubah Soal</div>
@@ -161,19 +47,22 @@ export default class ContentOnlineExam extends Component {
                                 <div className='col-sm-4 right-block__panel-part padding-top-4'>
                                     <div className='padding-bottom-1'>
                                         <label className='p'>Progress</label>
-                                        <span className='pull-right p-green'>{x.progress.percentage === null ? '0' : x.progress.percentage}%</span>
+                                        <span className='pull-right p-green'>{x.assigned_exam.percentage === null ? '0' : x.assigned_exam.percentage}%</span>
                                     </div>
-                                    <Progress value={x.progress.percentage}/>
-                                    <label className='info padding-top-1'>{x.progress.count === null ? '0' : x.progress.count}/{x.progress.total === null ? '0' : x.progress.total} Terbuat</label>
+                                    <Progress value={x.assigned_exam.progress} />
+                                    <label className='info padding-top-1'>{x.assigned_exam.created_question_count === null ? '0' : x.assigned_exam.created_question_count}/{x.assigned_exam.question_count === null ? '0' : x.assigned_exam.question_count} Terbuat</label>
                                 </div>
                                 <div className='col-sm-4'>
                                     <div className='padding-bottom-2'>
                                         <label className='p-bold padding-right-2'>Detil Soal</label>
                                         <i className='fa fa-pencil icon-green'></i>
                                     </div>
-                                    <DetailOnlineExam
-                                        detail={x.detail}
-                                    />
+                                    <div className='padding-bottom-2'>
+                                        <DetailOnlineExam
+                                            detail={x.assigned_exam}
+                                        />
+                                        <label className='info text-justify'>{x.assigned_exam.description === null ? ' ' : x.assigned_exam.description}</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -181,24 +70,38 @@ export default class ContentOnlineExam extends Component {
                 )
             })
         } else {
-            content.push(
-                <div className='padding-top-4 disblock right-block__panel-wrapper' key={Math.random()}>
-                    <NotAvailable>Data Belum Tersedia</NotAvailable>
-                </div>
-            )
+            <NotAvailable>Data Tidak Tersedia</NotAvailable>
         }
+
+
         return (
-            <div className='col-sm-9 right-block w-100'>
-                <div className="min-height-100">
+            <div className='col-sm-9 right-block'>
+
+                <div className='w-100'>
                     <div className='header-content margin-bottom-4'>
                         <label className='header-title disblock padding-top-6'>Daftar Ujian</label>
-                        <label className='padding-top-2 info margin-bottom-3'>{data.header.type} {data.header.period}</label>
+                        <label className='padding-top-2 info margin-bottom-3'>Periode {period_name}</label>
                     </div>
                     <div className='right-block__panel-wrapper margin-bottom-4'>
-                        {content}
+                        {
+                            this.props.loader ?
+                                <Loader loader={true} />
+                                :
+                                content
+                                
+                        }
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    listOnlineExam: state.listOnlineExam, //listOnlineExam dari reducer
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+}, dispatch
+)
+export default connect(mapStateToProps, mapDispatchToProps)(ContentOnlineExam)

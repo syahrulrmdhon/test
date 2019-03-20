@@ -70,27 +70,34 @@ $nunito_bold: "NunitoBold";
   min-height: 100%;
   padding-top: 125px;
   margin: 0 auto !important;
+  background-color: #ffffff;
   .content-block.main-block {
+    border-top: solid 0.5px #d3d9dd;
+    box-shadow: none;
     min-height: 100%;
     border-radius: 0px;
     .margin-box {
       min-height: 100%;
       margin: 0 60px 0 30px;
       .left-block {
+        height: 100%;
         position: fixed;
         min-height: 100%;
-        border-right: none;
       }
       .right-block {
         margin-left: 22%;
-        border-left: solid 1px #eeeeee;
-        min-height: 100%;
+        height: 100%;
         .header-content {
           border-bottom: solid 0.5px #d3d9dd;
         }
         .info {
           font-family: $nunito_regular;
           color: #a1a1a1;
+          font-size: 10px;
+        }
+        .info-danger {
+          font-family: $nunito_regular;
+          color: #ff7f8f;
           font-size: 10px;
         }
         .p {

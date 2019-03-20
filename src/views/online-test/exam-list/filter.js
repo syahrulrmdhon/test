@@ -3,8 +3,14 @@ import Select from 'react-select'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { handleChange, initial } from './../../../redux-modules/modules/listOnlineExam'
-import { schoolYears, getSemesterList, assessmentType, grades } from './../../../utils/common'
+import { 
+    handleChange, 
+    initial 
+} from './../../../redux-modules/modules/listOnlineExam'
+import { 
+    assessmentType, grades 
+} from './../../../utils/common'
+import { schoolYears, semesterList } from './../../../utils/exam-online'
 
 class FilterOnlineExam extends Component {
     constructor(props) {
@@ -20,14 +26,14 @@ class FilterOnlineExam extends Component {
     }
     componentDidMount() {
         this.props.initial()
-        schoolYears.call(this, false, { listOptions: true })
-        getSemesterList.call(this)
+        schoolYears.call(this)
+        semesterList.call(this)
         assessmentType.call(this, {category: 'knowledge'})
         grades.call(this)
     }
     changePeriod(e) {
         const value = e.value
-        getSemesterList.call(this, {school_year_id: value}, false)
+        semesterList.call(this, {school_year_id: value}, false)
         this.props.handleChange(e.value, 'selectedYear')
     }
     render() {
