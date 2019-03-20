@@ -89,7 +89,7 @@
 .schedule .list{
     padding: 0 1rem 0 2rem;
     margin-right: 1rem;
-    margin-top: 40px;
+    margin-top: 10px;
     max-height: 50vh;
     overflow-y: scroll;
 }
@@ -160,6 +160,7 @@
     border-radius: 5px;
     border: 1px solid #e9e9ef !important;
     padding: 10px;
+    margin: 20px;
     background-color: rgba(220, 251, 242, 0.09);
 }
 .add-activity a{
