@@ -9,10 +9,9 @@ import Select from 'react-select'
 import { examTypes } from '../../utils/common'
 import { apiClient } from '../../utils/apiClient'
 import { checkProperties } from '../../utils/common'
-import { assessmentShow } from '../../utils/exam'
-import ErrorModal from '../global/error_modal'
 import { error } from './../global/modal'
 import Page from './../../components/Title'
+import Loader from './../global/loader'
 
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import '../../styles/create-exam.scss'
@@ -26,7 +25,7 @@ class Index extends Component {
       step: 'BasicForm',
       category: 'knowledge',
       examTypes: [],
-
+      loader:true
     }
     this.onSubmit = this.onSubmit.bind(this)
 
@@ -162,61 +161,61 @@ class Index extends Component {
 
     return (
       <Page title="Buat Tugas">
-      <div className="padding-content create-exam">
-        <Header navbar={true} location={path} />
-        <div className="margin-content">
-          <div className="content-wrapper">
-            <div className="create-exam__title-wrapper">
-              <div className="create-exam__form-title">{this.state.examId ? "Ubah Tugas" : "Tambah Tugas"}</div>
-              <div className="create-exam__line"></div>
+        <div className="padding-content create-exam">
+          <Header navbar={true} location={path} />
+          <div className="margin-content">
+            <div className="content-wrapper">
+              <div className="create-exam__title-wrapper">
+                <div className="create-exam__form-title">{this.state.examId ? "Ubah Tugas" : "Tambah Tugas"}</div>
+                <div className="create-exam__line"></div>
+              </div>
+              <div className="create-exam__form-wrapper">
+                {
+                  !this.state.examId &&
+                  <div className="d-flex create-exam__input h-auto mb-5">
+                    <Switch
+                      onChange={this.props.handleSwitch}
+                      checked={this.props.exam.switch}
+                      uncheckedIcon={false}
+                      checkedIcon={false}
+                      onHandleColor="#ffffff"
+                      onColor="#1a9d7f"
+                      offColor="#cccccc"
+                      id="normal-switch"
+                      height={18}
+                      width={35} />
+                    <label className="create-exam__label pl-2">Buat Soal</label>
+                  </div>
+                }
+                <label className="create-exam__label">Judul Tugas</label>
+                <input type="text" className="form-control create-exam__input" placeholder="Masukkan Judul Tugas" onChange={event => this.props.handleEvent(event.target.value, "name", this.state.step)} value={name} />
+                <label className="create-exam__label">Tipe Tugas</label>
+                <Select
+                  className="create-exam__input"
+                  classNamePrefix="select"
+                  value={this.state.examTypes.find(type => { return type.value === examType })}
+                  onChange={event => this.props.handleEvent(event.value, 'exam_type', this.state.step)}
+                  options={this.state.examTypes}
+                  placeholder='Pilih Tipe Tugas' />
+                {
+                  this.props.exam.switch &&
+                  <div>
+                    <label className="create-exam__label">Jumlah Soal Tugas</label>
+                    <input type="text" className="form-control create-exam__input create-exam__input-amount" placeholder="Masukkan Jumlah Soal Tugas"
+                      value={question_count} onChange={event => this.props.handleEvent(event.target.value, "question_count", this.state.step)} disabled={this.state.examId ? true : false} />
+                  </div>
+                }
+              </div>
+              <button onClick={this.onSubmit} className="create-exam__button" disabled={this.state.examId ? false : disable}>{this.state.examId ? "Simpan" : "Lanjut"}</button>
             </div>
-            <div className="create-exam__form-wrapper">
-              {
-                !this.state.examId &&
-                <div className="d-flex create-exam__input h-auto mb-5">
-                  <Switch
-                    onChange={this.props.handleSwitch}
-                    checked={this.props.exam.switch}
-                    uncheckedIcon={false}
-                    checkedIcon={false}
-                    onHandleColor="#ffffff"
-                    onColor="#1a9d7f"
-                    offColor="#cccccc"
-                    id="normal-switch"
-                    height={18}
-                    width={35} />
-                  <label className="create-exam__label pl-2">Buat Soal</label>
-                </div>
-              }
-              <label className="create-exam__label">Judul Tugas</label>
-              <input type="text" className="form-control create-exam__input" placeholder="Masukkan Judul Tugas" onChange={event => this.props.handleEvent(event.target.value, "name", this.state.step)} value={name} />
-              <label className="create-exam__label">Tipe Tugas</label>
-              <Select
-                className="create-exam__input"
-                classNamePrefix="select"
-                value={this.state.examTypes.find(type => { return type.value === examType })}
-                onChange={event => this.props.handleEvent(event.value, 'exam_type', this.state.step)}
-                options={this.state.examTypes}
-                placeholder='Pilih Tipe Tugas' />
-              {
-                this.props.exam.switch &&
-                <div>
-                  <label className="create-exam__label">Jumlah Soal Tugas</label>
-                  <input type="text" className="form-control create-exam__input create-exam__input-amount" placeholder="Masukkan Jumlah Soal Tugas"
-                    value={question_count} onChange={event => this.props.handleEvent(event.target.value, "question_count", this.state.step)} disabled={this.state.examId ? true : false} />
-                </div>
-              }
-            </div>
-            <button onClick={this.onSubmit} className="create-exam__button" disabled={this.state.examId ? false : disable}>{this.state.examId ? "Simpan" : "Lanjut"}</button>
           </div>
         </div>
-      </div>
       </Page>
     )
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   exam: state.question,
   switch: state,
   test: state

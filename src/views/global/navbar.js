@@ -12,7 +12,7 @@ const menus = [
     { name: "Beranda", link: "/home", role: 'all' },
     { name: "Absensi", link: "/absen", role: 'all' },
     { name: "Penilaian", link: "/penilaian", role: 'all' },
-    // { name: "Ujian Sekolah", link: "/online-exam/", role: 'all' },
+    { name: "Ujian Sekolah", link: "/online-exam/", role: 'all' },
     { name: "Daftar Nilai", link: "/daftar-nilai", role: 'all' },
     { name: "Rapor Kelas", link: "/rapor", role: 'homeroom' },
     { name: "Daftar Murid", link: "/murid", role: 'homeroom' },
@@ -67,7 +67,7 @@ class MenuBar extends Component {
                             <div className="bg-white">
                                 <div className="menu">
                                     <div className="back">
-                                        <Link to={this.props.location}><i class="fa fas fa-chevron-left"></i> Kembali</Link>
+                                        <Link to={this.props.location}><i className="fa fas fa-chevron-left"></i> Kembali</Link>
                                     </div>
                                 </div>
                             </div>

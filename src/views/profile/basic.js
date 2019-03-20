@@ -30,7 +30,7 @@ import {
 import './../../styles/profile.scss'
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
-export class componentName extends Component {
+export class Basic extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -148,17 +148,6 @@ export class componentName extends Component {
     // attribute full
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
-      modal({
-        message: 'Berhasil',
-        description: 'Informasi dasar telah di perbaharui',
-        btns: [
-          {
-            label: 'Lanjut',
-            className: 'btn green',
-            // event:getUser(false)
-          }
-        ]
-      })
       this.onRedirect()
       getUser(false)
       // window.location.href="/profile/basic-information"
@@ -249,7 +238,7 @@ export class componentName extends Component {
         <div className="col-sm-12">
           <label htmlFor="1" className="pointer padding-2 border-full label-upload label-text">
             Unggah Foto Baru
-          <i class="margin-left-2 fa fas fa-upload"></i>
+          <i className="margin-left-2 fa fas fa-upload"></i>
           </label>
           <input type="file" className="button-upload" onChange={this.onPreviewPhoto} id="1" />
 
@@ -260,7 +249,7 @@ export class componentName extends Component {
         <div className="col-sm-12">
           <label htmlFor="1" className="pointer padding-2 border-full label-upload label-text">
             Unggah Foto Baru
-          <i class="margin-left-2 fa fas fa-upload"></i>
+          <i className="margin-left-2 fa fas fa-upload"></i>
           </label>
           {/* <label htmlFor="1" className="pointer margin-left-2 padding-2 border-full hapus-foto label-text">
             Hapus Foto
@@ -271,8 +260,6 @@ export class componentName extends Component {
     }
 
     let data_photo = photo_url ? photo_url : User
-    console.log(data_photo)
-
     return (
       <Page title="Basic Information">
         <Header />
@@ -281,7 +268,7 @@ export class componentName extends Component {
             <div className="margin-content">
               <div className="content-block main-block fit-screen">
                 <div className="row">
-                  <div className="col-sm-2 left-block fit-screen">
+                  <div className="col-sm-2">
                     <Sidebar />
                   </div>
                   <div className="col-sm-10 right-block">
@@ -458,7 +445,7 @@ export class componentName extends Component {
                           <div className="col-sm-12">
                             <div className="padding-top-3 padding-bottom-3">
                               <button
-                                className="submit-btn default"
+                                className="submit-btn"
                                 onClick={this.onCofirm}
                               >
                                 Simpan
@@ -489,4 +476,4 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = dispatch => bindActionCreators({ getUSer, getRegion, handlingInputText, handlingInputSelectRegion }, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(componentName)
+export default connect(mapStateToProps, mapDispatchToProps)(Basic)

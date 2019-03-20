@@ -149,7 +149,7 @@ export class componentName extends Component {
                         <div className="margin-content">
                             <div className="content-block main-block fit-screen">
                                 <div className="row">
-                                    <div className="col-sm-2 left-block fit-screen">
+                                    <div className="col-sm-2">
                                         <Sidebar />
                                     </div>
                                     <div className="col-sm-10 right-block">
