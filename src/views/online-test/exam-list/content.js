@@ -17,11 +17,8 @@ class ContentOnlineExam extends Component {
         const entries = data && assessments && assessments.entries
         let content = []
 
-        console.log('ent', entries)
-
         if (entries) {
             entries.map((x) => {
-                // let date = getDate('case-1', x.created_date)
                 content.push(
                     <div className='disblock' key={Math.random()}>
                         <div className='right-block__panel'>
@@ -76,7 +73,6 @@ class ContentOnlineExam extends Component {
             <NotAvailable>Data Tidak Tersedia</NotAvailable>
         }
 
-        console.log(this.props.q)
 
         return (
             <div className='col-sm-9 right-block'>
