@@ -14,16 +14,27 @@ class OnlineExamList extends Component {
         super(props)
 
         this.state = {
+            data: {},
+            assessments: {},
             entries: [],
-            classes: []
+            totalEntries: 0,
+            totalPages: 0,
+            sizes: 0,
+            classes: [],
+            loader: true
         }
+
         this.getData = this.getData.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+    componentDidMount() {
+        this.getData()
+    }
+
     getData() {
-        console.log('masuk submit')
         let listOnlineExam = _.get(this.props, 'listOnlineExam', {})
+        let selectedYear = listOnlineExam ? listOnlineExam.selectedYear : ''
         let selectedSemester = listOnlineExam ? listOnlineExam.selectedSemester : ''
         let selectedType = listOnlineExam ? listOnlineExam.selectedType : ''
         let selectedGrade = listOnlineExam ? listOnlineExam.selectedGrade : ''
@@ -40,13 +51,20 @@ class OnlineExamList extends Component {
             params['grade_id'] = selectedGrade
         }
 
-        apiClient('get', 'v1/tests', false, params).then(res => {
-            console.log('res', res)
+        apiClient('get', 'v1/tests', false, false).then(res => {
             const data = _.get(res, 'data.data', {})
-            const { entries, total_entries, total_pages, size } = data || []
+            const { assessments } = data || []
+            const { entries, total_entries, total_pages, size } = assessments || []
 
-            console.log('entries', total_pages)
-
+            this.setState({
+                data: data,
+                assessments: assessments,
+                entries: entries,
+                totalEntries: total_entries,
+                totalPages: total_pages,
+                sizes: size,
+                loader: false
+            })
         })
     }
 
@@ -67,7 +85,8 @@ class OnlineExamList extends Component {
                                 />
                             </div>
                             <ContentOnlineExam
-
+                                data={this.state.data}
+                                loader={this.state.loader}
                             />
                         </div>
                     </div>
