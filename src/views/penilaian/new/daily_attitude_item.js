@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Select from 'react-select';
-import Autocomplete from 'react-autocomplete';
 
 import { apiClient } from './../../../utils/apiClient'
 import {
