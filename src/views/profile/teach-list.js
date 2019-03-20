@@ -31,6 +31,7 @@ export class componentName extends Component {
         const url = `v1/users/subject_classes`
         apiClient('get', url).then(res => {
             this.setState({
+                loader: false,
                 data: res.data.data.subject_classes
             })
         })
@@ -64,6 +65,7 @@ export class componentName extends Component {
         let school = JSON.parse(window.localStorage.getItem('school'))
         const school_name = school.name
         const aws_img = school.doc_aws_url
+        let school_logo = !!(school) ? school.asset.doc_aws_url : Logo
         let content = []
         const { data } = this.state
         let join_data = []
@@ -74,10 +76,8 @@ export class componentName extends Component {
         data && data.map((data) => {
             data.subject_schedules.map((x) => {
                 join_data.push(this.convertDay(x.dayname))
-
             })
             join = join_data.join(",")
-
             content.push(
                 <tr key={Math.random()}>
                     <td className="padding-2 text-left">{data.class_name}</td>
@@ -101,10 +101,10 @@ export class componentName extends Component {
                                     <div className="col-sm-10 right-block">
                                         <div className="padding-top-6 padding-left-4 ">
                                             <div className="title">
-                                                Daftar Menagajar
+                                                Daftar Mengajar
                                             </div>
                                             <div className="margin-top-5">
-                                                <Avatar src={User} round={true} size={60} />
+                                                <Avatar src={school_logo} round={true} size={60} />
                                                 <span className="school-name margin-left-1">{school_name}</span>
                                             </div>
                                             <div className="row">
@@ -119,7 +119,15 @@ export class componentName extends Component {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                {content}
+                                                            {content.length ? 
+                                                                content :
+                                                                <tr>
+                                                                    <td colSpan="3">
+                                                                        <Loader loader={this.state.loader}/>
+                                                                        Data Tidak Tersedia
+                                                                    </td>
+                                                                </tr>
+                                                            }
                                                             </tbody>
                                                         </Table>
                                                     </div>
