@@ -48,7 +48,7 @@ export default function reducer(state = initialState, action) {
                 loading: false,
             }
         case REMOVE_CLASS:
-            state.data.exam.exam_classes_attributes.splice((action.index - 1), 1)
+            state.data.exam.exam_classes_attributes.splice(action.index, 1)
             return {
                 ...state,
                 loaded: true,
@@ -133,13 +133,13 @@ export function buildClass(attributes, data_basic_comps){
         data_basic_comps.map((basic_comp) => {
             basic_comps.push({
                 basic_comp_id: basic_comp.id,
-                class_id: null,
+                class_id: 0,
                 kkm: null,
             })
         })
 
         attributes.push({
-            class_id: null,
+            class_id: 0,
             start_date: null,
             deadline_date: null,
             comp_kkms: basic_comps,

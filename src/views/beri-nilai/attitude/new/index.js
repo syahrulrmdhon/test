@@ -187,7 +187,7 @@ export class Index extends Component {
             select.push(  <Select
                 className="select-box"
                 classNamePrefix="select"
-                placeholder="Pilih Nilai Ahkir"
+                placeholder="Pilih Nilai Akhir"
                 options={option}
                 onChange={(e) => {this.props.handlingInputSelect(e,'score')}}
                 value={option.filter((element) => {return element.value === score })}
@@ -234,7 +234,7 @@ export class Index extends Component {
                                                 <div className="row margin-top-8">
                                                     <div className="col-sm-4">
                                                         <div className="range-button ">
-                                                            <button className="btn-green" onClick={this.handleSave}>Submit</button>
+                                                            <button className="btn-green" onClick={this.handleSave}>Simpan</button>
                                                         </div>
                                                     </div>
                                                 </div>

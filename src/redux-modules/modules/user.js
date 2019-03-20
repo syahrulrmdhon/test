@@ -23,7 +23,7 @@ export default function reducer(state = initialState, action) {
     delete state.error;
       if (state.result !== action.result) {
         if (action.result.data.profile) {
-          console.log(action.result.data.profile,"profile")
+          console.log(action.result.data,"profile")
           action.result.data['user'] = {}
           action.result.data['user'] = {
             phone_number: action.result.data.profile.phone_number ? action.result.data.profile.phone_number : '',
@@ -43,7 +43,6 @@ export default function reducer(state = initialState, action) {
           }
         }
 
-        console.log(action.result.data.user,"user")
         return {
           ...state,
           loaded: true,
