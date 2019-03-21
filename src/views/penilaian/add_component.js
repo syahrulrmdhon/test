@@ -103,7 +103,7 @@ class AddComponent extends Component {
             }
             
             this.props.history.push(`/penilaian`)
-            window.location.reload();
+            
         }).catch(response => {
             error({
                 message: `Gagal ${msg} komponen topik, periksa kembali data yang dibutuhkan`,
