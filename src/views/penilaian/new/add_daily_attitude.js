@@ -6,6 +6,7 @@ import {
 } from './../../../redux-modules/modules/assessment'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash'
 
 var FontAwesome = require('react-fontawesome')
 
@@ -40,7 +41,8 @@ class AddDailyAttitude extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    user_attitudes: state.assessment.user_attitudes_attributes ? (state.assessment.user_attitudes_attributes.length > 0 ? state.assessment.user_attitudes_attributes : [{}]) : [{}]
+    user_attitudes: _.get(state, 'assessment.user_attitudes_attributes', [{}]),
+    data:state
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 

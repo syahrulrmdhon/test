@@ -47,7 +47,9 @@ export default function reducer(state = initialState, action = {}) {
                 loading: true,
             }
         case REMOVE_ATTITUDE_ITEM:
+            console.log(state.user_attitudes_attributes,"my attrib")
             state.user_attitudes_attributes = removeField(state.user_attitudes_attributes, action.idx)
+            console.log(state.user_attitudes_attributes,"my attrib")
             return{
                 ...state,
                 loaded: false,

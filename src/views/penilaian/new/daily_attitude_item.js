@@ -179,7 +179,6 @@ class DailyAttitudeItem extends Component {
             </div>
         }
         const { value, suggestions } = this.state
-        
         return (
             <div>
                 <div className="row">
@@ -248,6 +247,7 @@ class DailyAttitudeItem extends Component {
 
 const mapStateToProps = (state, props) => ({
     assessment: state.assessment,
+    assessment_classeset: state,
     user_attitude: state.assessment.user_attitudes_attributes ? (state.assessment.user_attitudes_attributes.length > 0 ? state.assessment.user_attitudes_attributes[props.index] : {}) : {}
 })
 

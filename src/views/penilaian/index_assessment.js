@@ -32,9 +32,9 @@ export default class IndexAssessment extends Component {
         }
     }
     
-    handlePageClick(data) {
+    handlePageClick(data) {    
         let page = data.selected + 1
-        assessmentGetData.call(this, this.state.activeTab, page)
+        assessmentGetData.call(this, this.props.category, page)
     }
     
     render() {
@@ -60,17 +60,21 @@ export default class IndexAssessment extends Component {
                         {this.props.paginate.total_pages > 1 && 
                             <div className="align-center">
                                 <ReactPaginate
+                                    key={this.props.category}
                                     previousLabel={<img src={previous} alt="" className="arrow-left"/>}      
                                     nextLabel={<img src={next} alt="" className="arrow-right" />}          
                                     breakLabel={'...'}
                                     breakClassName={'break-me disinblock'}
                                     pageCount={this.props.paginate.total_pages}
-                                    onPageChange={this.handlePageClick}
+                                    onPageChange={(data) => {
+                                        this.handlePageClick(data)
+                                    }}
                                     containerClassName={'pagination disblock'}
                                     pageClassName={'disinblock'}
                                     previousClassName={'disinblock'}
                                     nextClassName={'disinblock'}
-                                    activeClassName={'active'} />
+                                    activeClassName={'active'}
+                                />
                             </div>
 
                         }

@@ -60,7 +60,12 @@ class AttitudeDetail extends Component {
                     }
                 ]
             })
-            this.props.history.push('/penilaian')
+            this.props.history.push({
+                pathname: '/penilaian',
+                state: {
+                    category: 'attitude',
+                }
+            })
 
         }).catch(err => {
             console.log(err.response)
@@ -80,8 +85,7 @@ class AttitudeDetail extends Component {
             this.props.assessment.entries.map((user_attitude, idx) => {
                 users.push(
                     <AttitudeDetailItem
-                            // key={user_attitude.payload || idx}
-                        key={user_attitude.payload || idx}
+                        key={idx}
                         index={idx}
                     />
                 )

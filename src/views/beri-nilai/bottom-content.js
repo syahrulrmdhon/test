@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames'
 import Avatar from 'react-avatar';
-import Ava from './../../assets/images/img_avatar.png'
+import Ava from './../../assets/images/avatar_def.svg'
 import Pencil from './../../assets/images/beri_nilai.svg';
 
 
