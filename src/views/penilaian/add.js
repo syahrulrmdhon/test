@@ -201,13 +201,8 @@ class Add extends Component {
                                                     className="fullwidth"
                                                     placeholder="Contoh: Topik 1"
                                                     name="name"
-<<<<<<< HEAD
                                                     value={name}
                                                     onChange={(event) => {this.props.handleEvent(event.target.value, 'name')}}
-=======
-                                                    defaultValue={name}
-                                                    onChange={(event) => { this.props.handleEvent(event.target.value, 'name') }}
->>>>>>> 282b830a4baf53a2e70ae1dee61ef63a560398b3
                                                 />
                                             </div>
                                         </div>
@@ -218,18 +213,11 @@ class Add extends Component {
                                                 <label className="content-label">Kategori Penilaian</label>
                                                 <Select
                                                     isClearable
-<<<<<<< HEAD
                                                     key={Math.random()}
                                                     className= "select-list"
                                                     classNamePrefix= "select"
                                                     placeholder= "Pilih Kategori Penilaian"
                                                     name= "category"
-=======
-                                                    className="select-list"
-                                                    classNamePrefix="select"
-                                                    placeholder="Pilih Kategori Penilaian"
-                                                    name="category"
->>>>>>> 282b830a4baf53a2e70ae1dee61ef63a560398b3
                                                     options={category_types}
                                                     onChange={this.onCategoryType}
                                                     value={category_types.find((element) => { return element.value == category })}
