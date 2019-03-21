@@ -60,7 +60,7 @@ export default class ScheduleItem extends Component{
                 <div className="padding-3">
                     <div className="time cgray2">{title}</div>
                     <div className="time cgray2">{time}</div>
-                    <div className="description">{description}</div>
+                    <div className="description-home">{description}</div>
                     {textClass}
                 </div>
             </div>

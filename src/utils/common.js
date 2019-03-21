@@ -236,6 +236,30 @@ export function assessmentType(params = {}, event = {}, fieldName = 'assessment_
     }
 }
 
+export function assessment_grades(params = {}, options = {}) {
+    let grades = options.gradesOptions || false
+
+    apiClient('get', 'v1/filters/grades', false, params).then(response => {
+        let gradesOptions = response.data.data.grades || []
+
+        if ((gradesOptions.length > 0) && gradesOptions) {
+            const temps = gradesOptions
+            grades = []
+
+            temps.map((temp, idx) => {
+                grades.push({
+                    value: temp.id,
+                    label: temp.name,
+                })
+            })
+        }
+
+        this.setState({
+            assessment_grades: grades,
+        })
+    })
+}
+
 export function classes(params = {}) {
     apiClient('get', 'v1/filters/classes', false, params).then(response => response.data).then(data => {
         let result = []
