@@ -213,3 +213,52 @@ $nunito_bold: "NunitoBold";
     }
   }
 }
+
+.bank {
+  .wrapper-content {
+    height: 100%;
+    .btn-green {
+      border-radius: 5px;
+    }
+    .header {
+      display: block;
+      margin-left: 5%;
+      width: 90px;
+      .font-green {
+        font-family: $nunito_regular;
+        color: #1a9d7f;
+        font-size: 14px;
+      }
+      .header-title {
+        padding-left: 5%;
+        display: flex;
+        justify-content: center;
+        width: 90%;
+      }
+      .border-green {
+        height: 2px;
+        background-color: #1a9d7f;
+        margin: 0 auto !important;
+        width: 60%;
+      }
+    }
+    .select-bank {
+      border-bottom: solid 0.5px #d3d9dd;
+    }
+    .content-bank {
+      height: 68%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      .wrapper {
+        border: solid 0.5px #d9d9d9;
+        border-radius: 3px;
+        .kd {
+          text-align: justify;
+        }
+        .question {
+          text-align: justify;
+        }
+      }
+    }
+  }
+}

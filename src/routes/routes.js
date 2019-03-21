@@ -49,6 +49,7 @@ import TeachList from './../views/profile/teach-list'
 //online exams
 import OnlineExamList from './../views/online-test/exam-list/index'
 import CreateList from './../views/online-test/create-exam/index'
+import Bank from './../views/online-test/bank/bank'
 
 
 
@@ -224,36 +225,40 @@ export const MainRoutes = [
         component: NoQuestions
     },
     {
-        path:'/score/attitude/:id',
-        exact:true,
-        component:DetailScoreAttitude
+        path: '/score/attitude/:id',
+        exact: true,
+        component: DetailScoreAttitude
     },
     {
-        path:'/score/attitude/new/assessment/:assessment_id/class/:class_id/user/:user_id',
-        component:NewAttitudeScore
+        path: '/score/attitude/new/assessment/:assessment_id/class/:class_id/user/:user_id',
+        component: NewAttitudeScore
     },
     {
         path: '/profile/basic-information',
-        component:BasicInformation
+        component: BasicInformation
     },
     {
         path: '/profile/update-password',
-        component:UpdatePassword
+        component: UpdatePassword
     },
     {
         path: '/profile/teach-list',
-        component:TeachList
+        component: TeachList
     },
 
     //online exams
     {
         path: '/online-exam/',
-        exact:true,
+        exact: true,
         component: OnlineExamList
     },
     {
         path: '/online-exam/create',
         component: CreateList
+    },
+    {
+        path: '/bank',
+        component: Bank
     },
 
     {
