@@ -45,6 +45,22 @@ $nunito_bold: "NunitoBold";
     border-radius: 5px;
   }
 
+  .remove-profile {
+    width: 88px;
+    i {
+      float: right;
+      padding: 5px;
+      color: black;
+      border-radius: 50%;
+      background: #A3A6A9;
+      opacity: 0.5;
+      margin-bottom: 10px;
+    }
+    i:hover {
+      color: #199d7f;
+    }
+  }
+
   .profile-photo {
     border-radius: 50%;
     width: 88px;

@@ -47,6 +47,7 @@ export class Basic extends Component {
     this.handleCity = this.handleCity.bind(this)
     this.onPreviewPhoto = this.onPreviewPhoto.bind(this)
     this.onRedirect = this.onRedirect.bind(this)
+    this.confirmDelete = this.confirmDelete.bind(this)
   }
 
   componentDidMount() {
@@ -100,6 +101,34 @@ export class Basic extends Component {
       startDate: this.props.user && this.props.user.user && this.props.user && this.props.user.user.dob
     });
   }
+
+  handleProfilePicture() {
+    
+  }
+
+  confirmDelete(e) {
+    e.preventDefault()
+    confirmAlert({
+      customUI: ({ onClose, onConfirm }) => {
+        return (
+          <div className="react-confirm-alert modal-alert">
+            <div className="react-confirm-alert-body">
+              <div className="header align-center">
+                <h1>Apakah anda yakin Menghapus Foto Profil? </h1>
+              </div>
+              <div className="react-confirm-alert-button-group toggle">
+                <div className="align-center fullwidth">
+                  <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
+                  <a href="javascript:void(0);" className="btn green" onClick={() => { this.handleProfilePicture(); }}>Yakin</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      },
+    })
+  }
+
   onCofirm(e) {
     e.preventDefault()
     confirmAlert({
@@ -278,6 +307,9 @@ export class Basic extends Component {
                           <div className="row">
                             <div className="col-sm-12">
                               <div className="col-sm-1">
+                                <div className="remove-profile">
+                                  <i className="fa fa-close" onClick={this.confirmDelete}></i>
+                                </div>
                                 <img id="image" src={data_photo} className="profile-photo" alt="/" />
                               </div>
                               <div className="col-sm-6 margin-left-6 margin-top-2">
