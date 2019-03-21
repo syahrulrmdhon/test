@@ -98,8 +98,6 @@ export function getUser(redirect = false) {
 export function getDate(format = 'case-1', date = new Date) {
     let result = ''
 
-    console.log()
-
     if (!!(date)) {
         let dt = date.getDate()
         let month = date.getMonth()
