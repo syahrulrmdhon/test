@@ -101,7 +101,9 @@ class AddComponent extends Component {
                     console.log(response)
                 })
             }
+            
             this.props.history.push(`/penilaian`)
+            
         }).catch(response => {
             error({
                 message: `Gagal ${msg} komponen topik, periksa kembali data yang dibutuhkan`,
