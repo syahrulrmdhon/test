@@ -179,7 +179,6 @@ class DailyAttitudeItem extends Component {
             </div>
         }
         const { value, suggestions } = this.state
-        console.log(this.props.index,"here porps")
         return (
             <div>
                 <div className="row">
