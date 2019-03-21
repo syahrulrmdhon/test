@@ -7,6 +7,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Loader from './../../global/loader'
+import moment from 'moment/moment.js'
 
 class ContentOnlineExam extends Component {
     render() {
@@ -20,6 +21,7 @@ class ContentOnlineExam extends Component {
         if (entries) {
             if (entries.length) {
                 entries.map((x) => {
+                    const date = moment(x.created_at).locale('id').format('LL')
                     content.push(
                         <div className='disblock' key={Math.random()}>
                             <div className='right-block__panel'>
@@ -29,14 +31,14 @@ class ContentOnlineExam extends Component {
                                         <div className='right-block__basic-info-wrapper'>
                                             <div className='right-block__basic-info'>
                                                 <i className='fa fa-calendar-o padding-right-1'></i>
-                                                <label className='info'>{x.created_date}</label>
+                                                <label className='info'>{date === null ? '' : date}</label>
                                             </div>
-                                            <div className='right-block__basic-info'>
+                                            <label className='right-block__basic-info'>
                                                 {x.assessment_type_text === null ? '' : x.assessment_type_text}
-                                            </div>
-                                            <div className='right-block__basic-info'>
+                                            </label>
+                                            <label className='right-block__basic-info'>
                                                 {x.duration !== null ? '0' : x.duration} Menit
-                                             </div>
+                                             </label>
                                         </div>
                                         <label className='p'>{x.grade_name === null ? 'Kelas Belum Dipilih' : x.grade_name}</label>
                                         <div className='padding-top-2 right-block__action-wrapper'>
