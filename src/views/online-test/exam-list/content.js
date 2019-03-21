@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Progress } from 'reactstrap'
 import { NotAvailable } from '../../global/notAvailable';
-import { DetailOnlineExam, Classes } from './helper-online'
-import { getDate } from './../../../utils/common'
+import { DetailOnlineExam } from './helper-online'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
