@@ -291,7 +291,7 @@ export default class Attendance extends Component {
                       </div>
                     </div>
                       {
-                        this.state.loader ?
+                        (this.state.loader && this.state.selectedAttendanceType.value === 'homeroom') ?
                         <Loader loader={this.state.loader}/>
                         :
                         (!this.state.attendances || this.state.attendances.length === 0 || this.state.searchAttendances === null) ?

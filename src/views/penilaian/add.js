@@ -13,9 +13,9 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { assessmentType, getDate } from './../../utils/common'
+import { assessmentType, getDate, assessment_grades } from './../../utils/common'
 import { apiClient } from './../../utils/apiClient'
-import {error, modal} from './../global/modal'
+import { error, modal } from './../global/modal'
 
 const category_types = [
     { value: 'knowledge', label: 'Pengetahuan' },
@@ -24,7 +24,7 @@ const category_types = [
 ]
 
 class Add extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.state = {
@@ -32,68 +32,74 @@ class Add extends Component {
             label: (this.props.match.params.id) ? 'Edit Topik' : 'Tambah Topik',
             tab: '1',
             assessment_types: [],
+            assessment_grades: []
         }
 
-        this.onCategoryType = this.onCategoryType.bind(this) 
+        this.onCategoryType = this.onCategoryType.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.getNew(this.state.assessment_id)
     }
 
-    componentDidUpdate(prevProps){
-        if(prevProps.assessment != this.props.assessment){
+    componentDidUpdate(prevProps) {
+        if (prevProps.assessment != this.props.assessment) {
             let category = this.props.assessment.category
-            if(category !== undefined){
-                assessmentType.call(this, {category: category})
+            if (category !== undefined) {
+                assessmentType.call(this, { category: category })
                 // this.props.getNew(this.state.assessment_id, category)
             }
         }
     }
 
-    onCategoryType(event){
-        assessmentType.call(this, {category: event.value})
+    onCategoryType(event) {
+        assessmentType.call(this, { category: event.value })
+        assessment_grades.call(this, false, {
+            gradesOptions: true,
+        })
         this.props.handleEvent(event.value, 'category', ['assessment_type'])
     }
 
-    onSubmit(event){
-        event.preventDefault(); 
+    onSubmit(event) {
+        event.preventDefault();
         let data = this.props.assessment
         const assessment_id = this.state.assessment_id
         let url = 'v1/assessments/validate'
         let data_date = ''
         let msg = 'dibuat'
 
-        if(assessment_id){
+        if (assessment_id) {
             url = `v1/assessments/${assessment_id}/validate_update`
             msg = 'diubah'
         }
 
-        if(data.category === 'attitude'){
-            switch(data.assessment_type){
+        if (data.category === 'attitude') {
+            switch (data.assessment_type) {
                 case 'daily':
                     data_date = data.event_date ? data.event_date : new Date()
                     data.event_date = getDate('case-4', new Date(data_date))
                     delete data.assessment_classes_attributes
                     delete data.user_attitudes_attributes
-                break;
+                    break;
                 case 'final_aspect':
                     delete data.assessment_attitudes_attributes
                     delete data.assessment_subjects_attributes
                     delete data.user_attitudes_attributes
-                break;
+                    break;
                 case 'final_subject':
-                delete data.assessment_attitudes_attributes
-                delete data.assessment_subjects_attributes
-                break;
+                    delete data.assessment_attitudes_attributes
+                    delete data.assessment_subjects_attributes
+                    break;
                 default:
-                
+
             }
         } else {
             delete data.assessment_subjects_attributes
             delete data.assessment_attitudes_attributes
         }
+
+        console.log(data,"my data")
 
         apiClient('post', url, data, { category: data.category }).then(response => {
             modal({
@@ -107,7 +113,7 @@ class Add extends Component {
                     }
                 ]
             })
-            if(assessment_id){
+            if (assessment_id) {
                 apiClient('put', `v1/assessments/${assessment_id}`, data).then(response => {
                     this.props.history.push(`/penilaian/edit-component/${assessment_id}`)
                 }).catch(err => {
@@ -130,20 +136,52 @@ class Add extends Component {
         })
     }
 
-    render(){
-        const {name, category, assessment_type} = this.props.assessment
+    render() {
+        const { name, category, assessment_type, grade_id } = this.props.assessment
         let addOnLayout = ''
+        let grades = []
 
-        switch(assessment_type){
-            case 'daily':
-                addOnLayout = <AddAttitude />
-            break;
-            default:
-                addOnLayout = <AddClass />
-            break
+
+        switch (category) {
+            case 'knowledge':
+            case 'skill':
+                grades.push(
+                    <div className="row" key={Math.random()}>
+                        <div className="col-sm-6">
+                            <div className="content-input margin-top-4">
+                                <label className="content-label">Tingkatan</label>
+                                <Select
+                                    isClearable
+                                    className="select-list"
+                                    classNamePrefix="select"
+                                    placeholder="Pilih Tingkatan"
+                                    name="assessment_grades"
+                                    options={this.state.assessment_grades}
+                                    onChange={(event) => { this.props.handleEvent(event.value, 'grade_id') }}
+                                    value={this.state.assessment_grades.find((element) => element.value == grade_id)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )
+                break;
+            default: ''
         }
 
-        return(
+        switch (assessment_type) {
+            case 'daily':
+                switch (category) {
+                    case 'attitude':
+                        addOnLayout = <AddAttitude />
+                }
+                break;
+            default:
+
+            addOnLayout = <AddClass  />
+                break
+        }
+
+        return (
             <div className="padding-content">
                 <Header navbar={true} location='/penilaian' />
                 <div className="container">
@@ -151,7 +189,7 @@ class Add extends Component {
                         <div className="content-block main-block">
                             <div className="margin-side-10 padding-10">
                                 <form>
-                                    <label className="header-title form disblock">{this.state.label}</label>                                    
+                                    <label className="header-title form disblock">{this.state.label}</label>
                                     <Tab tab={this.state.tab} />
                                     <div className="margin-top-10">
                                     </div>
@@ -159,12 +197,17 @@ class Add extends Component {
                                         <div className="col-sm-10">
                                             <div className="content-input margin-top-10">
                                                 <label className="content-label">Judul Topik</label>
-                                                <input 
-                                                    className="fullwidth" 
-                                                    placeholder="Contoh: Topik 1" 
+                                                <input
+                                                    className="fullwidth"
+                                                    placeholder="Contoh: Topik 1"
                                                     name="name"
+<<<<<<< HEAD
                                                     value={name}
                                                     onChange={(event) => {this.props.handleEvent(event.target.value, 'name')}}
+=======
+                                                    defaultValue={name}
+                                                    onChange={(event) => { this.props.handleEvent(event.target.value, 'name') }}
+>>>>>>> 282b830a4baf53a2e70ae1dee61ef63a560398b3
                                                 />
                                             </div>
                                         </div>
@@ -175,11 +218,18 @@ class Add extends Component {
                                                 <label className="content-label">Kategori Penilaian</label>
                                                 <Select
                                                     isClearable
+<<<<<<< HEAD
                                                     key={Math.random()}
                                                     className= "select-list"
                                                     classNamePrefix= "select"
                                                     placeholder= "Pilih Kategori Penilaian"
                                                     name= "category"
+=======
+                                                    className="select-list"
+                                                    classNamePrefix="select"
+                                                    placeholder="Pilih Kategori Penilaian"
+                                                    name="category"
+>>>>>>> 282b830a4baf53a2e70ae1dee61ef63a560398b3
                                                     options={category_types}
                                                     onChange={this.onCategoryType}
                                                     value={category_types.find((element) => { return element.value == category })}
@@ -193,17 +243,18 @@ class Add extends Component {
                                                 <label className="content-label">Tipe Penilaian</label>
                                                 <Select
                                                     // isClearable
-                                                    className= "select-list"
-                                                    classNamePrefix= "select"
-                                                    placeholder= "Pilih Tipe Penilaian"
-                                                    name= "assessment_type"
+                                                    className="select-list"
+                                                    classNamePrefix="select"
+                                                    placeholder="Pilih Tipe Penilaian"
+                                                    name="assessment_type"
                                                     options={this.state.assessment_types}
-                                                    onChange={(event) => {this.props.handleEvent(event.value, 'assessment_type')}}
-                                                    value={this.state.assessment_types.find((element) => {  return element.value == assessment_type})}
+                                                    onChange={(event) => { this.props.handleEvent(event.value, 'assessment_type') }}
+                                                    value={this.state.assessment_types.find((element) => { return element.value == assessment_type })}
                                                 />
                                             </div>
                                         </div>
                                     </div>
+                                    {grades}
                                     <div className="border-top margin-top-6"></div>
                                     {addOnLayout}
                                     <div className="row">
@@ -227,7 +278,7 @@ const mapStateToProps = (state, props) => ({
     assessment: state.assessment
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ 
+const mapDispatchToProps = dispatch => bindActionCreators({
     getNew,
     handleEvent,
 }, dispatch);

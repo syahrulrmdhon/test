@@ -4,23 +4,24 @@ export class DetailOnlineExam extends Component {
     render() {
         let content = []
         let data = this.props.detail
-        if (!data.hasOwnProperty) {
-            content.push(
-                <label key={Math.random()} className='text-danger info'>Soal Belum Dibuat</label>
-            )
-        } else {
+        if (data) {
+            const full = data.problem_type_full_text
             content.push(
                 <div key={Math.random()}>
-                    <label className='info padding-bottom-2'>
-                        {data.choices} Pilihan Ganda & {data.essay} Essay
-                    </label>
-                    <label className='info text-justify'>{data.desc}</label>
+
+                    {full === '' ?
+                        <label key={Math.random()} className='info-danger'>Soal Belum Dibuat</label>
+                        :
+                        <label className='info padding-bottom-2'>{full}</label>
+                    }
                 </div>
             )
         }
 
         return (
-            <div>{content}</div>
+            <div>
+                {content}
+            </div>
         )
     }
 }

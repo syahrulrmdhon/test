@@ -1787,7 +1787,7 @@ input, td {
   flex: 0 0 20.083%;
   max-width: 20.083%;
 }
-/* 
+/*
 .col-sm-3.left-block {
   flex: 0 0 20.083%;
   max-width: 20.083%;
@@ -1873,4 +1873,16 @@ input, td {
     text-align: center;
     display: block;
   }
+}
+
+.heart {
+  color: #199d7f;
+  font-family: "NunitoBold";
+  font-size: 10px;
+}
+
+.broken-heart {
+  color: #eb373e;
+  font-family: "NunitoBold";
+  font-size: 10px;
 }

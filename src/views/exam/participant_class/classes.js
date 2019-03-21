@@ -27,7 +27,7 @@ class Classes extends Component {
         const data = this.props.exam && this.props.exam.data && this.props.exam.data.exam.exam_classes_attributes[this.props.index] || []
         const class_filters = this.props.exam && this.props.exam.data && this.props.exam.data.class_filters;
         const basic_comps = this.props.exam && this.props.exam.data && this.props.exam.data.basic_comps;
-
+        console.log(class_filters,"class filtr")
         let remove;
         if(this.props.index > 0){
             remove = <div className="col-sm-1">

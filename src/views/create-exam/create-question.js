@@ -38,6 +38,7 @@ class Question extends Component {
   }
 
   componentDidMount() {
+    console.log(this.state.examId,"exam ku")
     this.props.getData(this.state.assessmentId, this.state.step, false, this.state.examId)
     this.props.handleNumber(this.state.activeNumber, false)
     questionTypes.call(this)
@@ -150,6 +151,7 @@ class Question extends Component {
         }
 
         apiClient('post', path, body).then(response => {
+          console.log(response.data.data.exam.id,"response datas")
           const examId = response.data.data.exam.id
           this.setState({examId: examId})
           this.confirmAlert()

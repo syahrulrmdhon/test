@@ -89,7 +89,7 @@
 .schedule .list{
     padding: 0 1rem 0 2rem;
     margin-right: 1rem;
-    margin-top: 40px;
+    margin-top: 10px;
     max-height: 50vh;
     overflow-y: scroll;
 }
@@ -124,15 +124,15 @@
 .schedule .time{
     font-size: 11px;
 }
-.schedule .description{
+.schedule .description-home{
     margin-top:5px;
     margin-bottom:5px; 
     font-weight: 700;  
 }
-.schedule .holiday .description{
+.schedule .holiday .description-home{
     color: #ff7777;
 }
-.schedule .academic .description{
+.schedule .academic .description-home{
     color: #4da1ff;
 }
 .schedule .classes{
@@ -143,7 +143,7 @@
 }
 
 .schedule .subject .time,
-.schedule .subject .description,
+.schedule .subject .description-home,
 .schedule .subject .classes{
     color: #FFF;
 }
@@ -160,6 +160,7 @@
     border-radius: 5px;
     border: 1px solid #e9e9ef !important;
     padding: 10px;
+    margin: 20px;
     background-color: rgba(220, 251, 242, 0.09);
 }
 .add-activity a{
