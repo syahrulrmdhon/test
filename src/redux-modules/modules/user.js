@@ -84,7 +84,7 @@ export default function reducer(state = initialState, action) {
         loading: false,
       }
     case HANDLE_REMOVE_PROFILE_PICTURE:
-      state.data.profile[action.field] = action.value
+      state.data.profile.photo_url= ''
       return {
         ...state,
         loaded: true,

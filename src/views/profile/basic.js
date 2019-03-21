@@ -6,7 +6,7 @@ import Sidebar from './index/sidebar'
 import Avatar from 'react-avatar';
 import { apiClient } from './../../utils/apiClient'
 import Select from 'react-select'
-import User from './../../assets/images/img_avatar.png'
+import User from './../../assets/images/avatar_def.svg'
 import DatePicker from 'react-datepicker'
 import {
   getUSer,
@@ -105,7 +105,36 @@ export class Basic extends Component {
   }
 
   handleProfilePicture(data) {
-    this.props.handleRemoveProfilePicture(data,'photo_url')
+    let userObj = {}
+    let datas = {
+      profile_url: '',
+    }
+    userObj['user'] = datas
+    localStorage.removeItem('user')
+
+
+    // attribute full
+    let url = `/v1/users/update_basic_info`
+    apiClient('put', url, userObj).then(res => {
+      this.onRedirect()
+      getUser(false)
+      window.location.reload(true)
+    })
+      .catch(err => {
+        let response = err.response
+        let data = response.data.status_code
+        if (data === 400) {
+          error({
+            message: 'Gagal semua form harus diisi',
+            btns: [
+              {
+                label: 'Ulangi',
+                className: 'btn bcred cwhite'
+              }
+            ]
+          })
+        }
+      })
   }
 
   confirmDelete(e) {
@@ -121,7 +150,7 @@ export class Basic extends Component {
               <div className="react-confirm-alert-button-group toggle">
                 <div className="align-center fullwidth">
                   <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
-                  <a href="javascript:void(0);" className="btn green" onClick={() => { this.handleProfilePicture(""); }}>Yakin</a>
+                  <a href="javascript:void(0);" className="btn green" onClick={() => { this.handleProfilePicture(''); }}>Yakin</a>
                 </div>
               </div>
             </div>
@@ -180,7 +209,7 @@ export class Basic extends Component {
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
       this.onRedirect()
-      getUser(false)
+      getUser(true)
       // window.location.href="/profile/basic-information"
 
       window.location.reload(true)
@@ -291,6 +320,12 @@ export class Basic extends Component {
     }
 
     let data_photo = photo_url ? photo_url : User
+    let style = ''
+    if (data_photo == User) {
+      style = 'remove-profile hide'
+    } else {
+      style = 'remove-profile'
+    }
     return (
       <Page title="Basic Information">
         <Header />
@@ -309,7 +344,7 @@ export class Basic extends Component {
                           <div className="row">
                             <div className="col-sm-12">
                               <div className="col-sm-1">
-                                <div className="remove-profile">
+                                <div className={style}>
                                   <i className="fa fa-close" onClick={this.confirmDelete}></i>
                                 </div>
                                 <img id="image" src={data_photo} className="profile-photo" alt="/" />

@@ -44,7 +44,7 @@ $nunito_bold: "NunitoBold";
     background-color: #aaaaaa;
     border-radius: 5px;
   }
-
+  
   .remove-profile {
     width: 88px;
     i {
@@ -61,6 +61,10 @@ $nunito_bold: "NunitoBold";
     }
   }
 
+  .hide {
+    display: none;
+  }
+  
   .profile-photo {
     border-radius: 50%;
     width: 88px;
