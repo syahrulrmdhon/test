@@ -163,7 +163,7 @@ class Add extends Component {
                                                     className="fullwidth" 
                                                     placeholder="Contoh: Topik 1" 
                                                     name="name"
-                                                    defaultValue={name}
+                                                    value={name}
                                                     onChange={(event) => {this.props.handleEvent(event.target.value, 'name')}}
                                                 />
                                             </div>
@@ -175,6 +175,7 @@ class Add extends Component {
                                                 <label className="content-label">Kategori Penilaian</label>
                                                 <Select
                                                     isClearable
+                                                    key={Math.random()}
                                                     className= "select-list"
                                                     classNamePrefix= "select"
                                                     placeholder= "Pilih Kategori Penilaian"
