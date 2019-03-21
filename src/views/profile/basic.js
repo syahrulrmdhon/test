@@ -12,7 +12,8 @@ import {
   getUSer,
   getRegion,
   handlingInputText,
-  handlingInputSelectRegion
+  handlingInputSelectRegion,
+  handleRemoveProfilePicture
 } from './../../redux-modules/modules/user'
 import { bindActionCreators } from 'redux';
 import _ from 'lodash'
@@ -48,6 +49,7 @@ export class Basic extends Component {
     this.onPreviewPhoto = this.onPreviewPhoto.bind(this)
     this.onRedirect = this.onRedirect.bind(this)
     this.confirmDelete = this.confirmDelete.bind(this)
+    this.handleProfilePicture = this.handleProfilePicture.bind(this);
   }
 
   componentDidMount() {
@@ -102,8 +104,8 @@ export class Basic extends Component {
     });
   }
 
-  handleProfilePicture() {
-    
+  handleProfilePicture(data) {
+    this.props.handleRemoveProfilePicture(data,'photo_url')
   }
 
   confirmDelete(e) {
@@ -119,7 +121,7 @@ export class Basic extends Component {
               <div className="react-confirm-alert-button-group toggle">
                 <div className="align-center fullwidth">
                   <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
-                  <a href="javascript:void(0);" className="btn green" onClick={() => { this.handleProfilePicture(); }}>Yakin</a>
+                  <a href="javascript:void(0);" className="btn green" onClick={() => { this.handleProfilePicture(""); }}>Yakin</a>
                 </div>
               </div>
             </div>
@@ -507,5 +509,12 @@ const mapStateToProps = (state) => ({
 
 
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getUSer, getRegion, handlingInputText, handlingInputSelectRegion }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(
+  { 
+    getUSer, 
+    getRegion,
+    handlingInputText,
+    handlingInputSelectRegion,
+    handleRemoveProfilePicture
+  }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Basic)

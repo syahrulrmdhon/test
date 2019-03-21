@@ -9,6 +9,7 @@ const LOAD_SUCCESS = 'modules/user/LOAD_SUCCESS';
 const LOAD_FAIL = 'modules/user/LOAD_FAIL';
 const LOAD_SUCCESS_REGION = 'modules/user/LOAD_SUCCESS_REGION'
 const HANDLE_FORM_TEXT = 'modules/user/HANDLE_FORM_TEXT'
+const HANDLE_REMOVE_PROFILE_PICTURE = 'modules/user/HANDLE_REMOVE_PROFILE_PICTURE'
 
 const initialState = null;
 
@@ -82,6 +83,13 @@ export default function reducer(state = initialState, action) {
         loaded: true,
         loading: false,
       }
+    case HANDLE_REMOVE_PROFILE_PICTURE:
+      state.data.profile[action.field] = action.value
+      return {
+        ...state,
+        loaded: true,
+        loading: false,
+      }
     case LOAD_SUCCESS_REGION:
       delete state.error;
       if (state.result !== action.result) {
@@ -124,6 +132,15 @@ export function handlingInputSelectRegion(e, field_name) {
     type: HANDLE_FORM_TEXT,
     value: e.value,
     field: field_name
+  }
+}
+
+export function handleRemoveProfilePicture(field_name,value) {
+  console.log(value,field_name)
+  return {
+    type: HANDLE_REMOVE_PROFILE_PICTURE,
+    value: value,
+    field_name: field_name
   }
 }
 
