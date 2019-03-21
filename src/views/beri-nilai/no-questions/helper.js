@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Avatar from 'react-avatar'
-import Ava from './../../../assets/images/img_avatar.png'
+import Ava from './../../../assets/images/avatar_def.svg'
 import IconPencil from './../../../assets/images/beri_nilai.svg'
 import classnames from 'classnames'
 
