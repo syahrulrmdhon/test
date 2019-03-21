@@ -74,10 +74,16 @@ export default class Detail extends Component {
     });
   }
 
-  redirect(id) {
+  redirect(id, tab) {
+    let category = 'knowledge'
+
+    if (tab === 2) {
+      category = 'skill'
+    }
+
     this.props.history.push({
       pathname: `/detail/${this.state.studentId}/description/${id}`,
-      state: { prev: 'studentDetail' }
+      state: { status: 'murid', category: category }
     })
   }
 
@@ -93,7 +99,8 @@ export default class Detail extends Component {
         label: 'Catatan Wali Kelas'
       },
     ];
-    const menu = this.props.location.state.status
+
+    const menu = this.props.location.state && this.props.location.state.status
     let path = ''
     if (menu === 'absensi') {
       path = '/absen'
@@ -101,7 +108,7 @@ export default class Detail extends Component {
       path = '/rapor'
     } else if (menu === 'daftar-nilai') {
       path = '/daftar-nilai'
-    } else {
+    } else if (menu === 'murid') {
       path = '/murid'
     }
 
@@ -122,7 +129,7 @@ export default class Detail extends Component {
               activeTab={this.state.activeMenu}
               dataProfile={this.state.profile}
               subjects={this.state.subjects}
-              studentId={this.state.studentId} 
+              studentId={this.state.studentId}
               redirect={this.redirect}/>
           </div>
         </div>
