@@ -61,7 +61,6 @@ export class Basic extends Component {
     const url = 'v1/users'
       apiClient('get', url).then(res => {
           localStorage.setItem("user", JSON.stringify(res.data.data.user))
-          
       })
 
   }
