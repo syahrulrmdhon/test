@@ -124,15 +124,15 @@
 .schedule .time{
     font-size: 11px;
 }
-.schedule .description{
+.schedule .description-home{
     margin-top:5px;
     margin-bottom:5px; 
     font-weight: 700;  
 }
-.schedule .holiday .description{
+.schedule .holiday .description-home{
     color: #ff7777;
 }
-.schedule .academic .description{
+.schedule .academic .description-home{
     color: #4da1ff;
 }
 .schedule .classes{
@@ -143,7 +143,7 @@
 }
 
 .schedule .subject .time,
-.schedule .subject .description,
+.schedule .subject .description-home,
 .schedule .subject .classes{
     color: #FFF;
 }
