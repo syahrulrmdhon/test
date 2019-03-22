@@ -46,7 +46,7 @@ export default class ScoreTable extends Component {
                           <td style={{width: '100px'}} className="text-center">{subject.score.score ? subject.score.score : '-'}</td>
                           <td style={{width: '100px'}} className="text-center">{subject.score.predicate ? subject.score.predicate : '-'}</td>
                           <td className="text-left">{description ? description : '-'}</td>
-                          <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>
+                          <td style={{color: "#009D81", fontFamily: "NunitoBold", width: '75px'}}>
                             <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => {this.props.redirect(subject.id, this.props.activeTab)}}/>
                           </td>
                         </tr>
@@ -108,7 +108,7 @@ export default class ScoreTable extends Component {
                           <td style={{width: '100px'}} className="text-center">{subject.score.score ? subject.score.score : '-'}</td>
                           <td style={{width: '100px'}} className="text-center">{subject.score.predicate ? subject.score.predicate : '-'}</td>
                           <td className="text-left">{description ? description : '-'}</td>
-                          <td style={{color: "#009D81", fontFamily: "NunitoBold"}}>
+                          <td style={{color: "#009D81", fontFamily: "NunitoBold", width: '75px'}}>
                             <img src={Pencil} alt="pencil" width="20px" className="icon-pencil" onClick={(e) => {this.props.redirect(subject.id, this.props.activeTab)}}/>
                           </td>
                         </tr>
