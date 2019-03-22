@@ -36,6 +36,7 @@ class MenuBar extends Component {
             isOpen: !this.state.isOpen
         });
     }
+ 
     render() {
         let content = []
         const { navbar } = this.props
@@ -59,6 +60,9 @@ class MenuBar extends Component {
                 )
             })
         }
+
+
+        let data = this.props.data
         return (
             <div className="menu-bar">
                 <div className="bg-white size-nav">
@@ -67,7 +71,11 @@ class MenuBar extends Component {
                             <div className="bg-white">
                                 <div className="menu">
                                     <div className="back">
-                                        <Link to={this.props.location}><i className="fa fas fa-chevron-left"></i> Kembali</Link>
+                                        <Link to={{
+                                            pathname: "/penilaian",
+                                            state: data
+                                        }}
+                                        ><i className="fa fas fa-chevron-left"></i> {this.props.label}</Link>
                                     </div>
                                 </div>
                             </div>

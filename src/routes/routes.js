@@ -50,7 +50,7 @@ import TeachList from './../views/profile/teach-list'
 import OnlineExamList from './../views/online-test/exam-list/index'
 import CreateList from './../views/online-test/create-exam/index'
 import Bank from './../views/online-test/bank/bank'
-
+import Global from './../views/global/navbar'
 
 
 export const MainRoutes = [
@@ -259,6 +259,11 @@ export const MainRoutes = [
     {
         path: '/bank',
         component: Bank
+    },
+
+    {
+        path: '/globa',
+        component: Global
     },
 
     {

@@ -34,8 +34,6 @@ class Penilaian extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props.location)
-
         let params_category = _.get(this.props, 'location.state.category', 'knowledge')
 
         this.setState({
