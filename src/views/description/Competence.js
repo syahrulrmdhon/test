@@ -30,14 +30,14 @@ const competence = props => {
   }
 
   return (
-    <div key={props.key} className="description__basic-competence">
-      <div className="description__competence-number">
+    <div key={props.key} className="score-description__basic-competence">
+      <div className="score-description__competence-number">
         {props.competenceNumber}
       </div>
-      <div className="description__competence-name text-justify">
+      <div className="score-description__competence-name text-justify">
         {props.competenceName}
         <div className="clearfix"></div>
-        <div className="description__predicate">
+        <div className="score-description__predicate">
         {
           (predicate === 'A' || predicate === 'B') ?
             <i className="fa fas fa-heart heart"></i>
