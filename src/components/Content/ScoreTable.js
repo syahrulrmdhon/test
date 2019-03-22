@@ -164,7 +164,7 @@ export default class ScoreTable extends Component {
                     attitudeScore.subject_scores.map((subject, index) => {
                       return <tr key={index}>
                           <td>{subject.name}</td>
-                          <td className={!subject.note ? 'text-center' : ''}>{subject.note ? subject.note : '-'}</td>
+                          <td className={!subject.description ? 'text-center' : ''}>{subject.description ? subject.description : '-'}</td>
                           <td>
                           {
                             subject.score === 2 ?
