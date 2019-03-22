@@ -76,9 +76,9 @@ class Form extends Component {
 
     return (
       <div className="main-block">
-        <div className="description__field-label">Deskripsi</div>
+        <div className="score-description__field-label">Deskripsi</div>
         <textarea
-          className="description__textarea"
+          className="score-description__textarea"
           placeholder="Tulis deskripsi …"
           onChange={event => this.props.handleChange({value: event.target.value})}
           value={this.props.description || ''} />

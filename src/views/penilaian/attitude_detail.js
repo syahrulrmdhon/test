@@ -61,7 +61,7 @@ class AttitudeDetail extends Component {
                 ]
             })
             this.props.history.push({
-                pathname: '/penilaian',
+                pathname: '/assessment',
                 state: {
                     category: 'attitude',
                 }
@@ -94,7 +94,7 @@ class AttitudeDetail extends Component {
 
         return(
             <div className="padding-content">
-                <Header navbar={true} location="/penilaian" />
+                <Header navbar={true} location="/assessment" />
                 <div className="margin-content">
                     <div className="row">
                         <div className="col-sm-10 col-sm-offset-1">

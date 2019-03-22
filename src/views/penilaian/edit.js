@@ -72,7 +72,7 @@ class Edit extends Component {
         
         return(
             <div className="padding-content">
-                <Header />
+                <Header location="assessment" />
                 <div className="container">
                     <div className="margin-content">
                         <div className="content-block main-block">

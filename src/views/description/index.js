@@ -39,15 +39,15 @@ export default class Index extends Component {
       <Page title="Deskripsi">
         <Header navbar={false} location={this.state.path}/>
 
-        <div className="description">
-          <div className="description__wrapper row">
-            <div className="col-sm-4 description__content-left">
+        <div className="score-description">
+          <div className="score-description__wrapper row">
+            <div className="col-sm-4 score-description__content-left">
               <BasicCompetence
                 studentId={this.state.studentId}
                 subjectId={this.state.subjectId}
                 category={this.state.category} />
             </div>
-            <div className="col-sm-8 description__content-right">
+            <div className="col-sm-8 score-description__content-right">
               <Form
                 studentId={this.state.studentId}
                 subjectId={this.state.subjectId}

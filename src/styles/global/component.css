@@ -1061,11 +1061,11 @@ thead {
 /* Text Bold = Tulisannya bold semua */
 
 strong, .bold {
-  font-weight: 700;
+  font-weight: bold;
 }
 
 .normal-font {
-  font-weight: 400;
+  font-weight: normal;
 }
 
 /* Small Font */
@@ -1402,7 +1402,6 @@ table.table.assessment th, table.table.assessment td {
 
 table.table.assessment td {
   vertical-align: middle;
-  font-weight: 600;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.11;
@@ -1487,7 +1486,6 @@ tbody tr:nth-child(even) {
   text-align: center;
   color: #4a4a4a;
   font-size: 16px;
-  font-weight: 600;
 }
 
 .switch .trigger-account {
@@ -1515,7 +1513,6 @@ tbody tr:nth-child(even) {
 }
 
 .switch .name-school {
-  font-weight: 600;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -1588,7 +1585,6 @@ tbody tr:nth-child(even) {
 }
 .modal-alert .toggle span.description{
   font-size: 12px;
-  font-weight: 600;
   color: #4a4a4a;
 }
 
@@ -1630,7 +1626,6 @@ tbody tr:nth-child(even) {
   clear: both;
   color: #333;
   display: block;
-  font-weight: 400;
   line-height: 1.42857143;
   padding: 3px 20px;
   white-space: nowrap;

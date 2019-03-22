@@ -161,7 +161,7 @@ class Index extends Component {
     return (
       <Page title="Tugas">
       <div className="padding-content exam">
-        <Header navbar={true} location='/penilaian' />
+        <Header navbar={true} location='/assessment' />
         <div className="margin-content">
           <div className="content-block main-block">
             <div className="row">

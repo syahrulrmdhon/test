@@ -79,7 +79,7 @@ class AddComponent extends Component {
                             }
                         ]
                     })
-                    this.props.history.push(`/penilaian`)
+                    this.props.history.push(`/assessment`)
                 }).catch(err => {
                     console.log(err)
                 })
@@ -102,7 +102,7 @@ class AddComponent extends Component {
                 })
             }
             
-            this.props.history.push(`/penilaian`)
+            this.props.history.push(`/assessment`)
             
         }).catch(response => {
             error({
@@ -151,14 +151,14 @@ class AddComponent extends Component {
             break;
         }
 
-        let urlBack = '/penilaian/tambah'
+        let urlBack = '/assessment/add'
         if(this.state.assessment_id){
-            urlBack = `/penilaian/edit/${this.state.assessment_id}`
+            urlBack = `/assessment/edit/${this.state.assessment_id}`
         }
 
         return(
             <div className="padding-content">
-                <Header navbar={true} location='/penilaian/tambah' />
+                <Header navbar={true} location='/assessment/tambah' />
                 <div className="container">
                     <div className="margin-content">
                         <div className="content-block main-block">

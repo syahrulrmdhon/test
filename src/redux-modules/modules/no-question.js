@@ -1,6 +1,4 @@
 import headers from './../../utils/header'
-
-
 const SET = 'modules/no-question/SET';
 const RESET = 'modules/no-question/RESET';
 const LOAD_NO_QUESTIONS = 'modules/no-question/LOAD_NO_QUESTIONS';

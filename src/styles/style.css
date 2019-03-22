@@ -58,7 +58,6 @@ textarea {
   font-size: inherit;
   line-height: inherit;
   color: #1b1b1b;
-  font-weight: 600;
   height: 40px;
   border-radius: 3%;
   border: 1px solid #f0f0f0;
@@ -104,7 +103,6 @@ hr {
 
 label{
   font-size: 12px;
-  font-weight: 600;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -1085,11 +1083,11 @@ label{
 
 /* Text Bold = Tulisannya bold semua */
 strong, .bold {
-  font-weight: 700;
+  font-weight: bold;
 }
 
 .normal-font {
-  font-weight: 400;
+  font-weight: normal;
 }
 
 /* Small Font */
@@ -3725,7 +3723,6 @@ strong, .bold {
 
 .modal-error, .modal-success{
   font-size: 22px;
-  font-weight: 600;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
