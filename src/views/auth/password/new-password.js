@@ -15,7 +15,7 @@ export default class NewPassword extends Component {
             password: '',
             repassword: '',
             user: {},
-            contentType: 'image/png',
+            contentType: '',
             editor: '',
             token: this.props.match.params.code,
             type: {
@@ -74,7 +74,6 @@ export default class NewPassword extends Component {
 
             user_picture: {
                 src: base[1],
-                content_type: this.state.contentType
             }
         }
         let data = {}
@@ -95,28 +94,15 @@ export default class NewPassword extends Component {
         }).catch(err => {
             let errMsg = err.response.data.errors[0].description[0]
 
-            if (base.length > 0) {
-                error({
-                    message: errMsg,
-                    btns: [
-                        {
-                            label: 'Ulangi',
-                            className: 'btn bcred cwhite'
-                        }
-                    ]
-                })
-            }
-            else {
-                error({
-                    message: 'Photo harus di unggah',
-                    btns: [
-                        {
-                            label: 'Ulangi',
-                            className: 'btn bcred cwhite'
-                        }
-                    ]
-                })
-            }
+            error({
+                message: errMsg,
+                btns: [
+                    {
+                        label: 'Ulangi',
+                        className: 'btn bcred cwhite'
+                    }
+                ]
+            })
         })
     }
     setEditorRef(editor) {
@@ -136,7 +122,7 @@ export default class NewPassword extends Component {
                     </div>
                     <div className="body-gredu">
                         <form onSubmit={this.handleSubmit.bind(this)}>
-                            
+
                             <div className="ava margin-bottom-4">
                                 <Avatar
                                     width={90}
