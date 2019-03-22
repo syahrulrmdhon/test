@@ -9,7 +9,7 @@ export default class Bank extends Component {
         super(props)
 
         this.state = {
-            visible: false
+            visible: true
         }
     }
     openModal() {
@@ -29,7 +29,7 @@ export default class Bank extends Component {
     render() {
         return (
             <section className='bank'>
-                <input type="button" value="Open" onClick={() => this.openModal()} />
+                {/* <input type="button" value="Open" onClick={() => this.openModal()} /> */}
                 <Modal visible={this.state.visible} width="60%" height="90%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                     <div className='wrapper-content margin-side-4'>
                         <div className='header margin-top-4 margin-bottom-2'>
