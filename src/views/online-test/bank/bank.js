@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import Modal from 'react-awesome-modal'
-import { NavLink } from 'react-router-dom'
 import './../../../styles/online-test.scss'
 import Select from 'react-select'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getBank } from './../../../redux-modules/modules/bank'
 
-export default class Bank extends Component {
+class Bank extends Component {
     constructor(props) {
         super(props)
 
@@ -12,6 +14,11 @@ export default class Bank extends Component {
             visible: true
         }
     }
+
+    componentDidMount() {
+        this.props.getBank()
+    }
+    
     openModal() {
         this.setState({
             visible: true
@@ -102,117 +109,6 @@ export default class Bank extends Component {
                                     </div>
                                 </div>
                             </div>
-
-                            <div className='wrapper'>
-                                <div className='row padding-side-2'>
-                                    <div className='col-sm-1 col-md-1 float-right'>
-                                        <label htmlFor={'present'}></label>
-                                        <input type="radio" className="rd-btn" name='present' value="present" onChange={this.handleOptionChange} checked={'present'} />
-                                        <div className="check"></div>
-                                    </div>
-                                    <div className='col-sm-1 col-md-1 margin-top-5 text-left'>1.</div>
-                                    <div className='col-sm-10 col-md-10'>
-                                        <div className='kd margin-top-5'>
-                                            KD. 1.1 Memahami pemanfaatan citra Penginderaan Jauh dan Geografi.
-                                        </div>
-                                        <div className='question margin-top-2'>
-                                            Fenomena alam berupa gempa tektonik yang terjadi di Indonesia berkaitan dengan pergerakan lempeng tektonik antara Lempeng Pasifik, Eurasia, dan Lempeng Indo-Australia karena….
-                                        </div>
-                                        <div className='row padding-side-3 margin-vert-2'>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='wrapper'>
-                                <div className='row padding-side-2'>
-                                    <div className='col-sm-1 col-md-1 float-right'>
-                                        <label htmlFor={'present'}></label>
-                                        <input type="radio" className="rd-btn" name='present' value="present" onChange={this.handleOptionChange} checked={'present'} />
-                                        <div className="check"></div>
-                                    </div>
-                                    <div className='col-sm-1 col-md-1 margin-top-5 text-left'>1.</div>
-                                    <div className='col-sm-10 col-md-10'>
-                                        <div className='kd margin-top-5'>
-                                            KD. 1.1 Memahami pemanfaatan citra Penginderaan Jauh dan Geografi.
-                                        </div>
-                                        <div className='question margin-top-2'>
-                                            Fenomena alam berupa gempa tektonik yang terjadi di Indonesia berkaitan dengan pergerakan lempeng tektonik antara Lempeng Pasifik, Eurasia, dan Lempeng Indo-Australia karena….
-                                        </div>
-                                        <div className='row padding-side-3 margin-vert-2'>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='wrapper'>
-                                <div className='row padding-side-2'>
-                                    <div className='col-sm-1 col-md-1 float-right'>
-                                        <label htmlFor={'present'}></label>
-                                        <input type="radio" className="rd-btn" name='present' value="present" onChange={this.handleOptionChange} checked={'present'} />
-                                        <div className="check"></div>
-                                    </div>
-                                    <div className='col-sm-1 col-md-1 margin-top-5 text-left'>1.</div>
-                                    <div className='col-sm-10 col-md-10'>
-                                        <div className='kd margin-top-5'>
-                                            KD. 1.1 Memahami pemanfaatan citra Penginderaan Jauh dan Geografi.
-                                        </div>
-                                        <div className='question margin-top-2'>
-                                            Fenomena alam berupa gempa tektonik yang terjadi di Indonesia berkaitan dengan pergerakan lempeng tektonik antara Lempeng Pasifik, Eurasia, dan Lempeng Indo-Australia karena….
-                                        </div>
-                                        <div className='row padding-side-3 margin-vert-2'>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div>A.</div>
-                                                <div className='text-justify'>Berada di atas lempeng Samudra Pasifik dan Indo-Australia.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <button className='btn-green'>Pilih</button>
                     </div>
@@ -226,3 +122,13 @@ export default class Bank extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    dataBank: state.bank //bank dari reducer
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    getBank
+}, dispatch
+)
+export default connect(mapStateToProps, mapDispatchToProps)(Bank)
