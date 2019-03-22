@@ -103,13 +103,13 @@ export default class Detail extends Component {
     const menu = this.props.location.state && this.props.location.state.status
     let path = ''
     if (menu === 'absensi') {
-      path = '/absen'
+      path = '/attendance'
     } else if (menu === 'rapor') {
-      path = '/rapor'
+      path = '/student-report'
     } else if (menu === 'daftar-nilai') {
-      path = '/daftar-nilai'
+      path = '/score-list'
     } else if (menu === 'murid') {
-      path = '/murid'
+      path = '/students'
     }
 
     return (

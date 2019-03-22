@@ -69,7 +69,7 @@ class Penilaian extends Component {
 
     render() {
         return (
-            <Page title="Penilaian">
+            <Page title="assessment">
                 <div className="padding-content">
                     <Header />
                     <div className="margin-content">
@@ -93,7 +93,7 @@ class Penilaian extends Component {
                                             </div>
                                             <div className="col-sm-6">
                                                 <div className="float-right">
-                                                    <NavLink to="/penilaian/tambah" className="submit-btn default">Tambah Topik</NavLink>
+                                                    <NavLink to="/assessment/add" className="submit-btn default">Tambah Topik</NavLink>
                                                 </div>
                                             </div>
                                         </div>

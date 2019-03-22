@@ -11,7 +11,7 @@ export default class TableKeterampilan extends Component {
                         <th className='align-top'>Nama Siswa</th>
                         {
                             this.props.dTableSkill && this.props.dTableSkill.final_scores && this.props.dTableSkill.final_scores.subjects.map(function (x, i) {
-                                return <th key={i} className='align-top'>
+                                return <th key={i} className='align-middle'>
                                     {x.name}
                                 </th>
                             })

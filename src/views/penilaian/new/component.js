@@ -79,7 +79,7 @@ class Componentt extends Component {
         let url = 'v1/assessments?category=' + data.category
 
         apiClient('post', url, data).then(response => {
-            window.location.href = "/penilaian"
+            window.location.href = "/assessment"
         }).catch(error => {
             console.log(error)
             this.setState({

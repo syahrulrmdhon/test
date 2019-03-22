@@ -100,29 +100,29 @@ export const MainRoutes = [
         component: Home
     },
     {
-        path: '/absen',
+        path: '/attendance',
         component: Absensi
     },
 
     // PENILAIAN
     {
-        path: '/penilaian/tambah',
+        path: '/assessment/add',
         component: AssessmentNew
     },
     {
-        path: '/penilaian/edit/:id',
+        path: '/assessment/edit/:id',
         component: AssessmentNew
     },
     {
-        path: '/penilaian/tambah-component',
+        path: '/assessment/add-component',
         component: AssessmentComponent
     },
     {
-        path: '/penilaian/edit-component/:id',
+        path: '/assessment/edit-component/:id',
         component: AssessmentComponent
     },
     {
-        path: '/penilaian',
+        path: '/assessment',
         component: Assessment
     },
     {
@@ -151,15 +151,15 @@ export const MainRoutes = [
     // END SKILL
 
     {
-        path: '/daftar-nilai',
+        path: '/score-list',
         component: DaftarNilai
     },
     {
-        path: '/rapor',
+        path: '/student-report',
         component: Rapor
     },
     {
-        path: '/murid',
+        path: '/students',
         component: DaftarMurid
     },
     {
