@@ -18,6 +18,7 @@ import rapor from './modules/rapor'
 import listOnlineExam from './modules/listOnlineExam'
 import description from './modules/description'
 import bank from './modules/bank'
+import onlineQuestion from './modules/onlineQuestion'
 
 export default combineReducers({
   user,
@@ -39,5 +40,6 @@ export default combineReducers({
   listOnlineExam,
   description,
   bank,
+  onlineQuestion,
 })
 

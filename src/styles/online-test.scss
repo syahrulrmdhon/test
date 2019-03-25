@@ -265,3 +265,130 @@ $nunito_bold: "NunitoBold";
     }
   }
 }
+
+.online-question {
+  &.content-wrapper {
+    padding-top: 140px;
+    width: 910px;
+    margin: auto;
+    height: 97%;
+  }
+
+  &__left-wrapper {
+    background: #ffffff;
+    width: 230px;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 21px 14px;
+    float: left;
+    margin-right: 18px;
+  }
+
+  &__right-wrapper {
+    background: #ffffff;
+    width: 662px;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 21px 14px;
+    float: right;
+  }
+
+  &__subject-wrapper {
+    position: relative;
+  }
+
+  &__subject {
+    font-family: $nunito_semi_bold;
+    color: #1a9d7f;
+    font-size: 16px;
+    text-align: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  &__line {
+    height: 3px;
+    background-color: #1a9d7f;
+    width: 46px;
+    margin: auto;
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+  }
+
+  &__number-wrapper {
+    margin-top: 32px;
+  }
+
+  &__type {
+    font-size: 16px;
+    color: #666666;
+    font-family: $nunito_semi_bold;
+    margin-left: 14px;
+  }
+
+  &__number-content {
+    margin: 24px 0px 32px;
+    position: relative;
+    left: 6px;
+  }
+
+  &__number {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: $nunito_regular;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px;
+    cursor: pointer;
+
+    &--created {
+      background-color: #ffe087;
+      border-color: #ffe087;
+    }
+  }
+
+  &__form-group {
+    margin-bottom: 24px;
+  }
+
+  &__input {
+    display: block;
+    border: 1px solid #d3d9dd;
+    height: 32px;
+    border-radius: 5px;
+  }
+
+  &__score {
+    width: 46px;
+    text-align: center;
+  }
+
+  &__label {
+    margin-bottom: 16px;
+  }
+
+  .select{
+    &__control, &__menu {
+      width: 320px;
+      min-height: 32px;
+      height: 32px;
+      border-color: #d3d9dd !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px !important;
+    }
+
+    &__indicators {
+      height: 32px;
+    }
+  }
+}
