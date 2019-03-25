@@ -249,8 +249,7 @@ class BottomContent extends Component {
                           type="text"
                           placeholder="Cari murid disini..."
                           name="search"
-                          onChange={this.props.onChange}
-                          value={this.props.search}
+                          onChange={event => {this.props.onChange(event)}}
                         />
                         <i className="fa fa-search icon" onClick={this.props.submit}></i>
                       </div>
