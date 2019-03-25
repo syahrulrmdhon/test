@@ -3,28 +3,29 @@ import Select from 'react-select'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getBank, 
-    // getListBasicComp, 
-    // handleChange 
+import {
+    getBank,
+    handleChange 
 } from './../../../redux-modules/modules/bank'
-import { basicComps } from './../../../utils/common'
+import { basicComps, getProblemTypes } from './../../../utils/common'
 
 class BankFilter extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            basic_comps: []
+            basic_comps: [],
+            problemTypes: [],
         }
     }
     componentDidMount() {
-        // basicComps.call(this, {}, {listOptions: true})
+        basicComps.call(this, { category: 'knowledge', assessment_id: this.props.id }, { listOptions: true }),
+        getProblemTypes.call(this)
     }
     render() {
-        // console.log('udah',this.props)
-        // let dataBank = _.get(this, 'props.dataBank', {})
-        // let selectedBasicComp = dataBank ? dataBank.selectedBasicComp : ''
-        // let selectedType = dataBank ? dataBank.selectedType : ''
+        let dataBank = _.get(this, 'props.dataBank', {})
+        let selectedBasicComp = dataBank ? dataBank.selectedBasicComp : null
+        let selectedProblemType = dataBank ? dataBank.selectedProblemType : null
         return (
             <div className='row margin-bottom-2'>
                 <div className='col-sm-6 col-md-6'>
@@ -39,9 +40,9 @@ class BankFilter extends Component {
                 </div>
                 <div className='col-sm-4 col-md-4'>
                     <Select
-                        // onChange={(e) => this.props.handleChange(e.value, 'selectedSemester')}
-                        // options={this.state.listSemester ? this.state.listSemester : []}
-                        // value={this.state.listSemester.find((e) => { return e.value == selectedSemester })}
+                        onChange={(e) => { this.props.handleChange(e.value, 'selectedProblemType') }}
+                        options={this.state.problemTypes ? this.state.problemTypes : []}
+                        value={this.state.problemTypes.find((element) => { return element.value == selectedProblemType })}
                         className='select'
                         classNamePrefix='select'
                         placeholder='Pilih Type...'
@@ -61,8 +62,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     getBank,
-    // getListBasicComp,
-    // handleChange
+    handleChange
 }, dispatch
 )
 export default connect(mapStateToProps, mapDispatchToProps)(BankFilter)

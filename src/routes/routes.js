@@ -253,13 +253,17 @@ export const MainRoutes = [
         component: OnlineExamList
     },
     {
+        path: '/online-exam/bank/:id',
+        component: Bank
+    },
+    {
         path: '/online-exam/create',
         component: CreateList
     },
-    {
-        path: '/bank',
-        component: Bank
-    },
+    // {
+    //     path: '/bank',
+    //     component: Bank
+    // },
 
     {
         path: '/globa',
