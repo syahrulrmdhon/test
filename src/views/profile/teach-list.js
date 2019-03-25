@@ -54,7 +54,7 @@ export class componentName extends Component {
             day_in_indo = 'Rabu'
         }else if(day === 'thursday'){
             day_in_indo = 'Kamis'
-        }else if(day === 'friyay'){
+        }else if(day === 'friday'){
             day_in_indo = 'Jumat'
         }
 
@@ -65,7 +65,7 @@ export class componentName extends Component {
         let school = JSON.parse(window.localStorage.getItem('school'))
         const school_name = school.name
         const aws_img = school.doc_aws_url
-        let school_logo = !!(school) ? school.asset.doc_aws_url : Logo
+        let school_logo = !!(school) ? school.asset.doc_aws_url : User
         let content = []
         const { data } = this.state
         let join_data = []
