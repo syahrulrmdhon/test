@@ -1,6 +1,3 @@
-@import url('../../styles/global/component.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
-
 $nunito_light: 'NunitoLight';
 $nunito_regular: 'NunitoRegular';
 $nunito_semi_bold: 'NunitoSemiBold';
@@ -92,68 +89,3 @@ $nunito_extra_bold: 'NunitoExtraBold';
     }
   }
 }
-
-// @media only screen and (min-width: 800px) {
-//   .box-position {
-//     .card-nilai {
-//       .card {
-//         &__label {
-//           font-size: 12px;
-//           color: #2d2d2d;
-//           text-align: center;
-//         }
-//         &__value{
-//           color: #1a9d7f;
-//           font-size: 26px;
-//           margin: 10px;
-//           font-family: $nunito_bold;
-//         }
-//         &__error{
-//           color: #eb373e;
-//           font-size: 26px;
-//           margin: 10px;
-//           font-family: $nunito_bold;
-//         }
-//       }
-//     }
-//     .card h3 {
-//       color: #199d7f;
-//     }
-//     .card p {
-//       font-size: 10px;
-//       color: #2d2d2d;
-//     }
-//   }
-// }
-// @media only screen and (min-width: 1000px) {
-//   .box-position {
-//     .card-nilai {
-//       .card {
-//         &__label {
-//           font-size: 14px;
-//           color: #2d2d2d;
-//           text-align: center;
-//         }
-//         &__value{
-//           color: #1a9d7f;
-//           font-size: 28px;
-//           margin: 10px;
-//           font-family: $nunito_bold;
-//         }
-//         &__error{
-//           color: #eb373e;
-//           font-size: 28px;
-//           margin: 10px;
-//           font-family: $nunito_bold;
-//         }
-//       }
-//     }
-//     .card h3 {
-//       color: #199d7f;
-//     }
-//     .card p {
-//       font-size: 12px;
-//       color: #2d2d2d;
-//     }
-//   }
-// }

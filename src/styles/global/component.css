@@ -1,6 +1,4 @@
 /* Font NunitoSans */
-
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
 button, .pointer, input[type=submit]{
   cursor: pointer;
 }
@@ -71,10 +69,10 @@ textarea.textarea-box{
   height: unset;
 }
 
-option {
+/* option {
   margin: auto;
   font-family: "Nunito Sans", sans-serif;
-}
+} */
 
 /* button */
 
@@ -83,7 +81,7 @@ option {
   width: 100%;
   color: white;
   background: #1a9d7f;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "NunitoRegular";
   cursor: pointer;
 }
 
@@ -189,12 +187,12 @@ thead {
 }
 
 .font-white {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "NunitoRegular";
   color: white !important;
 }
 
 .font-grey {
-  font-family: "Nunito Sans", sans-serif;
+  font-family:"NunitoRegular";
   color: #9da2a6;
 }
 
