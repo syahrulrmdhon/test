@@ -115,12 +115,12 @@ class Add extends Component {
             })
             if (assessment_id) {
                 apiClient('put', `v1/assessments/${assessment_id}`, data).then(response => {
-                    this.props.history.push(`/penilaian/edit-component/${assessment_id}`)
+                    this.props.history.push(`/assessment/edit-component/${assessment_id}`)
                 }).catch(err => {
                     console.log(err)
                 })
             } else {
-                this.props.history.push('/penilaian/tambah-component')
+                this.props.history.push('/assessment/add-component')
             }
         }).catch(err => {
             error({
@@ -183,7 +183,7 @@ class Add extends Component {
 
         return (
             <div className="padding-content">
-                <Header navbar={true} location='/penilaian' />
+                <Header navbar={true} location='/assessment' />
                 <div className="container">
                     <div className="margin-content">
                         <div className="content-block main-block">
@@ -201,8 +201,8 @@ class Add extends Component {
                                                     className="fullwidth"
                                                     placeholder="Contoh: Topik 1"
                                                     name="name"
-                                                    defaultValue={name}
-                                                    onChange={(event) => { this.props.handleEvent(event.target.value, 'name') }}
+                                                    value={name}
+                                                    onChange={(event) => {this.props.handleEvent(event.target.value, 'name')}}
                                                 />
                                             </div>
                                         </div>
@@ -213,10 +213,11 @@ class Add extends Component {
                                                 <label className="content-label">Kategori Penilaian</label>
                                                 <Select
                                                     isClearable
-                                                    className="select-list"
-                                                    classNamePrefix="select"
-                                                    placeholder="Pilih Kategori Penilaian"
-                                                    name="category"
+                                                    key={Math.random()}
+                                                    className= "select-list"
+                                                    classNamePrefix= "select"
+                                                    placeholder= "Pilih Kategori Penilaian"
+                                                    name= "category"
                                                     options={category_types}
                                                     onChange={this.onCategoryType}
                                                     value={category_types.find((element) => { return element.value == category })}

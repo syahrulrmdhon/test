@@ -6,7 +6,7 @@ import Sidebar from './index/sidebar'
 import Avatar from 'react-avatar';
 import { apiClient } from './../../utils/apiClient'
 import { Table } from 'reactstrap'
-import  User from './../../assets/images/img_avatar.png'
+import  User from './../../assets/images/avatar_def.svg'
 import Loader from './../global/loader'
 
 

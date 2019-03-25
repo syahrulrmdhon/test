@@ -110,7 +110,7 @@ class AddClass extends Component {
 const mapStateToProps = (state, props) => ({
     assessment: state.assessment,
     assessment_classes: state.assessment ? state.assessment.assessment_classes_attributes : [{}],
-    assessment_classeset: state.assessment ,
+    assessment_classeset: state.assessment,
 })
 const mapDispatchToProps = dispatch => bindActionCreators({ 
     addClass,
