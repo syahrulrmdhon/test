@@ -33,6 +33,9 @@ export default function reducer(state = initialState, action) {
             pob: action.result.data.profile.pob ?  action.result.data.profile.pob : '',
             dob: action.result.data.profile.dob ? action.result.data.profile.dob : '',
             url: action.result.data.profile.photo_url ? action.result.data.profile.photo_url : '',
+            // edited by Risky S.
+            gender: action.result.data.profile.gender ? action.result.data.profile.gender : '',
+
             address_attributes: {
               id: action.result.data.profile.address.id ? action.result.data.profile.address.id : '',
               street: action.result.data.profile.address.street ? action.result.data.profile.address.street : '',

@@ -7,6 +7,10 @@ import Avatar from 'react-avatar';
 import { apiClient } from './../../utils/apiClient'
 import Select from 'react-select'
 import User from './../../assets/images/avatar_def.svg'
+// Edited by Risky S.
+import User_photo_male from './../../assets/images/m_avatar.svg'
+import User_photo_female from './../../assets/images/f_avatar.svg'
+
 import DatePicker from 'react-datepicker'
 import {
   getUSer,
@@ -265,6 +269,8 @@ export class Basic extends Component {
     let dob = this.props.user && this.props.user.user && this.props.user && this.props.user.user.dob
     let pob = this.props.user && this.props.user.user && this.props.user && this.props.user.user.pob
     let photo_url = this.props.user && this.props.user.user && this.props.user && this.props.user.user.url
+    // Edited by Risky S.
+    let gender = this.props.user && this.props.user.user && this.props.user && this.props.user.user.gender
 
     let check_dob = dob ? dob : null
 
@@ -322,12 +328,23 @@ export class Basic extends Component {
     }
 
     let data_photo = photo_url ? photo_url : User
+    
     let style = ''
     if (data_photo == User) {
       style = 'remove-profile hide'
+      
+      // Edited by Risky S.
+      if  (gender == 'M'){
+      data_photo = User_photo_male  
+      } else if(gender == 'F'){
+       data_photo = User_photo_female 
+      }
+
     } else {
       style = 'remove-profile'
     }
+
+    
     return (
       <Page title="Basic Information">
         <Header />
