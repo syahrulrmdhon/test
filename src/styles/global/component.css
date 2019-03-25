@@ -1,4 +1,9 @@
 /* Font NunitoSans */
+
+body{
+  font-family: 'NunitoBold' !important
+}
+
 button, .pointer, input[type=submit]{
   cursor: pointer;
 }
@@ -1289,6 +1294,7 @@ label.header-title.form {
   border: 1px solid #1a9d7f;
   color: #1a9d7f;
   padding: 10px 30px;
+  font-family: 'NunitoRegular'
 }
 
 .filter-btn {
@@ -1381,6 +1387,7 @@ ul.toggle>li.nav-item a.active {
   max-width: 100%;
   border-collapse: separate;
   border-spacing: 0 1em;
+  /* font-family:  */
 }
 
 table.table.assessment tr {
