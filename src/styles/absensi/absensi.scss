@@ -1,5 +1,4 @@
 @import url("../../styles/global/component.css");
-// @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
 $nunito_light: 'NunitoLight';
 $nunito_regular: 'NunitoRegular';
@@ -322,7 +321,7 @@ $nunito_extra_bold: 'NunitoExtraBold';
   border: solid 1px #e0e4e8;
   border-right: none;
   height: 30px;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: $nunito_regular;
 }
 /* Search bar end */
 
