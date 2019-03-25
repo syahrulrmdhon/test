@@ -64,7 +64,6 @@ export class Basic extends Component {
     const url = 'v1/users'
       apiClient('get', url).then(res => {
           localStorage.setItem("user", JSON.stringify(res.data.data.user))
-          
       })
 
   }
@@ -168,10 +167,13 @@ export class Basic extends Component {
           <div className="react-confirm-alert modal-alert">
             <div className="react-confirm-alert-body">
               <div className="header align-center">
-                <h1>Apakah anda yakin? </h1>
+                <h1>Simpan Perubahan </h1>
               </div>
               <div className="react-confirm-alert-button-group toggle">
                 <div className="align-center fullwidth">
+                <div className="disblock margin-bottom-3">
+                    <span className="description">Perubahan dilakukan. Apakah anda ingin menyimpannya?</span>
+                </div>
                   <a href="javascript:void(0);" className="btn default" onClick={onClose}>Belum Pasti</a>
                   <a href="javascript:void(0);" className="btn green" onClick={() => { this.submit(); }}>Yakin</a>
                 </div>

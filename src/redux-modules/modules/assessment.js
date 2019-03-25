@@ -140,7 +140,7 @@ export default function reducer(state = initialState, action = {}) {
                 loading: true,
             }
         case HANDLE_EVENT:
-            state[action.fieldName] = action.value
+            state[action.fieldName] = action.value || []
             if(action.relates.length > 0){
                 action.relates.map((key, idx) => {
                     state[key] = ''
@@ -173,6 +173,7 @@ export default function reducer(state = initialState, action = {}) {
                     name: "",
                     category: "",
                     assessment_type: "",
+                    grade_id:null,
                     school_id: school_id,
                     assessment_classes_attributes: [{ class_id: null }],
                     assessment_attitudes_attributes:[{ school_attitude_id: null }],
@@ -205,7 +206,6 @@ export default function reducer(state = initialState, action = {}) {
 
                 if(assessment.user_attitudes_attributes === undefined){
                     assessment['user_attitudes_attributes'] = []
-                    console.log("here enter",assessment)
                     assessment.user_attitudes_attributes.push({
                         class_id: null,
                         user_id: null,
@@ -217,7 +217,6 @@ export default function reducer(state = initialState, action = {}) {
                 }
             }
 
-            console.log(assessment ,"here assetss")
 
             return {
                 loaded: true,

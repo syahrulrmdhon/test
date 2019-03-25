@@ -98,8 +98,6 @@ export function getUser(redirect = false) {
 export function getDate(format = 'case-1', date = new Date) {
     let result = ''
 
-    console.log()
-
     if (!!(date)) {
         let dt = date.getDate()
         let month = date.getMonth()
@@ -236,6 +234,30 @@ export function assessmentType(params = {}, event = {}, fieldName = 'assessment_
             this.setState(obj)
         })
     }
+}
+
+export function assessment_grades(params = {}, options = {}) {
+    let grades = options.gradesOptions || false
+
+    apiClient('get', 'v1/filters/grades', false, params).then(response => {
+        let gradesOptions = response.data.data.grades || []
+
+        if ((gradesOptions.length > 0) && gradesOptions) {
+            const temps = gradesOptions
+            grades = []
+
+            temps.map((temp, idx) => {
+                grades.push({
+                    value: temp.id,
+                    label: temp.name,
+                })
+            })
+        }
+
+        this.setState({
+            assessment_grades: grades,
+        })
+    })
 }
 
 export function classes(params = {}) {

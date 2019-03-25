@@ -23,16 +23,26 @@ class AddClass extends Component {
     }
 
     componentDidUpdate(prevProps){
+        const { category, grade_id } = this.props.assessment
         if(prevProps.assessment !== this.props.assessment){
+            switch(category){
+                case 'knowledge':
+                case 'skill':
+                    classes.call(this, {attendance_type: 'subject', grade_id: grade_id})
+                break;
+                default:
+                     classes.call(this, {attendance_type: 'subject'})
+
+            }
+
             if(this.props.assessment.assessment_type == 'final_aspect'){
                 classes.call(this, {attendance_type: 'homeroom'})
+
             }
         }
     }
 
-    componentDidMount(){
-        classes.call(this, {attendance_type: 'subject'})
-    }
+   
 
     render(){
         let classes = []
@@ -100,7 +110,7 @@ class AddClass extends Component {
 const mapStateToProps = (state, props) => ({
     assessment: state.assessment,
     assessment_classes: state.assessment ? state.assessment.assessment_classes_attributes : [{}],
-    assessment_classeset: state.assessment ,
+    assessment_classeset: state.assessment,
 })
 const mapDispatchToProps = dispatch => bindActionCreators({ 
     addClass,

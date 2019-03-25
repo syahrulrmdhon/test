@@ -17,6 +17,7 @@ import scoreList from './modules/scoreList'
 import rapor from './modules/rapor'
 import listOnlineExam from './modules/listOnlineExam'
 import description from './modules/description'
+import bank from './modules/bank'
 
 export default combineReducers({
   user,
@@ -36,6 +37,7 @@ export default combineReducers({
   scoreList,
   rapor,
   listOnlineExam,
-  description
+  description,
+  bank,
 })
 

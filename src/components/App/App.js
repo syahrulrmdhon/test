@@ -16,6 +16,7 @@ class App extends Component {
     const user_id = localStorage.getItem('user_id')
     const path_url = this.props.location.pathname
 
+
     if(regist_token == null){
       if(token == null){
         this.props.history.push('/')

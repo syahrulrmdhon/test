@@ -9,6 +9,7 @@ import Page from './../../components/Title'
 
 import Tab from './index/tab'
 import { NavLink } from 'react-router-dom'
+import _ from 'lodash'
 
 // import Pagination from './../global/pagination'
 
@@ -24,7 +25,8 @@ class Penilaian extends Component {
             data: [],
             paginate: {},
             assessment_types: [],
-            loader: true
+            loader: true,
+            reset: 1,
         }
         this.tabToggle = this.tabToggle.bind(this)
         this.onChangeAttr = this.onChangeAttr.bind(this)
@@ -32,8 +34,14 @@ class Penilaian extends Component {
     }
 
     componentDidMount(){
-        assessmentGetData.call(this)
-        assessmentType.call(this, {category: this.state.activeTab})
+        let params_category = _.get(this.props, 'location.state.category', 'knowledge')
+
+        this.setState({
+            activeTab: params_category,
+        }, () => {
+            assessmentGetData.call(this)
+            assessmentType.call(this, {category: this.state.activeTab})
+        })
     }
 
     onChangeAttr(event, props){
@@ -43,20 +51,25 @@ class Penilaian extends Component {
     }
 
     tabToggle(category = false){
-        this.state.activeTab = category
-        assessmentGetData.call(this)
-        assessmentType.call(this, {category: category})
+        this.setState({
+            activeTab: category,
+            reset: 0,
+        }, () => {
+            assessmentGetData.call(this)
+            assessmentType.call(this, {category: category})
+        })
     }
 
     onFilter(event){
         event.preventDefault()
-        this.setState({loader: true})
-        assessmentGetData.call(this)
+        this.setState({loader: true}, () => { 
+            assessmentGetData.call(this) 
+        })
     }
 
     render() {
         return (
-            <Page title="Penilaian">
+            <Page title="assessment">
                 <div className="padding-content">
                     <Header />
                     <div className="margin-content">
@@ -80,7 +93,7 @@ class Penilaian extends Component {
                                             </div>
                                             <div className="col-sm-6">
                                                 <div className="float-right">
-                                                    <NavLink to="/penilaian/tambah" className="submit-btn default">Tambah Topik</NavLink>
+                                                    <NavLink to="/assessment/add" className="submit-btn default">Tambah Topik</NavLink>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,7 +105,9 @@ class Penilaian extends Component {
                                             data={this.state.data} 
                                             category={this.state.activeTab} 
                                             paginate={this.state.paginate}
-                                            loader={this.state.loader} />
+                                            loader={this.state.loader} 
+                                            reset={this.state.reset}
+                                        />
                                     </div>
                                 </div>
                             </div>
