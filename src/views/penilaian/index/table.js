@@ -127,6 +127,7 @@ export default class Table extends Component {
 
         return (
             <div className="table-responsive">
+                {/* <div className="NunitoBold" >tes data </div> */}
                 <table className="table assessment">
                     <thead>
                         <tr className="main-head">

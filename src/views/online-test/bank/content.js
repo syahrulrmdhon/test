@@ -22,12 +22,13 @@ class BankContent extends Component {
         let dataEntries = dataQuestions && dataQuestions.entries || []
         dataEntries.map((x, i) => {
             content.push(
-                <div className='wrapper' key={x.id}>
-                    <div className='row padding-side-2' key={Math.random()}>
+                <div className='wrapper' key={i}>
+                    <div className='row padding-side-2' >
                         <div className='col-sm-1 col-md-1 float-right'>
-                            {/* <label htmlFor={'present-' + x.id}></label>
+                            <input type='radio' name=''/>
+                            {/* <label htmlFor={'bank-' + x.id}></label>
                             <input type="radio" className="rd-btn"
-                                name={x.id} value="present"
+                                name={x.id} value="bank"
                                 onChange={e => this.props.handleOptionChange(e)}
                                 id={'present-' + x.id}
                                 checked={'present'}

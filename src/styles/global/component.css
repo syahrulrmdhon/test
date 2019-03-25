@@ -1,6 +1,9 @@
 /* Font NunitoSans */
 
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
+body{
+  font-family: 'NunitoBold' !important
+}
+
 button, .pointer, input[type=submit]{
   cursor: pointer;
 }
@@ -71,10 +74,10 @@ textarea.textarea-box{
   height: unset;
 }
 
-option {
+/* option {
   margin: auto;
   font-family: "Nunito Sans", sans-serif;
-}
+} */
 
 /* button */
 
@@ -83,7 +86,7 @@ option {
   width: 100%;
   color: white;
   background: #1a9d7f;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "NunitoRegular";
   cursor: pointer;
 }
 
@@ -189,12 +192,12 @@ thead {
 }
 
 .font-white {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "NunitoRegular";
   color: white !important;
 }
 
 .font-grey {
-  font-family: "Nunito Sans", sans-serif;
+  font-family:"NunitoRegular";
   color: #9da2a6;
 }
 
@@ -1291,6 +1294,7 @@ label.header-title.form {
   border: 1px solid #1a9d7f;
   color: #1a9d7f;
   padding: 10px 30px;
+  font-family: 'NunitoRegular'
 }
 
 .filter-btn {
@@ -1383,6 +1387,7 @@ ul.toggle>li.nav-item a.active {
   max-width: 100%;
   border-collapse: separate;
   border-spacing: 0 1em;
+  /* font-family:  */
 }
 
 table.table.assessment tr {
@@ -1872,7 +1877,6 @@ input, td {
 
 .heart {
   color: #199d7f;
-  font-family: "NunitoBold";
   font-size: 10px;
 }
 

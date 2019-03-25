@@ -1,6 +1,3 @@
-@charset "UTF-8";
-@import url("https://fonts.googleapis.com/css?family=Nunito Sans");
-
 /*
 - BOOTSTRAP
 - MODAL
@@ -25,7 +22,7 @@ time, mark, audio, video {
   font: inherit;
   font-size: 100%;
   vertical-align: baseline;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "NunitoRegular"
 }
 
 a {
@@ -41,8 +38,8 @@ body {
 }
 
 body {
-  /*font: 1.4rem "Nunito Sans", sans-serif;*/
-  font-family: "Nunito Sans", sans-serif;
+  /* font: 1.4rem "Nunito Sans", sans-serif; */
+  font-family: "NunitoRegular";
   color: #51647a;
 }
 

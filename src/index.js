@@ -12,7 +12,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // to use fonts
 import './styles/fonts.css'
-
+import './styles/font-awesome/css/font-awesome.css'
 import ApiHost from './routes/api_host'
 import configureStore from './redux-modules/create'
 

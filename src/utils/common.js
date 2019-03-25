@@ -282,12 +282,12 @@ export function classes(params = {}) {
 export function grades() {
     apiClient('get', 'v1/filters/grades').then(response => response.data).then(data => {
         let grades = data.data.grades || []
-        if(grades.length > 0) {
+        if (grades.length > 0) {
             const temps = grades
 
             grades = []
 
-            temps.map((temp, idx)=>{
+            temps.map((temp, idx) => {
                 grades.push({
                     value: temp.id,
                     label: temp.class_year
@@ -542,6 +542,25 @@ export function getStatusList(params = {}, options = {}) {
         }
         this.setState({
             listStatus: status
+        })
+    })
+}
+
+export function getProblemTypes() {
+    apiClient('get', 'v1/filters/problem_types').then(res => {
+        let data = res.data.data.problem_types || []
+        let result = []
+        if (data.length > 0) {
+
+            data.map((data) => {
+                result.push({
+                    value: data.key,
+                    label: data.abbv
+                })
+            })
+        }
+        this.setState({
+            problemTypes: result
         })
     })
 }
