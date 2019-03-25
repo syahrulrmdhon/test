@@ -51,7 +51,8 @@ class OnlineExamList extends Component {
             params['grade_id'] = selectedGrade
         }
 
-        apiClient('get', 'v1/tests', false, false).then(res => {
+        apiClient('get', 'v1/tests', false, params).then(res => {
+            console.log('res', res)
             const data = _.get(res, 'data.data', {})
             const { assessments } = data || []
             const { entries, total_entries, total_pages, size } = assessments || []

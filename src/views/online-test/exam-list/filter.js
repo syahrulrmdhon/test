@@ -28,7 +28,7 @@ class FilterOnlineExam extends Component {
         this.props.initial()
         schoolYears.call(this)
         semesterList.call(this)
-        assessmentType.call(this, {category: 'knowledge'})
+        assessmentType.call(this, {category: 'knowledge', test_type: 'periodic'})
         grades.call(this)
     }
     changePeriod(e) {
