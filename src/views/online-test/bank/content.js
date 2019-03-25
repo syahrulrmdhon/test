@@ -22,7 +22,7 @@ class BankContent extends Component {
         let dataEntries = dataQuestions && dataQuestions.entries || []
         dataEntries.map((x, i) => {
             content.push(
-                <div className='wrapper' key={Math.random}>
+                <div className='wrapper' key={i}>
                     <div className='row padding-side-2' >
                         <div className='col-sm-1 col-md-1 float-right'>
                             <input type='radio' name=''/>
