@@ -68,6 +68,10 @@
   text-decoration: none;
   filter: brightness(99%);
 }
+.safari .login .row{
+  display: -webkit-flex;
+  flex-wrap: unset;
+}
 .copyright {
   font-size: 10px;
   text-align: center;
