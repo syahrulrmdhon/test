@@ -4,7 +4,6 @@ import Avatar from './../../assets/images/avatar_def.svg'
 export default class ProfileDetail extends Component {
   render() {
     const response = this.props.dataProfile
-    console.log(response, 'profile')
     return (
       <div>
         <div className="avatar-wrapper">
