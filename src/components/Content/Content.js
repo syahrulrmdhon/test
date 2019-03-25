@@ -377,6 +377,7 @@ class Content extends Component {
                   attitudeScore={this.state.attitudeScore}
                   studentId={this.props.studentId}
                   redirect={this.props.redirect}
+                  statusMenu={this.props.menu}
                   loader={this.state.loader}/>
               </RightSide>
             </div>

@@ -34,11 +34,14 @@ export default class Index extends Component {
     })
   }
 
+ 
   render() {
+    let status = {
+      status:this.props.location.state && this.props.location.state.status
+    }
     return (
       <Page title="Deskripsi">
-        <Header navbar={false} location={this.state.path}/>
-
+        <Header navbar={false} location={this.state.path} params={status}/>
         <div className="score-description">
           <div className="score-description__wrapper row">
             <div className="col-sm-4 score-description__content-left">
