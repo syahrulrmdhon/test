@@ -110,46 +110,48 @@ module.exports = (env) => ({
         }),
         // new BundleAnalyzerPlugin()
     ],
-    // optimization: {
-    //     splitChunks: {
-    //         chunks:'all',
-    //         cacheGroups: {
-    //             default: false,
-    //             vendor: {
-    //                 name: 'vendor',
-    //                 chunks: 'all',
-    //                 test: /node_modules/,
-    //                 priority: 20
-    //             },
-
-    //             common: {
-    //                 name: 'common',
-    //                 minChunks: 2,
-    //                 chunks: 'all',
-    //                 priority: 10,
-    //                 reuseExistingChunk: true,
-    //                 enforce: true
-    //             }
-    //         }
-    //     }
-    // }
     optimization: {
-        runtimeChunk: 'single',
+        runtimeChunk:'single',
         splitChunks: {
-          chunks: 'all',
-          maxInitialRequests: Infinity,
-          minSize: 0,
-          cacheGroups: {
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name(module) {
-                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-                return `npm.${packageName.replace('@', '')}`;
-              },
-            },
-          },
-    },
-}
+            chunks:'all',
+            maxInitialRequests:Infinity,
+            cacheGroups: {
+                default: false,
+                vendor: {
+                    name: 'vendor',
+                    chunks: 'all',
+                    test: /node_modules/,
+                    priority: 20
+                },
+
+                common: {
+                    name: 'common',
+                    minChunks: 2,
+                    chunks: 'all',
+                    priority: 10,
+                    reuseExistingChunk: true,
+                    enforce: true
+                }
+            }
+        }
+    }
+//     optimization: {
+//         runtimeChunk: 'single',
+//         splitChunks: {
+//           chunks: 'all',
+//           maxInitialRequests: Infinity,
+//           minSize: 0,
+//           cacheGroups: {
+//             vendor: {
+//               test: /[\\/]node_modules[\\/]/,
+//               name(module) {
+//                 const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+//                 return `npm.${packageName.replace('@', '')}`;
+//               },
+//             },
+//           },
+//     },
+// }
 
 
 });
