@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getData } from './../../../redux-modules/modules/onlineQuestion'
+import { getQuestion, getBasicCompetency } from './../../../redux-modules/modules/onlineQuestion'
 
 import Page from '../../../components/Title'
 import Header from '../../global/header'
@@ -16,10 +16,12 @@ class CreateQuestion extends Component {
       assessmentId: props.match.params.assessment,
       examId: props.match.params.exam
     }
+
+    // this.onChangeCompetency = this.onChangeCompetency.bind(this)
   }
 
   componentDidMount() {
-    this.props.getData({
+    this.props.getQuestion({
       assessmentId: this.state.assessmentId,
       examId: this.state.examId,
       params: {
@@ -27,9 +29,20 @@ class CreateQuestion extends Component {
         problem_type: 'multiple_choice'
       }
     })
+    this.props.getBasicCompetency({
+      params: {
+        category: 'knowledge',
+        assessment_id: this.state.assessmentId
+      }
+    })
   }
 
+  // onChangeCompetency(event) {
+  //   console.log(event)
+  // }
+
   render() {
+    // console.log(this.props)
     return (
         <Page title="Deskripsi">
         <Header navbar={false} location={''}/>
@@ -42,8 +55,13 @@ class CreateQuestion extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  getData,
-}, dispatch);
+const mapStateToProps = state => ({
 
-export default connect(false, mapDispatchToProps)(CreateQuestion);
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getQuestion,
+  getBasicCompetency
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateQuestion);
