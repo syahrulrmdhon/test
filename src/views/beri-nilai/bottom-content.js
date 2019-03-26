@@ -9,6 +9,7 @@ import classnames from 'classnames'
 import Avatar from 'react-avatar';
 import Ava from './../../assets/images/avatar_def.svg'
 import Pencil from './../../assets/images/beri_nilai.svg';
+import { NotAvailable } from '../../views/global/notAvailable'
 
 
 const data_option = [
@@ -249,8 +250,7 @@ class BottomContent extends Component {
                           type="text"
                           placeholder="Cari murid disini..."
                           name="search"
-                          onChange={this.props.onChange}
-                          value={this.props.search}
+                          onChange={event => {this.props.onChange(event)}}
                         />
                         <i className="fa fa-search icon" onClick={this.props.submit}></i>
                       </div>
@@ -286,6 +286,7 @@ class BottomContent extends Component {
           </div>
           <div className="content-student">
             {
+              dataArray && dataArray.length ? (
               dataArray && dataArray.map(function (data, index) {
                 return <div className="box-student margin-top-3 " key={Math.random()} >
                   <div className={classnames('border-full border-right', data.scores.total_average.result_status === null || data.scores.total_average.result_status === 'need_attention' ? 'border-left-col-red' : data.scores.total_average.result_status === 'good' || data.scores.total_average.result_status === 'very_good' ? 'border-left-col-green' : 'border-left-col-yellow')}>
@@ -364,6 +365,12 @@ class BottomContent extends Component {
                   </div>
                 </div>
               }, this)
+              ) : (
+                <div className="col-sm-12">
+                  <div className="empty-search">Data tidak tersedia</div>
+                </div>
+              )
+
             }
             {/* start here */}
 

@@ -748,6 +748,17 @@ table.table.beri-nilai tr.head {
     .display-block {
       display: block;
     }
+    .empty-search {
+      border:0 !important;
+      text-align: center;
+      font-weight: bold;
+      color: #6d6d6d;
+      font-size: 12px;
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
 
