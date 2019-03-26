@@ -28,11 +28,6 @@ class BankContent extends Component {
                         <div className='wrapper' key={i}>
                             <div className='row padding-side-2' >
                                 <div className='col-sm-1 col-md-1 float-right'>
-                                    {/* <div className="status">
-                                        <label htmlFor={'present-' + attendance.user_id}></label>
-                                        <input type="radio" className="rd-btn" name={attendance.user_id} value="present" onChange={event => this.props.handleOptionChange(event)} id={'present-' + attendance.user_id} checked={attendance.status === 'present'} />
-                                        <div className="check"></div>
-                                    </div> */}
                                     <input
                                         type='radio' name='apalah' value='Opsi Question' id={x.id} checked={x.is_selected==true}
                                         onChange={(e) => this.props.handleEvent(e.target.id, 'is_selected')}
