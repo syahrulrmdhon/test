@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getBank, } from './../../../redux-modules/modules/bank'
+import { getBank, handleEvent } from './../../../redux-modules/modules/bank'
 import BankChoices from './choices'
+import { NotAvailable } from './../../global/notAvailable'
 
 class BankContent extends Component {
     constructor(props) {
@@ -20,38 +21,47 @@ class BankContent extends Component {
         const content = []
         let dataQuestions = this.props.dataBank && this.props.dataBank.data && this.props.dataBank.data.questions
         let dataEntries = dataQuestions && dataQuestions.entries || []
-        dataEntries.map((x, i) => {
-            content.push(
-                <div className='wrapper' key={i}>
-                    <div className='row padding-side-2' >
-                        <div className='col-sm-1 col-md-1 float-right'>
-                            <input type='radio' name=''/>
-                            {/* <label htmlFor={'bank-' + x.id}></label>
-                            <input type="radio" className="rd-btn"
-                                name={x.id} value="bank"
-                                onChange={e => this.props.handleOptionChange(e)}
-                                id={'present-' + x.id}
-                                checked={'present'}
-                            />
-                            <div className="check"></div> */}
-                        </div>
-                        <div className='col-sm-1 col-md-1 margin-top-5 text-left'>{x.qn_number ? x.qn_number : '-'}.</div>
-                        <div className='col-sm-10 col-md-10'>
-                            <div className='kd margin-top-5'>
-                                KD. {x.comp_number ? x.comp_number : '-'} {x.content ? x.content : '-'}
+        {
+            dataEntries && dataEntries.length > 0 ?
+                dataEntries.map((x, i) => {
+                    content.push(
+                        <div className='wrapper' key={i}>
+                            <div className='row padding-side-2' >
+                                <div className='col-sm-1 col-md-1 float-right'>
+                                    {/* <div className="status">
+                                        <label htmlFor={'present-' + attendance.user_id}></label>
+                                        <input type="radio" className="rd-btn" name={attendance.user_id} value="present" onChange={event => this.props.handleOptionChange(event)} id={'present-' + attendance.user_id} checked={attendance.status === 'present'} />
+                                        <div className="check"></div>
+                                    </div> */}
+                                    <input
+                                        type='radio' name='apalah' value='Opsi Question' id={x.id} checked={x.is_selected==true}
+                                        onChange={(e) => this.props.handleEvent(e.target.id, 'is_selected')}
+                                    />
+                                    <label htmlFor={x.id}></label>
+                                    <div className="check"></div>
+                                </div>
+                                <div className='col-sm-1 col-md-1 margin-top-5 text-left'>{x.qn_number ? x.qn_number : '-'}.</div>
+                                <div className='col-sm-10 col-md-10'>
+                                    <div className='kd margin-top-5'>
+                                        KD. {x.comp_number ? x.comp_number : '-'} {x.content ? x.content : '-'}
+                                    </div>
+                                    <div className='question margin-top-2'>
+                                        {x.question ? x.question : '-'}
+                                    </div>
+                                    <BankChoices
+                                        i={i}
+                                        data={x.exam_question_choices}
+                                    />
+                                </div>
                             </div>
-                            <div className='question margin-top-2'>
-                                {x.question ? x.question : '-'}
-                            </div>
-                            <BankChoices
-                                i={i}
-                                data={x.exam_question_choices}
-                            />
                         </div>
-                    </div>
-                </div>
-            )
-        })
+                    )
+                })
+                :
+                content.push(
+                    <NotAvailable key={Math.random()}>Data tidak tersedia</NotAvailable>
+                )
+        }
         return (
             <div className='content-bank margin-top-2 margin-bottom-4'>
                 {content}
@@ -65,7 +75,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    getBank
+    getBank,
+    handleEvent,
 }, dispatch
 )
 export default connect(mapStateToProps, mapDispatchToProps)(BankContent)
