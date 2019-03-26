@@ -27,7 +27,7 @@ class BankContent extends Component {
                     content.push(
                         <div className='wrapper' key={i}>
                             <div className='row padding-side-2' >
-                                <div className='col-sm-1 col-md-1 float-right'>
+                                <div className='col-sm-1 col-md-1 padding-top-3'>
                                     <input
                                         type='radio' name='apalah' value='Opsi Question' id={x.id} checked={x.is_selected==true}
                                         onChange={(e) => this.props.handleEvent(e.target.id, 'is_selected')}

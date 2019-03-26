@@ -34,7 +34,7 @@ export class ActionList extends Component {
         if (data > 0) {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
-                    <div className='right-block__action'>Lihat</div>
+                    <div className='right-block__action'>Lihat Soal</div>
                     <div className='right-block__action'>Hapus Soal</div>
                 </div>
             )
