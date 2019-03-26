@@ -42,6 +42,8 @@ class ContentOnlineExam extends Component {
                                         <label className='p'>{x.grade_name === null ? 'Kelas Belum Dipilih' : x.grade_name}</label>
                                         <ActionList
                                             action={x.assigned_exam.created_question_count}
+                                            id={x.id}
+                                            create={this.props.create}
                                         />
                                     </div>
                                     <div className='col-sm-4 right-block__panel-part padding-top-4'>
@@ -55,7 +57,7 @@ class ContentOnlineExam extends Component {
                                     <div className='col-sm-4'>
                                         <DetailAction
                                             id={x.id}
-                                            detailClicked = {this.props.detailClicked}
+                                            detailClicked={this.props.detailClicked}
                                             detail={x.assigned_exam.created_question_count}
                                         />
                                         <div className='padding-bottom-2'>

@@ -30,6 +30,7 @@ export class ActionList extends Component {
     render() {
         let content = []
         let data = this.props.action
+        let id = this.props.id
         if (data > 0) {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
@@ -40,7 +41,7 @@ export class ActionList extends Component {
         } else {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
-                    <div className='right-block__action padding-left-0'>Buat Soal</div>
+                    <div className='right-block__action padding-left-0' onClick={(e) => (this.props.create(e, id))}>Buat Soal</div>
                 </div>
             )
         }
