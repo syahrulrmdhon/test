@@ -23,8 +23,8 @@ class Bank extends Component {
 
     componentDidMount() {
         this.props.getBank()
-        basicComps.call(this, { category: 'knowledge', assessment_id: this.state.id }, { listOptions: true }),
-            getProblemTypes.call(this)
+        basicComps.call(this, { assessment_id: this.state.id }, { listOptions: true }),
+        getProblemTypes.call(this)
     }
 
     openModal() {
@@ -43,7 +43,6 @@ class Bank extends Component {
         let problem_type = dataBank ? dataBank.selectedProblemType : null
         let basic_comp_id = dataBank ? dataBank.selectedBasicComp : null
         this.props.getBank(problem_type, basic_comp_id)
-
     }
     render() {
         let dataBank = _.get(this, 'props.dataBank', {})
