@@ -68,7 +68,7 @@ $nunito_bold: "NunitoBold";
 
 .online-exam {
   min-height: 100%;
-  padding-top: 125px;
+  padding-top: 121px;
   margin: 0 auto !important;
   background-color: #ffffff;
   .content-block.main-block {
@@ -355,6 +355,11 @@ $nunito_bold: "NunitoBold";
     }
   }
 
+  &__top-content {
+    border-bottom: 1px solid #d3d9dd;
+    padding-bottom: 30px;
+  }
+
   &__form-group {
     margin-bottom: 24px;
   }
@@ -375,7 +380,7 @@ $nunito_bold: "NunitoBold";
     margin-bottom: 16px;
   }
 
-  .select{
+  .select {
     &__control, &__menu {
       width: 320px;
       min-height: 32px;

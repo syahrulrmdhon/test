@@ -16,7 +16,7 @@ const form = props => {
               classNamePrefix="select"
               placeholder="Pilih Kompetensi Dasar ..." />
           </div>
-          <div className="online-question__form-group">
+          <div className="online-question__form-group mb-0">
             <label className="online-question__label">Bobot Nilai</label>
             <input className="online-question__input online-question__score" type="number" />
           </div>

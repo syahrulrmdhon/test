@@ -123,6 +123,7 @@ export const MainRoutes = [
     },
     {
         path: '/assessment',
+        exact:true,
         component: Assessment
     },
     {
@@ -177,10 +178,12 @@ export const MainRoutes = [
     },
     {
         path: '/exam/:id',
+        exact:true,
         component: Exam
     },
     {
         path: '/assessment/:assessment_id/exam/:exam_id/class/:class_id/student/:student_id',
+        exact:true,
         component: NewScore
     },
     {
@@ -257,13 +260,17 @@ export const MainRoutes = [
         component: CreateQuestion
     },
     {
+        path: '/online-exam/bank/:id',
+        component: Bank
+    },
+    {
         path: '/online-exam/create',
         component: CreateList
     },
-    {
-        path: '/bank',
-        component: Bank
-    },
+    // {
+    //     path: '/bank',
+    //     component: Bank
+    // },
 
     {
         path: '/globa',

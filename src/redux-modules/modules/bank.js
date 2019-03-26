@@ -2,9 +2,9 @@ import headers from './../../utils/header'
 const SET = 'modules/bank/SET'
 const RESET = 'modules/bank/RESET'
 const INITIALIZE = 'modules/bank/INITIALIZE'
-const LOAD_BANK = 'modules/bank/LOAD_NO_QUESTIONS'
-const LOAD_BANK_SUCCESS = 'modules/bank/LOAD_NO_QUESTIONS_SUCCESS'
-const LOAD_BANK_FAIL = 'modules/bank/LOAD_NO_QUESTIONS_FAIL'
+const LOAD_BANK = 'modules/bank/LOAD_BANK'
+const LOAD_BANK_SUCCESS = 'modules/bank/LOAD_BANK_SUCCESS'
+const LOAD_BANK_FAIL = 'modules/bank/LOAD_BANK_FAIL'
 const HANDLE_CHANGE = 'modules/bank/HANDLE_CHANGE'
 
 const inititalState = null
@@ -18,7 +18,7 @@ export default function reducer(state = inititalState, action) {
                 loading: false,
                 ... {
                     selectedBasicComp: null,
-                    selectedType: null
+                    selectedProblemType: null
                 }
             }
             break
@@ -83,13 +83,19 @@ export default function reducer(state = inititalState, action) {
     }
 }
 
-const schoolId = localStorage.getItem('school_id')
-const token = localStorage.getItem('token')
-const category = 'knowledge'
+export function getBank(problem_type, basic_comp_id) {
 
-export function getBank() {
-    const url = `v1/question_banks`
-
+    let url = `v1/question_banks?problem_type=${problem_type}&basic_comp_id=${basic_comp_id}`
+    if (problem_type != undefined && basic_comp_id == undefined) {
+        url = `v1/question_banks?problem_type=${problem_type}`
+    } else if (basic_comp_id != undefined && problem_type == undefined) {
+        url = `v1/question_banks?basic_comp_id=${basic_comp_id}`
+    } else if (basic_comp_id == undefined && problem_type == undefined) {
+        url = `v1/question_banks`
+    } else if (basic_comp_id != undefined && problem_type != undefined) {
+        url = `v1/question_banks?problem_type=${problem_type}&basic_comp_id=${basic_comp_id}`
+    }
+    
     return {
         types: [LOAD_BANK, LOAD_BANK_SUCCESS, LOAD_BANK_FAIL],
         promise: client => client.get(process.env.API_URL + url, headers)

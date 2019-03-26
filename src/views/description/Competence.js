@@ -12,7 +12,7 @@ const competence = props => {
 
   switch(predicate) {
     case 'A':
-      predicateLabel = 'Sangan Baik'
+      predicateLabel = 'Sangat Baik'
       break
     case 'B':
       predicateLabel = 'Baik'
