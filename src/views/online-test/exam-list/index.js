@@ -40,11 +40,11 @@ class OnlineExamList extends Component {
         })
     }
 
-    createQuestion(e, id) {
+    createQuestion(e, id, name) {
         e.preventDefault()
         this.props.history.push({
             pathname: 'create/' + id,
-            state: {id: this.state.assessment_id}
+            state: {id: this.state.assessment_id, name: name}
         })
     }
 
@@ -92,7 +92,6 @@ class OnlineExamList extends Component {
             <Page title='Daftar Ujian'>
                 <Header />
                 <div className='online-exam'>
-
                     <div className='content-block main-block'>
                         <div className='margin-box row h-100'>
                             <div className='col-sm-3 left-block padding-top-4'>

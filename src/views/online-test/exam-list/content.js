@@ -43,6 +43,7 @@ class ContentOnlineExam extends Component {
                                         <ActionList
                                             action={x.assigned_exam.created_question_count}
                                             id={x.id}
+                                            name={x.name}
                                             create={this.props.create}
                                         />
                                     </div>
