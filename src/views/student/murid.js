@@ -40,10 +40,8 @@ class DaftarMurid extends Component {
                 student.nis = student.student.nis
                 student.nisn = student.student.nisn
                 student.percentage = student.attendance_report.percentage
-                student.knowledge_score = student.class_rank.knowledge.score ? student.class_rank.knowledge.score: '-'
-                student.skill_score  = student.class_rank.skill.score ? student.class_rank.skill.score : '-'
-                student.attitude_score  = student.class_rank.attitude.score ? student.class_rank.attitude.score : '-'
-                student.rank = student.class_rank.overall_rank.rank ? student.class_rank.overall_rank.rank: '-'
+                student.score = student.class_rank.score ? student.class_rank.score : '-'
+                student.rank = student.class_rank.rank ? student.class_rank.rank: '-'
             })
             this.setState({
                 data: data, 
@@ -113,15 +111,15 @@ class DaftarMurid extends Component {
                                         <TableHeaderColumn row="0" colSpan="3"columnClassName="score text-center" className="text-center">
                                             Nilai Rata-Rata
                                         </TableHeaderColumn>
-                                        <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center" dataField="knowledge_score" dataSort>
+                                        <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center" dataField="score" dataSort>
                                             Pengetahuan
                                         <i className="fa fa-sort"></i>
                                         </TableHeaderColumn>
-                                        <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center" dataField="skill_score" dataSort>
+                                        <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center" dataField="score" dataSort>
                                             Keterampilan
                                         <i className="fa fa-sort"></i>
                                         </TableHeaderColumn>
-                                        <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center cell-border-right" dataField="attitude_score" dataSort>
+                                        <TableHeaderColumn row="1" columnClassName="score text-center" className="text-center cell-border-right" dataField="score" dataSort>
                                             Sikap
                                         <i className="fa fa-sort"></i>
                                         </TableHeaderColumn>

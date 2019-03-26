@@ -101,7 +101,7 @@ export default function reducer(state = inititalState, action) {
 
 export function getBank(problem_type, basic_comp_id) {
 
-    let url = ``
+    let url = `v1/question_banks?problem_type=${problem_type}&basic_comp_id=${basic_comp_id}`
     if (problem_type != undefined && basic_comp_id == undefined) {
         url = `v1/question_banks?problem_type=${problem_type}`
     } else if (basic_comp_id != undefined && problem_type == undefined) {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getBank, handleEvent } from './../../../redux-modules/modules/bank'
+import { getBank, handleEvent} from './../../../redux-modules/modules/bank'
 import BankChoices from './choices'
-import { NotAvailable } from './../../global/notAvailable'
+import { NotAvailable } from '../../global/notAvailable';
 
 class BankContent extends Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class BankContent extends Component {
                             <div className='row padding-side-2' >
                                 <div className='col-sm-1 col-md-1 padding-top-3'>
                                     <input
-                                        type='radio' name='apalah' value='Opsi Question' id={x.id} checked={x.is_selected==true}
+                                        type='radio' name='apalah' value='Opsi Question' id={x.id} checked={x.is_selected == true}
                                         onChange={(e) => this.props.handleEvent(e.target.id, 'is_selected')}
                                     />
                                     <label htmlFor={x.id}></label>
@@ -71,7 +71,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     getBank,
-    handleEvent,
+    handleEvent
 }, dispatch
 )
 export default connect(mapStateToProps, mapDispatchToProps)(BankContent)
