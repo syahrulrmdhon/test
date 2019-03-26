@@ -6,7 +6,6 @@ const LOAD_BANK = 'modules/bank/LOAD_BANK'
 const LOAD_BANK_SUCCESS = 'modules/bank/LOAD_BANK_SUCCESS'
 const LOAD_BANK_FAIL = 'modules/bank/LOAD_BANK_FAIL'
 const HANDLE_CHANGE = 'modules/bank/HANDLE_CHANGE'
-const HANDLE_EVENT = 'modules/bank/HANDLE_EVENT'
 
 const inititalState = null
 
@@ -68,21 +67,6 @@ export default function reducer(state = inititalState, action) {
                 loading: false
             }
             break
-        case HANDLE_EVENT:
-            if (action.field == 'is_selected') {
-
-                const data = state.data.questions.entries.find(result => {
-                    result.is_selected = false
-                    return result.id === action.value
-                })
-                data.is_selected = true
-            }
-            return {
-                ...state,
-                loaded: false,
-                loading: true
-            }
-            break
         case SET:
             return {
                 ...state,
@@ -101,7 +85,7 @@ export default function reducer(state = inititalState, action) {
 
 export function getBank(problem_type, basic_comp_id) {
 
-    let url = ``
+    let url = `v1/question_banks?problem_type=${problem_type}&basic_comp_id=${basic_comp_id}`
     if (problem_type != undefined && basic_comp_id == undefined) {
         url = `v1/question_banks?problem_type=${problem_type}`
     } else if (basic_comp_id != undefined && problem_type == undefined) {
@@ -111,7 +95,7 @@ export function getBank(problem_type, basic_comp_id) {
     } else if (basic_comp_id != undefined && problem_type != undefined) {
         url = `v1/question_banks?problem_type=${problem_type}&basic_comp_id=${basic_comp_id}`
     }
-
+    
     return {
         types: [LOAD_BANK, LOAD_BANK_SUCCESS, LOAD_BANK_FAIL],
         promise: client => client.get(process.env.API_URL + url, headers)
@@ -123,13 +107,5 @@ export function handleChange(e, field_name) {
         type: HANDLE_CHANGE,
         value: e,
         fieldName: field_name
-    }
-}
-
-export function handleEvent(value, field) {
-    return {
-        type: HANDLE_EVENT,
-        value: value,
-        field: field
     }
 }
