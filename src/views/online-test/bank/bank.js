@@ -89,7 +89,7 @@ class Bank extends Component {
                         <BankContent
                             handleOptionChange={this.handleOptionChange.bind(this)}
                         />
-                        <div className='wrapper-button'>
+                        <div className='button-wrapper'>
                             <button className='btn-green'>Pilih</button>
                         </div>
                     </div>
