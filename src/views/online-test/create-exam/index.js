@@ -52,8 +52,9 @@ class index extends Component {
     render() {
         let data = _.get(this, 'props.data', {})
         let selectedProblemType = data ? data.selectedProblemType : null
-        const questions = this.state.questions.map(question => {
-            return <AddQuestion key={Math.random()} />
+        const questions = this.state.questions.map((question, idx) => {
+            console.log('question', question)
+            return <AddQuestion key={(idx)} />
         })
         return (
             <Page title="Tulis Ujian Online">

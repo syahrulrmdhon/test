@@ -21,7 +21,7 @@ class AddQuestion extends Component {
     let selectedProblemType = data ? data.selectedProblemType : null
     return (
       <div className='row'>
-        <div className="col-sm-8">
+        <div className="col-sm-8 margin-top-2">
           <label>Tipe Soal</label>
           <div className="margin-top-1">
             <Select
@@ -33,9 +33,9 @@ class AddQuestion extends Component {
             />
           </div>
         </div>
-        <div className="col-sm-4">
+        <div className="col-sm-4 margin-top-2">
           <label>Jumlah Soal </label>
-          <div className="margin-top-1 margin-bottom-2">
+          <div className="margin-top-1">
             <input type="number" className="form-control" />
           </div>
         </div>
