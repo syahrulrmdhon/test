@@ -17,8 +17,17 @@ export default function reducer(state = initialState, action) {
                 loaded: true,
                 loading: false,
                 ... {
-                    selectedProblemType: null
+                    selectedProblemType: null,
+                    exam_problem_types_attributes: [
+                        {
+                            problem_type: '',
+                            question_count: null
+                        }
+                    ]
                 }
+                // ... {
+                //     selectedProblemType: null
+                // }
             }
             break
         case LOAD:

@@ -32,11 +32,11 @@ class OnlineExamList extends Component {
         this.getData()
     }
 
-    detailClicked(e, id) {
+    detailClicked(e, id, examId) {
         e.preventDefault()
         this.props.history.push({
             pathname: 'bank/' +id,
-            state: {id: this.state.assessment_id}
+            state: {id: this.state.assessment_id, examId: examId}
         })
     }
 
