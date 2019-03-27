@@ -108,8 +108,8 @@ textarea.textarea-box{
 }
 
 .btn-white:hover {
-  background: #1a9d7f;
-  color: white;
+  filter: brightness(90%);
+  color: #1a9d7f;
 }
 
 .btn-young-green {
