@@ -1,25 +1,43 @@
 import React, { Component } from 'react'
 import '../../styles/global/not-found.css'
+import Header from './header'
 import { NavLink } from 'reactstrap'
+import Page from './../../components/Title'
+import Astronaut from './../../assets/images/astronaut.svg'
+import Planet from './../../assets/images/group.svg'
 
 export default class NotFound extends Component {
     render() {
         return (
-            <div className="not-found">
-                <div id="notfound">
-                    <div className="notfound">
-                        <div className="notfound-404">
-                            <h1>4<span></span>4</h1>
+            <React.Fragment>
+                <Page title='Page Not Found'>
+                    <div className="padding-content not-found">
+                        <Header/>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-5 h-100 notfound margin">
+                                    <h1>404</h1>
+                                    <h2>Halaman yang Anda cari tidak ada.</h2>
+                                    <p>Biarkan kami bantu Anda ke halaman yang benar</p>
+                                    <NavLink className="font-grey" href="/home">
+                                        Halaman Depan
+                                    </NavLink>
+                                </div>
+                                <div className="col-7 h-100">
+                                    <div className="row">
+                                        <div className="col-4">
+                                            <img className="planet" src={Planet}></img>
+                                        </div>
+                                        <div className="col-8">
+                                            <img src={Astronaut}></img>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <h2>Oops! Page Not Be Found</h2>
-                        <p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily
-      unavailable</p>
-                        <NavLink className="font-grey" href="/home">
-                            Back to Homepage
-                        </NavLink>
                     </div>
-                </div>
-            </div>
+                </Page>
+            </React.Fragment>
         )
     }
 }
