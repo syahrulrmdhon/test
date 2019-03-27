@@ -39,7 +39,7 @@ class ContentOnlineExam extends Component {
                                                 {x.duration !== null ? '0' : x.duration} Menit
                                              </label>
                                         </div>
-                                        <label className='p'>{x.grade_name === null ? 'Kelas Belum Dipilih' : x.grade_name}</label>
+                                        <label className='p'>{x.grade_name === null ? 'Kelas Belum Dipilih' : x.grade_name}  {x.major_name === null ? '': x.major_name}</label>
                                         <ActionList
                                             action={x.assigned_exam.created_question_count}
                                             id={x.id}
