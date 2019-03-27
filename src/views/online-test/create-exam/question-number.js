@@ -12,7 +12,10 @@ const questionNumber = props => {
         <div className="online-question__subject">Geografi - X IPS</div>
         <div className="online-question__line" />
       </div>
-      <NumberList problemTypes={problemTypes}/>
+      <NumberList
+        problemTypes={problemTypes}
+        onClickNumber={props.onClickNumber}
+      />
     </div>
   )
 }

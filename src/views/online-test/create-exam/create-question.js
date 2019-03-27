@@ -14,10 +14,12 @@ class CreateQuestion extends Component {
     super(props)
     this.state = {
       assessmentId: props.match.params.assessment,
-      examId: props.match.params.exam
+      examId: props.match.params.exam,
+      number: 1,
+      questionType: 'multiple_choice',
+      questionLabel: 'PG'
     }
-
-    // this.onChangeCompetency = this.onChangeCompetency.bind(this)
+    this.onClickNumber = this.onClickNumber.bind(this)
   }
 
   componentDidMount() {
@@ -37,18 +39,37 @@ class CreateQuestion extends Component {
     })
   }
 
-  // onChangeCompetency(event) {
-  //   console.log(event)
-  // }
+  onClickNumber({number, questionType, questionLabel}) {
+    this.props.getQuestion({
+      assessmentId: this.state.assessmentId,
+      examId: this.state.examId,
+      params: {
+        number: number,
+        problem_type: questionType,
+      }
+    })
+
+    if (this.state.number !== number || this.state.questionType !== questionType) {
+      this.setState({
+        number: number,
+        questionType: questionType,
+        questionLabel: questionLabel
+      })
+    }
+  }
 
   render() {
-    // console.log(this.props)
     return (
         <Page title="Deskripsi">
         <Header navbar={false} location={''}/>
         <div className="online-question content-wrapper">
-          <QuestionNumber />
-          <Form />
+          <QuestionNumber
+            onClickNumber={this.onClickNumber}
+          />
+          <Form
+            number={this.state.number}
+            questionType={this.state.questionLabel}
+          />
         </div>
       </Page>
     )

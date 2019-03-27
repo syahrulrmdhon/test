@@ -6,10 +6,11 @@ const LOAD = 'modules/onlineQuestion/LOAD'
 const LOAD_SUCCESS = 'modules/onlineQuestion/LOAD_SUCCESS'
 const LOAD_FAIL = 'modules/onlineQuestion/LOAD_FAIL'
 const BASIC_COMPETENCIES = 'modules/onlineQuestion/BASIC_COMPETENCIES'
-const HANDLE_CHANGE_INPUT = 'modules/onlineQuestion/HANDLE_CHANGE_INPUT'
+const HANDLE_CHANGE = 'modules/onlineQuestion/HANDLE_CHANGE'
 const HANDLE_CHANGE_CORRECT_ANSWER = 'modules/onlineQuestion/HANDLE_CHANGE_CORRECT_ANSWER'
 const HANDLE_DELETE_CHOICE = 'modules/onlineQuestion/HANDLE_DELETE_CHOICE'
 const HANDLE_ADD_CHOICE = 'modules/onlineQuestion/HANDLE_ADD_CHOICE'
+const HANDLE_CHANGE_CONTENT = 'modules/onlineQuestion/HANDLE_CHANGE_CONTENT'
 const initialState = null;
 
 export default function reducer(state = initialState, action) {
@@ -61,7 +62,7 @@ export default function reducer(state = initialState, action) {
         loading:false,
         ...{basicCompetencies: basicCompetencies}
       }
-    case HANDLE_CHANGE_INPUT:
+    case HANDLE_CHANGE:
       state.data.question[action.field] = action.value
       state.body.exam_question[action.field] = action.value
       return {
@@ -91,19 +92,11 @@ export default function reducer(state = initialState, action) {
       const order = action.order
       const options = state.data.question.exam_question_choices
       options.splice(order, 1)
-      // console.log(order)
-      // console.log(options.length)
 
-      // const totalChoices = state.data.question.exam_question_choices.length
-      for (let counter = order; counter <= options.length; counter++) {
-        // console.log(counter)
-        console.log(options[counter])
-        console.log(options[counter].symbol)
-        // options[counter]["symbol"] = defaultCharCode + counter
-        // if (counter > 10) {
-        //   break
-        // }
+      for (let counter = order; counter < options.length; counter++) {
+        options[counter].symbol = String.fromCharCode(defaultCharCode + counter)
       }
+      state.body.exam_question.exam_question_choices_attributes = options
 
       return {
         ...state,
@@ -116,6 +109,15 @@ export default function reducer(state = initialState, action) {
       const symbol = String.fromCharCode(initialCharCode + choices.length)
 
       choices.push({id: null, symbol: symbol, content: '', is_correct_ans: false})
+
+      return {
+        ...state,
+        loaded: true,
+        loading:false,
+      }
+    case HANDLE_CHANGE_CONTENT:
+      state.data.question.exam_question_choices[action.order].content = action.value
+      state.body.exam_question.exam_question_choices_attributes[action.order].content = action.value
 
       return {
         ...state,
@@ -155,9 +157,10 @@ export function getBasicCompetency({params}) {
     }
 }
 
-export function onChangeInput({field, value}) {
+export function onChange({field, value}) {
+  console.log(value)
   return {
-    type: HANDLE_CHANGE_INPUT,
+    type: HANDLE_CHANGE,
     field: field,
     value: value
   }
@@ -181,6 +184,14 @@ export function addChoiceHandler() {
   console.log('pppp')
   return {
     type: HANDLE_ADD_CHOICE,
+  }
+}
+
+export function onChangeContent({order, value}) {
+  return {
+    type: HANDLE_CHANGE_CONTENT,
+    order: order,
+    value: value
   }
 }
 

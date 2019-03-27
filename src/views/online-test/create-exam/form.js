@@ -2,25 +2,37 @@ import React, {Component} from "react"
 import { bindActionCreators } from 'redux'
 import { connect } from "react-redux"
 import {
-  onChangeInput,
+  onChange,
   onChangeCorrectAnswer,
   deleteChoiceHandler,
-  addChoiceHandler
+  addChoiceHandler,
+  onChangeContent
 } from "./../../../redux-modules/modules/onlineQuestion";
 
+import { apiClient } from '../../../utils/apiClient'
 import _ from "lodash"
 import Select from 'react-select'
 
 class Form extends Component {
+  constructor() {
+    super()
+    // this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  // onSubmit({data}) {
+  //   const url = `v1/assessments/${assessmentId}/exams/${examId}/questions`
+  //   apiClient('post', url, data)
+  // }
 
   render() {
     const question = _.get(this.props.data, 'data.question', {})
     const choices = _.get(this.props.data, 'data.question.exam_question_choices', [])
     const basicCompetencies = _.get(this.props.data, 'basicCompetencies', [])
-
+    // console.log(_.get(this.props.data, 'body', {}))
+    // console.log(question.weight)
     const listChoices = choices.map((choice, index) => {
       return (
-        <div key={choice.id} className="online-question__choice">
+        <div key={index} className="online-question__choice">
           <span className="online-question__symbol">
             {choice.symbol}
           </span>
@@ -28,6 +40,7 @@ class Form extends Component {
             className="online-question__answer"
             type="text"
             placeholder="Tulis Jawaban"
+            onChange={(event) => this.props.onChangeContent({order: index, value: event.target.value})}
             value={choice.content}
           />
           <input
@@ -35,7 +48,7 @@ class Form extends Component {
             type="radio"
             name="choices"
             checked={choice.is_correct_ans}
-            onChange={(event) => this.props.onChangeCorrectAnswer({order: index})}
+            onChange={() => this.props.onChangeCorrectAnswer({order: index})}
           />
           {
             index !== 0 &&
@@ -58,7 +71,7 @@ class Form extends Component {
                 classNamePrefix="select"
                 placeholder="Pilih Kompetensi Dasar ..."
                 options={basicCompetencies}
-                onChange={(event) => this.props.onChangeInput({field: 'basic_comp_id', value: event.id})}
+                onChange={(event) => this.props.onChange({field: 'basic_comp_id', value: event.id})}
                 value={basicCompetencies.find(competency => (competency.id === question.basic_comp_id))}
               />
             </div>
@@ -77,14 +90,16 @@ class Form extends Component {
             <input
               className="online-question__input online-question__score"
               type="number"
-              onChange={(event) => this.props.onChangeInput({field: 'weight', value: event.target.value})}
-              value={question.weight}
+              onChange={(event) => this.props.onChange({field: 'weight', value: event.target.value})}
+              value={question.weight || ''}
             />
           </div>
         </div>
         <div className="online-question__question-wrapper">
           <div className="d-flex justify-content-between align-items-center">
-            <div className="online-question__current-question">Soal PG - Nomor 1</div>
+            <div className="online-question__current-question">
+              Soal {this.props.questionType} - Nomor {this.props.number}
+            </div>
             <div className="online-question__import-question">
               <span className="online-question__add-icon">+</span> Impor Soal
             </div>
@@ -95,8 +110,8 @@ class Form extends Component {
           <textarea
             className="online-question__write-question"
             placeholder="Tulis Soal"
-            onChange={(event) => this.props.onChangeInput({field: 'question', value: event.target.value})}
-            value={question.question}
+            onChange={(event) => this.props.onChange({field: 'question', value: event.target.value})}
+            value={question.question || ''}
           />
           <div className="online-question__answer-wrapper">
               <div className="online-question__answer-label">Jawaban</div>
@@ -122,10 +137,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  onChangeInput,
+  onChange,
   onChangeCorrectAnswer,
   deleteChoiceHandler,
-  addChoiceHandler
+  addChoiceHandler,
+  onChangeContent
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
