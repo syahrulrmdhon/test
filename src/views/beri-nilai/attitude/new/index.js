@@ -6,7 +6,7 @@ import Report from './report-list'
 import Select from 'react-select'
 import { apiClient } from '../../../../utils/apiClient'
 import { error, modal } from './../../../global/modal'
-import { getDataScoreDetail, handlingInputText,handlingInputSelect } from './../../../../redux-modules/modules/attitude'
+import { getDataScoreDetail, handlingInputText, handlingInputSelect } from './../../../../redux-modules/modules/attitude'
 import { bindActionCreators } from 'redux';
 import Page from './../../../../components/Title'
 
@@ -41,23 +41,23 @@ export class Index extends Component {
     }
     componentDidMount() {
         let score = ''
-        console.log(this.state.activeTab,"tab active")
-        switch(this.state.activeTab){
+        console.log(this.state.activeTab, "tab active")
+        switch (this.state.activeTab) {
             case 'semua':
                 score = ''
-            break;
+                break;
             case 'sb':
                 score = 2
-            break;
+                break;
             case 'b':
                 score = 1
-            break;
+                break;
             case 'bp':
                 score = 0
-            break;
+                break;
             default:
                 score = ''
-            
+
         }
         this.props.getDataScoreDetail(this.props.match.params.assessment_id, this.props.match.params.class_id, this.props.match.params.user_id, score)
     }
@@ -74,23 +74,23 @@ export class Index extends Component {
     toggle(tab) {
         console.log(tab)
         if (this.state.activeTab !== tab) {
-            let  score= ''
-            switch(tab){
+            let score = ''
+            switch (tab) {
                 case 'semua':
                     score = ''
-                break;
+                    break;
                 case 'sb':
                     score = 2
-                break;
+                    break;
                 case 'b':
                     score = 1
-                break;
+                    break;
                 case 'bp':
                     score = 0
-                break;
+                    break;
                 default:
                     score = ''
-                
+
             }
             this.setState({
                 activeTab: tab
@@ -166,7 +166,7 @@ export class Index extends Component {
         const header = this.props.data_header
         const fullname = header && header.user && header.user.full_name
         const data_school_subjects = header && header.assessment && header.assessment.school_subjects
-        const data_school_subjects_length =  data_school_subjects && data_school_subjects.length
+        const data_school_subjects_length = data_school_subjects && data_school_subjects.length
         const data_school_attitudes = header && header.assessment && header.assessment.school_attitudes
 
         let title_render = []
@@ -183,58 +183,62 @@ export class Index extends Component {
         }
         let select = []
         let score = this.props.data_form && this.props.data_form.score
-        console.log(score,"score")
-            select.push(  <Select
-                className="select-box"
-                classNamePrefix="select"
-                placeholder="Pilih Nilai Akhir"
-                options={option}
-                onChange={(e) => {this.props.handlingInputSelect(e,'score')}}
-                value={option.filter((element) => {return element.value === score })}
-            />)
+        console.log(score, "score")
+        select.push(<Select
+            className="select-box"
+            classNamePrefix="select"
+            placeholder="Pilih Nilai Akhir"
+            options={option}
+            onChange={(e) => { this.props.handlingInputSelect(e, 'score') }}
+            value={option.filter((element) => { return element.value === score })}
+        />)
         return (
             <Title title="Nilai Sikap">
                 <div className="padding-content">
                     <div className="score-attitude-new">
                         <Header navbar={false} location={this.state.path} />
-                        <div className="margin-side-4 margin-top-7">
+                        <div className="margin-content">
                             <div className="col-sm-12">
-                                <div className="col-sm-5" >
-                                    <div className="content-block  content-score  ">
-                                        <Report
-                                            toggle={this.toggle}
-                                            activeTab={this.state.activeTab}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-sm-7" >
-                                    <div className="content-block  content-score  ">
-                                        <div className="padding-3">
-                                            <div className="score-attitude-new__predicate-title">
-                                                {title_render}
-                                                <span className="score-attitude-new__predicate-title"> - {fullname}</span>
+                                <div className="row">
+                                    <div className="col-sm-5" >
+                                        <div className="row">
+                                            <div className="content-block main-block">
+                                                <Report
+                                                    toggle={this.toggle}
+                                                    activeTab={this.state.activeTab}
+                                                />
                                             </div>
-                                            <div className="form margin-top-5">
-                                                <div className="row">
-                                                    <div className="col-sm-12">
-                                                        <label className="score-attitude-new__label-form">Nilai Akhir</label>
-                                                        <div className="padding-top-1">
-                                                          {select}
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-7" >
+                                        <div className="content-block main-block">
+                                            <div className="padding-3">
+                                                <div className="score-attitude-new__predicate-title">
+                                                    {title_render}
+                                                    <span className="score-attitude-new__predicate-title"> - {fullname}</span>
+                                                </div>
+                                                <div className="form margin-top-5">
+                                                    <div className="row">
+                                                        <div className="col-sm-12">
+                                                            <label className="score-attitude-new__label-form">Nilai Akhir</label>
+                                                            <div className="padding-top-1">
+                                                                {select}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div className="row padding-top-5">
-                                                    <div className="col-sm-12">
-                                                        <label className="score-attitude-new__label-form">Deskripsi Sikap</label>
-                                                        <div className="padding-top-1">
-                                                            <textarea className="textarea-description form-control" value={this.props.data_form && this.props.data_form.description}  onChange={(e) => {this.props.handlingInputText(e,'description')}} />
+                                                    <div className="row padding-top-5">
+                                                        <div className="col-sm-12">
+                                                            <label className="score-attitude-new__label-form">Deskripsi Sikap</label>
+                                                            <div className="padding-top-1">
+                                                                <textarea className="textarea-description form-control" value={this.props.data_form && this.props.data_form.description} onChange={(e) => { this.props.handlingInputText(e, 'description') }} />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div className="row margin-top-8">
-                                                    <div className="col-sm-4">
-                                                        <div className="range-button ">
-                                                            <button className="btn-green" onClick={this.handleSave}>Simpan</button>
+                                                    <div className="row margin-top-2">
+                                                        <div className="col-sm-4">
+                                                            <div className="range-button ">
+                                                                <button className="btn-green" onClick={this.handleSave}>Simpan</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -242,11 +246,12 @@ export class Index extends Component {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
                 </div>
+
             </Title>
         )
     }
@@ -255,8 +260,8 @@ export class Index extends Component {
 const mapStateToProps = state => ({
     data_header: state.attitude && state.attitude.data,
     data_form: state.attitude && state.attitude.data && state.attitude.data.data_form,
-    test:state
+    test: state
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreDetail,handlingInputText,handlingInputSelect }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ getDataScoreDetail, handlingInputText, handlingInputSelect }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
