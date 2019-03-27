@@ -35,7 +35,7 @@ class AddQuestion extends Component {
         </div>
         <div className="col-sm-4">
           <label>Jumlah Soal </label>
-          <div className="margin-top-1">
+          <div className="margin-top-1 margin-bottom-2">
             <input type="number" className="form-control" />
           </div>
         </div>

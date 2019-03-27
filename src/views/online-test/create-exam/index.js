@@ -21,6 +21,9 @@ class index extends Component {
             assessment_id: props.match.params.assessment_id,
             problemTypes: [],
             length: null,
+            questions: [
+                { problem_type: '', question_count: null }
+            ]
         };
         this.handleChangeSwitch = this.handleChangeSwitch.bind(this)
     }
@@ -38,19 +41,20 @@ class index extends Component {
     }
 
     addQuestion() {
-        this.setState({
-            length: this.state.length+1
-        })
+        let questions = this.state.questions
+        
+        questions.push(
+            { problem_type: '', question_count: null}
+            // <AddQuestion key={Math.random()} />
+        )
+        this.setState({questions: questions})
     }
     render() {
         let data = _.get(this, 'props.data', {})
         let selectedProblemType = data ? data.selectedProblemType : null
-        let questions = []
-        if (this.state.length) {
-            questions.push(
-                <AddQuestion key={Math.random()}/>
-            )
-        }
+        const questions = this.state.questions.map(question => {
+            return <AddQuestion key={Math.random()} />
+        })
         return (
             <Page title="Tulis Ujian Online">
                 <Header />
@@ -60,7 +64,7 @@ class index extends Component {
                             <div className='border-bottom'>
                                 <div className="padding-3">
                                     <span className="title-page"> Buat Soal Ujian </span>
-                                    <span className="title-page float-right"> {this.state.name} </span>
+                                    <span className="subject-head float-right"> {this.state.name} </span>
                                 </div>
                             </div>
                             <div className='form-position margin-bottom-3'>
