@@ -125,7 +125,7 @@ class Form extends Component {
           }
         </div>
         <div className="online-question__submit-wrapper">
-          <button className="online-question__submit btn-green">Selanjutnya</button>
+          <button className="online-question__submit btn-green" onClick={() => this.props.onSubmit()}>Selanjutnya</button>
         </div>
       </div>
     )

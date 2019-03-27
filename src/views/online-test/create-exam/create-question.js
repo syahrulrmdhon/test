@@ -3,10 +3,14 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getQuestion, getBasicCompetency } from './../../../redux-modules/modules/onlineQuestion'
+import { apiClient } from '../../../utils/apiClient'
 
 import Page from '../../../components/Title'
 import Header from '../../global/header'
 import QuestionNumber from './question-number'
+import _ from "lodash"
+
+
 import Form from './form'
 
 class CreateQuestion extends Component {
@@ -20,6 +24,7 @@ class CreateQuestion extends Component {
       questionLabel: 'PG'
     }
     this.onClickNumber = this.onClickNumber.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -58,6 +63,16 @@ class CreateQuestion extends Component {
     }
   }
 
+  onSubmit() {
+    const data = _.get(this.props.data, 'body', {})
+    // console.log(data)
+    const url = `v1/assessments/${this.state.assessmentId}/exams/${this.state.examId}/questions`
+
+    apiClient('post', url, data).then((response) => {
+      console.log(response)
+    })
+  }
+
   render() {
     return (
         <Page title="Deskripsi">
@@ -69,6 +84,7 @@ class CreateQuestion extends Component {
           <Form
             number={this.state.number}
             questionType={this.state.questionLabel}
+            onSubmit={this.onSubmit}
           />
         </div>
       </Page>
@@ -77,7 +93,7 @@ class CreateQuestion extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  data: state.onlineQuestion
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
