@@ -158,7 +158,7 @@ class AddComponent extends Component {
 
         return(
             <div className="padding-content">
-                <Header navbar={true} location='/assessment/tambah' />
+                <Header navbar={true} location='/assessment/add' />
                 <div className="container">
                     <div className="margin-content">
                         <div className="content-block main-block">
