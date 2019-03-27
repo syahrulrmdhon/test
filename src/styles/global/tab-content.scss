@@ -19,6 +19,7 @@ $nunito_bold: 'NunitoBold';
   .nav-link {
     border: none;
     color: #999999;
+    border-radius: unset;
     text-align: center;
     
     &.active {
