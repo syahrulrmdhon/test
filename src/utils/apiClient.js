@@ -34,16 +34,31 @@ export const apiClient = (method, url, request, params = {}) => {
     switch (method) {
         case 'get':
             return Axios.get(baseUrl + url, { headers: headers, params: params }).catch(
-            function (error) {
-                if (error.response.status === 500 ) {
-                    location.href = '/internal-server-error';
-                }
-            });
+                function (error) {
+                    if (error.response.status === 500 ) {
+                        location.href = '/internal-server-error';
+                    }
+                });
         case 'post':
-            return Axios.post(baseUrl + url, request, { headers: headers, params: params })
+            return Axios.post(baseUrl + url, request, { headers: headers, params: params }).catch(
+                function (error) {
+                    if (error.response.status === 500 ) {
+                        location.href = '/internal-server-error';
+                    }
+                });
         case 'put':
-            return Axios({ url: baseUrl + url, headers: headers, method: 'PUT', data: request })
+            return Axios({ url: baseUrl + url, headers: headers, method: 'PUT', data: request }).catch(
+                function (error) {
+                    if (error.response.status === 500 ) {
+                        location.href = '/internal-server-error';
+                    }
+                });
         case 'delete':
-            return Axios({ url: baseUrl + url, headers: headers, method: 'DELETE', data: request})
+            return Axios({ url: baseUrl + url, headers: headers, method: 'DELETE', data: request}).catch(
+                function (error) {
+                    if (error.response.status === 500 ) {
+                        location.href = '/internal-server-error';
+                    }
+                });
     }
 }
