@@ -8,6 +8,8 @@ const LOAD_FAIL = 'modules/onlineQuestion/LOAD_FAIL'
 const BASIC_COMPETENCIES = 'modules/onlineQuestion/BASIC_COMPETENCIES'
 const HANDLE_CHANGE_INPUT = 'modules/onlineQuestion/HANDLE_CHANGE_INPUT'
 const HANDLE_CHANGE_CORRECT_ANSWER = 'modules/onlineQuestion/HANDLE_CHANGE_CORRECT_ANSWER'
+const HANDLE_DELETE_CHOICE = 'modules/onlineQuestion/HANDLE_DELETE_CHOICE'
+const HANDLE_ADD_CHOICE = 'modules/onlineQuestion/HANDLE_ADD_CHOICE'
 const initialState = null;
 
 export default function reducer(state = initialState, action) {
@@ -21,7 +23,7 @@ export default function reducer(state = initialState, action) {
       delete state.error;
       if (state.result !== action.result) {
         const data = action.result.data.question
-        // console.log(action.result)
+
         let body = {
           "exam_question": {
             "qn_number": data.qn_number,
@@ -33,6 +35,9 @@ export default function reducer(state = initialState, action) {
         }
         if (data.exam_question_choices.length) {
           body.exam_question.exam_question_choices_attributes = data.exam_question_choices
+        }
+        else {
+          data.exam_question_choices.push({id: null, symbol: 'A', content: '', is_correct_ans: false})
         }
 
         return {
@@ -74,6 +79,43 @@ export default function reducer(state = initialState, action) {
         }
       })
       state.body.exam_question.exam_question_choices_attributes = state.data.question.exam_question_choices
+
+      return {
+        ...state,
+        loaded: true,
+        loading:false,
+      }
+    case HANDLE_DELETE_CHOICE:
+      const defaultCharCode = 65
+
+      const order = action.order
+      const options = state.data.question.exam_question_choices
+      options.splice(order, 1)
+      // console.log(order)
+      // console.log(options.length)
+
+      // const totalChoices = state.data.question.exam_question_choices.length
+      for (let counter = order; counter <= options.length; counter++) {
+        // console.log(counter)
+        console.log(options[counter])
+        console.log(options[counter].symbol)
+        // options[counter]["symbol"] = defaultCharCode + counter
+        // if (counter > 10) {
+        //   break
+        // }
+      }
+
+      return {
+        ...state,
+        loaded: true,
+        loading:false,
+      }
+    case HANDLE_ADD_CHOICE:
+      const initialCharCode = 65
+      const choices = state.data.question.exam_question_choices
+      const symbol = String.fromCharCode(initialCharCode + choices.length)
+
+      choices.push({id: null, symbol: symbol, content: '', is_correct_ans: false})
 
       return {
         ...state,
@@ -125,6 +167,20 @@ export function onChangeCorrectAnswer({order}) {
   return {
     type: HANDLE_CHANGE_CORRECT_ANSWER,
     order: order
+  }
+}
+
+export function deleteChoiceHandler({order}) {
+  return {
+    type: HANDLE_DELETE_CHOICE,
+    order: order
+  }
+}
+
+export function addChoiceHandler() {
+  console.log('pppp')
+  return {
+    type: HANDLE_ADD_CHOICE,
   }
 }
 

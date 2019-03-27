@@ -485,6 +485,9 @@ $nunito_bold: "NunitoBold";
 
   &__choice {
     margin-bottom: 14px;
+    position: relative;
+    display: flex;
+    align-items: center;
   }
 
   &__symbol {
@@ -495,7 +498,7 @@ $nunito_bold: "NunitoBold";
   }
 
   &__answer {
-    width: 456px;
+    width: 480px;
     margin-right: 16px;
     vertical-align: middle;
     border-radius: 4px;
@@ -504,6 +507,7 @@ $nunito_bold: "NunitoBold";
 
   &__radio {
     vertical-align: middle;
+    margin-right: 10px;
   }
 
   &__add-choice {
@@ -532,5 +536,38 @@ $nunito_bold: "NunitoBold";
   ::placeholder {
     font-family: $nunito_regular;
     color: #a1a1a1;
+  }
+
+  .delete {
+    height: 40px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:before, &:after {
+      position: absolute;
+      content: ' ';
+      height: 14px;
+      width: 2px;
+      background-color: #1a9d7f;
+    }
+
+    &:before {
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__delete-wrapper {
+    display: inline;
   }
 }

@@ -1,7 +1,12 @@
 import React, {Component} from "react"
 import { bindActionCreators } from 'redux'
 import { connect } from "react-redux"
-import { onChangeInput, onChangeCorrectAnswer } from './../../../redux-modules/modules/onlineQuestion'
+import {
+  onChangeInput,
+  onChangeCorrectAnswer,
+  deleteChoiceHandler,
+  addChoiceHandler
+} from "./../../../redux-modules/modules/onlineQuestion";
 
 import _ from "lodash"
 import Select from 'react-select'
@@ -32,6 +37,13 @@ class Form extends Component {
             checked={choice.is_correct_ans}
             onChange={(event) => this.props.onChangeCorrectAnswer({order: index})}
           />
+          {
+            index !== 0 &&
+              <div
+                className="delete"
+                onClick={() => this.props.deleteChoiceHandler({order: index})}
+              />
+          }
         </div>
       )
     })
@@ -90,9 +102,12 @@ class Form extends Component {
               <div className="online-question__answer-label">Jawaban</div>
               {listChoices}
           </div>
-          <div className="online-question__add-choice">
+          {
+            choices.length <= 25 &&
+            <div className="online-question__add-choice" onClick={() => this.props.addChoiceHandler()}>
               <span className="online-question__add-icon">+</span> Tambah Jawaban
             </div>
+          }
         </div>
         <div className="online-question__submit-wrapper">
           <button className="online-question__submit btn-green">Selanjutnya</button>
@@ -108,7 +123,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   onChangeInput,
-  onChangeCorrectAnswer
+  onChangeCorrectAnswer,
+  deleteChoiceHandler,
+  addChoiceHandler
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
