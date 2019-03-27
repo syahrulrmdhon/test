@@ -444,7 +444,7 @@ export class Basic extends Component {
                                   <label>No. Telp</label>
                                   <div className="padding-top-1 input-group ">
                                     <input
-
+                                      type="number"
                                       className="fullwidth"
                                       placeholder="Masukan Nama Provinsi"
                                       defaultValue={phone ? phone : ''}
