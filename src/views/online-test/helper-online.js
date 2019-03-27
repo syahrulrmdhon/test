@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { apiClient } from '../../utils/apiClient';
 
 export class DetailOnlineExam extends Component {
     render() {
@@ -82,4 +83,23 @@ export class DetailAction extends Component {
             {content}
         </div>
     }
+}
+
+export function getProblemTypes() {
+    apiClient('get', 'v1/filters/problem_types').then(res => {
+        let data = res.data.data.problem_types || []
+        let result = []
+        if (data.length > 0) {
+
+            data.map((data) => {
+                result.push({
+                    value: data.key,
+                    label: data.value
+                })
+            })
+        }
+        this.setState({
+            problemTypes: result
+        })
+    })
 }

@@ -1,23 +1,32 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import Page from './../../../components/Title'
 import Header from './../../global/header'
 import Switch from 'react-switch'
-import Select from 'react-select'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { handleChange, loadData } from './../../../redux-modules/modules/onlineExam'
+import { getProblemTypes } from './../helper-online'
 
 //scss
 import './../../../styles/online-test.scss'
+import AddQuestion from './add-question';
 
-export class index extends Component {
+class index extends Component {
     constructor(props) {
         super(props)
         this.state = {
             checked: false,
             name: props.location.state.name,
             assessment_id: props.match.params.assessment_id,
+            problemTypes: [],
+            length: null,
         };
         this.handleChangeSwitch = this.handleChangeSwitch.bind(this)
+    }
+
+    componentDidMount() {
+        getProblemTypes.call(this)
     }
 
     backToList() {
@@ -28,7 +37,20 @@ export class index extends Component {
         this.setState({ checked });
     }
 
+    addQuestion() {
+        this.setState({
+            length: this.state.length+1
+        })
+    }
     render() {
+        let data = _.get(this, 'props.data', {})
+        let selectedProblemType = data ? data.selectedProblemType : null
+        let questions = []
+        if (this.state.length) {
+            questions.push(
+                <AddQuestion key={Math.random()}/>
+            )
+        }
         return (
             <Page title="Tulis Ujian Online">
                 <Header />
@@ -76,11 +98,16 @@ export class index extends Component {
                                     />
                                 </div>
                                 <div className='margin-top-3'>
-                                    <div className="row">
+                                    {questions}
+                                    {/* <div className="row">
+                                        
                                         <div className="col-sm-8">
                                             <label>Tipe Soal</label>
                                             <div className="margin-top-1">
                                                 <Select
+                                                    onChange={(e) => { this.props.handleChange(e.value, 'selectedProblemType') }}
+                                                    options={this.state.problemTypes ? this.state.problemTypes : []}
+                                                    value={this.state.problemTypes.find((element) => { return element.value == selectedProblemType })}
                                                     classNamePrefix="select"
                                                     className="fullwidth"
                                                 />
@@ -92,9 +119,9 @@ export class index extends Component {
                                                 <input type="number" className="form-control" />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
-                                <div className="margin-top-3">
+                                <div className="margin-top-3" onClick={this.addQuestion.bind(this)}>
                                     <i className="fa fa-plus" aria-hidden="true"></i>
                                     <span className='normal-green-text'> Tambah Tipe Soal</span>
                                 </div>
@@ -118,11 +145,11 @@ export class index extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    data: state.onlineExam //listOnlineExam dari reducer
 })
-
-const mapDispatchToProps = {
-
-}
-
+const mapDispatchToProps = dispatch => bindActionCreators({
+    handleChange,
+    loadData
+}, dispatch
+)
 export default connect(mapStateToProps, mapDispatchToProps)(index)

@@ -5,7 +5,6 @@ import './../../../styles/online-test.scss'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getBank, handleChange } from './../../../redux-modules/modules/bank'
-import BankFilter from './filter';
 import BankContent from './content'
 import { basicComps, getProblemTypes } from './../../../utils/common'
 
