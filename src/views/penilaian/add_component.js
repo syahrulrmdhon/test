@@ -66,6 +66,7 @@ class AddComponent extends Component {
             break;
         }
 
+        console.log(data,"data")
         apiClient('post', url, data).then(response => {
             if(assessment_id){
                 apiClient('put', `v1/assessments/${assessment_id}`, data).then(response => {
