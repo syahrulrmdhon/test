@@ -6,7 +6,7 @@ export default class ApiClient {
   constructor(req) {
     methods.forEach(method => {
 
-      this[method] = (path, {headers}, params, data, files, fields, isExternal = false) => new Promise((resolve, reject) => {
+      this[method] = (path, {headers}, params, data, files, fields = false) => new Promise((resolve, reject) => {
         
         let request;
         request = superagent[method](path);
