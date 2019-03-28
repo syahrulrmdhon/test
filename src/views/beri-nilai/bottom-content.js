@@ -11,13 +11,9 @@ import Ava from './../../assets/images/avatar_def.svg'
 import Ava_m from './../../assets/images/m_avatar.svg'
 import Ava_f from './../../assets/images/f_avatar.svg'
 import Pencil from './../../assets/images/beri_nilai.svg';
-<<<<<<< HEAD
 import Loader from './../global/loader'
 import { NotAvailable } from './../global/notAvailable'
 
-=======
-import { NotAvailable } from '../../views/global/notAvailable'
->>>>>>> 668d65904b7af3291dfdb0b19203600a5c92017b
 
 
 const data_option = [

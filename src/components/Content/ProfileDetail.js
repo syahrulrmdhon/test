@@ -8,7 +8,6 @@ export default class ProfileDetail extends Component {
     let photo_url = this.props.user && this.props.user.user && this.props.user && this.props.user.user.url
     let data_photo = photo_url ? photo_url : Avatar
     const response = this.props.dataProfile
-<<<<<<< HEAD
     console.log(response, 'profile')
       // Edited by Risky S.
       if  (response.user.gender == 'M'){
@@ -16,8 +15,6 @@ export default class ProfileDetail extends Component {
       } else if(response.user.gender == 'F'){
        data_photo = Avatar_female 
       }
-=======
->>>>>>> 668d65904b7af3291dfdb0b19203600a5c92017b
     return (
       <div>
         <div className="avatar-wrapper">
