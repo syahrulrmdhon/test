@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Avatar from 'react-avatar';
 import Ava from './../../assets/images/avatar_def.svg';
+import Ava_m from './../../assets/images/m_avatar.svg';
+import Ava_f from './../../assets/images/f_avatar.svg';
 
 export class RightComponent extends Component {
   render() {
@@ -25,7 +27,8 @@ export class RightComponent extends Component {
             return <div className="">
               <div className="margin-top-5" key={Math.random()}>
                 <div className="margin-top-1 padding-bottom-4 d-flex align-items-center">
-                  <Avatar src={Ava} size="30" round={true} />
+                {/* Edited by Risky S.*/}
+                  <Avatar src={data.user.gender == 'M'?Ava_m:Ava_f} size="30" round={true} />
                   <div className="name-wrapper">
                     <div className="under-kkm">{data.user.full_name}</div>
                     <div className="email-under-kkm">{data.user.email}</div>

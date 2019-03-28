@@ -8,6 +8,8 @@ import { bindActionCreators } from 'redux'
 import classnames from 'classnames'
 import { Users, Subjects, Averages } from './helper'
 import Pencil from './../../../assets/images/beri_nilai.svg'
+import Loader from './../../global/loader'
+import { NotAvailable } from './../../global/notAvailable'
 
 class BottomContent extends Component {
     constructor(props) {
@@ -125,6 +127,12 @@ class BottomContent extends Component {
                                 </div>
                             </div>
                         </div>
+                        {/* Edited by Risky S. */}
+                        {
+                        this.props.loader ?
+                            <Loader loader={true} />
+                        :
+                        dataArray ?
                         <div className='content-bottom'>
                             <div className='header'>
                                 <div className='row'>
@@ -186,6 +194,9 @@ class BottomContent extends Component {
                                 }
                             </div>
                         </div>
+                        :
+                    <NotAvailable>Data tidak tersedia</NotAvailable>
+                    }
                     </div>
                 </div>
             </div>
