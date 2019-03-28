@@ -5,6 +5,7 @@ const BUILD_DATA = 'modules/onlineExam/BUILD_DATA'
 const HANDLE_EVENT = 'modules/onlineExam/HANDLE_EVENT'
 const ADD_QUESTION = 'modules/onlineExam/ADD_QUESTION'
 const REMOVE_QUESTION = 'modules/onlineExam/REMOVE_QUESTION'
+const HANDLE_EVENT_PROBLEM_TYPE = 'modules/onlineExam/HANDLE_EVENT_PROBLEM_TYPE'
 
 const initialState = {
     exam: null,
@@ -36,7 +37,6 @@ export default function reducer(state = initialState, action = {}) {
                 state.exam = {
                     name: '',
                     description: '',
-                    exam_type: '',
                     kkm: null,
                     is_assigned_exam: true,
                     exam_problem_types_attributes: [{ problem_type: '', question_count: null }]
@@ -48,12 +48,15 @@ export default function reducer(state = initialState, action = {}) {
                 ...state
             }
         case HANDLE_EVENT:
-            state[action.modelName][action.fieldName] = action.value || []
-            if (action.relates.length > 0) {
-                action.relates.map((key, idx) => {
-                    state[key] = ''
-                })
+            state[action.modelName][action.fieldName] = action.value || ''
+
+            return {
+                ...state,
+                loaded: true,
+                loading: false,
             }
+        case HANDLE_EVENT_PROBLEM_TYPE:
+            state[action.modelName][action.modelSubName][action.idx][action.fieldName] = action.value || ''
 
             return {
                 ...state,
@@ -92,6 +95,17 @@ export function handleEvent(value, modelName, fieldName, relates = []) {
         modelName: modelName,
         fieldName: fieldName,
         relates: relates
+    }
+}
+
+export function handleEventProblemtype(value, modelName, modelSubName, fieldName, idx){
+    return {
+        type: HANDLE_EVENT_PROBLEM_TYPE,
+        value: value,
+        modelName: modelName,
+        modelSubName: modelSubName,
+        fieldName: fieldName,
+        idx: idx,
     }
 }
 

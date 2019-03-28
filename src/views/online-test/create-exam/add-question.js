@@ -3,7 +3,7 @@ import Select from 'react-select'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
-  handleEvent,
+  handleEventProblemtype,
   buildObject,
   removeQuestion
 } from './../../../redux-modules/modules/onlineExam'
@@ -23,6 +23,7 @@ class AddQuestion extends Component {
   }
   render() {
     let exam_problem_types = _.get(this, 'props.exam_problem_type', [])
+    
     const { problem_type, question_count } = exam_problem_types
     let remove
     if (exam_problem_types) {
@@ -42,7 +43,7 @@ class AddQuestion extends Component {
           <label>Tipe Soal</label>
           <div className="margin-top-1">
             <Select
-              onChange={(e) => { this.props.handleEvent(e.value, 'exam_problem_type', 'problem_type') }}
+              onChange={(e) => { this.props.handleEventProblemtype(e.value, 'exam', 'exam_problem_types_attributes', 'problem_type', this.props.index) }}
               options={this.state.problemTypes ? this.state.problemTypes : []}
               value={this.state.problemTypes.find((e) => { return e.value == problem_type })}
               classNamePrefix="select"
@@ -59,7 +60,7 @@ class AddQuestion extends Component {
               placeholder='Contoh: 10'
               name='question_count'
               defaultValue={question_count}
-              onChange={(e) => { this.props.handleEvent(e.target.value, 'exam_problem_type', 'question_count') }}
+              onChange={(e) => { this.props.handleEventProblemtype(e.target.value, 'exam', 'exam_problem_types_attributes', 'question_count', this.props.index) }}
             />
           </div>
         </div>
@@ -73,7 +74,7 @@ const mapStateToProps = (state) => ({
   exam_problem_types: _.get(state, 'onlineExam.exam.exam_problem_types_attributes', {})
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  handleEvent,
+  handleEventProblemtype,
   buildObject,
   removeQuestion
 }, dispatch
