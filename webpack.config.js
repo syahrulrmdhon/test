@@ -34,6 +34,18 @@ module.exports = (env) => ({
         chunkFilename: '[id].[chunkhash].chunk.js',
         publicPath: publicPath
     },
+    resolve: {
+        alias: {
+            'history/createMemoryHistory':
+                path.resolve(__dirname, 'node_modules/history/es/createMemoryHistory'),
+            'history/createHashHistory':
+                path.resolve(__dirname, 'node_modules/history/es/createHashHistory'),
+            'history/createBrowserHistory':
+                path.resolve(__dirname, 'node_modules/history/es/createBrowserHistory'),
+            'history/PathUtils':
+                path.resolve(__dirname, 'node_modules/history/es/PathUtils')
+        }
+    },
     module: {
         rules: [
             {
