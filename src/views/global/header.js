@@ -162,12 +162,7 @@ export default class Header extends Component {
         let paramsData = params === undefined?'':params 
         let text = ''
 
-<<<<<<< HEAD
         if (this.state.schoolList.length == 1) {
-=======
-
-        if (this.state.schoolList.length > 1) {
->>>>>>> 49a144c7f093215cb2b92fe65c66ecd1dd7d168e
             text = <button id="dropdown-profile"  onClick={this.profile}  className="btn btn-info">{user_name}<span className="caret"></span></button>
         } else {
             text = <button id="dropdown-profile"  onClick={this.profile}  className="btn btn-info">{user_name}<span className="caret"></span></button>
