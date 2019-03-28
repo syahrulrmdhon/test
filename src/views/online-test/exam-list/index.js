@@ -21,15 +21,31 @@ class OnlineExamList extends Component {
             totalPages: 0,
             sizes: 0,
             classes: [],
-            loader: true
+            loader: true,
+            assessment_id: props.match.params.assessment_id,
         }
 
         this.getData = this.getData.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     componentDidMount() {
         this.getData()
+    }
+
+    detailClicked(e, id, examId) {
+        e.preventDefault()
+        this.props.history.push({
+            pathname: 'bank/' +id,
+            state: {id: this.state.assessment_id, examId: examId}
+        })
+    }
+
+    createQuestion(e, id, name) {
+        e.preventDefault()
+        this.props.history.push({
+            pathname: 'create/' + id,
+            state: {id: this.state.assessment_id, name: name}
+        })
     }
 
     getData() {
@@ -51,7 +67,7 @@ class OnlineExamList extends Component {
             params['grade_id'] = selectedGrade
         }
 
-        apiClient('get', 'v1/tests', false, false).then(res => {
+        apiClient('get', 'v1/tests', false, params).then(res => {
             const data = _.get(res, 'data.data', {})
             const { assessments } = data || []
             const { entries, total_entries, total_pages, size } = assessments || []
@@ -76,17 +92,18 @@ class OnlineExamList extends Component {
             <Page title='Daftar Ujian'>
                 <Header />
                 <div className='online-exam'>
-
                     <div className='content-block main-block'>
                         <div className='margin-box row h-100'>
                             <div className='col-sm-3 left-block padding-top-4'>
                                 <FilterOnlineExam
-                                    handleSubmit={this.handleSubmit}
+                                    handleSubmit={this.handleSubmit.bind(this)}
                                 />
                             </div>
                             <ContentOnlineExam
                                 data={this.state.data}
                                 loader={this.state.loader}
+                                detailClicked={this.detailClicked.bind(this)}
+                                create = {this.createQuestion.bind(this)}
                             />
                         </div>
                     </div>

@@ -30,24 +30,28 @@ export default class Index extends Component {
     apiClient('post', url, body).then((response) => {
       this.props.history.push({
         pathname: `/detail/${studentId}`,
+        state:{status:this.props.location.state && this.props.location.state.status}
       })
     })
   }
 
+ 
   render() {
+    let status = {
+      status:this.props.location.state && this.props.location.state.status
+    }
     return (
       <Page title="Deskripsi">
-        <Header navbar={false} location={this.state.path}/>
-
-        <div className="description">
-          <div className="description__wrapper row">
-            <div className="col-sm-4 description__content-left">
+        <Header navbar={false} location={this.state.path} params={status}/>
+        <div className="score-description">
+          <div className="score-description__wrapper row">
+            <div className="col-sm-4 score-description__content-left">
               <BasicCompetence
                 studentId={this.state.studentId}
                 subjectId={this.state.subjectId}
                 category={this.state.category} />
             </div>
-            <div className="col-sm-8 description__content-right">
+            <div className="col-sm-8 score-description__content-right">
               <Form
                 studentId={this.state.studentId}
                 subjectId={this.state.subjectId}

@@ -127,7 +127,6 @@
 .schedule .description-home{
     margin-top:5px;
     margin-bottom:5px; 
-    font-weight: 700;  
 }
 .schedule .holiday .description-home{
     color: #ff7777;
@@ -216,7 +215,6 @@
     color: #4a4a4a;
 }
 .popup-header .date-title{
-    font-weight: 600;
     color: #1a9d7f;
     margin-top: 5px;
 }
@@ -226,7 +224,6 @@
 .popup-body label{
     color: #51647a;
     font-size: 10px;
-    font-weight: 600;
     display: block;
 }
 .popup-body input[type='text'],

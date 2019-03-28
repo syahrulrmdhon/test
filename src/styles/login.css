@@ -68,6 +68,10 @@
   text-decoration: none;
   filter: brightness(99%);
 }
+.safari .login .row{
+  display: -webkit-flex;
+  flex-wrap: unset;
+}
 .copyright {
   font-size: 10px;
   text-align: center;
@@ -87,7 +91,6 @@
    font-size: 13px;
    text-align: center;
    font-family: "Nunito Sans", sans-serif;
-   font-weight: 300;
    color: #000;
 
 }

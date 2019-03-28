@@ -10,12 +10,12 @@ import { getMenu } from './../../redux-modules/modules/menu'
 
 const menus = [
     { name: "Beranda", link: "/home", role: 'all' },
-    { name: "Absensi", link: "/absen", role: 'all' },
-    { name: "Penilaian", link: "/penilaian", role: 'all' },
+    { name: "Absensi", link: "/attendance", role: 'all' },
+    { name: "Penilaian", link: "/assessment", role: 'all' },
+    { name: "Daftar Nilai", link: "/score-list", role: 'all' },
+    { name: "Rapor Kelas", link: "/student-report", role: 'homeroom' },
+    { name: "Daftar Murid", link: "/students", role: 'homeroom' },
     { name: "Ujian Sekolah", link: "/online-exam/", role: 'all' },
-    { name: "Daftar Nilai", link: "/daftar-nilai", role: 'all' },
-    { name: "Rapor Kelas", link: "/rapor", role: 'homeroom' },
-    { name: "Daftar Murid", link: "/murid", role: 'homeroom' },
 ]
 
 class MenuBar extends Component {
@@ -36,6 +36,7 @@ class MenuBar extends Component {
             isOpen: !this.state.isOpen
         });
     }
+ 
     render() {
         let content = []
         const { navbar } = this.props
@@ -59,24 +60,34 @@ class MenuBar extends Component {
                 )
             })
         }
+
+
+        let data = this.props.data
         return (
             <div className="menu-bar">
                 <div className="bg-white size-nav">
                     {
-                        navbar === false ?
+                        navbar === false && this.props.location !== '/' ?
                             <div className="bg-white">
                                 <div className="menu">
                                     <div className="back">
-                                        <Link to={this.props.location}><i className="fa fas fa-chevron-left"></i> Kembali</Link>
+                                        <Link to={{
+                                            pathname: this.props.location,
+                                            state: data
+                                        }}
+                                        ><i className="fa fas fa-chevron-left"></i> {this.props.label}</Link>
                                     </div>
                                 </div>
                             </div>
-                            :
-                            <div className="topnav">
-                                <div className="menu">
-                                    {content}
+                            : ( navbar === false && this.props.location === '/' ? 
+                                <div></div> 
+                                :
+                                <div className="topnav">
+                                    <div className="menu">
+                                        {content}
+                                    </div>
                                 </div>
-                            </div>
+                            )
                     }
                 </div>
             </div>

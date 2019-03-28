@@ -27,6 +27,7 @@ import ParticipantUser from '../views/exam/participant_class/user_new'
 import NoQuestions from '../views/beri-nilai/no-questions/no-questions'
 import Questions from '../views/beri-nilai/no-questions/questions'
 import NotFound from '../views/global/not-found'
+import InternalServerError from '../views/global/internal-server-error'
 import NewScore from './../views/beri-nilai/new'
 import EditExam from '../views/create-exam/index'
 import EditQuestion from '../views/create-exam/create-question'
@@ -50,7 +51,7 @@ import TeachList from './../views/profile/teach-list'
 import OnlineExamList from './../views/online-test/exam-list/index'
 import CreateList from './../views/online-test/create-exam/index'
 import Bank from './../views/online-test/bank/bank'
-
+import Global from './../views/global/navbar'
 
 
 export const MainRoutes = [
@@ -100,29 +101,30 @@ export const MainRoutes = [
         component: Home
     },
     {
-        path: '/absen',
+        path: '/attendance',
         component: Absensi
     },
 
     // PENILAIAN
     {
-        path: '/penilaian/tambah',
+        path: '/assessment/add',
         component: AssessmentNew
     },
     {
-        path: '/penilaian/edit/:id',
+        path: '/assessment/edit/:id',
         component: AssessmentNew
     },
     {
-        path: '/penilaian/tambah-component',
+        path: '/assessment/add-component',
         component: AssessmentComponent
     },
     {
-        path: '/penilaian/edit-component/:id',
+        path: '/assessment/edit-component/:id',
         component: AssessmentComponent
     },
     {
-        path: '/penilaian',
+        path: '/assessment',
+        exact:true,
         component: Assessment
     },
     {
@@ -151,15 +153,15 @@ export const MainRoutes = [
     // END SKILL
 
     {
-        path: '/daftar-nilai',
+        path: '/score-list',
         component: DaftarNilai
     },
     {
-        path: '/rapor',
+        path: '/student-report',
         component: Rapor
     },
     {
-        path: '/murid',
+        path: '/students',
         component: DaftarMurid
     },
     {
@@ -177,10 +179,12 @@ export const MainRoutes = [
     },
     {
         path: '/exam/:id',
+        exact:true,
         component: Exam
     },
     {
         path: '/assessment/:assessment_id/exam/:exam_id/class/:class_id/student/:student_id',
+        exact:true,
         component: NewScore
     },
     {
@@ -253,12 +257,26 @@ export const MainRoutes = [
         component: OnlineExamList
     },
     {
-        path: '/online-exam/create',
-        component: CreateList
+        path: '/online-exam/bank/:id',
+        component: Bank
     },
     {
-        path: '/bank',
-        component: Bank
+        path: '/online-exam/create/:id',
+        component: CreateList
+    },
+    // {
+    //     path: '/bank',
+    //     component: Bank
+    // },
+
+    {
+        path: '/globa',
+        component: Global
+    },
+
+    {
+        path: '/internal-server-error',
+        component: InternalServerError
     },
 
     {

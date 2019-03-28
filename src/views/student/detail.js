@@ -83,7 +83,7 @@ export default class Detail extends Component {
 
     this.props.history.push({
       pathname: `/detail/${this.state.studentId}/description/${id}`,
-      state: { status: 'murid', category: category }
+      state: { status: this.props.location.state && this.props.location.state.status, category: category  }
     })
   }
 
@@ -103,13 +103,13 @@ export default class Detail extends Component {
     const menu = this.props.location.state && this.props.location.state.status
     let path = ''
     if (menu === 'absensi') {
-      path = '/absen'
+      path = '/attendance'
     } else if (menu === 'rapor') {
-      path = '/rapor'
+      path = '/student-report'
     } else if (menu === 'daftar-nilai') {
-      path = '/daftar-nilai'
+      path = '/score-list'
     } else if (menu === 'murid') {
-      path = '/murid'
+      path = '/students'
     }
 
     return (
@@ -130,7 +130,9 @@ export default class Detail extends Component {
               dataProfile={this.state.profile}
               subjects={this.state.subjects}
               studentId={this.state.studentId}
-              redirect={this.redirect}/>
+              redirect={this.redirect}
+              menu={this.props.location.state && this.props.location.state.status}
+              />
           </div>
         </div>
       </Page>

@@ -112,7 +112,7 @@ export default class Table extends Component {
                         <td width="25%"  className="align-right padding-right-6">
                             <div className="action-wrapper">
                                 <NavLink to={url} className="btn default margin-right-4">Lihat</NavLink>
-                                <NavLink to={`/penilaian/edit/${value.id}`}>
+                                <NavLink to={`/assessment/edit/${value.id}`}>
                                     <FontAwesome name="edit" className="margin-left-2 cgreen" />
                                 </NavLink>
                                 <FontAwesome name="trash" className="margin-left-2 margin-right-2 cgreen" onClick={this.delete.bind(this, value)} />
@@ -127,6 +127,7 @@ export default class Table extends Component {
 
         return (
             <div className="table-responsive">
+                {/* <div className="NunitoBold" >tes data </div> */}
                 <table className="table assessment">
                     <thead>
                         <tr className="main-head">

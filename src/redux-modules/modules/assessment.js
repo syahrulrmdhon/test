@@ -47,9 +47,7 @@ export default function reducer(state = initialState, action = {}) {
                 loading: true,
             }
         case REMOVE_ATTITUDE_ITEM:
-            console.log(state.user_attitudes_attributes,"my attrib")
             state.user_attitudes_attributes = removeField(state.user_attitudes_attributes, action.idx)
-            console.log(state.user_attitudes_attributes,"my attrib")
             return{
                 ...state,
                 loaded: false,
@@ -208,7 +206,6 @@ export default function reducer(state = initialState, action = {}) {
 
                 if(assessment.user_attitudes_attributes === undefined){
                     assessment['user_attitudes_attributes'] = []
-                    console.log("here enter",assessment)
                     assessment.user_attitudes_attributes.push({
                         class_id: null,
                         user_id: null,
@@ -220,7 +217,6 @@ export default function reducer(state = initialState, action = {}) {
                 }
             }
 
-            console.log(assessment ,"here assetss")
 
             return {
                 loaded: true,
