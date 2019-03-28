@@ -7,6 +7,8 @@ import Avatar from 'react-avatar';
 import { apiClient } from './../../utils/apiClient'
 import Select from 'react-select'
 import User from './../../assets/images/avatar_def.svg'
+import User_male from './../../assets/images/m_avatar.svg'
+import User_female from './../../assets/images/f_avatar.svg'
 import DatePicker from 'react-datepicker'
 import {
   getUSer,
@@ -265,6 +267,7 @@ export class Basic extends Component {
     let dob = this.props.user && this.props.user.user && this.props.user && this.props.user.user.dob
     let pob = this.props.user && this.props.user.user && this.props.user && this.props.user.user.pob
     let photo_url = this.props.user && this.props.user.user && this.props.user && this.props.user.user.url
+    let gender = this.props.user && this.props.user.user && this.props.user && this.props.user.user.gender
 
     let check_dob = dob ? dob : null
 
@@ -325,6 +328,11 @@ export class Basic extends Component {
     let style = ''
     if (data_photo == User) {
       style = 'remove-profile hide'
+      if (gender == 'M'){
+        data_photo = User_male
+      }else if(gender == 'F'){
+        data_photo = User_female
+      }
     } else {
       style = 'remove-profile'
     }

@@ -30,6 +30,7 @@ export default function reducer(state = initialState, action) {
             phone_number: action.result.data.profile.phone_number ? action.result.data.profile.phone_number : '',
             email: action.result.data.profile.email ? action.result.data.profile.email : '',
             full_name: action.result.data.profile.full_name ? action.result.data.profile.full_name : '',
+            gender: action.result.data.profile.gender ? action.result.data.profile.gender : '',
             pob: action.result.data.profile.pob ?  action.result.data.profile.pob : '',
             dob: action.result.data.profile.dob ? action.result.data.profile.dob : '',
             url: action.result.data.profile.photo_url ? action.result.data.profile.photo_url : '',
