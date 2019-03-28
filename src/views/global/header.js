@@ -159,23 +159,25 @@ export default class Header extends Component {
         let navbarOpt = navbar === undefined ? true : false
         let path = location === undefined ? '/murid' : location
         let text = ''
-        if (this.state.schoolList.length > 1) {
+
+        if (this.state.schoolList.length == 1) {
             text = <button id="dropdown-profile"  onClick={this.profile}  className="btn btn-info">{user_name}<span className="caret"></span></button>
         } else {
             text = <button id="dropdown-profile"  onClick={this.profile}  className="btn btn-info">{user_name}<span className="caret"></span></button>
-            // text = <NavItem>
-            //     <ButtonToolbar>
-            //         <DropdownButton
-            //             bsStyle='info'
-            //             title={user_name}
-            //             id='dropdown-profile'
-            //         >
-            //             <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
-            //                 <span className="profile padding-left-1">Profil</span>
-            //             </MenuItem>
-            //         </DropdownButton>
-            //     </ButtonToolbar>
-            // </NavItem>
+            text = <NavItem>
+                <ButtonToolbar>
+                    <DropdownButton
+                        bsStyle='info'
+                        title={user_name}
+                        id='dropdown-profile'
+                    >
+                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
+                            <span className="profile padding-left-1">Profil</span>
+                        </MenuItem>
+                        {school_account}
+                    </DropdownButton>
+                </ButtonToolbar>
+            </NavItem>
         }
 
         return (
