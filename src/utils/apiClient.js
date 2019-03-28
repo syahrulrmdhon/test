@@ -1,5 +1,5 @@
 import Axios from 'axios'
-// import history from './../views/global/browser-history';
+import history from './../views/global/browser-history';
 
 export const apiClient = (method, url, request, params = {}) => {
     const baseUrl = `${process.env.API_URL}`
