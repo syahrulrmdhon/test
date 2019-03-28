@@ -53,13 +53,13 @@ class BasicCompetence extends Component {
 
     return (
       <div className="main-block">
-        <div className="description__title">Daftar KD</div>
-        <div className="description__basic-competencies">
+        <div className="score-description__title">Daftar KD</div>
+        <div className="score-description__basic-competencies">
           {
             (numberOfBasicCompetencies > 0) ?
-              <div className="description__basic-competencies-status-wrapper">
+              <div className="score-description__basic-competencies-status-wrapper">
                 Semua
-                <span className="description__basic-competencies-total">
+                <span className="score-description__basic-competencies-total">
                   ({numberOfBasicCompetencies})
                 </span>
               </div>
@@ -67,11 +67,11 @@ class BasicCompetence extends Component {
               <div className="empty">Tidak Ada Data</div>
           }
 
-          <div className="description__basic-competencies-wrapper">
+          <div className="score-description__basic-competencies-wrapper">
             {basicCompetencies.length > 0 && <Competencies />}
           </div>
         </div>
-        <div className="description__predicate-wrapper bg-white">
+        <div className="score-description__predicate-wrapper bg-white">
           <Nav tabs className="toggle-predicate">
             <NavItem className={classnames({
                   active: this.state.activeTab === ""

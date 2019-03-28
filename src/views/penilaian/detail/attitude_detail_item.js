@@ -64,7 +64,7 @@ class AttitudeDetailItem extends Component {
                                 <div className="content-input">
                                     <input 
                                         className="fullwidth"
-                                        value={description}
+                                        defaultValue={description}
                                         placeholder="Masukkan deskripsi"
                                         name="description"
                                         onChange={(event) => {this.props.handleUpdateAttitude(event.target.value, this.props.index, 'description')}}

@@ -112,6 +112,7 @@ class AddAttitude extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
+    assessment_classeset: state,
     assessment: state.assessment ? state.assessment : {},
     assessment_attitude: state.assessment.assessment_attitudes_attributes ? (state.assessment.assessment_attitudes_attributes.length > 0 ? state.assessment.assessment_attitudes_attributes[0] : {})  : {},
     assessment_subject: state.assessment.assessment_subjects_attributes ? state.assessment.assessment_subjects_attributes[0] : {},

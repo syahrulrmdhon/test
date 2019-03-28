@@ -206,7 +206,6 @@ export default function reducer(state = initialState, action = {}) {
 
                 if(assessment.user_attitudes_attributes === undefined){
                     assessment['user_attitudes_attributes'] = []
-                    console.log("here enter",assessment)
                     assessment.user_attitudes_attributes.push({
                         class_id: null,
                         user_id: null,
@@ -218,7 +217,6 @@ export default function reducer(state = initialState, action = {}) {
                 }
             }
 
-            console.log(assessment ,"here assetss")
 
             return {
                 loaded: true,

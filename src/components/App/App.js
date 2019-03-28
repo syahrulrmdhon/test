@@ -16,6 +16,7 @@ class App extends Component {
     const user_id = localStorage.getItem('user_id')
     const path_url = this.props.location.pathname
 
+
     if(regist_token == null){
       if(token == null){
         this.props.history.push('/')
@@ -35,6 +36,7 @@ class App extends Component {
     }
     
     this.disableScreen();
+    this.safari();
   }
 
   disableScreen () {
@@ -45,6 +47,12 @@ class App extends Component {
         message: `Resolusi layar tidak mendukung.`,
       })
     }
+}
+
+safari() {
+  if (window.safari) {
+    document.getElementsByTagName("BODY")[0].className += " safari";
+  }
 }
 
 // Initial execution if needed

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { getDataScoreAttitude } from './../../../../redux-modules/modules/attitude'
 import { bindActionCreators } from 'redux';
 import Avatar from 'react-avatar';
-import Ava from './../../../../assets/images/img_avatar.png'
+import Ava from './../../../../assets/images/avatar_def.svg'
 import BrokenHeart from './../../../../assets/images/BROKENHEARTFORHENGKYFROMHENGKY.svg'
 
 export class Report extends Component {

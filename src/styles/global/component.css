@@ -1,6 +1,9 @@
 /* Font NunitoSans */
 
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
+body{
+  font-family: 'NunitoBold' !important
+}
+
 button, .pointer, input[type=submit]{
   cursor: pointer;
 }
@@ -71,10 +74,10 @@ textarea.textarea-box{
   height: unset;
 }
 
-option {
+/* option {
   margin: auto;
   font-family: "Nunito Sans", sans-serif;
-}
+} */
 
 /* button */
 
@@ -83,7 +86,7 @@ option {
   width: 100%;
   color: white;
   background: #1a9d7f;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "NunitoRegular";
   cursor: pointer;
 }
 
@@ -105,8 +108,8 @@ option {
 }
 
 .btn-white:hover {
-  background: #1a9d7f;
-  color: white;
+  filter: brightness(90%);
+  color: #1a9d7f;
 }
 
 .btn-young-green {
@@ -189,12 +192,12 @@ thead {
 }
 
 .font-white {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "NunitoRegular";
   color: white !important;
 }
 
 .font-grey {
-  font-family: "Nunito Sans", sans-serif;
+  font-family:"NunitoRegular";
   color: #9da2a6;
 }
 
@@ -1061,11 +1064,11 @@ thead {
 /* Text Bold = Tulisannya bold semua */
 
 strong, .bold {
-  font-weight: 700;
+  font-weight: bold;
 }
 
 .normal-font {
-  font-weight: 400;
+  font-weight: normal;
 }
 
 /* Small Font */
@@ -1291,6 +1294,7 @@ label.header-title.form {
   border: 1px solid #1a9d7f;
   color: #1a9d7f;
   padding: 10px 30px;
+  font-family: 'NunitoRegular'
 }
 
 .filter-btn {
@@ -1383,6 +1387,7 @@ ul.toggle>li.nav-item a.active {
   max-width: 100%;
   border-collapse: separate;
   border-spacing: 0 1em;
+  /* font-family:  */
 }
 
 table.table.assessment tr {
@@ -1402,7 +1407,6 @@ table.table.assessment th, table.table.assessment td {
 
 table.table.assessment td {
   vertical-align: middle;
-  font-weight: 600;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.11;
@@ -1487,7 +1491,6 @@ tbody tr:nth-child(even) {
   text-align: center;
   color: #4a4a4a;
   font-size: 16px;
-  font-weight: 600;
 }
 
 .switch .trigger-account {
@@ -1515,7 +1518,6 @@ tbody tr:nth-child(even) {
 }
 
 .switch .name-school {
-  font-weight: 600;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -1588,7 +1590,6 @@ tbody tr:nth-child(even) {
 }
 .modal-alert .toggle span.description{
   font-size: 12px;
-  font-weight: 600;
   color: #4a4a4a;
 }
 
@@ -1630,7 +1631,6 @@ tbody tr:nth-child(even) {
   clear: both;
   color: #333;
   display: block;
-  font-weight: 400;
   line-height: 1.42857143;
   padding: 3px 20px;
   white-space: nowrap;
@@ -1877,7 +1877,6 @@ input, td {
 
 .heart {
   color: #199d7f;
-  font-family: "NunitoBold";
   font-size: 10px;
 }
 

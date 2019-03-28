@@ -155,12 +155,19 @@ export default class Header extends Component {
                 school_account.push(<MenuItem key={Math.random()} eventKey={Math.random()} className={actived} onClick={() => { this.onChangeSchool(school) }} value={school.id} ><FontAwesome className="check-school" name={icon} /> {seeMore(school.name, 20)} </MenuItem>)
             })
         }
-        const { navbar, location } = this.props
+        const { navbar, location, label, params } = this.props
         let navbarOpt = navbar === undefined ? true : false
-        let path = location === undefined ? '/murid' : location
+        let path = location === undefined ? '/' : location
+        let labelPath = label === undefined?'Kembali':label
+        let paramsData = params === undefined?'':params 
         let text = ''
 
+<<<<<<< HEAD
         if (this.state.schoolList.length == 1) {
+=======
+
+        if (this.state.schoolList.length > 1) {
+>>>>>>> 49a144c7f093215cb2b92fe65c66ecd1dd7d168e
             text = <button id="dropdown-profile"  onClick={this.profile}  className="btn btn-info">{user_name}<span className="caret"></span></button>
         } else {
             text = <button id="dropdown-profile"  onClick={this.profile}  className="btn btn-info">{user_name}<span className="caret"></span></button>
@@ -179,6 +186,8 @@ export default class Header extends Component {
                 </ButtonToolbar>
             </NavItem>
         }
+
+        // console.log(this.props.label,"label")
 
         return (
             <div className="fix-nav">
@@ -206,7 +215,7 @@ export default class Header extends Component {
                         </Navbar>
                     </div>
                 </div>
-                <Menu navbar={navbarOpt} location={path} />
+                <Menu navbar={navbarOpt} location={path} data={this.props.params} label={labelPath} data={paramsData} />
             </div>
         )
     }

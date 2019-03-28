@@ -107,6 +107,8 @@ class Nilai extends Component {
     this.setState({
       search: e.target.value
     })
+    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.asssessment_id, e.target.value,'')
+
   }
 
   onChangeScore(valueOpt){

@@ -56,9 +56,10 @@ class AddFinalAttitude extends Component {
         const { school_attitude_id } = this.props.assessment_attitude
         const { school_subject_id } = this.props.assessment_subject
         let result = ''
-
+        let title = []
         switch(assessment_type){
             case 'final_subject':
+            title =  'Sikap -Penilaian Mata Pelajaran Ahkir'
             result = <div className="content-input margin-top-5">
                 <label className="content-label">Mata Pelajaran</label>
                 <Select
@@ -74,6 +75,7 @@ class AddFinalAttitude extends Component {
             </div>
             break;
             case 'final_aspect':
+                title = 'Sikap - Penilaian Aspek Sikap Ahkir'
                 result = <div className="content-input margin-top-5">
                     <label className="content-label">Aspek Sikap</label>
                     <Select
@@ -92,7 +94,7 @@ class AddFinalAttitude extends Component {
 
         return(
             <div>
-                <label className="header-title margin-top-10 margin-bottom-6">Sikap - Penilaian Akhir Aspek Sikap</label>
+                <label className="header-title margin-top-10 margin-bottom-6">{title}</label>
                 <div className="row">
                     <div className="col-sm-11">
                         <div className="row">
@@ -118,6 +120,7 @@ class AddFinalAttitude extends Component {
 }
 const mapStateToProps = (state, props) => ({
     assessment: state.assessment,
+    assessment_classeset: state,
     assessment_attitude: state.assessment.assessment_attitudes_attributes ? (state.assessment.assessment_attitudes_attributes.length ? state.assessment.assessment_attitudes_attributes[0] : {
         school_attitude_id: null
     } )  : {

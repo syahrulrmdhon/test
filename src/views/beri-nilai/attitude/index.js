@@ -25,11 +25,11 @@ export class index extends Component {
     }
 
     render() {
-        let path = '/penilaian'
+        let path = '/assessment'
         let data_title = this.props.data_panel && this.props.data_panel && this.props.data_panel.attitude && this.props.data_panel.attitude.data && this.props.data_panel.attitude.data
         console.log(data_title, "here ")
         let title = []
-        let aspect= []
+        let aspect = []
         if (data_title && data_title.assessment_type === 'final_subject') {
             title.push(
                 <div className="block bold score-attitude-title">
@@ -56,23 +56,25 @@ export class index extends Component {
                         <Header navbar={false} location={path} />
                     </div>
                     <div className="padding-content">
-                        <div className="margin-side bg-white margin-top-7">
-                            <div className="margin-side-5">
-                                <div className="padding-top-3">
-                                    {title}
-                                    <div>
-                                       {aspect}
+                        <div className="margin-content">
+                            <div className="content-block main-block">
+                                <div className="margin-side-5">
+                                    <div className="padding-top-3">
+                                        {title}
+                                        <div>
+                                            {aspect}
+                                        </div>
+                                    </div>
+                                    <div className="padding-top-2">
+                                        <Panel
+                                            onChange={this.onChange}
+                                        />
                                     </div>
                                 </div>
-                                <div className="padding-top-2">
-                                    <Panel
-                                        onChange={this.onChange}
-                                    />
-                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </Page>
         )
     }

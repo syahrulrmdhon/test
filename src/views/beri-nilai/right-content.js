@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Avatar from 'react-avatar';
-import Ava from './../../assets/images/img_avatar.png';
+import Ava from './../../assets/images/avatar_def.svg';
 
 export class RightComponent extends Component {
   render() {

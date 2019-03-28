@@ -10,7 +10,7 @@ import RightSide from '../RightSide/RightSide'
 import ScoreTable from './ScoreTable'
 import AttendanceDetail from './AttendanceDetail'
 import Tab from '../TabContent/TabContent'
-import Avatar from './../../assets/images/img_avatar.png'
+import Avatar from './../../assets/images/avatar_def.svg'
 import { getDate } from '../../utils/common'
 import { getData, getExtracurriculars, handleDisabled, getAttendances, getSubjects, getStatus, handleFilter} from '../../redux-modules/modules/studentDetail'
 import { connect } from 'react-redux'
@@ -377,6 +377,7 @@ class Content extends Component {
                   attitudeScore={this.state.attitudeScore}
                   studentId={this.props.studentId}
                   redirect={this.props.redirect}
+                  statusMenu={this.props.menu}
                   loader={this.state.loader}/>
               </RightSide>
             </div>
