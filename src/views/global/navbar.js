@@ -67,7 +67,7 @@ class MenuBar extends Component {
             <div className="menu-bar">
                 <div className="bg-white size-nav">
                     {
-                        navbar === false ?
+                        navbar === false && this.props.location !== '/' ?
                             <div className="bg-white">
                                 <div className="menu">
                                     <div className="back">
@@ -79,12 +79,15 @@ class MenuBar extends Component {
                                     </div>
                                 </div>
                             </div>
-                            :
-                            <div className="topnav">
-                                <div className="menu">
-                                    {content}
+                            : ( navbar === false && this.props.location === '/' ? 
+                                <div></div> 
+                                :
+                                <div className="topnav">
+                                    <div className="menu">
+                                        {content}
+                                    </div>
                                 </div>
-                            </div>
+                            )
                     }
                 </div>
             </div>

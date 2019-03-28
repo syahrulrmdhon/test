@@ -27,6 +27,7 @@ import ParticipantUser from '../views/exam/participant_class/user_new'
 import NoQuestions from '../views/beri-nilai/no-questions/no-questions'
 import Questions from '../views/beri-nilai/no-questions/questions'
 import NotFound from '../views/global/not-found'
+import InternalServerError from '../views/global/internal-server-error'
 import NewScore from './../views/beri-nilai/new'
 import EditExam from '../views/create-exam/index'
 import EditQuestion from '../views/create-exam/create-question'
@@ -275,6 +276,11 @@ export const MainRoutes = [
     {
         path: '/globa',
         component: Global
+    },
+
+    {
+        path: '/internal-server-error',
+        component: InternalServerError
     },
 
     {
