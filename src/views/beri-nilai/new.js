@@ -179,7 +179,6 @@ class New extends Component {
         <div className="padding-content ">
           <div className="margin-content">
             <div className="content-block main-block">
-              <div className="content-wrapper">
                 <Content
                   dataProfile={this.state.profile}
                   subjects={this.state.subjects}
@@ -195,7 +194,6 @@ class New extends Component {
                   choice={this.state.choice}
                   type={this.props.location.state.conditon}
                 />
-              </div>
             </div>
           </div>
         </div>
