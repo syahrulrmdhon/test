@@ -61,12 +61,13 @@ export class DetailAction extends Component {
         let content = []
         let data = this.props.detail
         let id = this.props.id
+        let examId = this.props.examId
 
         if (data > 0) {
             content.push(
                 <div className='padding-bottom-2' key={Math.random()}>
                     <label className='p-bold padding-right-2'>Detil Soal</label>
-                    <i className='fa fa-pencil icon-green' onClick={(e) => (this.props.detailClicked(e, id))}>
+                    <i className='fa fa-pencil icon-green' onClick={(e) => (this.props.detailClicked(e, id, examId))}>
                     </i>
                 </div>
             )
