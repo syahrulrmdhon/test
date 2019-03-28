@@ -166,7 +166,7 @@ export class componentName extends Component {
                                                                 <input
                                                                     type={type.old_pass}
                                                                     className="col-sm-3  form-outine"
-                                                                    placeholder="Masukan Kata Sandi Lama"
+                                                                    placeholder="Masukkan Kata Sandi Lama"
                                                                     value={value.old_pass_value}
                                                                     onChange={(e) => { this.onChange(e, 'old_pass_value') }}
                                                                 />
