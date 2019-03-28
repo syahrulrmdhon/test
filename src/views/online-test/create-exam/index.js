@@ -2,15 +2,20 @@ import React, { Component } from 'react'
 import Page from './../../../components/Title'
 import Header from './../../global/header'
 import Switch from 'react-switch'
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { handleChange, loadData } from './../../../redux-modules/modules/onlineExam'
+import {
+    handleEvent,
+    buildObject,
+    addQuestion
+} from './../../../redux-modules/modules/onlineExam'
 import { getProblemTypes } from './../helper-online'
 
 //scss
 import './../../../styles/online-test.scss'
 import AddQuestion from './add-question';
+import { apiClient } from '../../../utils/apiClient';
+import _ from 'lodash'
 
 class index extends Component {
     constructor(props) {
@@ -18,18 +23,16 @@ class index extends Component {
         this.state = {
             checked: false,
             name: props.location.state.name,
-            assessment_id: props.match.params.assessment_id,
+            id: props.match.params.id,
             problemTypes: [],
             length: null,
-            questions: [
-                { problem_type: '', question_count: null }
-            ]
         };
         this.handleChangeSwitch = this.handleChangeSwitch.bind(this)
     }
 
     componentDidMount() {
         getProblemTypes.call(this)
+        this.props.buildObject()
     }
 
     backToList() {
@@ -40,29 +43,39 @@ class index extends Component {
         this.setState({ checked });
     }
 
-    addQuestion() {
-        let questions = this.state.questions
-        
-        questions.push(
-            { problem_type: '', question_count: null}
-            // <AddQuestion key={Math.random()} />
-        )
-        this.setState({questions: questions})
-    }
-    render() {
-        let data = _.get(this, 'props.data', {})
-        let selectedProblemType = data ? data.selectedProblemType : null
-        const questions = this.state.questions.map((question, idx) => {
-            console.log('question', question)
-            return <AddQuestion key={(idx)} />
+    handleSubmit(e) {
+        e.preventDefault()
+
+        let data = this.props.exam
+        console.log('data submit', data)
+        let assesment_id = this.state.id
+        let url = `v1/assessments/${assesment_id}/exams`
+
+        apiClient('post', url, data).then(res => {
         })
+    }
+
+    render() {
+        const { name, kkm, description } = this.props.exam || {}
+        let exam_problem_types = _.get(this, 'props.exam.exam_problem_types_attributes', [])        
+        let questions = []
+
+        if (exam_problem_types.length > 0) {
+            exam_problem_types.map((question, idx) => {
+                questions.push(<AddQuestion
+                    key={(idx)}
+                    index={(idx)}
+                />)
+            })
+        }
+
         return (
             <Page title="Tulis Ujian Online">
                 <Header />
                 <div className='new-exam-online padding-content h-100'>
                     <div className='margin-content full-margin'>
                         <div className='content-wrapper'>
-                            <div className='border-bottom'>
+                            <div className='border-bottom title-container'>
                                 <div className="padding-3">
                                     <span className="title-page"> Buat Soal Ujian </span>
                                     <span className="subject-head float-right"> {this.state.name} </span>
@@ -72,19 +85,37 @@ class index extends Component {
                                 <div className="margin-top-3">
                                     <label>Judul Ujian</label>
                                     <div className="margin-top-1">
-                                        <input type="text" className="form-control" />
+                                        <input
+                                            type="text" className="form-control"
+                                            placeholder='Masukkan Judul Ujian...'
+                                            defaultValue={name}
+                                            name='name'
+                                            onChange={(e) => { this.props.handleEvent(e.target.value, 'exam', 'name') }}
+                                        />
                                     </div>
                                 </div>
                                 <div className="margin-top-3">
                                     <label>Nilai KKM</label>
                                     <div className="margin-top-1">
-                                        <input type="number" className="form-control" />
+                                        <input
+                                            type="number" className="form-control"
+                                            placeholder='Masukkan Nilai KKM...'
+                                            defaultValue={kkm}
+                                            name='kkm'
+                                            onChange={(e) => { this.props.handleEvent(e.target.value, 'exam', 'kkm') }}
+                                        />
                                     </div>
                                 </div>
                                 <div className="margin-top-3">
                                     <label>Kisi-kisi/Indikator</label>
                                     <div className="margin-top-1">
-                                        <textarea className="form-control"></textarea>
+                                        <textarea
+                                            className="form-control"
+                                            placeholder='Masukkan Kisi-Kisi...'
+                                            defaultValue={description}
+                                            name='description'
+                                            onChange={(e) => { this.props.handleEvent(e.target.value, 'exam', 'description') }}
+                                        />
                                     </div>
                                 </div>
                                 <div className="margin-top-3">
@@ -104,29 +135,8 @@ class index extends Component {
                                 </div>
                                 <div className='margin-top-3'>
                                     {questions}
-                                    {/* <div className="row">
-                                        
-                                        <div className="col-sm-8">
-                                            <label>Tipe Soal</label>
-                                            <div className="margin-top-1">
-                                                <Select
-                                                    onChange={(e) => { this.props.handleChange(e.value, 'selectedProblemType') }}
-                                                    options={this.state.problemTypes ? this.state.problemTypes : []}
-                                                    value={this.state.problemTypes.find((element) => { return element.value == selectedProblemType })}
-                                                    classNamePrefix="select"
-                                                    className="fullwidth"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-sm-4">
-                                            <label>Jumlah Soal </label>
-                                            <div className="margin-top-1">
-                                                <input type="number" className="form-control" />
-                                            </div>
-                                        </div>
-                                    </div> */}
                                 </div>
-                                <div className="margin-top-3" onClick={this.addQuestion.bind(this)}>
+                                <div className="margin-top-3" onClick={this.props.addQuestion}>
                                     <i className="fa fa-plus" aria-hidden="true"></i>
                                     <span className='normal-green-text'> Tambah Tipe Soal</span>
                                 </div>
@@ -137,7 +147,7 @@ class index extends Component {
                                         >
                                             Kembali
                                         </button>
-                                        <button className='btn-green'>Lanjut</button>
+                                        <button className='btn-green' onClick={this.handleSubmit.bind(this)}>Lanjut</button>
                                     </div>
                                 </div>
                             </div>
@@ -150,11 +160,12 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    data: state.onlineExam //listOnlineExam dari reducer
+    exam: _.get(state, 'onlineExam.exam', {}), //listOnlineExam dari reducer
+    exam_problem_types: _.get(state, 'onlineExam.exam.exam_problem_types_attributes', {})
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-    handleChange,
-    loadData
-}, dispatch
-)
+    handleEvent,
+    buildObject,
+    addQuestion
+}, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(index)
