@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App/App';
 // import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter,Router } from 'react-router-dom'
 import './styles/style.css';
 import ReactGA from 'react-ga';
 // to use bootstrap
@@ -16,6 +16,7 @@ import './styles/font-awesome/css/font-awesome.css'
 import ApiHost from './routes/api_host'
 import configureStore from './redux-modules/create'
 
+import history from './views/global/browser-history';
 
 var initialState = "Gredu Indonesia"
 initialState = window.DATA;
@@ -42,7 +43,9 @@ localStorage.setItem('Device-Type', 'browser')
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
+    <Router history={history}>
       <App initialData={window.DATA} />
+    </Router>
     </BrowserRouter>
   </Provider>, document.getElementById('root')
 );
