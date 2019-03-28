@@ -9,7 +9,6 @@ export class Right extends Component {
         let content_value = []
         data && data.map((data, idx) => {
             data.competency_scores.map((x, i) => {
-                // console.log(x,"index")
                 content_value.push(<div className="padding-top-3" key={i}>
                     <span>{x.basic_comp.competency_number+' '+x.basic_comp.content } </span>
                 </div>)
