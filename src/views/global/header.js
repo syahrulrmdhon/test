@@ -187,12 +187,14 @@ export default class Header extends Component {
 
         // console.log(this.props.label,"label")
         let data_photo = user_logo ? user_logo : Ava
-        // Edited by Risky S.
-        if(gender == 'M'){
-        data_photo = Ava_m  
-        } else if(gender == 'F'){
-         data_photo = Ava_f 
+
+        if  (user_logo==null && gender=='M'){
+            data_photo = Ava_m
+        }else if (user_logo==null && gender=='F'){
+            data_photo = Ava_f
         }
+
+
         return (
             <div className="fix-nav">
                 <div className="header-bar">
