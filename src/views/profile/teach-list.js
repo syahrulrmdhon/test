@@ -114,7 +114,7 @@ export class componentName extends Component {
                     <td className="padding-2 text-left">{data.class_name}</td>
                     <td className="padding-2 text-left">{data.subject_name}</td>
                     <td className="padding-2 text-left">{final_data}</td>
-                </tr>
+                </tr>   
             )
         })
 

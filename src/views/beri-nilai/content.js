@@ -216,13 +216,15 @@ class Content extends Component {
         }
 
         return (
-            <div className=" margin-top-8 bg-white container-fluid container-fluid-custom rounded-corners">
+            <div className="">
                 <div className="row rounded-10">
                     <LeftSide>
-                        <Profile dataProfile={this.props.student && this.props.student.data} />
+                        <div className="margin-left-4">
+                            <Profile dataProfile={this.props.student && this.props.student.data} />
+                        </div>
                     </LeftSide>
                     <RightContent>
-                        <div className="right-content-score">
+                        <div className="right-content-score ">
                             {title}
                             <div>
                                 <div className="table-responsive">

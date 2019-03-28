@@ -117,13 +117,14 @@ textarea.textarea-box{
   width: 100%;
   height: 50%;
   color: white;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "NunitoRegular";
   cursor: pointer;
   border-radius: 5px;
 }
 
 .btn-young-green:hover {
   filter: brightness(90%);
+  color: #FFFFFF;
 }
 
 .btn {

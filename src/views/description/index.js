@@ -30,6 +30,7 @@ export default class Index extends Component {
     apiClient('post', url, body).then((response) => {
       this.props.history.push({
         pathname: `/detail/${studentId}`,
+        state:{status:this.props.location.state && this.props.location.state.status}
       })
     })
   }
