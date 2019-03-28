@@ -6,7 +6,7 @@ import Sidebar from './index/sidebar'
 import Avatar from 'react-avatar';
 import { apiClient } from './../../utils/apiClient'
 import { Table } from 'reactstrap'
-import  User from './../../assets/images/avatar_def.svg'
+import User from './../../assets/images/avatar_def.svg'
 import Loader from './../global/loader'
 
 
@@ -18,7 +18,7 @@ export class componentName extends Component {
 
         this.state = {
             data: [],
-            loader:true
+            loader: true
         }
         this.fetchData = this.fetchData.bind(this)
     }
@@ -30,6 +30,13 @@ export class componentName extends Component {
     fetchData() {
         const url = `v1/users/subject_classes`
         apiClient('get', url).then(res => {
+            let join_data =  [] 
+            for (var i in res.data.data.subject_classes) {
+                const data = res.data.data.subject_classes[i]
+                for(let j in data.subject_schedules){
+                    data.subject_schedules[j].dayname = this.convertDay(data.subject_schedules[j].dayname)
+                }
+            }
             this.setState({
                 loader: false,
                 data: res.data.data.subject_classes
@@ -44,46 +51,70 @@ export class componentName extends Component {
             })
     }
 
-    convertDay(day){
+    convertDay(day) {
         let day_in_indo = ''
-        if(day === 'monday'){
+        if (day === 'monday') {
             day_in_indo = 'Senin'
-        }else if(day === 'tuesday'){
+        } else if (day === 'tuesday') {
             day_in_indo = 'Selasa'
-        }else if(day === 'wednesday'){
+        } else if (day === 'wednesday') {
             day_in_indo = 'Rabu'
-        }else if(day === 'thursday'){
+        } else if (day === 'thursday') {
             day_in_indo = 'Kamis'
-        }else if(day === 'friday'){
+        } else if (day === 'friday') {
             day_in_indo = 'Jumat'
         }
 
         return day_in_indo;
     }
 
+     find_duplicate_in_array(arra1) {
+        var object = {};
+        var result = [];
+
+        arra1.forEach(function (item) {
+          if(!object[item])
+              object[item] = 0;
+            object[item] += 1;
+        })
+
+        for (var prop in object) {
+           if(object[prop] >= 2) {
+               result.push(prop);
+           }
+        }
+
+        return this.convertDay(result);
+
+    }
+
+    remvoeDuplicate(arrArg){
+        return arrArg.filter((elem, pos, arr) => {
+            return arr.indexOf(elem) === pos;
+          });
+    }
+
     render() {
         let school = JSON.parse(window.localStorage.getItem('school'))
         const school_name = school.name
-        const aws_img = school.doc_aws_url
         let school_logo = !!(school) ? school.asset.doc_aws_url : User
         let content = []
         const { data } = this.state
         let join_data = []
-        let join = []
-        let length_data = data && data.length
+        let final_data = ''
+        data && data.map((data, idx) => {
+            for (var i in data.subject_schedules) {
+                const a = data.subject_schedules[i]
+                join_data.push(a.dayname)
+            }
+            final_data = this.remvoeDuplicate(join_data).join(", ")
 
-        
-        data && data.map((data) => {
-            data.subject_schedules.map((x) => {
-                join_data.push(this.convertDay(x.dayname))
-            })
-            join = join_data.join(",")
             content.push(
                 <tr key={Math.random()}>
                     <td className="padding-2 text-left">{data.class_name}</td>
                     <td className="padding-2 text-left">{data.subject_name}</td>
-                    <td className="padding-2 text-left">{join}</td>
-                </tr>
+                    <td className="padding-2 text-left">{final_data}</td>
+                </tr>   
             )
         })
 
@@ -119,15 +150,15 @@ export class componentName extends Component {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                            {content.length ? 
-                                                                content :
-                                                                <tr>
-                                                                    <td colSpan="3">
-                                                                        <Loader loader={this.state.loader}/>
-                                                                        Data Tidak Tersedia
+                                                                {content.length ?
+                                                                    content :
+                                                                    <tr>
+                                                                        <td colSpan="3">
+                                                                            <Loader loader={this.state.loader} />
+                                                                            Data Tidak Tersedia
                                                                     </td>
-                                                                </tr>
-                                                            }
+                                                                    </tr>
+                                                                }
                                                             </tbody>
                                                         </Table>
                                                     </div>

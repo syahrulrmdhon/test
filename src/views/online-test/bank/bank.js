@@ -5,7 +5,6 @@ import './../../../styles/online-test.scss'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getBank, handleChange } from './../../../redux-modules/modules/bank'
-import BankFilter from './filter';
 import BankContent from './content'
 import { basicComps, getProblemTypes } from './../../../utils/common'
 
@@ -23,8 +22,8 @@ class Bank extends Component {
 
     componentDidMount() {
         this.props.getBank()
-        basicComps.call(this, { category: 'knowledge', assessment_id: this.state.id }, { listOptions: true }),
-            getProblemTypes.call(this)
+        basicComps.call(this, { category: 'knowledge', assessment_id: this.state.id }, { listOptions: true })
+        getProblemTypes.call(this)
     }
 
     openModal() {
@@ -89,7 +88,7 @@ class Bank extends Component {
                         <BankContent
                             handleOptionChange={this.handleOptionChange.bind(this)}
                         />
-                        <div className='wrapper-button'>
+                        <div className='button-wrapper'>
                             <button className='btn-green'>Pilih</button>
                         </div>
                     </div>

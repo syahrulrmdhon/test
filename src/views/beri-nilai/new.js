@@ -178,8 +178,7 @@ class New extends Component {
         <Header navbar={false} location={path} />
         <div className="padding-content ">
           <div className="margin-content">
-            <div className="content-block main-block bg-grey">
-              <div className="content-wrapper content-wrap-custom-size ">
+            <div className="content-block main-block">
                 <Content
                   dataProfile={this.state.profile}
                   subjects={this.state.subjects}
@@ -195,7 +194,6 @@ class New extends Component {
                   choice={this.state.choice}
                   type={this.props.location.state.conditon}
                 />
-              </div>
             </div>
           </div>
         </div>

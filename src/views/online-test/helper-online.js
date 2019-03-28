@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { apiClient } from '../../utils/apiClient';
 
 export class DetailOnlineExam extends Component {
     render() {
@@ -30,17 +31,19 @@ export class ActionList extends Component {
     render() {
         let content = []
         let data = this.props.action
+        let id = this.props.id
+        let name = this.props.name
         if (data > 0) {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
-                    <div className='right-block__action'>Lihat</div>
+                    <div className='right-block__action'>Lihat Soal</div>
                     <div className='right-block__action'>Hapus Soal</div>
                 </div>
             )
         } else {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
-                    <div className='right-block__action padding-left-0'>Buat Soal</div>
+                    <div className='right-block__action padding-left-0' onClick={(e) => (this.props.create(e, id, name))}>Buat Soal</div>
                 </div>
             )
         }
@@ -58,12 +61,13 @@ export class DetailAction extends Component {
         let content = []
         let data = this.props.detail
         let id = this.props.id
+        let examId = this.props.examId
 
         if (data > 0) {
             content.push(
                 <div className='padding-bottom-2' key={Math.random()}>
                     <label className='p-bold padding-right-2'>Detil Soal</label>
-                    <i className='fa fa-pencil icon-green' onClick={(e) => (this.props.detailClicked(e, id))}>
+                    <i className='fa fa-pencil icon-green' onClick={(e) => (this.props.detailClicked(e, id, examId))}>
                     </i>
                 </div>
             )
@@ -80,4 +84,23 @@ export class DetailAction extends Component {
             {content}
         </div>
     }
+}
+
+export function getProblemTypes() {
+    apiClient('get', 'v1/filters/problem_types').then(res => {
+        let data = res.data.data.problem_types || []
+        let result = []
+        if (data.length > 0) {
+
+            data.map((data) => {
+                result.push({
+                    value: data.key,
+                    label: data.value
+                })
+            })
+        }
+        this.setState({
+            problemTypes: result
+        })
+    })
 }

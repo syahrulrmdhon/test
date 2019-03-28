@@ -32,11 +32,19 @@ class OnlineExamList extends Component {
         this.getData()
     }
 
-    detailClicked(e, id) {
+    detailClicked(e, id, examId) {
         e.preventDefault()
         this.props.history.push({
             pathname: 'bank/' +id,
-            state: {id: this.state.assessment_id}
+            state: {id: this.state.assessment_id, examId: examId}
+        })
+    }
+
+    createQuestion(e, id, name) {
+        e.preventDefault()
+        this.props.history.push({
+            pathname: 'create/' + id,
+            state: {id: this.state.assessment_id, name: name}
         })
     }
 
@@ -84,7 +92,6 @@ class OnlineExamList extends Component {
             <Page title='Daftar Ujian'>
                 <Header />
                 <div className='online-exam'>
-
                     <div className='content-block main-block'>
                         <div className='margin-box row h-100'>
                             <div className='col-sm-3 left-block padding-top-4'>
@@ -96,6 +103,7 @@ class OnlineExamList extends Component {
                                 data={this.state.data}
                                 loader={this.state.loader}
                                 detailClicked={this.detailClicked.bind(this)}
+                                create = {this.createQuestion.bind(this)}
                             />
                         </div>
                     </div>

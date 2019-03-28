@@ -114,7 +114,6 @@ module.exports = (env) => ({
                     test: /node_modules/,
                     priority: 20
                 },
-
                 common: {
                     name: 'common',
                     minChunks: 2,
