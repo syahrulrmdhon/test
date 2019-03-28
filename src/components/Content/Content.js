@@ -11,6 +11,8 @@ import ScoreTable from './ScoreTable'
 import AttendanceDetail from './AttendanceDetail'
 import Tab from '../TabContent/TabContent'
 import Avatar from './../../assets/images/avatar_def.svg'
+import Avatar_male from './../../assets/images/m_avatar.svg'
+import Avatar_female from './../../assets/images/f_avatar.svg'
 import { getDate } from '../../utils/common'
 import { getData, getExtracurriculars, handleDisabled, getAttendances, getSubjects, getStatus, handleFilter} from '../../redux-modules/modules/studentDetail'
 import { connect } from 'react-redux'
@@ -105,10 +107,25 @@ class Content extends Component {
   componentDidUpdate(prevProps, nextState) {
     if (nextState.activeTab !== this.state.activeTab) {
       if (this.state.activeTab === 2 && !this.state.skillScore) {
+        // Edited by Risky S.
+        this.setState({
+          loader : true
+        })
         this.getSkillScore()
       }
       else if (this.state.activeTab === 3 && !this.state.attitudeScore) {
-          this.getAttitudeScore()
+        // Edited by Risky S.        
+        this.setState({
+          loader : true
+        })  
+        this.getAttitudeScore()
+      }
+        // Edited by Risky S.
+      else if (this.state.activeTab === 1 && !this.state.knowledgeScore) {
+          this.setState({
+            loader : true
+          })
+          this.getKnowledgeScore()
       }
     }
 
@@ -150,7 +167,11 @@ class Content extends Component {
     const url = `v1/students/${this.props.studentId}/score_recap?category=skill`
 
     apiClient('get', url).then(response => {
-      this.setState({ skillScore: response.data.data })
+      // Edited by Risky S.
+      this.setState({ 
+        skillScore: response.data.data,
+        loader : false
+      })
     })
   }
 
@@ -158,7 +179,11 @@ class Content extends Component {
     const url = `v1/students/${this.props.studentId}/score_recap?category=attitude`
 
     apiClient('get', url).then(response => {
-      this.setState({attitudeScore: response.data.data})
+      // Edited by Risky S.      
+      this.setState({
+        attitudeScore: response.data.data,
+        loader : false
+      })
     })
   }
 
@@ -351,6 +376,16 @@ class Content extends Component {
     const tabScore = ['Pengetahuan', 'Keterampilan', 'Sikap'];
     const tabHomeRoom = ['Catatan Wali Kelas', 'Ekstrakurikuler', 'Prestasi']
 
+    let photo_url = this.props.user && this.props.user.user && this.props.user && this.props.user.user.url
+    let data_photo = photo_url ? photo_url : Avatar
+
+      // Edited by Risky S.
+      if  (this.props.dataProfile.user.gender == 'M'){
+      data_photo = Avatar_male  
+      } else if(this.props.dataProfile.user.gender == 'F'){
+       data_photo = Avatar_female 
+      }
+
     let recap = []
     if (this.props.data.attendances) {
       recap = this.props.data.attendances.attendances
@@ -386,7 +421,7 @@ class Content extends Component {
               <LeftSide>
               <div>
                 <div className="avatar-wrapper">
-                  <img className="avatar" src={Avatar} alt="" />
+                  <img className="avatar" src={data_photo} alt="" />
                 </div>
                 <div className="mt-3 detail-name">
                   {this.props.dataProfile && this.props.dataProfile.user && this.props.dataProfile.user.full_name}

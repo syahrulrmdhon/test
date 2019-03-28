@@ -8,7 +8,12 @@ import { bindActionCreators } from 'redux';
 import classnames from 'classnames'
 import Avatar from 'react-avatar';
 import Ava from './../../assets/images/avatar_def.svg'
+import Ava_m from './../../assets/images/m_avatar.svg'
+import Ava_f from './../../assets/images/f_avatar.svg'
 import Pencil from './../../assets/images/beri_nilai.svg';
+import Loader from './../global/loader'
+import { NotAvailable } from './../global/notAvailable'
+
 
 
 const data_option = [
@@ -218,6 +223,7 @@ class BottomContent extends Component {
 
   render() {
     const dataArray = this.props.user && this.props.user.data && this.props.user.data.participants;
+
     return (
       <div className="margin-left-5 margin-right-5 bg-white padding-top-4 margin-bottom-2">
         <div className='row padding-bottom-5'>
@@ -261,6 +267,12 @@ class BottomContent extends Component {
             </div>
           </div>
         </div>
+        {/* Edited By Risky S. */}
+        {
+          this.props.loader ?
+            <Loader loader={true} />
+          :
+          dataArray ?     
         <div className="content-bottom">
           <div className="header">
             <div className="row">
@@ -292,7 +304,9 @@ class BottomContent extends Component {
                     <div className="row">
                       <div className="col-sm-12 ">
                         <div className="col-sm-3 padding-left-4 padding-top-2 padding-bottom-2 d-table">
-                          <Avatar src={Ava} size="30" round={true} className="d-table-cell"/>
+                          {/* Edited by Risky S. */}
+                          <Avatar src={data.user.gender == 'M'? Ava_m : Ava_f} size="30" round={true} className="d-table-cell"/>
+                          
                           <span className="padding-left-2 label-content d-table-cell">{data.user.full_name}</span>
                         </div>
                         <div className="col-sm-3 align-left padding-1 d-flex align-items-center word-break h-100">
@@ -369,6 +383,10 @@ class BottomContent extends Component {
 
           </div>
         </div>
+        // Edited By Risky S.
+        :
+        <NotAvailable>Data tidak tersedia</NotAvailable>
+      }
       </div>
 
     )
