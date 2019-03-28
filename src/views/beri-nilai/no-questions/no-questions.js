@@ -33,7 +33,8 @@ export default class NoQuestions extends Component {
             exam_id: props.match.params.exam_id,
             class_id: props.match.params.class_id,
             score_id: '',
-            fullname: ''
+            fullname: '',
+            loader: true
         }
 
         this.handleNewScore = this.handleNewScore.bind(this)
@@ -76,6 +77,7 @@ export default class NoQuestions extends Component {
                 kkm: res.data.data.kkm,
                 participant_passed: res.data.data.participants.passed,
                 participant_not_passed: res.data.data.participants.not_passed,
+                loader: false
             })
         })
             .catch(err => {
@@ -123,6 +125,7 @@ export default class NoQuestions extends Component {
                                                 asssessment={this.state.assessment_id}
                                                 handleNewScoreParent={this.handleNewScore}
                                                 page={this.onChangePage}
+                                                loader= {this.state.loader}
                                             />
                                         </div>
                                     </div>
