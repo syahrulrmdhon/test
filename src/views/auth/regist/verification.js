@@ -5,8 +5,6 @@ import { error, modal } from './../../global/modal'
 import { apiClient } from '../../../utils/apiClient'
 import Page from "./../../../components/Title";
 import './../../../styles/auth.scss'
-// import { loadReCaptcha } from 'react-recaptcha-google'
-// import { ReCaptcha } from 'react-recaptcha-google'
 
 export default class Verification extends Component {
     constructor(props) {
@@ -18,8 +16,6 @@ export default class Verification extends Component {
             fullname: '',
             url: props.location
         }
-        // this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
-        // this.verifyCallback = this.verifyCallback.bind(this);
     }
     componentDidMount() {
         this.getDataUser()
