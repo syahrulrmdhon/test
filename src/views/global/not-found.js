@@ -11,9 +11,9 @@ export default class NotFound extends Component {
         return (
             <React.Fragment>
                 <Page title='Page Not Found'>
-                    <div className="padding-content not-found">
+                    <div className="padding-content">
                         <Header navbar={false}/>
-                        <div className="container">
+                        <div className="container not-found">
                             <div className="row">
                                 <div className="col-5 h-100 notfound margin">
                                     <h1>404</h1>
