@@ -52,6 +52,7 @@ export default class SideBar extends Component{
                         prevLabel={<FontAwesome name="chevron-left" />}
                         nextLabel={<FontAwesome name="chevron-right" />}
                         onChange={this.props.changeCalendar}
+                        locale={"id-ID"}
                     />
                 </div>
                 <div className="border-top padding-top-2">

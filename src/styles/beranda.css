@@ -59,13 +59,14 @@
     overflow: auto;
     white-space: nowrap;
     overflow-y: scroll;
-    max-height: 660px;
+    height: 660px;
 }
 .schedule .content-block{
     border-radius: 5px;
     width: 30%;
     vertical-align: top;
     white-space: initial;
+    height: auto;
 }
 .minimize .schedule .content-block{
     width: 23%;
@@ -175,6 +176,10 @@
 .react-calendar__tile--active:enabled:focus{
     background-color: #199d7f;
 }
+.react-calendar__tile--now {
+    border: 1px solid #199d7f !important;
+}
+
 .react-calendar__navigation__label{
     color: #6d6d6d;
 }
