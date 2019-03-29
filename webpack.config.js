@@ -34,6 +34,18 @@ module.exports = (env) => ({
         chunkFilename: '[id].[chunkhash].chunk.js',
         publicPath: publicPath
     },
+    resolve: {
+        alias: {
+            'history/createMemoryHistory':
+                path.resolve(__dirname, 'node_modules/history/es/createMemoryHistory'),
+            'history/createHashHistory':
+                path.resolve(__dirname, 'node_modules/history/es/createHashHistory'),
+            'history/createBrowserHistory':
+                path.resolve(__dirname, 'node_modules/history/es/createBrowserHistory'),
+            'history/PathUtils':
+                path.resolve(__dirname, 'node_modules/history/es/PathUtils')
+        }
+    },
     module: {
         rules: [
             {
@@ -102,18 +114,18 @@ module.exports = (env) => ({
         })
     ],
     optimization: {
+        runtimeChunk:'single',
         splitChunks: {
+            chunks:'all',
+            maxInitialRequests:Infinity,
             cacheGroups: {
                 default: false,
-                vendors: false,
-
                 vendor: {
                     name: 'vendor',
                     chunks: 'all',
                     test: /node_modules/,
                     priority: 20
                 },
-
                 common: {
                     name: 'common',
                     minChunks: 2,
@@ -125,6 +137,23 @@ module.exports = (env) => ({
             }
         }
     }
+//     optimization: {
+//         runtimeChunk: 'single',
+//         splitChunks: {
+//           chunks: 'all',
+//           maxInitialRequests: Infinity,
+//           minSize: 0,
+//           cacheGroups: {
+//             vendor: {
+//               test: /[\\/]node_modules[\\/]/,
+//               name(module) {
+//                 const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+//                 return `npm.${packageName.replace('@', '')}`;
+//               },
+//             },
+//           },
+//     },
+// }
 
 
 });

@@ -6,6 +6,8 @@ import { Table } from 'reactstrap'
 import { getDate } from '../../utils/common'
 import { NotAvailable } from '../../views/global/notAvailable'
 import DatePicker from 'react-datepicker'
+import Loader from '../../views/global/loader'
+
 
 import Select from 'react-select'
 
@@ -22,6 +24,7 @@ class AttendanceDetail extends Component {
     this.props.getAttendances(this.props.studentId, params) 
   }
 
+  
   render() {
     let homeroomId = JSON.parse(localStorage.getItem("homeroom_class")) && JSON.parse(localStorage.getItem("homeroom_class")).id
     let data = this.props.attendanceDetail
@@ -85,6 +88,10 @@ class AttendanceDetail extends Component {
           </div>
         )
       }
+    }else {
+      attendances = (
+      <Loader loader={true}/>
+      )
     }
 
     return (

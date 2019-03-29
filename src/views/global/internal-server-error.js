@@ -6,19 +6,19 @@ import Page from './../../components/Title'
 import Astronaut from './../../assets/images/astronaut.svg'
 import Planet from './../../assets/images/group.svg'
 
-export default class NotFound extends Component {
+export default class InternalServerError extends Component {
     render() {
         return (
             <React.Fragment>
-                <Page title='Page Not Found'>
+                <Page title='Internal Server Error'>
                     <div className="padding-content">
                         <Header navbar={false}/>
                         <div className="container not-found">
                             <div className="row">
                                 <div className="col-5 h-100 notfound margin">
-                                    <h1>404</h1>
-                                    <h2>Halaman yang Anda cari tidak ada.</h2>
-                                    <p>Biarkan kami bantu Anda ke halaman yang benar</p>
+                                    <h1>500</h1>
+                                    <h2>Internal Server Error.</h2>
+                                    <p>Ini benar-benar bukan Kesalahan Anda. Biarkan kami bantu Anda ke halaman yang benar.</p>
                                     <NavLink className="font-grey" href="/home">
                                         Halaman Depan
                                     </NavLink>

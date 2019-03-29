@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Progress } from 'reactstrap'
 import { NotAvailable } from '../../global/notAvailable';
-import { DetailOnlineExam } from '../helper-online'
+import { DetailOnlineExam, ActionList, DetailAction } from '../helper-online'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -39,12 +39,14 @@ class ContentOnlineExam extends Component {
                                                 {x.duration !== null ? '0' : x.duration} Menit
                                              </label>
                                         </div>
-                                        <label className='p'>{x.grade_name === null ? 'Kelas Belum Dipilih' : x.grade_name}</label>
-                                        <div className='padding-top-2 right-block__action-wrapper'>
-                                            <div className='right-block__action'>Lihat</div>
-                                            <div className='right-block__action'>Ubah Soal</div>
-                                            <div className='right-block__action'>Hapus Soal</div>
-                                        </div>
+                                        <label className='p'>{x.grade_name === null ? 'Kelas Belum Dipilih' : x.grade_name}  {x.major_name === null ? '' : x.major_name}</label>
+                                        <ActionList
+                                            action={x.assigned_exam.created_question_count}
+                                            examId={x.assigned_exam.id}
+                                            id={x.id}
+                                            name={x.name}
+                                            create={this.props.create}
+                                        />
                                     </div>
                                     <div className='col-sm-4 right-block__panel-part padding-top-4'>
                                         <div className='padding-bottom-1'>
@@ -55,10 +57,12 @@ class ContentOnlineExam extends Component {
                                         <label className='info padding-top-1'>{x.assigned_exam.created_question_count === null ? '0' : x.assigned_exam.created_question_count}/{x.assigned_exam.question_count === null ? '0' : x.assigned_exam.question_count} Terbuat</label>
                                     </div>
                                     <div className='col-sm-4'>
-                                        <div className='padding-bottom-2'>
-                                            <label className='p-bold padding-right-2'>Detil Soal</label>
-                                            <i className='fa fa-pencil icon-green'></i>
-                                        </div>
+                                        <DetailAction
+                                            id={x.id}
+                                            examId={x.assigned_exam.id}
+                                            detailClicked={this.props.detailClicked}
+                                            detail={x.assigned_exam.created_question_count}
+                                        />
                                         <div className='padding-bottom-2'>
                                             <DetailOnlineExam
                                                 detail={x.assigned_exam}

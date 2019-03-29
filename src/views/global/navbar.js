@@ -12,10 +12,10 @@ const menus = [
     { name: "Beranda", link: "/home", role: 'all' },
     { name: "Absensi", link: "/attendance", role: 'all' },
     { name: "Penilaian", link: "/assessment", role: 'all' },
-    { name: "Ujian Sekolah", link: "/online-exam/", role: 'all' },
     { name: "Daftar Nilai", link: "/score-list", role: 'all' },
     { name: "Rapor Kelas", link: "/student-report", role: 'homeroom' },
     { name: "Daftar Murid", link: "/students", role: 'homeroom' },
+    { name: "Ujian Sekolah", link: "/online-exam/", role: 'all' },
 ]
 
 class MenuBar extends Component {
@@ -67,7 +67,7 @@ class MenuBar extends Component {
             <div className="menu-bar">
                 <div className="bg-white size-nav">
                     {
-                        navbar === false ?
+                        navbar === false && this.props.location !== '/' ?
                             <div className="bg-white">
                                 <div className="menu">
                                     <div className="back">
@@ -79,12 +79,15 @@ class MenuBar extends Component {
                                     </div>
                                 </div>
                             </div>
-                            :
-                            <div className="topnav">
-                                <div className="menu">
-                                    {content}
+                            : ( navbar === false && this.props.location === '/' ? 
+                                <div></div> 
+                                :
+                                <div className="topnav">
+                                    <div className="menu">
+                                        {content}
+                                    </div>
                                 </div>
-                            </div>
+                            )
                     }
                 </div>
             </div>

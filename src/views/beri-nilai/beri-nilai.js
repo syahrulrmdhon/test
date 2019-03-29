@@ -19,7 +19,6 @@ import Page from './../../components/Title'
 
 
 
-
 class Nilai extends Component {
   constructor(props) {
     super(props)
@@ -41,6 +40,8 @@ class Nilai extends Component {
       data: [],
       prevPath: '',
       search: '',
+      // Edited by Risky S.
+      loader: true,
       valueOpt:''
     }
     this.toggleMenu = this.toggleMenu.bind(this)
@@ -52,7 +53,6 @@ class Nilai extends Component {
     this.onChangeScore = this.onChangeScore.bind(this)
   }
   componentDidMount() {
-
     this.getQuestionsResults()
     this.getQuestions()
     this.fetchData()
@@ -73,7 +73,9 @@ class Nilai extends Component {
         score: res.data.data.participants,
         exam: res.data.data.exam,
         participant_passed: res.data.data.participants.passed,
-        participant_not_passed: res.data.data.participants.not_passed
+        participant_not_passed: res.data.data.participants.not_passed,
+        // Edited by Risky S.
+        loader: false
       })
     })
       .catch(err => {
@@ -107,6 +109,8 @@ class Nilai extends Component {
     this.setState({
       search: e.target.value
     })
+    this.props.getParticipant(this.state.exam_id, this.state.class_id, this.state.asssessment_id, e.target.value,'')
+
   }
 
   onChangeScore(valueOpt){
@@ -222,7 +226,9 @@ class Nilai extends Component {
                         onChange={this.onChangeSelect}
                         submit={this.onSubmmit}
                         valueOpt={this.state.valueOpt}
-                        onChangeScore={this.onChangeScore}
+                        onChangeScore={this.onChangeScore}   
+                        //Edited by Risky S.  
+                        loader={this.state.loader}              
                       />
                     </div>
                   </div>
