@@ -24,7 +24,6 @@ export default function reducer(state = initialState, action) {
     delete state.error;
       if (state.result !== action.result) {
         if (action.result.data.profile) {
-          console.log(action.result.data,"profile")
           action.result.data['user'] = {}
           action.result.data['user'] = {
             phone_number: action.result.data.profile.phone_number ? action.result.data.profile.phone_number : '',
@@ -160,10 +159,6 @@ export function getUSer() {
 
 
 export function getRegion() {
-  const token = localStorage.getItem('token')
-  const schoolId = localStorage.getItem("school_id")
-  console.log("hit")
-
   return {
     types: [LOAD, LOAD_SUCCESS_REGION, LOAD_FAIL],
     promise: client => client.get(process.env.API_URL + `/v1/filters/regions`, headers)
