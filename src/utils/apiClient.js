@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import history from './../views/global/browser-history';
 
 export const apiClient = (method, url, request, params = {}) => {
     const baseUrl = `${process.env.API_URL}`
@@ -35,8 +36,10 @@ export const apiClient = (method, url, request, params = {}) => {
         case 'get':
             return Axios.get(baseUrl + url, { headers: headers, params: params }).catch(
                 function (error) {
-                    if (error.response.status === 500 ) {
-                        location.href = '/internal-server-error';
+                    if (!error.response) {
+                        history.push('/no-connection');
+                    } else if (error.response.status === 500 ) {
+                        history.push('/internal-server-error');
                     }
                 });
         case 'post':

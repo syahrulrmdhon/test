@@ -503,7 +503,6 @@ export function cities(params = {}, options = {}) {
             })
         }
 
-        console.log(city, "list")
         this.setState({
             cityDefaultOpt: city,
         })
