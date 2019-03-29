@@ -10,7 +10,6 @@ import {modal} from './../global/modal'
 export default class ScheduleModal extends Component{
     constructor(props) {
         super(props);
-        
         this.state = {
             open: false,
             listClass: this.props.listClass,
@@ -192,7 +191,6 @@ export default class ScheduleModal extends Component{
             }).catch(error => {
                 let response = error.response
                 let data = response.data
-    
                 this.setState({
                     open: true,
                     errors: setError(data),
