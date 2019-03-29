@@ -26,8 +26,6 @@ import ParticipantClass from '../views/exam/participant_class/new'
 import ParticipantUser from '../views/exam/participant_class/user_new'
 import NoQuestions from '../views/beri-nilai/no-questions/no-questions'
 import Questions from '../views/beri-nilai/no-questions/questions'
-import NotFound from '../views/global/not-found'
-import InternalServerError from '../views/global/internal-server-error'
 import NewScore from './../views/beri-nilai/new'
 import EditExam from '../views/create-exam/index'
 import EditQuestion from '../views/create-exam/create-question'
@@ -40,6 +38,12 @@ import NewPassword from '../views/auth/password/new-password';
 import ExamDetail from './../views/exam/detail/index'
 import DetailScoreAttitude from './../views/beri-nilai/attitude/'
 import NewAttitudeScore from './../views/beri-nilai/attitude/new'
+
+// Error Page
+
+import NotFound from '../views/global/not-found'
+import InternalServerError from '../views/global/internal-server-error'
+import NoConnection from '../views/global/no-connection'
 
 //profile
 import BasicInformation from './../views/profile/basic'
@@ -277,6 +281,11 @@ export const MainRoutes = [
     {
         path: '/internal-server-error',
         component: InternalServerError
+    },
+
+    {
+        path: '/no-connection',
+        component: NoConnection
     },
 
     {
