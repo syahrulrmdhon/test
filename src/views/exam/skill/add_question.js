@@ -11,6 +11,7 @@ import {
 } from './../../../redux-modules/modules/exam/skill'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {basic_comp_lists} from "../../../utils/exam";
 
 class AddQuestion extends Component {
     constructor(props){
@@ -60,7 +61,9 @@ class AddQuestion extends Component {
             action = 'post'
             url = `v1/assessments/${this.state.assessment_id}/exams/validate?step=QuestionForm&category=skill`
         }
-        console.log(data, "data")
+
+        // console.log(exam_questions,"exam question")
+
         apiClient(action, url, data).then(response => {
             if(!this.state.exam_id){
                 apiClient('post', `/v1/assessments/${this.state.assessment_id}/exams`, data).then(response => {
@@ -93,7 +96,7 @@ class AddQuestion extends Component {
             modal({
                 message: 'Gagal',
                 description: `Detil langkah kerja gagal ${msg}. Silakan periksa ulang.`,
-                btns: [
+                btns: [                                                                                                                                        
                     {
                         label: 'Ulangi',
                         className: 'btn bcred cwhite',
@@ -160,7 +163,9 @@ class AddQuestion extends Component {
 const mapStateToProps = (state, props) => ({
     exam: state.skill.exam,
     problem_types: state.skill.problem_types,
-    problem_type_sets: state.skill.problem_type_sets
+    problem_type_sets: state.skill.problem_type_sets,
+    assessment_basic_comps: state.skill.assessment_basic_comps || [],
+
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 

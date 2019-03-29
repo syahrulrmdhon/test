@@ -18,15 +18,15 @@ class WorkStepIndicator extends Component {
         super(props)
     }
 
+
+
     render() {
         let items = []
-        console.log("here prosp", this.props)
         const basic_comps = basic_comp_lists(this.props.assessment_basic_comps)
         if (this.props.problem_type_sets) {
             this.props.problem_type_sets.map((problem_type_set, idx) => {
                 let action;
                 if (idx > 0) {
-                    console.log(problem_type_set, "here go")
                     action = <td className="align-center valign-center">
                         <a href="javascript:void(0);" onClick={() => { this.props.removeIndicator(this.props.key_value, idx) }}>
                             <FontAwesome name="trash" />
