@@ -11,9 +11,7 @@ import { apiClient } from '../../utils/apiClient'
 import { classes } from '../../utils/common'
 import Loader from './../global/loader'
 import Page from './../../components/Title'
-
 var FontAwesome = require('react-fontawesome');
-
 
 class Beranda extends Component {
 
@@ -74,8 +72,11 @@ class Beranda extends Component {
 
     changeCalendar(date){
         let setDate = new Intl.DateTimeFormat('sq-AL', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(date)
-        this.state.setDate = setDate
-        this.getData()
+        this.setState({
+            setDate: setDate
+        }, () => {
+            this.getData();
+        })
     }
 
     onChangeClass(e) {
