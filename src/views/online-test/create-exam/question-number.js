@@ -15,6 +15,8 @@ const questionNumber = props => {
       <NumberList
         problemTypes={problemTypes}
         onClickNumber={props.onClickNumber}
+        currentPage={props.currentPage}
+        questionType={props.questionType}
       />
     </div>
   )

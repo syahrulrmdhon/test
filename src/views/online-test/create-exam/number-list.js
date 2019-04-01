@@ -11,11 +11,16 @@ const numberList = props => {
         <div className="online-question__number-content">
           {
             type.numbers.map((item, index) =>{
-              let status = item.is_created ? 'online-question__number--created' : ''
+              let status = item.status
+
+              if (props.currentPage === item.order) {
+                status = 'current-page'
+              }
+
               return (
                 <div
-                  key={index} className={`online-question__number ${status}`}
-                  onClick={() => props.onClickNumber({number: item.number, questionType: type.problem_type, questionLabel: type.problem_type_abbv})}>
+                  key={index} className={`online-question__number online-question__number--${status}`}
+                  onClick={() => props.onClickNumber({number: item.order, questionType: type.problem_type, questionLabel: type.problem_type_abbv})}>
                   {item.number}
                 </div>
               )

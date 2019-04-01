@@ -403,9 +403,25 @@ $nunito_bold: "NunitoBold";
     margin: 3px;
     cursor: pointer;
 
-    &--created {
+    &--final {
       background-color: #e7ffc1;
       border-color: #e7ffc1;
+    }
+
+    &--null {
+      background-color: #fff;
+      // border-color: #fff;
+    }
+
+    &--draft {
+      background-color: #eb373e;
+      border-color: #eb373e;
+      color: #fff;
+    }
+
+    &--current-page {
+      background-color: #ffe087;
+      border-color: #ffe087;
     }
   }
 
@@ -466,6 +482,7 @@ $nunito_bold: "NunitoBold";
     border: 1px solid #ebebeb;
     vertical-align: middle;
     text-align: center;
+    cursor: pointer;
 
     &:first-child {
       position: relative;

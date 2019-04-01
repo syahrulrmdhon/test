@@ -11,6 +11,7 @@ const HANDLE_CHANGE_CORRECT_ANSWER = 'modules/onlineQuestion/HANDLE_CHANGE_CORRE
 const HANDLE_DELETE_CHOICE = 'modules/onlineQuestion/HANDLE_DELETE_CHOICE'
 const HANDLE_ADD_CHOICE = 'modules/onlineQuestion/HANDLE_ADD_CHOICE'
 const HANDLE_CHANGE_CONTENT = 'modules/onlineQuestion/HANDLE_CHANGE_CONTENT'
+const HANDLE_SUCCESS = 'modules/onlineQuestion/HANDLE_SUCCESS'
 const initialState = null;
 
 export default function reducer(state = initialState, action) {
@@ -24,21 +25,22 @@ export default function reducer(state = initialState, action) {
       delete state.error;
       if (state.result !== action.result) {
         const data = action.result.data.question
-
+        action.result.success = false
         let body = {
           "exam_question": {
             "qn_number": data.qn_number,
             "problem_type": data.problem_type,
             "question": data.question,
             "weight": data.weight,
-            "basic_comp_id": data.basic_comp_id
+            "basic_comp_id": data.basic_comp_id,
+            "exam_question_choices_attributes": [{id: null, symbol: 'A', content: '', is_correct_ans: true}]
           }
         }
         if (data.exam_question_choices.length) {
           body.exam_question.exam_question_choices_attributes = data.exam_question_choices
         }
         else {
-          data.exam_question_choices.push({id: null, symbol: 'A', content: '', is_correct_ans: false})
+          data.exam_question_choices.push({id: null, symbol: 'A', content: '', is_correct_ans: true})
         }
 
         return {
@@ -124,6 +126,13 @@ export default function reducer(state = initialState, action) {
         loaded: true,
         loading:false,
       }
+    case HANDLE_SUCCESS:
+      state.success = action.value
+      return {
+        ...state,
+        loaded: true,
+        loading:false,
+      }
     case LOAD_FAIL:
       return {
         loaded: true,
@@ -158,7 +167,6 @@ export function getBasicCompetency({params}) {
 }
 
 export function onChange({field, value}) {
-  console.log(value)
   return {
     type: HANDLE_CHANGE,
     field: field,
@@ -181,7 +189,6 @@ export function deleteChoiceHandler({order}) {
 }
 
 export function addChoiceHandler() {
-  console.log('pppp')
   return {
     type: HANDLE_ADD_CHOICE,
   }
@@ -195,7 +202,15 @@ export function onChangeContent({order, value}) {
   }
 }
 
+export function handleSuccess(value) {
+  return {
+    type: HANDLE_SUCCESS,
+    value: value
+  }
+}
+
 export function reset() {
+
   return {
     type: RESET
   }

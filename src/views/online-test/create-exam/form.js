@@ -19,17 +19,17 @@ class Form extends Component {
     // this.onSubmit = this.onSubmit.bind(this)
   }
 
-  // onSubmit({data}) {
-  //   const url = `v1/assessments/${assessmentId}/exams/${examId}/questions`
-  //   apiClient('post', url, data)
-  // }
-
   render() {
+    // console.log(this.props.data)
     const question = _.get(this.props.data, 'data.question', {})
+    const questionType = _.get(this.props.data, 'data.problem_types', [])
+
     const choices = _.get(this.props.data, 'data.question.exam_question_choices', [])
     const basicCompetencies = _.get(this.props.data, 'basicCompetencies', [])
-    // console.log(_.get(this.props.data, 'body', {}))
-    // console.log(question.weight)
+    const currentQuestionType = questionType.find(type => {
+      return type.problem_type === question.problem_type
+    })
+    console.log(currentQuestionType)
     const listChoices = choices.map((choice, index) => {
       return (
         <div key={index} className="online-question__choice">
@@ -77,11 +77,20 @@ class Form extends Component {
             </div>
           </div>
           <div className="online-question__navigation">
-            <div className="online-question__arrow-icon">
-              <i className="fa fa-chevron-left" />
+            <div className="online-question__arrow-icon"
+                onClick={() => this.props.onClickNavigation({event: 'prev', questionType: question.problem_type, questionCount: currentQuestionType.question_count})}
+            >
+              <i
+                className="fa fa-chevron-left"
+                style={this.props.number === 1 ? {color: '#c8c8c8'} : null}
+              />
             </div>
-            <div className="online-question__arrow-icon">
-              <i className="fa fa-chevron-right" />
+            <div className="online-question__arrow-icon"
+                onClick={() => this.props.onClickNavigation({event: 'next', questionType: question.problem_type, questionCount: currentQuestionType.question_count})}
+            >
+              <i
+                className="fa fa-chevron-right"
+              />
             </div>
           </div>
           <div className="clearfix"></div>
@@ -125,7 +134,11 @@ class Form extends Component {
           }
         </div>
         <div className="online-question__submit-wrapper">
-          <button className="online-question__submit btn-green" onClick={() => this.props.onSubmit()}>Selanjutnya</button>
+          <button
+            className="online-question__submit btn-green"
+            onClick={() => this.props.onSubmit({number: this.props.number, questionType: question.problem_type})}>
+            Selanjutnya
+          </button>
         </div>
       </div>
     )
