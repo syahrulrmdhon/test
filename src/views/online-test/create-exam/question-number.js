@@ -16,6 +16,7 @@ const questionNumber = props => {
         problemTypes={problemTypes}
         onClickNumber={props.onClickNumber}
         currentPage={props.currentPage}
+        currentObj={props.currentObj}
         questionType={props.questionType}
       />
     </div>

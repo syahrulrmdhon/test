@@ -10,17 +10,17 @@ const numberList = props => {
         </div>
         <div className="online-question__number-content">
           {
-            type.numbers.map((item, index) =>{
+            type.numbers.map((item, idx) =>{
               let status = item.status
 
-              if (props.currentPage === item.order) {
+              if (props.currentPage === item.number && props.currentObj == index) {
                 status = 'current-page'
               }
 
               return (
                 <div
-                  key={index} className={`online-question__number online-question__number--${status}`}
-                  onClick={() => props.onClickNumber({number: item.order, questionType: type.problem_type, questionLabel: type.problem_type_abbv})}>
+                  key={idx} className={`online-question__number online-question__number--${status}`}
+                  onClick={() => props.onClickNumber({number: item.number, index: index, questionType: type.problem_type, questionLabel: type.problem_type_abbv})}>
                   {item.number}
                 </div>
               )

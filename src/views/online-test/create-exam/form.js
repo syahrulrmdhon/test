@@ -82,7 +82,7 @@ class Form extends Component {
             >
               <i
                 className="fa fa-chevron-left"
-                style={this.props.number === 1 ? {color: '#c8c8c8'} : null}
+                style={this.props.number === 1 && this.props.currentObj == 0 ? {color: '#c8c8c8'} : null}
               />
             </div>
             <div className="online-question__arrow-icon"

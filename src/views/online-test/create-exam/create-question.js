@@ -19,6 +19,7 @@ class CreateQuestion extends Component {
       assessmentId: props.match.params.assessment,
       examId: props.match.params.exam,
       currentPage: 1,
+      currentObj: 0,
       questionType: 'multiple_choice',
       questionLabel: 'PG',
       success: _.get(props.data, 'success', false)
@@ -47,10 +48,7 @@ class CreateQuestion extends Component {
     })
   }
 
-  onClickNumber({number, questionType, questionLabel}) {
-    console.log(number)
-    console.log(questionType)
-
+  onClickNumber({number, index, questionType, questionLabel}) {
     if (this.validation()) {
       let data = this.validation()
       apiClient(data.method, data.url, data.data).then(() => {
@@ -63,6 +61,7 @@ class CreateQuestion extends Component {
     if (this.state.number !== number || this.state.questionType !== questionType) {
       this.setState({
         currentPage: number,
+        currentObj: index,
         questionType: questionType,
         questionLabel: questionLabel,
         success: false
@@ -119,13 +118,12 @@ class CreateQuestion extends Component {
   }
 
   onClickNavigation({event, questionType, questionCount}) {
-    console.log(questionType)
-    console.log(questionCount)
-    console.log(this.state.currentPage)
+    const currentObj = _.get(this.props.problem_types, this.state.currentObj, {})
+    const {problem_type, question_count} = currentObj
+
     switch (event) {
       case 'prev':
-        const prevCurrentPage = this.state.currentPage - 1
-
+        let  prevCurrentPage = this.state.currentPage - 1
         if(!prevCurrentPage < 1) {
           if (this.validation()) {
             let data = this.validation()
@@ -137,16 +135,33 @@ class CreateQuestion extends Component {
             })
           }
           this.setState({
-            currentPage: prevCurrentPage,
-            // questionType: questionType,
             success: false
           })
         }
+
+        if(prevCurrentPage == 0){
+          const currentObjCount = this.state.currentObj - 1
+          const prevObj = _.get(this.props.problem_types, currentObjCount, {})
+          questionType = prevObj.problem_type
+          prevCurrentPage = prevObj.question_count
+
+          this.setState({
+            currentObj: currentObjCount,
+            currentPage: prevObj.question_count,
+            questionType: questionType,
+            questionLabel: prevObj.problem_type_abbv
+          })
+        } else {
+          this.setState({
+            currentPage: prevCurrentPage,
+          })
+        }
+
         this.getQuestion({number: prevCurrentPage, questionType: questionType})
 
         break
       case 'next':
-        const nextCurrentPage = this.state.currentPage + 1
+        let nextCurrentPage = this.state.currentPage + 1
         if (this.validation()) {
           let data = this.validation()
           apiClient(data.method, data.url, data.data).then(() => {
@@ -156,11 +171,27 @@ class CreateQuestion extends Component {
           }).catch(() => {
           })
         }
-        this.setState({
-          currentPage: nextCurrentPage,
-          questionType: questionType,
-          success: false
-        })
+
+        if(nextCurrentPage > question_count){
+          const currentObjCount = this.state.currentObj + 1
+          const nextObj = _.get(this.props.problem_types, currentObjCount, {})
+          questionType = nextObj.problem_type
+          nextCurrentPage = 1
+
+          this.setState({
+            currentObj: currentObjCount,
+            currentPage: nextCurrentPage,
+            questionType: questionType,
+            questionLabel: nextObj.problem_type_abbv,
+            success: false
+          })
+        } else {
+          this.setState({
+            currentPage: nextCurrentPage,
+            success: false
+          })
+        }
+
         this.getQuestion({number: nextCurrentPage, questionType: questionType})
         break
       default:
@@ -179,20 +210,18 @@ class CreateQuestion extends Component {
           <div id="note">
             Soal berhasil disimpan.
           </div>
-          // :
-          // <div id="note" style={{display: "none"}}>
-          //   Soal berhasil disimpan.
-          // </div>
         }
 
         <div className="online-question content-wrapper">
           <QuestionNumber
             onClickNumber={this.onClickNumber}
             currentPage={this.state.currentPage}
+            currentObj={this.state.currentObj}
             questionType={this.state.questionType}
           />
           <Form
             number={this.state.currentPage}
+            currentObj={this.state.currentObj}
             questionType={this.state.questionLabel}
             onSubmit={this.onSubmit}
             onClickNavigation={this.onClickNavigation}
@@ -205,6 +234,7 @@ class CreateQuestion extends Component {
 
 const mapStateToProps = state => ({
   data: state.onlineQuestion,
+  problem_types: _.get(state, 'onlineQuestion.data.problem_types', [])
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
