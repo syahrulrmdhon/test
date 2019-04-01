@@ -20,7 +20,6 @@ class Form extends Component {
   }
 
   render() {
-    // console.log(this.props.data)
     const question = _.get(this.props.data, 'data.question', {})
     const questionType = _.get(this.props.data, 'data.problem_types', [])
 
@@ -29,7 +28,7 @@ class Form extends Component {
     const currentQuestionType = questionType.find(type => {
       return type.problem_type === question.problem_type
     })
-    console.log(currentQuestionType)
+
     const listChoices = choices.map((choice, index) => {
       return (
         <div key={index} className="online-question__choice">
@@ -78,18 +77,19 @@ class Form extends Component {
           </div>
           <div className="online-question__navigation">
             <div className="online-question__arrow-icon"
-                onClick={() => this.props.onClickNavigation({event: 'prev', questionType: question.problem_type, questionCount: currentQuestionType.question_count})}
+              onClick={() => this.props.onClickNavigation({event: 'prev', questionType: question.problem_type, questionCount: currentQuestionType.question_count})}
+              style={this.props.number === 1 && this.props.currentObj == 0 ? {color: '#c8c8c8', cursor: 'default'} : null}
             >
               <i
-                className="fa fa-chevron-left"
-                style={this.props.number === 1 && this.props.currentObj == 0 ? {color: '#c8c8c8'} : null}
+                className="fa fa-chevron-left" style={{cursor: 'inherit'}}
               />
             </div>
             <div className="online-question__arrow-icon"
-                onClick={() => this.props.onClickNavigation({event: 'next', questionType: question.problem_type, questionCount: currentQuestionType.question_count})}
+              onClick={() => this.props.onClickNavigation({event: 'next', questionType: question.problem_type, questionCount: currentQuestionType.question_count})}
+              style={(this.props.number === _.get(questionType[this.props.currentObj], 'question_count', 0) && this.props.currentObj == (questionType.length - 1)) ? {color: '#c8c8c8', cursor: 'default'} : null}
             >
               <i
-                className="fa fa-chevron-right"
+                className="fa fa-chevron-right" style={{cursor: 'inherit'}}
               />
             </div>
           </div>
@@ -122,14 +122,29 @@ class Form extends Component {
             onChange={(event) => this.props.onChange({field: 'question', value: event.target.value})}
             value={question.question || ''}
           />
-          <div className="online-question__answer-wrapper">
-              <div className="online-question__answer-label">Jawaban</div>
-              {listChoices}
-          </div>
           {
-            choices.length <= 25 &&
-            <div className="online-question__add-choice" onClick={() => this.props.addChoiceHandler()}>
-              <span className="online-question__add-icon">+</span> Tambah Jawaban
+            this.props.questionType === 'multiple_choice' ?
+              <div>
+                <div className="online-question__answer-wrapper">
+                    <div className="online-question__answer-label">Jawaban</div>
+                    {listChoices}
+                </div>
+
+                {choices.length <= 25 &&
+                  <div className="online-question__add-choice" onClick={() => this.props.addChoiceHandler()}>
+                    <span className="online-question__add-icon">+</span> Tambah Jawaban
+                  </div>
+                }
+              </div>
+            :
+            <div>
+              <label className="online-question__label-essay-answer">Jawaban</label>
+              <textarea
+                className="online-question__write-question mt-0"
+                placeholder="Tulis Jawaban"
+                onChange={(event) => this.props.onChangeContent({order: 0, value: event.target.value})}
+                value={_.get(question.exam_question_choices, '0.content', '')}
+              />
             </div>
           }
         </div>
@@ -146,7 +161,8 @@ class Form extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.onlineQuestion
+  data: state.onlineQuestion,
+  problem_types: _.get(state, 'onlineQuestion.data.problem_types', [])
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

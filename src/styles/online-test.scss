@@ -614,6 +614,13 @@ $nunito_bold: "NunitoBold";
     }
   }
 
+  &__label-essay-answer {
+    display: block;
+    font-family: $nunito_regular;
+    color: #a1a1a1;
+    margin: 24px 0px 8px;
+  }
+
   ::placeholder {
     font-family: $nunito_regular;
     color: #a1a1a1;
@@ -650,5 +657,9 @@ $nunito_bold: "NunitoBold";
 
   &__delete-wrapper {
     display: inline;
+  }
+
+  .fa {
+    cursor: default;
   }
 }

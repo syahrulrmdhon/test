@@ -111,6 +111,7 @@ export default function reducer(state = initialState, action) {
       const symbol = String.fromCharCode(initialCharCode + choices.length)
 
       choices.push({id: null, symbol: symbol, content: '', is_correct_ans: false})
+      state.body.exam_question.exam_question_choices_attributes = choices
 
       return {
         ...state,

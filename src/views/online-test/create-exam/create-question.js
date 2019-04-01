@@ -27,7 +27,7 @@ class CreateQuestion extends Component {
     this.onClickNumber = this.onClickNumber.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.onClickNavigation = this.onClickNavigation.bind(this)
-    this.validation = this.validation.bind(this)
+    this.postQuestion = this.postQuestion.bind(this)
     this.getQuestion = this.getQuestion.bind(this)
   }
 
@@ -49,44 +49,54 @@ class CreateQuestion extends Component {
   }
 
   onClickNumber({number, index, questionType, questionLabel}) {
-    if (this.validation()) {
-      let data = this.validation()
-      apiClient(data.method, data.url, data.data).then(() => {
-        this.setState({
-          success: true
-        })
-      }).catch(() => {
-      })
-    }
+    this.postQuestion({
+      nextNumber: number,
+      questionType: questionType
+    })
+
     if (this.state.number !== number || this.state.questionType !== questionType) {
       this.setState({
         currentPage: number,
         currentObj: index,
         questionType: questionType,
         questionLabel: questionLabel,
-        success: false
       })
     }
-    this.getQuestion({number: number, questionType: questionType})
+    // this.getQuestion({number: number, questionType: questionType})
   }
 
   onSubmit({number, questionType}) {
-    const nextNumber = number + 1
-    if (this.validation()) {
-      let data = this.validation()
-      apiClient(data.method, data.url, data.data).then(() => {
-        this.setState({
-          success: true
-        })
-      }).catch(() => {
+    const currentObj = _.get(this.props.problem_types, this.state.currentObj, {})
+    const {question_count} = currentObj
+    let nextNumber = number + 1
+
+    if (nextNumber > question_count && this.state.currentObj !== this.props.problem_types.length - 1){
+      const currentObjCount = this.state.currentObj + 1
+      const nextObj = _.get(this.props.problem_types, currentObjCount, {})
+      questionType = nextObj.problem_type
+      nextNumber = 1
+
+      this.postQuestion({
+        nextNumber: nextNumber,
+        questionType: questionType
+      })
+
+      this.setState({
+        currentObj: currentObjCount,
+        currentPage: nextNumber,
+        questionType: questionType,
+        questionLabel: nextObj.problem_type_abbv,
       })
     }
-    this.setState({
-      currentPage: nextNumber,
-      questionType: questionType,
-      success: false
-    })
-    this.getQuestion({ number: nextNumber, questionType: questionType })
+    else if (nextNumber <= question_count) {
+      this.postQuestion({
+        nextNumber: nextNumber,
+        questionType: this.state.questionType
+      })
+      this.setState({
+        currentPage: nextNumber,
+      })
+    }
   }
 
   getQuestion({number, questionType}) {
@@ -100,7 +110,82 @@ class CreateQuestion extends Component {
     })
   }
 
-  validation(){
+  onClickNavigation({event, questionType, questionCount}) {
+    const currentObj = _.get(this.props.problem_types, this.state.currentObj, {})
+    const {question_count} = currentObj
+
+    switch (event) {
+      case 'prev':
+        let  prevCurrentPage = this.state.currentPage - 1
+
+        if (prevCurrentPage == 0 && this.state.currentObj !== 0){
+          const currentObjCount = this.state.currentObj - 1
+          const prevObj = _.get(this.props.problem_types, currentObjCount, {})
+          questionType = prevObj.problem_type
+          prevCurrentPage = prevObj.question_count
+
+          this.postQuestion({
+            nextNumber: prevCurrentPage,
+            questionType: questionType
+          })
+
+          this.setState({
+            currentObj: currentObjCount,
+            currentPage: prevObj.question_count,
+            questionType: questionType,
+            questionLabel: prevObj.problem_type_abbv
+          })
+        }
+        else if (prevCurrentPage !== 0){
+          this.postQuestion({
+            nextNumber: prevCurrentPage,
+            questionType: this.state.questionType
+          })
+
+          this.setState({
+            currentPage: prevCurrentPage,
+          })
+        }
+
+        break
+      case 'next':
+        let nextCurrentPage = this.state.currentPage + 1
+
+        if (nextCurrentPage > question_count && this.state.currentObj !== this.props.problem_types.length - 1){
+          const currentObjCount = this.state.currentObj + 1
+          const nextObj = _.get(this.props.problem_types, currentObjCount, {})
+          questionType = nextObj.problem_type
+          nextCurrentPage = 1
+
+          this.postQuestion({
+            nextNumber: nextCurrentPage,
+            questionType: questionType
+          })
+
+          this.setState({
+            currentObj: currentObjCount,
+            currentPage: nextCurrentPage,
+            questionType: questionType,
+            questionLabel: nextObj.problem_type_abbv,
+          })
+        } else if (nextCurrentPage <= question_count){
+
+          this.postQuestion({
+            nextNumber: nextCurrentPage,
+            questionType: this.state.questionType
+          })
+
+          this.setState({
+            currentPage: nextCurrentPage,
+          })
+        }
+        break
+      default:
+        break
+    }
+  }
+
+  postQuestion({nextNumber, questionType}){
     const data = _.get(this.props.data, 'body', {})
 
     let choices = data.exam_question.exam_question_choices_attributes.filter((choice, index) => {
@@ -110,98 +195,26 @@ class CreateQuestion extends Component {
 
     if (data.exam_question.basic_comp_id && data.exam_question.exam_question_choices_attributes.length && data.exam_question.question && data.exam_question.weight) {
       const url = `v1/assessments/${this.state.assessmentId}/exams/${this.state.examId}/questions`
-      return {method: 'post', url: url, data: data}
+
+      apiClient('post', url, data).then(() => {
+        this.setState({
+          success: true
+        })
+        this.getQuestion({ number: nextNumber, questionType: questionType })
+
+      }).catch(() => {
+      })
     }
     else {
-      return false
+      this.getQuestion({ number: nextNumber, questionType: questionType })
     }
-  }
 
-  onClickNavigation({event, questionType, questionCount}) {
-    const currentObj = _.get(this.props.problem_types, this.state.currentObj, {})
-    const {problem_type, question_count} = currentObj
-
-    switch (event) {
-      case 'prev':
-        let  prevCurrentPage = this.state.currentPage - 1
-        if(!prevCurrentPage < 1) {
-          if (this.validation()) {
-            let data = this.validation()
-            apiClient(data.method, data.url, data.data).then(() => {
-              this.setState({
-                success: true
-              })
-            }).catch(() => {
-            })
-          }
-          this.setState({
-            success: false
-          })
-        }
-
-        if(prevCurrentPage == 0){
-          const currentObjCount = this.state.currentObj - 1
-          const prevObj = _.get(this.props.problem_types, currentObjCount, {})
-          questionType = prevObj.problem_type
-          prevCurrentPage = prevObj.question_count
-
-          this.setState({
-            currentObj: currentObjCount,
-            currentPage: prevObj.question_count,
-            questionType: questionType,
-            questionLabel: prevObj.problem_type_abbv
-          })
-        } else {
-          this.setState({
-            currentPage: prevCurrentPage,
-          })
-        }
-
-        this.getQuestion({number: prevCurrentPage, questionType: questionType})
-
-        break
-      case 'next':
-        let nextCurrentPage = this.state.currentPage + 1
-        if (this.validation()) {
-          let data = this.validation()
-          apiClient(data.method, data.url, data.data).then(() => {
-            this.setState({
-              success: true
-            })
-          }).catch(() => {
-          })
-        }
-
-        if(nextCurrentPage > question_count){
-          const currentObjCount = this.state.currentObj + 1
-          const nextObj = _.get(this.props.problem_types, currentObjCount, {})
-          questionType = nextObj.problem_type
-          nextCurrentPage = 1
-
-          this.setState({
-            currentObj: currentObjCount,
-            currentPage: nextCurrentPage,
-            questionType: questionType,
-            questionLabel: nextObj.problem_type_abbv,
-            success: false
-          })
-        } else {
-          this.setState({
-            currentPage: nextCurrentPage,
-            success: false
-          })
-        }
-
-        this.getQuestion({number: nextCurrentPage, questionType: questionType})
-        break
-      default:
-        break
-    }
+    this.setState({
+      success: false
+    })
   }
 
   render() {
-    // const success = _.get(this.props.data, 'success', false)
-
     return (
         <Page title="Deskripsi">
         <Header navbar={false} location={''}/>
@@ -222,7 +235,8 @@ class CreateQuestion extends Component {
           <Form
             number={this.state.currentPage}
             currentObj={this.state.currentObj}
-            questionType={this.state.questionLabel}
+            questionLabel={this.state.questionLabel}
+            questionType={this.state.questionType}
             onSubmit={this.onSubmit}
             onClickNavigation={this.onClickNavigation}
           />
