@@ -94,6 +94,9 @@ textarea.textarea-box{
   filter: brightness(90%);
 }
 
+.no-drop {cursor: no-drop;}
+
+
 .btn-white {
   text-align: center;
   padding: 5px;
