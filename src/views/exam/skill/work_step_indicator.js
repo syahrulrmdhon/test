@@ -19,11 +19,16 @@ class WorkStepIndicator extends Component {
     }
 
 
+    onChangeIndicator(event,type, key_value, idx, basic_comps) {
+        this.props.handleProblemSet(event.value, type, this.props.key_value, idx, basic_comps)
+    }
+
+
+
 
     render() {
         let items = []
         const basic_comps = basic_comp_lists(this.props.assessment_basic_comps)
-        console.log(basic_comps,"basic comp")
         if (this.props.problem_type_sets) {
             this.props.problem_type_sets.map((problem_type_set, idx) => {
                 let action;
@@ -40,12 +45,12 @@ class WorkStepIndicator extends Component {
                 basic_comps.map((data, i) => {
                     data.isDisabled = false
                 })
-                let basic_comp_value = basic_comps.find((element) => { return element.value == problem_type_set.basic_comp_id }) || null
+
+                let basic_comp_value = basic_comps.find((element) => { return element.value === problem_type_set.basic_comp_id }) || null
                 if (basic_comp_value) {
                     basic_comp_value.isDisabled = true
                 }
-                console.log(basic_comp_value,"value")
-                console.log(basic_comps)
+
                 items.push(
                     <tr key={idx}>
                         <td className="align-center valign-center">
@@ -59,7 +64,7 @@ class WorkStepIndicator extends Component {
                                 placeholder="Pilih kompetensi dasar"
                                 name="basic_comp_id"
                                 options={basic_comps}
-                                onChange={(event) => { this.props.handleProblemSet(event.value, 'basic_comp_id', this.props.key_value, idx) }}
+                                onChange={(event) => { this.onChangeIndicator(event, 'basic_comp_id', this.props.key_value, idx, basic_comps) }}
                                 value={basic_comp_value}
                             />
                         </td>

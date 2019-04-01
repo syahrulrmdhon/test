@@ -40,14 +40,7 @@ export class Basic extends Component {
       citiesOptions: [],
       cityDefaultOpt: [],
       base64: '',
-      arr1:[{
-        value:'0',
-        label:'Tidak Lulus'
-      }],
-      arr2:[{
-        value:'1',
-        label:'Lulus'
-      }]
+
     }
     this.submit = this.submit.bind(this)
     this.onCofirm = this.onCofirm.bind(this)
@@ -73,31 +66,10 @@ export class Basic extends Component {
           localStorage.setItem("user", JSON.stringify(res.data.data.user))
       })
 
-    var arr1 = [1, 2];
-    var arr2 = [1, 2, 1];
-
-    if (JSON.stringify(arr1) === JSON.stringify(arr2)) {
-      console.log('They are equal!');
-    }
-
-  }
-
-   compare(arr1,arr2){
-    console.log(arr1, arr2)
-
-     const objMap={};
-
-     arr1.forEach((e1)=>arr2.forEach((e2)=> {if(e1 === e2){
-        console.log(e1,"asdas")
-           objMap[e1]=objMap[e1]+1||1 ;
-         }
-         }
-     ));
-
-     console.log(Object.keys(objMap).map(e=>Number(e)));
 
 
   }
+
   handleRegion(e, props) {
     this.props.handlingInputSelectRegion(e, props)
     let region_id = this.props.region && this.props.region.user && this.props.region.user.data && this.props.region.user.data.user && this.props.region.user.data.user.address_attributes && this.props.region.user.data.user.address_attributes.region_id
@@ -138,7 +110,6 @@ export class Basic extends Component {
       profile_url: '',
     }
     userObj['user'] = datas
-
 
     // attribute full
     let url = `/v1/users/update_basic_info`
@@ -226,11 +197,15 @@ export class Basic extends Component {
     }
     userObj['user'] = data
 
+    console.log(this.state.base64.split(",")[0],"type")
+
+
+
     // attribute full
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
-      getUser(true)
-      window.location.reload(true)
+      // getUser(true)
+      // window.location.reload(true)
 
     })
       .catch(err => {
@@ -257,6 +232,7 @@ export class Basic extends Component {
     for (var i = 0, len = files.length; i < len; i++) {
       var file = files[i];
       var reader = new FileReader();
+      console.log(files, "onvent")
       reader.onload = ((event) => {
         this.setState({
           base64: event.target.result
@@ -381,7 +357,7 @@ export class Basic extends Component {
                                     Besar file maksimum: 1 Mb
                                 </div>
                                   <div className="notice margin-top-1">
-                                    Ekstensi file yang diperbolehkan: .PNG, jpg, dan jpeg.
+                                    Ekstensi file yang diperbolehkan: .PNG, jpg,jpeg dan gif.
                                 </div>
                                 </div>
                               </div>

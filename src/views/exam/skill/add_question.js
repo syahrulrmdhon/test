@@ -29,6 +29,13 @@ class AddQuestion extends Component {
         this.props.getComponent(this.state.assessment_id, this.state.exam_id)
     }
 
+    remvoeDuplicate(arrArg){
+        return arrArg.filter((elem, pos, arr) => {
+            return arr.indexOf(elem) === pos;
+        });
+    }
+
+
     onSubmit(event){
         event.preventDefault(); 
         const problem_types = this.props.problem_types
@@ -62,7 +69,28 @@ class AddQuestion extends Component {
             url = `v1/assessments/${this.state.assessment_id}/exams/validate?step=QuestionForm&category=skill`
         }
 
-        // console.log(exam_questions,"exam question")
+        let basic_comps = []
+
+        data.exam_questions_attributes.map((data, index) =>{
+            basic_comps.push(data.basic_comp_id)
+        })
+
+        let length_basic_comps_afer_eliminate = this.remvoeDuplicate(basic_comps).length
+        const basic_comps_pure = basic_comp_lists(this.props.assessment_basic_comps).length
+
+        if(basic_comps_pure !== length_basic_comps_afer_eliminate){
+            modal({
+                message: 'Gagal',
+                description: `Pilih semua kompetensi dasar.`,
+                btns: [
+                    {
+                        label: 'Ulangi',
+                        className: 'btn bcred cwhite',
+                    }
+                ]
+            })
+            return false
+        }
 
         apiClient(action, url, data).then(response => {
             if(!this.state.exam_id){
@@ -148,7 +176,7 @@ class AddQuestion extends Component {
                                         <NavLink to={urlBack}>
                                             <button className="submit-btn default margin-right-2" >Kembali</button>
                                         </NavLink>
-                                        <button className="submit-btn" onClick={this.onSubmit} >Simpan</button>
+                                        <button  className="submit-btn" onClick={this.onSubmit} >Simpan</button>
                                     </div>
                                 </form>
                             </div>
