@@ -572,3 +572,43 @@ export function getClassName() {
         nameClass: nameClass
     })
 }
+
+export function getFullSemesterList(params = {}, options = {}) {
+
+    apiClient('get', 'v1/filters/full_semesters', false, params).then(res => {
+        let data = res.data.data.semesters || []
+        let result = []
+        if (data.length > 0) {
+
+            data.map((x) => {
+                result.push({
+                    value: x.id,
+                    label: x.full_period_name
+                })
+            })
+        }
+        this.setState({
+            listFullSemester: result
+        })
+    })
+}
+
+// export function getExamListForDuplicate(params = {}, options = {}) {
+
+//     apiClient('get', 'v1/filters/full_semesters', false, params).then(res => {
+//         let data = res.data.data.semesters || []
+//         let result = []
+//         if (data.length > 0) {
+
+//             data.map((x) => {
+//                 result.push({
+//                     value: x.id,
+//                     label: x.full_period_name
+//                 })
+//             })
+//         }
+//         this.setState({
+//             listFullSemester: result
+//         })
+//     })
+// }

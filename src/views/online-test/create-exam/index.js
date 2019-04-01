@@ -7,14 +7,14 @@ import { bindActionCreators } from 'redux'
 import {
     handleEvent,
     buildObject,
-    addQuestion
+    addQuestion,
+    handleSwitch
 } from './../../../redux-modules/modules/onlineExam'
 import { getProblemTypes } from './../helper-online'
-
-//scss
+import DuplicateQuestion from './duplicate'
 import './../../../styles/online-test.scss'
-import AddQuestion from './add-question';
-import { apiClient } from '../../../utils/apiClient';
+import AddQuestion from './add-question'
+import { apiClient } from '../../../utils/apiClient'
 import _ from 'lodash'
 
 class index extends Component {
@@ -24,8 +24,6 @@ class index extends Component {
             checked: false,
             name: props.location.state.name,
             id: props.match.params.id,
-            problemTypes: [],
-            length: null,
         };
         this.handleChangeSwitch = this.handleChangeSwitch.bind(this)
     }
@@ -47,30 +45,38 @@ class index extends Component {
         e.preventDefault()
 
         let data = this.props.exam
-        console.log('data submit', data)
         let assesment_id = this.state.id
         let url = `v1/assessments/${assesment_id}/exams`
 
         apiClient('post', url, data).then(res => {
-            console.log('res',res)
-            
+
         })
     }
 
     render() {
+        // console.log('props', this.props.exam)
         const { name, kkm, description } = this.props.exam || {}
-        let exam_problem_types = _.get(this, 'props.exam.exam_problem_types_attributes', [])        
+        let exam_problem_types = _.get(this, 'props.exam.exam_problem_types_attributes', [])
         let questions = []
+        let duplication = []
 
-        if (exam_problem_types.length > 0) {
-            exam_problem_types.map((question, idx) => {
-                questions.push(<AddQuestion
-                    key={(idx)}
-                    index={(idx)}
-                />)
-            })
+        if (this.props.switch) {
+            duplication.push(
+                <DuplicateQuestion 
+                    key={Math.random()}
+                />
+            )
+        } else {
+            if (exam_problem_types.length > 0) {
+                exam_problem_types.map((question, idx) => {
+                    questions.push(<AddQuestion
+                        i={idx}
+                        key={(idx)}
+                        index={(idx)}
+                    />)
+                })
+            }
         }
-
         return (
             <Page title="Tulis Ujian Online">
                 <Header />
@@ -123,19 +129,20 @@ class index extends Component {
                                 <div className="margin-top-3">
                                     <label>Duplikat Soal</label>
                                     <Switch
-                                        onChange={this.handleChangeSwitch}
-                                        checked={this.state.checked}
+                                        onChange={this.props.handleSwitch}
+                                        checked={this.props.switch}
                                         uncheckedIcon={false}
                                         checkedIcon={false}
                                         onHandleColor="#ffffff"
                                         onColor="#1a9d7f"
                                         offColor="#cccccc"
                                         id="normal-switch"
-                                        height={18}
+                                        height={15}
                                         width={35}
                                     />
                                 </div>
                                 <div className='margin-top-3'>
+                                    {duplication}
                                     {questions}
                                 </div>
                                 <div className="margin-top-3" onClick={this.props.addQuestion}>
@@ -162,12 +169,14 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    exam: _.get(state, 'onlineExam.exam', {}), //listOnlineExam dari reducer
-    exam_problem_types: _.get(state, 'onlineExam.exam.exam_problem_types_attributes', {})
+    exam: _.get(state, 'onlineExam.exam', {}), //onlineExam dari reducer
+    exam_problem_types: _.get(state, 'onlineExam.exam.exam_problem_types_attributes', {}),
+    switch: state.onlineExam.switch
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
     handleEvent,
     buildObject,
-    addQuestion
+    addQuestion,
+    handleSwitch
 }, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(index)
