@@ -265,7 +265,7 @@ export const MainRoutes = [
         component: Bank
     },
     {
-        path: '/online-exam/create/:id',
+        path: '/online-exam/create/:id/subject/:subject_id',
         component: CreateList
     },
     // {
