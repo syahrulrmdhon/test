@@ -64,7 +64,8 @@ export const apiClient = (method, url, request, params = {}) => {
                 function (error) {
                     errorHandling(error)
                     throw error;
-                });
+                }
+            );
         case 'post':
             return Axios.post(baseUrl + url, request, { headers: headers, params: params })
             .catch(
@@ -79,13 +80,15 @@ export const apiClient = (method, url, request, params = {}) => {
                 function (error) {
                     errorHandling(error)
                     throw error;
-                });
+                }
+            );
         case 'delete':
             return Axios({ url: baseUrl + url, headers: headers, method: 'DELETE', data: request})
             .catch(
                 function (error) {
                     errorHandling(error)
                     throw error;
-                });
+                }
+            );
     }
 }
