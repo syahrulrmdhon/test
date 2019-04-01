@@ -15,7 +15,6 @@ export default function reducer(state=initialState, action) {
             ...state,
             loading:true
         }
-        break
 
         case INITIALIZE:
         return {
@@ -27,7 +26,6 @@ export default function reducer(state=initialState, action) {
                 selectedSemester: null
             }
         }
-        break
 
         case LOAD_SUCCESS:
         delete state.error
@@ -38,7 +36,6 @@ export default function reducer(state=initialState, action) {
             loading: false,
             ...action.state
         }
-        break
 
         case HANDLE_CHANGE:
         state[action.fieldName] = action.value
@@ -48,7 +45,6 @@ export default function reducer(state=initialState, action) {
             loaded: true,
             loading: false
         }
-        break
 
         case LOAD_FAIL:
         
@@ -57,7 +53,6 @@ export default function reducer(state=initialState, action) {
             loading: false,
             error: action.error
         }
-        break
 
         case SET:
 
@@ -65,7 +60,6 @@ export default function reducer(state=initialState, action) {
             ...state,
             ...action.payload
         }
-        break
 
         case RESET:
 

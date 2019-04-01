@@ -10,7 +10,6 @@ import {modal} from './../global/modal'
 export default class ScheduleModal extends Component{
     constructor(props) {
         super(props);
-        
         this.state = {
             open: false,
             listClass: this.props.listClass,
