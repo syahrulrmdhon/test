@@ -24,12 +24,12 @@ export default function reducer(state = initialState, action) {
     delete state.error;
       if (state.result !== action.result) {
         if (action.result.data.profile) {
-          console.log(action.result.data,"profile")
           action.result.data['user'] = {}
           action.result.data['user'] = {
             phone_number: action.result.data.profile.phone_number ? action.result.data.profile.phone_number : '',
             email: action.result.data.profile.email ? action.result.data.profile.email : '',
             full_name: action.result.data.profile.full_name ? action.result.data.profile.full_name : '',
+            gender: action.result.data.profile.gender ? action.result.data.profile.gender : '',
             pob: action.result.data.profile.pob ?  action.result.data.profile.pob : '',
             dob: action.result.data.profile.dob ? action.result.data.profile.dob : '',
             url: action.result.data.profile.photo_url ? action.result.data.profile.photo_url : '',
@@ -159,10 +159,6 @@ export function getUSer() {
 
 
 export function getRegion() {
-  const token = localStorage.getItem('token')
-  const schoolId = localStorage.getItem("school_id")
-  console.log("hit")
-
   return {
     types: [LOAD, LOAD_SUCCESS_REGION, LOAD_FAIL],
     promise: client => client.get(process.env.API_URL + `/v1/filters/regions`, headers)

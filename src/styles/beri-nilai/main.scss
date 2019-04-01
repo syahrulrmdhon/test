@@ -812,6 +812,9 @@ table.table.beri-nilai tr.head {
 }
 
 .box-question {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
   margin: auto;
   width: 70%;
   min-height: 20%;

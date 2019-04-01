@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import Header from './../global/header'
 import Page from './../../components/Title'
 import Sidebar from './index/sidebar'
-import Avatar from 'react-avatar';
 import { apiClient } from './../../utils/apiClient'
 import Select from 'react-select'
 import User from './../../assets/images/avatar_def.svg'
+import User_male from './../../assets/images/m_avatar.svg'
+import User_female from './../../assets/images/f_avatar.svg'
 import DatePicker from 'react-datepicker'
 import {
   getUSer,
@@ -16,7 +17,6 @@ import {
   handleRemoveProfilePicture
 } from './../../redux-modules/modules/user'
 import { bindActionCreators } from 'redux';
-import _ from 'lodash'
 import { getDate } from './../../utils/common'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import { error, modal } from './../global/modal'
@@ -47,7 +47,6 @@ export class Basic extends Component {
     this.handleRegion = this.handleRegion.bind(this)
     this.handleCity = this.handleCity.bind(this)
     this.onPreviewPhoto = this.onPreviewPhoto.bind(this)
-    this.onRedirect = this.onRedirect.bind(this)
     this.confirmDelete = this.confirmDelete.bind(this)
     this.handleProfilePicture = this.handleProfilePicture.bind(this);
   }
@@ -76,7 +75,6 @@ export class Basic extends Component {
 
 
   handleCity(region) {
-    console.log(region, ",")
     apiClient('get', `/v1/filters/cities?region_id=${region}`).then(response => {
       let city = response.data.data.cities || []
       const temps = city
@@ -109,13 +107,11 @@ export class Basic extends Component {
       profile_url: '',
     }
     userObj['user'] = datas
-    localStorage.removeItem('user')
 
 
     // attribute full
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
-      this.onRedirect()
       getUser(false)
       window.location.reload(true)
     })
@@ -185,12 +181,6 @@ export class Basic extends Component {
     })
   }
 
-  onRedirect() {
-    // localStorage.removeItem('user')
-    getUser(false)
-
-  }
-
   submit() {
     let userObj = {}
     let data_attitbutes = this.props.user && this.props.user.user && this.props.user.user.address_attributes
@@ -204,16 +194,11 @@ export class Basic extends Component {
       full_name: this.props.user && this.props.user.user && this.props.user.user.full_name,
     }
     userObj['user'] = data
-    localStorage.removeItem('user')
-
 
     // attribute full
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
-      this.onRedirect()
       getUser(true)
-      // window.location.href="/profile/basic-information"
-
       window.location.reload(true)
 
     })
@@ -242,7 +227,6 @@ export class Basic extends Component {
       var file = files[i];
       var reader = new FileReader();
       reader.onload = ((event) => {
-        console.log(event.target.result)
         this.setState({
           base64: event.target.result
         })
@@ -265,6 +249,7 @@ export class Basic extends Component {
     let dob = this.props.user && this.props.user.user && this.props.user && this.props.user.user.dob
     let pob = this.props.user && this.props.user.user && this.props.user && this.props.user.user.pob
     let photo_url = this.props.user && this.props.user.user && this.props.user && this.props.user.user.url
+    let gender = this.props.user && this.props.user.user && this.props.user && this.props.user.user.gender
 
     let check_dob = dob ? dob : null
 
@@ -273,6 +258,7 @@ export class Basic extends Component {
     let data_cities = this.state.citiesOptions.length === 0 ? this.state.cityDefaultOpt : this.state.citiesOptions
     select_region.push(
       <Select
+          key={Math.random()}
         classNamePrefix="select"
         className="fullwidth"
         placeholder="Masukan Nama Provinsi"
@@ -284,6 +270,7 @@ export class Basic extends Component {
 
     select_city.push(
       <Select
+          key={Math.random()}
         classNamePrefix="select"
         className="fullwidth"
         placeholder="Masukan Nama Kota Kecamatan"
@@ -297,7 +284,7 @@ export class Basic extends Component {
     let action = []
     if (photo_url === '' || photo_url === null) {
       action.push(
-        <div className="col-sm-12">
+        <div className="col-sm-12" key={Math.random()}>
           <label htmlFor="1" className="pointer padding-2 border-full label-upload label-text">
             Unggah Foto Baru
           <i className="margin-left-2 fa fas fa-upload"></i>
@@ -308,7 +295,7 @@ export class Basic extends Component {
       )
     } else {
       action.push(
-        <div className="col-sm-12">
+        <div key={Math.random()} className="col-sm-12">
           <label htmlFor="1" className="pointer padding-2 border-full label-upload label-text">
             Unggah Foto Baru
           <i className="margin-left-2 fa fas fa-upload"></i>
@@ -325,6 +312,11 @@ export class Basic extends Component {
     let style = ''
     if (data_photo == User) {
       style = 'remove-profile hide'
+      if (gender == 'M'){
+        data_photo = User_male
+      }else if(gender == 'F'){
+        data_photo = User_female
+      }
     } else {
       style = 'remove-profile'
     }

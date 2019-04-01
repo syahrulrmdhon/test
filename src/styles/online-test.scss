@@ -20,6 +20,16 @@ $nunito_bold: "NunitoBold";
     min-height: 530px;
     margin: 0px auto;
     // padding: 38.5px 120px 27.5px 85px;
+    .look {
+      display: inline;
+      font-family: $nunito_bold;
+      color: #1a9d7f;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .fa-close {
+      color: #1a9d7f;
+    }
   }
 
   .title-page {
@@ -46,6 +56,9 @@ $nunito_bold: "NunitoBold";
       height: 40px;
     }
     .fa-plus {
+      color: #1a9d7f;
+    }
+    .fa-trash {
       color: #1a9d7f;
     }
     .normal-green-text {

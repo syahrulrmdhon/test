@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
 import Avatar from './../../assets/images/avatar_def.svg'
+import Avatar_male from './../../assets/images/m_avatar.svg'
+import Avatar_female from './../../assets/images/f_avatar.svg'
 
 export default class ProfileDetail extends Component {
   render() {
+    let photo_url = this.props.user && this.props.user.user && this.props.user && this.props.user.user.url
+    let data_photo = photo_url ? photo_url : Avatar
     const response = this.props.dataProfile
+    console.log(response, 'profile')
+      // Edited by Risky S.
+      if  (response.user.gender == 'M'){
+      data_photo = Avatar_male  
+      } else if(response.user.gender == 'F'){
+       data_photo = Avatar_female 
+      }
     return (
       <div>
         <div className="avatar-wrapper">
-          <img className="avatar" src={Avatar} alt="" />
+          <img className="avatar" src={data_photo} alt="" />
         </div>
         <div className="mt-3 detail-name">
           {response && response.user && response.user.full_name}

@@ -21,6 +21,8 @@ import { apiClient } from '../../utils/apiClient'
 
 import Avatar from 'react-avatar'
 import Ava from './../../assets/images/avatar_def.svg'
+import Ava_m from './../../assets/images/m_avatar.svg'
+import Ava_f from './../../assets/images/f_avatar.svg'
 
 var FontAwesome = require('react-fontawesome');
 
@@ -141,6 +143,7 @@ export default class Header extends Component {
         let school_logo = !!(school) ? school.asset.doc_aws_url : Logo
 
         let user_name = !!(user) ? user.full_name : ''
+        let gender = !!(user) ? user.gender : ''
         let user_logo = !!(user) ? user.asset.doc_aws_url : ''
         let school_account = []
         if (this.state.schoolList.length > 1) {
@@ -162,27 +165,35 @@ export default class Header extends Component {
         let paramsData = params === undefined?'':params 
         let text = ''
 
-
-        if (this.state.schoolList.length > 1) {
+        if (this.state.schoolList.length == 1) {
             text = <button id="dropdown-profile"  onClick={this.profile}  className="btn btn-info">{user_name}<span className="caret"></span></button>
         } else {
             text = <button id="dropdown-profile"  onClick={this.profile}  className="btn btn-info">{user_name}<span className="caret"></span></button>
-            // text = <NavItem>
-            //     <ButtonToolbar>
-            //         <DropdownButton
-            //             bsStyle='info'
-            //             title={user_name}
-            //             id='dropdown-profile'
-            //         >
-            //             <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
-            //                 <span className="profile padding-left-1">Profil</span>
-            //             </MenuItem>
-            //         </DropdownButton>
-            //     </ButtonToolbar>
-            // </NavItem>
+            text = <NavItem>
+                <ButtonToolbar>
+                    <DropdownButton
+                        bsStyle='info'
+                        title={user_name}
+                        id='dropdown-profile'
+                    >
+                        <MenuItem onClick={this.profile} eventKey="1"><FontAwesome name="user" />
+                            <span className="profile padding-left-1">Profil</span>
+                        </MenuItem>
+                        {school_account}
+                    </DropdownButton>
+                </ButtonToolbar>
+            </NavItem>
         }
 
         // console.log(this.props.label,"label")
+        let data_photo = user_logo ? user_logo : Ava
+
+        if  (user_logo==null && gender=='M'){
+            data_photo = Ava_m
+        }else if (user_logo==null && gender=='F'){
+            data_photo = Ava_f
+        }
+
 
         return (
             <div className="fix-nav">
@@ -197,7 +208,7 @@ export default class Header extends Component {
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
                                     <NavItem className='padding-right-2'>
-                                        <img src={user_logo?user_logo:Ava} height="40" width="40" className="profile-photo" alt="/" />
+                                        <img src={data_photo} height="40" width="40" className="profile-photo" alt="/" />
                                     </NavItem>
                                     {text}
                                     <NavItem>
