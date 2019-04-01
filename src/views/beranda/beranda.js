@@ -45,7 +45,6 @@ class Beranda extends Component {
         if(this.state.setDate){
             params['date'] = this.state.setDate
         }
-
         if(this.state.class_id != ''){
             params['class_id'] = this.state.class_id;
         }
@@ -56,6 +55,13 @@ class Beranda extends Component {
                 loader: false
             })
         })
+                
+        this.setState({
+            data: [],      
+            scheduleList: [],
+            loader : true
+        })
+        
     }
 
     clickSideBar(){
