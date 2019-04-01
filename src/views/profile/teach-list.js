@@ -10,6 +10,7 @@ import User from './../../assets/images/avatar_def.svg'
 import Loader from './../global/loader'
 
 
+
 // scss
 import './../../styles/profile.scss'
 export class componentName extends Component {

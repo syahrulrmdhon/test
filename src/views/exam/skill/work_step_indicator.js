@@ -18,15 +18,21 @@ class WorkStepIndicator extends Component {
         super(props)
     }
 
+
+    onChangeIndicator(event,type, key_value, idx, basic_comps) {
+        this.props.handleProblemSet(event.value, type, this.props.key_value, idx, basic_comps)
+    }
+
+
+
+
     render() {
         let items = []
-        console.log("here prosp", this.props)
         const basic_comps = basic_comp_lists(this.props.assessment_basic_comps)
         if (this.props.problem_type_sets) {
             this.props.problem_type_sets.map((problem_type_set, idx) => {
                 let action;
                 if (idx > 0) {
-                    console.log(problem_type_set, "here go")
                     action = <td className="align-center valign-center">
                         <a href="javascript:void(0);" onClick={() => { this.props.removeIndicator(this.props.key_value, idx) }}>
                             <FontAwesome name="trash" />
@@ -34,6 +40,15 @@ class WorkStepIndicator extends Component {
                     </td>
                 } else {
                     action = <td></td>
+                }
+
+                basic_comps.map((data, i) => {
+                    data.isDisabled = false
+                })
+
+                let basic_comp_value = basic_comps.find((element) => { return element.value === problem_type_set.basic_comp_id }) || null
+                if (basic_comp_value) {
+                    basic_comp_value.isDisabled = true
                 }
 
                 items.push(
@@ -49,8 +64,8 @@ class WorkStepIndicator extends Component {
                                 placeholder="Pilih kompetensi dasar"
                                 name="basic_comp_id"
                                 options={basic_comps}
-                                onChange={(event) => { this.props.handleProblemSet(event.value, 'basic_comp_id', this.props.key_value, idx) }}
-                                value={basic_comps.find((element) => { return element.value == problem_type_set.basic_comp_id })}
+                                onChange={(event) => { this.onChangeIndicator(event, 'basic_comp_id', this.props.key_value, idx, basic_comps) }}
+                                value={basic_comp_value}
                             />
                         </td>
                         <td>
