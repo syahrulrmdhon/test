@@ -168,6 +168,7 @@ export default class ScheduleModal extends Component{
         } else {
             let url = 'v1/home/schedule?date='+this.state.setDate // SET SCHEDULE
             apiClient('post', url, data).then(response => {
+                // console.log(response)
                 this.setState({
                     open: false,
                 })
@@ -190,12 +191,11 @@ export default class ScheduleModal extends Component{
 
                 // this.props.callBack(items)
             }).catch(error => {
-                let response = error.response
-                let data = response.data
+                let responseError = error.response.data
     
                 this.setState({
                     open: true,
-                    errors: setError(data),
+                    errors: setError(responseError),
                 })
             })
         }

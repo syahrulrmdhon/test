@@ -59,24 +59,33 @@ export const apiClient = (method, url, request, params = {}) => {
 
     switch (method) {
         case 'get':
-            return Axios.get(baseUrl + url, { headers: headers, params: params }).catch(
+            return Axios.get(baseUrl + url, { headers: headers, params: params })
+            .catch(
                 function (error) {
                     errorHandling(error)
+                    throw error;
                 });
         case 'post':
-            return Axios.post(baseUrl + url, request, { headers: headers, params: params }).catch(
+            return Axios.post(baseUrl + url, request, { headers: headers, params: params })
+            .catch(
                 function (error) {
                     errorHandling(error)
-                });
+                    throw error;
+                }
+            );
         case 'put':
-            return Axios({ url: baseUrl + url, headers: headers, method: 'PUT', data: request }).catch(
+            return Axios({ url: baseUrl + url, headers: headers, method: 'PUT', data: request })
+            .catch(
                 function (error) {
                     errorHandling(error)
+                    throw error;
                 });
         case 'delete':
-            return Axios({ url: baseUrl + url, headers: headers, method: 'DELETE', data: request}).catch(
+            return Axios({ url: baseUrl + url, headers: headers, method: 'DELETE', data: request})
+            .catch(
                 function (error) {
                     errorHandling(error)
+                    throw error;
                 });
     }
 }
