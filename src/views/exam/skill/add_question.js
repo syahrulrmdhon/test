@@ -96,7 +96,7 @@ class AddQuestion extends Component {
             modal({
                 message: 'Gagal',
                 description: `Detil langkah kerja gagal ${msg}. Silakan periksa ulang.`,
-                btns: [                                                                                                                                        
+                btns: [
                     {
                         label: 'Ulangi',
                         className: 'btn bcred cwhite',

@@ -39,7 +39,15 @@ export class Basic extends Component {
       regionOptions: [],
       citiesOptions: [],
       cityDefaultOpt: [],
-      base64: ''
+      base64: '',
+      arr1:[{
+        value:'0',
+        label:'Tidak Lulus'
+      }],
+      arr2:[{
+        value:'1',
+        label:'Lulus'
+      }]
     }
     this.submit = this.submit.bind(this)
     this.onCofirm = this.onCofirm.bind(this)
@@ -65,8 +73,31 @@ export class Basic extends Component {
           localStorage.setItem("user", JSON.stringify(res.data.data.user))
       })
 
+    var arr1 = [1, 2];
+    var arr2 = [1, 2, 1];
+
+    if (JSON.stringify(arr1) === JSON.stringify(arr2)) {
+      console.log('They are equal!');
+    }
+
   }
 
+   compare(arr1,arr2){
+    console.log(arr1, arr2)
+
+     const objMap={};
+
+     arr1.forEach((e1)=>arr2.forEach((e2)=> {if(e1 === e2){
+        console.log(e1,"asdas")
+           objMap[e1]=objMap[e1]+1||1 ;
+         }
+         }
+     ));
+
+     console.log(Object.keys(objMap).map(e=>Number(e)));
+
+
+  }
   handleRegion(e, props) {
     this.props.handlingInputSelectRegion(e, props)
     let region_id = this.props.region && this.props.region.user && this.props.region.user.data && this.props.region.user.data.user && this.props.region.user.data.user.address_attributes && this.props.region.user.data.user.address_attributes.region_id
