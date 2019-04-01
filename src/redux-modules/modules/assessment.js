@@ -168,6 +168,7 @@ export default function reducer(state = initialState, action = {}) {
             }
         case GET_NEW:
             let assessment = action.result.data.assessment ? action.result.data.assessment : {}
+            console.log(assessment,"my assessment")
             if(Object.entries(assessment) == 0){
                 assessment = {
                     name: "",
