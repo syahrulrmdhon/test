@@ -19,6 +19,8 @@ export default class InternalServerError extends Component {
                                     <h1>500</h1>
                                     <h2>Internal Server Error.</h2>
                                     <p>Ini benar-benar bukan Kesalahan Anda. Biarkan kami bantu Anda ke halaman yang benar.</p>
+                                    <br/>
+                                    <pre id="log"></pre>
                                     <NavLink className="font-grey" href="/home">
                                         Halaman Depan
                                     </NavLink>
