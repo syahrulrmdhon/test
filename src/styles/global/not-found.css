@@ -25,6 +25,11 @@ body {
   color: #232323;
 }
 
+.notfound .header-noconnect {
+  font-size: 5rem;
+  margin-top: 20vh;
+}
+
 .notfound h2 {
   font-family: "Nunito Sans", sans-serif;
   font-size: 18px;

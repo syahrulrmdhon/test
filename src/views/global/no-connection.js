@@ -16,8 +16,8 @@ export default class NoConnection extends Component {
                         <div className="container not-found">
                             <div className="row">
                                 <div className="col-5 h-100 notfound margin">
-                                    <h1>No Connection</h1>
-                                    <p>Ini benar-benar bukan Kesalahan Anda. Biarkan kami bantu Anda ke halaman yang benar.</p>
+                                    <h1 className="header-noconnect">No Connection</h1>
+                                    <p>Sayangnya Koneksi anda tidak bisa menjangkau Halaman kami.</p>
                                     <NavLink className="font-grey" href="/home">
                                         Halaman Depan
                                     </NavLink>
