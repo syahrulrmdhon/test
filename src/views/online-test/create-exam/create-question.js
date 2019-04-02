@@ -62,7 +62,6 @@ class CreateQuestion extends Component {
         questionLabel: questionLabel,
       })
     }
-    // this.getQuestion({number: number, questionType: questionType})
   }
 
   onSubmit({number, questionType}) {
@@ -219,9 +218,11 @@ class CreateQuestion extends Component {
   }
 
   render() {
+    const subject = `${_.get(this.props.data, 'data.subject_name', '')} - ${_.get(this.props.data, 'data.grade_name', '')} ${_.get(this.props.data, 'data.major_name', '')}`
+
     return (
         <Page title="Deskripsi">
-        <Header navbar={false} location={''}/>
+        <Header navbar={false} location={'/online-exam'}/>
         {
           this.state.success &&
           <div id="note">
@@ -235,6 +236,7 @@ class CreateQuestion extends Component {
             currentPage={this.state.currentPage}
             currentObj={this.state.currentObj}
             questionType={this.state.questionType}
+            subject={subject}
           />
           <Form
             number={this.state.currentPage}

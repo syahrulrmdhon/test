@@ -506,7 +506,7 @@ $nunito_bold: "NunitoBold";
   }
 
   &__question-wrapper {
-    padding-top: 28px;
+    padding: 28px 20px 28px 0px;
     max-height: 400px;
     overflow-y: auto;
   }
@@ -612,6 +612,7 @@ $nunito_bold: "NunitoBold";
     justify-content: space-between;
     float: left;
     cursor: pointer;
+    padding-left: 24px;
   }
 
   &__submit {

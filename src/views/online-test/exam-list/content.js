@@ -24,6 +24,7 @@ class ContentOnlineExam extends Component {
                     x.assessment_subjects.map((assessment_subjects) => {
                         let school_subject_id = assessment_subjects.school_subject_id
                         const date = moment(x.created_at).locale('id').format('LL')
+
                         content.push(
                             <div className='disblock' key={Math.random()}>
                                 <div className='right-block__panel'>
@@ -44,7 +45,9 @@ class ContentOnlineExam extends Component {
                                             </div>
                                             <label className='p'>{x.grade_name === null ? '' : x.grade_name}  {x.major_name === null ? '' : x.major_name}</label>
                                             <ActionList
+                                                direct={this.props.directQuestion}
                                                 flag={x.is_editable}
+                                                examId={x.assigned_exam.id}
                                                 id={x.id}
                                                 subjectId={school_subject_id}
                                                 name={x.name}

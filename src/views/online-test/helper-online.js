@@ -28,9 +28,15 @@ export class DetailOnlineExam extends Component {
 }
 
 export class ActionList extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+
     render() {
         let content = []
         let id = this.props.id
+        let exam_id = this.props.examId
         let name = this.props.name
         let subjectId = this.props.subjectId
         let flag = this.props.flag
@@ -38,7 +44,7 @@ export class ActionList extends Component {
         if (!flag) {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
-                    <div className='right-block__action'>Lihat Soal</div>
+                    <div className='right-block__action' onClick={(e) => { this.props.direct(e, id, exam_id) }}>Lihat Soal</div>
                     <div className='right-block__action' onClick={(e) => (this.props.remove(id, examId))}>Hapus Soal</div>
                 </div>
             )
@@ -64,7 +70,7 @@ export class DetailAction extends Component {
         let data = this.props.detail
         let id = this.props.id
         let examId = this.props.examId
-
+        console.log(data, "data")
         if (examId) {
             content.push(
                 <div className='padding-bottom-2' key={Math.random()}>
