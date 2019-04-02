@@ -19,6 +19,8 @@ import listOnlineExam from './modules/listOnlineExam'
 import description from './modules/description'
 import bank from './modules/bank'
 import onlineExam from './modules/onlineExam'
+import onlineQuestion from './modules/onlineQuestion'
+
 
 export default combineReducers({
   user,
@@ -40,6 +42,7 @@ export default combineReducers({
   listOnlineExam,
   description,
   bank,
-  onlineExam
+  onlineExam,
+  onlineQuestion,
 })
 
