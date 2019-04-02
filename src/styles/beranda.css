@@ -61,12 +61,18 @@
     overflow-y: scroll;
     height: 660px;
 }
+.schedule .loader-wrapper + .schedule-item{
+    display: none;
+}
 .schedule .content-block{
     border-radius: 5px;
     width: 30%;
     vertical-align: top;
     white-space: initial;
     height: auto;
+}
+.schedule .content-block.latency {
+    border: 2px solid #1a9d7f;
 }
 .minimize .schedule .content-block{
     width: 23%;
