@@ -17,6 +17,7 @@ import Right from './right'
   }
 
   componentDidMount(){
+      console.log(this.props.match.params.exam_id, this.props.match.params.assessment_id,"aalalsaasd")
     this.props.getExamQuestion(this.props.match.params.exam_id, this.props.match.params.assessment_id)
   }
 

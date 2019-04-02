@@ -26,6 +26,8 @@ class OnlineExamList extends Component {
         }
 
         this.getData = this.getData.bind(this)
+        this.onQuestionDetail = this.onQuestionDetail.bind(this)
+
     }
 
     componentDidMount() {
@@ -47,6 +49,16 @@ class OnlineExamList extends Component {
         })
     }
 
+    onQuestionDetail(e, assessment_id, exam_id){
+        console.log(assessment_id, exam_id,"here we go")
+        this.props.history.push({
+            pathname:`/all-question/${assessment_id}/assessment/${exam_id}/exam/`
+        })
+    }
+
+
+
+
     getData() {
         let listOnlineExam = _.get(this.props, 'listOnlineExam', {})
         let selectedYear = listOnlineExam ? listOnlineExam.selectedYear : ''
@@ -56,13 +68,13 @@ class OnlineExamList extends Component {
 
         let params = {}
 
-        if (selectedSemester != '') {
+        if (selectedSemester !== '') {
             params['school_period_id'] = selectedSemester
         }
-        if (selectedType != '') {
+        if (selectedType !== '') {
             params['assessment_type'] = selectedType
         }
-        if (selectedGrade != '') {
+        if (selectedGrade !== '') {
             params['grade_id'] = selectedGrade
         }
 
@@ -103,6 +115,7 @@ class OnlineExamList extends Component {
                                 loader={this.state.loader}
                                 detailClicked={this.detailClicked.bind(this)}
                                 create = {this.createQuestion.bind(this)}
+                                directQuestion={this.onQuestionDetail}
                             />
                         </div>
                     </div>
