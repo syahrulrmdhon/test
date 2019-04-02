@@ -62,7 +62,6 @@ class CreateQuestion extends Component {
         questionLabel: questionLabel,
       })
     }
-    // this.getQuestion({number: number, questionType: questionType})
   }
 
   onSubmit({number, questionType}) {
@@ -219,9 +218,10 @@ class CreateQuestion extends Component {
   }
 
   render() {
+
     return (
         <Page title="Deskripsi">
-        <Header navbar={false} location={''}/>
+        <Header navbar={false} location={'/online-exam'}/>
         {
           this.state.success &&
           <div id="note">
