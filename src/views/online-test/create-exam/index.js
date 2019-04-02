@@ -136,6 +136,7 @@ class index extends Component {
                                 <div className="margin-top-3">
                                     <label>Duplikat Soal</label>
                                     <Switch
+                                        className='margin-top-3'
                                         onChange={this.props.handleSwitch}
                                         checked={this.props.switch}
                                         uncheckedIcon={false}

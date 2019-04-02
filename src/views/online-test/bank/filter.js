@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
     getBank,
-    handleChange 
+    handleChange
 } from './../../../redux-modules/modules/bank'
 import { basicComps, getProblemTypes } from './../../../utils/common'
 
@@ -19,8 +19,14 @@ class BankFilter extends Component {
         }
     }
     componentDidMount() {
-        basicComps.call(this, { category: 'knowledge', assessment_id: this.props.id }, { listOptions: true }),
+        basicComps.call(this, { category: 'knowledge', assessment_id: this.state.id }, { listOptions: true })
         getProblemTypes.call(this)
+    }
+    handleOptionChange() {
+        let dataBank = _.get(this, 'props.dataBank', {})
+        let problem_type = dataBank ? dataBank.selectedProblemType : undefined
+        let basic_comp_id = dataBank ? dataBank.selectedBasicComp : undefined
+        this.props.getBank(problem_type, basic_comp_id)
     }
     render() {
         let dataBank = _.get(this, 'props.dataBank', {})
@@ -49,7 +55,7 @@ class BankFilter extends Component {
                     />
                 </div>
                 <div className='col-sm-2 col-md-2'>
-                    <button className='btn-green'>Cari</button>
+                    <button className='btn-green' onClick={this.handleOptionChange.bind(this)}>Cari</button>
                 </div>
             </div>
         )
@@ -57,7 +63,7 @@ class BankFilter extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    dataBank: state.bank //bank dari reducer
+    dataBank: state.bank, //bank dari reducer
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
