@@ -21,6 +21,7 @@ export default class Table extends Component {
 
         this.delete = this.delete.bind(this)
         this.onDelete = this.onDelete.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount() {
@@ -28,7 +29,10 @@ export default class Table extends Component {
             data: this.props.data
         })
     }
-
+    handleClick(e){
+        const { linkDisabled } = this.state
+        if(linkDisabled) e.preventDefault()
+    }
     onDelete(value) {
         let assessment_id = value.id
         let url = 'v1/assessments/' + assessment_id
@@ -80,6 +84,8 @@ export default class Table extends Component {
                 let totalExam = ''
                 let subjectName = combineNameSubject(value.school_subjects)
                 let color = assessmentLabel(value.assessment_type, true)
+                let edit_button = []
+
 
                 if (category == 'attitude') {
                     totalExam = combineNameSubject(value.school_attitudes)
@@ -102,6 +108,21 @@ export default class Table extends Component {
                     totalExam = value.exam_count + ' (' + label + ')'
                 }
 
+                if(value.is_editable === false){
+                    edit_button.push(
+                        <NavLink className="no-drop"  to='#'>
+                            <FontAwesome name="edit" className="margin-left-2 cgreen no-drop" />
+                        </NavLink>
+                    )
+                }else{
+                    edit_button.push(
+                        <NavLink   to={`/assessment/edit/${value.id}`}>
+                            <FontAwesome name="edit" className="margin-left-2 cgreen" />
+                        </NavLink>
+
+                    )
+                }
+
                 content.push(
                     <tr key={idx} >
                         <td width="5%" className="align-center"><span className={classnames("bullet", color)}></span></td>
@@ -112,9 +133,7 @@ export default class Table extends Component {
                         <td width="25%"  className="align-right padding-right-6">
                             <div className="action-wrapper">
                                 <NavLink to={url} className="btn default margin-right-4">Lihat</NavLink>
-                                <NavLink to={`/assessment/edit/${value.id}`}>
-                                    <FontAwesome name="edit" className="margin-left-2 cgreen" />
-                                </NavLink>
+                                {edit_button}
                                 <FontAwesome name="trash" className="margin-left-2 margin-right-2 cgreen" onClick={this.delete.bind(this, value)} />
                             </div>
                         </td>

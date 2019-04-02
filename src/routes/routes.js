@@ -56,7 +56,7 @@ import OnlineExamList from './../views/online-test/exam-list/index'
 import CreateList from './../views/online-test/create-exam/index'
 import Bank from './../views/online-test/bank/bank'
 import Global from './../views/global/navbar'
-
+import CreateQuestion from './../views/online-test/create-exam/create-question'
 
 export const MainRoutes = [
     {
@@ -261,11 +261,15 @@ export const MainRoutes = [
         component: OnlineExamList
     },
     {
+        path: '/online-exam/create/:assessment/exam/:exam',
+        component: CreateQuestion
+    },
+    {
         path: '/online-exam/bank/:id',
         component: Bank
     },
     {
-        path: '/online-exam/create/:id',
+        path: '/online-exam/create/:id/subject/:subject_id',
         component: CreateList
     },
     // {

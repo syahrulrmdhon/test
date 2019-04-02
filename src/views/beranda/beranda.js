@@ -43,7 +43,6 @@ class Beranda extends Component {
         if(this.state.setDate){
             params['date'] = this.state.setDate
         }
-
         if(this.state.class_id != ''){
             params['class_id'] = this.state.class_id;
         }
@@ -54,6 +53,13 @@ class Beranda extends Component {
                 loader: false
             })
         })
+                
+        this.setState({
+            data: [],      
+            scheduleList: [],
+            loader : true
+        })
+        
     }
 
     clickSideBar(){
@@ -91,9 +97,15 @@ class Beranda extends Component {
     }
 
     render() {
+        let dayname = ''
         if(this.state.data.length > 0){
             this.state.scheduleList = []
             {this.state.data.map((result) => {
+
+                if(result.date == this.state.setDate){
+                    dayname = result.dayname
+                }
+
                 this.state.scheduleList.push(<Schedule 
                     dayname={result.dayname} 
                     datename={result.datename} 
@@ -102,14 +114,13 @@ class Beranda extends Component {
                     items={result.items}
                     holiday={result.holiday}
                     classes={this.state.classes}
-                    key={Math.random()}
+                    key={result.date}
                 />)
             })};
         }
 
         let icon = (this.state.isSideBar == 'expand') ? 'arrow-left' : 'calendar'
-
-        dragEvent()
+        dragEvent(dayname)
         return (
             <Page title="Beranda">
                 <div className="body-content padding-content">
