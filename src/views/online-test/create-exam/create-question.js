@@ -218,6 +218,7 @@ class CreateQuestion extends Component {
   }
 
   render() {
+    const subject = `${_.get(this.props.data, 'data.subject_name', '')} - ${_.get(this.props.data, 'data.grade_name', '')} ${_.get(this.props.data, 'data.major_name', '')}`
 
     return (
         <Page title="Deskripsi">
@@ -235,6 +236,7 @@ class CreateQuestion extends Component {
             currentPage={this.state.currentPage}
             currentObj={this.state.currentObj}
             questionType={this.state.questionType}
+            subject={subject}
           />
           <Form
             number={this.state.currentPage}
