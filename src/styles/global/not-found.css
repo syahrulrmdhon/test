@@ -31,16 +31,15 @@ body {
 }
 
 .notfound h2 {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "NunitoRegular";
   font-size: 18px;
-  font-weight: bold;
   color: #232323;
 }
 
 .notfound p {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "NunitoRegular";
   color: #787878;
-  font-size: 18px;
+  font-size: 14px;
   margin-top: 1rem;
 }
 
