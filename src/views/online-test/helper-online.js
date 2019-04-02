@@ -30,10 +30,11 @@ export class DetailOnlineExam extends Component {
 export class ActionList extends Component {
     render() {
         let content = []
-        let data = this.props.action
         let id = this.props.id
         let name = this.props.name
-        if (data > 0) {
+        let subjectId = this.props.subjectId
+        let flag = this.props.flag
+        if (!flag) {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
                     <div className='right-block__action'>Lihat Soal</div>
@@ -43,7 +44,7 @@ export class ActionList extends Component {
         } else {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
-                    <div className='right-block__action padding-left-0' onClick={(e) => (this.props.create(e, id, name))}>Buat Soal</div>
+                    <div className='right-block__action padding-left-0' onClick={(e) => (this.props.create(e, id, name, subjectId))}>Buat Soal</div>
                 </div>
             )
         }
@@ -63,7 +64,7 @@ export class DetailAction extends Component {
         let id = this.props.id
         let examId = this.props.examId
 
-        if (data > 0) {
+        if (examId) {
             content.push(
                 <div className='padding-bottom-2' key={Math.random()}>
                     <label className='p-bold padding-right-2'>Detil Soal</label>
@@ -101,6 +102,26 @@ export function getProblemTypes() {
         }
         this.setState({
             problemTypes: result
+        })
+    })
+}
+
+export function getExamListForDuplicate(params = {}, options = {}) {
+
+    apiClient('get', 'v1/exams/list', false, params).then(res => {
+        let data = res.data.data.exams.entries || []
+        let result = []
+        if (data.length > 0) {
+
+            data.map((x) => {
+                result.push({
+                    value: x.id,
+                    label: x.name
+                })
+            })
+        }
+        this.setState({
+            listSubjectName: result
         })
     })
 }

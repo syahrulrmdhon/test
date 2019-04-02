@@ -24,8 +24,8 @@ class index extends Component {
             checked: false,
             name: props.location.state.name,
             id: props.match.params.id,
-        };
-        this.handleChangeSwitch = this.handleChangeSwitch.bind(this)
+            subjectId: props.match.params.subject_id
+        }
     }
 
     componentDidMount() {
@@ -37,36 +37,44 @@ class index extends Component {
         this.props.history.goBack()
     }
 
-    handleChangeSwitch(checked) {
-        this.setState({ checked });
-    }
-
     handleSubmit(e) {
         e.preventDefault()
 
         let data = this.props.exam
         let assesment_id = this.state.id
         let url = `v1/assessments/${assesment_id}/exams`
-
         apiClient('post', url, data).then(res => {
-
+            this.props.history.push({
+                pathname: '/online-exam/create/' + this.state.id + '/exam/' + res.data.data.exam.id
+            })
         })
     }
 
     render() {
-        // console.log('props', this.props.exam)
         const { name, kkm, description } = this.props.exam || {}
         let exam_problem_types = _.get(this, 'props.exam.exam_problem_types_attributes', [])
         let questions = []
         let duplication = []
+        let add = []
 
         if (this.props.switch) {
             duplication.push(
-                <DuplicateQuestion 
+                <DuplicateQuestion
                     key={Math.random()}
+                    subjectId={this.state.subjectId}
                 />
             )
         } else {
+            exam_problem_types.length > 1 ?
+            add.push(
+                <div className='margin-top-3' key={Math.random()}></div>
+            ):
+            add.push(
+                <div className="margin-top-3" onClick={this.props.addQuestion} key={Math.random()}>
+                    <i className="fa fa-plus" aria-hidden="true"></i>
+                    <span className='normal-green-text'> Tambah Tipe Soal</span>
+                </div>
+            )
             if (exam_problem_types.length > 0) {
                 exam_problem_types.map((question, idx) => {
                     questions.push(<AddQuestion
@@ -129,6 +137,7 @@ class index extends Component {
                                 <div className="margin-top-3">
                                     <label>Duplikat Soal</label>
                                     <Switch
+                                        className='margin-top-3'
                                         onChange={this.props.handleSwitch}
                                         checked={this.props.switch}
                                         uncheckedIcon={false}
@@ -145,10 +154,7 @@ class index extends Component {
                                     {duplication}
                                     {questions}
                                 </div>
-                                <div className="margin-top-3" onClick={this.props.addQuestion}>
-                                    <i className="fa fa-plus" aria-hidden="true"></i>
-                                    <span className='normal-green-text'> Tambah Tipe Soal</span>
-                                </div>
+                                {add}
                                 <div className='margin-top-3'>
                                     <div className='button'>
                                         <button className='btn-white margin-right-3'
@@ -170,7 +176,7 @@ class index extends Component {
 
 const mapStateToProps = (state) => ({
     exam: _.get(state, 'onlineExam.exam', {}), //onlineExam dari reducer
-    exam_problem_types: _.get(state, 'onlineExam.exam.exam_problem_types_attributes', {}),
+    exam_problem_types: _.get(state, 'onlineExam.exam.exam_problem_types_attributes', []),
     switch: state.onlineExam.switch
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
