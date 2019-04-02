@@ -35,7 +35,7 @@ export default function reducer(state = initialState, action = {}) {
                 state.exam = {
                     name: '',
                     description: '',
-                    kkm: null,
+                    kkm: '',
                     is_assigned_exam: true,
                     is_duplication: false,
                     exam_problem_types_attributes: [{ problem_type: '', question_count: null }],
