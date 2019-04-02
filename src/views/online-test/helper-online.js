@@ -34,17 +34,18 @@ export class ActionList extends Component {
         let name = this.props.name
         let subjectId = this.props.subjectId
         let flag = this.props.flag
+        let examId = this.props.examId
         if (!flag) {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
                     <div className='right-block__action'>Lihat Soal</div>
-                    <div className='right-block__action'>Hapus Soal</div>
+                    <div className='right-block__action' onClick={(e) => (this.props.remove(id, examId))}>Hapus Soal</div>
                 </div>
             )
         } else {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
-                    <div className='right-block__action padding-left-0' onClick={(e) => (this.props.create(e, id, name, subjectId))}>Buat Soal</div>
+                    <div className='right-block__action padding-left-0' onClick={(e) => (this.props.create(e, id, name, subjectId, examId))}>Buat Soal</div>
                 </div>
             )
         }

@@ -8,7 +8,7 @@ import {
     handleEvent,
     buildObject,
     addQuestion,
-    handleSwitch
+    handleSwitch,
 } from './../../../redux-modules/modules/onlineExam'
 import { getProblemTypes } from './../helper-online'
 import DuplicateQuestion from './duplicate'
@@ -26,6 +26,8 @@ class index extends Component {
             id: props.match.params.id,
             subjectId: props.match.params.subject_id
         }
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.backToList  = this.backToList.bind(this)
     }
 
     componentDidMount() {
@@ -158,11 +160,11 @@ class index extends Component {
                                 <div className='margin-top-3'>
                                     <div className='button'>
                                         <button className='btn-white margin-right-3'
-                                            onClick={this.backToList.bind(this)}
+                                            onClick={this.backToList}
                                         >
                                             Kembali
                                         </button>
-                                        <button className='btn-green' onClick={this.handleSubmit.bind(this)}>Lanjut</button>
+                                        <button className='btn-green' onClick={this.handleSubmit}>Lanjut</button>
                                     </div>
                                 </div>
                             </div>
@@ -183,6 +185,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     handleEvent,
     buildObject,
     addQuestion,
-    handleSwitch
+    handleSwitch,
 }, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(index)
