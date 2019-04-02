@@ -18,7 +18,6 @@ export default function reducer(state = initialState, action) {
       }
     case LOAD_SUCCESS:
     if (state.result !== action.result) {
-        console.log(action.result)
         return {
             ...state,
             loaded: true,

@@ -28,6 +28,7 @@ class index extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.backToList  = this.backToList.bind(this)
+        this.viewQuestions = this.viewQuestions.bind(this)
     }
 
     componentDidMount() {
@@ -37,6 +38,12 @@ class index extends Component {
 
     backToList() {
         this.props.history.goBack()
+    }
+
+    viewQuestions(e, assessment_id, exam_id) {
+        this.props.history.push({
+            pathname:`/all-question/${assessment_id}/assessment/${exam_id}/exam/`
+        })
     }
 
     handleSubmit(e) {
@@ -64,6 +71,8 @@ class index extends Component {
                 <DuplicateQuestion
                     key={Math.random()}
                     subjectId={this.state.subjectId}
+                    assessmentId={this.state.id}
+                    viewQuestions={this.viewQuestions}
                 />
             )
         } else {
