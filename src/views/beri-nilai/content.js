@@ -215,12 +215,14 @@ class Content extends Component {
             )
         }
 
+        // console.log(this.props.dataProfile,"response is null")
+
         return (
             <div className="">
                 <div className="row rounded-10">
                     <LeftSide>
                         <div className="margin-left-4">
-                            <Profile dataProfile={this.props.student && this.props.student.data} />
+                            <Profile dataProfile={this.props.dataProfile} />
                         </div>
                     </LeftSide>
                     <RightContent>
@@ -246,7 +248,7 @@ class Content extends Component {
 
 const mapStateToProps = state => ({
     data_exam: state.score,
-    student: state.student
+    student: state
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

@@ -41,7 +41,7 @@ class New extends Component {
       is_correct: ''
     }
 
-    this.getStudent = this.getStudent.bind(this)
+    this.getStudentData = this.getStudentData.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.onChangeEssay = this.onChangeEssay.bind(this)
     this.onChangeSelect = this.onChangeSelect.bind(this)
@@ -50,7 +50,7 @@ class New extends Component {
   }
 
   componentDidMount() {
-    this.getStudent()
+    this.getStudentData()
     this.props.getDataScoreQuestion(this.state.assessment_id, this.state.exam, this.state.student_id, this.state.class_id, this.props.location.state.conditon)
     this.props.getStudent(this.state.student_id)
   }
@@ -63,11 +63,12 @@ class New extends Component {
   }
 
 
-  getStudent() {
+  getStudentData() {
+    console.log("here we go")
     const url = `/v1/students/${this.state.student_id}`
 
     apiClient('get', url).then(response => {
-      console.log(response)
+      console.log(response,"my respossadasdasd student")
       this.setState({
         student: response.data.data,
       })
@@ -172,6 +173,7 @@ class New extends Component {
   }
 
   render() {
+    console.log(this.state.student,"profile1")
     const path = `/assessment/${this.state.assessment_id}/exam/${this.state.exam}/category/${this.props.location.state.conditon}/class/${this.state.class_id}/flag/true`
     return (
       <Page title="Memberi Nilai">
@@ -180,7 +182,7 @@ class New extends Component {
           <div className="margin-content">
             <div className="content-block main-block">
                 <Content
-                  dataProfile={this.state.profile}
+                  dataProfile={this.state.student}
                   subjects={this.state.subjects}
                   studentId={this.state.studentId}
                   form={this.state.question}
