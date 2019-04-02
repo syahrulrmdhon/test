@@ -63,9 +63,8 @@ export class DetailAction extends Component {
         let data = this.props.detail
         let id = this.props.id
         let examId = this.props.examId
-        console.log('detail', data)
 
-        if (data > 0) {
+        if (examId) {
             content.push(
                 <div className='padding-bottom-2' key={Math.random()}>
                     <label className='p-bold padding-right-2'>Detil Soal</label>
