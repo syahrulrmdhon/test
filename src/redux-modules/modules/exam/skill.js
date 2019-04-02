@@ -13,6 +13,7 @@ const LOAD_COMPONENT = 'modules/exam/skill/LOAD_COMPONENT';
 const ADD_INDICATOR = 'modules/exam/skill/ADD_INDICATOR';
 const REMOVE_INDICATOR = 'modules/exam/skill/REMOVE_INDICATOR';
 const HANDLE_PROBLEM_SET = 'modules/exam/skill/HANDLE_PROBLEM_SET';
+const LOAD_CHECK_BAS_COMPS = 'modules/exam/skill/HANDLE_CHECK_BAS_COMPS'
 
 const initialState = {
     exam: {},
@@ -20,28 +21,35 @@ const initialState = {
     assessment_basic_comps: [{}],
 };
 
-const school_id = localStorage.getItem("school_id")
 
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case HANDLE_PROBLEM_SET:
             state.problem_type_sets[action.keyValue][action.idx][action.fieldName] = action.value
-            
-            if(action.fieldName == 'basic_comp_id'){
+            if(action.fieldName === 'basic_comp_id'){
                 if(state.assessment_basic_comps && state.assessment_basic_comps.length > 0){
-                    let assessment_basic = state.assessment_basic_comps.find((element) => { return element.id == action.value })
+                    let assessment_basic = state.assessment_basic_comps.find((element) => { return element.id === action.value })
                     if(assessment_basic){
                         state.problem_type_sets[action.keyValue][action.idx]['school_subject_id'] = assessment_basic.school_subject_id
                     }
                 }
             }
+            action.basic_comps.map((data, index) => {
+                    state['store_basic_comp_selected'] = []
+                    state['store_basic_comp_selected'].push(action.value)
+
+            })
+
+            // console.log(state.store_basic_comp_selected,"selected basic comp")
         
             return{
                 ...state,
                 loaded: true,
                 loading: false,
             }
+
+
         case ADD_INDICATOR:
             const count = state.problem_type_sets[action.key_value] ? state.problem_type_sets[action.key_value].length : 0 
             state.problem_type_sets[action.key_value] = state.problem_type_sets[action.key_value].concat([{
@@ -70,7 +78,7 @@ export default function reducer(state = initialState, action) {
             if (state.result !== action.result) {
                 if(action.result.data.problem_types){
                     action.result.data.problem_types.map((value, key) => {
-                        if(action.result.data.problem_type_sets[value] == undefined){
+                        if(action.result.data.problem_type_sets[value] === undefined){
                             action.result.data.problem_type_sets[value] = [{
                                 qn_number: 1,
                                 weight: null,
@@ -250,13 +258,20 @@ export function removeIndicator(key_value, idx){
     }
 }
 
-export function handleProblemSet(value, fieldName, keyValue, idx){
-    console.log(value,"value")
+export function checkBasComps() {
+    return {
+
+    }
+}
+
+export function handleProblemSet(value, fieldName, keyValue, idx,basic_comps){
+
     return {
         type: HANDLE_PROBLEM_SET,
         value: value,
         fieldName: fieldName,
         keyValue: keyValue,
         idx: idx,
+        basic_comps:basic_comps
     }
 }

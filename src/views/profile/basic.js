@@ -39,7 +39,8 @@ export class Basic extends Component {
       regionOptions: [],
       citiesOptions: [],
       cityDefaultOpt: [],
-      base64: ''
+      base64: '',
+
     }
     this.submit = this.submit.bind(this)
     this.onCofirm = this.onCofirm.bind(this)
@@ -64,6 +65,8 @@ export class Basic extends Component {
       apiClient('get', url).then(res => {
           localStorage.setItem("user", JSON.stringify(res.data.data.user))
       })
+
+
 
   }
 
@@ -107,7 +110,6 @@ export class Basic extends Component {
       profile_url: '',
     }
     userObj['user'] = datas
-
 
     // attribute full
     let url = `/v1/users/update_basic_info`
@@ -195,11 +197,15 @@ export class Basic extends Component {
     }
     userObj['user'] = data
 
+    console.log(this.state.base64.split(",")[0],"type")
+
+
+
     // attribute full
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
-      getUser(true)
-      window.location.reload(true)
+      // getUser(true)
+      // window.location.reload(true)
 
     })
       .catch(err => {
@@ -226,6 +232,7 @@ export class Basic extends Component {
     for (var i = 0, len = files.length; i < len; i++) {
       var file = files[i];
       var reader = new FileReader();
+      console.log(files, "onvent")
       reader.onload = ((event) => {
         this.setState({
           base64: event.target.result
@@ -350,7 +357,7 @@ export class Basic extends Component {
                                     Besar file maksimum: 1 Mb
                                 </div>
                                   <div className="notice margin-top-1">
-                                    Ekstensi file yang diperbolehkan: .PNG, jpg, dan jpeg.
+                                    Ekstensi file yang diperbolehkan: .PNG, jpg,jpeg dan gif.
                                 </div>
                                 </div>
                               </div>

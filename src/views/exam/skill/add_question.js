@@ -11,6 +11,7 @@ import {
 } from './../../../redux-modules/modules/exam/skill'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {basic_comp_lists} from "../../../utils/exam";
 
 class AddQuestion extends Component {
     constructor(props){
@@ -27,6 +28,13 @@ class AddQuestion extends Component {
     componentDidMount(){
         this.props.getComponent(this.state.assessment_id, this.state.exam_id)
     }
+
+    remvoeDuplicate(arrArg){
+        return arrArg.filter((elem, pos, arr) => {
+            return arr.indexOf(elem) === pos;
+        });
+    }
+
 
     onSubmit(event){
         event.preventDefault(); 
@@ -60,7 +68,30 @@ class AddQuestion extends Component {
             action = 'post'
             url = `v1/assessments/${this.state.assessment_id}/exams/validate?step=QuestionForm&category=skill`
         }
-        console.log(data, "data")
+
+        let basic_comps = []
+
+        data.exam_questions_attributes.map((data, index) =>{
+            basic_comps.push(data.basic_comp_id)
+        })
+
+        let length_basic_comps_afer_eliminate = this.remvoeDuplicate(basic_comps).length
+        const basic_comps_pure = basic_comp_lists(this.props.assessment_basic_comps).length
+
+        if(basic_comps_pure !== length_basic_comps_afer_eliminate){
+            modal({
+                message: 'Gagal',
+                description: `Pilih semua kompetensi dasar.`,
+                btns: [
+                    {
+                        label: 'Ulangi',
+                        className: 'btn bcred cwhite',
+                    }
+                ]
+            })
+            return false
+        }
+
         apiClient(action, url, data).then(response => {
             if(!this.state.exam_id){
                 apiClient('post', `/v1/assessments/${this.state.assessment_id}/exams`, data).then(response => {
@@ -145,7 +176,7 @@ class AddQuestion extends Component {
                                         <NavLink to={urlBack}>
                                             <button className="submit-btn default margin-right-2" >Kembali</button>
                                         </NavLink>
-                                        <button className="submit-btn" onClick={this.onSubmit} >Simpan</button>
+                                        <button  className="submit-btn" onClick={this.onSubmit} >Simpan</button>
                                     </div>
                                 </form>
                             </div>
@@ -160,7 +191,9 @@ class AddQuestion extends Component {
 const mapStateToProps = (state, props) => ({
     exam: state.skill.exam,
     problem_types: state.skill.problem_types,
-    problem_type_sets: state.skill.problem_type_sets
+    problem_type_sets: state.skill.problem_type_sets,
+    assessment_basic_comps: state.skill.assessment_basic_comps || [],
+
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 

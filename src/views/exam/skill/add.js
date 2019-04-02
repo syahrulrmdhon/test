@@ -5,6 +5,8 @@ import WorkStep from './work_step'
 import {examTypes} from './../../../utils/common'
 import { apiClient } from './../../../utils/apiClient'
 import { modal } from './../../global/modal'
+import { basic_comp_lists } from './../../../utils/exam'
+
 
 // redux
 import {

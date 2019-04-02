@@ -81,15 +81,16 @@ class Homeroom extends Component {
       if (data.notes) {
         if (this.props.activeTab === 2) {
           extracurriculars = data.extracurriculars || []
-          console.log(extracurriculars)
           extracurriculars.map(extracurricular => {
-            extracurricular.isDisabled = false
+              extracurricular.isDisabled = false
           })
           data.notes.map((note, index) => {
             let selectedExtracurricular = extracurriculars.find(extracurricular => {return extracurricular.value === note.extracurricular_id}) || null
             if (selectedExtracurricular) {
               selectedExtracurricular.isDisabled = true
             }
+            console.log(this.props.notes.extracurriculars)
+            console.log(selectedExtracurricular)
             notes.push(
               <div key={index} className="mb-4 position-relative">
                 <div className="note-wrapper">
@@ -100,7 +101,8 @@ class Homeroom extends Component {
                     onChange={event => this.props.handleEvent(event.value, 'extracurricular_id', {id: note.id, order: index})}
                     options={this.props.notes.extracurriculars}
                     placeholder='Pilih Tipe Ekstrakurikuler'
-                    isDisabled={!homeroomId} />  
+                    isDisabled={!homeroomId}
+                  />
                   <Input 
                     onChange={(event) => this.props.handleEvent(event.target.value, 'description', {id: note.id, order: index})} 
                     value={note.description} 
