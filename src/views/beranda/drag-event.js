@@ -14,7 +14,7 @@ export function dragEvent(dayname = false) {
             
             slider.addEventListener('trigger-item', (e) => {
                 var id = "#item-" + dayname
-                var elmnt = document.querySelector(id);                
+                var elmnt = slider.querySelector(id);
                 if(elmnt != null){
                     slider.scrollLeft = elmnt.offsetLeft - 40
                     // elmnt.classList.add('latency')
