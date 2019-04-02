@@ -45,7 +45,7 @@ class index extends Component {
         let url = `v1/assessments/${assesment_id}/exams`
 
         apiClient('post', url, data).then(res => {
-
+            
         })
     }
 

@@ -63,6 +63,7 @@ export class DetailAction extends Component {
         let data = this.props.detail
         let id = this.props.id
         let examId = this.props.examId
+        console.log('detail', data)
 
         if (data > 0) {
             content.push(
