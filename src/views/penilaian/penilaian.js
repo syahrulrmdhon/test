@@ -54,6 +54,7 @@ class Penilaian extends Component {
         this.setState({
             activeTab: category,
             reset: 0,
+            loader: true
         }, () => {
             assessmentGetData.call(this)
             assessmentType.call(this, {category: category})
