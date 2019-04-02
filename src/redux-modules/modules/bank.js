@@ -41,7 +41,8 @@ export default function reducer(state = inititalState, action) {
                             question: x.question ? x.question : '',
                             kdNumber: x.comp_number ? x.comp_number : null,
                             kdContent: x.content ? x.content : '',
-                            kdChoices: x.exam_question_choices ? x.exam_question_choices : []
+                            kdChoices: x.exam_question_choices ? x.exam_question_choices : [],
+                            basic_comp_id: x.basic_comp_id ? x.basic_comp_id: null
                         })
                     })
                 }
