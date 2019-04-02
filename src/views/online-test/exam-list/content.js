@@ -20,7 +20,6 @@ class ContentOnlineExam extends Component {
         if (entries) {
             if (entries.length) {
                 entries.map((x) => {
-                    console.log('count', x)
                     x.assessment_subjects.map((assessment_subjects) => {
                         let school_subject_id = assessment_subjects.school_subject_id
                         const date = moment(x.created_at).locale('id').format('LL')

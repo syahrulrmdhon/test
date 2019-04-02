@@ -44,7 +44,6 @@ class index extends Component {
         let assesment_id = this.state.id
         let url = `v1/assessments/${assesment_id}/exams`
         apiClient('post', url, data).then(res => {
-            console.log('id di state', this.state.id)
             this.props.history.push({
                 pathname: '/online-exam/create/' + this.state.id + '/exam/' + res.data.data.exam.id
             })
@@ -52,7 +51,6 @@ class index extends Component {
     }
 
     render() {
-        console.log('id', this.state.id)
         const { name, kkm, description } = this.props.exam || {}
         let exam_problem_types = _.get(this, 'props.exam.exam_problem_types_attributes', [])
         let questions = []
