@@ -1576,7 +1576,6 @@ tbody tr:nth-child(even) {
 }
 .modal-alert .header > h1{
   font-family: 'NunitoBold';
-  font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
