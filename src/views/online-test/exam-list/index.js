@@ -26,6 +26,10 @@ class OnlineExamList extends Component {
         }
 
         this.getData = this.getData.bind(this)
+        this.detailClicked = this.detailClicked.bind(this)
+        this.createQuestion = this.createQuestion.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
         this.onQuestionDetail = this.onQuestionDetail.bind(this)
 
     }
@@ -41,11 +45,20 @@ class OnlineExamList extends Component {
         })
     }
 
-    createQuestion(e, id, name, subject_id) {
+    createQuestion(e, assessment_id, name, subject_id, examId) {
         e.preventDefault()
         this.props.history.push({
-            pathname: '/online-exam/create/' + id + '/subject/' + subject_id,
-            state: {id: this.state.assessment_id, name: name, subject_id: subject_id}
+            pathname: '/online-exam/' + assessment_id + '/subject/' + subject_id,
+            state: { assessment_id: this.state.assessment_id, name: name, subject_id: subject_id }
+        })
+    }
+
+    handleRemove(assessment_id, examId) {
+        console.log('assessment_id', assessment_id)
+        console.log('examId', examId)
+
+        apiClient('delete', `v1/assessments/${assessment_id}/exams/${examId}`, false).then(res=>{
+            this.getData()
         })
     }
 
@@ -107,14 +120,15 @@ class OnlineExamList extends Component {
                         <div className='margin-box row h-100'>
                             <div className='col-sm-3 left-block padding-top-4'>
                                 <FilterOnlineExam
-                                    handleSubmit={this.handleSubmit.bind(this)}
+                                    handleSubmit={this.handleSubmit}
                                 />
                             </div>
                             <ContentOnlineExam
                                 data={this.state.data}
                                 loader={this.state.loader}
-                                detailClicked={this.detailClicked.bind(this)}
-                                create = {this.createQuestion.bind(this)}
+                                detailClicked={this.detailClicked}
+                                create={this.createQuestion}
+                                remove={this.handleRemove}
                                 directQuestion={this.onQuestionDetail}
                             />
                         </div>

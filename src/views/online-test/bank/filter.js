@@ -17,6 +17,7 @@ class BankFilter extends Component {
             basic_comps: [],
             problemTypes: [],
         }
+        this.handleOptionChange = this.handleOptionChange.bind(this)
     }
     componentDidMount() {
         basicComps.call(this, { category: 'knowledge', assessment_id: this.state.id }, { listOptions: true })
@@ -55,7 +56,7 @@ class BankFilter extends Component {
                     />
                 </div>
                 <div className='col-sm-2 col-md-2'>
-                    <button className='btn-green' onClick={this.handleOptionChange.bind(this)}>Cari</button>
+                    <button className='btn-green' onClick={this.handleOptionChange}>Cari</button>
                 </div>
             </div>
         )
