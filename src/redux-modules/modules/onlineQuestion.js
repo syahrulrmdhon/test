@@ -12,6 +12,7 @@ const HANDLE_DELETE_CHOICE = 'modules/onlineQuestion/HANDLE_DELETE_CHOICE'
 const HANDLE_ADD_CHOICE = 'modules/onlineQuestion/HANDLE_ADD_CHOICE'
 const HANDLE_CHANGE_CONTENT = 'modules/onlineQuestion/HANDLE_CHANGE_CONTENT'
 const HANDLE_SUCCESS = 'modules/onlineQuestion/HANDLE_SUCCESS'
+const HANDLE_ADD_IMAGE_QUESTION = 'modules/onlineQuestion/HANDLE_ADD_IMAGE_QUESTION'
 const initialState = null;
 
 export default function reducer(state = initialState, action) {
@@ -33,6 +34,7 @@ export default function reducer(state = initialState, action) {
             "question": data.question,
             "weight": data.weight,
             "basic_comp_id": data.basic_comp_id,
+            "image_sources": [],
             "exam_question_choices_attributes": [{id: null, symbol: 'A', content: '', is_correct_ans: true}]
           }
         }
@@ -127,6 +129,16 @@ export default function reducer(state = initialState, action) {
         loaded: true,
         loading:false,
       }
+    case HANDLE_ADD_IMAGE_QUESTION:
+      const base64 = action.value.split(",")[1]
+      state.data.question.image_urls.push({doc_aws_url: action.value})
+      state.body.exam_question.image_sources.push({src: base64})
+
+      return {
+        ...state,
+        loaded: true,
+        loading:false,
+      }
     case HANDLE_SUCCESS:
       state.success = action.value
       return {
@@ -200,6 +212,13 @@ export function onChangeContent({order, value}) {
     type: HANDLE_CHANGE_CONTENT,
     order: order,
     value: value
+  }
+}
+
+export function onAddImageQuestion({base64}) {
+  return {
+    type: HANDLE_ADD_IMAGE_QUESTION,
+    value: base64
   }
 }
 
