@@ -43,9 +43,10 @@ class index extends Component {
         let data = this.props.exam
         let assesment_id = this.state.id
         let url = `v1/assessments/${assesment_id}/exams`
-
         apiClient('post', url, data).then(res => {
-
+            this.props.history.push({
+                pathname: '/online-exam/create/' + this.state.id + '/exam/' + res.data.data.exam.id
+            })
         })
     }
 
@@ -136,6 +137,7 @@ class index extends Component {
                                 <div className="margin-top-3">
                                     <label>Duplikat Soal</label>
                                     <Switch
+                                        className='margin-top-3'
                                         onChange={this.props.handleSwitch}
                                         checked={this.props.switch}
                                         uncheckedIcon={false}

@@ -20,7 +20,7 @@ class DuplicateQuestion extends Component {
     }
     componentDidMount() {
         getFullSemesterList.call(this)
-        getExamListForDuplicate.call(this, {subject_id: this.props.subjectId})
+        getExamListForDuplicate.call(this, {school_subject_id: this.props.subjectId})
     }
     render() {
         const { selectedFullSemester, duplicate_exam_id } = this.props.exam || {}
