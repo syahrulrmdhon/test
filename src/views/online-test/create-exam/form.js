@@ -6,7 +6,8 @@ import {
   onChangeCorrectAnswer,
   deleteChoiceHandler,
   addChoiceHandler,
-  onChangeContent
+  onChangeContent,
+  onAddImageQuestion
 } from "./../../../redux-modules/modules/onlineQuestion";
 
 import { apiClient } from '../../../utils/apiClient'
@@ -16,7 +17,21 @@ import Select from 'react-select'
 class Form extends Component {
   constructor() {
     super()
-    // this.onSubmit = this.onSubmit.bind(this)
+    this.state = {
+      base64: ''
+    }
+  }
+
+  onPreviewPhoto(evt) {
+    let files = evt.target.files;
+    for (let i = 0, len = files.length; i < len; i++) {
+      let file = files[i];
+      let reader = new FileReader();
+      reader.onload = ((event) => {
+        this.props.onAddImageQuestion({base64: event.target.result })
+      })
+      reader.readAsDataURL(file);
+    }
   }
 
   render() {
@@ -27,6 +42,11 @@ class Form extends Component {
     const basicCompetencies = _.get(this.props.data, 'basicCompetencies', [])
     const currentQuestionType = questionType.find(type => {
       return type.problem_type === question.problem_type
+    })
+
+    const images = _.get(this.props.data, 'data.question.image_urls', [])
+    const imageList = images.map((image, index) => {
+      return <img key={index} id="image" src={image.doc_aws_url} className="online-question__question-image" alt="gambar soal" />
     })
 
     const listChoices = choices.map((choice, index) => {
@@ -107,14 +127,21 @@ class Form extends Component {
         <div className="online-question__question-wrapper">
           <div className="d-flex justify-content-between align-items-center">
             <div className="online-question__current-question">
-              Soal {this.props.questionType} - Nomor {this.props.number}
+              Soal {this.props.questionLabel} - Nomor {this.props.number}
             </div>
             <div className="online-question__import-question">
               <span className="online-question__add-icon">+</span> Impor Soal
             </div>
           </div>
           <div className="online-question__upload-image">
-            <i className="fa fa-upload" /> Masukan Gambar
+            <label htmlFor="insert-picture">
+              <i className="fa fa-upload" /> Masukan Gambar
+
+            </label>
+            <input id="insert-picture" type="file" className="d-none" onChange={this.onPreviewPhoto.bind(this)} />
+          </div>
+        <div className="d-flex align-items-center">
+          {imageList}
           </div>
           <textarea
             className="online-question__write-question"
@@ -170,7 +197,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   onChangeCorrectAnswer,
   deleteChoiceHandler,
   addChoiceHandler,
-  onChangeContent
+  onChangeContent,
+  onAddImageQuestion
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

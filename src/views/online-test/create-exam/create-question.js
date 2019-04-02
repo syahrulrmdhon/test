@@ -193,6 +193,10 @@ class CreateQuestion extends Component {
     })
     data.exam_question.exam_question_choices_attributes = choices
 
+    data.exam_question.image_sources.map((image, index) => {
+      image.key = `${index + 1}`
+    })
+
     if (data.exam_question.basic_comp_id && data.exam_question.exam_question_choices_attributes.length && data.exam_question.question && data.exam_question.weight) {
       const url = `v1/assessments/${this.state.assessmentId}/exams/${this.state.examId}/questions`
 

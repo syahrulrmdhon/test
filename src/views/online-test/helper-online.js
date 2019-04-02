@@ -30,11 +30,11 @@ export class DetailOnlineExam extends Component {
 export class ActionList extends Component {
     render() {
         let content = []
-        let data = this.props.action
         let id = this.props.id
         let name = this.props.name
         let subjectId = this.props.subjectId
-        if (data > 0) {
+        let flag = this.props.flag
+        if (!flag) {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
                     <div className='right-block__action'>Lihat Soal</div>
@@ -64,7 +64,7 @@ export class DetailAction extends Component {
         let id = this.props.id
         let examId = this.props.examId
 
-        if (data > 0) {
+        if (examId) {
             content.push(
                 <div className='padding-bottom-2' key={Math.random()}>
                     <label className='p-bold padding-right-2'>Detil Soal</label>

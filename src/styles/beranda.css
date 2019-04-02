@@ -61,6 +61,9 @@
     overflow-y: scroll;
     height: 660px;
 }
+.schedule .loader-wrapper + .schedule-item{
+    display: none;
+}
 .schedule .content-block{
     border-radius: 5px;
     width: 30%;

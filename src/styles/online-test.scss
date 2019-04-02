@@ -531,15 +531,24 @@ $nunito_bold: "NunitoBold";
     margin-right: 7px;
   }
 
-  &__upload-image {
+  &__upload-image label {
     color: #1a9d7f;
     font-size: 12px;
     font-family: $nunito_semi_bold;
     margin-top: 16px;
+    cursor: pointer;
+  }
+
+  &__question-image {
+    max-width: 200px;
+    min-width: 100px;
+    // display: block;
+    margin: 14px 10px 0px 0px;
   }
 
   .fa-upload {
     margin-right: 5px;
+    cursor: inherit;
   }
 
   &__write-question {
@@ -548,6 +557,7 @@ $nunito_bold: "NunitoBold";
     height: 100px;
     border: 1px solid #ebebeb;
     border-radius: 4px;
+    display: block;
   }
 
   &__answer-wrapper {
@@ -657,9 +667,5 @@ $nunito_bold: "NunitoBold";
 
   &__delete-wrapper {
     display: inline;
-  }
-
-  .fa {
-    cursor: default;
   }
 }
