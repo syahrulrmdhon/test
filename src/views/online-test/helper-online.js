@@ -33,6 +33,7 @@ export class ActionList extends Component {
         let data = this.props.action
         let id = this.props.id
         let name = this.props.name
+        let subjectId = this.props.subjectId
         if (data > 0) {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
@@ -43,7 +44,7 @@ export class ActionList extends Component {
         } else {
             content.push(
                 <div className='right-block__action-wrapper' key={Math.random()}>
-                    <div className='right-block__action padding-left-0' onClick={(e) => (this.props.create(e, id, name))}>Buat Soal</div>
+                    <div className='right-block__action padding-left-0' onClick={(e) => (this.props.create(e, id, name, subjectId))}>Buat Soal</div>
                 </div>
             )
         }
@@ -101,6 +102,26 @@ export function getProblemTypes() {
         }
         this.setState({
             problemTypes: result
+        })
+    })
+}
+
+export function getExamListForDuplicate(params = {}, options = {}) {
+
+    apiClient('get', 'v1/exams/list', false, params).then(res => {
+        let data = res.data.data.exams.entries || []
+        let result = []
+        if (data.length > 0) {
+
+            data.map((x) => {
+                result.push({
+                    value: x.id,
+                    label: x.name
+                })
+            })
+        }
+        this.setState({
+            listSubjectName: result
         })
     })
 }

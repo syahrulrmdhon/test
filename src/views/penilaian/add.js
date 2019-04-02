@@ -46,8 +46,12 @@ class Add extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.assessment != this.props.assessment) {
             let category = this.props.assessment.category
+            console.log("masuk", this.props.assessment)
             if (category !== undefined) {
                 assessmentType.call(this, { category: category })
+                assessment_grades.call(this, false, {
+                    gradesOptions: true,
+                })
                 // this.props.getNew(this.state.assessment_id, category)
             }
         }
@@ -145,6 +149,7 @@ class Add extends Component {
         switch (category) {
             case 'knowledge':
             case 'skill':
+                console.log(grade_id,"grade id")
                 grades.push(
                     <div className="row" key={Math.random()}>
                         <div className="col-sm-6">
@@ -158,7 +163,7 @@ class Add extends Component {
                                     name="assessment_grades"
                                     options={this.state.assessment_grades}
                                     onChange={(event) => { this.props.handleEvent(event.value, 'grade_id') }}
-                                    value={this.state.assessment_grades.find((element) => element.value == grade_id)}
+                                    value={this.state.assessment_grades.find((element) => element.value === grade_id)}
                                 />
                             </div>
                         </div>

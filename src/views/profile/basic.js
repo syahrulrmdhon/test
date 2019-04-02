@@ -65,7 +65,7 @@ export class Basic extends Component {
       apiClient('get', url).then(res => {
           localStorage.setItem("user", JSON.stringify(res.data.data.user))
       })
-
+    // window.location.href="/profile/basic-information"
 
 
   }
@@ -204,8 +204,8 @@ export class Basic extends Component {
     // attribute full
     let url = `/v1/users/update_basic_info`
     apiClient('put', url, userObj).then(res => {
-      // getUser(true)
-      // window.location.reload(true)
+      getUser(true)
+      window.location.reload(true)
 
     })
       .catch(err => {

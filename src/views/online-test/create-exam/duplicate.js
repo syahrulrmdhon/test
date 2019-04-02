@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
-import { getFullSemesterList } from './../../../utils/common'
+import { getFullSemesterList,} from './../../../utils/common'
+import { getExamListForDuplicate } from './../helper-online'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -14,10 +15,12 @@ class DuplicateQuestion extends Component {
 
         this.state = {
             listFullSemester: [],
+            listSubjectName: []
         }
     }
     componentDidMount() {
         getFullSemesterList.call(this)
+        getExamListForDuplicate.call(this, {subject_id: this.props.subjectId})
     }
     render() {
         const { selectedFullSemester, duplicate_exam_id } = this.props.exam || {}
@@ -35,9 +38,9 @@ class DuplicateQuestion extends Component {
                     </div>
                     <div className="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                         <Select
-                            // onChange={(e) => { this.props.handleEventProblemtype(e.value, 'exam', 'exam_problem_types_attributes', 'problem_type', this.props.index) }}
-                            // options={this.state.problemTypes ? this.state.problemTypes : []}
-                            // value={this.state.problemTypes.find((e) => { return e.value == problem_type })}
+                            onChange={(e) => { this.props.handleEvent(e.value, 'exam', 'duplicate_exam_id') }}
+                            options={this.state.listSubjectName ? this.state.listSubjectName : []}
+                            value={this.state.listSubjectName.find((e) => { return e.value == duplicate_exam_id })}
                             classNamePrefix="select"
                         />
                     </div>
