@@ -40,11 +40,11 @@ class OnlineExamList extends Component {
         })
     }
 
-    createQuestion(e, id, name) {
+    createQuestion(e, id, name, subject_id) {
         e.preventDefault()
         this.props.history.push({
-            pathname: 'create/' + id,
-            state: {id: this.state.assessment_id, name: name}
+            pathname: 'create/' + id + '/subject/' + subject_id,
+            state: {id: this.state.assessment_id, name: name, subject_id: subject_id}
         })
     }
 
