@@ -194,14 +194,21 @@ class CreateQuestion extends Component {
 
   postQuestion({nextNumber, questionType}){
     const data = _.get(this.props.data, 'body', {})
+    const problemTypes = _.get(this.props.data, 'data.problem_types', [])
+    const question = _.get(this.props.data, 'data.question', {})
 
     let choices = data.exam_question.exam_question_choices_attributes.filter((choice, index) => {
       return choice.id != null || choice.content != ''
     })
+
     data.exam_question.exam_question_choices_attributes = choices
 
     data.exam_question.image_sources.map((image, index) => {
       image.key = `${index + 1}`
+    })
+
+    const currentProblemType = problemTypes.find(type => {
+      return type.problem_type === question.problem_type
     })
 
     if (data.exam_question.basic_comp_id && data.exam_question.exam_question_choices_attributes.length && data.exam_question.question && data.exam_question.weight) {
@@ -212,7 +219,7 @@ class CreateQuestion extends Component {
           success: true
         })
 
-        if (nextNumber <= data.qn_number) {
+        if (nextNumber <= currentProblemType.question_count) {
           this.getQuestion({ number: nextNumber, questionType: questionType })
         }
 
