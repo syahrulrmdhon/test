@@ -94,13 +94,12 @@ class OnlineExamList extends Component {
     }
 
     onQuestionDetail(e, assessment_id, exam_id) {
-        console.log(assessment_id, exam_id, "here we go")
         this.props.history.push({
             pathname: `/all-question/${assessment_id}/assessment/${exam_id}/exam/`
         })
     }
 
-    getData() {
+    getData(page) {
         let listOnlineExam = _.get(this.props, 'listOnlineExam', {})
         let selectedYear = listOnlineExam ? listOnlineExam.selectedYear : ''
         let selectedSemester = listOnlineExam ? listOnlineExam.selectedSemester : ''
@@ -119,7 +118,13 @@ class OnlineExamList extends Component {
             params['grade_id'] = selectedGrade
         }
 
-        apiClient('get', 'v1/tests', false, params).then(res => {
+        let url = 'v1/tests?per_page=1'
+
+        if (page) {
+            url = 'v1/tests?per_page=1' + '&page=' + page
+        }
+
+        apiClient('get', url, false, params).then(res => {
             const data = _.get(res, 'data.data', {})
             const { assessments } = data || []
             const { entries, total_entries, total_pages, size } = assessments || []
@@ -140,6 +145,7 @@ class OnlineExamList extends Component {
         this.getData()
     }
     render() {
+        console.log('page', this.state.totalPages)
         return (
             <Page title='Daftar Ujian'>
                 <Header />
@@ -158,6 +164,8 @@ class OnlineExamList extends Component {
                                 create={this.createQuestion}
                                 remove={this.handleRemove}
                                 directQuestion={this.onQuestionDetail}
+                                page={this.state.totalPages}
+                                getData={this.getData}
                             />
                         </div>
                     </div>
