@@ -8,7 +8,8 @@ import {
   addChoiceHandler,
   onChangeContent,
   onAddImageQuestion,
-  onQuestionSelected
+  onQuestionSelected,
+  deleteImage,
 } from "./../../../redux-modules/modules/onlineQuestion";
 
 import BankQuestion from '../bank/bank'
@@ -63,7 +64,15 @@ class Form extends Component {
 
     const images = _.get(this.props.data, 'data.question.image_urls', [])
     const imageList = images.map((image, index) => {
-      return <img key={index} id="image" src={image.doc_aws_url} className="online-question__question-image" alt="gambar soal" />
+      return (
+      <div className="online-question__image-wrapper">
+        <img key={index} id="image" src={image.doc_aws_url} className="online-question__question-image" alt="gambar soal" />
+        <div
+          className="online-question__delete-image delete"
+          onClick={() => this.props.deleteImage()}
+        />
+      </div>
+      )
     })
 
     const listChoices = choices.map((choice, index) => {
@@ -151,14 +160,17 @@ class Form extends Component {
           </div>
           <div className="online-question__upload-image">
             <label htmlFor="insert-picture">
-              <i className="fa fa-upload" /> Masukan Gambar
-
+              <i className="fa fa-upload" />
+              {
+                imageList.length ?
+                  'Ubah Gambar'
+                :
+                  'Masukan Gambar'
+              }
             </label>
             <input id="insert-picture" type="file" className="d-none" onChange={this.onPreviewPhoto.bind(this)} />
           </div>
-        <div className="d-flex align-items-center">
-          {imageList}
-          </div>
+            {imageList}
           <textarea
             className="online-question__write-question"
             placeholder="Tulis Soal"
@@ -221,7 +233,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addChoiceHandler,
   onChangeContent,
   onAddImageQuestion,
-  onQuestionSelected
+  onQuestionSelected,
+  deleteImage
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
