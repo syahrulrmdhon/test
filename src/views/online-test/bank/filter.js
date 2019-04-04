@@ -17,9 +17,9 @@ class BankFilter extends Component {
             basic_comps: [],
             problemTypes: [],
         }
+        this.handleOptionChange = this.handleOptionChange.bind(this)
     }
     componentDidMount() {
-        basicComps.call(this, { category: 'knowledge', assessment_id: this.state.id }, { listOptions: true })
         getProblemTypes.call(this)
     }
     handleOptionChange() {
@@ -32,13 +32,15 @@ class BankFilter extends Component {
         let dataBank = _.get(this, 'props.dataBank', {})
         let selectedBasicComp = dataBank ? dataBank.selectedBasicComp : null
         let selectedProblemType = dataBank ? dataBank.selectedProblemType : null
+        const basicCompetencies = this.props.basicCompetencies
+
         return (
             <div className='row margin-bottom-2'>
                 <div className='col-sm-6 col-md-6'>
                     <Select
                         onChange={(e) => { this.props.handleChange(e.value, 'selectedBasicComp') }}
-                        options={this.state.basic_comps ? this.state.basic_comps : []}
-                        value={this.state.basic_comps.find((element) => { return element.value == selectedBasicComp })}
+                        options={basicCompetencies}
+                        value={basicCompetencies.find((element) => { return element.value == selectedBasicComp })}
                         className='select'
                         classNamePrefix='select'
                         placeholder='Pilih KD...'
@@ -55,7 +57,7 @@ class BankFilter extends Component {
                     />
                 </div>
                 <div className='col-sm-2 col-md-2'>
-                    <button className='btn-green' onClick={this.handleOptionChange.bind(this)}>Cari</button>
+                    <button className='btn-green' onClick={this.handleOptionChange}>Cari</button>
                 </div>
             </div>
         )
@@ -64,6 +66,7 @@ class BankFilter extends Component {
 
 const mapStateToProps = (state) => ({
     dataBank: state.bank, //bank dari reducer
+    basicCompetencies: _.get(state.onlineQuestion, 'basicCompetencies', [])
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

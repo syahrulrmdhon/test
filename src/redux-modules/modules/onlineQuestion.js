@@ -13,6 +13,8 @@ const HANDLE_ADD_CHOICE = 'modules/onlineQuestion/HANDLE_ADD_CHOICE'
 const HANDLE_CHANGE_CONTENT = 'modules/onlineQuestion/HANDLE_CHANGE_CONTENT'
 const HANDLE_SUCCESS = 'modules/onlineQuestion/HANDLE_SUCCESS'
 const HANDLE_ADD_IMAGE_QUESTION = 'modules/onlineQuestion/HANDLE_ADD_IMAGE_QUESTION'
+const QUESTION_SELECTED = 'modules/onlineQuestion/QUESTION_SELECTED'
+const HANDLE_DELETE_IMAGE = 'modules/onlineQuestion/HANDLE_DELETE_IMAGE'
 const initialState = null;
 
 export default function reducer(state = initialState, action) {
@@ -131,14 +133,71 @@ export default function reducer(state = initialState, action) {
       }
     case HANDLE_ADD_IMAGE_QUESTION:
       const base64 = action.value.split(",")[1]
-      state.data.question.image_urls.push({doc_aws_url: action.value})
-      state.body.exam_question.image_sources.push({src: base64})
+      state.data.question.image_urls.splice(0,1,{doc_aws_url: action.value})
+      state.body.exam_question.image_sources.splice(0,1,{src: base64})
 
       return {
         ...state,
         loaded: true,
         loading:false,
       }
+    case QUESTION_SELECTED:
+    let data = action.data
+    state.data.question = {
+      basic_comp_id: data.basic_comp_id,
+      exam_id: data.exam_id,
+      exam_question_choices: data.exam_question_choices,
+      id: data.id,
+      image_urls: data.image_urls,
+      problem_type: data.problem_type,
+      problem_type_text: data.problem_type_text,
+      qn_number: state.data.question.qn_number,
+      question: data.question,
+      school_subject_id: data.school_subject_id,
+      weight: data.weight,
+    }
+
+    data.exam_question_choices.map(choice => {
+      choice.id = null
+      delete choice.image_urls
+    })
+
+    let body = {
+      exam_question: {
+        qn_number: state.data.question.qn_number,
+        problem_type: data.problem_type,
+        question: data.question,
+        weight: data.weight,
+        basic_comp_id: data.basic_comp_id,
+        image_sources: [],
+        exam_question_choices_attributes: [{id: null, symbol: 'A', content: '', is_correct_ans: true}]
+      }
+    }
+    if (state.data.question.exam_question_choices.length) {
+      body.exam_question.exam_question_choices_attributes = data.exam_question_choices
+    }
+    else {
+      data.exam_question_choices.push({id: null, symbol: 'A', content: '', is_correct_ans: true})
+    }
+
+    state.body = body
+
+    return {
+      ...state,
+      loaded: true,
+      loading:false,
+    }
+
+    case HANDLE_DELETE_IMAGE:
+      const images = state.data.question.image_urls
+      images.splice(0, 1)
+      state.body.exam_question.image_sources = [{src: ''}]
+    return {
+      ...state,
+      loaded: true,
+      loading:false,
+    }
+
     case HANDLE_SUCCESS:
       state.success = action.value
       return {
@@ -226,6 +285,20 @@ export function handleSuccess(value) {
   return {
     type: HANDLE_SUCCESS,
     value: value
+  }
+}
+
+
+export function onQuestionSelected({data}) {
+  return {
+    type: QUESTION_SELECTED,
+    data: data
+  }
+}
+
+export function deleteImage(){
+  return {
+    type: HANDLE_DELETE_IMAGE,
   }
 }
 

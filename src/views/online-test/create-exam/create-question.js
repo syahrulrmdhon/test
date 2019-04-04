@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getQuestion, getBasicCompetency, reset, handleSuccess } from './../../../redux-modules/modules/onlineQuestion'
+import { getQuestion, getBasicCompetency, reset, handleSuccess, onQuestionSelected } from './../../../redux-modules/modules/onlineQuestion'
 import { apiClient } from '../../../utils/apiClient'
 
 import Page from '../../../components/Title'
 import Header from '../../global/header'
 import QuestionNumber from './question-number'
+import { isNull } from '../../../utils/common'
 import _ from "lodash"
 
 import Form from './form'
@@ -29,6 +30,7 @@ class CreateQuestion extends Component {
     this.onClickNavigation = this.onClickNavigation.bind(this)
     this.postQuestion = this.postQuestion.bind(this)
     this.getQuestion = this.getQuestion.bind(this)
+    this.onQuestionSelected = this.onQuestionSelected.bind(this)
   }
 
   componentDidMount() {
@@ -62,7 +64,6 @@ class CreateQuestion extends Component {
         questionLabel: questionLabel,
       })
     }
-    // this.getQuestion({number: number, questionType: questionType})
   }
 
   onSubmit({number, questionType}) {
@@ -95,6 +96,12 @@ class CreateQuestion extends Component {
       })
       this.setState({
         currentPage: nextNumber,
+      })
+    }
+    else {
+      this.postQuestion({
+        nextNumber: nextNumber,
+        questionType: this.state.questionType
       })
     }
   }
@@ -204,7 +211,10 @@ class CreateQuestion extends Component {
         this.setState({
           success: true
         })
-        this.getQuestion({ number: nextNumber, questionType: questionType })
+
+        if (nextNumber <= data.qn_number) {
+          this.getQuestion({ number: nextNumber, questionType: questionType })
+        }
 
       }).catch(() => {
       })
@@ -218,10 +228,16 @@ class CreateQuestion extends Component {
     })
   }
 
+  onQuestionSelected() {
+    this.props.onQuestionSelected({data: this.props.bankQuestions})
+  }
   render() {
+    const subject = `${isNull(_.get(this.props.data, 'data.subject_name', ''))} -
+      ${isNull(_.get(this.props.data, 'data.grade_name', ''))} ${isNull(_.get(this.props.data, 'data.major_name', ''))}`
+
     return (
         <Page title="Deskripsi">
-        <Header navbar={false} location={''}/>
+        <Header navbar={false} location={'/online-exam'}/>
         {
           this.state.success &&
           <div id="note">
@@ -235,6 +251,7 @@ class CreateQuestion extends Component {
             currentPage={this.state.currentPage}
             currentObj={this.state.currentObj}
             questionType={this.state.questionType}
+            subject={subject}
           />
           <Form
             number={this.state.currentPage}
@@ -243,6 +260,7 @@ class CreateQuestion extends Component {
             questionType={this.state.questionType}
             onSubmit={this.onSubmit}
             onClickNavigation={this.onClickNavigation}
+            onQuestionSelected={this.onQuestionSelected}
           />
         </div>
       </Page>
@@ -252,6 +270,7 @@ class CreateQuestion extends Component {
 
 const mapStateToProps = state => ({
   data: state.onlineQuestion,
+  bankQuestions: _.get(state.bank, 'selectedQuestion', {}),
   problem_types: _.get(state, 'onlineQuestion.data.problem_types', [])
 })
 
@@ -259,7 +278,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getQuestion,
   getBasicCompetency,
   reset,
-  handleSuccess
+  handleSuccess,
+  onQuestionSelected
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateQuestion);

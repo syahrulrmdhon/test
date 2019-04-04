@@ -9,7 +9,7 @@ const questionNumber = props => {
   return (
     <div className="online-question__left-wrapper main-block">
       <div className="online-question__subject-wrapper">
-        <div className="online-question__subject">Geografi - X IPS</div>
+        <div className="online-question__subject">{props.subject}</div>
         <div className="online-question__line" />
       </div>
       <NumberList

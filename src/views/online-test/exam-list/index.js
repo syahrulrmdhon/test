@@ -7,7 +7,9 @@ import ContentOnlineExam from './content'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import _ from 'lodash'
-import { apiClient } from '../../../utils/apiClient';
+import { apiClient } from '../../../utils/apiClient'
+import { confirmAlert } from 'react-confirm-alert'
+import { modal } from './../../global/modal'
 
 class OnlineExamList extends Component {
     constructor(props) {
@@ -26,6 +28,11 @@ class OnlineExamList extends Component {
         }
 
         this.getData = this.getData.bind(this)
+        this.detailClicked = this.detailClicked.bind(this)
+        this.createQuestion = this.createQuestion.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
+        this.onQuestionDetail = this.onQuestionDetail.bind(this)
     }
 
     componentDidMount() {
@@ -39,11 +46,57 @@ class OnlineExamList extends Component {
         })
     }
 
-    createQuestion(e, id, name, subject_id) {
+    createQuestion(e, assessment_id, name, subject_id) {
         e.preventDefault()
         this.props.history.push({
-            pathname: '/online-exam/create/' + id + '/subject/' + subject_id,
-            state: {id: this.state.assessment_id, name: name, subject_id: subject_id}
+            pathname: '/online-exam/' + assessment_id + '/subject/' + subject_id,
+            state: { assessment_id: this.state.assessment_id, name: name, subject_id: subject_id }
+        })
+    }
+
+    deleteExam(assessment_id, examId) {
+
+        apiClient('delete', `v1/assessments/${assessment_id}/exams/${examId}`, false).then(res => {
+            this.getData()
+            modal({
+                message: 'Berhasil',
+                description: 'Soal berhasil di hapus',
+                btns: [
+                    {
+                        label: 'Tutup',
+                        className: 'btn green',
+                    }
+                ]
+            })
+        })
+    }
+
+    handleRemove(assessment_id, examId) {
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <div className="react-confirm-alert modal-alert">
+                        <div className="react-confirm-alert-body">
+                            <div className="header align-center">
+                                <h1>Yakin menghapus soal ujian ini? </h1>
+                            </div>
+                            <div className="react-confirm-alert-button-group toggle">
+                                <div className="align-center fullwidth">
+                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Kembali</a>
+                                    <a href="javascript:void(0);" className="btn green" onClick={() => { this.deleteExam(assessment_id, examId); onClose(); }}>Yakin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            },
+        })
+    }
+
+    onQuestionDetail(e, assessment_id, exam_id) {
+        console.log(assessment_id, exam_id, "here we go")
+        this.props.history.push({
+            pathname: `/all-question/${assessment_id}/assessment/${exam_id}/exam/`
         })
     }
 
@@ -56,13 +109,13 @@ class OnlineExamList extends Component {
 
         let params = {}
 
-        if (selectedSemester != '') {
+        if (selectedSemester !== '') {
             params['school_period_id'] = selectedSemester
         }
-        if (selectedType != '') {
+        if (selectedType !== '') {
             params['assessment_type'] = selectedType
         }
-        if (selectedGrade != '') {
+        if (selectedGrade !== '') {
             params['grade_id'] = selectedGrade
         }
 
@@ -95,14 +148,16 @@ class OnlineExamList extends Component {
                         <div className='margin-box row h-100'>
                             <div className='col-sm-3 left-block padding-top-4'>
                                 <FilterOnlineExam
-                                    handleSubmit={this.handleSubmit.bind(this)}
+                                    handleSubmit={this.handleSubmit}
                                 />
                             </div>
                             <ContentOnlineExam
                                 data={this.state.data}
                                 loader={this.state.loader}
-                                detailClicked={this.detailClicked.bind(this)}
-                                create = {this.createQuestion.bind(this)}
+                                detailClicked={this.detailClicked}
+                                create={this.createQuestion}
+                                remove={this.handleRemove}
+                                directQuestion={this.onQuestionDetail}
                             />
                         </div>
                     </div>

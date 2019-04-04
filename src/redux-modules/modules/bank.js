@@ -71,19 +71,19 @@ export default function reducer(state = inititalState, action) {
             break
         case HANDLE_EVENT:
             if (action.field == 'is_selected') {
-
                 const data = state.data.questions.entries.find(result => {
                     result.is_selected = false
                     return result.id === action.value
                 })
                 data.is_selected = true
+                state.selectedQuestion = data
             }
             return {
                 ...state,
                 loaded: false,
-                loading: true
+                loading: true,
             }
-            break
+
         case SET:
             return {
                 ...state,
