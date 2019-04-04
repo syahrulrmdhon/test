@@ -97,6 +97,12 @@ class CreateQuestion extends Component {
         currentPage: nextNumber,
       })
     }
+    else {
+      this.postQuestion({
+        nextNumber: nextNumber,
+        questionType: this.state.questionType
+      })
+    }
   }
 
   getQuestion({number, questionType}) {
@@ -204,7 +210,10 @@ class CreateQuestion extends Component {
         this.setState({
           success: true
         })
-        this.getQuestion({ number: nextNumber, questionType: questionType })
+
+        if (nextNumber <= data.qn_number) {
+          this.getQuestion({ number: nextNumber, questionType: questionType })
+        }
 
       }).catch(() => {
       })
