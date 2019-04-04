@@ -71,7 +71,6 @@ class OnlineExamList extends Component {
         })
     }
 
-
     handleRemove(assessment_id, examId) {
         confirmAlert({
             customUI: ({ onClose }) => {
@@ -100,9 +99,6 @@ class OnlineExamList extends Component {
             pathname: `/all-question/${assessment_id}/assessment/${exam_id}/exam/`
         })
     }
-
-
-
 
     getData() {
         let listOnlineExam = _.get(this.props, 'listOnlineExam', {})
