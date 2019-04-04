@@ -7,7 +7,9 @@ import ContentOnlineExam from './content'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import _ from 'lodash'
-import { apiClient } from '../../../utils/apiClient';
+import { apiClient } from '../../../utils/apiClient'
+import { confirmAlert } from 'react-confirm-alert'
+import { modal } from './../../global/modal'
 
 class OnlineExamList extends Component {
     constructor(props) {
@@ -31,7 +33,6 @@ class OnlineExamList extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
         this.onQuestionDetail = this.onQuestionDetail.bind(this)
-
     }
 
     componentDidMount() {
@@ -45,7 +46,7 @@ class OnlineExamList extends Component {
         })
     }
 
-    createQuestion(e, assessment_id, name, subject_id, examId) {
+    createQuestion(e, assessment_id, name, subject_id) {
         e.preventDefault()
         this.props.history.push({
             pathname: '/online-exam/' + assessment_id + '/subject/' + subject_id,
@@ -53,24 +54,51 @@ class OnlineExamList extends Component {
         })
     }
 
-    handleRemove(assessment_id, examId) {
-        console.log('assessment_id', assessment_id)
-        console.log('examId', examId)
+    deleteExam(assessment_id, examId) {
 
-        apiClient('delete', `v1/assessments/${assessment_id}/exams/${examId}`, false).then(res=>{
+        apiClient('delete', `v1/assessments/${assessment_id}/exams/${examId}`, false).then(res => {
             this.getData()
+            modal({
+                message: 'Berhasil',
+                description: 'Soal berhasil di hapus',
+                btns: [
+                    {
+                        label: 'Tutup',
+                        className: 'btn green',
+                    }
+                ]
+            })
         })
     }
 
-    onQuestionDetail(e, assessment_id, exam_id){
-        console.log(assessment_id, exam_id,"here we go")
+    handleRemove(assessment_id, examId) {
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <div className="react-confirm-alert modal-alert">
+                        <div className="react-confirm-alert-body">
+                            <div className="header align-center">
+                                <h1>Yakin menghapus soal ujian ini? </h1>
+                            </div>
+                            <div className="react-confirm-alert-button-group toggle">
+                                <div className="align-center fullwidth">
+                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Kembali</a>
+                                    <a href="javascript:void(0);" className="btn green" onClick={() => { this.deleteExam(assessment_id, examId); onClose(); }}>Yakin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            },
+        })
+    }
+
+    onQuestionDetail(e, assessment_id, exam_id) {
+        console.log(assessment_id, exam_id, "here we go")
         this.props.history.push({
-            pathname:`/all-question/${assessment_id}/assessment/${exam_id}/exam/`
+            pathname: `/all-question/${assessment_id}/assessment/${exam_id}/exam/`
         })
     }
-
-
-
 
     getData() {
         let listOnlineExam = _.get(this.props, 'listOnlineExam', {})
