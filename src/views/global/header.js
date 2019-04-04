@@ -114,7 +114,7 @@ export default class Header extends Component {
                             </div>
                             <div className="react-confirm-alert-button-group toggle">
                                 <div className="align-center fullwidth">
-                                    <a href="javascript:void(0);" className="btn default" onClick={this.props.history.goBack()}>Kembali</a>
+                                    <a href="javascript:void(0);" className="btn default" onClick={onClose}>Kembali</a>
                                     <a href="javascript:void(0);" className="btn green" onClick={() => { this.onConfirm(school.id); onClose(); }}>Lanjut</a>
                                 </div>
                             </div>

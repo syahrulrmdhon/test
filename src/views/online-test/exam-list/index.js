@@ -118,10 +118,10 @@ class OnlineExamList extends Component {
             params['grade_id'] = selectedGrade
         }
 
-        let url = 'v1/tests?per_page=1'
+        let url = 'v1/tests?'
 
         if (page) {
-            url = 'v1/tests?per_page=1' + '&page=' + page
+            url = 'v1/tests?' + '&page=' + page
         }
 
         apiClient('get', url, false, params).then(res => {
@@ -145,7 +145,6 @@ class OnlineExamList extends Component {
         this.getData()
     }
     render() {
-        console.log('page', this.state.totalPages)
         return (
             <Page title='Daftar Ujian'>
                 <Header />
