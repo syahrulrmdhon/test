@@ -8,6 +8,7 @@ import { apiClient } from '../../../utils/apiClient'
 import Page from '../../../components/Title'
 import Header from '../../global/header'
 import QuestionNumber from './question-number'
+import { isNull } from '../../../utils/common'
 import _ from "lodash"
 
 import Form from './form'
@@ -95,6 +96,12 @@ class CreateQuestion extends Component {
       })
       this.setState({
         currentPage: nextNumber,
+      })
+    }
+    else {
+      this.postQuestion({
+        nextNumber: nextNumber,
+        questionType: this.state.questionType
       })
     }
   }
@@ -204,7 +211,10 @@ class CreateQuestion extends Component {
         this.setState({
           success: true
         })
-        this.getQuestion({ number: nextNumber, questionType: questionType })
+
+        if (nextNumber <= data.qn_number) {
+          this.getQuestion({ number: nextNumber, questionType: questionType })
+        }
 
       }).catch(() => {
       })
@@ -222,7 +232,8 @@ class CreateQuestion extends Component {
     this.props.onQuestionSelected({data: this.props.bankQuestions})
   }
   render() {
-    const subject = `${_.get(this.props.data, 'data.subject_name', '')} - ${_.get(this.props.data, 'data.grade_name', '')} ${_.get(this.props.data, 'data.major_name', '')}`
+    const subject = `${isNull(_.get(this.props.data, 'data.subject_name', ''))} -
+      ${isNull(_.get(this.props.data, 'data.grade_name', ''))} ${isNull(_.get(this.props.data, 'data.major_name', ''))}`
 
     return (
         <Page title="Deskripsi">

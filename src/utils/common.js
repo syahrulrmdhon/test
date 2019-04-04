@@ -592,3 +592,10 @@ export function getFullSemesterList(params = {}, options = {}) {
         })
     })
 }
+
+export function isNull(data) {
+    if (data === null) {
+        return ''
+    }
+    return data
+}
