@@ -69,7 +69,6 @@ export class DetailAction extends Component {
         let data = this.props.detail
         let id = this.props.id
         let examId = this.props.examId
-        console.log(data, "data")
         if (examId) {
             content.push(
                 <div className='padding-bottom-2' key={Math.random()}>
