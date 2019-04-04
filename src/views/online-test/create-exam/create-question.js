@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getQuestion, getBasicCompetency, reset, handleSuccess } from './../../../redux-modules/modules/onlineQuestion'
+import { getQuestion, getBasicCompetency, reset, handleSuccess, onQuestionSelected } from './../../../redux-modules/modules/onlineQuestion'
 import { apiClient } from '../../../utils/apiClient'
 
 import Page from '../../../components/Title'
@@ -29,6 +29,7 @@ class CreateQuestion extends Component {
     this.onClickNavigation = this.onClickNavigation.bind(this)
     this.postQuestion = this.postQuestion.bind(this)
     this.getQuestion = this.getQuestion.bind(this)
+    this.onQuestionSelected = this.onQuestionSelected.bind(this)
   }
 
   componentDidMount() {
@@ -217,6 +218,9 @@ class CreateQuestion extends Component {
     })
   }
 
+  onQuestionSelected() {
+    this.props.onQuestionSelected({data: this.props.bankQuestions})
+  }
   render() {
     const subject = `${_.get(this.props.data, 'data.subject_name', '')} - ${_.get(this.props.data, 'data.grade_name', '')} ${_.get(this.props.data, 'data.major_name', '')}`
 
@@ -245,6 +249,7 @@ class CreateQuestion extends Component {
             questionType={this.state.questionType}
             onSubmit={this.onSubmit}
             onClickNavigation={this.onClickNavigation}
+            onQuestionSelected={this.onQuestionSelected}
           />
         </div>
       </Page>
@@ -254,6 +259,7 @@ class CreateQuestion extends Component {
 
 const mapStateToProps = state => ({
   data: state.onlineQuestion,
+  bankQuestions: _.get(state.bank, 'selectedQuestion', {}),
   problem_types: _.get(state, 'onlineQuestion.data.problem_types', [])
 })
 
@@ -261,7 +267,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getQuestion,
   getBasicCompetency,
   reset,
-  handleSuccess
+  handleSuccess,
+  onQuestionSelected
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateQuestion);
