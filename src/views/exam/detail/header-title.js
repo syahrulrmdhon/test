@@ -10,7 +10,6 @@ export class HeaderTitle extends Component {
     const data = this.props.question && this.props.question.data && this.props.question.data.subject_competencies
     const assessment = this.props.question && this.props.question.data
     let content = []
-    console.log("data", assessment)
     data && data.map((data, idx) => {
       content.push(<div key={Math.random()}>
         <div className="padding-2">

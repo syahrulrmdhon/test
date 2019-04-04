@@ -34,9 +34,7 @@ export default function reducer(state = initialState, action) {
             }
             break;
         case HANDLE_FORM_TEXT:
-            console.log(action, "actin")
             state.data.data_form[action.field] = action.value
-            console.log(state.data.data_form, "actin")
             return {
                 ...state,
                 loaded: true,
@@ -51,7 +49,6 @@ export default function reducer(state = initialState, action) {
 
         case LOAD_SUCCESS:
             delete state.error;
-            console.log(action, "my result")
             if (state.result !== action.result) {
                 return {
                     ...state,
@@ -83,7 +80,6 @@ export default function reducer(state = initialState, action) {
 }
 
 export function handlingInputText(e, field_name) {
-    console.log(e.target.value, "value")
     return {
         type: HANDLE_FORM_TEXT,
         value: e.target.value,
@@ -112,11 +108,9 @@ export function getDataScoreAttitude(assessment_id) {
 
 
 export function getDataScoreDetail(assessment_id, class_id, user_id,tipe) {
-    console.log(tipe,"hehe")
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
     const url = `${process.env.API_URL}v1/assessments/${assessment_id}/classes/${class_id}/users/${user_id}?page=1&score=${tipe}`
-    console.log(url, "my url")
     return {
         types: [LOAD, LOAD_FORM_DATA, LOAD_FAIL],
         promise: client => client.get(url,headers)
@@ -124,7 +118,6 @@ export function getDataScoreDetail(assessment_id, class_id, user_id,tipe) {
 }
 
 export function setSavedata(payload) {
-    console.log(payload, "here payload")
     return {
         type: SET,
         payload

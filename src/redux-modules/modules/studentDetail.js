@@ -115,7 +115,6 @@ export default function reducer(state = initialState, action) {
         loading: false
       };
     case GET_SUBJECTS:
-    console.log(action.result)
       let subjects = [{label: 'Semua Mata Pelajaran', value: 'all'}]
       action.result.data.subjects.map(item => {
         subjects.push(
@@ -178,25 +177,6 @@ export default function reducer(state = initialState, action) {
       loading: false
     }
     case LOAD:
-      // if (state.notes) {
-      //   console.log(state.notes)
-      //   if (!state.notes.length && (state.notes.extracurricular_id === '' || state.notes.description === '') ) {
-      //     console.log(state.notes)
-
-      //     state.notes[0].extracurricular_id = ''
-      //     state.notes[0].description = ''
-      //   }
-      //   else {
-      //     state.notes[0] = {
-      //       title: '',
-      //       description: ''
-      //     }
-
-      //     // state.notes[0].description = ''
-      //   }
-      //   console.log(state.notes)
-
-      // }
       return {
         ...state,
         loading: true
