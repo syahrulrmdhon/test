@@ -95,7 +95,8 @@ class OnlineExamList extends Component {
 
     onQuestionDetail(e, assessment_id, exam_id) {
         this.props.history.push({
-            pathname: `/all-question/${assessment_id}/assessment/${exam_id}/exam/`
+            pathname: `/all-question/${assessment_id}/assessment/${exam_id}/exam/`,
+            state: { status: 'online' }
         })
     }
 
