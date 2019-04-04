@@ -7,9 +7,11 @@ import {
   deleteChoiceHandler,
   addChoiceHandler,
   onChangeContent,
-  onAddImageQuestion
+  onAddImageQuestion,
+  onQuestionSelected
 } from "./../../../redux-modules/modules/onlineQuestion";
 
+import BankQuestion from '../bank/bank'
 import { apiClient } from '../../../utils/apiClient'
 import _ from "lodash"
 import Select from 'react-select'
@@ -18,8 +20,12 @@ class Form extends Component {
   constructor() {
     super()
     this.state = {
-      base64: ''
+      base64: '',
+      visible: false,
     }
+
+    this.showBankQuestion = this.showBankQuestion.bind(this)
+    this.onQuestionSelected = this.onQuestionSelected.bind(this)
   }
 
   onPreviewPhoto(evt) {
@@ -32,6 +38,17 @@ class Form extends Component {
       })
       reader.readAsDataURL(file);
     }
+  }
+
+  showBankQuestion() {
+    this.setState({
+      visible: !this.state.visible
+    })
+  }
+
+  onQuestionSelected() {
+    this.props.onQuestionSelected({data: this.props.bankQuestions})
+    this.showBankQuestion()
   }
 
   render() {
@@ -79,7 +96,6 @@ class Form extends Component {
         </div>
       )
     })
-
     return (
       <div className="online-question__right-wrapper main-block">
         <div className="online-question__top-content">
@@ -129,7 +145,7 @@ class Form extends Component {
             <div className="online-question__current-question">
               Soal {this.props.questionLabel} - Nomor {this.props.number}
             </div>
-            <div className="online-question__import-question">
+            <div className="online-question__import-question" onClick={() => this.showBankQuestion()}>
               <span className="online-question__add-icon">+</span> Impor Soal
             </div>
           </div>
@@ -182,6 +198,11 @@ class Form extends Component {
             Selanjutnya
           </button>
         </div>
+          <BankQuestion
+            visible={this.state.visible}
+            closeModal={this.showBankQuestion}
+            onQuestionSelected={this.onQuestionSelected}
+          />
       </div>
     )
   }
@@ -189,6 +210,7 @@ class Form extends Component {
 
 const mapStateToProps = state => ({
   data: state.onlineQuestion,
+  bankQuestions: _.get(state.bank, 'selectedQuestion', {}),
   problem_types: _.get(state, 'onlineQuestion.data.problem_types', [])
 })
 
@@ -198,7 +220,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   deleteChoiceHandler,
   addChoiceHandler,
   onChangeContent,
-  onAddImageQuestion
+  onAddImageQuestion,
+  onQuestionSelected
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
