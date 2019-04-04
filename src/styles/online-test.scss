@@ -541,12 +541,24 @@ $nunito_bold: "NunitoBold";
     cursor: pointer;
   }
 
+  &__image-wrapper {
+    width: fit-content;
+    position: relative;
+    padding-right: 25px;
+  }
+
+  &__delete-image {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+
   &__question-image {
     max-width: 200px;
     min-width: 100px;
-    // display: block;
-    margin: 14px 10px 0px 0px;
+    padding-top: 14px;
   }
+
 
   .fa-upload {
     margin-right: 5px;
@@ -667,6 +679,8 @@ $nunito_bold: "NunitoBold";
     &:after {
       transform: rotate(-45deg);
     }
+
+
   }
 
   &__delete-wrapper {

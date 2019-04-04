@@ -14,6 +14,7 @@ const HANDLE_CHANGE_CONTENT = 'modules/onlineQuestion/HANDLE_CHANGE_CONTENT'
 const HANDLE_SUCCESS = 'modules/onlineQuestion/HANDLE_SUCCESS'
 const HANDLE_ADD_IMAGE_QUESTION = 'modules/onlineQuestion/HANDLE_ADD_IMAGE_QUESTION'
 const QUESTION_SELECTED = 'modules/onlineQuestion/QUESTION_SELECTED'
+const HANDLE_DELETE_IMAGE = 'modules/onlineQuestion/HANDLE_DELETE_IMAGE'
 const initialState = null;
 
 export default function reducer(state = initialState, action) {
@@ -132,8 +133,8 @@ export default function reducer(state = initialState, action) {
       }
     case HANDLE_ADD_IMAGE_QUESTION:
       const base64 = action.value.split(",")[1]
-      state.data.question.image_urls.push({doc_aws_url: action.value})
-      state.body.exam_question.image_sources.push({src: base64})
+      state.data.question.image_urls.splice(0,1,{doc_aws_url: action.value})
+      state.body.exam_question.image_sources.splice(0,1,{src: base64})
 
       return {
         ...state,
@@ -186,6 +187,17 @@ export default function reducer(state = initialState, action) {
       loaded: true,
       loading:false,
     }
+
+    case HANDLE_DELETE_IMAGE:
+      const images = state.data.question.image_urls
+      images.splice(0, 1)
+      state.body.exam_question.image_sources = [{src: ''}]
+    return {
+      ...state,
+      loaded: true,
+      loading:false,
+    }
+
     case HANDLE_SUCCESS:
       state.success = action.value
       return {
@@ -281,6 +293,12 @@ export function onQuestionSelected({data}) {
   return {
     type: QUESTION_SELECTED,
     data: data
+  }
+}
+
+export function deleteImage(){
+  return {
+    type: HANDLE_DELETE_IMAGE,
   }
 }
 
