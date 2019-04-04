@@ -25,6 +25,7 @@ class OnlineExamList extends Component {
             classes: [],
             loader: true,
             assessment_id: props.match.params.assessment_id,
+            subject_id: props.match.params.subject_id
         }
 
         this.getData = this.getData.bind(this)

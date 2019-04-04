@@ -38,7 +38,7 @@ export default class Index extends Component {
  
   render() {
     let status = {
-      status:this.props.location.state && this.props.location.state.status
+      status:this.props.location.state && this.props.location.state.status,
     }
     return (
       <Page title="Deskripsi">

@@ -17,7 +17,6 @@ class index extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match.params.exam_id, this.props.match.params.assessment_id, "aalalsaasd")
     this.props.getExamQuestion(this.props.match.params.exam_id, this.props.match.params.assessment_id)
   }
 
@@ -37,14 +36,16 @@ class index extends Component {
   }
 
   render() {
-    const menu = this.props.location.state && this.props.location.state.status
+    let menu = this.props.location.state && this.props.location.state.status
     let path = ''
     if (menu === 'online') {
       path = '/online-exam'
+    } else if (menu === 'online-exam') {
+      path = `/online-exam/${this.props.match.params.assessment_id}/subject/${this.props.location.state.subject_id}`
     } else {
       path = `/exam/${this.props.match.params.assessment_id}`
     }
-    
+
     return (
       <div className="question padding-content">
         <div>
