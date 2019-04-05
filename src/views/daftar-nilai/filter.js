@@ -58,7 +58,6 @@ class FilterNilai extends Component {
                         <label>Semester</label>
                         <Select
                             onChange={(e) => { this.changePeriod(e) }}
-                            // onChange={(e) => { this.props.handleChange(e.value, 'selectedSemester') }}
                             options={this.state.listSemester ? this.state.listSemester : []}
                             value={this.state.listSemester.find((element) => { return element.value == selectedSemester })}
                             className='select'
