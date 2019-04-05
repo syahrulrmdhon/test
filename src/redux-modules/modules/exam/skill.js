@@ -40,8 +40,6 @@ export default function reducer(state = initialState, action) {
                     state['store_basic_comp_selected'].push(action.value)
 
             })
-
-            // console.log(state.store_basic_comp_selected,"selected basic comp")
         
             return{
                 ...state,
@@ -118,7 +116,6 @@ export default function reducer(state = initialState, action) {
             }
         case REMOVE_WORK_STEP:
             state.problem_types = removeField(state.problem_types, action.idx)
-            console.log(state.problem_types,"problem")
             return{
                 ...state,
                 loaded: true,
@@ -203,7 +200,6 @@ export function addWorkStep(){
 }
 
 export function removeWorkStep(idx){
-    console.log(idx,"index")
     return{
         type: REMOVE_WORK_STEP,
         idx: idx,

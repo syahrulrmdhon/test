@@ -35,7 +35,7 @@ class BankContent extends Component {
                                     <label htmlFor={x.id}></label>
                                     <div className="check"></div>
                                 </div>
-                                <div className='col-sm-1 col-md-1 margin-top-5 text-left'>{x.qn_number ? x.qn_number : '-'}.</div>
+                                <div className='col-sm-1 col-md-1 margin-top-5 text-left'>{i + 1}.</div>
                                 <div className='col-sm-10 col-md-10'>
                                     <div className='kd margin-top-5'>
                                         KD. {x.comp_number ? x.comp_number : '-'} {x.content ? x.content : '-'}

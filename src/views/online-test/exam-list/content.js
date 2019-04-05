@@ -7,8 +7,24 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Loader from './../../global/loader'
 import moment from 'moment/moment.js'
+import previous from './../../../assets/images/previous.svg'
+import next from './../../../assets/images/next.svg'
+import ReactPaginate from 'react-paginate'
 
 class ContentOnlineExam extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+
+        }
+        this.handlePageClick = this.handlePageClick.bind(this)
+    }
+    handlePageClick(e) {
+        let page = e.selected + 1
+        this.props.getData(page)
+    }
+
     render() {
         const period_name = _.get(this.props.listOnlineExam, 'schoolYear.period_name', null)
 
@@ -103,8 +119,29 @@ class ContentOnlineExam extends Component {
                             this.props.loader ?
                                 <Loader loader={true} />
                                 :
-                                content
-
+                                <div>
+                                    {content}
+                                    {
+                                        this.props.page > 1 &&
+                                        <div className="align-center">
+                                            <ReactPaginate
+                                                previousLabel={<img src={previous} alt="" className="arrow-left" />}
+                                                nextLabel={<img src={next} alt="" className="arrow-right" />}
+                                                breakLabel={'...'}
+                                                breakClassName={'break-me disinblock'}
+                                                pageCount={this.props.page}
+                                                onPageChange={(e) => {
+                                                    this.handlePageClick(e)
+                                                }}
+                                                containerClassName={'pagination disblock'}
+                                                pageClassName={'disinblock'}
+                                                previousClassName={'disinblock'}
+                                                nextClassName={'disinblock'}
+                                                activeClassName={'active'}
+                                            />
+                                        </div>
+                                    }
+                                </div>
                         }
                     </div>
                 </div>

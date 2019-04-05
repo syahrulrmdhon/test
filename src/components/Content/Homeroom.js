@@ -89,8 +89,6 @@ class Homeroom extends Component {
             if (selectedExtracurricular) {
               selectedExtracurricular.isDisabled = true
             }
-            console.log(this.props.notes.extracurriculars)
-            console.log(selectedExtracurricular)
             notes.push(
               <div key={index} className="mb-4 position-relative">
                 <div className="note-wrapper">

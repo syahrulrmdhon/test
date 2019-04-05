@@ -55,7 +55,7 @@ class Form extends Component {
   render() {
     const question = _.get(this.props.data, 'data.question', {})
     const questionType = _.get(this.props.data, 'data.problem_types', [])
-
+    const examStatus = _.get(this.props.data, 'data.flag', '')
     const choices = _.get(this.props.data, 'data.question.exam_question_choices', [])
     const basicCompetencies = _.get(this.props.data, 'basicCompetencies', [])
     const currentQuestionType = questionType.find(type => {
@@ -207,7 +207,12 @@ class Form extends Component {
           <button
             className="online-question__submit btn-green"
             onClick={() => this.props.onSubmit({number: this.props.number, questionType: question.problem_type})}>
-            Selanjutnya
+            {
+              examStatus ?
+                'Selesai'
+              :
+                'Selanjutnya'
+            }
           </button>
         </div>
           <BankQuestion
