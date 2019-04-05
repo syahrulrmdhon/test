@@ -25,6 +25,7 @@ class OnlineExamList extends Component {
             classes: [],
             loader: true,
             assessment_id: props.match.params.assessment_id,
+            subject_id: props.match.params.subject_id
         }
 
         this.getData = this.getData.bind(this)
@@ -94,13 +95,13 @@ class OnlineExamList extends Component {
     }
 
     onQuestionDetail(e, assessment_id, exam_id) {
-        console.log(assessment_id, exam_id, "here we go")
         this.props.history.push({
-            pathname: `/all-question/${assessment_id}/assessment/${exam_id}/exam/`
+            pathname: `/all-question/${assessment_id}/assessment/${exam_id}/exam/`,
+            state: { status: 'online' }
         })
     }
 
-    getData() {
+    getData(page) {
         let listOnlineExam = _.get(this.props, 'listOnlineExam', {})
         let selectedYear = listOnlineExam ? listOnlineExam.selectedYear : ''
         let selectedSemester = listOnlineExam ? listOnlineExam.selectedSemester : ''
@@ -119,7 +120,13 @@ class OnlineExamList extends Component {
             params['grade_id'] = selectedGrade
         }
 
-        apiClient('get', 'v1/tests', false, params).then(res => {
+        let url = 'v1/tests?'
+
+        if (page) {
+            url = 'v1/tests?' + '&page=' + page
+        }
+
+        apiClient('get', url, false, params).then(res => {
             const data = _.get(res, 'data.data', {})
             const { assessments } = data || []
             const { entries, total_entries, total_pages, size } = assessments || []
@@ -158,6 +165,8 @@ class OnlineExamList extends Component {
                                 create={this.createQuestion}
                                 remove={this.handleRemove}
                                 directQuestion={this.onQuestionDetail}
+                                page={this.state.totalPages}
+                                getData={this.getData}
                             />
                         </div>
                     </div>
