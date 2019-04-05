@@ -20,7 +20,13 @@ const content = (props) => {
       <div className="exam__wrapper-panel">
         {
           exams.entries.length ?
-            <Exams exams={props.exams} page={props.page} delete={props.delete} edit={props.edit}/>
+            <Exams
+                exams={props.exams}
+                page={props.page}
+                delete={props.delete} edit={props.edit}
+                seeMore={props.seeMore}
+                expanded={props.expanded}
+            />
           :
             <NotAvailable>Tugas belum tersedia</NotAvailable>
         }
