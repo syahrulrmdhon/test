@@ -13,6 +13,7 @@ import {
 } from './../../redux-modules/modules/assessment'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {seeMore} from "../../utils/common";
 
 class Index extends Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class Index extends Component {
         total_pages: 0,
         entries: []
       },
+      expanded:false,
       classes: [],
       selectedClass: null,
       assessment: {
@@ -39,6 +41,7 @@ class Index extends Component {
     this.toEdit = this.toEdit.bind(this)
     this.getAssessments = this.getAssessments.bind(this)
     this.filterClass = this.filterClass.bind(this)
+    this.seeMore = this.seeMore.bind(this)
   }
 
   componentDidMount() {
@@ -132,6 +135,12 @@ class Index extends Component {
       params['class_id'] = event.value
     }
   }
+
+  seeMore(){
+    this.setState({
+      expanded: !this.state.expanded,
+    })
+  }
   
   delete(value) {
     confirmAlert({
@@ -170,6 +179,8 @@ class Index extends Component {
               </div>
               <div className="col-sm-10 col-sm-10-custom right-block">
                 <Content
+                  seeMore={this.seeMore}
+                  expanded={this.state.expanded}
                   exams={this.state.exams}
                   addExam={this.addExam}
                   page={this.onChangePage}

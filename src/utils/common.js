@@ -32,7 +32,7 @@ export function seeMore(value, s_count = 50, options = {}) {
 
     if (s_count < count) {
         if (expanded) {
-            value += '...'
+            value += ''
             seeMore = 'ciutkan'
         } else {
             value = value.substring(0, s_count);
