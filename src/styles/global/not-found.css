@@ -68,10 +68,10 @@ body {
 }
 
 .not-found .illustration {
-  margin-top: -20vh;
+  margin-top: -10vh;
 }
 
-.font-grey {
+.not-found .font-grey {
   color: #fff !important;
   cursor: pointer;
 }
