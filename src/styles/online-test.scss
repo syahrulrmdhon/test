@@ -687,3 +687,21 @@ $nunito_bold: "NunitoBold";
     display: inline;
   }
 }
+
+.back-button {
+  &__wrapper {
+      margin-bottom: 16px;
+  }
+
+  &__button {
+      color: #2f58bd;
+      font-family: "NunitoBold";
+      font-size: 16px;
+      text-decoration: none;
+  }
+
+  &__button:hover {
+      text-decoration: none;
+  }
+
+}
