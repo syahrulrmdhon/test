@@ -20,7 +20,7 @@ export default class SideBar extends Component{
         if(this.props.classes.length > 0){
             this.props.classes.map((classs, idx) => {
                 textClass.push(
-                    <div className="col-sm-6" key={idx}>
+                    <div className="col-md-12 col-lg-6" key={idx}>
                         <div className="disblock margin-top-2">
                             <div className="checkbox-wrapper">
                                 <div className="checkbox-button">

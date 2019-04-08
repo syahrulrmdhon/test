@@ -167,8 +167,8 @@ class Beranda extends Component {
                         </div>
                     </div>
                     <div className={classnames("row margin-right-0 schedule-range", this.state.isSideBar)}>
-                        <div className="col-sm-12">
-                            <div className="margin-2">
+                        <div className="col-sm-12 padding-left-1 padding-right-0">
+                            <div className="margin-left-2 margin-top-1">
                                 <div className={classnames("schedule items padding-4", this.state.isSideBar)}>
                                     <Loader loader={this.state.loader}/>
                                     <div className="schedule-item">

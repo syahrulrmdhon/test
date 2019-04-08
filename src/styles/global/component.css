@@ -1231,7 +1231,7 @@ strong, .bold {
 }
 
 .content-block.main-block, .content-block.main-block .left-block, .content-block.main-block .right-block {
-  min-height: 530px;
+  min-height: 79vh;
 }
 
 .content-block.main-block .left-block {
@@ -1239,7 +1239,7 @@ strong, .bold {
 }
 
 .content-block.main-block .empty-data, .content .empty-data {
-  height: 90%;
+  height: 60vh;
   border: 1px solid #cccccc;
   border-radius: 2px;
   text-align: center;
