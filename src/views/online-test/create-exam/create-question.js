@@ -24,7 +24,7 @@ class CreateQuestion extends Component {
       currentObj: 0,
       questionType: 'multiple_choice',
       questionLabel: 'PG',
-      success: _.get(props.data, 'success', false)
+      success: _.get(props.data, 'success', false),
     }
     this.onClickNumber = this.onClickNumber.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -211,10 +211,8 @@ class CreateQuestion extends Component {
     const currentProblemType = problemTypes.find(type => {
       return type.problem_type === question.problem_type
     })
-
-    if (data.exam_question.basic_comp_id && data.exam_question.exam_question_choices_attributes.length && data.exam_question.question && data.exam_question.weight) {
+    if (this.props.data.changed) {
       const url = `v1/assessments/${this.state.assessmentId}/exams/${this.state.examId}/questions`
-
       apiClient('post', url, data).then(() => {
         this.setState({
           success: true
