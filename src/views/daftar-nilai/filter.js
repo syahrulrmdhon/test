@@ -4,7 +4,11 @@ import classnames from 'classnames'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getSemesterList, classes, subjects } from './../../utils/common'
+import {
+    getSemesterList,
+    classes,
+    subjects,
+} from './../../utils/common'
 import { handleChange, initial } from './../../redux-modules/modules/scoreList'
 
 
@@ -22,7 +26,12 @@ class FilterNilai extends Component {
     componentDidMount() {
         this.props.initial()
         getSemesterList.call(this)
-        classes.call(this)
+    }
+
+    changePeriod(e) {
+        const value = e.value
+        classes.call(this, {school_period_id: value})
+        this.props.handleChange(e.value, 'selectedSemester')
     }
 
     changeClass(e) {
@@ -48,10 +57,10 @@ class FilterNilai extends Component {
                     <div className='field-filter'>
                         <label>Semester</label>
                         <Select
-                            onChange={(e) => { this.props.handleChange(e.value, 'selectedSemester') }}
+                            onChange={(e) => { this.changePeriod(e) }}
                             options={this.state.listSemester ? this.state.listSemester : []}
-                            className='select'
                             value={this.state.listSemester.find((element) => { return element.value == selectedSemester })}
+                            className='select'
                             classNamePrefix='select'
                             placeholder='Pilih Semester...'
                         />
