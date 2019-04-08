@@ -43,7 +43,8 @@ class Form extends Component {
   }
 
   showBankQuestion() {
-    this.props.getBank(this.props.questionType)
+    const basic_comp_ids = _.map(this.props.basic_comps, 'id')
+    this.props.getBank(this.props.questionType, basic_comp_ids)
     this.setState({
       visible: !this.state.visible
     })
@@ -234,6 +235,7 @@ class Form extends Component {
 
 const mapStateToProps = state => ({
   data: state.onlineQuestion,
+  basic_comps: _.get(state, 'onlineQuestion.basicCompetencies', []),
   bankQuestions: _.get(state.bank, 'selectedQuestion', {}),
   problem_types: _.get(state, 'onlineQuestion.data.problem_types', []),
 })
