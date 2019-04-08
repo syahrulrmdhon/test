@@ -65,7 +65,7 @@ class Form extends Component {
     const images = _.get(this.props.data, 'data.question.image_urls', [])
     const imageList = images.map((image, index) => {
       return (
-      <div className="online-question__image-wrapper">
+      <div className="online-question__image-wrapper" key={index}>
         <img key={index} id="image" src={image.doc_aws_url} className="online-question__question-image" alt="gambar soal" />
         <div
           className="online-question__delete-image delete"
