@@ -25,20 +25,20 @@ class BankContent extends Component {
             dataEntries && dataEntries.length > 0 ?
                 dataEntries.map((x, i) => {
                     content.push(
-                        <div className='wrapper' key={i}>
-                            <div className='row padding-side-2' >
-                                <div className='col-sm-1 col-md-1 padding-top-3'>
+                        <label className='wrapper' key={i}>
+                            <div className='question-wrapper d-flex' >
+                                <div className='select-question-wrapper'>
+                                    <label htmlFor={x.id}></label>
                                     <input
-                                        type='radio' name='apalah' value='Opsi Question' id={x.id} checked={x.is_selected == true}
+                                        className="selected-question" type='radio' name='apalah' value='Opsi Question' id={x.id} checked={x.is_selected == true}
                                         onChange={(e) => this.props.handleEvent(e.target.id, 'is_selected')}
                                     />
-                                    <label htmlFor={x.id}></label>
                                     <div className="check"></div>
                                 </div>
-                                <div className='col-sm-1 col-md-1 margin-top-5 text-left'>{i + 1}.</div>
-                                <div className='col-sm-10 col-md-10'>
-                                    <div className='kd margin-top-5'>
-                                        KD. {x.comp_number ? x.comp_number : '-'} {x.content ? x.content : '-'}
+                                <div className='number'>{i + 1}.</div>
+                                <div className=''>
+                                    <div className='kd'>
+                                        <span className="competency-number">KD. {x.comp_number ? x.comp_number : '-'}</span> <span className="competency">{x.content ? x.content : '-'}</span>
                                     </div>
                                     <div className='question margin-top-2'>
                                         {x.question ? x.question : '-'}
@@ -49,7 +49,7 @@ class BankContent extends Component {
                                     />
                                 </div>
                             </div>
-                        </div>
+                        </label>
                     )
                 })
                 :
@@ -58,7 +58,7 @@ class BankContent extends Component {
                 )
         }
         return (
-            <div className='content-bank margin-top-2 margin-bottom-4'>
+            <div className='content-bank margin-bottom-4'>
                 {content}
             </div>
         )

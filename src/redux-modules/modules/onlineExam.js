@@ -3,6 +3,7 @@ import headers from './../../utils/header'
 const LOAD = 'modules/onlineExam/LOAD'
 const LOAD_FAIL = 'modules/onlineExam/LOAD_FAIL'
 const BUILD_DATA = 'modules/onlineExam/BUILD_DATA'
+const RESET = 'modules/onlineExam/RESET'
 const HANDLE_EVENT = 'modules/onlineExam/HANDLE_EVENT'
 const HANDLE_SWITCH = 'modules/onlineExam/HANDLE_SWITCH'
 const ADD_QUESTION = 'modules/onlineExam/ADD_QUESTION'
@@ -22,6 +23,7 @@ export default function reducer(state = initialState, action = {}) {
                 loaded: false,
                 loading: true,
             }
+
         case LOAD_FAIL:
             delete state.result;
             return {
@@ -30,6 +32,7 @@ export default function reducer(state = initialState, action = {}) {
                 result: false,
                 error: action.error
             }
+
         case BUILD_DATA:
             if (state.exam == undefined) {
                 state.exam = {
@@ -46,6 +49,7 @@ export default function reducer(state = initialState, action = {}) {
                 loading: false,
                 ...state
             }
+
         case HANDLE_SWITCH:
             state.switch = action.value
             state.exam.is_duplication = action.value
@@ -68,6 +72,7 @@ export default function reducer(state = initialState, action = {}) {
                 loaded: false,
                 loading: true,
             }
+
         case HANDLE_EVENT:
             state[action.modelName][action.fieldName] = action.value || ''
 
@@ -76,6 +81,7 @@ export default function reducer(state = initialState, action = {}) {
                 loaded: true,
                 loading: false,
             }
+
         case HANDLE_EVENT_PROBLEM_TYPE:
             state[action.modelName][action.modelSubName][action.idx][action.fieldName] = action.value || ''
 
@@ -84,6 +90,7 @@ export default function reducer(state = initialState, action = {}) {
                 loaded: true,
                 loading: false,
             }
+
         case ADD_QUESTION:
             state.exam.exam_problem_types_attributes = state.exam.exam_problem_types_attributes.concat([{ problem_type: '', question_count: null }])
             return {
@@ -91,6 +98,7 @@ export default function reducer(state = initialState, action = {}) {
                 loaded: false,
                 loading: true,
             }
+
         case REMOVE_QUESTION:
             state.exam.exam_problem_types_attributes = removeField(state.exam.exam_problem_types_attributes, action.idx)
             return {

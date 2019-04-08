@@ -35,7 +35,7 @@ class BankFilter extends Component {
         const basicCompetencies = this.props.basicCompetencies
 
         return (
-            <div className='row margin-bottom-2'>
+            <div className='row'>
                 <div className='col-sm-6 col-md-6'>
                     <Select
                         onChange={(e) => { this.props.handleChange(e.value, 'selectedBasicComp') }}
@@ -46,18 +46,8 @@ class BankFilter extends Component {
                         placeholder='Pilih KD...'
                     />
                 </div>
-                <div className='col-sm-4 col-md-4'>
-                    <Select
-                        onChange={(e) => { this.props.handleChange(e.value, 'selectedProblemType') }}
-                        options={this.state.problemTypes ? this.state.problemTypes : []}
-                        value={this.state.problemTypes.find((element) => { return element.value == selectedProblemType })}
-                        className='select'
-                        classNamePrefix='select'
-                        placeholder='Pilih Type...'
-                    />
-                </div>
-                <div className='col-sm-2 col-md-2'>
-                    <button className='btn-green' onClick={this.handleOptionChange}>Cari</button>
+                <div className='col-md-offset-4 col-md-2'>
+                    <button className='btn-green online-question__find-button' onClick={this.handleOptionChange}>Cari</button>
                 </div>
             </div>
         )

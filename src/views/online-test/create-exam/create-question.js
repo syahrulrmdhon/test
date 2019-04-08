@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getQuestion, getBasicCompetency, reset, handleSuccess, onQuestionSelected } from './../../../redux-modules/modules/onlineQuestion'
 import { apiClient } from '../../../utils/apiClient'
+import { Link } from 'react-router-dom';
 
 import Page from '../../../components/Title'
 import Header from '../../global/header'
@@ -244,7 +245,7 @@ class CreateQuestion extends Component {
 
     return (
         <Page title="Deskripsi">
-        <Header navbar={false} location={'/online-exam'}/>
+        <Header />
         {
           this.state.success &&
           <div id="note">
@@ -253,6 +254,13 @@ class CreateQuestion extends Component {
         }
 
         <div className="online-question content-wrapper">
+        <div className="back-button__wrapper">
+          <Link
+            className="back-button__button"
+            to={{pathname: '/online-exam'}}>
+            <span className="chevron left"></span>Halaman Utama
+          </Link>
+        </div>
           <QuestionNumber
             onClickNumber={this.onClickNumber}
             currentPage={this.state.currentPage}

@@ -9,9 +9,10 @@ import {
   onChangeContent,
   onAddImageQuestion,
   onQuestionSelected,
-  deleteImage,
+  deleteImage
 } from "./../../../redux-modules/modules/onlineQuestion";
 
+import { getBank } from "./../../../redux-modules/modules/bank"
 import BankQuestion from '../bank/bank'
 import { apiClient } from '../../../utils/apiClient'
 import _ from "lodash"
@@ -42,6 +43,7 @@ class Form extends Component {
   }
 
   showBankQuestion() {
+    this.props.getBank(this.props.questionType)
     this.setState({
       visible: !this.state.visible
     })
@@ -65,7 +67,7 @@ class Form extends Component {
     const images = _.get(this.props.data, 'data.question.image_urls', [])
     const imageList = images.map((image, index) => {
       return (
-      <div className="online-question__image-wrapper">
+      <div className="online-question__image-wrapper" key={index}>
         <img key={index} id="image" src={image.doc_aws_url} className="online-question__question-image" alt="gambar soal" />
         <div
           className="online-question__delete-image delete"
@@ -88,13 +90,18 @@ class Form extends Component {
             onChange={(event) => this.props.onChangeContent({order: index, value: event.target.value})}
             value={choice.content}
           />
-          <input
-            className="online-question__radio"
-            type="radio"
-            name="choices"
-            checked={choice.is_correct_ans}
-            onChange={() => this.props.onChangeCorrectAnswer({order: index})}
-          />
+          <div className='online-question__choice-wrapper'>
+            <label htmlFor={'choices-' + index}></label>
+            <input
+              id={'choices-' + index}
+              className="online-question__radio"
+              type='radio'
+              name="choices"
+              checked={choice.is_correct_ans}
+              onChange={() => this.props.onChangeCorrectAnswer({order: index})}
+            />
+            <div className="check"></div>
+        </div>
           {
             index !== 0 &&
               <div
@@ -228,7 +235,7 @@ class Form extends Component {
 const mapStateToProps = state => ({
   data: state.onlineQuestion,
   bankQuestions: _.get(state.bank, 'selectedQuestion', {}),
-  problem_types: _.get(state, 'onlineQuestion.data.problem_types', [])
+  problem_types: _.get(state, 'onlineQuestion.data.problem_types', []),
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -239,7 +246,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   onChangeContent,
   onAddImageQuestion,
   onQuestionSelected,
-  deleteImage
+  deleteImage,
+  getBank
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

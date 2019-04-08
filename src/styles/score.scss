@@ -6,12 +6,12 @@ $nunito_bold: "NunitoBold";
 .row-score {
   .right-block {
     .tab-content-score {
-      max-height: 430px;
+      max-height: 65vh;
       overflow-y: scroll;
       .tab-pane {
         height: 100%;
         .not-available {
-          height: 430px;
+          height: 65vh;
         }
         tbody tr:nth-of-type(even) {
           background-color: #ffffff;

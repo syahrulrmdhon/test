@@ -16,7 +16,7 @@
 }
 
 .row-class {
-    max-height: 20vh;
+    max-height: 27vh;
     overflow-y: scroll;
 }
 
@@ -59,7 +59,7 @@
     overflow: auto;
     white-space: nowrap;
     overflow-y: scroll;
-    height: 660px;
+    height: 84vh;
 }
 .schedule .loader-wrapper + .schedule-item{
     display: none;

@@ -296,7 +296,7 @@ export function onQuestionSelected({data}) {
   }
 }
 
-export function deleteImage(){
+export function deleteImage() {
   return {
     type: HANDLE_DELETE_IMAGE,
   }
