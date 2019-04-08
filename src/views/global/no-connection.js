@@ -7,6 +7,13 @@ import Astronaut from './../../assets/images/astronaut.svg'
 import Planet from './../../assets/images/group.svg'
 
 export default class NoConnection extends Component {
+    constructor(props) {
+        super(props)
+        this.refresh = this.refresh.bind(this)
+    }
+    refresh(){
+        window.history.back()
+    }
     render() {
         return (
             <React.Fragment>
@@ -18,8 +25,8 @@ export default class NoConnection extends Component {
                                 <div className="col-5 h-100 notfound margin">
                                     <h1 className="header-noconnect">No Connection</h1>
                                     <p>Sayangnya Koneksi anda tidak bisa menjangkau Halaman kami.</p>
-                                    <NavLink className="font-grey" href="/home">
-                                        Halaman Depan
+                                    <NavLink className="font-grey" onClick={this.refresh}>
+                                        Refresh
                                     </NavLink>
                                 </div>
                                 <div className="col-7 h-100">
