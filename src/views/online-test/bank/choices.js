@@ -11,7 +11,7 @@ export default class BankChoices extends Component {
                         <div className='row' key={Math.random()}>
                             <div className='d-flex'>
                                 <div>{x.symbol ? x.symbol : '-'}.</div>
-                                <div className='text-justify'>{x.content ? x.content : '-'}</div>
+                                <div className='text-justify ml-3'>{x.content ? x.content : '-'}</div>
                             </div>
                         </div>
                     )
@@ -23,7 +23,7 @@ export default class BankChoices extends Component {
 
     }
         return (
-            <div className='padding-side-3 margin-vert-2'>
+            <div className='padding-side-3 margin-vert-2 question'>
                 {content}
             </div>
         )
