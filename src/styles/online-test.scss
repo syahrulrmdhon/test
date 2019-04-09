@@ -310,22 +310,97 @@ $nunito_bold: "NunitoBold";
     }
     .select-bank {
       border-bottom: solid 0.5px #d3d9dd;
+      padding-bottom: 15px;
     }
+    .competency-number {
+      color: #4a4a4a;
+      font-family: $nunito_bold;
+      font-size: 13px;
+    }
+    .competency {
+      font-family: $nunito_regular;
+      color: #a1a1a1;
+      font-size: 13px;
+    }
+    .number {
+      margin: 0px 6px 0px 14px;
+      font-size: 14px;
+      font-family: $nunito_bold;
+      color: #4a4a4a;
+    }
+    .selected-question{
+      height: auto;
+      visibility: hidden;
+    }
+
+    .question-wrapper {
+      padding: 18px 14px;
+    }
+
+    .select-question-wrapper {
+      position: relative;
+      justify-content: center;
+
+      label {
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        position: absolute;
+        z-index: 900;
+      }
+    }
+
+    .check {
+      display: block;
+      position: absolute;
+      border: 1px solid #1a9d7f;
+      border-radius: 100%;
+      height: 16px;
+      width: 16px;
+      top: 10px;
+      transition: border .25s linear;
+      -webkit-transition: border .25s linear;
+    }
+
+    .check::before {
+      display: block;
+      position: absolute;
+      content: '';
+      border-radius: 100%;
+      height: 10px;
+      width: 10px;
+      top: 2px;
+      left: 2px;
+      margin: auto;
+      transition: background 0.25s linear;
+      -webkit-transition: background 0.25s linear;
+    }
+
+    input[type=radio]:checked ~ .check::before{
+      background: #1a9d7f;
+    }
+
     .content-bank {
       height: 68%;
       overflow-y: scroll;
       overflow-x: hidden;
       border-bottom: solid 1px #d3d9dd;
+      margin-top: 15px;
       .wrapper {
-        border: solid 0.5px #d9d9d9;
+        border: solid 1px #d9d9d9;
         border-radius: 3px;
         margin-bottom: 10px;
         width: 90%;
+        border-radius: 6px;
+        cursor: pointer;
         .kd {
           text-align: justify;
         }
         .question {
-          text-align: justify;
+          font-size: 14px;
+          font-family: $nunito_regular;
+          color: #4a4a4a;
         }
       }
     }
@@ -613,6 +688,7 @@ $nunito_bold: "NunitoBold";
   &__radio {
     vertical-align: middle;
     margin-right: 10px;
+    visibility: hidden;
   }
 
   &__add-choice {
@@ -686,4 +762,76 @@ $nunito_bold: "NunitoBold";
   &__delete-wrapper {
     display: inline;
   }
+
+  &__find-button {
+    height: 32px;
+    float: right;
+    padding: 0px;
+    width: 100px;
+  }
+
+  &__choice-wrapper {
+    position: relative;
+    justify-content: center;
+
+    label {
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      position: absolute;
+      z-index: 900;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .check {
+    display: block;
+    position: absolute;
+    border: 1px solid #1a9d7f;
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: border .25s linear;
+    -webkit-transition: border .25s linear;
+  }
+
+  .check::before {
+    display: block;
+    position: absolute;
+    content: '';
+    border-radius: 100%;
+    height: 10px;
+    width: 10px;
+    top: 2px;
+    left: 2px;
+    margin: auto;
+    transition: background 0.25s linear;
+    -webkit-transition: background 0.25s linear;
+  }
+
+  input[type=radio]:checked ~ .check::before{
+    background: #1a9d7f;
+  }
+}
+
+.back-button {
+  &__wrapper {
+      margin-bottom: 16px;
+  }
+
+  &__button {
+      color: #2f58bd;
+      font-family: "NunitoBold";
+      font-size: 16px;
+      text-decoration: none;
+  }
+
+  &__button:hover {
+      text-decoration: none;
+  }
+
 }

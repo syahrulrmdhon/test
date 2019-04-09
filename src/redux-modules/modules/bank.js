@@ -101,21 +101,15 @@ export default function reducer(state = inititalState, action) {
 }
 
 export function getBank(problem_type, basic_comp_id) {
-
-    let url = `v1/question_banks?problem_type=${problem_type}&basic_comp_id=${basic_comp_id}`
-    if (problem_type != undefined && basic_comp_id == undefined) {
-        url = `v1/question_banks?problem_type=${problem_type}`
-    } else if (basic_comp_id != undefined && problem_type == undefined) {
-        url = `v1/question_banks?basic_comp_id=${basic_comp_id}`
-    } else if (basic_comp_id == undefined && problem_type == undefined) {
-        url = `v1/question_banks`
-    } else if (basic_comp_id != undefined && problem_type != undefined) {
-        url = `v1/question_banks?problem_type=${problem_type}&basic_comp_id=${basic_comp_id}`
+    const url = 'v1/question_banks'
+    let params = {
+        problem_type: problem_type,
+        "basic_comp_id[]": basic_comp_id
     }
 
     return {
         types: [LOAD_BANK, LOAD_BANK_SUCCESS, LOAD_BANK_FAIL],
-        promise: client => client.get(process.env.API_URL + url, headers)
+        promise: client => client.get(process.env.API_URL + url, headers, params)
     }
 }
 

@@ -46,6 +46,7 @@ export default function reducer(state = initialState, action) {
         else {
           data.exam_question_choices.push({id: null, symbol: 'A', content: '', is_correct_ans: true})
         }
+        state.changed = false
 
         return {
           ...state,
@@ -71,6 +72,7 @@ export default function reducer(state = initialState, action) {
     case HANDLE_CHANGE:
       state.data.question[action.field] = action.value
       state.body.exam_question[action.field] = action.value
+      state.changed = true
       return {
         ...state,
         loaded: true,
@@ -86,6 +88,7 @@ export default function reducer(state = initialState, action) {
         }
       })
       state.body.exam_question.exam_question_choices_attributes = state.data.question.exam_question_choices
+      state.changed = true
 
       return {
         ...state,
@@ -103,6 +106,7 @@ export default function reducer(state = initialState, action) {
         options[counter].symbol = String.fromCharCode(defaultCharCode + counter)
       }
       state.body.exam_question.exam_question_choices_attributes = options
+      state.changed = true
 
       return {
         ...state,
@@ -125,6 +129,7 @@ export default function reducer(state = initialState, action) {
     case HANDLE_CHANGE_CONTENT:
       state.data.question.exam_question_choices[action.order].content = action.value
       state.body.exam_question.exam_question_choices_attributes[action.order].content = action.value
+      state.changed = true
 
       return {
         ...state,
@@ -135,6 +140,7 @@ export default function reducer(state = initialState, action) {
       const base64 = action.value.split(",")[1]
       state.data.question.image_urls.splice(0,1,{doc_aws_url: action.value})
       state.body.exam_question.image_sources.splice(0,1,{src: base64})
+      state.changed = true
 
       return {
         ...state,
@@ -181,6 +187,7 @@ export default function reducer(state = initialState, action) {
     }
 
     state.body = body
+    state.changed = true
 
     return {
       ...state,
@@ -192,6 +199,7 @@ export default function reducer(state = initialState, action) {
       const images = state.data.question.image_urls
       images.splice(0, 1)
       state.body.exam_question.image_sources = [{src: ''}]
+      state.changed = true
     return {
       ...state,
       loaded: true,
@@ -296,7 +304,7 @@ export function onQuestionSelected({data}) {
   }
 }
 
-export function deleteImage(){
+export function deleteImage() {
   return {
     type: HANDLE_DELETE_IMAGE,
   }
