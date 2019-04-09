@@ -11,7 +11,8 @@ class BankContent extends Component {
         super(props)
 
         this.state = {
-            page: 1
+            page: 1,
+            // loader: true
         }
 
         this.handleScroll = this.handleScroll.bind(this)
@@ -33,13 +34,16 @@ class BankContent extends Component {
         const page = this.state.page + 1
         const totalPages = _.get(this.props.dataBank, 'data.questions.total_pages', 1)
 
-        if (scrollPosition === scrollTop && page <= totalPages) {
-            this.props.getBank(this.props.questionType, competencyId, page, 'scroll')
+        if (scrollPosition === scrollTop && page <= totalPages  ) {
             this.setState({
                 page: page
             })
+            this.props.getBank(this.props.questionType, competencyId, page, 'scroll')
             return false
         }
+        // this.setState({
+        //     loader: true
+        // })
     }
 
 
@@ -80,6 +84,10 @@ class BankContent extends Component {
                 {
                     content.length ?
                         content
+
+                            /* {this.state.loader &&
+                                <div className="loader"></div>
+                            } */
                     :
                         <NotAvailable key={Math.random()}>Data tidak tersedia</NotAvailable>
 
