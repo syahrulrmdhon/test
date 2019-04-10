@@ -55,8 +55,7 @@ export default class Tab extends Component {
                                 <NotAvailable>
                                     Data tidak tersedia
                                 </NotAvailable>
-                            ) : (
-                                <TableSikap
+                            ) : (<TableSikap
                                     tableAttitude={this.props.tableAttitude}
                                     nameClicked={this.props.nameClicked} />)
                     }

@@ -279,8 +279,8 @@ export function classes(params = {}) {
     })
 }
 
-export function grades() {
-    apiClient('get', 'v1/filters/grades').then(response => response.data).then(data => {
+export function grades(params={}) {
+    apiClient('get', 'v1/filters/grades', false, params).then(response => response.data).then(data => {
         let grades = data.data.grades || []
         if (grades.length > 0) {
             const temps = grades
