@@ -36,7 +36,7 @@ class Bank extends Component {
                         <div className='select-bank'>
                             <BankFilter />
                         </div>
-                        <BankContent />
+                        <BankContent questionType={this.props.questionType}/>
                         <div className='button-wrapper'>
                             <button className='btn-green' onClick={this.props.onQuestionSelected}>Pilih</button>
                         </div>
