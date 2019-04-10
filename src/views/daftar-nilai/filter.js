@@ -27,7 +27,6 @@ class FilterNilai extends Component {
     componentDidMount() {
         const current_period = !!(localStorage.getItem("current_period")) ? JSON.parse(localStorage.getItem("current_period")) : {}
         getSemesterList.call(this)
-<<<<<<< HEAD
         classes.call(this)
         this.props.initial()
         this.props.handleChange(_.get(current_period, 'id', null), 'selectedSemester')
@@ -48,14 +47,12 @@ class FilterNilai extends Component {
                this.props.handleChange(subject.value, 'selectedSubject')
             }
         }
-=======
     }
 
     changePeriod(e) {
         const value = e.value
         classes.call(this, {school_period_id: value})
         this.props.handleChange(e.value, 'selectedSemester')
->>>>>>> 4537368863b9bd6d15afd81005127879dd6995f2
     }
 
     changeClass(e) {
