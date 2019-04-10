@@ -6,20 +6,9 @@ import { bindActionCreators } from 'redux'
 import { getBank, handleChange } from './../../../redux-modules/modules/bank'
 import BankContent from './content'
 import BankFilter from './filter'
+import _ from 'lodash'
 
 class Bank extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            visible: true,
-            id: props.match.params.id,
-        }
-    }
-
-    componentDidMount() {
-        this.props.getBank()
-    }
 
     openModal() {
         this.setState({
@@ -36,7 +25,7 @@ class Bank extends Component {
     render() {
         return (
             <section className='bank'>
-                <Modal visible={this.state.visible} width="60%" height="90%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                <Modal visible={this.props.visible} width="664px" height="90%" effect="fadeInUp" onClickAway={() => this.props.closeModal()}>
                     <div className='wrapper-content margin-side-4'>
                         <div className='header margin-top-4 margin-bottom-2'>
                             <div className='header-title padding-bottom-1'>
@@ -47,9 +36,9 @@ class Bank extends Component {
                         <div className='select-bank'>
                             <BankFilter />
                         </div>
-                        <BankContent />
+                        <BankContent questionType={this.props.questionType}/>
                         <div className='button-wrapper'>
-                            <button className='btn-green'>Pilih</button>
+                            <button className='btn-green' onClick={this.props.onQuestionSelected}>Pilih</button>
                         </div>
                     </div>
                 </Modal>
@@ -63,7 +52,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     getBank,
-    handleChange
+    handleChange,
 }, dispatch
 )
 export default connect(mapStateToProps, mapDispatchToProps)(Bank)

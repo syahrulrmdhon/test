@@ -7,9 +7,13 @@ import {
   deleteChoiceHandler,
   addChoiceHandler,
   onChangeContent,
-  onAddImageQuestion
+  onAddImageQuestion,
+  onQuestionSelected,
+  deleteImage
 } from "./../../../redux-modules/modules/onlineQuestion";
 
+import { getBank } from "./../../../redux-modules/modules/bank"
+import BankQuestion from '../bank/bank'
 import { apiClient } from '../../../utils/apiClient'
 import _ from "lodash"
 import Select from 'react-select'
@@ -18,8 +22,12 @@ class Form extends Component {
   constructor() {
     super()
     this.state = {
-      base64: ''
+      base64: '',
+      visible: false,
     }
+
+    this.showBankQuestion = this.showBankQuestion.bind(this)
+    this.onQuestionSelected = this.onQuestionSelected.bind(this)
   }
 
   onPreviewPhoto(evt) {
@@ -34,10 +42,23 @@ class Form extends Component {
     }
   }
 
+  showBankQuestion() {
+    const basic_comp_ids = _.map(this.props.basic_comps, 'id')
+    this.props.getBank(this.props.questionType, basic_comp_ids)
+    this.setState({
+      visible: !this.state.visible
+    })
+  }
+
+  onQuestionSelected() {
+    this.props.onQuestionSelected({data: this.props.bankQuestions})
+    this.showBankQuestion()
+  }
+
   render() {
     const question = _.get(this.props.data, 'data.question', {})
     const questionType = _.get(this.props.data, 'data.problem_types', [])
-
+    const examStatus = _.get(this.props.data, 'data.flag', '')
     const choices = _.get(this.props.data, 'data.question.exam_question_choices', [])
     const basicCompetencies = _.get(this.props.data, 'basicCompetencies', [])
     const currentQuestionType = questionType.find(type => {
@@ -46,7 +67,15 @@ class Form extends Component {
 
     const images = _.get(this.props.data, 'data.question.image_urls', [])
     const imageList = images.map((image, index) => {
-      return <img key={index} id="image" src={image.doc_aws_url} className="online-question__question-image" alt="gambar soal" />
+      return (
+      <div className="online-question__image-wrapper" key={index}>
+        <img key={index} id="image" src={image.doc_aws_url} className="online-question__question-image" alt="gambar soal" />
+        <div
+          className="online-question__delete-image delete"
+          onClick={() => this.props.deleteImage()}
+        />
+      </div>
+      )
     })
 
     const listChoices = choices.map((choice, index) => {
@@ -62,13 +91,18 @@ class Form extends Component {
             onChange={(event) => this.props.onChangeContent({order: index, value: event.target.value})}
             value={choice.content}
           />
-          <input
-            className="online-question__radio"
-            type="radio"
-            name="choices"
-            checked={choice.is_correct_ans}
-            onChange={() => this.props.onChangeCorrectAnswer({order: index})}
-          />
+          <div className='online-question__choice-wrapper'>
+            <label htmlFor={'choices-' + index}></label>
+            <input
+              id={'choices-' + index}
+              className="online-question__radio"
+              type='radio'
+              name="choices"
+              checked={choice.is_correct_ans}
+              onChange={() => this.props.onChangeCorrectAnswer({order: index})}
+            />
+            <div className="check"></div>
+        </div>
           {
             index !== 0 &&
               <div
@@ -79,7 +113,6 @@ class Form extends Component {
         </div>
       )
     })
-
     return (
       <div className="online-question__right-wrapper main-block">
         <div className="online-question__top-content">
@@ -129,20 +162,23 @@ class Form extends Component {
             <div className="online-question__current-question">
               Soal {this.props.questionLabel} - Nomor {this.props.number}
             </div>
-            <div className="online-question__import-question">
+            <div className="online-question__import-question" onClick={() => this.showBankQuestion()}>
               <span className="online-question__add-icon">+</span> Impor Soal
             </div>
           </div>
           <div className="online-question__upload-image">
             <label htmlFor="insert-picture">
-              <i className="fa fa-upload" /> Masukan Gambar
-
+              <i className="fa fa-upload" />
+              {
+                imageList.length ?
+                  'Ubah Gambar'
+                :
+                  'Masukan Gambar'
+              }
             </label>
             <input id="insert-picture" type="file" className="d-none" onChange={this.onPreviewPhoto.bind(this)} />
           </div>
-        <div className="d-flex align-items-center">
-          {imageList}
-          </div>
+            {imageList}
           <textarea
             className="online-question__write-question"
             placeholder="Tulis Soal"
@@ -179,9 +215,20 @@ class Form extends Component {
           <button
             className="online-question__submit btn-green"
             onClick={() => this.props.onSubmit({number: this.props.number, questionType: question.problem_type})}>
-            Selanjutnya
+            {
+              examStatus ?
+                'Selesai'
+              :
+                'Selanjutnya'
+            }
           </button>
         </div>
+          <BankQuestion
+            visible={this.state.visible}
+            closeModal={this.showBankQuestion}
+            onQuestionSelected={this.onQuestionSelected}
+            questionType={this.props.questionType}
+          />
       </div>
     )
   }
@@ -189,7 +236,9 @@ class Form extends Component {
 
 const mapStateToProps = state => ({
   data: state.onlineQuestion,
-  problem_types: _.get(state, 'onlineQuestion.data.problem_types', [])
+  basic_comps: _.get(state, 'onlineQuestion.basicCompetencies', []),
+  bankQuestions: _.get(state.bank, 'selectedQuestion', {}),
+  problem_types: _.get(state, 'onlineQuestion.data.problem_types', []),
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -198,7 +247,10 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   deleteChoiceHandler,
   addChoiceHandler,
   onChangeContent,
-  onAddImageQuestion
+  onAddImageQuestion,
+  onQuestionSelected,
+  deleteImage,
+  getBank
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

@@ -32,7 +32,7 @@ export function seeMore(value, s_count = 50, options = {}) {
 
     if (s_count < count) {
         if (expanded) {
-            value += '...'
+            value += ''
             seeMore = 'ciutkan'
         } else {
             value = value.substring(0, s_count);
@@ -279,8 +279,8 @@ export function classes(params = {}) {
     })
 }
 
-export function grades() {
-    apiClient('get', 'v1/filters/grades').then(response => response.data).then(data => {
+export function grades(params={}) {
+    apiClient('get', 'v1/filters/grades', false, params).then(response => response.data).then(data => {
         let grades = data.data.grades || []
         if (grades.length > 0) {
             const temps = grades
@@ -591,4 +591,11 @@ export function getFullSemesterList(params = {}, options = {}) {
             listFullSemester: result
         })
     })
+}
+
+export function isNull(data) {
+    if (data === null) {
+        return ''
+    }
+    return data
 }

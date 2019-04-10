@@ -18,9 +18,16 @@ export default class Tab extends Component {
                             !this.props.tableKnowledge ||
                             this.props.tableKnowledge.length === 0 ? (
                                 <NotAvailable>
+<<<<<<< HEAD
                                     Mohon pilih semua filter untuk menampilkan data.
                                 </NotAvailable>
                         ) : (<TablePengetahuan
+=======
+                                    Data tidak tersedia.
+                                </NotAvailable>
+                            )
+                            : (<TablePengetahuan
+>>>>>>> 4537368863b9bd6d15afd81005127879dd6995f2
                                 tableKnowledge={this.props.tableKnowledge}
                                 idxScores={this.props.idxScores}
                                 idxTugas={this.props.idxTugas}
@@ -35,9 +42,10 @@ export default class Tab extends Component {
                             !this.props.tableSkill ||
                             this.props.tableSkill.length === 0 ? (
                                 <NotAvailable>
-                                    Mohon pilih semua filter untuk menampilkan data.
+                                    Data tidak tersedia.
                                 </NotAvailable>
-                        ) : (<TableKeterampilan
+                        ) : (
+                        <TableKeterampilan
                                 tableSkill={this.props.tableSkill}
                                 idxScoresSkill={this.props.idxScoresSkill}
                                 nameClicked={this.props.nameClicked} />)
@@ -51,7 +59,7 @@ export default class Tab extends Component {
                         : !this.props.tableAttitude ||
                             this.props.tableAttitude.length === 0 ? (
                                 <NotAvailable>
-                                    Mohon pilih semua filter untuk menampilkan data.
+                                    Data tidak tersedia
                                 </NotAvailable>
                             ) : (<TableSikap
                                     tableAttitude={this.props.tableAttitude}

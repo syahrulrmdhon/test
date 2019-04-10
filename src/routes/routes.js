@@ -269,7 +269,7 @@ export const MainRoutes = [
         component: Bank
     },
     {
-        path: '/online-exam/create/:id/subject/:subject_id',
+        path: '/online-exam/:id/subject/:subject_id',
         component: CreateList
     },
     // {

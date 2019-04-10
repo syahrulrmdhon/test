@@ -39,6 +39,8 @@ class Login extends Component {
             password: this.state.password
         }
 
+        user.email = user.email.toLowerCase()
+
         apiClient('post', url, user).then(res => {
             localStorage.setItem("token", res.data.data.auth_token)
             console.log(localStorage.getItem('token'),"school")

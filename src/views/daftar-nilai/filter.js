@@ -4,7 +4,11 @@ import classnames from 'classnames'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getSemesterList, classes, subjects } from './../../utils/common'
+import {
+    getSemesterList,
+    classes,
+    subjects,
+} from './../../utils/common'
 import { handleChange, initial } from './../../redux-modules/modules/scoreList'
 
 
@@ -23,6 +27,7 @@ class FilterNilai extends Component {
     componentDidMount() {
         const current_period = !!(localStorage.getItem("current_period")) ? JSON.parse(localStorage.getItem("current_period")) : {}
         getSemesterList.call(this)
+<<<<<<< HEAD
         classes.call(this)
         this.props.initial()
         this.props.handleChange(_.get(current_period, 'id', null), 'selectedSemester')
@@ -43,6 +48,14 @@ class FilterNilai extends Component {
                this.props.handleChange(subject.value, 'selectedSubject')
             }
         }
+=======
+    }
+
+    changePeriod(e) {
+        const value = e.value
+        classes.call(this, {school_period_id: value})
+        this.props.handleChange(e.value, 'selectedSemester')
+>>>>>>> 4537368863b9bd6d15afd81005127879dd6995f2
     }
 
     changeClass(e) {
@@ -68,10 +81,10 @@ class FilterNilai extends Component {
                     <div className='field-filter'>
                         <label>Semester</label>
                         <Select
-                            onChange={(e) => { this.props.handleChange(e.value, 'selectedSemester') }}
+                            onChange={(e) => { this.changePeriod(e) }}
                             options={this.state.listSemester ? this.state.listSemester : []}
-                            className='select'
                             value={this.state.listSemester.find((element) => { return element.value == selectedSemester })}
+                            className='select'
                             classNamePrefix='select'
                             placeholder='Pilih Semester...'
                         />

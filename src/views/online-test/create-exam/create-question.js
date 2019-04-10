@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getQuestion, getBasicCompetency, reset, handleSuccess } from './../../../redux-modules/modules/onlineQuestion'
+import { getQuestion, getBasicCompetency, reset, handleSuccess, onQuestionSelected } from './../../../redux-modules/modules/onlineQuestion'
 import { apiClient } from '../../../utils/apiClient'
+import { Link } from 'react-router-dom';
 
 import Page from '../../../components/Title'
 import Header from '../../global/header'
 import QuestionNumber from './question-number'
+import { isNull } from '../../../utils/common'
 import _ from "lodash"
 
 import Form from './form'
@@ -22,13 +24,14 @@ class CreateQuestion extends Component {
       currentObj: 0,
       questionType: 'multiple_choice',
       questionLabel: 'PG',
-      success: _.get(props.data, 'success', false)
+      success: _.get(props.data, 'success', false),
     }
     this.onClickNumber = this.onClickNumber.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.onClickNavigation = this.onClickNavigation.bind(this)
     this.postQuestion = this.postQuestion.bind(this)
     this.getQuestion = this.getQuestion.bind(this)
+    this.onQuestionSelected = this.onQuestionSelected.bind(this)
   }
 
   componentDidMount() {
@@ -62,7 +65,6 @@ class CreateQuestion extends Component {
         questionLabel: questionLabel,
       })
     }
-    // this.getQuestion({number: number, questionType: questionType})
   }
 
   onSubmit({number, questionType}) {
@@ -95,6 +97,12 @@ class CreateQuestion extends Component {
       })
       this.setState({
         currentPage: nextNumber,
+      })
+    }
+    else {
+      this.postQuestion({
+        nextNumber: nextNumber,
+        questionType: this.state.questionType
       })
     }
   }
@@ -187,24 +195,32 @@ class CreateQuestion extends Component {
 
   postQuestion({nextNumber, questionType}){
     const data = _.get(this.props.data, 'body', {})
+    const problemTypes = _.get(this.props.data, 'data.problem_types', [])
+    const question = _.get(this.props.data, 'data.question', {})
 
     let choices = data.exam_question.exam_question_choices_attributes.filter((choice, index) => {
       return choice.id != null || choice.content != ''
     })
+
     data.exam_question.exam_question_choices_attributes = choices
 
     data.exam_question.image_sources.map((image, index) => {
       image.key = `${index + 1}`
     })
 
-    if (data.exam_question.basic_comp_id && data.exam_question.exam_question_choices_attributes.length && data.exam_question.question && data.exam_question.weight) {
+    const currentProblemType = problemTypes.find(type => {
+      return type.problem_type === question.problem_type
+    })
+    if (this.props.data.changed) {
       const url = `v1/assessments/${this.state.assessmentId}/exams/${this.state.examId}/questions`
-
       apiClient('post', url, data).then(() => {
         this.setState({
           success: true
         })
-        this.getQuestion({ number: nextNumber, questionType: questionType })
+
+        if (nextNumber <= currentProblemType.question_count) {
+          this.getQuestion({ number: nextNumber, questionType: questionType })
+        }
 
       }).catch(() => {
       })
@@ -218,10 +234,16 @@ class CreateQuestion extends Component {
     })
   }
 
+  onQuestionSelected() {
+    this.props.onQuestionSelected({data: this.props.bankQuestions})
+  }
   render() {
+    const subject = `${isNull(_.get(this.props.data, 'data.subject_name', ''))} -
+      ${isNull(_.get(this.props.data, 'data.grade_name', ''))} ${isNull(_.get(this.props.data, 'data.major_name', ''))}`
+
     return (
         <Page title="Deskripsi">
-        <Header navbar={false} location={''}/>
+        <Header />
         {
           this.state.success &&
           <div id="note">
@@ -230,11 +252,19 @@ class CreateQuestion extends Component {
         }
 
         <div className="online-question content-wrapper">
+        <div className="back-button__wrapper">
+          <Link
+            className="back-button__button"
+            to={{pathname: '/online-exam'}}>
+            <span className="chevron left"></span>Halaman Utama
+          </Link>
+        </div>
           <QuestionNumber
             onClickNumber={this.onClickNumber}
             currentPage={this.state.currentPage}
             currentObj={this.state.currentObj}
             questionType={this.state.questionType}
+            subject={subject}
           />
           <Form
             number={this.state.currentPage}
@@ -243,6 +273,7 @@ class CreateQuestion extends Component {
             questionType={this.state.questionType}
             onSubmit={this.onSubmit}
             onClickNavigation={this.onClickNavigation}
+            onQuestionSelected={this.onQuestionSelected}
           />
         </div>
       </Page>
@@ -252,6 +283,7 @@ class CreateQuestion extends Component {
 
 const mapStateToProps = state => ({
   data: state.onlineQuestion,
+  bankQuestions: _.get(state.bank, 'selectedQuestion', {}),
   problem_types: _.get(state, 'onlineQuestion.data.problem_types', [])
 })
 
@@ -259,7 +291,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getQuestion,
   getBasicCompetency,
   reset,
-  handleSuccess
+  handleSuccess,
+  onQuestionSelected
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateQuestion);

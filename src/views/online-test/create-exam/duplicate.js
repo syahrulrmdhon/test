@@ -46,7 +46,7 @@ class DuplicateQuestion extends Component {
                     </div>
                     <div className='col-xs-3 col-sm-3 col-md-3 col-xl-3 margin-top-3'>
                         <div className='look padding-left-0'
-                        //  onClick={(e) => (this.props.create(e, id, name))}
+                         onClick={(e) => (this.props.viewQuestions(e, this.props.assessmentId, duplicate_exam_id))}
                         >
                             Lihat Soal
                         </div>

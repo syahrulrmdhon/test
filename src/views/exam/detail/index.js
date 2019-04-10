@@ -4,19 +4,19 @@ import Header from './../../global/header'
 import '../../../styles/exam.scss'
 import Head from './header-title'
 import Question from './question'
-import  { getExamQuestion }  from './../../../redux-modules/modules/questionDetail'
+import { getExamQuestion } from './../../../redux-modules/modules/questionDetail'
 import { bindActionCreators } from 'redux';
 import Right from './right'
 
- class index extends Component {
-  constructor(props){
+class index extends Component {
+  constructor(props) {
     super(props)
 
 
-      this.redirect = this.redirect.bind(this)
+    this.redirect = this.redirect.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getExamQuestion(this.props.match.params.exam_id, this.props.match.params.assessment_id)
   }
 
@@ -24,19 +24,28 @@ import Right from './right'
     if (edit === 'question') {
       this.props.history.push({
         pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}/${edit}`,
-        state: {status: 'all-question'}
+        state: { status: 'all-question' }
       })
     }
     else {
       this.props.history.push({
         pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}`,
-        state: {status: 'all-question'}
+        state: { status: 'all-question' }
       })
     }
   }
 
   render() {
-    const path = `/exam/${this.props.match.params.assessment_id}`
+    let menu = this.props.location.state && this.props.location.state.status
+    let path = ''
+    if (menu === 'online') {
+      path = '/online-exam'
+    } else if (menu === 'online-exam') {
+      path = `/online-exam/${this.props.match.params.assessment_id}/subject/${this.props.location.state.subject_id}`
+    } else {
+      path = `/exam/${this.props.match.params.assessment_id}`
+    }
+
     return (
       <div className="question padding-content">
         <div>
@@ -44,15 +53,15 @@ import Right from './right'
         </div>
         <div className="main-layout">
 
-        <div className="col-sm-12">
-          <div className="col-sm-8">
-            <div className="padding-top-4">
+          <div className="col-sm-12">
+            <div className="col-sm-8">
+              <div className="padding-top-4">
                 <div className="col-sm-12">
-                  <Head redirect={this.redirect}/>
+                  <Head redirect={this.redirect} />
                 </div>
                 <div className="col-sm-12">
                   <div className="margin-top-3 margin-bottom-3">
-                    <Question redirect={this.redirect}/>
+                    <Question redirect={this.redirect} />
                   </div>
                 </div>
               </div>

@@ -30,22 +30,9 @@ export default function reducer(state = inititalState, action) {
             }
             break
         case LOAD_BANK_SUCCESS:
-            delete state.error
-            if (state.result !== action.result) {
-                if (action.result.data.questions) {
-                    action.result.data.questions['data_entries'] = []
-                    action.result.data.questions.entries.map((x) => {
-                        action.result.data.questions['data_entries'].push({
-                            idx: x.id ? x.id : null,
-                            no: x.qn_number ? x.qn_number : null,
-                            question: x.question ? x.question : '',
-                            kdNumber: x.comp_number ? x.comp_number : null,
-                            kdContent: x.content ? x.content : '',
-                            kdChoices: x.exam_question_choices ? x.exam_question_choices : [],
-                            basic_comp_id: x.basic_comp_id ? x.basic_comp_id: null
-                        })
-                    })
-                }
+            if (action.event === 'scroll') {
+                state.data.questions.entries = [...state.data.questions.entries,...action.result.data.questions.entries]
+                return {...state}
             }
             return {
                 ...state,
@@ -71,19 +58,19 @@ export default function reducer(state = inititalState, action) {
             break
         case HANDLE_EVENT:
             if (action.field == 'is_selected') {
-
                 const data = state.data.questions.entries.find(result => {
                     result.is_selected = false
                     return result.id === action.value
                 })
                 data.is_selected = true
+                state.selectedQuestion = data
             }
             return {
                 ...state,
                 loaded: false,
-                loading: true
+                loading: true,
             }
-            break
+
         case SET:
             return {
                 ...state,
@@ -100,22 +87,18 @@ export default function reducer(state = inititalState, action) {
     }
 }
 
-export function getBank(problem_type, basic_comp_id) {
-
-    let url = `v1/question_banks?problem_type=${problem_type}&basic_comp_id=${basic_comp_id}`
-    if (problem_type != undefined && basic_comp_id == undefined) {
-        url = `v1/question_banks?problem_type=${problem_type}`
-    } else if (basic_comp_id != undefined && problem_type == undefined) {
-        url = `v1/question_banks?basic_comp_id=${basic_comp_id}`
-    } else if (basic_comp_id == undefined && problem_type == undefined) {
-        url = `v1/question_banks`
-    } else if (basic_comp_id != undefined && problem_type != undefined) {
-        url = `v1/question_banks?problem_type=${problem_type}&basic_comp_id=${basic_comp_id}`
+export function getBank(problem_type, basic_comp_id, page, event) {
+    const url = 'v1/question_banks'
+    let params = {
+        "problem_type": problem_type,
+        "basic_comp_id[]": basic_comp_id,
+        "page": page
     }
 
     return {
         types: [LOAD_BANK, LOAD_BANK_SUCCESS, LOAD_BANK_FAIL],
-        promise: client => client.get(process.env.API_URL + url, headers)
+        promise: client => client.get(process.env.API_URL + url, headers, params),
+        event: event
     }
 }
 

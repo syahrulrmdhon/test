@@ -14,7 +14,6 @@ const initialState = null;
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOAD:
-            console.log("wawa")
             return {
                 ...state,
                 loading: true,
@@ -72,8 +71,6 @@ export default function reducer(state = initialState, action) {
                     state.data.user[action.field] = action.value.target.value
             }
 
-            console.log(state.data.user, "state")
-
             return {
                 ...state,
                 loaded: true,
@@ -107,7 +104,6 @@ export default function reducer(state = initialState, action) {
 }
 
 export function handlingInputText(e, field_name) {
-    console.log(e, "value")
     return {
         type: HANDLE_FORM_TEXT,
         value: e,
@@ -116,7 +112,6 @@ export function handlingInputText(e, field_name) {
 }
 
 export function handlingInputSelectRegion(e, field_name) {
-    console.log(e.value, "value")
     return {
         type: HANDLE_FORM_TEXT,
         value: e.value,
@@ -137,7 +132,6 @@ export function getUSer() {
 }
 
 export function city() {
-    console.log("hit me")
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
     return {
@@ -149,7 +143,6 @@ export function city() {
 export function getRegion() {
     const token = localStorage.getItem('token')
     const schoolId = localStorage.getItem("school_id")
-    console.log("hit")
 
     return {
         types: [LOAD, LOAD_SUCCESS_REGION, LOAD_FAIL],

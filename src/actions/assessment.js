@@ -1,7 +1,6 @@
 import { basicComps } from './../utils/common'
 
 export const setSubject = (event, props) => {
-    console.log(event);
     // const category = this.props.assessment.category || null
 
     if(category && event.value){
@@ -12,7 +11,6 @@ export const setSubject = (event, props) => {
             listOptions: true,
             set_data: false,
         })
-        console.log(basic_comps)
     } 
 
     return {
