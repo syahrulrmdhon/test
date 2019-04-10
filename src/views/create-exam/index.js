@@ -188,7 +188,13 @@ class Index extends Component {
                   </div>
                 }
                 <label className="create-exam__label">Judul Tugas</label>
-                <input type="text" className="form-control create-exam__input" placeholder="Masukkan Judul Tugas" onChange={event => this.props.handleEvent(event.target.value, "name", this.state.step)} value={name} />
+                <input
+                  type="text"
+                  className="form-control create-exam__input"
+                  placeholder="Masukkan Judul Tugas"
+                  onChange={event => this.props.handleEvent(event.target.value, "name", this.state.step)}
+                  value={name}
+                  maxLength={150} />
                 <label className="create-exam__label">Tipe Tugas</label>
                 <Select
                   className="create-exam__input"
