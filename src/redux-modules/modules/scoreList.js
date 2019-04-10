@@ -1,3 +1,4 @@
+import _ from 'lodash'
 const SET = 'modules/scoreList/SET'
 const RESET = 'modules/scoreList/RESET'
 const LOAD = 'modules/scoreList/LOAD'
@@ -18,6 +19,7 @@ export default function reducer(state = initialState, action) {
             break
 
         case INITIALIZE:
+           
             return {
                 ...state,
                 loaded: true,

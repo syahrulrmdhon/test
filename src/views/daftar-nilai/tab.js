@@ -17,9 +17,10 @@ export default class Tab extends Component {
                         :
                             !this.props.tableKnowledge ||
                             this.props.tableKnowledge.length === 0 ? (
-                                <NotAvailable>Mohon pilih semua filter untuk menampilkan data.</NotAvailable>
-                            )
-                            : (<TablePengetahuan
+                                <NotAvailable>
+                                    Mohon pilih semua filter untuk menampilkan data.
+                                </NotAvailable>
+                        ) : (<TablePengetahuan
                                 tableKnowledge={this.props.tableKnowledge}
                                 idxScores={this.props.idxScores}
                                 idxTugas={this.props.idxTugas}
@@ -52,8 +53,7 @@ export default class Tab extends Component {
                                 <NotAvailable>
                                     Mohon pilih semua filter untuk menampilkan data.
                                 </NotAvailable>
-                            ) : (
-                                <TableSikap
+                            ) : (<TableSikap
                                     tableAttitude={this.props.tableAttitude}
                                     nameClicked={this.props.nameClicked} />)
                     }

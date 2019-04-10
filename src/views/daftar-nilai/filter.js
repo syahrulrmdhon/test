@@ -16,13 +16,33 @@ class FilterNilai extends Component {
             listSemester: [],
             subjects: [],
             classes: [],
+
         }
         this.changeClass = this.changeClass.bind(this)
     }
     componentDidMount() {
-        this.props.initial()
+        const current_period = !!(localStorage.getItem("current_period")) ? JSON.parse(localStorage.getItem("current_period")) : {}
         getSemesterList.call(this)
         classes.call(this)
+        this.props.initial()
+        this.props.handleChange(_.get(current_period, 'id', null), 'selectedSemester')
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(this.state.classes !== prevState.classes){
+            if(this.state.classes.length > 0){
+                let classs = this.state.classes[0] ? this.state.classes[0] : {}
+                this.changeClass(classs)
+            }
+            
+        }
+
+        if(this.state.subjects !== prevState.subjects){
+            if(this.state.subjects.length > 0){
+               let subject =  this.state.subjects[0] ? this.state.subjects[0] : {}
+               this.props.handleChange(subject.value, 'selectedSubject')
+            }
+        }
     }
 
     changeClass(e) {
@@ -33,14 +53,14 @@ class FilterNilai extends Component {
 
     render() {
         let scoreList = _.get(this, 'props.scoreList', {})
-        let selectedClass = scoreList ? scoreList.selectedClass : ''
         let selectedSemester = scoreList ? scoreList.selectedSemester : ''
+        let selectedClass = scoreList ? scoreList.selectedClass : ''
         let selectedSubject = scoreList ? scoreList.selectedSubject : ''
+
         let isDisabled = false
         if (selectedClass === '' || selectedSemester === '' || selectedSubject === '') {
             isDisabled = "cursor"
-        }
-
+        }        
         return (
             <div className='filter'>
                 <div className='title'>Filter</div>
@@ -85,6 +105,10 @@ class FilterNilai extends Component {
                 </button>
             </div>
         )
+    }
+
+    newMethod(selectedSemester) {
+        console.log(selectedSemester);
     }
 }
 
