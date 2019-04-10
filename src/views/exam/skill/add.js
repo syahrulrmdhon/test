@@ -36,7 +36,7 @@ class Add extends Component{
 
 
     onSubmit(event){
-        event.preventDefault(); 
+        event.preventDefault();
         let data = {}
         data['exam'] = this.props.exam
         data['problem_types'] = this.props.problem_types
@@ -81,9 +81,9 @@ class Add extends Component{
             })
         })
     }
- 
+
     render(){
-        const { exam_type, name, is_remedial } = this.props.exam ? this.props.exam : [] 
+        const { exam_type, name, is_remedial } = this.props.exam ? this.props.exam : []
         let msg = ''
         if(this.state.exam_id){
             msg = 'Ubah'
@@ -98,7 +98,7 @@ class Add extends Component{
                         <div className="content-block main-block">
                             <div className="margin-side-10 padding-10">
                                 <form>
-                                    <label className="header-title form disblock">{msg} Tugas</label>   
+                                    <label className="header-title form disblock">{msg} Tugas</label>
                                     <div className="row">
                                         <div className="col-sm-12 margin-top-10">
                                             <div className="content-input">
@@ -120,12 +120,13 @@ class Add extends Component{
                                         <div className="col-sm-12">
                                             <div className="content-input margin-top-4">
                                                 <label className="content-label">Judul Tugas</label>
-                                                <input 
-                                                    className="fullwidth" 
-                                                    placeholder="Contoh: Produk 1" 
+                                                <input
+                                                    className="fullwidth"
+                                                    placeholder="Contoh: Produk 1"
                                                     name="name"
                                                     onChange={(event) => {this.props.handleEvent(event.target.value, 'name')}}
                                                     defaultValue={name}
+                                                    maxLength={150}
                                                 />
                                             </div>
                                         </div>
@@ -153,7 +154,7 @@ const mapStateToProps = (state, props) => ({
     problem_types: state.skill.problem_types,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ 
+const mapDispatchToProps = dispatch => bindActionCreators({
     getNew,
     handleEvent,
 }, dispatch);
