@@ -36,6 +36,11 @@ class FilterOnlineExam extends Component {
         semesterList.call(this, {school_year_id: value}, false)
         this.props.handleChange(e.value, 'selectedYear')
     }
+    changeSemester(e) {
+        const value = e.value
+        grades.call(this, {school_period_id: value})
+        this.props.handleChange(e.value, 'selectedSemester')
+    }
     render() {
         let listOnlineExam = _.get(this, 'props.listOnlineExam', {})
         let selectedYear = listOnlineExam ? listOnlineExam.selectedYear : ''
@@ -60,7 +65,7 @@ class FilterOnlineExam extends Component {
                     <div className='field-filter'>
                         <label>Semester</label>
                         <Select
-                            onChange={(e) => { this.props.handleChange(e.value, 'selectedSemester') }}
+                            onChange={(e)=>{this.changeSemester(e)}}
                             options={this.state.listSemester ? this.state.listSemester : []}
                             value={this.state.listSemester.find((e) => { return e.value == selectedSemester })}
                             className='select'
