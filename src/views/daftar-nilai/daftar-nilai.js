@@ -20,6 +20,7 @@ class DaftarNilai extends Component {
       tableSkill: [],
       tableAttitude: [],
       disabled: false,
+      // loader : true,
 
       // knowledge
       idxScores: 0,
@@ -33,6 +34,18 @@ class DaftarNilai extends Component {
     this.nameClicked = this.nameClicked.bind(this)
     this.getData = this.getData.bind(this)
   }
+ 
+  componentDidMount(){
+    this.setState({
+      loader: true
+    })    
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevProps.scoreList !== this.props.scoreList && prevState.activeTab == '1'){
+      this.getData();
+    }
+  }
 
   toggle(tab) {
     if (this.state.activeTab !== tab) {
@@ -44,13 +57,12 @@ class DaftarNilai extends Component {
 
   getData() {
     let activeTab = this.state.activeTab
-
     let scoreList = _.get(this.props, 'scoreList', {})
-    let selectedClass = scoreList ? scoreList.selectedClass : ''
     let selectedSemester = scoreList ? scoreList.selectedSemester : ''
+    let selectedClass = scoreList ? scoreList.selectedClass : ''
     let selectedSubject = scoreList ? scoreList.selectedSubject : ''
-
     let params = {}
+    
 
     let category = 'knowledge'
     switch (activeTab) {
@@ -74,7 +86,7 @@ class DaftarNilai extends Component {
     if (selectedSubject != '') {
       params['school_subject_id'] = selectedSubject
     }
-
+    
     apiClient('get', 'v1/scores/index', false, params).then(response => {
       const data = _.get(response, 'data.data', {})
       const { users, count } = data || []
@@ -101,7 +113,7 @@ class DaftarNilai extends Component {
           })
           break;
       }
-
+      
     }).catch(() =>{
       this.setState({loader: false})
     })
@@ -119,6 +131,7 @@ class DaftarNilai extends Component {
       state: { status: 'daftar-nilai' }
     })
   }
+
   render() {
     return (
       <Page title="Daftar Nilai">
