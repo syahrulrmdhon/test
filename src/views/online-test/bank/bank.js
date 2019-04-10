@@ -10,10 +10,6 @@ import _ from 'lodash'
 
 class Bank extends Component {
 
-    componentDidMount() {
-        this.props.getBank()
-    }
-
     openModal() {
         this.setState({
             visible: true
@@ -29,7 +25,7 @@ class Bank extends Component {
     render() {
         return (
             <section className='bank'>
-                <Modal visible={this.props.visible} width="60%" height="90%" effect="fadeInUp" onClickAway={() => this.props.closeModal()}>
+                <Modal visible={this.props.visible} width="664px" height="90%" effect="fadeInUp" onClickAway={() => this.props.closeModal()}>
                     <div className='wrapper-content margin-side-4'>
                         <div className='header margin-top-4 margin-bottom-2'>
                             <div className='header-title padding-bottom-1'>
@@ -40,7 +36,7 @@ class Bank extends Component {
                         <div className='select-bank'>
                             <BankFilter />
                         </div>
-                        <BankContent />
+                        <BankContent questionType={this.props.questionType}/>
                         <div className='button-wrapper'>
                             <button className='btn-green' onClick={this.props.onQuestionSelected}>Pilih</button>
                         </div>

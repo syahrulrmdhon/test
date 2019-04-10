@@ -31,6 +31,7 @@ class index extends Component {
         this.viewQuestions = this.viewQuestions.bind(this)
     }
 
+
     componentDidMount() {
         getProblemTypes.call(this)
         this.props.buildObject()

@@ -9,7 +9,7 @@ $nunito_light: 'NunitoLight';
   font-family: "Nunito Sans", sans-serif;
 
   .content-block {
-    height: 530px;
+    height: 79vh;
     border-radius: 10px;
   }
 
@@ -43,7 +43,7 @@ $nunito_light: 'NunitoLight';
     border-spacing: unset;
 
     &-content {
-      max-height: 400px;
+      max-height: 65vh;
       overflow-y: auto;
       height: auto;
     }

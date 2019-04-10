@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getQuestion, getBasicCompetency, reset, handleSuccess, onQuestionSelected } from './../../../redux-modules/modules/onlineQuestion'
 import { apiClient } from '../../../utils/apiClient'
+import { Link } from 'react-router-dom';
 
 import Page from '../../../components/Title'
 import Header from '../../global/header'
@@ -23,7 +24,7 @@ class CreateQuestion extends Component {
       currentObj: 0,
       questionType: 'multiple_choice',
       questionLabel: 'PG',
-      success: _.get(props.data, 'success', false)
+      success: _.get(props.data, 'success', false),
     }
     this.onClickNumber = this.onClickNumber.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -210,10 +211,8 @@ class CreateQuestion extends Component {
     const currentProblemType = problemTypes.find(type => {
       return type.problem_type === question.problem_type
     })
-
-    if (data.exam_question.basic_comp_id && data.exam_question.exam_question_choices_attributes.length && data.exam_question.question && data.exam_question.weight) {
+    if (this.props.data.changed) {
       const url = `v1/assessments/${this.state.assessmentId}/exams/${this.state.examId}/questions`
-
       apiClient('post', url, data).then(() => {
         this.setState({
           success: true
@@ -244,7 +243,7 @@ class CreateQuestion extends Component {
 
     return (
         <Page title="Deskripsi">
-        <Header navbar={false} location={'/online-exam'}/>
+        <Header />
         {
           this.state.success &&
           <div id="note">
@@ -253,6 +252,13 @@ class CreateQuestion extends Component {
         }
 
         <div className="online-question content-wrapper">
+        <div className="back-button__wrapper">
+          <Link
+            className="back-button__button"
+            to={{pathname: '/online-exam'}}>
+            <span className="chevron left"></span>Halaman Utama
+          </Link>
+        </div>
           <QuestionNumber
             onClickNumber={this.onClickNumber}
             currentPage={this.state.currentPage}

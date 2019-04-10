@@ -9,10 +9,10 @@ export function schoolYears(params = {}, options = {}) {
         let arr = null
         let value = null
 
-        
-        if(datas.length > 0){
+
+        if (datas.length > 0) {
             datas.map((data, idx) => {
-                if(data.status == 'active'){
+                if (data.status == 'active') {
                     value = data.id
                     arr = data
                 }
@@ -33,15 +33,15 @@ export function schoolYears(params = {}, options = {}) {
     })
 }
 
-export function semesterList(params={}, options={}){
-    apiClient('get', 'v1/filters/semesters', false, params).then(res=>{
+export function semesterList(params = {}, options = {}) {
+    apiClient('get', 'v1/filters/semesters', false, params).then(res => {
         const list = _.get(res, 'data.data.semesters', [])
         let result = []
         let value = null
 
-        if(list.length > 0) {
-            list.map((data)=>{
-                if(data.status == 'active') {
+        if (list.length > 0) {
+            list.map((data) => {
+                if (data.status == 'active') {
                     value = data.id
                 }
 

@@ -24,10 +24,19 @@ class AttitudeDetailItem extends Component {
         this.state = {
             attitude_scores: [],
         }
+        this.handleAttitude = this.handleAttitude.bind(this)
     }
 
     componentDidMount(){
         attitudeScores.call(this)
+    }
+
+    handleAttitude(e) {
+        this.props.handleUpdateAttitude(e.value,this.props.index,'score')
+        let scoress = this.state.attitude_scores.value
+        this.setState({
+            attitudeScores: scoress
+        })
     }
 
     render(){
@@ -51,7 +60,7 @@ class AttitudeDetailItem extends Component {
                                         classNamePrefix= "select"
                                         placeholder= "Pilih nilai sikap"
                                         name= "score"
-                                        onChange={(event) => {this.props.handleUpdateAttitude(event.value, this.props.index, 'score')}}
+                                        onChange={(event) => {this.handleAttitude(event)}}
                                         options={this.state.attitude_scores}
                                         value={this.state.attitude_scores.find((element) => { return element.value == score })}
                                     />
