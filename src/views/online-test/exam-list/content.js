@@ -26,6 +26,7 @@ class ContentOnlineExam extends Component {
     }
 
     render() {
+        console.log('data', this.props.data)
         const period_name = _.get(this.props.listOnlineExam, 'schoolYear.period_name', null)
 
         const data = this.props.data
@@ -44,7 +45,7 @@ class ContentOnlineExam extends Component {
                         content.push(
                             <div className='disblock' key={Math.random()}>
                                 <div className='right-block__panel'>
-                                    <div className='row h-100'>
+                                    <div className='row h-100 margin-vert-2'>
                                         <div className='col-sm-4 right-block__panel-part'>
                                             <label className='header-title disblock padding-bottom-1'>{x.name}</label>
                                             <div className='right-block__basic-info-wrapper'>
