@@ -237,11 +237,12 @@ class CreateQuestion extends Component {
   onQuestionSelected() {
     this.props.onQuestionSelected({data: this.props.bankQuestions})
   }
+
   render() {
     const subject = `${isNull(_.get(this.props.data, 'data.subject_name', ''))} -
       ${isNull(_.get(this.props.data, 'data.grade_name', ''))} ${isNull(_.get(this.props.data, 'data.major_name', ''))}`
 
-    return (
+      return (
         <Page title="Deskripsi">
         <Header />
         {
