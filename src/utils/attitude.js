@@ -9,7 +9,7 @@ export function getScore(score, flag = false){
             if(flag){
                 result = {
                     text: text,
-                    color: 'border-left-green',
+                    color: 'border-left-red',
                 }
             } else {
                 return text
@@ -31,7 +31,7 @@ export function getScore(score, flag = false){
             if(flag){
                 result = {
                     text: text,
-                    color: 'border-left-red',
+                    color: 'border-left-green',
                 }
             } else {
                 return text
