@@ -64,6 +64,8 @@ export class componentName extends Component {
             day_in_indo = 'Kamis'
         } else if (day === 'friday') {
             day_in_indo = 'Jumat'
+        } else if (day === 'saturday') {
+            day_in_indo = 'Sabtu'
         }
 
         return day_in_indo;
@@ -104,11 +106,17 @@ export class componentName extends Component {
         let join_data = []
         let final_data = ''
         data && data.map((data, idx) => {
+            // console.log(data.subject_schedules)
             for (var i in data.subject_schedules) {
                 const a = data.subject_schedules[i]
-                join_data.push(a.dayname)
+                console.log(a.dayname)
+                final_data = a.dayname
+                console.log(final_data)
+                // join_data.push(a)
+                // console.log(join_data)
             }
-            final_data = this.remvoeDuplicate(join_data).join(", ")
+            // console.log(join_data,"join dta")
+            // final_data = this.remvoeDuplicate(join_data).join(", ")
 
             content.push(
                 <tr key={Math.random()}>
