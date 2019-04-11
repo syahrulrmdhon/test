@@ -22,12 +22,14 @@ class index extends Component {
 
   redirect(edit) {
     if (edit === 'question') {
+      console.log("here not")
       this.props.history.push({
         pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}/${edit}`,
         state: { status: 'all-question' }
       })
     }
     else {
+      console.log("here")
       this.props.history.push({
         pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}`,
         state: { status: 'all-question' }
@@ -46,10 +48,11 @@ class index extends Component {
       path = `/exam/${this.props.match.params.assessment_id}`
     }
 
+
     return (
       <div className="question padding-content">
         <div>
-          <Header navbar={false} location={path} />
+          <Header navbar={false} location={path} params={menu} />
         </div>
         <div className="main-layout">
 

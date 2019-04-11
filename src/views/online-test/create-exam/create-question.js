@@ -6,6 +6,7 @@ import { getQuestion, getBasicCompetency, reset, handleSuccess, onQuestionSelect
 import { apiClient } from '../../../utils/apiClient'
 import { Link } from 'react-router-dom';
 
+import { confirmAlert } from 'react-confirm-alert'
 import Page from '../../../components/Title'
 import Header from '../../global/header'
 import QuestionNumber from './question-number'
@@ -32,6 +33,8 @@ class CreateQuestion extends Component {
     this.postQuestion = this.postQuestion.bind(this)
     this.getQuestion = this.getQuestion.bind(this)
     this.onQuestionSelected = this.onQuestionSelected.bind(this)
+    this.handleBack = this.handleBack.bind(this)
+    this.redirectTo = this.redirectTo.bind(this)
   }
 
   componentDidMount() {
@@ -69,6 +72,7 @@ class CreateQuestion extends Component {
 
   onSubmit({number, questionType}) {
     const currentObj = _.get(this.props.problem_types, this.state.currentObj, {})
+    const examStatus = _.get(this.props.data, 'data.flag', '')
     const {question_count} = currentObj
     let nextNumber = number + 1
 
@@ -104,6 +108,10 @@ class CreateQuestion extends Component {
         nextNumber: nextNumber,
         questionType: this.state.questionType
       })
+    }
+
+    if (examStatus) {
+      this.props.history.push({pathname: `/online-exam`})
     }
   }
 
@@ -238,6 +246,36 @@ class CreateQuestion extends Component {
     this.props.onQuestionSelected({data: this.props.bankQuestions})
   }
 
+  redirectTo() {
+    this.props.history.push({
+      pathname: '/online-exam',
+    })
+  }
+
+  handleBack() {
+    confirmAlert({
+      customUI: ({ onClose, onConfirm }) => {
+          return (
+              <div className="react-confirm-alert modal-alert online-question">
+                  <div className="react-confirm-alert-body">
+                      <div className="align-center" style={{backgroundColor: "#f9fbfe", padding: "20px 0px", borderRadius: "10px", position: "relative", display: "flex", justifyContent: "center"}}>
+                        <div style={{fontFamily: "NunitoBold", color: "#4a4a4a", fontSize: "14px"}}>Soal Belum Disimpan</div>
+                        <div className="cross-icon" onClick={onClose}/>
+                      </div>
+                      <div style={{fontFamily: "NunitoRegular", color: "#4a4a4a", textAlign: "center", fontSize: "16px", margin: "32px 0px 21px"}}>Anda yakin ingin kembali?</div>
+                      <div className="react-confirm-alert-button-group toggle">
+                          <div className="align-center fullwidth">
+                              <a href="javascript:void(0);" className="btn default" onClick={onClose}>Tidak</a>
+                              <a href="javascript:void(0);" className="btn green" onClick={() => { this.redirectTo(); onClose(); }}>Ya</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          )
+      },
+  })
+  }
+
   render() {
     const subject = `${isNull(_.get(this.props.data, 'data.subject_name', ''))} -
       ${isNull(_.get(this.props.data, 'data.grade_name', ''))} ${isNull(_.get(this.props.data, 'data.major_name', ''))}`
@@ -253,13 +291,13 @@ class CreateQuestion extends Component {
         }
 
         <div className="online-question content-wrapper">
-        <div className="back-button__wrapper">
-          <Link
-            className="back-button__button"
-            to={{pathname: '/online-exam'}}>
-            <span className="chevron left"></span>Halaman Utama
-          </Link>
-        </div>
+          <div className="back-button__wrapper">
+            <div
+              className="back-button__button"
+              onClick={this.handleBack}>
+              <span className="chevron left">Halaman Utama</span>
+            </div>
+          </div>
           <QuestionNumber
             onClickNumber={this.onClickNumber}
             currentPage={this.state.currentPage}
