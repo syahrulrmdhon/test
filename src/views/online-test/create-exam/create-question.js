@@ -280,7 +280,7 @@ class CreateQuestion extends Component {
     const subject = `${isNull(_.get(this.props.data, 'data.subject_name', ''))} -
       ${isNull(_.get(this.props.data, 'data.grade_name', ''))} ${isNull(_.get(this.props.data, 'data.major_name', ''))}`
 
-    return (
+      return (
         <Page title="Deskripsi">
         <Header />
         {

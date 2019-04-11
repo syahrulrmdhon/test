@@ -40,17 +40,21 @@ class DaftarNilai extends Component {
       loader: true
     })    
   }
-
+  
   componentDidUpdate(prevProps, prevState){
-    if(prevProps.scoreList !== this.props.scoreList && prevState.activeTab == '1'){
+    if(this.props.scoreList !== prevProps.scoreList){
+      if(this.state.activeTab == '1'){
       this.getData();
+      }
+      // console.log(prevProps.scoreList)
     }
   }
 
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
-        activeTab: tab
+        activeTab: tab,
+        loader: true
       }, () => { this.getData() })
     }
   }

@@ -3,8 +3,7 @@ import './../../styles/global/not-found.css'
 import Header from './header'
 import { NavLink } from 'reactstrap'
 import Page from './../../components/Title'
-import Astronaut from './../../assets/images/astronaut.svg'
-import Planet from './../../assets/images/group.svg'
+import Koneksi from './../../assets/images/koneksi-internet.svg'
 
 export default class NoConnection extends Component {
     constructor(props) {
@@ -18,26 +17,17 @@ export default class NoConnection extends Component {
         return (
             <React.Fragment>
                 <Page title='No Connection'>
-                    <div className="padding-content">
+                    <div className="no-connection padding-content">
                         <Header navbar={false}/>
-                        <div className="container not-found">
+                        <div className="container not-found no-connection">
                             <div className="row">
-                                <div className="col-5 h-100 notfound margin">
-                                    <h1 className="header-noconnect">No Connection</h1>
-                                    <p>Sayangnya Koneksi anda tidak bisa menjangkau Halaman kami.</p>
+                                <div className="notfound margin">
+                                    <img src={Koneksi}/>
+                                    <h2>Koneksi internet Anda Terganggu</h2>
+                                    <p>Silahkan periksa koneksi dan buka ulang situs ini.</p>
                                     <NavLink className="font-grey" onClick={this.refresh}>
-                                        Refresh
+                                        Muat Ulang
                                     </NavLink>
-                                </div>
-                                <div className="col-7 h-100">
-                                    <div className="row">
-                                        <div className="col-4">
-                                            <img className="planet" src={Planet}></img>
-                                        </div>
-                                        <div className="col-8">
-                                            <img src={Astronaut}></img>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

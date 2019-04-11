@@ -76,6 +76,26 @@ body {
   cursor: pointer;
 }
 
+.not-found.no-connection {
+  text-align: center;
+}
+
+.no-connection .row{
+  margin: 0 auto;
+}
+
+.no-connection img {
+  width: 75%;
+}
+
+.no-connection h2 {
+  font-family: 'NunitoBold';
+}
+
+.no-connection.padding-content {
+  padding-top: 10vh !important;
+}
+
 @media only screen and (max-width: 767px) {
   .notfound .notfound-404 {
     height: 115px;
