@@ -106,7 +106,7 @@ class Form extends Component {
           {
             index !== 0 &&
               <div
-                className="delete"
+                className="cross-icon"
                 onClick={() => this.props.deleteChoiceHandler({order: index})}
               />
           }
