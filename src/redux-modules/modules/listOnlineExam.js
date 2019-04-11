@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action) {
                     selectedType: null,
                     selectedGrade: null,
                     schoolYear: {},
-                }
+                },
             }
 
         case LOAD_SUCCESS:
@@ -44,7 +44,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 loaded: true,
-                loading: false
+                loading: false,
             }
 
         case LOAD_FAIL:
@@ -70,9 +70,6 @@ export default function reducer(state = initialState, action) {
             return state
     }
 }
-
-const schoolID = localStorage.getItem('school_id')
-const token = localStorage.getItem('token')
 
 export function initial() {
     return {

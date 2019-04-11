@@ -10,6 +10,10 @@ import _ from 'lodash'
 import { apiClient } from '../../../utils/apiClient'
 import { confirmAlert } from 'react-confirm-alert'
 import { modal } from './../../global/modal'
+import { 
+    // handleChange, 
+    initial 
+} from './../../../redux-modules/modules/listOnlineExam'
 
 class OnlineExamList extends Component {
     constructor(props) {
@@ -103,7 +107,6 @@ class OnlineExamList extends Component {
 
     getData(page) {
         let listOnlineExam = _.get(this.props, 'listOnlineExam', {})
-        let selectedYear = listOnlineExam ? listOnlineExam.selectedYear : ''
         let selectedSemester = listOnlineExam ? listOnlineExam.selectedSemester : ''
         let selectedType = listOnlineExam ? listOnlineExam.selectedType : ''
         let selectedGrade = listOnlineExam ? listOnlineExam.selectedGrade : ''
@@ -127,6 +130,7 @@ class OnlineExamList extends Component {
         }
 
         apiClient('get', url, false, params).then(res => {
+            console.log('params', params)
             const data = _.get(res, 'data.data', {})
             const { assessments } = data || []
             const { entries, total_entries, total_pages, size } = assessments || []
@@ -145,6 +149,7 @@ class OnlineExamList extends Component {
 
     handleSubmit() {
         this.getData()
+        this.props.initial()
     }
     render() {
         return (
@@ -180,6 +185,7 @@ const mapStateToProps = (state) => ({
     listOnlineExam: state.listOnlineExam //listOnlineExam dari reducer
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
+    initial,    
 }, dispatch
 )
 export default connect(mapStateToProps, mapDispatchToProps)(OnlineExamList)
