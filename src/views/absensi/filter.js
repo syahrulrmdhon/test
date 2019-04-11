@@ -3,9 +3,11 @@ import Select from 'react-select'
 import { getDate } from '../../utils/common'
 import DatePicker from 'react-datepicker'
 export default class FilterAbsensi extends Component {
-    
+
     render() {
         const now = new Date()
+        const attendanceType = this.props.selectedAttendanceType.value
+
         return (
             <div className="filter">
                 <div className="title">Filter</div>
@@ -26,31 +28,35 @@ export default class FilterAbsensi extends Component {
                     </div>
                     <div className="field-filter">
                         <label>Tipe Absensi</label>
-                        <Select 
+                        <Select
                             value={this.props.selectedAttendanceType}
                             onChange={event => this.props.selectAttendanceType(event)}
-                            options={this.props.attendanceTypes} 
+                            options={this.props.attendanceTypes}
                             classNamePrefix='select'
                             placeholder='Pilih Tipe Absensi' />
                     </div>
                     <div className="field-filter">
                         <label>Kelas</label>
-                        <Select 
+                        <Select
                             value={this.props.selectedClass}
                             onChange={event => this.props.selectClass(event)}
                             options={this.props.classes}
                             classNamePrefix='select'
                             placeholder='Pilih Kelas' />
                     </div>
-                    <div className="field-filter">
-                        <label>Mata Pelajaran</label>
-                        <Select 
-                            value={this.props.selectedSubject}
-                            onChange={event => this.props.selectSubject(event)}
-                            options={this.props.subjects} 
-                            classNamePrefix='select'
-                            placeholder='Pilih Mata Pelajaran' />
-                    </div>
+                    {
+                        attendanceType === 'subject' &&
+
+                        <div className="field-filter">
+                            <label>Mata Pelajaran</label>
+                            <Select
+                                value={this.props.selectedSubject}
+                                onChange={event => this.props.selectSubject(event)}
+                                options={this.props.subjects}
+                                classNamePrefix='select'
+                                placeholder='Pilih Mata Pelajaran' />
+                        </div>
+                    }
                 </form>
                 <button type="submit" onClick={this.props.handleFilterSubmit} className="btn-green">Filter</button>
             </div>
