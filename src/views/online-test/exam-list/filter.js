@@ -29,11 +29,13 @@ class FilterOnlineExam extends Component {
         this.changePeriod = this.changePeriod.bind(this)
     }
     componentDidMount() {
+        // const current_year = this.props.listOnlineExam ? this.props.listOnlineExam.selectedYear : ''
         this.props.initial()
         schoolYears.call(this)
         semesterList.call(this)
         assessmentType.call(this, {category: 'knowledge', test_type:'periodic'})
         grades.call(this)
+        // this.props.handleChange(_.get(current_year, 'id', null), 'selectedYear')
     }
     changePeriod(e) {
         const value = e.value
