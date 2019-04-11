@@ -8,81 +8,68 @@ const INITIALIZE = 'modules/listOnlineExam/INITIALIZE'
 
 const initialState = null
 
-export default function reducer(state=initialState, action) {
+export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOAD:
-        return {
-            ...state,
-            loading:true
-        }
-        break
+            return {
+                ...state,
+                loading: true
+            }
 
         case INITIALIZE:
-        return {
-            ...state,
-            loaded: true,
-            loading: false,
-            ...{
-                selectedYear: null,
-                selectedSemester: null,
-                selectedType: null,
-                selectedGrade: null,
-                schoolYear: {},
+            return {
+                ...state,
+                loaded: true,
+                loading: false,
+                ...{
+                    selectedYear: null,
+                    selectedSemester: null,
+                    selectedType: null,
+                    selectedGrade: null,
+                    schoolYear: {},
+                },
             }
-        }
-        break
 
         case LOAD_SUCCESS:
-        delete state.error
-
-        return {
-            ...state,
-            loaded: true,
-            loading: false,
-            ...action.state
-        }
-        break
+            delete state.error
+            return {
+                ...state,
+                loaded: true,
+                loading: false,
+                ...action.state
+            }
 
         case HANDLE_CHANGE:
-        state[action.fieldName] = action.value
-
-        return {
-            ...state,
-            loaded: true,
-            loading: false
-        }
-        break
+            state[action.fieldName] = action.value
+            return {
+                ...state,
+                loaded: true,
+                loading: false,
+            }
 
         case LOAD_FAIL:
-        
-        return {
-            loaded: true,
-            loading: false,
-            error: action.error
-        }
-        break
+            return {
+                loaded: true,
+                loading: false,
+                error: action.error
+            }
 
         case SET:
-
-        return {
-            ...state,
-            ...action.payload
-        }
-        break
+            return {
+                ...state,
+                ...action.payload
+            }
 
         case RESET:
 
-        return {
-            ...initialState
-        }
+            return {
+                ...initialState
+            }
 
         default:
-        return state
+            return state
     }
 }
-
-const schoolID = localStorage.getItem('school_id')
-const token = localStorage.getItem('token')
 
 export function initial() {
     return {
