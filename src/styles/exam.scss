@@ -8,7 +8,7 @@ $nunito_bold: "NunitoBold";
     color: #2d2d2d;
     line-height: 20px;
   }
-  
+
   &__topic-description {
     font-family: $nunito_regular;
   }
@@ -24,7 +24,7 @@ $nunito_bold: "NunitoBold";
     margin-bottom: 20px;
     padding: 18px 13.5px;
     border: 1px solid rgba(204, 204, 204, 0.5);
-    height: 120px;
+    height: 150px;
   }
 
   &__task-of {
@@ -39,6 +39,7 @@ $nunito_bold: "NunitoBold";
     color: #333333;
     font-family: $nunito_semi_bold;
     margin-top: 4px;
+    word-break: break-word;
   }
 
   &__action-wrapper {
@@ -69,7 +70,7 @@ $nunito_bold: "NunitoBold";
       padding-right: 0px;
       border-right: none;
     }
-    
+
     &:hover {
       color: #1a9d7f;
     }
@@ -139,7 +140,7 @@ $nunito_bold: "NunitoBold";
   a:hover {
     text-decoration: none;
   }
-  
+
   label.header-title {
     color: #2d2d2d;
   }
@@ -219,7 +220,7 @@ $nunito_bold: "NunitoBold";
    &__update:hover {
      text-decoration: underline;
    }
-   
+
    &__correct_ans {
      font-family: $nunito_light;
      font-size: 10px;
@@ -278,7 +279,7 @@ $nunito_bold: "NunitoBold";
    }
 
    &__bascomp_value {
-     
+
    }
 
    &__basic-competences {

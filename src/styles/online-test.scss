@@ -431,10 +431,8 @@ $nunito_bold: "NunitoBold";
     background: #ffffff;
     width: 662px;
     max-height: 100%;
-    // overflow-y: auto;
-    padding: 21px 14px;
+    padding: 21px 0px;
     float: right;
-    // overflow-y: hidden;
   }
 
   &__subject-wrapper {
@@ -517,8 +515,7 @@ $nunito_bold: "NunitoBold";
 
   &__top-content {
     border-bottom: 1px solid #d3d9dd;
-    padding-bottom: 30px;
-    // overflow: hidden;
+    padding: 0px 32px 30px;
   }
 
   &__form-group {
@@ -581,9 +578,10 @@ $nunito_bold: "NunitoBold";
   }
 
   &__question-wrapper {
-    padding: 28px 20px 28px 0px;
+    padding: 0px 30px 28px 32px;
     max-height: 400px;
     overflow-y: auto;
+    margin: 28px 20px 0px 0px;
   }
 
   &__current-question {
@@ -634,7 +632,6 @@ $nunito_bold: "NunitoBold";
     padding-top: 14px;
   }
 
-
   .fa-upload {
     margin-right: 5px;
     cursor: inherit;
@@ -656,7 +653,7 @@ $nunito_bold: "NunitoBold";
 
   &__answer-label {
     position: absolute;
-    right: 65px;
+    right: 26px;
     display: block;
     width: auto;
     top: 14px;

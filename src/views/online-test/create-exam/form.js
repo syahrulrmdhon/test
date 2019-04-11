@@ -227,6 +227,7 @@ class Form extends Component {
             visible={this.state.visible}
             closeModal={this.showBankQuestion}
             onQuestionSelected={this.onQuestionSelected}
+            questionType={this.props.questionType}
           />
       </div>
     )
