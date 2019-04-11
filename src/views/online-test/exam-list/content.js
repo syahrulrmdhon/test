@@ -26,7 +26,6 @@ class ContentOnlineExam extends Component {
     }
 
     render() {
-        console.log('data', this.props.data)
         const period_name = _.get(this.props.listOnlineExam, 'schoolYear.period_name', null)
 
         const data = this.props.data
