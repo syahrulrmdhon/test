@@ -30,6 +30,7 @@ class WorkStepIndicator extends Component {
         let items = []
         const basic_comps = basic_comp_lists(this.props.assessment_basic_comps)
         if (this.props.problem_type_sets) {
+            console.log(this.props.problem_type_sets,"index")
             this.props.problem_type_sets.map((problem_type_set, idx) => {
                 let action;
                 if (idx > 0) {
@@ -74,7 +75,7 @@ class WorkStepIndicator extends Component {
                                     className="disblock fullwidth"
                                     placeholder="Masukkan bobot anda"
                                     onChange={(event) => { this.props.handleProblemSet(event.target.value, 'weight', this.props.key_value, idx) }}
-                                    defaultValue={problem_type_set.weight}
+                                    value={problem_type_set.weight}
                                     type='number'
                                 />
                             </div>
@@ -85,7 +86,7 @@ class WorkStepIndicator extends Component {
                                     className="disblock fullwidth"
                                     placeholder="Masukkan Indikator dari komponen ini"
                                     onChange={(event) => { this.props.handleProblemSet(event.target.value, 'question', this.props.key_value, idx) }}
-                                    defaultValue={problem_type_set.question}
+                                    value={problem_type_set.question}
                                 />
                             </div>
                         </td>

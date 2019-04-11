@@ -49,7 +49,7 @@ export default function reducer(state = initialState, action) {
 
 
         case ADD_INDICATOR:
-            const count = state.problem_type_sets[action.key_value] ? state.problem_type_sets[action.key_value].length : 0 
+            const count = state.problem_type_sets[action.key_value] ? state.problem_type_sets[action.key_value].length : 0
             state.problem_type_sets[action.key_value] = state.problem_type_sets[action.key_value].concat([{
                 qn_number: count + 1,
                 weight: null,
@@ -59,13 +59,17 @@ export default function reducer(state = initialState, action) {
                 school_subject_id: null,
                 basic_comp_id: null,
             }])
+            console.log(state.problem_type_sets[action.key_value],"here add ")
+
             return{
                 ...state,
                 loaded: true,
                 loading: false
             }
         case REMOVE_INDICATOR:
+            console.log(state.problem_type_sets[action.key_value])
             state.problem_type_sets[action.key_value] = removeField(state.problem_type_sets[action.key_value], action.idx)
+            console.log(state.problem_type_sets[action.key_value])
             return{
                 ...state,
                 loaded: false,
