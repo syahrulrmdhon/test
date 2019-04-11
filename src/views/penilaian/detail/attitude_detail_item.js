@@ -41,6 +41,7 @@ class AttitudeDetailItem extends Component {
 
     render(){
         let {full_name, score, description} = this.props.users
+        console.log(score,"score")
         const { text, color } = getScore(score, true)
 
         return(
