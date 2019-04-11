@@ -252,7 +252,8 @@ $nunito_bold: "NunitoBold";
   }
 
   .box-report {
-    height: 390px;
+    height: 100%;
+    height: 650px;
     position:relative;
   }
 
@@ -295,11 +296,13 @@ $nunito_bold: "NunitoBold";
   }
 
   .range-button {
-    margin-top: 40%;
+    position:relative;
+    margin-top: 380px;
   }
   ul.nav.toggle-score > li.nav-item {
     width: 100px;
     border: 0;
+    margin-left:15px;
   }
 
   ul.nav.toggle-score > li.nav-item:first-child {
