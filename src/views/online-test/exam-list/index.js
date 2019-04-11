@@ -10,7 +10,10 @@ import _ from 'lodash'
 import { apiClient } from '../../../utils/apiClient'
 import { confirmAlert } from 'react-confirm-alert'
 import { modal } from './../../global/modal'
-import { initial } from './../../../redux-modules/modules/listOnlineExam'
+import { 
+    initial,
+    handleChange
+ } from './../../../redux-modules/modules/listOnlineExam'
 
 class OnlineExamList extends Component {
     constructor(props) {
@@ -182,6 +185,7 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
     initial,    
+    handleChange,
 }, dispatch
 )
 export default connect(mapStateToProps, mapDispatchToProps)(OnlineExamList)

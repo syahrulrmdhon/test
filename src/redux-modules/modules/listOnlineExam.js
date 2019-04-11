@@ -22,8 +22,6 @@ export default function reducer(state = initialState, action) {
                 loaded: true,
                 loading: false,
                 ...{
-                    selectedYear: null,
-                    selectedSemester: null,
                     selectedType: null,
                     selectedGrade: null,
                     schoolYear: {},
