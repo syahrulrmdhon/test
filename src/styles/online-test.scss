@@ -724,38 +724,6 @@ $nunito_bold: "NunitoBold";
     color: #a1a1a1;
   }
 
-  .delete {
-    height: 40px;
-    width: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-
-    &:hover {
-      opacity: 1;
-    }
-
-    &:before,
-    &:after {
-      position: absolute;
-      content: " ";
-      height: 14px;
-      width: 2px;
-      background-color: #1a9d7f;
-    }
-
-    &:before {
-      transform: rotate(45deg);
-    }
-
-    &:after {
-      transform: rotate(-45deg);
-    }
-
-
-  }
-
   &__delete-wrapper {
     display: inline;
   }
@@ -813,22 +781,44 @@ $nunito_bold: "NunitoBold";
   input[type=radio]:checked ~ .check::before{
     background: #1a9d7f;
   }
+
+  &.modal-alert {
+    .cross-icon {
+      display: inline;
+      position: absolute;
+      right: 8px;
+      height: 20px;
+      width: 20px;
+      border: 2px solid #ff7366;
+      border-radius: 50%;
+      display: flex;
+    }
+    .cross-icon:before, .cross-icon:after {
+        background-color: #ff7366;
+        height: 12px;
+      }
+    }
 }
 
 .back-button {
   &__wrapper {
-      margin-bottom: 16px;
+    margin-bottom: 16px;
   }
 
   &__button {
-      color: #2f58bd;
+    color: #2f58bd;
+    font-family: "NunitoBold";
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+
+    .chevron {
       font-family: "NunitoBold";
       font-size: 16px;
-      text-decoration: none;
+    }
   }
 
   &__button:hover {
-      text-decoration: none;
+    text-decoration: none;
   }
-
 }
