@@ -33,8 +33,8 @@ class index extends Component {
 
 
     componentDidMount() {
-        getProblemTypes.call(this)
         this.props.buildObject()
+        getProblemTypes.call(this)
     }
 
     backToList() {

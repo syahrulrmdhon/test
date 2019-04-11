@@ -58,6 +58,7 @@ class AddQuestion extends Component {
                 name='question_count'
                 defaultValue={question_count}
                 onChange={(e) => { this.props.handleEventProblemtype(e.target.value, 'exam', 'exam_problem_types_attributes', 'question_count', this.props.index) }}
+                placeholder='Contoh: 20'
               />
             </div>
           </div>

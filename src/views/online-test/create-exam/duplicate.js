@@ -34,6 +34,7 @@ class DuplicateQuestion extends Component {
                             options={this.state.listFullSemester ? this.state.listFullSemester : []}
                             value={this.state.listFullSemester.find((e) => { return e.value == selectedFullSemester })}
                             classNamePrefix="select"
+                            placeholder='Pilih Periode...'
                         />
                     </div>
                     <div className="col-sm-4 col-md-4 col-xs-4 col-lg-4">
@@ -42,6 +43,7 @@ class DuplicateQuestion extends Component {
                             options={this.state.listSubjectName ? this.state.listSubjectName : []}
                             value={this.state.listSubjectName.find((e) => { return e.value == duplicate_exam_id })}
                             classNamePrefix="select"
+                            placeholder='Pilih Pelajaran...'
                         />
                     </div>
                     <div className='col-xs-3 col-sm-3 col-md-3 col-xl-3 margin-top-3'>
