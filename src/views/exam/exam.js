@@ -40,18 +40,18 @@ const exam = (props) => {
     break;
   }
 
-  const  title = seeMore(props.title, 150, {
-    expanded: props.expanded,
-    see_more: true,
-    callBack: props.seeMore
-  })
+  // const  title = seeMore(props.title, 150, {
+  //   expanded: props.expanded,
+  //   see_more: true,
+  //   callBack: props.seeMore
+  // })
 
   return (
     <div className="exam__panel">
       <div className="row h-100">
         <div className="col-sm-5 position-relative">
           <div className="exam__task-of">Tugas {props.order}</div>
-          <div className="exam__title">{title}</div>
+          <div className="exam__title">{props.title}</div>
           <div className="exam__action-wrapper">
             <NavLink to= {`/pariticipant-class/${props.exam.assessment_id}/assessment/${props.exam.id}/exam`} className="exam__action" >
               Tambah Kelas
