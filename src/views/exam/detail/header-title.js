@@ -29,7 +29,7 @@ export class HeaderTitle extends Component {
                 <span className="question__title">{assessment && assessment.exam.name}</span>
               </div>
               <div className="col-sm-2">
-                <span className="question__update" onClick={() => this.props.redirect()}>Ubah</span>
+                <span className="question__update" onClick={() => this.props.redirect('header')}>Ubah</span>
               </div>
             </div>
           </div>

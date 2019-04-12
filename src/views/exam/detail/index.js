@@ -20,16 +20,23 @@ class index extends Component {
     this.props.getExamQuestion(this.props.match.params.exam_id, this.props.match.params.assessment_id)
   }
 
-  redirect(edit) {
-    if (edit === 'question') {
-      console.log("here not")
+  redirect(page) {
+    let status = this.props.location.state && this.props.location.state.status
+    console.log(page)
+    //  console.log(status)
+    // let
+    if (page === 'question') {
       this.props.history.push({
-        pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}/${edit}`,
+        pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}/question`,
         state: { status: 'all-question' }
       })
+    } else if (status === 'online') {
+      this.props.history.push({
+        pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}/question`,
+        state: { status: 'online' }
+      })
     }
-    else {
-      console.log("here")
+    else if(page === 'header') {
       this.props.history.push({
         pathname: `/edit/${this.props.match.params.assessment_id}/exam/${this.props.match.params.exam_id}`,
         state: { status: 'all-question' }
@@ -39,11 +46,14 @@ class index extends Component {
 
   render() {
     let menu = this.props.location.state && this.props.location.state.status
+    console.log(menu)
     let path = ''
     if (menu === 'online') {
       path = '/online-exam'
     } else if (menu === 'online-exam') {
       path = `/online-exam/${this.props.match.params.assessment_id}/subject/${this.props.location.state.subject_id}`
+    }else if(menu === '' ){
+      path = '/online-exam'
     } else {
       path = `/exam/${this.props.match.params.assessment_id}`
     }
