@@ -48,7 +48,7 @@ const exam = (props) => {
 
   return (
     <div className="exam__panel">
-      <div className="row h-100">
+      <div className="row h-100 exam__panel-wrapper">
         <div className="col-sm-5 position-relative">
           <div className="exam__task-of">Tugas {props.order}</div>
           <div className="exam__title">{props.title}</div>

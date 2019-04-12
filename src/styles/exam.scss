@@ -24,7 +24,12 @@ $nunito_bold: "NunitoBold";
     margin-bottom: 20px;
     padding: 18px 13.5px;
     border: 1px solid rgba(204, 204, 204, 0.5);
-    height: 150px;
+    // height: 150px;
+    min-height: 120px;
+
+    &-wrapper {
+      min-height: 82px;
+    }
   }
 
   &__task-of {
@@ -40,6 +45,7 @@ $nunito_bold: "NunitoBold";
     font-family: $nunito_semi_bold;
     margin-top: 4px;
     word-break: break-word;
+    padding-bottom: 20px;
   }
 
   &__action-wrapper {
@@ -66,7 +72,7 @@ $nunito_bold: "NunitoBold";
     }
 
     &:last-child {
-      padding-left: 6.5px;
+      // padding-left: 6.5px;
       padding-right: 0px;
       border-right: none;
     }
@@ -102,7 +108,11 @@ $nunito_bold: "NunitoBold";
   }
 
   &__circular-wrapper {
-    width: 40%;
+    // width: 40%;
+
+    .CircularProgressbar {
+      max-width: 52px;
+    }
   }
 
   &__assigned-class-wrapper {
